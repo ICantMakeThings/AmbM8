@@ -1,0 +1,1681 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SoC Capability Macros - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/system/soc_caps.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/system/soc_caps';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="System Time" href="system_time.html" />
+    <link rel="prev" title="Sleep Modes" href="sleep_modes.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth<sup>®</sup> API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">System API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="app_image_format.html">App Image Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bootloader_image_format.html">Bootloader Image Format</a></li>
+<li class="toctree-l3"><a class="reference internal" href="app_trace.html">Application Level Tracing</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_function_with_shared_stack.html">Call Function with External Stack</a></li>
+<li class="toctree-l3"><a class="reference internal" href="chip_revision.html">Chip Revision</a></li>
+<li class="toctree-l3"><a class="reference internal" href="console.html">Console</a></li>
+<li class="toctree-l3"><a class="reference internal" href="efuse.html">eFuse Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_err.html">Error Code and Helper Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_https_ota.html">ESP HTTPS OTA</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_event.html">Event Loop Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freertos.html">FreeRTOS Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freertos_idf.html">FreeRTOS (IDF)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="freertos_additions.html">FreeRTOS (Supplemental Features)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mem_alloc.html">Heap Memory Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mm.html">Memory Management for MMU Supported Memory</a></li>
+<li class="toctree-l3"><a class="reference internal" href="heap_debug.html">Heap Memory Debugging</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_timer.html">ESP Timer (High Resolution Timer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="internal-unstable.html">Internal and Unstable APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="intr_alloc.html">Interrupt Allocation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="log.html">Logging library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="misc_system_api.html">Miscellaneous System APIs</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ota.html">Over The Air Updates (OTA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="power_management.html">Power Management</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pthread.html">POSIX Support (Including POSIX Threads Support)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="random.html">Random Number Generation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sleep_modes.html">Sleep Modes</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SoC Capability Macros</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#using-soc-capability-macros">Using SoC Capability Macros</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="system_time.html">System Time</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ulp.html">Ultra Low Power (ULP) coprocessor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wdts.html">Watchdogs</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">System API</a></li>
+      <li class="breadcrumb-item active">SoC Capability Macros</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/system/soc_caps.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="soc-capability-macros">
+<h1>SoC Capability Macros<a class="headerlink" href="#soc-capability-macros" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32c3/api-reference/system/soc_caps.html">[中文]</a></p>
+<p>Different models of ESP chips integrate various hardware modules. Even the same type of module may have subtle differences across different chips. ESP-IDF provides a small &quot;database&quot; to describe the differences between chips (please note, only differences are described, not commonalities). The contents of this &quot;database&quot; are defined as macros in the <strong>soc/soc_caps.h</strong> file, referred to as <strong>SoC capability macros</strong>. Users can utilize these macros in their code with conditional compilation directives (such as <code class="docutils literal notranslate"><span class="pre">#if</span></code>) to control which code is actually compiled.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please note that the contents of <strong>soc/soc_caps.h</strong> are currently unstable and may undergo significant changes in the future.</p>
+</div>
+<section id="using-soc-capability-macros">
+<h2>Using SoC Capability Macros<a class="headerlink" href="#using-soc-capability-macros" title="Permalink to this heading"></a></h2>
+<p>We recommend accessing SoC capability macros indirectly through the following macro functions:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17.6%" />
+<col style="width: 35.3%" />
+<col style="width: 47.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Macro Function</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>Example</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference internal" href="#c.SOC_IS" title="SOC_IS"><code class="xref c c-macro docutils literal notranslate"><span class="pre">SOC_IS</span></code></a></p></td>
+<td><p>Determines the chip model</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">SOC_IS(ESP32)</span></code> checks if the chip is ESP32</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#c.SOC_HAS" title="SOC_HAS"><code class="xref c c-macro docutils literal notranslate"><span class="pre">SOC_HAS</span></code></a></p></td>
+<td><p>Checks if the chip has a specific hardware module or feature</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">#if</span> <span class="pre">SOC_HAS(DAC)</span></code> checks if the chip has a DAC module</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/soc/esp32c3/include/soc/soc_caps.h">components/soc/esp32c3/include/soc/soc_caps.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"soc/soc_caps.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c._SOC_CAPS_TARGET_IS_ESP32C3">
+<span class="target" id="soc__caps_8h_1a0d60ffc065ebaec284d7858cb60846ec"></span><span class="sig-name descname"><span class="n"><span class="pre">_SOC_CAPS_TARGET_IS_ESP32C3</span></span></span><a class="headerlink" href="#c._SOC_CAPS_TARGET_IS_ESP32C3" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a242f716799b9ab919443ca52121b3fb6"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_DEDICATED_GPIO_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ad5fed5333c980f024b1dd32748c65650"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_DEDICATED_GPIO_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_DEDICATED_GPIO_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a45de14c206626c7daca6ecc56a8f836b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_UART_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GDMA_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a7dfbf060d9cbcf52d9d656408cba4f82"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GDMA_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_GDMA_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UHCI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a0b0a16961ee8f91f099b1a9bbc717b0d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UHCI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_UHCI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AHB_GDMA_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a28db4c07bde884335f69fed0dc5505d9"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AHB_GDMA_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_AHB_GDMA_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPTIMER_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aae68e7bc9930accc75037c80f097f7b6"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPTIMER_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_GPTIMER_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_TWAI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a41d9d24286d754f89343d3722f637259"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_TWAI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_TWAI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a5cdb4e131d04667ec9b5ef97d288074e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ASYNC_MEMCPY_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a48695ea2a6998909beb8611055ee08ab"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ASYNC_MEMCPY_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ASYNC_MEMCPY_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_USB_SERIAL_JTAG_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aa7fb35361bd6e7795754d9130a843c67"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_USB_SERIAL_JTAG_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_USB_SERIAL_JTAG_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_TEMP_SENSOR_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a9ace7c11574617774cbc823a11c77ad7"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_TEMP_SENSOR_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_TEMP_SENSOR_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_XT_WDT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aacc615ff02790c5fb730ec1c26312743"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_XT_WDT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_XT_WDT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PHY_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ace24fcc5625fe54ca8d88749b80088d5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PHY_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_PHY_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a33918d5f4b97abdb3f6a6299deadc8b2"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_WIFI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SUPPORTS_SECURE_DL_MODE">
+<span class="target" id="soc__caps_8h_1a1067b5362205c7d7f515b7b2983b3650"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SUPPORTS_SECURE_DL_MODE</span></span></span><a class="headerlink" href="#c.SOC_SUPPORTS_SECURE_DL_MODE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_KEY_PURPOSE_FIELD">
+<span class="target" id="soc__caps_8h_1a49aec7fb4f3baa18dafbd3d9d8590165"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_KEY_PURPOSE_FIELD</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_KEY_PURPOSE_FIELD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_HAS_EFUSE_RST_BUG">
+<span class="target" id="soc__caps_8h_1a51e8e4e42c8985819b45311775495336"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_HAS_EFUSE_RST_BUG</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_HAS_EFUSE_RST_BUG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ab05975dd02e47f5917148d010f5c141a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_FAST_MEM_SUPPORTED">
+<span class="target" id="soc__caps_8h_1afe7bf7e567099c02113b38537ca71526"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_FAST_MEM_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_RTC_FAST_MEM_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_MEM_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a7db233b2762f979279eeb11517c4904f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_MEM_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_RTC_MEM_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_TIMER_SUPPORTED">
+<span class="target" id="soc__caps_8h_1af06efd50956a28df9b9f22f4fdee987a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_TIMER_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_RTC_TIMER_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a6d0464a118364f026b1c8055d41ee82a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RMT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a5231dbe1ceaf6fa7578435df89860cb5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RMT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_RMT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SDM_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a8ff6bed4963f2c79b8a4e3b4d9ea96a8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SDM_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SDM_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPSPI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a332887a4a7943b0cdb6e6b8ab39de7a4"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPSPI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_GPSPI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a70e2685bc3bf043ae90c587a2b41d693"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_LEDC_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aa98c0f7bc9c78614fe3e987fce73932a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_I2C_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SYSTIMER_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a742d92220d4c013ce16918891b26319d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SYSTIMER_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SYSTIMER_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SUPPORT_COEXISTENCE">
+<span class="target" id="soc__caps_8h_1a97b279a0e96ec14f3787ef89f39b88d5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SUPPORT_COEXISTENCE</span></span></span><a class="headerlink" href="#c.SOC_SUPPORT_COEXISTENCE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AES_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aaa593cfe6f6faa611f97b176602f97cc"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AES_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_AES_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a3850161cc726c95fe7d3dfd91a330df1"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_MPI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_SUPPORTED">
+<span class="target" id="soc__caps_8h_1af675200f24f413997fb7f1f73dfdf055"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SHA_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_HMAC_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a098a6836dfaadcf044ed4440eaf08de1"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_HMAC_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_HMAC_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_DIG_SIGN_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a48d1ffce59b28f54475814c1e05b9efb"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_DIG_SIGN_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_DIG_SIGN_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_FLASH_ENC_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a2d72bc15e06e060bb0ca8c11aded4f56"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_FLASH_ENC_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_FLASH_ENC_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SECURE_BOOT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ab648db37b2f2351c5def2e72a52be3a2"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SECURE_BOOT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SECURE_BOOT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MEMPROT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aa3665bab61a2d3be2db8916d76ec200a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MEMPROT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_MEMPROT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BOD_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a6ce87afb7268c3d326cd513aa79cfa23"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BOD_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BOD_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CLK_TREE_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a4d49f90dfb4dabdb64f1cb2c2b2e44ad"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CLK_TREE_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_CLK_TREE_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_REGI2C_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aced63864860cc33ba70066642bb08faf"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_REGI2C_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_REGI2C_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ASSIST_DEBUG_SUPPORTED">
+<span class="target" id="soc__caps_8h_1aa08ad390a89d9747e6a5194800a1b012"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ASSIST_DEBUG_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ASSIST_DEBUG_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WDT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1afa77df4a0b3d1ee9627e498abf4c792d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WDT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_WDT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_WDT_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a903c0c777556ad7bb09e59e815f89b85"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_WDT_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_RTC_WDT_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_FLASH_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a51243d0ff94b050b66138204da48a742"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_FLASH_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SPI_FLASH_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RNG_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ad6f6fdbbe07b6f44371d738c1a8953b7"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RNG_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_RNG_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LIGHT_SLEEP_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ad21b18ac4070bebdb7a3722439f4a59e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LIGHT_SLEEP_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_LIGHT_SLEEP_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_DEEP_SLEEP_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a17ef06c35af71b51bd1c3188191749bc"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_DEEP_SLEEP_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_DEEP_SLEEP_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LP_PERIPH_SHARE_INTERRUPT">
+<span class="target" id="soc__caps_8h_1a9dfc39aa228a9d5938ac4d2c22b55b75"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LP_PERIPH_SHARE_INTERRUPT</span></span></span><a class="headerlink" href="#c.SOC_LP_PERIPH_SHARE_INTERRUPT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORTED">
+<span class="target" id="soc__caps_8h_1af32b3ee6efc9d9e8a1ffac7bbe0ab63e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_EXTERNAL_NOR_FLASH_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a23d52ff235aa7bffee99fa8e5928e98d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_EXTERNAL_NOR_FLASH_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SPI_EXTERNAL_NOR_FLASH_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_XTAL_SUPPORT_40M">
+<span class="target" id="soc__caps_8h_1a0c0157f590d1c2fd568e76095fa18655"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_XTAL_SUPPORT_40M</span></span></span><a class="headerlink" href="#c.SOC_XTAL_SUPPORT_40M" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AES_SUPPORT_DMA">
+<span class="target" id="soc__caps_8h_1ad63cc7c96bd5ce2f073d6935b95c3834"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AES_SUPPORT_DMA</span></span></span><a class="headerlink" href="#c.SOC_AES_SUPPORT_DMA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AES_GDMA">
+<span class="target" id="soc__caps_8h_1a0ede4018e5bd9dc24d1c9f06cdd7b9ac"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AES_GDMA</span></span></span><a class="headerlink" href="#c.SOC_AES_GDMA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AES_SUPPORT_AES_128">
+<span class="target" id="soc__caps_8h_1a179cdabcb6ccab7bbb33dd9ea8db3763"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AES_SUPPORT_AES_128</span></span></span><a class="headerlink" href="#c.SOC_AES_SUPPORT_AES_128" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AES_SUPPORT_AES_256">
+<span class="target" id="soc__caps_8h_1a02d18fda24db6208827fa7f0aebbc6f1"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AES_SUPPORT_AES_256</span></span></span><a class="headerlink" href="#c.SOC_AES_SUPPORT_AES_256" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIG_CTRL_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a342133077f6d81b6394618ad7b295150"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIG_CTRL_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIG_CTRL_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>&lt; SAR ADC Module </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_ARBITER_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a0d46c3194d7fd94df61153f06d5f7760"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_ARBITER_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_ARBITER_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIG_IIR_FILTER_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a175c2b17f8af4341472726da2703c791"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIG_IIR_FILTER_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIG_IIR_FILTER_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_MONITOR_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a2be32c467c664c79f23d8b9b4d301f0c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_MONITOR_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_MONITOR_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DMA_SUPPORTED">
+<span class="target" id="soc__caps_8h_1af16cf0aa8eaf3bfb5291ac65eff7891b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DMA_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_DMA_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIG_SUPPORTED_UNIT">
+<span class="target" id="soc__caps_8h_1aaee321ed584c196085efe4812eb6a2be"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIG_SUPPORTED_UNIT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">UNIT</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SOC_ADC_DIG_SUPPORTED_UNIT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_PERIPH_NUM">
+<span class="target" id="soc__caps_8h_1a66244d2294e2672ef6fe0cad7e1a71b9"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_PERIPH_NUM</span></span></span><a class="headerlink" href="#c.SOC_ADC_PERIPH_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_CHANNEL_NUM">
+<span class="target" id="soc__caps_8h_1ac2a8b7e21603fe1b1fc560fb2f4c6841"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_CHANNEL_NUM</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">PERIPH_NUM</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SOC_ADC_CHANNEL_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_MAX_CHANNEL_NUM">
+<span class="target" id="soc__caps_8h_1a8a2c183cb09084cfae9c085f668e8f27"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_MAX_CHANNEL_NUM</span></span></span><a class="headerlink" href="#c.SOC_ADC_MAX_CHANNEL_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_ATTEN_NUM">
+<span class="target" id="soc__caps_8h_1a51869c28f52daa7971d712edc6b50db3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_ATTEN_NUM</span></span></span><a class="headerlink" href="#c.SOC_ADC_ATTEN_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Digital </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_CONTROLLER_NUM">
+<span class="target" id="soc__caps_8h_1ae7478508bf8ab29cc31e75067d62d308"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_CONTROLLER_NUM</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_CONTROLLER_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_PATT_LEN_MAX">
+<span class="target" id="soc__caps_8h_1a1fae6f209761327f7e0adf558f3b4331"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_PATT_LEN_MAX</span></span></span><a class="headerlink" href="#c.SOC_ADC_PATT_LEN_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>One pattern table, each contains 8 items. Each item takes 1 byte </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_MIN_BITWIDTH">
+<span class="target" id="soc__caps_8h_1ab533d1bb640dc6801de29fd6434801c8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_MIN_BITWIDTH</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_MIN_BITWIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_MAX_BITWIDTH">
+<span class="target" id="soc__caps_8h_1a13999c641a707411009a1b8b31d146a8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_MAX_BITWIDTH</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_MAX_BITWIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_RESULT_BYTES">
+<span class="target" id="soc__caps_8h_1a9716ee0b3c3a25ca7f9c27e316617cee"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_RESULT_BYTES</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_RESULT_BYTES" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_DATA_BYTES_PER_CONV">
+<span class="target" id="soc__caps_8h_1a9ba778f537bb17c1cbfb44ff6d87cb6c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_DATA_BYTES_PER_CONV</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_DATA_BYTES_PER_CONV" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_IIR_FILTER_NUM">
+<span class="target" id="soc__caps_8h_1a67025b57070e48870dc524fb3ad8cfdc"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_IIR_FILTER_NUM</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_IIR_FILTER_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_DIGI_MONITOR_NUM">
+<span class="target" id="soc__caps_8h_1abcaf8f95e157cc69433887871ce826e8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_DIGI_MONITOR_NUM</span></span></span><a class="headerlink" href="#c.SOC_ADC_DIGI_MONITOR_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd><p>F_sample = F_digi_con / 2 / interval. F_digi_con = 5M for now. 30 &lt;= interval &lt;= 4095 </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_SAMPLE_FREQ_THRES_HIGH">
+<span class="target" id="soc__caps_8h_1aa4c8e8fbaab7f77d257fa4e58921e012"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_SAMPLE_FREQ_THRES_HIGH</span></span></span><a class="headerlink" href="#c.SOC_ADC_SAMPLE_FREQ_THRES_HIGH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_SAMPLE_FREQ_THRES_LOW">
+<span class="target" id="soc__caps_8h_1a658a7f97a9374ade1cbf72d54c8e4e97"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_SAMPLE_FREQ_THRES_LOW</span></span></span><a class="headerlink" href="#c.SOC_ADC_SAMPLE_FREQ_THRES_LOW" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RTC </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_RTC_MIN_BITWIDTH">
+<span class="target" id="soc__caps_8h_1a1e663abacda7a7bc87e10e97d65d526b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_RTC_MIN_BITWIDTH</span></span></span><a class="headerlink" href="#c.SOC_ADC_RTC_MIN_BITWIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_RTC_MAX_BITWIDTH">
+<span class="target" id="soc__caps_8h_1af46fe01f9a0cfb3fd862a4e7c4739fb8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_RTC_MAX_BITWIDTH</span></span></span><a class="headerlink" href="#c.SOC_ADC_RTC_MAX_BITWIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Calibration </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_CALIBRATION_V1_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ad405302a539a9232945b3d12006a1f1f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_CALIBRATION_V1_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_CALIBRATION_V1_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>support HW offset calibration version 1 </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_SELF_HW_CALI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a93321bc226f9886ebd0d1db0a34cddf0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_SELF_HW_CALI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_ADC_SELF_HW_CALI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>support HW offset self calibration ADC power control is shared by PWDET, TempSensor </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_ADC_SHARED_POWER">
+<span class="target" id="soc__caps_8h_1ad175606d5fa783540b3737600003fbaa"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_ADC_SHARED_POWER</span></span></span><a class="headerlink" href="#c.SOC_ADC_SHARED_POWER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_APB_BACKUP_DMA">
+<span class="target" id="soc__caps_8h_1a5f4d605a12530e737eed8fff9fd102ef"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_APB_BACKUP_DMA</span></span></span><a class="headerlink" href="#c.SOC_APB_BACKUP_DMA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BROWNOUT_RESET_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a01406c5969eb610bdd0f3bcd1d5633eb"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BROWNOUT_RESET_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BROWNOUT_RESET_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHARED_IDCACHE_SUPPORTED">
+<span class="target" id="soc__caps_8h_1ae2aff0fa9cd267f5843fce5b583259fa"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHARED_IDCACHE_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_SHARED_IDCACHE_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CACHE_FREEZE_SUPPORTED">
+<span class="target" id="soc__caps_8h_1adb28f98fdc0d0799f350b1823d76ea7d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CACHE_FREEZE_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_CACHE_FREEZE_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CACHE_MEMORY_IBANK_SIZE">
+<span class="target" id="soc__caps_8h_1a73df997cc48ca3ee54323a1078466fdf"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CACHE_MEMORY_IBANK_SIZE</span></span></span><a class="headerlink" href="#c.SOC_CACHE_MEMORY_IBANK_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_CORES_NUM">
+<span class="target" id="soc__caps_8h_1aad10b8c06b4c426cda391e0a6c44c14b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_CORES_NUM</span></span></span><a class="headerlink" href="#c.SOC_CPU_CORES_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_INTR_NUM">
+<span class="target" id="soc__caps_8h_1ac1e7fb970d806e968a47dbdc0ccc9533"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_INTR_NUM</span></span></span><a class="headerlink" href="#c.SOC_CPU_INTR_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_HAS_FLEXIBLE_INTC">
+<span class="target" id="soc__caps_8h_1a244fc4d6659b2c6e1affd4eef3108ebb"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_HAS_FLEXIBLE_INTC</span></span></span><a class="headerlink" href="#c.SOC_CPU_HAS_FLEXIBLE_INTC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_HAS_CSR_PC">
+<span class="target" id="soc__caps_8h_1a5b8de1f436d44c96125af2198b2abbf5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_HAS_CSR_PC</span></span></span><a class="headerlink" href="#c.SOC_CPU_HAS_CSR_PC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_BREAKPOINTS_NUM">
+<span class="target" id="soc__caps_8h_1ab9b11264968ddad80e1a9a8493ad38ed"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_BREAKPOINTS_NUM</span></span></span><a class="headerlink" href="#c.SOC_CPU_BREAKPOINTS_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_WATCHPOINTS_NUM">
+<span class="target" id="soc__caps_8h_1a81f4064317752525fb1610454687686f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_WATCHPOINTS_NUM</span></span></span><a class="headerlink" href="#c.SOC_CPU_WATCHPOINTS_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CPU_WATCHPOINT_MAX_REGION_SIZE">
+<span class="target" id="soc__caps_8h_1a7e7328e6d297b957f4880ff769923b51"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CPU_WATCHPOINT_MAX_REGION_SIZE</span></span></span><a class="headerlink" href="#c.SOC_CPU_WATCHPOINT_MAX_REGION_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_DS_SIGNATURE_MAX_BIT_LEN">
+<span class="target" id="soc__caps_8h_1a54bf301d79fb99d5562f1f5de572db77"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_DS_SIGNATURE_MAX_BIT_LEN</span></span></span><a class="headerlink" href="#c.SOC_DS_SIGNATURE_MAX_BIT_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The maximum length of a Digital Signature in bits. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_DS_KEY_PARAM_MD_IV_LENGTH">
+<span class="target" id="soc__caps_8h_1a6f529b5c5267de41d822e792344b9df2"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_DS_KEY_PARAM_MD_IV_LENGTH</span></span></span><a class="headerlink" href="#c.SOC_DS_KEY_PARAM_MD_IV_LENGTH" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialization vector (IV) length for the RSA key parameter message digest (MD) in bytes. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_DS_KEY_CHECK_MAX_WAIT_US">
+<span class="target" id="soc__caps_8h_1aff7071208bda425410f53ff687403878"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_DS_KEY_CHECK_MAX_WAIT_US</span></span></span><a class="headerlink" href="#c.SOC_DS_KEY_CHECK_MAX_WAIT_US" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum wait time for DS parameter decryption key. If overdue, then key error. See TRM DS chapter for more details </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_AHB_GDMA_VERSION">
+<span class="target" id="soc__caps_8h_1a0d24d8171cb7f7e145af75155939e025"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_AHB_GDMA_VERSION</span></span></span><a class="headerlink" href="#c.SOC_AHB_GDMA_VERSION" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_PORT">
+<span class="target" id="soc__caps_8h_1ab3b23fe7ea11575c09f2742bf983f795"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_PORT</span></span></span><a class="headerlink" href="#c.SOC_GPIO_PORT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_PIN_COUNT">
+<span class="target" id="soc__caps_8h_1ad80b298825881d993daafe3ee481114f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_PIN_COUNT</span></span></span><a class="headerlink" href="#c.SOC_GPIO_PIN_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_SUPPORT_PIN_GLITCH_FILTER">
+<span class="target" id="soc__caps_8h_1a445bfb405c41f1c9caa41584129ec6b0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_SUPPORT_PIN_GLITCH_FILTER</span></span></span><a class="headerlink" href="#c.SOC_GPIO_SUPPORT_PIN_GLITCH_FILTER" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_SUPPORT_FORCE_HOLD">
+<span class="target" id="soc__caps_8h_1ace67ca848fddd22b7727a0b3783c58fb"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_SUPPORT_FORCE_HOLD</span></span></span><a class="headerlink" href="#c.SOC_GPIO_SUPPORT_FORCE_HOLD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_SUPPORT_HP_PERIPH_PD_SLEEP_WAKEUP">
+<span class="target" id="soc__caps_8h_1afaede20cf9f06edf37bd6fad5822263d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_SUPPORT_HP_PERIPH_PD_SLEEP_WAKEUP</span></span></span><a class="headerlink" href="#c.SOC_GPIO_SUPPORT_HP_PERIPH_PD_SLEEP_WAKEUP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_SUPPORT_DEEPSLEEP_WAKEUP">
+<span class="target" id="soc__caps_8h_1aa8871ea7da61b1a16b27c844d2ed7776"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_SUPPORT_DEEPSLEEP_WAKEUP</span></span></span><a class="headerlink" href="#c.SOC_GPIO_SUPPORT_DEEPSLEEP_WAKEUP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_VALID_GPIO_MASK">
+<span class="target" id="soc__caps_8h_1aa848f5346d48d19dfa8ae489cdd6b8a3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_VALID_GPIO_MASK</span></span></span><a class="headerlink" href="#c.SOC_GPIO_VALID_GPIO_MASK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_VALID_OUTPUT_GPIO_MASK">
+<span class="target" id="soc__caps_8h_1af2699790bd274c99f5c3f28477eaa496"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_VALID_OUTPUT_GPIO_MASK</span></span></span><a class="headerlink" href="#c.SOC_GPIO_VALID_OUTPUT_GPIO_MASK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_IN_RANGE_MAX">
+<span class="target" id="soc__caps_8h_1a8ab185d4924d12a70a1ddbf0c6a97457"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_IN_RANGE_MAX</span></span></span><a class="headerlink" href="#c.SOC_GPIO_IN_RANGE_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_OUT_RANGE_MAX">
+<span class="target" id="soc__caps_8h_1af826f881441b361df541b8c99b507a40"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_OUT_RANGE_MAX</span></span></span><a class="headerlink" href="#c.SOC_GPIO_OUT_RANGE_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_HP_PERIPH_PD_SLEEP_WAKEABLE_MASK">
+<span class="target" id="soc__caps_8h_1a920bcbcdf7cba4f77a54b3e07721583e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_HP_PERIPH_PD_SLEEP_WAKEABLE_MASK</span></span></span><a class="headerlink" href="#c.SOC_GPIO_HP_PERIPH_PD_SLEEP_WAKEABLE_MASK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_VALID_DIGITAL_IO_PAD_MASK">
+<span class="target" id="soc__caps_8h_1a8747fe3529957ca3f448d920f7b08782"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_VALID_DIGITAL_IO_PAD_MASK</span></span></span><a class="headerlink" href="#c.SOC_GPIO_VALID_DIGITAL_IO_PAD_MASK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_CLOCKOUT_BY_GPIO_MATRIX">
+<span class="target" id="soc__caps_8h_1aa14f3320f8a0541fc6d6963133dc2d9c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_CLOCKOUT_BY_GPIO_MATRIX</span></span></span><a class="headerlink" href="#c.SOC_GPIO_CLOCKOUT_BY_GPIO_MATRIX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_GPIO_CLOCKOUT_CHANNEL_NUM">
+<span class="target" id="soc__caps_8h_1a99fc78cffbc690dfa8d2bac03a873864"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_GPIO_CLOCKOUT_CHANNEL_NUM</span></span></span><a class="headerlink" href="#c.SOC_GPIO_CLOCKOUT_CHANNEL_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_NUM">
+<span class="target" id="soc__caps_8h_1a9ddeff4f00e1187bf5b20ce1d358549f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_NUM</span></span></span><a class="headerlink" href="#c.SOC_I2C_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_HP_I2C_NUM">
+<span class="target" id="soc__caps_8h_1a5c27da22f160b80a572d11a46e6d1636"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_HP_I2C_NUM</span></span></span><a class="headerlink" href="#c.SOC_HP_I2C_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SUPPORT_XTAL">
+<span class="target" id="soc__caps_8h_1ab58bc24a81bc6936098328c0f14d262c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SUPPORT_XTAL</span></span></span><a class="headerlink" href="#c.SOC_I2C_SUPPORT_XTAL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SUPPORT_RTC">
+<span class="target" id="soc__caps_8h_1a16d2fe0a7c0b4d90e15b3f535345b37a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SUPPORT_RTC</span></span></span><a class="headerlink" href="#c.SOC_I2C_SUPPORT_RTC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SUPPORT_10BIT_ADDR">
+<span class="target" id="soc__caps_8h_1a7504b996f3e509b25d260460cbbf7b33"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SUPPORT_10BIT_ADDR</span></span></span><a class="headerlink" href="#c.SOC_I2C_SUPPORT_10BIT_ADDR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SUPPORT_SLAVE">
+<span class="target" id="soc__caps_8h_1ac3ad65097fa10bac51c4f1e880eb131a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SUPPORT_SLAVE</span></span></span><a class="headerlink" href="#c.SOC_I2C_SUPPORT_SLAVE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SLAVE_SUPPORT_BROADCAST">
+<span class="target" id="soc__caps_8h_1a492c55128b2c1600009c4faa2940a98d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SLAVE_SUPPORT_BROADCAST</span></span></span><a class="headerlink" href="#c.SOC_I2C_SLAVE_SUPPORT_BROADCAST" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2C_SLAVE_CAN_GET_STRETCH_CAUSE">
+<span class="target" id="soc__caps_8h_1a3b1159b9e9bc9d538014e8dcad5233f8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2C_SLAVE_CAN_GET_STRETCH_CAUSE</span></span></span><a class="headerlink" href="#c.SOC_I2C_SLAVE_CAN_GET_STRETCH_CAUSE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_HW_VERSION_2">
+<span class="target" id="soc__caps_8h_1acd5b00aa48989a73cf290057f89abab8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_HW_VERSION_2</span></span></span><a class="headerlink" href="#c.SOC_I2S_HW_VERSION_2" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTS_PCM">
+<span class="target" id="soc__caps_8h_1a9b739ece7294a4224529c9f6120a1a88"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTS_PCM</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTS_PCM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTS_PDM">
+<span class="target" id="soc__caps_8h_1a6d69d7447b10ada967ff9d16f2e69370"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTS_PDM</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTS_PDM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTS_PDM_TX">
+<span class="target" id="soc__caps_8h_1adcdd4e840a6dd16bb2f8122861933f5f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTS_PDM_TX</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTS_PDM_TX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTS_PCM2PDM">
+<span class="target" id="soc__caps_8h_1acabd0cb8ba8b595cdf335cb1528b6a4e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTS_PCM2PDM</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTS_PCM2PDM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTS_PDM_RX">
+<span class="target" id="soc__caps_8h_1aa16723b06c34f66dbba4044c20b335cc"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTS_PDM_RX</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTS_PDM_RX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_PDM_MAX_TX_LINES">
+<span class="target" id="soc__caps_8h_1ac0aa0990bfec5cab02174068fdcdc0b3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_PDM_MAX_TX_LINES</span></span></span><a class="headerlink" href="#c.SOC_I2S_PDM_MAX_TX_LINES" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_PDM_MAX_RX_LINES">
+<span class="target" id="soc__caps_8h_1a0d37b89237bc036664ffdb249f80c1d0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_PDM_MAX_RX_LINES</span></span></span><a class="headerlink" href="#c.SOC_I2S_PDM_MAX_RX_LINES" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_I2S_SUPPORTS_TDM">
+<span class="target" id="soc__caps_8h_1a3c72213751bafb2997a68f5496138d14"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_I2S_SUPPORTS_TDM</span></span></span><a class="headerlink" href="#c.SOC_I2S_SUPPORTS_TDM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_SUPPORT_APB_CLOCK">
+<span class="target" id="soc__caps_8h_1a612a4ef035b491b01b0014252c778389"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_SUPPORT_APB_CLOCK</span></span></span><a class="headerlink" href="#c.SOC_LEDC_SUPPORT_APB_CLOCK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_SUPPORT_XTAL_CLOCK">
+<span class="target" id="soc__caps_8h_1a6cff0635f86f5c27dad87a06f802bcbb"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_SUPPORT_XTAL_CLOCK</span></span></span><a class="headerlink" href="#c.SOC_LEDC_SUPPORT_XTAL_CLOCK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_TIMER_NUM">
+<span class="target" id="soc__caps_8h_1aa66421fedd0b3fad8c62cf79aebe4e81"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_TIMER_NUM</span></span></span><a class="headerlink" href="#c.SOC_LEDC_TIMER_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_CHANNEL_NUM">
+<span class="target" id="soc__caps_8h_1a2835348f478205c71878ef4a5796823b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_CHANNEL_NUM</span></span></span><a class="headerlink" href="#c.SOC_LEDC_CHANNEL_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_TIMER_BIT_WIDTH">
+<span class="target" id="soc__caps_8h_1abff035ce5fff05e354bae5082fcdb819"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_TIMER_BIT_WIDTH</span></span></span><a class="headerlink" href="#c.SOC_LEDC_TIMER_BIT_WIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LEDC_SUPPORT_FADE_STOP">
+<span class="target" id="soc__caps_8h_1ad0d3f35a01c61558994cd676b590293a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LEDC_SUPPORT_FADE_STOP</span></span></span><a class="headerlink" href="#c.SOC_LEDC_SUPPORT_FADE_STOP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MMU_LINEAR_ADDRESS_REGION_NUM">
+<span class="target" id="soc__caps_8h_1a097c005bd635ecd4807587f2ea740205"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MMU_LINEAR_ADDRESS_REGION_NUM</span></span></span><a class="headerlink" href="#c.SOC_MMU_LINEAR_ADDRESS_REGION_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MMU_PERIPH_NUM">
+<span class="target" id="soc__caps_8h_1ab922874988800a3f1e28948389a4867c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MMU_PERIPH_NUM</span></span></span><a class="headerlink" href="#c.SOC_MMU_PERIPH_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPU_CONFIGURABLE_REGIONS_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a3886efc863c25f23b7bdef77f1a07f5a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPU_CONFIGURABLE_REGIONS_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_MPU_CONFIGURABLE_REGIONS_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPU_MIN_REGION_SIZE">
+<span class="target" id="soc__caps_8h_1ae9f1115fc7343929014cc8e31622ad0b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPU_MIN_REGION_SIZE</span></span></span><a class="headerlink" href="#c.SOC_MPU_MIN_REGION_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPU_REGIONS_MAX_NUM">
+<span class="target" id="soc__caps_8h_1aa9fd2d53910e5c6c84eb936be35f72f8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPU_REGIONS_MAX_NUM</span></span></span><a class="headerlink" href="#c.SOC_MPU_REGIONS_MAX_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPU_REGION_RO_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a80d14b31a264f8ffedad60129d8d494a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPU_REGION_RO_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_MPU_REGION_RO_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPU_REGION_WO_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a22cddf2e4187e9005d60efaa4f09750e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPU_REGION_WO_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_MPU_REGION_WO_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RMT_MEM_WORDS_PER_CHANNEL">
+<span class="target" id="soc__caps_8h_1a7c7332264f565782abccf3c445afe3e3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RMT_MEM_WORDS_PER_CHANNEL</span></span></span><a class="headerlink" href="#c.SOC_RMT_MEM_WORDS_PER_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Each channel owns 48 words memory (1 word = 4 Bytes) </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RMT_SUPPORT_RX_PINGPONG">
+<span class="target" id="soc__caps_8h_1a92852ca685a5abee6da6b6e759a1cf67"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RMT_SUPPORT_RX_PINGPONG</span></span></span><a class="headerlink" href="#c.SOC_RMT_SUPPORT_RX_PINGPONG" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support Ping-Pong mode on RX path </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RMT_SUPPORT_TX_LOOP_COUNT">
+<span class="target" id="soc__caps_8h_1a83a23f8093711a7eca6137645f360603"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RMT_SUPPORT_TX_LOOP_COUNT</span></span></span><a class="headerlink" href="#c.SOC_RMT_SUPPORT_TX_LOOP_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support transmit specified number of cycles in loop mode </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_CNTL_CPU_PD_DMA_BUS_WIDTH">
+<span class="target" id="soc__caps_8h_1a5645907ebc63790f254b19431fbe026e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_CNTL_CPU_PD_DMA_BUS_WIDTH</span></span></span><a class="headerlink" href="#c.SOC_RTC_CNTL_CPU_PD_DMA_BUS_WIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_CNTL_CPU_PD_REG_FILE_NUM">
+<span class="target" id="soc__caps_8h_1a15ae47f980d8fc730e1f0e0be5de5d83"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_CNTL_CPU_PD_REG_FILE_NUM</span></span></span><a class="headerlink" href="#c.SOC_RTC_CNTL_CPU_PD_REG_FILE_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_CNTL_CPU_PD_DMA_ADDR_ALIGN">
+<span class="target" id="soc__caps_8h_1a33f365125907d5ebcdb9e781780f682c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_CNTL_CPU_PD_DMA_ADDR_ALIGN</span></span></span><a class="headerlink" href="#c.SOC_RTC_CNTL_CPU_PD_DMA_ADDR_ALIGN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_CNTL_CPU_PD_DMA_BLOCK_SIZE">
+<span class="target" id="soc__caps_8h_1add0c588b1b10f364a686c146ad0fbbcc"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_CNTL_CPU_PD_DMA_BLOCK_SIZE</span></span></span><a class="headerlink" href="#c.SOC_RTC_CNTL_CPU_PD_DMA_BLOCK_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_CNTL_CPU_PD_RETENTION_MEM_SIZE">
+<span class="target" id="soc__caps_8h_1a359e2da28f5ce9e6f0c30526b34f6dc0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_CNTL_CPU_PD_RETENTION_MEM_SIZE</span></span></span><a class="headerlink" href="#c.SOC_RTC_CNTL_CPU_PD_RETENTION_MEM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_CNTL_NEEDS_ATOMIC_ACCESS">
+<span class="target" id="soc__caps_8h_1a56386946458e786015f89d8dc4a5045a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_CNTL_NEEDS_ATOMIC_ACCESS</span></span></span><a class="headerlink" href="#c.SOC_RTC_CNTL_NEEDS_ATOMIC_ACCESS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SLEEP_SYSTIMER_STALL_WORKAROUND">
+<span class="target" id="soc__caps_8h_1a453a3bc0d5becfceec9ec2df2fc4fbc5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SLEEP_SYSTIMER_STALL_WORKAROUND</span></span></span><a class="headerlink" href="#c.SOC_SLEEP_SYSTIMER_STALL_WORKAROUND" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SLEEP_TGWDT_STOP_WORKAROUND">
+<span class="target" id="soc__caps_8h_1a3d4a1638a609ab27e5d35f4d7950b7d9"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SLEEP_TGWDT_STOP_WORKAROUND</span></span></span><a class="headerlink" href="#c.SOC_SLEEP_TGWDT_STOP_WORKAROUND" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTCIO_PIN_COUNT">
+<span class="target" id="soc__caps_8h_1a6246bc5e88f2eefcc96d515d5758028c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTCIO_PIN_COUNT</span></span></span><a class="headerlink" href="#c.SOC_RTCIO_PIN_COUNT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPI_MEM_BLOCKS_NUM">
+<span class="target" id="soc__caps_8h_1af48d21c21eb5cdf3d3ad659c89049cfd"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPI_MEM_BLOCKS_NUM</span></span></span><a class="headerlink" href="#c.SOC_MPI_MEM_BLOCKS_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MPI_OPERATIONS_NUM">
+<span class="target" id="soc__caps_8h_1a0d74b170fa810912874cbbbc997eca9b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MPI_OPERATIONS_NUM</span></span></span><a class="headerlink" href="#c.SOC_MPI_OPERATIONS_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RSA_MAX_BIT_LEN">
+<span class="target" id="soc__caps_8h_1a5fc5ab18676f151638c275b7313dfa56"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RSA_MAX_BIT_LEN</span></span></span><a class="headerlink" href="#c.SOC_RSA_MAX_BIT_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_DMA_MAX_BUFFER_SIZE">
+<span class="target" id="soc__caps_8h_1a8accded9d665878c949d03ebac0a4a9a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_DMA_MAX_BUFFER_SIZE</span></span></span><a class="headerlink" href="#c.SOC_SHA_DMA_MAX_BUFFER_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_SUPPORT_DMA">
+<span class="target" id="soc__caps_8h_1ace1949fc77a41c6ecc82cf5b1db5f19e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_SUPPORT_DMA</span></span></span><a class="headerlink" href="#c.SOC_SHA_SUPPORT_DMA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_SUPPORT_RESUME">
+<span class="target" id="soc__caps_8h_1a242957b51b5087317272c1338370b221"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_SUPPORT_RESUME</span></span></span><a class="headerlink" href="#c.SOC_SHA_SUPPORT_RESUME" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_GDMA">
+<span class="target" id="soc__caps_8h_1aa4c10d272b32db3648cdb986d04e09a5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_GDMA</span></span></span><a class="headerlink" href="#c.SOC_SHA_GDMA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_SUPPORT_SHA1">
+<span class="target" id="soc__caps_8h_1a177b8587c98532145091f22803818fb3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_SUPPORT_SHA1</span></span></span><a class="headerlink" href="#c.SOC_SHA_SUPPORT_SHA1" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_SUPPORT_SHA224">
+<span class="target" id="soc__caps_8h_1adcb6fb02fe0a86495374f47486b900f6"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_SUPPORT_SHA224</span></span></span><a class="headerlink" href="#c.SOC_SHA_SUPPORT_SHA224" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SHA_SUPPORT_SHA256">
+<span class="target" id="soc__caps_8h_1a335dc9bbee15672f967fce2126a113a1"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SHA_SUPPORT_SHA256</span></span></span><a class="headerlink" href="#c.SOC_SHA_SUPPORT_SHA256" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_PERIPH_NUM">
+<span class="target" id="soc__caps_8h_1a55aaf3756130e04704b58bb526b77dc0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_PERIPH_NUM</span></span></span><a class="headerlink" href="#c.SOC_SPI_PERIPH_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MAXIMUM_BUFFER_SIZE">
+<span class="target" id="soc__caps_8h_1a6b5b0c7e542cab3e757b4a9091f4d6cf"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MAXIMUM_BUFFER_SIZE</span></span></span><a class="headerlink" href="#c.SOC_SPI_MAXIMUM_BUFFER_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_SUPPORT_SLAVE_HD_VER2">
+<span class="target" id="soc__caps_8h_1a1efd6dab46d6a24c14c96dbc95f9f41c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_SUPPORT_SLAVE_HD_VER2</span></span></span><a class="headerlink" href="#c.SOC_SPI_SUPPORT_SLAVE_HD_VER2" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_AUTO_WAIT_IDLE">
+<span class="target" id="soc__caps_8h_1af720eda96e026e92b46c7b8bda782429"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_AUTO_WAIT_IDLE</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_AUTO_WAIT_IDLE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_AUTO_SUSPEND">
+<span class="target" id="soc__caps_8h_1a1d1c296e7d95e06ea2e9eb5f837cba84"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_AUTO_SUSPEND</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_AUTO_SUSPEND" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_AUTO_RESUME">
+<span class="target" id="soc__caps_8h_1a33034b200b9e96cba20bfa48edc5d232"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_AUTO_RESUME</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_AUTO_RESUME" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_IDLE_INTR">
+<span class="target" id="soc__caps_8h_1a2e3a68a5b72a4f854736c4077d811101"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_IDLE_INTR</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_IDLE_INTR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_SW_SUSPEND">
+<span class="target" id="soc__caps_8h_1ad1b15aa20e3271dd6e0b273c159d2269"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_SW_SUSPEND</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_SW_SUSPEND" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_CHECK_SUS">
+<span class="target" id="soc__caps_8h_1a31bad326af3eda0d72c1289704630a79"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_CHECK_SUS</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_CHECK_SUS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_CONFIG_GPIO_BY_EFUSE">
+<span class="target" id="soc__caps_8h_1a5739af461d2f21514fcd5b180b1a9912"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_CONFIG_GPIO_BY_EFUSE</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_CONFIG_GPIO_BY_EFUSE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SPI_MEM_SUPPORT_WRAP">
+<span class="target" id="soc__caps_8h_1a9116f6f7a01a0bc90a795d85a1685694"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SPI_MEM_SUPPORT_WRAP</span></span></span><a class="headerlink" href="#c.SOC_SPI_MEM_SUPPORT_WRAP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MEMSPI_SUPPORT_CONTROL_DUMMY_OUT">
+<span class="target" id="soc__caps_8h_1ad2edfb0efeffcde3fe9d198f944e7baf"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MEMSPI_SUPPORT_CONTROL_DUMMY_OUT</span></span></span><a class="headerlink" href="#c.SOC_MEMSPI_SUPPORT_CONTROL_DUMMY_OUT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MEMSPI_IS_INDEPENDENT">
+<span class="target" id="soc__caps_8h_1aa07132e7685710bba1b50ea9ec4cad18"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MEMSPI_IS_INDEPENDENT</span></span></span><a class="headerlink" href="#c.SOC_MEMSPI_IS_INDEPENDENT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MEMSPI_ENCRYPTION_ALIGNMENT">
+<span class="target" id="soc__caps_8h_1aab10a148cfd702601548d29b100ef69d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MEMSPI_ENCRYPTION_ALIGNMENT</span></span></span><a class="headerlink" href="#c.SOC_MEMSPI_ENCRYPTION_ALIGNMENT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>16-byte alignment restriction to mem addr and size if encryption is enabled </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LP_TIMER_BIT_WIDTH_LO">
+<span class="target" id="soc__caps_8h_1ae41976830d9ea5d3a287d040409c2093"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LP_TIMER_BIT_WIDTH_LO</span></span></span><a class="headerlink" href="#c.SOC_LP_TIMER_BIT_WIDTH_LO" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_LP_TIMER_BIT_WIDTH_HI">
+<span class="target" id="soc__caps_8h_1a6c0b54eb6e54c28b30a32e81ee60ee4d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_LP_TIMER_BIT_WIDTH_HI</span></span></span><a class="headerlink" href="#c.SOC_LP_TIMER_BIT_WIDTH_HI" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_TIMER_V1">
+<span class="target" id="soc__caps_8h_1a8e597ea40d90ab38f6a7ea6de7b72bb1"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_TIMER_V1</span></span></span><a class="headerlink" href="#c.SOC_RTC_TIMER_V1" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MWDT_SUPPORT_XTAL">
+<span class="target" id="soc__caps_8h_1a10dc0faa7eea1cecad9ea93afcd950b9"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MWDT_SUPPORT_XTAL</span></span></span><a class="headerlink" href="#c.SOC_MWDT_SUPPORT_XTAL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_TWAI_CONTROLLER_NUM">
+<span class="target" id="soc__caps_8h_1a0cee64901ddd83a7fddaf21c58234912"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_TWAI_CONTROLLER_NUM</span></span></span><a class="headerlink" href="#c.SOC_TWAI_CONTROLLER_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_TWAI_MASK_FILTER_NUM">
+<span class="target" id="soc__caps_8h_1ae60bd1130f9606a80a35f43a3e4ecdf9"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_TWAI_MASK_FILTER_NUM</span></span></span><a class="headerlink" href="#c.SOC_TWAI_MASK_FILTER_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_DIS_DOWNLOAD_ICACHE">
+<span class="target" id="soc__caps_8h_1ac8fa0a488b696a6643350ceb3c4de9c1"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_DIS_DOWNLOAD_ICACHE</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_DIS_DOWNLOAD_ICACHE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_DIS_PAD_JTAG">
+<span class="target" id="soc__caps_8h_1a1589e9251347e57a5c0684f7afc818cf"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_DIS_PAD_JTAG</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_DIS_PAD_JTAG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_DIS_USB_JTAG">
+<span class="target" id="soc__caps_8h_1a850e102441b06a5783c0e3f1b28415d7"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_DIS_USB_JTAG</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_DIS_USB_JTAG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_DIS_DIRECT_BOOT">
+<span class="target" id="soc__caps_8h_1a9bdf3ee870ac5a3dcb16ff2b1d4214c3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_DIS_DIRECT_BOOT</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_DIS_DIRECT_BOOT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_SOFT_DIS_JTAG">
+<span class="target" id="soc__caps_8h_1a3b034d3636ab05a51ba9047fded32189"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_SOFT_DIS_JTAG</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_SOFT_DIS_JTAG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_DIS_ICACHE">
+<span class="target" id="soc__caps_8h_1ab599fb34c775ebfebc492e2d3610028e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_DIS_ICACHE</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_DIS_ICACHE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_BLOCK9_KEY_PURPOSE_QUIRK">
+<span class="target" id="soc__caps_8h_1a8390acf531248d6d0bbf401d85d1697e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_BLOCK9_KEY_PURPOSE_QUIRK</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_BLOCK9_KEY_PURPOSE_QUIRK" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_XTS_AES_KEY_128">
+<span class="target" id="soc__caps_8h_1a9ee532fa77b4b3c53b35e601ff72f2a5"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_XTS_AES_KEY_128</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_XTS_AES_KEY_128" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SECURE_BOOT_V2_RSA">
+<span class="target" id="soc__caps_8h_1a3a9bd390692dfb4def8e8fb3ebf9e517"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SECURE_BOOT_V2_RSA</span></span></span><a class="headerlink" href="#c.SOC_SECURE_BOOT_V2_RSA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_SECURE_BOOT_KEY_DIGESTS">
+<span class="target" id="soc__caps_8h_1a98a956333e8d63e7dd573a9b23d2d46a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_SECURE_BOOT_KEY_DIGESTS</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_SECURE_BOOT_KEY_DIGESTS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_EFUSE_REVOKE_BOOT_KEY_DIGESTS">
+<span class="target" id="soc__caps_8h_1ae2ddabb588631ce0618fa1654cde2f01"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_EFUSE_REVOKE_BOOT_KEY_DIGESTS</span></span></span><a class="headerlink" href="#c.SOC_EFUSE_REVOKE_BOOT_KEY_DIGESTS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_SUPPORT_SECURE_BOOT_REVOKE_KEY">
+<span class="target" id="soc__caps_8h_1a0d543a0e1a817252c005b356b723edd2"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_SUPPORT_SECURE_BOOT_REVOKE_KEY</span></span></span><a class="headerlink" href="#c.SOC_SUPPORT_SECURE_BOOT_REVOKE_KEY" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_FLASH_ENCRYPTED_XTS_AES_BLOCK_MAX">
+<span class="target" id="soc__caps_8h_1aea8eaae97693f79e9ad9190947543fda"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_FLASH_ENCRYPTED_XTS_AES_BLOCK_MAX</span></span></span><a class="headerlink" href="#c.SOC_FLASH_ENCRYPTED_XTS_AES_BLOCK_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_FLASH_ENCRYPTION_XTS_AES">
+<span class="target" id="soc__caps_8h_1a63ca31218140d2a37c57cad44cdafe03"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_FLASH_ENCRYPTION_XTS_AES</span></span></span><a class="headerlink" href="#c.SOC_FLASH_ENCRYPTION_XTS_AES" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_FLASH_ENCRYPTION_XTS_AES_128">
+<span class="target" id="soc__caps_8h_1ae57daa63b46daff288ee7317950a035f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_FLASH_ENCRYPTION_XTS_AES_128</span></span></span><a class="headerlink" href="#c.SOC_FLASH_ENCRYPTION_XTS_AES_128" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MEMPROT_CPU_PREFETCH_PAD_SIZE">
+<span class="target" id="soc__caps_8h_1aa18c4b5ebdaa7fc048d7330cbee8fe46"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MEMPROT_CPU_PREFETCH_PAD_SIZE</span></span></span><a class="headerlink" href="#c.SOC_MEMPROT_CPU_PREFETCH_PAD_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MEMPROT_MEM_ALIGN_SIZE">
+<span class="target" id="soc__caps_8h_1a93d8952f9f4f14d938cb24a16078bbd7"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MEMPROT_MEM_ALIGN_SIZE</span></span></span><a class="headerlink" href="#c.SOC_MEMPROT_MEM_ALIGN_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_NUM">
+<span class="target" id="soc__caps_8h_1a65fe04d31c214e6184a1317d23ac611b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_NUM</span></span></span><a class="headerlink" href="#c.SOC_UART_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_HP_NUM">
+<span class="target" id="soc__caps_8h_1acae157c327b2827773b052eedf8199ac"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_HP_NUM</span></span></span><a class="headerlink" href="#c.SOC_UART_HP_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_FIFO_LEN">
+<span class="target" id="soc__caps_8h_1ab9d3440c5355a90bfc75a5260571897a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_FIFO_LEN</span></span></span><a class="headerlink" href="#c.SOC_UART_FIFO_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The UART hardware FIFO length </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_BITRATE_MAX">
+<span class="target" id="soc__caps_8h_1a6afbc1d8086c4fea8abe419d775b3082"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_BITRATE_MAX</span></span></span><a class="headerlink" href="#c.SOC_UART_BITRATE_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Max bit rate supported by UART </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_SUPPORT_APB_CLK">
+<span class="target" id="soc__caps_8h_1a1695a5a20a24a0dc37781728ad74ca3b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_SUPPORT_APB_CLK</span></span></span><a class="headerlink" href="#c.SOC_UART_SUPPORT_APB_CLK" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support APB as the clock source </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_SUPPORT_RTC_CLK">
+<span class="target" id="soc__caps_8h_1ad8484e09ba724c7eaaa6425b2da3c705"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_SUPPORT_RTC_CLK</span></span></span><a class="headerlink" href="#c.SOC_UART_SUPPORT_RTC_CLK" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support RTC clock as the clock source </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_SUPPORT_XTAL_CLK">
+<span class="target" id="soc__caps_8h_1ad3856a1c710723ff9fe0e848398a9649"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_SUPPORT_XTAL_CLK</span></span></span><a class="headerlink" href="#c.SOC_UART_SUPPORT_XTAL_CLK" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support XTAL clock as the clock source </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_SUPPORT_WAKEUP_INT">
+<span class="target" id="soc__caps_8h_1ab2c804cd9d631445bb13aeecb7c93802"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_SUPPORT_WAKEUP_INT</span></span></span><a class="headerlink" href="#c.SOC_UART_SUPPORT_WAKEUP_INT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support UART wakeup interrupt </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_UART_WAKEUP_SUPPORT_ACTIVE_THRESH_MODE">
+<span class="target" id="soc__caps_8h_1a8e01cf5b69acdddb917634ab6d942bfb"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_UART_WAKEUP_SUPPORT_ACTIVE_THRESH_MODE</span></span></span><a class="headerlink" href="#c.SOC_UART_WAKEUP_SUPPORT_ACTIVE_THRESH_MODE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_COEX_HW_PTI">
+<span class="target" id="soc__caps_8h_1a2bb02e54e9bdcf8323ec86a6954dcb02"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_COEX_HW_PTI</span></span></span><a class="headerlink" href="#c.SOC_COEX_HW_PTI" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PHY_DIG_REGS_MEM_SIZE">
+<span class="target" id="soc__caps_8h_1a23d0bf5ca36189265d409379f45a8091"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PHY_DIG_REGS_MEM_SIZE</span></span></span><a class="headerlink" href="#c.SOC_PHY_DIG_REGS_MEM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MAC_BB_PD_MEM_SIZE">
+<span class="target" id="soc__caps_8h_1a31f41ae38acbc779e0707cd1090dc33e"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MAC_BB_PD_MEM_SIZE</span></span></span><a class="headerlink" href="#c.SOC_MAC_BB_PD_MEM_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_LIGHT_SLEEP_CLK_WIDTH">
+<span class="target" id="soc__caps_8h_1a91f013b928d996eea9b721e1b3058491"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_LIGHT_SLEEP_CLK_WIDTH</span></span></span><a class="headerlink" href="#c.SOC_WIFI_LIGHT_SLEEP_CLK_WIDTH" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_WIFI_WAKEUP">
+<span class="target" id="soc__caps_8h_1acd41155af71d95fd714993551f581b5c"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_WIFI_WAKEUP</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_WIFI_WAKEUP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_BT_WAKEUP">
+<span class="target" id="soc__caps_8h_1a3b4c2944994f07e93b9e9b3cc610b334"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_BT_WAKEUP</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_BT_WAKEUP" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_CPU_PD">
+<span class="target" id="soc__caps_8h_1a16e655b00fff7082b4f4423096dafcc4"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_CPU_PD</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_CPU_PD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_WIFI_PD">
+<span class="target" id="soc__caps_8h_1a4eea1810e4e8d5a1c4a4b90ab84daf51"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_WIFI_PD</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_WIFI_PD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_BT_PD">
+<span class="target" id="soc__caps_8h_1a14232c159ddf3d07fb07b44000a870dd"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_BT_PD</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_BT_PD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_RC_FAST_PD">
+<span class="target" id="soc__caps_8h_1a0b3561f842fa1e49028b0d71183965e2"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_RC_FAST_PD</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_RC_FAST_PD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_VDDSDIO_PD">
+<span class="target" id="soc__caps_8h_1a3b687ee5a4245ec7580c83362089df72"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_VDDSDIO_PD</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_VDDSDIO_PD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_SUPPORT_MAC_BB_PD">
+<span class="target" id="soc__caps_8h_1a24a3ae02f9beaff94f57ac12d97533ce"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_SUPPORT_MAC_BB_PD</span></span></span><a class="headerlink" href="#c.SOC_PM_SUPPORT_MAC_BB_PD" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_CPU_RETENTION_BY_RTCCNTL">
+<span class="target" id="soc__caps_8h_1a10a1649e965bcff08334b1cac41c0229"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_CPU_RETENTION_BY_RTCCNTL</span></span></span><a class="headerlink" href="#c.SOC_PM_CPU_RETENTION_BY_RTCCNTL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_MODEM_RETENTION_BY_BACKUPDMA">
+<span class="target" id="soc__caps_8h_1a268642eb4685e0c7aad73f7b2985f801"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_MODEM_RETENTION_BY_BACKUPDMA</span></span></span><a class="headerlink" href="#c.SOC_PM_MODEM_RETENTION_BY_BACKUPDMA" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PM_MODEM_PD_BY_SW">
+<span class="target" id="soc__caps_8h_1a5183906c30e23b609196498368d91c2b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PM_MODEM_PD_BY_SW</span></span></span><a class="headerlink" href="#c.SOC_PM_MODEM_PD_BY_SW" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CLK_RC_FAST_D256_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a3edcdbbacc1fdc00ac9fe49836f78fd3"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CLK_RC_FAST_D256_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_CLK_RC_FAST_D256_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_RTC_SLOW_CLK_SUPPORT_RC_FAST_D256">
+<span class="target" id="soc__caps_8h_1a683aaaf8d75c2c8c1ac6925be68fd680"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_RTC_SLOW_CLK_SUPPORT_RC_FAST_D256</span></span></span><a class="headerlink" href="#c.SOC_RTC_SLOW_CLK_SUPPORT_RC_FAST_D256" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CLK_RC_FAST_SUPPORT_CALIBRATION">
+<span class="target" id="soc__caps_8h_1aeb551860c6ae723328cd7cf3b48c6f9b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CLK_RC_FAST_SUPPORT_CALIBRATION</span></span></span><a class="headerlink" href="#c.SOC_CLK_RC_FAST_SUPPORT_CALIBRATION" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CLK_XTAL32K_SUPPORTED">
+<span class="target" id="soc__caps_8h_1af4a7669227ae4bb4e0bf49055c87b042"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CLK_XTAL32K_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_CLK_XTAL32K_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support to connect an external low frequency crystal </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_CLK_LP_FAST_SUPPORT_XTAL_D2">
+<span class="target" id="soc__caps_8h_1a05e67a3e33d8e0ab7bc1e37d84e41dde"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_CLK_LP_FAST_SUPPORT_XTAL_D2</span></span></span><a class="headerlink" href="#c.SOC_CLK_LP_FAST_SUPPORT_XTAL_D2" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support XTAL_D2 clock as the LP_FAST clock source </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_TEMPERATURE_SENSOR_SUPPORT_FAST_RC">
+<span class="target" id="soc__caps_8h_1a55d466778a9ec75006e9991bab1a8e39"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_TEMPERATURE_SENSOR_SUPPORT_FAST_RC</span></span></span><a class="headerlink" href="#c.SOC_TEMPERATURE_SENSOR_SUPPORT_FAST_RC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_TEMPERATURE_SENSOR_SUPPORT_XTAL">
+<span class="target" id="soc__caps_8h_1aad770fda6e7ce69648b23bf84b93e416"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_TEMPERATURE_SENSOR_SUPPORT_XTAL</span></span></span><a class="headerlink" href="#c.SOC_TEMPERATURE_SENSOR_SUPPORT_XTAL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_HW_TSF">
+<span class="target" id="soc__caps_8h_1a9be853e983f562fd333fcb65b54aba38"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_HW_TSF</span></span></span><a class="headerlink" href="#c.SOC_WIFI_HW_TSF" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support hardware TSF </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_FTM_SUPPORT">
+<span class="target" id="soc__caps_8h_1a3e2dd77d12b71206e048d20c4f7d2d1f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_FTM_SUPPORT</span></span></span><a class="headerlink" href="#c.SOC_WIFI_FTM_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support FTM </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_GCMP_SUPPORT">
+<span class="target" id="soc__caps_8h_1abd7a893deba51aaf7cb75a5295994e85"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_GCMP_SUPPORT</span></span></span><a class="headerlink" href="#c.SOC_WIFI_GCMP_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support GCMP(GCMP128 and GCMP256) </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_WAPI_SUPPORT">
+<span class="target" id="soc__caps_8h_1a796ae5798831017cf21fd95712c51c41"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_WAPI_SUPPORT</span></span></span><a class="headerlink" href="#c.SOC_WIFI_WAPI_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support WAPI </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_TXOP_SUPPORT">
+<span class="target" id="soc__caps_8h_1aded1e8b7de5a0c10a201bb6dca007663"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_TXOP_SUPPORT</span></span></span><a class="headerlink" href="#c.SOC_WIFI_TXOP_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support TXOP </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_CSI_SUPPORT">
+<span class="target" id="soc__caps_8h_1a59cd892ec15d83e48aaccf53f524208b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_CSI_SUPPORT</span></span></span><a class="headerlink" href="#c.SOC_WIFI_CSI_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support CSI </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_MESH_SUPPORT">
+<span class="target" id="soc__caps_8h_1a99cbf2b2512d4bbf79b06ff44f831e96"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_MESH_SUPPORT</span></span></span><a class="headerlink" href="#c.SOC_WIFI_MESH_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support WIFI MESH </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_SUPPORT_VARIABLE_BEACON_WINDOW">
+<span class="target" id="soc__caps_8h_1a7d9c7317359d8c99b2ee22d398eab8f8"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_SUPPORT_VARIABLE_BEACON_WINDOW</span></span></span><a class="headerlink" href="#c.SOC_WIFI_SUPPORT_VARIABLE_BEACON_WINDOW" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support delta early time for rf phy on/off </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_WIFI_PHY_NEEDS_USB_WORKAROUND">
+<span class="target" id="soc__caps_8h_1a6ac4689e69324c619efe4db3deac304d"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_WIFI_PHY_NEEDS_USB_WORKAROUND</span></span></span><a class="headerlink" href="#c.SOC_WIFI_PHY_NEEDS_USB_WORKAROUND" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SoC has WiFi and USB PHYs interference, needs a workaround </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BLE_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a4d9eaec9f477c152d1264b8a4b1821ba"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BLE_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BLE_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support Bluetooth Low Energy hardware </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BLE_MESH_SUPPORTED">
+<span class="target" id="soc__caps_8h_1adfe55de40c01a5804b921c5e05d01ca0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BLE_MESH_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BLE_MESH_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support BLE MESH </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BLE_50_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a20038e31df41567060722fa469a2561b"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BLE_50_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BLE_50_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support Bluetooth 5.0 </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BLE_DEVICE_PRIVACY_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a454afd6e5039e362a8bde8e1aa7454af"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BLE_DEVICE_PRIVACY_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BLE_DEVICE_PRIVACY_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support BLE device privacy mode </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_BLUFI_SUPPORTED">
+<span class="target" id="soc__caps_8h_1a6cb9d69e64e8fe7e528369f6aab5be09"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_BLUFI_SUPPORTED</span></span></span><a class="headerlink" href="#c.SOC_BLUFI_SUPPORTED" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support BLUFI </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_PHY_COMBO_MODULE">
+<span class="target" id="soc__caps_8h_1aff2277de69faf93f89d81e5d8d9ba82a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_PHY_COMBO_MODULE</span></span></span><a class="headerlink" href="#c.SOC_PHY_COMBO_MODULE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Support Wi-Fi and BLE </p>
+</dd></dl>
+
+</section>
+<section id="id1">
+<h3>Header File<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/soc/include/soc/soc_caps_eval.h">components/soc/include/soc/soc_caps_eval.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"soc/soc_caps_eval.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h3>Macros<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c._SOC_CAPS_EVAL">
+<span class="target" id="soc__caps__eval_8h_1a27c9f9e8edd445a79f47dd38f5739dbb"></span><span class="sig-name descname"><span class="n"><span class="pre">_SOC_CAPS_EVAL</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_name</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c._SOC_CAPS_EVAL" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SOC Capability evaluation helpers</p>
+<p>These macros provide a standardized way to query SOC capabilities without directly accessing the macros in soc_caps.h.</p>
+<p>The main categories of macros are:<ul class="simple">
+<li><p>SOC_IS : Check if the SOC is a specific target (e.g., SOC_IS(ESP32S3))</p></li>
+<li><p>SOC_MODULE_ATTR : Get a specific attribute of a module (e.g., SOC_MODULE_ATTR(GPTIMER, NUM))</p></li>
+<li><p>SOC_MODULE_SUPPORT : Check if a module supports a feature (e.g., SOC_MODULE_SUPPORT(GPTIMER, ETM)) </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_HAS">
+<span class="target" id="soc__caps__eval_8h_1a7acb53eae9914847e9dd2962d5a9a07a"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_HAS</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_module</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SOC_HAS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_IS">
+<span class="target" id="soc__caps__eval_8h_1a021f5521831fd3f92bdaef218a0d41aa"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_IS</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_target</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SOC_IS" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MODULE_ATTR">
+<span class="target" id="soc__caps__eval_8h_1ae22da2fed01b58a58bdfb1e57c0c6a0f"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MODULE_ATTR</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_module</span></span>, <span class="n"><span class="pre">_attr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SOC_MODULE_ATTR" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SOC_MODULE_SUPPORT">
+<span class="target" id="soc__caps__eval_8h_1a92c4e34aa9d84ecd2410b2866a2e3ad0"></span><span class="sig-name descname"><span class="n"><span class="pre">SOC_MODULE_SUPPORT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">_module</span></span>, <span class="n"><span class="pre">_feat</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.SOC_MODULE_SUPPORT" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=SoC Capability Macros (api-reference/system/soc_caps)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=SoC Capability Macros (api-reference/system/soc_caps)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="sleep_modes.html" class="btn btn-neutral float-left" title="Sleep Modes" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="system_time.html" class="btn btn-neutral float-right" title="System Time" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

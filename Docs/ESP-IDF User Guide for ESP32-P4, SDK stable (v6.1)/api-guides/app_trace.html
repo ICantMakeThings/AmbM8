@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Application Level Tracing Library - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-guides/app_trace.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-guides/app_trace';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Application Startup Flow" href="startup.html" />
+    <link rel="prev" title="API Guides" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Guides</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Application Level Tracing Library</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#modes-of-operation">Modes of Operation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration-options-and-dependencies">Configuration Options and Dependencies</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#how-to-use-this-library">How to Use This Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#quick-start-summary">Quick Start Summary</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#application-specific-tracing">Application Specific Tracing</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#logging-to-host">Logging to Host</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#system-behavior-analysis-with-segger-systemview">System Behavior Analysis with SEGGER SystemView</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gcov-source-code-coverage">Gcov (Source Code Coverage)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#integrating-a-custom-trace-library">Integrating a Custom Trace Library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html">Application Startup Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system-v2.html">Build System v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c.html">C Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cplusplus.html">C++ Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality/index.html">Code Quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dump.html">Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="current-consumption-measurement-modules.html">Current Consumption Measurement of Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dfu.html">Device Firmware Upgrade via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-ram.html">Support for External RAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fatal-errors.html">Fatal Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-system-considerations.html">File System Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-abstraction.html">Hardware Abstraction</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="jtag-debugging/index.html">JTAG Debugging</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#introduction">Introduction</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#how-it-works">How it Works?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#selecting-jtag-adapter">Selecting JTAG Adapter</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#setup-of-openocd">Setup of OpenOCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#configuring-esp32-p4-target">Configuring ESP32-P4 Target</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#launching-debugger">Launching Debugger</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#debugging-examples">Debugging Examples</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#building-openocd-from-sources">Building OpenOCD from Sources</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#semihosting">Semihosting</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jtag-debugging/index.html#tips-and-quirks">Tips and Quirks</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="jtag-debugging/index.html#related-documents">Related Documents</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="jtag-debugging/using-debugger.html">Using Debugger</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jtag-debugging/debugging-examples.html">Debugging Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jtag-debugging/semihosting.html">Semihosting Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="jtag-debugging/tips-and-quirks.html">Tips and Quirks</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Application Level Tracing Library</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig/index.html">Project Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linker-script-generation.html">Linker Script Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="low-power-mode/index.html">Low Power Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lwip.html">lwIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory-types.html">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openthread.html">OpenThread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance/index.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducible-builds.html">Reproducible Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdio.html">Standard I/O and Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread-local-storage.html">Thread Local Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/index.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit-tests.html">Unit Testing in ESP32-P4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host-apps.html">Running ESP-IDF Applications on Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usb-serial-jtag-console.html">USB Serial/JTAG Controller Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi-expansion.html">Wi-Fi Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Guides</a></li>
+      <li class="breadcrumb-item active">Application Level Tracing Library</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-guides/app_trace.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="application-level-tracing-library">
+<h1>Application Level Tracing Library<a class="headerlink" href="#application-level-tracing-library" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../zh_CN/v6.1/esp32p4/api-guides/app_trace.html">[中文]</a></p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>ESP-IDF provides a useful feature for program behavior analysis: application level tracing. It is implemented in the corresponding library and can be enabled in menuconfig. This feature allows to transfer arbitrary data between host and ESP32-P4 via JTAG, UART, or USB interfaces with small overhead on program execution. It is possible to use JTAG and UART interfaces simultaneously. The UART interface is mostly used for connection with SEGGER SystemView tool (see <a class="reference external" href="https://www.segger.com/products/development-tools/systemview/">SystemView</a>).</p>
+<p>Developers can use this library to send application-specific state of execution to the host and receive commands or other types of information from the opposite direction at runtime. The main use cases of this library are:</p>
+<ol class="arabic simple">
+<li><p>Collecting application-specific data. See <a class="reference internal" href="#app-trace-application-specific-tracing"><span class="std std-ref">Application Specific Tracing</span></a>.</p></li>
+<li><p>Lightweight logging to the host. See <a class="reference internal" href="#app-trace-logging-to-host"><span class="std std-ref">Logging to Host</span></a>.</p></li>
+<li><p>System behavior analysis. See <a class="reference internal" href="#app-trace-system-behaviour-analysis-with-segger-systemview"><span class="std std-ref">System Behavior Analysis with SEGGER SystemView</span></a>.</p></li>
+<li><p>Source code coverage. See <a class="reference internal" href="#app-trace-gcov-source-code-coverage"><span class="std std-ref">Gcov (Source Code Coverage)</span></a>.</p></li>
+</ol>
+<p>Tracing components used when working over JTAG interface are shown in the figure below.</p>
+<figure class="align-center" id="id4">
+<img alt="Tracing Components When Working Over JTAG" src="../_images/app_trace-overview.jpg" />
+<figcaption>
+<p><span class="caption-text">Tracing Components Used When Working Over JTAG</span><a class="headerlink" href="#id4" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="modes-of-operation">
+<h2>Modes of Operation<a class="headerlink" href="#modes-of-operation" title="Permalink to this heading"></a></h2>
+<p>The library supports two modes of operation:</p>
+<p><strong>Post-mortem mode:</strong> This is the default mode. The mode does not need interaction with the host side. In this mode, tracing module does not check whether the host has read all the data from <em>HW UP BUFFER</em>, but directly overwrites old data with the new ones. This mode is useful when only the latest trace data is interesting to the user, e.g., for analyzing program's behavior just before the crash. The host can read the data later on upon user request, e.g., via special OpenOCD command in case of working via JTAG interface.</p>
+<p><strong>Streaming mode:</strong> Tracing module enters this mode when the host connects to ESP32-P4. In this mode, before writing new data to <em>HW UP BUFFER</em>, the tracing module checks that whether there is enough space in it and if necessary, waits for the host to read data and free enough memory. Maximum waiting time is controlled via timeout values passed by users to corresponding API routines. So when application tries to write data to the trace buffer using the finite value of the maximum waiting time, it is possible that this data will be dropped. This is especially true for tracing from time critical code (ISRs, OS scheduler code, etc.) where infinite timeouts can lead to system malfunction.</p>
+</section>
+<section id="configuration-options-and-dependencies">
+<h2>Configuration Options and Dependencies<a class="headerlink" href="#configuration-options-and-dependencies" title="Permalink to this heading"></a></h2>
+<p>Using of this feature depends on two components:</p>
+<ol class="arabic simple">
+<li><p><strong>Host side:</strong> Application tracing is done over JTAG, so it needs OpenOCD to be set up and running on host machine. For instructions on how to set it up, please see <a class="reference internal" href="jtag-debugging/index.html"><span class="doc">JTAG Debugging</span></a> for details.</p></li>
+<li><p><strong>Target side:</strong> Application tracing functionality can be enabled in menuconfig. <strong>Important:</strong> You must first enable application tracing by going to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">transport</span></code> and selecting <code class="docutils literal notranslate"><span class="pre">ESP-IDF</span> <span class="pre">apptrace</span></code>. After that, configuration can be done at <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code>. Here you can configure the destination for the trace data. For UART interfaces, users have to define port number, baud rate, TX and RX pins numbers, and additional UART-related parameters. When any trace library is selected (for example SEGGER SystemView), these settings will be used for the library as well.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In order to achieve higher data rates and minimize the number of dropped packets, it is recommended to optimize the setting of JTAG clock frequency, so that it is at maximum and still provides stable operation of JTAG. See <a class="reference internal" href="jtag-debugging/tips-and-quirks.html#jtag-debugging-tip-optimize-jtag-speed"><span class="std std-ref">Optimize JTAG Speed</span></a>.</p>
+</div>
+<p>There are some additional menuconfig options not mentioned above:</p>
+<ol class="arabic simple">
+<li><p><em>Threshold for flushing last trace data to host on panic</em> (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-apptrace-postmortem-flush-thresh"><span class="std std-ref">CONFIG_APPTRACE_POSTMORTEM_FLUSH_THRESH</span></a>). This option is necessary due to the nature of working over JTAG. In this mode, trace data is exposed to the host in 16 KB blocks. In post-mortem mode, when one block is filled, it is exposed to the host and the previous one becomes unavailable. In other words, the trace data is overwritten in 16 KB granularity. On panic, the latest data from the current input block is exposed to the host and the host can read them for post-analysis. System panic may occur when a very small amount of data are not exposed to the host yet. In this case, the previous 16 KB of collected data will be lost and the host will see the latest, but very small piece of the trace. It can be insufficient to diagnose the problem. This menuconfig option allows avoiding such situations. It controls the threshold for flushing data in case of apanic. For example, users can decide that it needs no less than 512 bytes of the recent trace data, so if there is less then 512 bytes of pending data at the moment of panic, they will not be flushed and will not overwrite the previous 16 KB. The option is only meaningful in post-mortem mode and when working over JTAG.</p></li>
+<li><p><em>Timeout for flushing last trace data to host on panic</em> (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-apptrace-onpanic-host-flush-tmo"><span class="std std-ref">CONFIG_APPTRACE_ONPANIC_HOST_FLUSH_TMO</span></a>). The option is only meaningful in streaming mode and it controls the maximum time that the tracing module will wait for the host to read the last data in case of panic.</p></li>
+<li><p><em>Internal Sync Lock</em> (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-apptrace-lock-enable"><span class="std std-ref">CONFIG_APPTRACE_LOCK_ENABLE</span></a>). Enable this option to protect trace buffer writes with locks, preventing data corruption when multiple tasks generate trace data concurrently.</p></li>
+<li><p><em>UART RX/TX ring buffer size</em> (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-apptrace-uart-tx-buff-size"><span class="std std-ref">CONFIG_APPTRACE_UART_TX_BUFF_SIZE</span></a>). The size of the buffer depends on the amount of data transferred through the UART.</p></li>
+<li><p><em>UART TX message size</em> (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-apptrace-uart-tx-msg-size"><span class="std std-ref">CONFIG_APPTRACE_UART_TX_MSG_SIZE</span></a>). The maximum size of the single message to transfer.</p></li>
+</ol>
+</section>
+<section id="how-to-use-this-library">
+<h2>How to Use This Library<a class="headerlink" href="#how-to-use-this-library" title="Permalink to this heading"></a></h2>
+<p>This library provides APIs for transferring arbitrary data between the host and ESP32-P4. When enabled in menuconfig, the application tracing module is automatically initialized during system startup using configuration from menuconfig. Users can then call corresponding APIs to send, receive, or flush the data.</p>
+<p>Optionally, users can override the default configuration by implementing the weak callback function <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_get_user_params()</span></code>. This callback will be active when there is no selected trace library, meaning the Application Level Tracing library (<code class="docutils literal notranslate"><span class="pre">app_trace</span></code> component) will be working standalone. Otherwise, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_trace_get_user_params()</span></code> will be used for overriding the configuration.</p>
+</section>
+<section id="quick-start-summary">
+<h2>Quick Start Summary<a class="headerlink" href="#quick-start-summary" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>Standalone usage with Application Level Tracing APIs</p>
+<p>In menuconfig, disable the trace library and enable the Application Level Tracing transport:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">library</span></code>: select <code class="docutils literal notranslate"><span class="pre">None</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">transport</span></code>: select <code class="docutils literal notranslate"><span class="pre">ESP-IDF</span> <span class="pre">apptrace</span></code></p></li>
+</ul>
+<p>Alternatively, set these options in <code class="docutils literal notranslate"><span class="pre">sdkconfig.defaults</span></code> to enforce standalone mode:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_ESP_TRACE_ENABLE=y
+CONFIG_ESP_TRACE_LIB_NONE=y
+CONFIG_ESP_TRACE_TRANSPORT_APPTRACE=y
+</pre></div>
+</div>
+<p>Configure the destination in <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code>.</p>
+</li>
+<li><p>Runtime configuration via <code class="docutils literal notranslate"><span class="pre">esp_apptrace_get_user_params()</span></code></p>
+<ul class="simple">
+<li><p>If you select <code class="docutils literal notranslate"><span class="pre">All</span> <span class="pre">(runtime</span> <span class="pre">selection)</span></code> in Kconfig (<code class="docutils literal notranslate"><span class="pre">APPTRACE_DEST_ALL</span></code>), the callback can switch between JTAG and UART at runtime and adjust their parameters.</p></li>
+<li><p>If you select a single destination (JTAG or UART) in Kconfig, the callback can override that destination's parameters at runtime, but it cannot switch the destination type.</p></li>
+</ul>
+</li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Application tracing can also work as a transport adapter to the esp_trace library. In this case, the Application Level Tracing library will not be used directly, but rather through the selected esp_trace library with new APIs.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The code examples below are valid when the Application Level Tracing library is used standalone without a trace library.</p>
+</div>
+<section id="application-specific-tracing">
+<span id="app-trace-application-specific-tracing"></span><h3>Application Specific Tracing<a class="headerlink" href="#application-specific-tracing" title="Permalink to this heading"></a></h3>
+<p>In general, users should decide what type of data should be transferred in every direction and how these data must be interpreted (processed). The following steps must be performed to transfer data between the target and the host:</p>
+<ol class="arabic">
+<li><p><strong>Configuration:</strong> Application tracing is automatically initialized during system startup using configuration from menuconfig. If you need to override the default configuration at runtime (e.g., to use custom UART pins), implement the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_get_user_params()</span></code> callback:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_app_trace.h"</span>
+
+<span class="n">esp_apptrace_config_t</span><span class="w"> </span><span class="o">*</span><span class="nf">esp_apptrace_get_user_params</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_apptrace_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">APPTRACE_CONFIG_DEFAULT</span><span class="p">();</span>
+
+<span class="w">    </span><span class="c1">// Customize configuration if needed</span>
+<span class="w">    </span><span class="c1">// For example, to use different UART pins:</span>
+<span class="w">    </span><span class="n">config</span><span class="p">.</span><span class="n">dest_cfg</span><span class="p">.</span><span class="n">uart</span><span class="p">.</span><span class="n">tx_pin_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_NUM_17</span><span class="p">;</span>
+<span class="w">    </span><span class="n">config</span><span class="p">.</span><span class="n">dest_cfg</span><span class="p">.</span><span class="n">uart</span><span class="p">.</span><span class="n">rx_pin_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">GPIO_NUM_16</span><span class="p">;</span>
+
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">config</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This callback is optional. Only implement it if you need to override menuconfig settings. For most use cases, configuring through menuconfig is sufficient.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>On the target side, users should implement algorithms for writing trace data to the host. Piece of code below shows an example on how to do this.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_app_trace.h"</span>
+<span class="p">...</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hello World!"</span><span class="p">;</span>
+<span class="n">esp_err_t</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_apptrace_write</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="n">strlen</span><span class="p">(</span><span class="n">buf</span><span class="p">),</span><span class="w"> </span><span class="n">ESP_APPTRACE_TMO_INFINITE</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to write data to host!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv418esp_apptrace_writePKv8uint32_t8uint32_t" title="esp_apptrace_write"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_write()</span></code></a> function uses memcpy to copy user data to the internal buffer. In some cases, it can be more optimal to use <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv423esp_apptrace_buffer_get8uint32_t8uint32_t" title="esp_apptrace_buffer_get"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_buffer_get()</span></code></a> and <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv423esp_apptrace_buffer_putP7uint8_t8uint32_t" title="esp_apptrace_buffer_put"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_buffer_put()</span></code></a> functions. They allow developers to allocate buffer and fill it themselves. The following piece of code shows how to do this.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_app_trace.h"</span>
+<span class="p">...</span>
+<span class="kt">int</span><span class="w"> </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">esp_apptrace_buffer_get</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="cm">/*tmo in us*/</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to get buffer!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ESP_FAIL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">sprintf</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="s">"Here is the number %d"</span><span class="p">,</span><span class="w"> </span><span class="n">number</span><span class="p">);</span>
+<span class="n">esp_err_t</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_apptrace_buffer_put</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="cm">/*tmo in us*/</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* in case of error host tracing tool (e.g., OpenOCD) will report incomplete user buffer */</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to put buffer!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Also according to his needs, the user may want to receive data from the host. Piece of code below shows an example on how to do this.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_app_trace.h"</span>
+<span class="p">...</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">down_buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buf</span><span class="p">);</span>
+
+<span class="cm">/* config down buffer */</span>
+<span class="n">esp_err_t</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_apptrace_down_buffer_config</span><span class="p">(</span><span class="n">down_buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">down_buf</span><span class="p">));</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to config down buffer!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="cm">/* check for incoming data and read them if any */</span>
+<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_apptrace_read</span><span class="p">(</span><span class="n">buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">sz</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="cm">/*do not wait*/</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to read data from host!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sz</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* we have data, process them */</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv417esp_apptrace_readPvP8uint32_t8uint32_t" title="esp_apptrace_read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_read()</span></code></a> function uses memcpy to copy host data to user buffer. In some cases, it can be more optimal to use <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv428esp_apptrace_down_buffer_getP8uint32_t8uint32_t" title="esp_apptrace_down_buffer_get"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_down_buffer_get()</span></code></a> and <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv428esp_apptrace_down_buffer_putP7uint8_t8uint32_t" title="esp_apptrace_down_buffer_put"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_down_buffer_put()</span></code></a> functions. They allow developers to occupy chunk of read buffer and process it in-place. The following piece of code shows how to do this.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_app_trace.h"</span>
+<span class="p">...</span>
+<span class="kt">char</span><span class="w"> </span><span class="n">down_buf</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="n">number</span><span class="p">;</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">sz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">;</span>
+
+<span class="cm">/* config down buffer */</span>
+<span class="n">esp_err_t</span><span class="w"> </span><span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_apptrace_down_buffer_config</span><span class="p">(</span><span class="n">down_buf</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">down_buf</span><span class="p">));</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to config down buffer!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">ptr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">esp_apptrace_down_buffer_get</span><span class="p">(</span><span class="o">&amp;</span><span class="n">sz</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="cm">/*tmo in us*/</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">ptr</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to get buffer!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ESP_FAIL</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">sz</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mi">4</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">number</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">;</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"Here is the number %d"</span><span class="p">,</span><span class="w"> </span><span class="o">*</span><span class="n">number</span><span class="p">);</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"No data"</span><span class="p">);</span>
+<span class="p">}</span>
+<span class="n">res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_apptrace_down_buffer_put</span><span class="p">(</span><span class="n">ptr</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="cm">/*tmo in us*/</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">res</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/* in case of error host tracing tool (e.g., OpenOCD) will report incomplete user buffer */</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"Failed to put buffer!"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">res</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>The next step is to build the program image and download it to the target as described in the <a class="reference internal" href="../get-started/index.html#get-started-build"><span class="std std-ref">Getting Started Guide</span></a>.</p></li>
+<li><p>Run OpenOCD (see <a class="reference internal" href="jtag-debugging/index.html"><span class="doc">JTAG Debugging</span></a>).</p></li>
+<li><p>Connect to OpenOCD telnet server. It can be done using the following command in terminal <code class="docutils literal notranslate"><span class="pre">telnet</span> <span class="pre">&lt;oocd_host&gt;</span> <span class="pre">4444</span></code>. If telnet session is opened on the same machine which runs OpenOCD, you can use <code class="docutils literal notranslate"><span class="pre">localhost</span></code> as <code class="docutils literal notranslate"><span class="pre">&lt;oocd_host&gt;</span></code> in the command above.</p></li>
+<li><p>Start trace data collection using special OpenOCD command. This command will transfer tracing data and redirect them to the specified file or socket. For description of the corresponding commands, see <a class="reference internal" href="#openocd-application-level-tracing-commands">OpenOCD Application Level Tracing Commands</a>.</p></li>
+<li><p>The final step is to process received data. Since the format of data is defined by users, the processing stage is out of the scope of this document. Good starting points for data processor are python scripts in <code class="docutils literal notranslate"><span class="pre">$IDF_PATH/tools/esp_app_trace</span></code>: <code class="docutils literal notranslate"><span class="pre">apptrace_proc.py</span></code> (used for feature tests) and <code class="docutils literal notranslate"><span class="pre">logtrace_proc.py</span></code> (see more details in section <a class="reference internal" href="#logging-to-host">Logging to Host</a>).</p></li>
+</ol>
+<section id="openocd-application-level-tracing-commands">
+<h4>OpenOCD Application Level Tracing Commands<a class="headerlink" href="#openocd-application-level-tracing-commands" title="Permalink to this heading"></a></h4>
+<p><em>HW UP BUFFER</em> is shared between user data blocks and the filling of the allocated memory is performed on behalf of the API caller (in task or ISR context). In multithreading environment, it can happen that the task/ISR which fills the buffer is preempted by another high priority task/ISR. So it is possible that the user data preparation process is not completed at the moment when that chunk is read by the host. To handle such conditions, the tracing module prepends all user data chunks with header which contains the allocated user buffer size (2 bytes) and the length of the actually written data (2 bytes). So the total length of the header is 4 bytes. OpenOCD command which reads trace data reports error when it reads incomplete user data chunk, but in any case, it puts the contents of the whole user chunk (including unfilled area) to the output file.</p>
+<p>Below is the description of available OpenOCD application tracing commands.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Currently, OpenOCD does not provide commands to send arbitrary user data to the target.</p>
+</div>
+<p>Command usage:</p>
+<p><code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">apptrace</span> <span class="pre">[start</span> <span class="pre">&lt;options&gt;]</span> <span class="pre">|</span> <span class="pre">[stop]</span> <span class="pre">|</span> <span class="pre">[status]</span> <span class="pre">|</span> <span class="pre">[dump</span> <span class="pre">&lt;cores_num&gt;</span> <span class="pre">&lt;outfile&gt;]</span></code></p>
+<p>Sub-commands:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">start</span></code></dt><dd><p>Start tracing (continuous streaming).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">stop</span></code></dt><dd><p>Stop tracing.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">status</span></code></dt><dd><p>Get tracing status.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">dump</span></code></dt><dd><p>Dump all data from  (post-mortem dump).</p>
+</dd>
+</dl>
+<p>Start command syntax:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">&lt;outfile&gt;</span> <span class="pre">[poll_period</span> <span class="pre">[trace_size</span> <span class="pre">[stop_tmo</span> <span class="pre">[wait4halt</span> <span class="pre">[skip_size]]]]</span></code></p>
+</div></blockquote>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">outfile</span></code></dt><dd><p>Path to file to save data from both CPUs. This argument should have the following format: <code class="docutils literal notranslate"><span class="pre">file://path/to/file</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">poll_period</span></code></dt><dd><p>Data polling period (in ms) for available trace data. If greater than 0, then command runs in non-blocking mode. By default, 1 ms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trace_size</span></code></dt><dd><p>Maximum size of data to collect (in bytes). Tracing is stopped after specified amount of data is received. By default, -1 (trace size stop trigger is disabled).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">stop_tmo</span></code></dt><dd><p>Idle timeout (in sec). Tracing is stopped if there is no data for specified period of time. By default, -1 (disable this stop trigger). Optionally set it to value longer than longest pause between tracing commands from target.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">wait4halt</span></code></dt><dd><p>If 0, start tracing immediately, otherwise command waits for the target to be halted (after reset, by breakpoint etc.) and then automatically resumes it and starts tracing. By default, 0.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">skip_size</span></code></dt><dd><p>Number of bytes to skip at the start. By default, 0.</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">poll_period</span></code> is 0, OpenOCD telnet command line will not be available until tracing is stopped. You must stop it manually by resetting the board or pressing Ctrl+C in OpenOCD window (not one with the telnet session). Another option is to set <code class="docutils literal notranslate"><span class="pre">trace_size</span></code> and wait until this size of data is collected. At this point, tracing stops automatically.</p>
+</div>
+<p>Command usage examples:</p>
+<ol class="arabic">
+<li><p>Collect 2048 bytes of tracing data to the file <code class="docutils literal notranslate"><span class="pre">trace.log</span></code>. The file will be saved in the <code class="docutils literal notranslate"><span class="pre">openocd-esp32</span></code> directory.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp apptrace start file://trace.log 1 2048 5 0 0
+</pre></div>
+</div>
+<p>The tracing data will be retrieved and saved in non-blocking mode. This process will stop automatically after 2048 bytes are collected, or if no data are available for more than 5 seconds.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Tracing data is buffered before it is made available to OpenOCD. If you see &quot;Data timeout!&quot; message, then it is likely that the target is not sending enough data to empty the buffer to OpenOCD before the timeout. Either increase the timeout or use the function <code class="docutils literal notranslate"><span class="pre">esp_apptrace_flush()</span></code> to flush the data on specific intervals.</p>
+</div>
+</li>
+<li><p>Retrieve tracing data indefinitely in non-blocking mode.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp apptrace start file://trace.log 1 -1 -1 0 0
+</pre></div>
+</div>
+<p>There is no limitation on the size of collected data and there is no data timeout set. This process may be stopped by issuing <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">apptrace</span> <span class="pre">stop</span></code> command on OpenOCD telnet prompt, or by pressing Ctrl+C in OpenOCD window.</p>
+</li>
+<li><p>Retrieve tracing data and save them indefinitely.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp apptrace start file://trace.log 0 -1 -1 0 0
+</pre></div>
+</div>
+<p>OpenOCD telnet command line prompt will not be available until tracing is stopped. To stop tracing, press Ctrl+C in the OpenOCD window.</p>
+</li>
+<li><p>Wait for the target to be halted. Then resume the target's operation and start data retrieval. Stop after collecting 2048 bytes of data:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp apptrace start file://trace.log 0 2048 -1 1 0
+</pre></div>
+</div>
+<p>To configure tracing immediately after reset, use the OpenOCD <code class="docutils literal notranslate"><span class="pre">reset</span> <span class="pre">halt</span></code> command.</p>
+</li>
+</ol>
+</section>
+</section>
+<section id="logging-to-host">
+<span id="app-trace-logging-to-host"></span><h3>Logging to Host<a class="headerlink" href="#logging-to-host" title="Permalink to this heading"></a></h3>
+<p>ESP-IDF implements a useful feature: logging to the host via application level tracing library. This is a kind of semihosting when all <cite>ESP_LOGx</cite> calls send strings to be printed to the host instead of UART. This can be useful because &quot;printing to host&quot; eliminates some steps performed when logging to UART. Most part of the work is done on the host.</p>
+<p>By default, ESP-IDF's logging library uses vprintf-like function to write formatted output to dedicated UART. In general, it involves the following steps:</p>
+<ol class="arabic simple">
+<li><p>Format string is parsed to obtain type of each argument.</p></li>
+<li><p>According to its type, every argument is converted to string representation.</p></li>
+<li><p>Format string combined with converted arguments is sent to UART.</p></li>
+</ol>
+<p>Though the implementation of the vprintf-like function can be optimized to a certain level, all steps above have to be performed in any case and every step takes some time (especially item 3). So it frequently occurs that with additional log added to the program to identify the problem, the program behavior is changed and the problem cannot be reproduced. And in the worst cases, the program cannot work normally at all and ends up with an error or even hangs.</p>
+<p>Possible ways to overcome this problem are to use higher UART bitrates (or another faster interface) and/or to move string formatting procedure to the host.</p>
+<p>The application level tracing feature can be used to transfer log information to the host using <code class="docutils literal notranslate"><span class="pre">esp_apptrace_vprintf</span></code> function. This function does not perform full parsing of the format string and arguments. Instead, it just calculates the number of arguments passed and sends them along with the format string address to the host. On the host, log data is processed and printed out by a special Python script.</p>
+<section id="limitations">
+<h4>Limitations<a class="headerlink" href="#limitations" title="Permalink to this heading"></a></h4>
+<p>Current implementation of logging over JTAG has some limitations:</p>
+<ol class="arabic simple">
+<li><p>No support for tracing from <code class="docutils literal notranslate"><span class="pre">ESP_EARLY_LOGx</span></code> macros.</p></li>
+<li><p>No support for printf arguments whose size exceeds 4 bytes (e.g., <code class="docutils literal notranslate"><span class="pre">double</span></code> and <code class="docutils literal notranslate"><span class="pre">uint64_t</span></code>).</p></li>
+<li><p>Only strings from the .rodata section are supported as format strings and arguments.</p></li>
+<li><p>The maximum number of printf arguments is 256.</p></li>
+</ol>
+</section>
+<section id="how-to-use-it">
+<h4>How To Use It<a class="headerlink" href="#how-to-use-it" title="Permalink to this heading"></a></h4>
+<p>In order to use logging via trace module, users need to perform the following steps:</p>
+<ol class="arabic simple">
+<li><p>Enable application tracing in menuconfig by going to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">transport</span></code> and selecting <code class="docutils literal notranslate"><span class="pre">ESP-IDF</span> <span class="pre">apptrace</span></code>. After that, configuration can be done at <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code>.</p></li>
+<li><p>On the target side, the special vprintf-like function <a class="reference internal" href="../api-reference/system/app_trace.html#_CPPv420esp_apptrace_vprintfPKc7va_list" title="esp_apptrace_vprintf"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_apptrace_vprintf()</span></code></a> needs to be installed. It sends log data to the host. An example is <code class="docutils literal notranslate"><span class="pre">esp_log_set_vprintf(esp_apptrace_vprintf);</span></code>. To send log data to UART again, use <code class="docutils literal notranslate"><span class="pre">esp_log_set_vprintf(vprintf);</span></code>.</p></li>
+<li><p>Follow instructions in items 4-6 in <a class="reference internal" href="#application-specific-tracing">Application Specific Tracing</a> (OpenOCD setup and trace collection).</p></li>
+<li><p>To print out collected log records, run the following command in terminal: <code class="docutils literal notranslate"><span class="pre">$IDF_PATH/tools/esp_app_trace/logtrace_proc.py</span> <span class="pre">/path/to/trace/file</span> <span class="pre">/path/to/program/elf/file</span></code>.</p></li>
+</ol>
+<section id="log-trace-processor-command-options">
+<h5>Log Trace Processor Command Options<a class="headerlink" href="#log-trace-processor-command-options" title="Permalink to this heading"></a></h5>
+<p>Command usage:</p>
+<p><code class="docutils literal notranslate"><span class="pre">logtrace_proc.py</span> <span class="pre">[-h]</span> <span class="pre">[--no-errors]</span> <span class="pre">&lt;trace_file&gt;</span> <span class="pre">&lt;elf_file&gt;</span></code></p>
+<p>Positional arguments:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">trace_file</span></code></dt><dd><p>Path to log trace file.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">elf_file</span></code></dt><dd><p>Path to program ELF file.</p>
+</dd>
+</dl>
+<p>Optional arguments:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">-h</span></code>, <code class="docutils literal notranslate"><span class="pre">--help</span></code></dt><dd><p>Show this help message and exit.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">--no-errors</span></code>, <code class="docutils literal notranslate"><span class="pre">-n</span></code></dt><dd><p>Do not print errors.</p>
+</dd>
+</dl>
+</section>
+</section>
+</section>
+<section id="system-behavior-analysis-with-segger-systemview">
+<span id="app-trace-system-behaviour-analysis-with-segger-systemview"></span><h3>System Behavior Analysis with SEGGER SystemView<a class="headerlink" href="#system-behavior-analysis-with-segger-systemview" title="Permalink to this heading"></a></h3>
+<p>Another useful ESP-IDF feature built on top of application tracing library is the system level tracing which produces traces compatible with SEGGER SystemView tool (see <a class="reference external" href="https://www.segger.com/products/development-tools/systemview/">SystemView</a>). SEGGER SystemView is a real-time recording and visualization tool that allows to analyze runtime behavior of an application. It is possible to view events in real-time through the UART interface.</p>
+<section id="id2">
+<h4>How To Use It<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<p>SystemView support is provided by the managed component <code class="docutils literal notranslate"><span class="pre">espressif/esp_sysview</span></code>. The SystemView menu becomes visible only after:</p>
+<ol class="arabic">
+<li><p>Adding the component dependency in <code class="docutils literal notranslate"><span class="pre">idf_component.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">espressif/esp_sysview</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^1</span>
+</pre></div>
+</div>
+</li>
+<li><p>Selecting the external library in menuconfig: <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">library</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">library</span> <span class="pre">from</span> <span class="pre">component</span> <span class="pre">registry</span></code>.</p></li>
+</ol>
+<p>After that, you can configure SystemView in <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">SEGGER</span> <span class="pre">SystemView</span> <span class="pre">Configuration</span></code>. For full, up-to-date instructions, see the component README: <a class="reference external" href="https://components.espressif.com/components/espressif/esp_sysview">esp_sysview</a>.</p>
+<p>There are several other options enabled under the same menu:</p>
+<ol class="arabic">
+<li><p>ESP32-P4 timer to use as SystemView timestamp source: (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-esp-trace-timestamp-source"><span class="std std-ref">CONFIG_ESP_TRACE_TIMESTAMP_SOURCE</span></a>) selects the source of timestamps for SystemView events. In the single core mode, timestamps are generated using ESP32-P4 internal cycle counter running at maximum frequency. (<a class="reference internal" href="../api-reference/kconfig-reference.html#config-esp-default-cpu-freq-mhz"><span class="std std-ref">CONFIG_ESP_DEFAULT_CPU_FREQ_MHZ</span></a>) In the dual-core mode, external timer is used to generate timestamps. It's frequency is 1/2 of the CPU frequency.</p></li>
+<li><p>Individually enabled or disabled collection of SystemView events (<code class="docutils literal notranslate"><span class="pre">CONFIG_SEGGER_SYSVIEW_EVT_XXX</span></code>):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Trace Buffer Overflow Event</p></li>
+<li><p>ISR Enter Event</p></li>
+<li><p>ISR Exit Event</p></li>
+<li><p>ISR Exit to Scheduler Event</p></li>
+<li><p>Task Start Execution Event</p></li>
+<li><p>Task Stop Execution Event</p></li>
+<li><p>Task Start Ready State Event</p></li>
+<li><p>Task Stop Ready State Event</p></li>
+<li><p>Task Create Event</p></li>
+<li><p>Task Terminate Event</p></li>
+<li><p>System Idle Event</p></li>
+<li><p>Timer Enter Event</p></li>
+<li><p>Timer Exit Event</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ol>
+<p>ESP-IDF has all the code required to produce SystemView compatible traces.</p>
+<ol class="arabic simple" start="3">
+<li><p>To trace over the UART interface in real-time, first select UART as the destination in <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code>. Then select Pro or App CPU in <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">SEGGER</span> <span class="pre">SystemView</span></code>.</p></li>
+</ol>
+</section>
+<section id="openocd-systemview-tracing-command-options">
+<h4>OpenOCD SystemView Tracing Command Options<a class="headerlink" href="#openocd-systemview-tracing-command-options" title="Permalink to this heading"></a></h4>
+<p>Command usage:</p>
+<p><code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview</span> <span class="pre">[start</span> <span class="pre">&lt;options&gt;]</span> <span class="pre">|</span> <span class="pre">[stop]</span> <span class="pre">|</span> <span class="pre">[status]</span></code></p>
+<p>Sub-commands:</p>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">start</span></code></dt><dd><p>Start tracing (continuous streaming).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">stop</span></code></dt><dd><p>Stop tracing.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">status</span></code></dt><dd><p>Get tracing status.</p>
+</dd>
+</dl>
+<p>Start command syntax:</p>
+<blockquote>
+<div><p><code class="docutils literal notranslate"><span class="pre">start</span> <span class="pre">&lt;outfile1&gt;</span> <span class="pre">[outfile2]</span> <span class="pre">[poll_period</span> <span class="pre">[trace_size</span> <span class="pre">[stop_tmo]]]</span></code></p>
+</div></blockquote>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">outfile1</span></code></dt><dd><p>Path to file to save data from PRO CPU. This argument should have the following format: <code class="docutils literal notranslate"><span class="pre">file://path/to/file</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">outfile2</span></code></dt><dd><p>Path to file to save data from APP CPU. This argument should have the following format: <code class="docutils literal notranslate"><span class="pre">file://path/to/file</span></code>.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">poll_period</span></code></dt><dd><p>Data polling period (in ms) for available trace data. If greater than 0, then command runs in non-blocking mode. By default, 1 ms.</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">trace_size</span></code></dt><dd><p>Maximum size of data to collect (in bytes). Tracing is stopped after specified amount of data is received. By default, -1 (trace size stop trigger is disabled).</p>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">stop_tmo</span></code></dt><dd><p>Idle timeout (in sec). Tracing is stopped if there is no data for specified period of time. By default, -1 (disable this stop trigger).</p>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">poll_period</span></code> is 0, OpenOCD telnet command line will not be available until tracing is stopped. You must stop it manually by resetting the board or pressing Ctrl+C in the OpenOCD window (not the one with the telnet session). Another option is to set <code class="docutils literal notranslate"><span class="pre">trace_size</span></code> and wait until this size of data is collected. At this point, tracing stops automatically.</p>
+</div>
+<p>Command usage examples:</p>
+<ol class="arabic">
+<li><p>Collect SystemView tracing data to files <code class="docutils literal notranslate"><span class="pre">pro-cpu.SVDat</span></code> and <code class="docutils literal notranslate"><span class="pre">app-cpu.SVDat</span></code>. The files will be saved in <code class="docutils literal notranslate"><span class="pre">openocd-esp32</span></code> directory.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp sysview start file://pro-cpu.SVDat file://app-cpu.SVDat
+</pre></div>
+</div>
+<p>The tracing data will be retrieved and saved in non-blocking mode. To stop this process, enter <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview</span> <span class="pre">stop</span></code> command on OpenOCD telnet prompt, optionally pressing Ctrl+C in the OpenOCD window.</p>
+</li>
+<li><p>Retrieve tracing data and save them indefinitely.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp sysview start file://pro-cpu.SVDat file://app-cpu.SVDat 0 -1 -1
+</pre></div>
+</div>
+<p>OpenOCD telnet command line prompt will not be available until tracing is stopped. To stop tracing, press Ctrl+C in the OpenOCD window.</p>
+</li>
+</ol>
+</section>
+<section id="multi-core-systemview-tracing-command">
+<h4>Multi-Core SystemView Tracing Command<a class="headerlink" href="#multi-core-systemview-tracing-command" title="Permalink to this heading"></a></h4>
+<p>For SystemView version 3.60 and later, which supports multi-core tracing, use the <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview_mcore</span></code> command. This command is identical to <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview</span></code> but uses the official SEGGER SystemView multi-core format. Tracing data from all cores are saved in the same file, which can be opened in SEGGER SystemView v3.60 or later.</p>
+<p>Command usage example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp sysview_mcore start file://heap_log_mcore.SVDat
+</pre></div>
+</div>
+<p>For detailed command syntax and options, refer to the <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview</span></code> command above, as <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview_mcore</span></code> accepts the same parameters.</p>
+</section>
+<section id="data-visualization">
+<h4>Data Visualization<a class="headerlink" href="#data-visualization" title="Permalink to this heading"></a></h4>
+<p>After trace data are collected, users can use a special tool to visualize the results and inspect behavior of the program.</p>
+<p><strong>Multi-Core Tracing</strong></p>
+<p>SystemView version 3.60 and later supports tracing from multiple cores. For multi-core tracing, use the <code class="docutils literal notranslate"><span class="pre">esp</span> <span class="pre">sysview_mcore</span></code> command to generate a single file compatible with SystemView multi-core format:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>esp sysview_mcore start file://heap_log_mcore.SVDat
+</pre></div>
+</div>
+<p>This command will create a single trace file that can be loaded directly into SystemView 3.60+ for multi-core visualization.</p>
+<p><strong>Note:</strong> SystemView versions before 3.60 do not support multi-core tracing. For older versions, when tracing from ESP32-P4 with JTAG interfaces in the dual-core mode, two separate files are generated: one for PRO CPU and another for APP CPU. Users can load each file into separate instances of the tool. For tracing over UART, after selecting the external library in menuconfig, users can select <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">SEGGER</span> <span class="pre">SystemView</span> <span class="pre">Configuration</span></code> to choose which CPU (Pro or App) has to be traced.</p>
+<p>For older SystemView versions, analyzing data for every core in separate instances can be awkward. An alternative is to use the Eclipse plugin called <em>Impulse</em>, which can load several trace files, making it possible to inspect events from both cores in one view. This plugin also has no limitation of 1,000,000 events as compared to the free version of SystemView.</p>
+<p>Good instructions on how to install, configure, and visualize data in Impulse from one core can be found <a class="reference external" href="https://mcuoneclipse.com/2016/07/31/impulse-segger-systemview-in-eclipse/">here</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ESP-IDF uses its own mapping for SystemView FreeRTOS events IDs, so users need to replace the original file mapping <code class="docutils literal notranslate"><span class="pre">$SYSVIEW_INSTALL_DIR/Description/SYSVIEW_FreeRTOS.txt</span></code> with <code class="docutils literal notranslate"><span class="pre">$IDF_PATH/tools/esp_app_trace/SYSVIEW_FreeRTOS.txt</span></code>. Also, contents of that ESP-IDF-specific file should be used when configuring SystemView serializer using the above link.</p>
+</div>
+<section id="configure-impulse-for-dual-core-traces">
+<h5>Configure Impulse for Dual Core Traces<a class="headerlink" href="#configure-impulse-for-dual-core-traces" title="Permalink to this heading"></a></h5>
+<p>After installing Impulse and ensuring that it can successfully load trace files for each core in separate tabs, users can add special Multi Adapter port and load both files into one view. To do this, users need to do the following steps in Eclipse:</p>
+<ol class="arabic simple">
+<li><p>Open the <code class="docutils literal notranslate"><span class="pre">Signal</span> <span class="pre">Ports</span></code> view. Go to <code class="docutils literal notranslate"><span class="pre">Windows</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Show</span> <span class="pre">View</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Other</span> <span class="pre">menu</span></code>. Find the <code class="docutils literal notranslate"><span class="pre">Signal</span> <span class="pre">Ports</span></code> view in Impulse folder and double-click it.</p></li>
+<li><p>In the <code class="docutils literal notranslate"><span class="pre">Signal</span> <span class="pre">Ports</span></code> view, right-click <code class="docutils literal notranslate"><span class="pre">Ports</span></code> and select <code class="docutils literal notranslate"><span class="pre">Add</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Multi</span> <span class="pre">Adapter</span> <span class="pre">Port</span></code>.</p></li>
+<li><p>In the open dialog box, click <code class="docutils literal notranslate"><span class="pre">Add</span></code> and select <code class="docutils literal notranslate"><span class="pre">New</span> <span class="pre">Pipe/File</span></code>.</p></li>
+<li><p>In the open dialog box, select <code class="docutils literal notranslate"><span class="pre">SystemView</span> <span class="pre">Serializer</span></code> as Serializer and set path to PRO CPU trace file. Click <code class="docutils literal notranslate"><span class="pre">OK</span></code>.</p></li>
+<li><p>Repeat the steps 3-4 for APP CPU trace file.</p></li>
+<li><p>Double-click the created port. View for this port should open.</p></li>
+<li><p>Click the <code class="docutils literal notranslate"><span class="pre">Start/Stop</span> <span class="pre">Streaming</span></code> button. Data should be loaded.</p></li>
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">Zoom</span> <span class="pre">Out</span></code>, <code class="docutils literal notranslate"><span class="pre">Zoom</span> <span class="pre">In</span></code> and <code class="docutils literal notranslate"><span class="pre">Zoom</span> <span class="pre">Fit</span></code> buttons to inspect data.</p></li>
+<li><p>For settings measurement cursors and other features, please see <a class="reference external" href="https://toem.de/index.php/products/impulse">Impulse documentation</a>).</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you have problems with visualization (no data is shown or strange behaviors of zoom action are observed), you can try to delete current signal hierarchy and double-click on the necessary file or port. Eclipse will ask you to create a new signal hierarchy.</p>
+</div>
+</section>
+</section>
+<section id="application-examples">
+<h4>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/system/sysview_tracing">system/sysview_tracing</a> demonstrates how to trace FreeRTOS task and system events using SEGGER SystemView.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/system/sysview_tracing_heap_log">system/sysview_tracing_heap_log</a> demonstrates heap allocation tracing alongside SystemView events.</p></li>
+</ul>
+</section>
+</section>
+<section id="gcov-source-code-coverage">
+<span id="app-trace-gcov-source-code-coverage"></span><h3>Gcov (Source Code Coverage)<a class="headerlink" href="#gcov-source-code-coverage" title="Permalink to this heading"></a></h3>
+<p>In ESP-IDF projects, code coverage analysis using gcov can be done with the help of <a class="reference external" href="https://components.espressif.com/components/espressif/esp_gcov">espressif/esp_gcov</a> managed component.</p>
+</section>
+<section id="integrating-a-custom-trace-library">
+<span id="app-trace-integrating-a-custom-trace-library"></span><h3>Integrating a Custom Trace Library<a class="headerlink" href="#integrating-a-custom-trace-library" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">esp_trace</span></code> component exposes a stable extension point (<code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TRACE_LIB_EXTERNAL</span></code>) for plugging in a third-party trace recorder without patching ESP-IDF. An external component provides an encoder adapter (registered via <code class="docutils literal notranslate"><span class="pre">ESP_TRACE_REGISTER_ENCODER()</span></code>) and a slim <code class="docutils literal notranslate"><span class="pre">esp_trace_freertos_impl.h</span></code> that injects the desired FreeRTOS trace hooks. The encoder vtable also offers optional <code class="docutils literal notranslate"><span class="pre">start</span></code> / <code class="docutils literal notranslate"><span class="pre">stop</span></code> / <code class="docutils literal notranslate"><span class="pre">flush</span></code> and <code class="docutils literal notranslate"><span class="pre">take_lock</span></code> / <code class="docutils literal notranslate"><span class="pre">give_lock</span></code> entries dispatched from the public <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_trace_start()</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_trace_stop()</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_trace_flush()</span></code> API.</p>
+<section id="id3">
+<h4>Application Examples<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/system/esp_trace">system/esp_trace</a> is a minimal copy-paste template that wires up an external encoder, demonstrates the FreeRTOS trace-hook include-chain contract, and covers cross-core serialization through the encoder lock.</p></li>
+</ul>
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Application Level Tracing Library (api-guides/app_trace)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Application Level Tracing Library (api-guides/app_trace)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="API Guides" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="startup.html" class="btn btn-neutral float-right" title="Application Startup Flow" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

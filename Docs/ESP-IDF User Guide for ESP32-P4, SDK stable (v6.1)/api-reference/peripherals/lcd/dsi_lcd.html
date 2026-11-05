@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MIPI DSI Interfaced LCD - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/lcd/dsi_lcd.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/lcd/dsi_lcd';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Parallel IO simulation of SPI or I80 Interfaced LCD" href="parl_lcd.html" />
+    <link rel="prev" title="RGB Interfaced LCD" href="rgb_lcd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../key_manager.html">Key Manager</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">LCD</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#lcd-control-panel-operations">LCD Control Panel Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#lcd-data-panel-operations">LCD Data Panel Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#advanced-frame-buffer-debugging">Advanced Frame Buffer Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#steps-to-add-manufacturer-specific-initialization">Steps to Add Manufacturer Specific Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Peripherals API</a></li>
+          <li class="breadcrumb-item"><a href="index.html">LCD</a></li>
+      <li class="breadcrumb-item active">MIPI DSI Interfaced LCD</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/lcd/dsi_lcd.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mipi-dsi-interfaced-lcd">
+<h1>MIPI DSI Interfaced LCD<a class="headerlink" href="#mipi-dsi-interfaced-lcd" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/lcd/dsi_lcd.html">[中文]</a></p>
+<ol class="arabic">
+<li><p>Create a DSI bus, and it will initialize the D-PHY as well.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_dsi_bus_handle_t</span><span class="w"> </span><span class="n">mipi_dsi_bus</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_dsi_bus_config_t</span><span class="w"> </span><span class="n">bus_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">bus_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="c1">// index from 0, specify the DSI host to use</span>
+<span class="w">    </span><span class="p">.</span><span class="n">num_data_lanes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w"> </span><span class="c1">// Number of data lanes to use, can't set a value that exceeds the chip's capability</span>
+<span class="w">    </span><span class="p">.</span><span class="n">lane_bit_rate_mbps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LANE_BITRATE_MBPS</span><span class="p">,</span><span class="w"> </span><span class="c1">// Bit rate of the data lanes, in Mbps</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_dsi_bus</span><span class="p">(</span><span class="o">&amp;</span><span class="n">bus_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mipi_dsi_bus</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Derive the DBI interface from the DSI bus. The DBI interface mostly is used as the control IO layer in the esp_lcd component. This interface provides the functions to read or write the configuration registers inside the LCD device. In this step, you need to provide the following information:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N23esp_lcd_dbi_io_config_t15virtual_channelE" title="esp_lcd_dbi_io_config_t::virtual_channel"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dbi_io_config_t::virtual_channel</span></code></a> sets the virtual channel number to use. The virtual channel is a logical channel that is used to multiplex the data from different sources. If you only have one LCD connected, you can set this to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N23esp_lcd_dbi_io_config_t12lcd_cmd_bitsE" title="esp_lcd_dbi_io_config_t::lcd_cmd_bits"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dbi_io_config_t::lcd_cmd_bits</span></code></a> and <a class="reference internal" href="#_CPPv4N23esp_lcd_dbi_io_config_t14lcd_param_bitsE" title="esp_lcd_dbi_io_config_t::lcd_param_bits"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dbi_io_config_t::lcd_param_bits</span></code></a> set the bit width of the command and parameter that recognized by the LCD controller chip. This is chip specific, you should refer to your LCD spec in advance.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_io_handle_t</span><span class="w"> </span><span class="n">mipi_dbi_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_dbi_io_config_t</span><span class="w"> </span><span class="n">dbi_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">virtual_channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">lcd_cmd_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w">   </span><span class="c1">// according to the LCD spec</span>
+<span class="w">    </span><span class="p">.</span><span class="n">lcd_param_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span><span class="w"> </span><span class="c1">// according to the LCD spec</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_panel_io_dbi</span><span class="p">(</span><span class="n">mipi_dsi_bus</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dbi_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mipi_dbi_io</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Install the LCD controller driver. The LCD controller driver is responsible for sending the commands and parameters to the LCD controller chip. In this step, you need to specify the MIPI DBI IO handle that allocated in the last step, and some panel specific configurations:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::bits_per_pixel</span></code> sets the bit width of each pixel. The LCD driver uses this value to calculate the number of bytes to send to the LCD controller chip.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::reset_gpio_num</span></code> sets the GPIO number of the reset pin. If the LCD controller chip does not have a reset pin, you can set this value to <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::rgb_ele_order</span></code> sets the RGB element order of the pixel data, it can be <strong>RGB</strong> or <strong>BGR</strong>.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">ili9881c_ctrl_panel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_panel_dev_config_t</span><span class="w"> </span><span class="n">lcd_dev_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">bits_per_pixel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">24</span><span class="p">,</span><span class="w"> </span><span class="c1">// MIPI LCD usually uses 24 bit (i.e., RGB888) per pixel</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rgb_ele_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_RGB_ELEMENT_ORDER_RGB</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">reset_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_LCD_RST</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_panel_ili9881c</span><span class="p">(</span><span class="n">mipi_dbi_io</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lcd_dev_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ili9881c_ctrl_panel</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>With the LCD control panel that returned in the last step, you can reset the LCD device followed by a basic initialization. After that, you can turn on the display.</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_panel_reset</span><span class="p">(</span><span class="n">ili9881c_ctrl_panel</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_panel_init</span><span class="p">(</span><span class="n">ili9881c_ctrl_panel</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_panel_disp_on_off</span><span class="p">(</span><span class="n">ili9881c_ctrl_panel</span><span class="p">,</span><span class="w"> </span><span class="nb">true</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>However, you still can't send pixel data to the MIPI LCD with the control panel, because MIPI LCD has a high resolution and there's no GRAM in the LCD controller. We need to maintain the LCD frame buffer and flush it to the LCD via the MIPI DSI DPI interface. To allocate a DPI data panel, you need to provide many essential parameters, including the DPI clock frequency, the pixel format, the video timing, and so on.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_dpi_panel_config_t15virtual_channelE" title="esp_lcd_dpi_panel_config_t::virtual_channel"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t::virtual_channel</span></code></a> sets the virtual channel number to use. Like the DBI interface, we also need to set the virtual channel for the DPI interface. If you only have one LCD connected, you can set this to <code class="docutils literal notranslate"><span class="pre">0</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_dpi_panel_config_t11dpi_clk_srcE" title="esp_lcd_dpi_panel_config_t::dpi_clk_src"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t::dpi_clk_src</span></code></a> sets the clock source for the DPI interface. The available clock sources are listed in <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">mipi_dsi_dpi_clock_source_t</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_dpi_panel_config_t18dpi_clock_freq_mhzE" title="esp_lcd_dpi_panel_config_t::dpi_clock_freq_mhz"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t::dpi_clock_freq_mhz</span></code></a> sets the DPI clock frequency in MHz. Higher pixel clock frequency results in higher refresh rate, but may cause flickering if the DMA bandwidth is not sufficient or the LCD controller chip does not support high pixel clock frequency.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_dpi_panel_config_t15in_color_formatE" title="esp_lcd_dpi_panel_config_t::in_color_format"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t::in_color_format</span></code></a> sets the pixel format of the input pixel data. The available pixel formats are listed in <a class="reference internal" href="index.html#_CPPv418lcd_color_format_t" title="lcd_color_format_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">lcd_color_format_t</span></code></a>. We usually use <strong>RGB888</strong> for MIPI LCD to get the best color depth.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_dpi_panel_config_t12video_timingE" title="esp_lcd_dpi_panel_config_t::video_timing"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t::video_timing</span></code></a> sets the LCD panel specific timing parameters. All required parameters are listed in the <a class="reference internal" href="index.html#_CPPv422esp_lcd_video_timing_t" title="esp_lcd_video_timing_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_video_timing_t</span></code></a>, including the LCD resolution and blanking porches. Please fill them according to the datasheet of your LCD.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">mipi_dpi_panel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_dpi_panel_config_t</span><span class="w"> </span><span class="n">dpi_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">virtual_channel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dpi_clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MIPI_DSI_DPI_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dpi_clock_freq_mhz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">in_color_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_COLOR_FMT_RGB888</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">video_timing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_H_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_V_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_HBP</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_HSYNC</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_HFP</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_VBP</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_VSYNC</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_MIPI_DSI_LCD_VFP</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_panel_dpi</span><span class="p">(</span><span class="n">mipi_dsi_bus</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dpi_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">mipi_dpi_panel</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_panel_init</span><span class="p">(</span><span class="n">mipi_dpi_panel</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Configure draw bitmap hook function (optional)</p>
+<blockquote>
+<div><p>If you want to use DMA2D to implement draw bitmap, the driver has already implemented the DMA2D draw bitmap hook function, you only need to call <code class="xref py py-func docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_enable_dma2d()</span></code> to enable it.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_dpi_panel_enable_dma2d</span><span class="p">(</span><span class="n">mipi_dpi_panel</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Due to hardware limitation, if external memory encryption is enabled, DMA2D can only access address and length that are aligned to 16 bytes. You need to ensure that your draw buffer's address and length are aligned to 16 bytes. <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/lcd/mipi_dsi">peripherals/lcd/mipi_dsi</a> shows how to use LVGL to constrain the redrawn area to ensure alignment.</p>
+</div>
+<p>If you need more advanced applications, you can add a custom hook for draw bitmap, such as using PPA to implement rotation, scaling, etc.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_hooks_t</span><span class="w"> </span><span class="n">hooks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">draw_bitmap_hook</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">custom_draw_bitmap_hook</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_dpi_panel_register_hooks</span><span class="p">(</span><span class="n">mipi_dpi_panel</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hooks</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">user_ctx</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<section id="power-supply-for-mipi-dphy">
+<h2>Power Supply for MIPI DPHY<a class="headerlink" href="#power-supply-for-mipi-dphy" title="Permalink to this heading"></a></h2>
+<p>The MIPI DPHY on ESP32-P4 requires a dedicated 2.5V power supply. Please refer to your schematic and ensure that the power pin (often labeled <code class="docutils literal notranslate"><span class="pre">VDD_MIPI_DPHY</span></code>) is properly connected to a 2.5V power source before using the MIPI DSI driver.</p>
+<p>On ESP32-P4, the MIPI DPHY can be powered by the internal adjustable LDO. Connect the output pin of the LDO channel to the MIPI DPHY power pin. Before initializing the DSI driver, use the API provided in <a class="reference internal" href="../ldo_regulator.html"><span class="doc">Low Dropout Voltage Regulator (LDO)</span></a> to configure the LDO output voltage to 2.5V.</p>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_lcd/dsi/include/esp_lcd_mipi_dsi.h">components/esp_lcd/dsi/include/esp_lcd_mipi_dsi.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_lcd_mipi_dsi.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_lcd</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_lcd</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_lcd
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_lcd
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419esp_lcd_new_dsi_busPK24esp_lcd_dsi_bus_config_tP24esp_lcd_dsi_bus_handle_t">
+<span id="_CPPv319esp_lcd_new_dsi_busPK24esp_lcd_dsi_bus_config_tP24esp_lcd_dsi_bus_handle_t"></span><span id="_CPPv219esp_lcd_new_dsi_busPK24esp_lcd_dsi_bus_config_tP24esp_lcd_dsi_bus_handle_t"></span><span id="esp_lcd_new_dsi_bus__esp_lcd_dsi_bus_config_tCP.esp_lcd_dsi_bus_handle_tP"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a2b37a505aa64b02b3eb368c97d3c2ab0"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_new_dsi_bus</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424esp_lcd_dsi_bus_config_t" title="esp_lcd_dsi_bus_config_t"><span class="n"><span class="pre">esp_lcd_dsi_bus_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">bus_config</span></span>, <a class="reference internal" href="#_CPPv424esp_lcd_dsi_bus_handle_t" title="esp_lcd_dsi_bus_handle_t"><span class="n"><span class="pre">esp_lcd_dsi_bus_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_bus</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419esp_lcd_new_dsi_busPK24esp_lcd_dsi_bus_config_tP24esp_lcd_dsi_bus_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create MIPI DSI bus handle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bus_config</strong> -- <strong>[in]</strong> Bus configuration </p></li>
+<li><p><strong>ret_bus</strong> -- <strong>[out]</strong> Returned bus handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Create MIPI DSI bus successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Create MIPI DSI bus failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Create MIPI DSI bus failed because of out of memory</p></li>
+<li><p>ESP_ERR_NOT_FOUND: Create MIPI DSI bus failed because no more free DSI hardware instance</p></li>
+<li><p>ESP_FAIL: Create MIPI DSI bus failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419esp_lcd_del_dsi_bus24esp_lcd_dsi_bus_handle_t">
+<span id="_CPPv319esp_lcd_del_dsi_bus24esp_lcd_dsi_bus_handle_t"></span><span id="_CPPv219esp_lcd_del_dsi_bus24esp_lcd_dsi_bus_handle_t"></span><span id="esp_lcd_del_dsi_bus__esp_lcd_dsi_bus_handle_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a270fb6e33de58ad1edaa06ed09ef9129"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_del_dsi_bus</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_lcd_dsi_bus_handle_t" title="esp_lcd_dsi_bus_handle_t"><span class="n"><span class="pre">esp_lcd_dsi_bus_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bus</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419esp_lcd_del_dsi_bus24esp_lcd_dsi_bus_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destroy MIPI DSI bus handle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bus</strong> -- <strong>[in]</strong> MIPI DSI bus handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_dsi_bus</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Destroy MIPI DSI bus successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Destroy MIPI DSI bus failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Destroy MIPI DSI bus failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424esp_lcd_new_panel_io_dbi24esp_lcd_dsi_bus_handle_tPK23esp_lcd_dbi_io_config_tP25esp_lcd_panel_io_handle_t">
+<span id="_CPPv324esp_lcd_new_panel_io_dbi24esp_lcd_dsi_bus_handle_tPK23esp_lcd_dbi_io_config_tP25esp_lcd_panel_io_handle_t"></span><span id="_CPPv224esp_lcd_new_panel_io_dbi24esp_lcd_dsi_bus_handle_tPK23esp_lcd_dbi_io_config_tP25esp_lcd_panel_io_handle_t"></span><span id="esp_lcd_new_panel_io_dbi__esp_lcd_dsi_bus_handle_t.esp_lcd_dbi_io_config_tCP.esp_lcd_panel_io_handle_tP"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1ac0f26e2c3d6e7cff040905335124ca3b"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_new_panel_io_dbi</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_lcd_dsi_bus_handle_t" title="esp_lcd_dsi_bus_handle_t"><span class="n"><span class="pre">esp_lcd_dsi_bus_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bus</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423esp_lcd_dbi_io_config_t" title="esp_lcd_dbi_io_config_t"><span class="n"><span class="pre">esp_lcd_dbi_io_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">io_config</span></span>, <a class="reference internal" href="index.html#_CPPv425esp_lcd_panel_io_handle_t" title="esp_lcd_panel_io_handle_t"><span class="n"><span class="pre">esp_lcd_panel_io_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_io</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424esp_lcd_new_panel_io_dbi24esp_lcd_dsi_bus_handle_tPK23esp_lcd_dbi_io_config_tP25esp_lcd_panel_io_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create LCD panel IO, for MIPI DSI DBI interface. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although we call it &quot;DBI&quot;, internally the driver is using a co-called &quot;generic&quot; interface for transmitting/receiving LCD commands and parameters.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bus</strong> -- <strong>[in]</strong> MIPI DSI bus handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_dsi_bus</span></code></p></li>
+<li><p><strong>io_config</strong> -- <strong>[in]</strong> IO configuration </p></li>
+<li><p><strong>ret_io</strong> -- <strong>[out]</strong> Returned panel IO handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Create MIPI DSI command IO successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Create MIPI DSI command IO failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Create MIPI DSI command IO failed because of out of memory</p></li>
+<li><p>ESP_FAIL: Create MIPI DSI command IO failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421esp_lcd_new_panel_dpi24esp_lcd_dsi_bus_handle_tPK26esp_lcd_dpi_panel_config_tP22esp_lcd_panel_handle_t">
+<span id="_CPPv321esp_lcd_new_panel_dpi24esp_lcd_dsi_bus_handle_tPK26esp_lcd_dpi_panel_config_tP22esp_lcd_panel_handle_t"></span><span id="_CPPv221esp_lcd_new_panel_dpi24esp_lcd_dsi_bus_handle_tPK26esp_lcd_dpi_panel_config_tP22esp_lcd_panel_handle_t"></span><span id="esp_lcd_new_panel_dpi__esp_lcd_dsi_bus_handle_t.esp_lcd_dpi_panel_config_tCP.esp_lcd_panel_handle_tP"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1ad7fde90d132096d9ade485249c0e1ce6"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_new_panel_dpi</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_lcd_dsi_bus_handle_t" title="esp_lcd_dsi_bus_handle_t"><span class="n"><span class="pre">esp_lcd_dsi_bus_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bus</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_lcd_dpi_panel_config_t" title="esp_lcd_dpi_panel_config_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">panel_config</span></span>, <a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_panel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421esp_lcd_new_panel_dpi24esp_lcd_dsi_bus_handle_tPK26esp_lcd_dpi_panel_config_tP22esp_lcd_panel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create LCD panel for MIPI DSI DPI interface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bus</strong> -- <strong>[in]</strong> MIPI DSI bus handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_dsi_bus</span></code></p></li>
+<li><p><strong>panel_config</strong> -- <strong>[in]</strong> DSI data panel configuration </p></li>
+<li><p><strong>ret_panel</strong> -- <strong>[out]</strong> Returned LCD panel handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Create MIPI DSI data panel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Create MIPI DSI data panel failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Create MIPI DSI data panel failed because of out of memory</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Create MIPI DSI data panel failed because of unsupported feature</p></li>
+<li><p>ESP_FAIL: Create MIPI DSI data panel failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434esp_lcd_dpi_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz">
+<span id="_CPPv334esp_lcd_dpi_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz"></span><span id="_CPPv234esp_lcd_dpi_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz"></span><span id="esp_lcd_dpi_panel_get_frame_buffer__esp_lcd_panel_handle_t.uint32_t.voidPP.z"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a82bfa7ea827759c2a55463a730afca5f"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_get_frame_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fb_num</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fb0</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434esp_lcd_dpi_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the address of the frame buffer(s) that allocated by the driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi_panel</strong> -- <strong>[in]</strong> MIPI DPI panel handle, returned from esp_lcd_new_panel_dpi() </p></li>
+<li><p><strong>fb_num</strong> -- <strong>[in]</strong> Number of frame buffer(s) to get. This value must be the same as the number of the followed parameters. </p></li>
+<li><p><strong>fb0</strong> -- <strong>[out]</strong> Address of the frame buffer 0 (first frame buffer) </p></li>
+<li><p><strong>...</strong> -- <strong>[out]</strong> List of other frame buffers if any </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Get frame buffer address failed because of invalid argument</p></li>
+<li><p>ESP_OK: Get frame buffer address successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429esp_lcd_dpi_panel_set_pattern22esp_lcd_panel_handle_t23mipi_dsi_pattern_type_t">
+<span id="_CPPv329esp_lcd_dpi_panel_set_pattern22esp_lcd_panel_handle_t23mipi_dsi_pattern_type_t"></span><span id="_CPPv229esp_lcd_dpi_panel_set_pattern22esp_lcd_panel_handle_t23mipi_dsi_pattern_type_t"></span><span id="esp_lcd_dpi_panel_set_pattern__esp_lcd_panel_handle_t.mipi_dsi_pattern_type_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a754c6ad0bcbf6a4d54fac14a011a2317"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_set_pattern</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span>, <span class="n"><span class="pre">mipi_dsi_pattern_type_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pattern</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429esp_lcd_dpi_panel_set_pattern22esp_lcd_panel_handle_t23mipi_dsi_pattern_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set pre-defined pattern to the screen for testing or debugging purpose. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi_panel</strong> -- <strong>[in]</strong> MIPI DPI panel handle, returned from esp_lcd_new_panel_dpi() </p></li>
+<li><p><strong>pattern</strong> -- <strong>[in]</strong> Pattern type </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set pattern successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set pattern failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Set pattern failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv436esp_lcd_dpi_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t">
+<span id="_CPPv336esp_lcd_dpi_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t"></span><span id="_CPPv236esp_lcd_dpi_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t"></span><span id="esp_lcd_dpi_panel_set_yuv_conversion__esp_lcd_panel_handle_t.esp_lcd_color_conv_yuv_config_tCP"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1aebafb7f38391534f148f6e2895c87f70"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_set_yuv_conversion</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="index.html#_CPPv431esp_lcd_color_conv_yuv_config_t" title="esp_lcd_color_conv_yuv_config_t"><span class="n"><span class="pre">esp_lcd_color_conv_yuv_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436esp_lcd_dpi_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set color conversion (YUV&lt;-&gt;RGB) configuration for DPI panel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi_panel</strong> -- <strong>[in]</strong> MIPI DPI panel handle, returned from esp_lcd_new_panel_dpi() </p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Color conversion configuration </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set color conversion configuration successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set color conversion configuration failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Set color conversion configuration failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv442esp_lcd_dpi_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_dpi_panel_event_callbacks_tPv">
+<span id="_CPPv342esp_lcd_dpi_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_dpi_panel_event_callbacks_tPv"></span><span id="_CPPv242esp_lcd_dpi_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_dpi_panel_event_callbacks_tPv"></span><span id="esp_lcd_dpi_panel_register_event_callbacks__esp_lcd_panel_handle_t.esp_lcd_dpi_panel_event_callbacks_tCP.voidP"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a2fa67d13980d7077296e4d31cb2b244d"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_register_event_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv435esp_lcd_dpi_panel_event_callbacks_t" title="esp_lcd_dpi_panel_event_callbacks_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_event_callbacks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cbs</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">user_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv442esp_lcd_dpi_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_dpi_panel_event_callbacks_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register LCD DPI panel callbacks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi_panel</strong> -- <strong>[in]</strong> LCD DPI panel handle, which is returned from esp_lcd_new_panel_dpi() </p></li>
+<li><p><strong>cbs</strong> -- <strong>[in]</strong> structure with all LCD panel callbacks </p></li>
+<li><p><strong>user_ctx</strong> -- <strong>[in]</strong> User private data, passed directly to callback's user_ctx </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Register callbacks failed because of invalid argument</p></li>
+<li><p>ESP_OK: Register callbacks successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432esp_lcd_dpi_panel_register_hooks22esp_lcd_panel_handle_tPK21esp_lcd_panel_hooks_tPv">
+<span id="_CPPv332esp_lcd_dpi_panel_register_hooks22esp_lcd_panel_handle_tPK21esp_lcd_panel_hooks_tPv"></span><span id="_CPPv232esp_lcd_dpi_panel_register_hooks22esp_lcd_panel_handle_tPK21esp_lcd_panel_hooks_tPv"></span><span id="esp_lcd_dpi_panel_register_hooks__esp_lcd_panel_handle_t.esp_lcd_panel_hooks_tCP.voidP"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a394402ff9b1da5abe62db34b35b368bf"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_register_hooks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421esp_lcd_panel_hooks_t" title="esp_lcd_panel_hooks_t"><span class="n"><span class="pre">esp_lcd_panel_hooks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">hooks</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">hook_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432esp_lcd_dpi_panel_register_hooks22esp_lcd_panel_handle_tPK21esp_lcd_panel_hooks_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register panel hooks to the DPI panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can register panel hooks to implement custom operations like scaling, rotation, color space conversion, etc. with hardware accelerators like PPA or DMA2D. The hook will be overridden when this function is called multiple times.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dpi_panel</strong> -- <strong>[in]</strong> LCD DPI panel handle, which is returned from esp_lcd_new_panel_dpi() </p></li>
+<li><p><strong>hooks</strong> -- <strong>[in]</strong> Panel hooks </p></li>
+<li><p><strong>hook_ctx</strong> -- <strong>[in]</strong> Hook context </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Register hooks successfully</p></li>
+<li><p>Other error codes on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430esp_lcd_dpi_panel_enable_dma2d22esp_lcd_panel_handle_t">
+<span id="_CPPv330esp_lcd_dpi_panel_enable_dma2d22esp_lcd_panel_handle_t"></span><span id="_CPPv230esp_lcd_dpi_panel_enable_dma2d22esp_lcd_panel_handle_t"></span><span id="esp_lcd_dpi_panel_enable_dma2d__esp_lcd_panel_handle_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a3009dba7bb06850b06b32910b09c368e"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_enable_dma2d</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430esp_lcd_dpi_panel_enable_dma2d22esp_lcd_panel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable DMA2D for DPI panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function will register a built-in DMA2D draw bitmap hook to perform draw bitmap operations using DMA2D.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dpi_panel</strong> -- <strong>[in]</strong> LCD DPI panel handle, which is returned from esp_lcd_new_panel_dpi() </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Enable DMA2D successfully</p></li>
+<li><p>Other error codes on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431esp_lcd_dpi_panel_disable_dma2d22esp_lcd_panel_handle_t">
+<span id="_CPPv331esp_lcd_dpi_panel_disable_dma2d22esp_lcd_panel_handle_t"></span><span id="_CPPv231esp_lcd_dpi_panel_disable_dma2d22esp_lcd_panel_handle_t"></span><span id="esp_lcd_dpi_panel_disable_dma2d__esp_lcd_panel_handle_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a271d522488e609589f8b34bb5d8eb1b2"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_disable_dma2d</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">dpi_panel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431esp_lcd_dpi_panel_disable_dma2d22esp_lcd_panel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable DMA2D for DPI panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function will unregister the built-in DMA2D draw bitmap hook.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dpi_panel</strong> -- <strong>[in]</strong> LCD DPI panel handle, which is returned from esp_lcd_new_panel_dpi() </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Disable DMA2D successfully</p></li>
+<li><p>Other error codes on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424esp_lcd_dsi_bus_config_t">
+<span id="_CPPv324esp_lcd_dsi_bus_config_t"></span><span id="_CPPv224esp_lcd_dsi_bus_config_t"></span><span id="esp_lcd_dsi_bus_config_t"></span><span class="target" id="structesp__lcd__dsi__bus__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dsi_bus_config_t</span></span></span><a class="headerlink" href="#_CPPv424esp_lcd_dsi_bus_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MIPI DSI bus configuration structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t6bus_idE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t6bus_idE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t6bus_idE"></span><span id="esp_lcd_dsi_bus_config_t::bus_id__i"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1a273c1c826a26cc2a7a965091603881a2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bus_id</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t6bus_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Select which DSI controller, index from 0 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t14num_data_lanesE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t14num_data_lanesE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t14num_data_lanesE"></span><span id="esp_lcd_dsi_bus_config_t::num_data_lanes__uint8_t"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1a3d47a066cab72d89c5708836abba34e4"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_data_lanes</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t14num_data_lanesE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of data lanes, if set to 0, the driver will fallback to use maximum number of lanes </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t11phy_clk_srcE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t11phy_clk_srcE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t11phy_clk_srcE"></span><span id="esp_lcd_dsi_bus_config_t::phy_clk_src__mipi_dsi_phy_pllref_clock_source_t"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1a292a43bb7262d671712433e134852fbd"></span><span class="n"><span class="pre">mipi_dsi_phy_pllref_clock_source_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">phy_clk_src</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t11phy_clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The clock source for the PHY PLL </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t18lane_bit_rate_mbpsE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t18lane_bit_rate_mbpsE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t18lane_bit_rate_mbpsE"></span><span id="esp_lcd_dsi_bus_config_t::lane_bit_rate_mbps__float"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1a45aad9bf2783e86102688a0a11717312"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lane_bit_rate_mbps</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t18lane_bit_rate_mbpsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Lane bit rate in Mbps </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t5flagsE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t5flagsE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t5flagsE"></span><span id="esp_lcd_dsi_bus_config_t::flags__esp_lcd_dsi_bus_config_t::extra_dsi_bus_flags"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1a76d0c31837a2d8dae9b4829c16f7b19c"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424esp_lcd_dsi_bus_config_t" title="esp_lcd_dsi_bus_config_t"><span class="n"><span class="pre">esp_lcd_dsi_bus_config_t</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flagsE" title="esp_lcd_dsi_bus_config_t::extra_dsi_bus_flags"><span class="n"><span class="pre">extra_dsi_bus_flags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra configuration flags </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flagsE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flagsE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flagsE"></span><span id="esp_lcd_dsi_bus_config_t::extra_dsi_bus_flags"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1_1extra__dsi__bus__flags"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extra_dsi_bus_flags</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra configuration flags for MIPI DSI bus. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flags19clock_lane_force_hsE">
+<span id="_CPPv3N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flags19clock_lane_force_hsE"></span><span id="_CPPv2N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flags19clock_lane_force_hsE"></span><span id="esp_lcd_dsi_bus_config_t::extra_dsi_bus_flags::clock_lane_force_hs__uint32_t"></span><span class="target" id="structesp__lcd__dsi__bus__config__t_1_1extra__dsi__bus__flags_1afda49d2908618e5466de280cbd415ed7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clock_lane_force_hs</span></span></span><a class="headerlink" href="#_CPPv4N24esp_lcd_dsi_bus_config_t19extra_dsi_bus_flags19clock_lane_force_hsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Force the clock lane to high speed mode </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423esp_lcd_dbi_io_config_t">
+<span id="_CPPv323esp_lcd_dbi_io_config_t"></span><span id="_CPPv223esp_lcd_dbi_io_config_t"></span><span id="esp_lcd_dbi_io_config_t"></span><span class="target" id="structesp__lcd__dbi__io__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dbi_io_config_t</span></span></span><a class="headerlink" href="#_CPPv423esp_lcd_dbi_io_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Panel IO configuration structure, for MIPI DSI command interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_lcd_dbi_io_config_t15virtual_channelE">
+<span id="_CPPv3N23esp_lcd_dbi_io_config_t15virtual_channelE"></span><span id="_CPPv2N23esp_lcd_dbi_io_config_t15virtual_channelE"></span><span id="esp_lcd_dbi_io_config_t::virtual_channel__uint8_t"></span><span class="target" id="structesp__lcd__dbi__io__config__t_1a8dc61dc1d50a62c368bcda429f6b8826"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">virtual_channel</span></span></span><a class="headerlink" href="#_CPPv4N23esp_lcd_dbi_io_config_t15virtual_channelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Virtual channel ID, index from 0 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_lcd_dbi_io_config_t12lcd_cmd_bitsE">
+<span id="_CPPv3N23esp_lcd_dbi_io_config_t12lcd_cmd_bitsE"></span><span id="_CPPv2N23esp_lcd_dbi_io_config_t12lcd_cmd_bitsE"></span><span id="esp_lcd_dbi_io_config_t::lcd_cmd_bits__i"></span><span class="target" id="structesp__lcd__dbi__io__config__t_1a72e861c9fbf28e02dc4cddd591c34744"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lcd_cmd_bits</span></span></span><a class="headerlink" href="#_CPPv4N23esp_lcd_dbi_io_config_t12lcd_cmd_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bit-width of LCD command </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_lcd_dbi_io_config_t14lcd_param_bitsE">
+<span id="_CPPv3N23esp_lcd_dbi_io_config_t14lcd_param_bitsE"></span><span id="_CPPv2N23esp_lcd_dbi_io_config_t14lcd_param_bitsE"></span><span id="esp_lcd_dbi_io_config_t::lcd_param_bits__i"></span><span class="target" id="structesp__lcd__dbi__io__config__t_1a3f338829d36cfb1eec7a4b698d672959"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lcd_param_bits</span></span></span><a class="headerlink" href="#_CPPv4N23esp_lcd_dbi_io_config_t14lcd_param_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bit-width of LCD parameter </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426esp_lcd_dpi_panel_config_t">
+<span id="_CPPv326esp_lcd_dpi_panel_config_t"></span><span id="_CPPv226esp_lcd_dpi_panel_config_t"></span><span id="esp_lcd_dpi_panel_config_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_config_t</span></span></span><a class="headerlink" href="#_CPPv426esp_lcd_dpi_panel_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MIPI DSI DPI panel configuration structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t15virtual_channelE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t15virtual_channelE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t15virtual_channelE"></span><span id="esp_lcd_dpi_panel_config_t::virtual_channel__uint8_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1aca36d43eac2fbd7966864ef39c21b8d9"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">virtual_channel</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t15virtual_channelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Virtual channel ID, index from 0 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t11dpi_clk_srcE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t11dpi_clk_srcE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t11dpi_clk_srcE"></span><span id="esp_lcd_dpi_panel_config_t::dpi_clk_src__mipi_dsi_dpi_clock_source_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1ac84f4864831d78b51eda3f32c10fe2fe"></span><span class="n"><span class="pre">mipi_dsi_dpi_clock_source_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpi_clk_src</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t11dpi_clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>MIPI DSI DPI clock source </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t18dpi_clock_freq_mhzE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t18dpi_clock_freq_mhzE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t18dpi_clock_freq_mhzE"></span><span id="esp_lcd_dpi_panel_config_t::dpi_clock_freq_mhz__float"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1a54f559360054f286707739ca0203fc5c"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dpi_clock_freq_mhz</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t18dpi_clock_freq_mhzE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pixel clock frequency in MHz </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t15in_color_formatE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t15in_color_formatE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t15in_color_formatE"></span><span id="esp_lcd_dpi_panel_config_t::in_color_format__lcd_color_format_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1af4b9a31299f3c98e4c39f0d0aa467149"></span><a class="reference internal" href="index.html#_CPPv418lcd_color_format_t" title="lcd_color_format_t"><span class="n"><span class="pre">lcd_color_format_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">in_color_format</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t15in_color_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format of the input data (color space and pixel format), which is the format stored in the frame buffer </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t16out_color_formatE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t16out_color_formatE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t16out_color_formatE"></span><span id="esp_lcd_dpi_panel_config_t::out_color_format__lcd_color_format_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1a0662d85fab54bd92517e3b28aadf7616"></span><a class="reference internal" href="index.html#_CPPv418lcd_color_format_t" title="lcd_color_format_t"><span class="n"><span class="pre">lcd_color_format_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">out_color_format</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t16out_color_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format of the output data (color space and pixel format), which is the format that the panel can accept </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t7num_fbsE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t7num_fbsE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t7num_fbsE"></span><span id="esp_lcd_dpi_panel_config_t::num_fbs__uint8_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1a4e3a7ba404fab4120c860f2d123e3999"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_fbs</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t7num_fbsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of screen-sized frame buffers that allocated by the driver By default (set to either 0 or 1) only one frame buffer will be created </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t12video_timingE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t12video_timingE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t12video_timingE"></span><span id="esp_lcd_dpi_panel_config_t::video_timing__esp_lcd_video_timing_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1afa320c85a06dd55bfc23891abe7cf1ed"></span><a class="reference internal" href="index.html#_CPPv422esp_lcd_video_timing_t" title="esp_lcd_video_timing_t"><span class="n"><span class="pre">esp_lcd_video_timing_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">video_timing</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t12video_timingE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Video timing </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t5flagsE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t5flagsE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t5flagsE"></span><span id="esp_lcd_dpi_panel_config_t::flags__esp_lcd_dpi_panel_config_t::extra_dpi_panel_flags"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1a63ac397af2275380698ceca5ff0642e9"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_lcd_dpi_panel_config_t" title="esp_lcd_dpi_panel_config_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_config_t</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flagsE" title="esp_lcd_dpi_panel_config_t::extra_dpi_panel_flags"><span class="n"><span class="pre">extra_dpi_panel_flags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra configuration flags </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flagsE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flagsE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flagsE"></span><span id="esp_lcd_dpi_panel_config_t::extra_dpi_panel_flags"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1_1extra__dpi__panel__flags"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">extra_dpi_panel_flags</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra configuration flags for MIPI DSI DPI panel. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flags10disable_lpE">
+<span id="_CPPv3N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flags10disable_lpE"></span><span id="_CPPv2N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flags10disable_lpE"></span><span id="esp_lcd_dpi_panel_config_t::extra_dpi_panel_flags::disable_lp__uint32_t"></span><span class="target" id="structesp__lcd__dpi__panel__config__t_1_1extra__dpi__panel__flags_1aaf1b209cd86a0a04b7635622bbc40f80"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disable_lp</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_dpi_panel_config_t21extra_dpi_panel_flags10disable_lpE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable low-power for DPI </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430esp_lcd_dpi_panel_event_data_t">
+<span id="_CPPv330esp_lcd_dpi_panel_event_data_t"></span><span id="_CPPv230esp_lcd_dpi_panel_event_data_t"></span><span id="esp_lcd_dpi_panel_event_data_t"></span><span class="target" id="structesp__lcd__dpi__panel__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_event_data_t</span></span></span><a class="headerlink" href="#_CPPv430esp_lcd_dpi_panel_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of LCD DPI panel event data. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv435esp_lcd_dpi_panel_event_callbacks_t">
+<span id="_CPPv335esp_lcd_dpi_panel_event_callbacks_t"></span><span id="_CPPv235esp_lcd_dpi_panel_event_callbacks_t"></span><span id="esp_lcd_dpi_panel_event_callbacks_t"></span><span class="target" id="structesp__lcd__dpi__panel__event__callbacks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_event_callbacks_t</span></span></span><a class="headerlink" href="#_CPPv435esp_lcd_dpi_panel_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of LCD DPI panel callbacks. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t19on_color_trans_doneE">
+<span id="_CPPv3N35esp_lcd_dpi_panel_event_callbacks_t19on_color_trans_doneE"></span><span id="_CPPv2N35esp_lcd_dpi_panel_event_callbacks_t19on_color_trans_doneE"></span><span id="esp_lcd_dpi_panel_event_callbacks_t::on_color_trans_done__esp_lcd_dpi_panel_color_trans_done_cb_t"></span><span class="target" id="structesp__lcd__dpi__panel__event__callbacks__t_1ad4eac3108871e4a5064680224eb32058"></span><a class="reference internal" href="#_CPPv439esp_lcd_dpi_panel_color_trans_done_cb_t" title="esp_lcd_dpi_panel_color_trans_done_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_color_trans_done_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_color_trans_done</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t19on_color_trans_doneE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invoked when user's draw buffer copied to the frame buffer. This is an indicator that the draw buffer can be recycled safely. But doesn't mean the draw buffer finishes the refreshing to the screen. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t15on_refresh_doneE">
+<span id="_CPPv3N35esp_lcd_dpi_panel_event_callbacks_t15on_refresh_doneE"></span><span id="_CPPv2N35esp_lcd_dpi_panel_event_callbacks_t15on_refresh_doneE"></span><span id="esp_lcd_dpi_panel_event_callbacks_t::on_refresh_done__esp_lcd_dpi_panel_refresh_done_cb_t"></span><span class="target" id="structesp__lcd__dpi__panel__event__callbacks__t_1acaacca50f58580c5e5d1e5c2b16e41fa"></span><a class="reference internal" href="#_CPPv435esp_lcd_dpi_panel_refresh_done_cb_t" title="esp_lcd_dpi_panel_refresh_done_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_refresh_done_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_refresh_done</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t15on_refresh_doneE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deprecated, use on_frame_buf_complete instead </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t21on_frame_buf_completeE">
+<span id="_CPPv3N35esp_lcd_dpi_panel_event_callbacks_t21on_frame_buf_completeE"></span><span id="_CPPv2N35esp_lcd_dpi_panel_event_callbacks_t21on_frame_buf_completeE"></span><span id="esp_lcd_dpi_panel_event_callbacks_t::on_frame_buf_complete__esp_lcd_dpi_panel_frame_buf_complete_cb_t"></span><span class="target" id="structesp__lcd__dpi__panel__event__callbacks__t_1a2211840983010096d91a9a9a8fa0ce58"></span><a class="reference internal" href="#_CPPv441esp_lcd_dpi_panel_frame_buf_complete_cb_t" title="esp_lcd_dpi_panel_frame_buf_complete_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_frame_buf_complete_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_frame_buf_complete</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t21on_frame_buf_completeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invoked when the frame buffer can be reused safely when the frame buffer is the draw buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t8on_vsyncE">
+<span id="_CPPv3N35esp_lcd_dpi_panel_event_callbacks_t8on_vsyncE"></span><span id="_CPPv2N35esp_lcd_dpi_panel_event_callbacks_t8on_vsyncE"></span><span id="esp_lcd_dpi_panel_event_callbacks_t::on_vsync__esp_lcd_dpi_panel_vsync_cb_t"></span><span class="target" id="structesp__lcd__dpi__panel__event__callbacks__t_1aa12de202f0789533dc8174bda567111e"></span><a class="reference internal" href="#_CPPv428esp_lcd_dpi_panel_vsync_cb_t" title="esp_lcd_dpi_panel_vsync_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_vsync_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_vsync</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_dpi_panel_event_callbacks_t8on_vsyncE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>VSYNC event callback </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv431esp_lcd_draw_bitmap_hook_data_t">
+<span id="_CPPv331esp_lcd_draw_bitmap_hook_data_t"></span><span id="_CPPv231esp_lcd_draw_bitmap_hook_data_t"></span><span id="esp_lcd_draw_bitmap_hook_data_t"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_draw_bitmap_hook_data_t</span></span></span><a class="headerlink" href="#_CPPv431esp_lcd_draw_bitmap_hook_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of draw bitmap hook data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t8dst_dataE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t8dst_dataE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t8dst_dataE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_data__voidP"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a0a4b8eeaf3db6d7ebe57b3c283277f83"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dst_data</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t8dst_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination buffer (usually frame buffer) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10dst_x_sizeE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t10dst_x_sizeE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t10dst_x_sizeE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_x_size__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a6d1a139a639a73e3ac637ea15d9e896e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_x_size</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10dst_x_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination bitmap width </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10dst_y_sizeE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t10dst_y_sizeE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t10dst_y_sizeE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_y_size__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a797803af98c69cdbd54d3de5a12ec488"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_y_size</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10dst_y_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination bitmap height </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11dst_x_startE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t11dst_x_startE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t11dst_x_startE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_x_start__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1acd68bad27a75917e9afa512f40af44de"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_x_start</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11dst_x_startE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination start x coordinate </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11dst_y_startE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t11dst_y_startE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t11dst_y_startE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_y_start__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a038da6822fd4ecf1f36d25b54cb436a6"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_y_start</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11dst_y_startE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination start y coordinate </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9dst_x_endE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t9dst_x_endE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t9dst_x_endE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_x_end__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a6ee81b3750823d7d931485bf680da7b3"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_x_end</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9dst_x_endE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination end x coordinate (exclusive) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9dst_y_endE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t9dst_y_endE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t9dst_y_endE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::dst_y_end__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a081baccf078cfc05fb632a531fec0b15"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_y_end</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9dst_y_endE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination end y coordinate (exclusive) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t8src_dataE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t8src_dataE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t8src_dataE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_data__voidCP"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a83bc63582ab601773529aa1e1a755d8e"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">src_data</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t8src_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source bitmap data </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10src_x_sizeE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t10src_x_sizeE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t10src_x_sizeE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_x_size__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a9cc405ac02816c78f3493ff9feaa589d"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_x_size</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10src_x_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source bitmap width </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10src_y_sizeE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t10src_y_sizeE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t10src_y_sizeE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_y_size__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1aee78f1b1456cdb7b5c9acbdc21014a2f"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_y_size</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t10src_y_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source bitmap height </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11src_x_startE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t11src_x_startE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t11src_x_startE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_x_start__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1ae8bd30ae33560c1fc14f7c7aa5373472"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_x_start</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11src_x_startE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source start x coordinate </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11src_y_startE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t11src_y_startE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t11src_y_startE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_y_start__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1ab3cf80b1f543341b3abbe368b69398b5"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_y_start</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11src_y_startE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source start y coordinate </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9src_x_endE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t9src_x_endE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t9src_x_endE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_x_end__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1ae255ebe330e99ef4f6c9bcf7f1329c38"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_x_end</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9src_x_endE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source end x coordinate (exclusive) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9src_y_endE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t9src_y_endE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t9src_y_endE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::src_y_end__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1aa492a970fb2eaf116f1e013490d27c8e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_y_end</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t9src_y_endE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source end y coordinate (exclusive) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t14bits_per_pixelE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t14bits_per_pixelE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t14bits_per_pixelE"></span><span id="esp_lcd_draw_bitmap_hook_data_t::bits_per_pixel__i"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1ab299b201c1939a3bf800a8d87f7915ca"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bits_per_pixel</span></span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t14bits_per_pixelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bits per pixel </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11on_hook_endE">
+<span id="_CPPv3N31esp_lcd_draw_bitmap_hook_data_t11on_hook_endE"></span><span id="_CPPv2N31esp_lcd_draw_bitmap_hook_data_t11on_hook_endE"></span><span class="target" id="structesp__lcd__draw__bitmap__hook__data__t_1a1f57af893bdea99015c76adff22bdd66"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">on_hook_end</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N31esp_lcd_draw_bitmap_hook_data_t11on_hook_endE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback to be invoked when the hook completes its operation </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv421esp_lcd_panel_hooks_t">
+<span id="_CPPv321esp_lcd_panel_hooks_t"></span><span id="_CPPv221esp_lcd_panel_hooks_t"></span><span id="esp_lcd_panel_hooks_t"></span><span class="target" id="structesp__lcd__panel__hooks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_panel_hooks_t</span></span></span><a class="headerlink" href="#_CPPv421esp_lcd_panel_hooks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of LCD panel hooks. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21esp_lcd_panel_hooks_t16draw_bitmap_hookE">
+<span id="_CPPv3N21esp_lcd_panel_hooks_t16draw_bitmap_hookE"></span><span id="_CPPv2N21esp_lcd_panel_hooks_t16draw_bitmap_hookE"></span><span id="esp_lcd_panel_hooks_t::draw_bitmap_hook__esp_lcd_panel_draw_bitmap_hook_t"></span><span class="target" id="structesp__lcd__panel__hooks__t_1a1ea2891bd28d2d3cfd9a037829a3d356"></span><a class="reference internal" href="#_CPPv432esp_lcd_panel_draw_bitmap_hook_t" title="esp_lcd_panel_draw_bitmap_hook_t"><span class="n"><span class="pre">esp_lcd_panel_draw_bitmap_hook_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">draw_bitmap_hook</span></span></span><a class="headerlink" href="#_CPPv4N21esp_lcd_panel_hooks_t16draw_bitmap_hookE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Draw bitmap hook function </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv424esp_lcd_dsi_bus_handle_t">
+<span id="_CPPv324esp_lcd_dsi_bus_handle_t"></span><span id="_CPPv224esp_lcd_dsi_bus_handle_t"></span><span id="esp_lcd_dsi_bus_handle_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a649addde02f0675595788afc83ea03ac"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">esp_lcd_dsi_bus_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dsi_bus_handle_t</span></span></span><a class="headerlink" href="#_CPPv424esp_lcd_dsi_bus_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of MIPI DSI bus handle </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv430esp_lcd_dpi_panel_general_cb_t">
+<span id="_CPPv330esp_lcd_dpi_panel_general_cb_t"></span><span id="_CPPv230esp_lcd_dpi_panel_general_cb_t"></span><span id="esp_lcd_dpi_panel_general_cb_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a7d43bf377513e8adb4b4ed74181f2cf2"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_general_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_dpi_panel_event_data_t" title="esp_lcd_dpi_panel_event_data_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv430esp_lcd_dpi_panel_general_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A general function callback prototype for DPI panel driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param panel<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> LCD panel handle, which is created by factory API like esp_lcd_new_panel_dpi() </p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> DPI panel event data, fed by driver </p>
+</dd>
+<dt class="field-odd">Param user_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User data </p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this function </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv439esp_lcd_dpi_panel_color_trans_done_cb_t">
+<span id="_CPPv339esp_lcd_dpi_panel_color_trans_done_cb_t"></span><span id="_CPPv239esp_lcd_dpi_panel_color_trans_done_cb_t"></span><span id="esp_lcd_dpi_panel_color_trans_done_cb_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a251009b3a42da89a394ce1af348af42f"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_dpi_panel_general_cb_t" title="esp_lcd_dpi_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_color_trans_done_cb_t</span></span></span><a class="headerlink" href="#_CPPv439esp_lcd_dpi_panel_color_trans_done_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when driver finishes coping user's color buffer to frame buffer. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv435esp_lcd_dpi_panel_refresh_done_cb_t">
+<span id="_CPPv335esp_lcd_dpi_panel_refresh_done_cb_t"></span><span id="_CPPv235esp_lcd_dpi_panel_refresh_done_cb_t"></span><span id="esp_lcd_dpi_panel_refresh_done_cb_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a98462c406608bdefa0c3347fd0e7c9da"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_dpi_panel_general_cb_t" title="esp_lcd_dpi_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_refresh_done_cb_t</span></span></span><a class="headerlink" href="#_CPPv435esp_lcd_dpi_panel_refresh_done_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when the frame buffer can be reused safely. </p>
+<p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Use esp_lcd_dpi_panel_frame_buf_complete_cb_t instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv428esp_lcd_dpi_panel_vsync_cb_t">
+<span id="_CPPv328esp_lcd_dpi_panel_vsync_cb_t"></span><span id="_CPPv228esp_lcd_dpi_panel_vsync_cb_t"></span><span id="esp_lcd_dpi_panel_vsync_cb_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a51c35786e6f07b768d622ea3caec44d5"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_dpi_panel_general_cb_t" title="esp_lcd_dpi_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_vsync_cb_t</span></span></span><a class="headerlink" href="#_CPPv428esp_lcd_dpi_panel_vsync_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when the LCD controller sends the VSYNC signal. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv441esp_lcd_dpi_panel_frame_buf_complete_cb_t">
+<span id="_CPPv341esp_lcd_dpi_panel_frame_buf_complete_cb_t"></span><span id="_CPPv241esp_lcd_dpi_panel_frame_buf_complete_cb_t"></span><span id="esp_lcd_dpi_panel_frame_buf_complete_cb_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a3269fd02194484cebd39ef9c55562d31"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_dpi_panel_general_cb_t" title="esp_lcd_dpi_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_dpi_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_dpi_panel_frame_buf_complete_cb_t</span></span></span><a class="headerlink" href="#_CPPv441esp_lcd_dpi_panel_frame_buf_complete_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when the frame buffer can be reused safely. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv432esp_lcd_panel_draw_bitmap_hook_t">
+<span id="_CPPv332esp_lcd_panel_draw_bitmap_hook_t"></span><span id="_CPPv232esp_lcd_panel_draw_bitmap_hook_t"></span><span id="esp_lcd_panel_draw_bitmap_hook_t"></span><span class="target" id="esp__lcd__mipi__dsi_8h_1a4a495106bb3a010181a0ae36654080e0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_panel_draw_bitmap_hook_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv431esp_lcd_draw_bitmap_hook_data_t" title="esp_lcd_draw_bitmap_hook_data_t"><span class="n"><span class="pre">esp_lcd_draw_bitmap_hook_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hook_data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">hook_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv432esp_lcd_panel_draw_bitmap_hook_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>draw bitmap hook function type for custom pixel processing operations </p>
+<p>This hook allows users to implement custom operations like scaling, rotation, color space conversion, etc. using hardware accelerators like PPA or DMA2D.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The hook should ensure the synchronization of draw operations on its own.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param panel<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> LCD panel handle </p>
+</dd>
+<dt class="field-even">Param hook_data<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> Hook data </p>
+</dd>
+<dt class="field-odd">Param hook_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> Hook context </p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Other error codes on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=MIPI DSI Interfaced LCD (api-reference/peripherals/lcd/dsi_lcd)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=MIPI DSI Interfaced LCD (api-reference/peripherals/lcd/dsi_lcd)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="rgb_lcd.html" class="btn btn-neutral float-left" title="RGB Interfaced LCD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="parl_lcd.html" class="btn btn-neutral float-right" title="Parallel IO simulation of SPI or I80 Interfaced LCD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

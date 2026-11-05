@@ -1,0 +1,1073 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Event Task Matrix (ETM) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/etm.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/etm';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="GPIO &amp; RTC GPIO" href="gpio.html" />
+    <link rel="prev" title="ECDSA Digital Signature Peripheral (ECDSA_DS)" href="ecdsa.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Event Task Matrix (ETM)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Event Task Matrix (ETM)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/etm.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="event-task-matrix-etm">
+<h1>Event Task Matrix (ETM)<a class="headerlink" href="#event-task-matrix-etm" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/etm.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>Normally, if a peripheral X needs to notify peripheral Y of a particular event, this could only be done via a CPU interrupt from peripheral X, where the CPU notifies peripheral Y on behalf of peripheral X. However, in time-critical applications, the latency introduced by CPU interrupts is non-negligible.</p>
+<p>With the help of the Event Task Matrix (ETM) module, some peripherals can directly notify other peripherals of events through pre-set connections without the intervention of CPU interrupts. This allows precise and low latency synchronization between peripherals, and lessens the CPU's workload as the CPU no longer needs to handle these events.</p>
+<figure class="align-center" id="id12">
+<div class="align-default"><img height="280" src="../../_images/blockdiag-ddebc1912a27228a45e6aedfb6ed2e69f381dfcf.png" width="856" /></div>
+<figcaption>
+<p><span class="caption-text">ETM channels Overview</span><a class="headerlink" href="#id12" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The ETM module has multiple programmable channels, they are used to connect a particular <strong>Event</strong> to a particular <strong>Task</strong>. When an event is activated, the ETM channel will trigger the corresponding task automatically.</p>
+<p>Peripherals that support ETM functionality provide their or unique set of events and tasks to be connected by the ETM. An ETM channel can connect any event to any task, even looping back an event to a task on the same peripheral. However, an ETM channel can only connect one event to one task at a time (i.e., 1 to 1 relation). If you want to use different events to trigger the same task, you can set up more ETM channels.</p>
+<p>Typically, with the help of the ETM module, you can implement features like:</p>
+<ul class="simple">
+<li><p>Toggle the GPIO when a timer alarm event happens</p></li>
+<li><p>Start an ADC conversion when a pulse edge is detected on a GPIO</p></li>
+</ul>
+</section>
+<section id="functional-overview">
+<h2>Functional Overview<a class="headerlink" href="#functional-overview" title="Permalink to this heading"></a></h2>
+<p>The following sections of this document cover the typical steps to configure and use the ETM module.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#etm-channel-allocation"><span class="std std-ref">ETM Channel Allocation</span></a> - describes how to install and uninstall the ETM channel.</p></li>
+<li><p><a class="reference internal" href="#etm-event"><span class="std std-ref">ETM Event</span></a> - describes how to allocate a new ETM event handle or fetch an existing handle from various peripherals.</p></li>
+<li><p><a class="reference internal" href="#etm-task"><span class="std std-ref">ETM Task</span></a> - describes how to allocate a new ETM task handle or fetch an existing handle from various peripherals.</p></li>
+<li><p><a class="reference internal" href="#etm-channel-control"><span class="std std-ref">ETM Channel Control</span></a> - describes common ETM channel control functions.</p></li>
+<li><p><a class="reference internal" href="#etm-power-management"><span class="std std-ref">Power Management</span></a> - describes the options and strategies provided by the driver in order to save power.</p></li>
+<li><p><a class="reference internal" href="#etm-thread-safety"><span class="std std-ref">Thread Safety</span></a> - lists which APIs are guaranteed to be thread-safe by the driver.</p></li>
+<li><p><a class="reference internal" href="#etm-kconfig-options"><span class="std std-ref">Kconfig Options</span></a> - lists the supported Kconfig options that can be used to make a different effect on driver behavior.</p></li>
+</ul>
+<section id="etm-channel-allocation">
+<span id="id1"></span><h3>ETM Channel Allocation<a class="headerlink" href="#etm-channel-allocation" title="Permalink to this heading"></a></h3>
+<p>There are many identical ETM channels in ESP32-P4 <a class="footnote-reference brackets" href="#id11" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a>, and each channel is represented by <a class="reference internal" href="#_CPPv424esp_etm_channel_handle_t" title="esp_etm_channel_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_etm_channel_handle_t</span></code></a> in the software. The ETM core driver manages all available hardware resources in a pool so that you do not need to care about which channel is in use and which is not. The ETM core driver will allocate a channel for you when you call <a class="reference internal" href="#_CPPv419esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t" title="esp_etm_new_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_new_channel()</span></code></a> and delete it when you call <a class="reference internal" href="#_CPPv419esp_etm_del_channel24esp_etm_channel_handle_t" title="esp_etm_del_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_del_channel()</span></code></a>. All requirements needed for allocating a channel are provided in <a class="reference internal" href="#_CPPv424esp_etm_channel_config_t" title="esp_etm_channel_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_etm_channel_config_t</span></code></a>.</p>
+<p>Before deleting an ETM channel, please disable it by <a class="reference internal" href="#_CPPv423esp_etm_channel_disable24esp_etm_channel_handle_t" title="esp_etm_channel_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_disable()</span></code></a> in advance or make sure it has not been enabled yet by <a class="reference internal" href="#_CPPv422esp_etm_channel_enable24esp_etm_channel_handle_t" title="esp_etm_channel_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_enable()</span></code></a>.</p>
+</section>
+<section id="etm-event">
+<span id="id3"></span><h3>ETM Event<a class="headerlink" href="#etm-event" title="Permalink to this heading"></a></h3>
+<p>ETM Event abstracts the event source, masking the details of specific event sources, and is represented by <a class="reference internal" href="#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_etm_event_handle_t</span></code></a> in the software, allowing applications to handle different types of events more easily. ETM events can be generated from a variety of peripherals, thus the way to get the event handle differs from peripherals. When an ETM event is no longer used, you should call <a class="reference internal" href="#_CPPv423esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t" title="esp_etm_channel_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_connect()</span></code></a> with a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> event handle to disconnect it and then call <a class="reference internal" href="#_CPPv417esp_etm_del_event22esp_etm_event_handle_t" title="esp_etm_del_event"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_del_event()</span></code></a> to free the event resource.</p>
+<section id="gpio-events">
+<h4>GPIO Events<a class="headerlink" href="#gpio-events" title="Permalink to this heading"></a></h4>
+<p>GPIO <strong>edge</strong> event is the most common event type, it can be generated by any GPIO pin. You can call <a class="reference internal" href="#_CPPv418gpio_new_etm_eventPK23gpio_etm_event_config_tP22esp_etm_event_handle_tz" title="gpio_new_etm_event"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_new_etm_event()</span></code></a> to create a GPIO event handle, with the configurations provided in <a class="reference internal" href="#_CPPv423gpio_etm_event_config_t" title="gpio_etm_event_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">gpio_etm_event_config_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N23gpio_etm_event_config_t4edgeE" title="gpio_etm_event_config_t::edge"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">gpio_etm_event_config_t::edge</span></code></a> or <a class="reference internal" href="#_CPPv4N23gpio_etm_event_config_t5edgesE" title="gpio_etm_event_config_t::edges"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">gpio_etm_event_config_t::edges</span></code></a> decides which edge(s) to trigger the event(s), supported edge types are listed in the <a class="reference internal" href="#_CPPv421gpio_etm_event_edge_t" title="gpio_etm_event_edge_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">gpio_etm_event_edge_t</span></code></a>.</p></li>
+</ul>
+<p>You need to build a connection between the GPIO ETM event handle and the GPIO number. So you should call <a class="reference internal" href="#_CPPv424gpio_etm_event_bind_gpio22esp_etm_event_handle_ti" title="gpio_etm_event_bind_gpio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_etm_event_bind_gpio()</span></code></a> afterwards. Please note, only the ETM event handle that created by <a class="reference internal" href="#_CPPv418gpio_new_etm_eventPK23gpio_etm_event_config_tP22esp_etm_event_handle_tz" title="gpio_new_etm_event"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_new_etm_event()</span></code></a> can set a GPIO number. Calling this function with other kinds of ETM events returns <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_ARG" title="ESP_ERR_INVALID_ARG"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code></a> error. Needless to say, this function does not help with the GPIO initialization, you still need to call <a class="reference internal" href="gpio.html#_CPPv411gpio_configPK13gpio_config_t" title="gpio_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_config()</span></code></a> to set the property like direction, pull up/down mode separately.</p>
+</section>
+<section id="other-peripheral-events">
+<h4>Other Peripheral Events<a class="headerlink" href="#other-peripheral-events" title="Permalink to this heading"></a></h4>
+<p><ul class="simple">
+<li><p>You can call <a class="reference internal" href="#_CPPv431esp_systick_new_etm_alarm_eventiP22esp_etm_event_handle_t" title="esp_systick_new_etm_alarm_event"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_systick_new_etm_alarm_event()</span></code></a> to get the ETM event from RTOS Systick, one per CPU core.</p></li>
+<li><p>Refer to <a class="reference internal" href="../system/esp_timer.html"><span class="doc">ESP Timer (High Resolution Timer)</span></a> for how to get the ETM event handle from esp_timer.</p></li>
+<li><p>Refer to <a class="reference internal" href="gptimer.html#gptimer-etm-event-and-task"><span class="std std-ref">GPTimer's ETM Events and Tasks</span></a> for how to get the ETM event handle from GPTimer.</p></li>
+<li><p>Refer to <a class="reference internal" href="async_memcpy.html"><span class="doc">Asynchronous Memory Copy</span></a> for how to get the ETM event handle from async memcpy.</p></li>
+<li><p>Refer to <a class="reference internal" href="mcpwm.html"><span class="doc">Motor Control Pulse Width Modulator (MCPWM)</span></a> for how to get the ETM event handle from MCPWM.</p></li>
+<li><p>Refer to <a class="reference internal" href="ana_cmpr.html"><span class="doc">Analog Comparator</span></a> for how to get the ETM event handle from analog comparator.</p></li>
+<li><p>Refer to <a class="reference internal" href="temp_sensor.html"><span class="doc">Temperature Sensor</span></a> for how to get the ETM event handle from temperature sensor.</p></li>
+<li><p>Refer to <a class="reference internal" href="i2s.html"><span class="doc">Inter-IC Sound (I2S)</span></a> for how to get the ETM event handle from I2S.</p></li>
+<li><p>Refer to <a class="reference internal" href="ledc.html"><span class="doc">LED Control (LEDC)</span></a> for how to get the ETM event handle from LEDC.</p></li>
+</ul>
+</p>
+</section>
+</section>
+<section id="etm-task">
+<span id="id4"></span><h3>ETM Task<a class="headerlink" href="#etm-task" title="Permalink to this heading"></a></h3>
+<p>ETM Task abstracts the task action and is represented by <a class="reference internal" href="#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_etm_task_handle_t</span></code></a> in the software, allowing tasks to be managed and represented in the same way. ETM tasks can be assigned to a variety of peripherals, thus the way to get the task handle differs from peripherals. When an ETM task is no longer used, you should call <a class="reference internal" href="#_CPPv423esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t" title="esp_etm_channel_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_connect()</span></code></a> with a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> task handle to disconnect it and then call <a class="reference internal" href="#_CPPv416esp_etm_del_task21esp_etm_task_handle_t" title="esp_etm_del_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_del_task()</span></code></a> to free the task resource.</p>
+<section id="gpio-tasks">
+<h4>GPIO Tasks<a class="headerlink" href="#gpio-tasks" title="Permalink to this heading"></a></h4>
+<p>GPIO task is the most common task type. One GPIO can take one or more GPIO ETM task actions, and one GPIO ETM task action can even manage multiple GPIOs. When the task gets activated by the ETM channel, all managed GPIOs can set/clear/toggle at the same time. You can call <a class="reference internal" href="#_CPPv417gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz" title="gpio_new_etm_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_new_etm_task()</span></code></a> to create a GPIO task handle, with the configurations provided in <a class="reference internal" href="#_CPPv422gpio_etm_task_config_t" title="gpio_etm_task_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">gpio_etm_task_config_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N22gpio_etm_task_config_t6actionE" title="gpio_etm_task_config_t::action"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">gpio_etm_task_config_t::action</span></code></a> or <a class="reference internal" href="#_CPPv4N22gpio_etm_task_config_t7actionsE" title="gpio_etm_task_config_t::actions"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">gpio_etm_task_config_t::actions</span></code></a> decides what GPIO action(s) would be taken by the ETM task. Supported actions are listed in the <a class="reference internal" href="#_CPPv422gpio_etm_task_action_t" title="gpio_etm_task_action_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">gpio_etm_task_action_t</span></code></a>. If one GPIO needs to take more than one actions, the action tasks have to be created in one <a class="reference internal" href="#_CPPv417gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz" title="gpio_new_etm_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_new_etm_task()</span></code></a> call with filling the actions into the array of <a class="reference internal" href="#_CPPv4N22gpio_etm_task_config_t7actionsE" title="gpio_etm_task_config_t::actions"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">gpio_etm_task_config_t::actions</span></code></a>.</p></li>
+</ul>
+<p>To build a connection between the GPIO ETM task and the GPIO number, you should call <a class="reference internal" href="#_CPPv422gpio_etm_task_add_gpio21esp_etm_task_handle_ti" title="gpio_etm_task_add_gpio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_etm_task_add_gpio()</span></code></a>. You can call this function by several times if you want the task handle to manage more GPIOs. Please note, only the ETM task handle that created by <a class="reference internal" href="#_CPPv417gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz" title="gpio_new_etm_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_new_etm_task()</span></code></a> can manage a GPIO. Calling this function with other kinds of ETM tasks returns <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_ARG" title="ESP_ERR_INVALID_ARG"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code></a> error. Needless to say, this function does not help with the GPIO initialization, you still need to call <a class="reference internal" href="gpio.html#_CPPv411gpio_configPK13gpio_config_t" title="gpio_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_config()</span></code></a> to set the property like direction, pull up/down mode separately.</p>
+<p>Before you call <a class="reference internal" href="#_CPPv416esp_etm_del_task21esp_etm_task_handle_t" title="esp_etm_del_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_del_task()</span></code></a> to delete the GPIO ETM task, make sure that all previously added GPIOs are removed by <a class="reference internal" href="#_CPPv421gpio_etm_task_rm_gpio21esp_etm_task_handle_ti" title="gpio_etm_task_rm_gpio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_etm_task_rm_gpio()</span></code></a> in advance.</p>
+</section>
+<section id="other-peripheral-tasks">
+<h4>Other Peripheral Tasks<a class="headerlink" href="#other-peripheral-tasks" title="Permalink to this heading"></a></h4>
+<p><ul class="simple">
+<li><p>Refer to <a class="reference internal" href="gptimer.html#gptimer-etm-event-and-task"><span class="std std-ref">GPTimer's ETM Events and Tasks</span></a> for how to get the ETM task handle from GPTimer.</p></li>
+<li><p>Refer to <a class="reference internal" href="temp_sensor.html"><span class="doc">Temperature Sensor</span></a> for how to get the ETM task handle from temperature sensor.</p></li>
+<li><p>Refer to <a class="reference internal" href="i2s.html"><span class="doc">Inter-IC Sound (I2S)</span></a> for how to get the ETM task handle from I2S.</p></li>
+<li><p>Refer to <a class="reference internal" href="ledc.html"><span class="doc">LED Control (LEDC)</span></a> for how to get the ETM task handle from LEDC.</p></li>
+</ul>
+</p>
+</section>
+</section>
+<section id="etm-channel-control">
+<span id="id5"></span><h3>ETM Channel Control<a class="headerlink" href="#etm-channel-control" title="Permalink to this heading"></a></h3>
+<section id="connect-event-and-task">
+<h4>Connect Event and Task<a class="headerlink" href="#connect-event-and-task" title="Permalink to this heading"></a></h4>
+<p>An ETM event has no association with an ETM task, until they are connected to the same ETM channel by calling <a class="reference internal" href="#_CPPv423esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t" title="esp_etm_channel_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_connect()</span></code></a>. Especially, calling the function with a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> task/event handle means disconnecting the channel from any task or event. Note that, this function can be called either before or after the channel is enabled. But calling this function at runtime to change the connection can be dangerous, because the channel may be in the middle of a cycle, and the new connection may not take effect immediately.</p>
+</section>
+<section id="enable-and-disable-channel">
+<h4>Enable and Disable Channel<a class="headerlink" href="#enable-and-disable-channel" title="Permalink to this heading"></a></h4>
+<p>You can call <a class="reference internal" href="#_CPPv422esp_etm_channel_enable24esp_etm_channel_handle_t" title="esp_etm_channel_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_enable()</span></code></a> and <a class="reference internal" href="#_CPPv423esp_etm_channel_disable24esp_etm_channel_handle_t" title="esp_etm_channel_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_disable()</span></code></a> to enable and disable the ETM channel from working.</p>
+</section>
+<section id="etm-channel-profiling">
+<h4>ETM Channel Profiling<a class="headerlink" href="#etm-channel-profiling" title="Permalink to this heading"></a></h4>
+<p>To check if the ETM channels are set with proper events and tasks, you can call <a class="reference internal" href="#_CPPv412esp_etm_dumpP4FILE" title="esp_etm_dump"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_dump()</span></code></a> to dump all working ETM channels with their associated events and tasks. The dumping format is like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">===========</span><span class="n">ETM</span> <span class="n">Dump</span> <span class="n">Start</span><span class="o">==========</span>
+<span class="n">channel</span> <span class="mi">0</span><span class="p">:</span> <span class="n">event</span> <span class="mi">48</span> <span class="o">==&gt;</span> <span class="n">task</span> <span class="mi">17</span>
+<span class="n">channel</span> <span class="mi">1</span><span class="p">:</span> <span class="n">event</span> <span class="mi">48</span> <span class="o">==&gt;</span> <span class="n">task</span> <span class="mi">90</span>
+<span class="n">channel</span> <span class="mi">2</span><span class="p">:</span> <span class="n">event</span> <span class="mi">48</span> <span class="o">==&gt;</span> <span class="n">task</span> <span class="mi">94</span>
+<span class="o">===========</span><span class="n">ETM</span> <span class="n">Dump</span> <span class="n">End</span><span class="o">============</span>
+</pre></div>
+</div>
+<p>The digital ID printed in the dump information is defined in the <code class="docutils literal notranslate"><span class="pre">soc/soc_etm_source.h</span></code> file.</p>
+</section>
+</section>
+<section id="power-management">
+<span id="etm-power-management"></span><h3>Power Management<a class="headerlink" href="#power-management" title="Permalink to this heading"></a></h3>
+<p>When power management is enabled, i.e., <a class="reference internal" href="../kconfig-reference.html#config-pm-enable"><span class="std std-ref">CONFIG_PM_ENABLE</span></a> is on, the system may adjust or disable the clock source, and power off the ETM peripheral before going to sleep. As a result, the existing connection between events and tasks will be lost, and the ETM channels can't work correctly after wake up. So by default, the driver will acquire a power management lock internally to forbid the system from powering off the ETM peripheral.</p>
+<p>If you want to save more power, you can set <a class="reference internal" href="#_CPPv4N24esp_etm_channel_config_t14etm_chan_flags8allow_pdE" title="esp_etm_channel_config_t::etm_chan_flags::allow_pd"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_etm_channel_config_t::etm_chan_flags::allow_pd</span></code></a> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. Then ETM registers will be backed up before sleep and restored after wake up. Please note, enabling this option will increase the memory consumption for saving the register context.</p>
+</section>
+<section id="thread-safety">
+<span id="etm-thread-safety"></span><h3>Thread Safety<a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>The ETM core driver is thread-safe.</p>
+<ul class="simple">
+<li><p>Factory functions (for example, <a class="reference internal" href="#_CPPv419esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t" title="esp_etm_new_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_new_channel()</span></code></a>, <a class="reference internal" href="#_CPPv417gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz" title="gpio_new_etm_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">gpio_new_etm_task()</span></code></a>, and other <code class="docutils literal notranslate"><span class="pre">*_new_etm_*</span></code> creators) are thread-safe and can be called from different RTOS tasks concurrently.</p></li>
+<li><p>Channel control APIs (for example, <a class="reference internal" href="#_CPPv423esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t" title="esp_etm_channel_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_connect()</span></code></a>, <a class="reference internal" href="#_CPPv422esp_etm_channel_enable24esp_etm_channel_handle_t" title="esp_etm_channel_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_enable()</span></code></a>, <a class="reference internal" href="#_CPPv423esp_etm_channel_disable24esp_etm_channel_handle_t" title="esp_etm_channel_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_channel_disable()</span></code></a>, <a class="reference internal" href="#_CPPv419esp_etm_del_channel24esp_etm_channel_handle_t" title="esp_etm_del_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_del_channel()</span></code></a>) are also thread-safe. Concurrent operations on different channels are safe. Concurrent operations on the same channel are serialized internally; if an operation is incompatible with the current channel state, it will return <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_STATE" title="ESP_ERR_INVALID_STATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code></a>.</p></li>
+<li><p>No functions are allowed to run within the ISR environment.</p></li>
+</ul>
+</section>
+<section id="kconfig-options">
+<span id="etm-kconfig-options"></span><h3>Kconfig Options<a class="headerlink" href="#kconfig-options" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-etm-enable-debug-log"><span class="std std-ref">CONFIG_ETM_ENABLE_DEBUG_LOG</span></a> is used to enable the debug log output. Enabling this option increases the firmware binary size as well.</p></li>
+</ul>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hw_support/etm/include/esp_etm.h">components/esp_hw_support/etm/include/esp_etm.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_etm.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t">
+<span id="_CPPv319esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t"></span><span id="_CPPv219esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t"></span><span id="esp_etm_new_channel__esp_etm_channel_config_tCP.esp_etm_channel_handle_tP"></span><span class="target" id="esp__etm_8h_1a05e94090e4e4fad60576e02037b71bbe"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_new_channel</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424esp_etm_channel_config_t" title="esp_etm_channel_config_t"><span class="n"><span class="pre">esp_etm_channel_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv424esp_etm_channel_handle_t" title="esp_etm_channel_handle_t"><span class="n"><span class="pre">esp_etm_channel_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_chan</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate an ETM channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The channel can later be freed by <code class="docutils literal notranslate"><span class="pre">esp_etm_del_channel</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> ETM channel configuration </p></li>
+<li><p><strong>ret_chan</strong> -- <strong>[out]</strong> Returned ETM channel handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Allocate ETM channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Allocate ETM channel failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Allocate ETM channel failed because of out of memory</p></li>
+<li><p>ESP_ERR_NOT_FOUND: Allocate ETM channel failed because all channels are used up and no more free one</p></li>
+<li><p>ESP_FAIL: Allocate ETM channel failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419esp_etm_del_channel24esp_etm_channel_handle_t">
+<span id="_CPPv319esp_etm_del_channel24esp_etm_channel_handle_t"></span><span id="_CPPv219esp_etm_del_channel24esp_etm_channel_handle_t"></span><span id="esp_etm_del_channel__esp_etm_channel_handle_t"></span><span class="target" id="esp__etm_8h_1a12b6e696070c92defd3eac6e07ed2a08"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_del_channel</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_etm_channel_handle_t" title="esp_etm_channel_handle_t"><span class="n"><span class="pre">esp_etm_channel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419esp_etm_del_channel24esp_etm_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete an ETM channel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> -- <strong>[in]</strong> ETM channel handle that created by <code class="docutils literal notranslate"><span class="pre">esp_etm_new_channel</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Delete ETM channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Delete ETM channel failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Delete ETM channel failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422esp_etm_channel_enable24esp_etm_channel_handle_t">
+<span id="_CPPv322esp_etm_channel_enable24esp_etm_channel_handle_t"></span><span id="_CPPv222esp_etm_channel_enable24esp_etm_channel_handle_t"></span><span id="esp_etm_channel_enable__esp_etm_channel_handle_t"></span><span class="target" id="esp__etm_8h_1af813b93630ee5dbc99eab3abdcfb6a10"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_channel_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_etm_channel_handle_t" title="esp_etm_channel_handle_t"><span class="n"><span class="pre">esp_etm_channel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422esp_etm_channel_enable24esp_etm_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable ETM channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function will transit the channel state from init to enable.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> -- <strong>[in]</strong> ETM channel handle that created by <code class="docutils literal notranslate"><span class="pre">esp_etm_new_channel</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Enable ETM channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Enable ETM channel failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Enable ETM channel failed because the channel has been enabled already</p></li>
+<li><p>ESP_FAIL: Enable ETM channel failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_etm_channel_disable24esp_etm_channel_handle_t">
+<span id="_CPPv323esp_etm_channel_disable24esp_etm_channel_handle_t"></span><span id="_CPPv223esp_etm_channel_disable24esp_etm_channel_handle_t"></span><span id="esp_etm_channel_disable__esp_etm_channel_handle_t"></span><span class="target" id="esp__etm_8h_1a822f60889ac359782428755d8073a8bd"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_channel_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_etm_channel_handle_t" title="esp_etm_channel_handle_t"><span class="n"><span class="pre">esp_etm_channel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_etm_channel_disable24esp_etm_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable ETM channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function will transit the channel state from enable to init.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> -- <strong>[in]</strong> ETM channel handle that created by <code class="docutils literal notranslate"><span class="pre">esp_etm_new_channel</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Disable ETM channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Disable ETM channel failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Disable ETM channel failed because the channel is not enabled yet</p></li>
+<li><p>ESP_FAIL: Disable ETM channel failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t">
+<span id="_CPPv323esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t"></span><span id="_CPPv223esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t"></span><span id="esp_etm_channel_connect__esp_etm_channel_handle_t.esp_etm_event_handle_t.esp_etm_task_handle_t"></span><span class="target" id="esp__etm_8h_1a551d897cbe69bbbe7028454aeb1fa728"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_channel_connect</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_etm_channel_handle_t" title="esp_etm_channel_handle_t"><span class="n"><span class="pre">esp_etm_channel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span>, <a class="reference internal" href="#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">event</span></span>, <a class="reference internal" href="#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_etm_channel_connect24esp_etm_channel_handle_t22esp_etm_event_handle_t21esp_etm_task_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Connect an ETM event to an ETM task via a previously allocated ETM channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Setting the ETM event/task handle to NULL means to disconnect the channel from any event/task</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> -- <strong>[in]</strong> ETM channel handle that created by <code class="docutils literal notranslate"><span class="pre">esp_etm_new_channel</span></code></p></li>
+<li><p><strong>event</strong> -- <strong>[in]</strong> ETM event handle obtained from a driver/peripheral, e.g. <code class="docutils literal notranslate"><span class="pre">xxx_new_etm_event</span></code></p></li>
+<li><p><strong>task</strong> -- <strong>[in]</strong> ETM task handle obtained from a driver/peripheral, e.g. <code class="docutils literal notranslate"><span class="pre">xxx_new_etm_task</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Connect ETM event and task to the channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Connect ETM event and task to the channel failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Connect ETM event and task to the channel failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417esp_etm_del_event22esp_etm_event_handle_t">
+<span id="_CPPv317esp_etm_del_event22esp_etm_event_handle_t"></span><span id="_CPPv217esp_etm_del_event22esp_etm_event_handle_t"></span><span id="esp_etm_del_event__esp_etm_event_handle_t"></span><span class="target" id="esp__etm_8h_1a0fa4996787de3ee57ece4c5645f086e2"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_del_event</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417esp_etm_del_event22esp_etm_event_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete ETM event. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the ETM event comes from various peripherals, we provide the same user API to delete the event handle seamlessly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>event</strong> -- <strong>[in]</strong> ETM event handle obtained from a driver/peripheral, e.g. <code class="docutils literal notranslate"><span class="pre">xxx_new_etm_event</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Delete ETM event successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Delete ETM event failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Delete ETM event failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416esp_etm_del_task21esp_etm_task_handle_t">
+<span id="_CPPv316esp_etm_del_task21esp_etm_task_handle_t"></span><span id="_CPPv216esp_etm_del_task21esp_etm_task_handle_t"></span><span id="esp_etm_del_task__esp_etm_task_handle_t"></span><span class="target" id="esp__etm_8h_1a08fa1ac977c6c3b42e1a7f5b01bcb7c0"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_del_task</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416esp_etm_del_task21esp_etm_task_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete ETM task. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Although the ETM task comes from various peripherals, we provide the same user API to delete the task handle seamlessly.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>task</strong> -- <strong>[in]</strong> ETM task handle obtained from a driver/peripheral, e.g. <code class="docutils literal notranslate"><span class="pre">xxx_new_etm_task</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Delete ETM task successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Delete ETM task failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Delete ETM task failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412esp_etm_dumpP4FILE">
+<span id="_CPPv312esp_etm_dumpP4FILE"></span><span id="_CPPv212esp_etm_dumpP4FILE"></span><span id="esp_etm_dump__FILEP"></span><span class="target" id="esp__etm_8h_1aaeea09d53622805f5accca8f965d72b1"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_dump</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412esp_etm_dumpP4FILE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Dump ETM channel usages to the given IO stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>out_stream</strong> -- <strong>[in]</strong> IO stream (e.g. stdout) </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Dump ETM channel usages successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Dump ETM channel usages failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Dump ETM channel usages failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424esp_etm_channel_config_t">
+<span id="_CPPv324esp_etm_channel_config_t"></span><span id="_CPPv224esp_etm_channel_config_t"></span><span id="esp_etm_channel_config_t"></span><span class="target" id="structesp__etm__channel__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_channel_config_t</span></span></span><a class="headerlink" href="#_CPPv424esp_etm_channel_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ETM channel configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_etm_channel_config_t7clk_srcE">
+<span id="_CPPv3N24esp_etm_channel_config_t7clk_srcE"></span><span id="_CPPv2N24esp_etm_channel_config_t7clk_srcE"></span><span id="esp_etm_channel_config_t::clk_src__etm_clock_source_t"></span><span class="target" id="structesp__etm__channel__config__t_1a6a1fbf5ad70d7868daf3a2a5a27428b9"></span><span class="n"><span class="pre">etm_clock_source_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_src</span></span></span><a class="headerlink" href="#_CPPv4N24esp_etm_channel_config_t7clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clock source for the ETM channel </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_etm_channel_config_t5flagsE">
+<span id="_CPPv3N24esp_etm_channel_config_t5flagsE"></span><span id="_CPPv2N24esp_etm_channel_config_t5flagsE"></span><span id="esp_etm_channel_config_t::flags__esp_etm_channel_config_t::etm_chan_flags"></span><span class="target" id="structesp__etm__channel__config__t_1ae378640674fc9b282315adbc37411ed8"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424esp_etm_channel_config_t" title="esp_etm_channel_config_t"><span class="n"><span class="pre">esp_etm_channel_config_t</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N24esp_etm_channel_config_t14etm_chan_flagsE" title="esp_etm_channel_config_t::etm_chan_flags"><span class="n"><span class="pre">etm_chan_flags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N24esp_etm_channel_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ETM channel flags </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_etm_channel_config_t14etm_chan_flagsE">
+<span id="_CPPv3N24esp_etm_channel_config_t14etm_chan_flagsE"></span><span id="_CPPv2N24esp_etm_channel_config_t14etm_chan_flagsE"></span><span id="esp_etm_channel_config_t::etm_chan_flags"></span><span class="target" id="structesp__etm__channel__config__t_1_1etm__chan__flags"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">etm_chan_flags</span></span></span><a class="headerlink" href="#_CPPv4N24esp_etm_channel_config_t14etm_chan_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra configuration flags for ETM channel. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_etm_channel_config_t14etm_chan_flags8allow_pdE">
+<span id="_CPPv3N24esp_etm_channel_config_t14etm_chan_flags8allow_pdE"></span><span id="_CPPv2N24esp_etm_channel_config_t14etm_chan_flags8allow_pdE"></span><span id="esp_etm_channel_config_t::etm_chan_flags::allow_pd__uint32_t"></span><span class="target" id="structesp__etm__channel__config__t_1_1etm__chan__flags_1ac3cb77fb398f83137481ec92374b5912"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allow_pd</span></span></span><a class="headerlink" href="#_CPPv4N24esp_etm_channel_config_t14etm_chan_flags8allow_pdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set, driver allows the power domain to be powered off when system enters sleep mode. This can save power, but at the expense of more RAM being consumed to save register context. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv424esp_etm_channel_handle_t">
+<span id="_CPPv324esp_etm_channel_handle_t"></span><span id="_CPPv224esp_etm_channel_handle_t"></span><span id="esp_etm_channel_handle_t"></span><span class="target" id="esp__etm_8h_1a656060e3196a321b4e138190b3403fa0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">esp_etm_channel_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_channel_handle_t</span></span></span><a class="headerlink" href="#_CPPv424esp_etm_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ETM channel handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv422esp_etm_event_handle_t">
+<span id="_CPPv322esp_etm_event_handle_t"></span><span id="_CPPv222esp_etm_event_handle_t"></span><span id="esp_etm_event_handle_t"></span><span class="target" id="esp__etm_8h_1a87b18b61bce01351bf962441a066d79e"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">esp_etm_event_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></span><a class="headerlink" href="#_CPPv422esp_etm_event_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ETM event handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421esp_etm_task_handle_t">
+<span id="_CPPv321esp_etm_task_handle_t"></span><span id="_CPPv221esp_etm_task_handle_t"></span><span id="esp_etm_task_handle_t"></span><span class="target" id="esp__etm_8h_1a8980f2aa4a5e11a271fe1fcec9963ee7"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">esp_etm_task_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></span><a class="headerlink" href="#_CPPv421esp_etm_task_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ETM task handle. </p>
+</dd></dl>
+
+</section>
+<section id="id6">
+<h3>Header File<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_gpio/include/driver/gpio_etm.h">components/esp_driver_gpio/include/driver/gpio_etm.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/gpio_etm.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_gpio</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_gpio</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_gpio
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_gpio
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id7">
+<h3>Functions<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418gpio_new_etm_eventPK23gpio_etm_event_config_tP22esp_etm_event_handle_tz">
+<span id="_CPPv318gpio_new_etm_eventPK23gpio_etm_event_config_tP22esp_etm_event_handle_tz"></span><span id="_CPPv218gpio_new_etm_eventPK23gpio_etm_event_config_tP22esp_etm_event_handle_tz"></span><span id="gpio_new_etm_event__gpio_etm_event_config_tCP.esp_etm_event_handle_tP.z"></span><span class="target" id="gpio__etm_8h_1ac6c45fbe0d6ad5d84165a307abc020cf"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_new_etm_event</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423gpio_etm_event_config_t" title="gpio_etm_event_config_t"><span class="n"><span class="pre">gpio_etm_event_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_event</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418gpio_new_etm_eventPK23gpio_etm_event_config_tP22esp_etm_event_handle_tz" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create an ETM event object for the GPIO peripheral. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The created ETM event object can be deleted later by calling <code class="docutils literal notranslate"><span class="pre">esp_etm_del_event</span></code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The newly created ETM event object is not bind to any GPIO, you need to call <code class="docutils literal notranslate"><span class="pre">gpio_etm_event_bind_gpio</span></code> to bind the wanted GPIO </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Every success call to this function will acquire a free GPIO ETM event channel</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> GPIO ETM event configuration </p></li>
+<li><p><strong>ret_event</strong> -- <strong>[out]</strong> Returned ETM event handle </p></li>
+<li><p><strong>...</strong> -- <strong>[out]</strong> Other returned ETM event handles if any (the order of the returned event handles is aligned with the array order in field <code class="docutils literal notranslate"><span class="pre">edges</span></code> in <code class="docutils literal notranslate"><a class="reference internal" href="#structgpio__etm__event__config__t"><span class="std std-ref"><span class="pre">gpio_etm_event_config_t</span></span></a></code>) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Create ETM event successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Create ETM event failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Create ETM event failed because of out of memory</p></li>
+<li><p>ESP_ERR_NOT_FOUND: Create ETM event failed because all events are used up and no more free one</p></li>
+<li><p>ESP_FAIL: Create ETM event failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424gpio_etm_event_bind_gpio22esp_etm_event_handle_ti">
+<span id="_CPPv324gpio_etm_event_bind_gpio22esp_etm_event_handle_ti"></span><span id="_CPPv224gpio_etm_event_bind_gpio22esp_etm_event_handle_ti"></span><span id="gpio_etm_event_bind_gpio__esp_etm_event_handle_t.i"></span><span class="target" id="gpio__etm_8h_1a2ed01810a8696be5fa762a142d0c3e58"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_event_bind_gpio</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">event</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gpio_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424gpio_etm_event_bind_gpio22esp_etm_event_handle_ti" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bind the GPIO with the ETM event. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Calling this function multiple times with different GPIO number can override the previous setting immediately. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only GPIO ETM object can call this function</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>event</strong> -- <strong>[in]</strong> ETM event handle that created by <code class="docutils literal notranslate"><span class="pre">gpio_new_etm_event</span></code></p></li>
+<li><p><strong>gpio_num</strong> -- <strong>[in]</strong> GPIO number that can trigger the ETM event </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set the GPIO for ETM event successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set the GPIO for ETM event failed because of invalid argument, e.g. GPIO is not input capable, ETM event is not of GPIO type</p></li>
+<li><p>ESP_FAIL: Set the GPIO for ETM event failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz">
+<span id="_CPPv317gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz"></span><span id="_CPPv217gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz"></span><span id="gpio_new_etm_task__gpio_etm_task_config_tCP.esp_etm_task_handle_tP.z"></span><span class="target" id="gpio__etm_8h_1a74823161bb8f8816270df327cfe6306b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_new_etm_task</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422gpio_etm_task_config_t" title="gpio_etm_task_config_t"><span class="n"><span class="pre">gpio_etm_task_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_task</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417gpio_new_etm_taskPK22gpio_etm_task_config_tP21esp_etm_task_handle_tz" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create an ETM task object for the GPIO peripheral. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The created ETM task object can be deleted later by calling <code class="docutils literal notranslate"><span class="pre">esp_etm_del_task</span></code></p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The GPIO ETM task works like a container, a newly created ETM task object doesn't have GPIO members to be managed. You need to call <code class="docutils literal notranslate"><span class="pre">gpio_etm_task_add_gpio</span></code> to put one or more GPIOs to the container. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Every success call to this function will acquire a free GPIO ETM task channel</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> GPIO ETM task configuration </p></li>
+<li><p><strong>ret_task</strong> -- <strong>[out]</strong> Returned ETM task handle </p></li>
+<li><p><strong>...</strong> -- <strong>[out]</strong> Other returned ETM task handles if any (the order of the returned task handles is aligned with the array order in field <code class="docutils literal notranslate"><span class="pre">actions</span></code> in <code class="docutils literal notranslate"><a class="reference internal" href="#structgpio__etm__task__config__t"><span class="std std-ref"><span class="pre">gpio_etm_task_config_t</span></span></a></code>) </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Create ETM task successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Create ETM task failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Create ETM task failed because of out of memory</p></li>
+<li><p>ESP_ERR_NOT_FOUND: Create ETM task failed because all tasks are used up and no more free one</p></li>
+<li><p>ESP_FAIL: Create ETM task failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422gpio_etm_task_add_gpio21esp_etm_task_handle_ti">
+<span id="_CPPv322gpio_etm_task_add_gpio21esp_etm_task_handle_ti"></span><span id="_CPPv222gpio_etm_task_add_gpio21esp_etm_task_handle_ti"></span><span id="gpio_etm_task_add_gpio__esp_etm_task_handle_t.i"></span><span class="target" id="gpio__etm_8h_1a1ebbe8ab08b63f6be26bc1b284f6fb69"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_task_add_gpio</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gpio_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422gpio_etm_task_add_gpio21esp_etm_task_handle_ti" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add GPIO to the ETM task. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can call this function multiple times to add more GPIOs </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only GPIO ETM object can call this function</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> -- <strong>[in]</strong> ETM task handle that created by <code class="docutils literal notranslate"><span class="pre">gpio_new_etm_task</span></code></p></li>
+<li><p><strong>gpio_num</strong> -- <strong>[in]</strong> GPIO number that can be controlled by the ETM task </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Add GPIO to the ETM task successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Add GPIO to the ETM task failed because of invalid argument, e.g. GPIO is not output capable, ETM task is not of GPIO type</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Add GPIO to the ETM task failed because the GPIO is used by other ETM task already</p></li>
+<li><p>ESP_FAIL: Add GPIO to the ETM task failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421gpio_etm_task_rm_gpio21esp_etm_task_handle_ti">
+<span id="_CPPv321gpio_etm_task_rm_gpio21esp_etm_task_handle_ti"></span><span id="_CPPv221gpio_etm_task_rm_gpio21esp_etm_task_handle_ti"></span><span id="gpio_etm_task_rm_gpio__esp_etm_task_handle_t.i"></span><span class="target" id="gpio__etm_8h_1aa14d7b8a8902a8f37d35640dfefeb556"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_task_rm_gpio</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">task</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">gpio_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421gpio_etm_task_rm_gpio21esp_etm_task_handle_ti" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove the GPIO from the ETM task. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Before deleting the ETM task, you need to remove all the GPIOs from the ETM task by this function </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only GPIO ETM object can call this function</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>task</strong> -- <strong>[in]</strong> ETM task handle that created by <code class="docutils literal notranslate"><span class="pre">gpio_new_etm_task</span></code></p></li>
+<li><p><strong>gpio_num</strong> -- <strong>[in]</strong> GPIO number that to be remove from the ETM task </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Remove the GPIO from the ETM task successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Remove the GPIO from the ETM task failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Remove the GPIO from the ETM task failed because the GPIO is not controlled by this ETM task</p></li>
+<li><p>ESP_FAIL: Remove the GPIO from the ETM task failed because of other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id8">
+<h3>Structures<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423gpio_etm_event_config_t">
+<span id="_CPPv323gpio_etm_event_config_t"></span><span id="_CPPv223gpio_etm_event_config_t"></span><span id="gpio_etm_event_config_t"></span><span class="target" id="structgpio__etm__event__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_event_config_t</span></span></span><a class="headerlink" href="#_CPPv423gpio_etm_event_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO ETM event configuration. </p>
+<p>If more than one kind of ETM edge event want to be triggered on the same GPIO pin, you can configure them together. It helps to save GPIO ETM event channel resources for other GPIOs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23gpio_etm_event_config_t4edgeE">
+<span id="_CPPv3N23gpio_etm_event_config_t4edgeE"></span><span id="_CPPv2N23gpio_etm_event_config_t4edgeE"></span><span id="gpio_etm_event_config_t::edge__gpio_etm_event_edge_t"></span><span class="target" id="structgpio__etm__event__config__t_1a91a5a0b49240fc3d880af18e15f48b28"></span><a class="reference internal" href="#_CPPv421gpio_etm_event_edge_t" title="gpio_etm_event_edge_t"><span class="n"><span class="pre">gpio_etm_event_edge_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">edge</span></span></span><a class="headerlink" href="#_CPPv4N23gpio_etm_event_config_t4edgeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Which kind of edge can trigger the ETM event module </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23gpio_etm_event_config_t5edgesE">
+<span id="_CPPv3N23gpio_etm_event_config_t5edgesE"></span><span id="_CPPv2N23gpio_etm_event_config_t5edgesE"></span><span id="gpio_etm_event_config_t::edges__gpio_etm_event_edge_tA"></span><span class="target" id="structgpio__etm__event__config__t_1aa566e858d3c5fd8f06e2f0be7743f810"></span><a class="reference internal" href="#_CPPv421gpio_etm_event_edge_t" title="gpio_etm_event_edge_t"><span class="n"><span class="pre">gpio_etm_event_edge_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">edges</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">GPIO_ETM_EVENT_EDGE_TYPES</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N23gpio_etm_event_config_t5edgesE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of kinds of edges to trigger the ETM event module on the same GPIO </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422gpio_etm_task_config_t">
+<span id="_CPPv322gpio_etm_task_config_t"></span><span id="_CPPv222gpio_etm_task_config_t"></span><span id="gpio_etm_task_config_t"></span><span class="target" id="structgpio__etm__task__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_task_config_t</span></span></span><a class="headerlink" href="#_CPPv422gpio_etm_task_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO ETM task configuration. </p>
+<p>If multiple actions wants to be added to the same GPIO pin, you have to configure all the GPIO ETM tasks together. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22gpio_etm_task_config_t6actionE">
+<span id="_CPPv3N22gpio_etm_task_config_t6actionE"></span><span id="_CPPv2N22gpio_etm_task_config_t6actionE"></span><span id="gpio_etm_task_config_t::action__gpio_etm_task_action_t"></span><span class="target" id="structgpio__etm__task__config__t_1a3871cfe1deb1db41d265c345968c5222"></span><a class="reference internal" href="#_CPPv422gpio_etm_task_action_t" title="gpio_etm_task_action_t"><span class="n"><span class="pre">gpio_etm_task_action_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">action</span></span></span><a class="headerlink" href="#_CPPv4N22gpio_etm_task_config_t6actionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Action to take by the ETM task module </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22gpio_etm_task_config_t7actionsE">
+<span id="_CPPv3N22gpio_etm_task_config_t7actionsE"></span><span id="_CPPv2N22gpio_etm_task_config_t7actionsE"></span><span id="gpio_etm_task_config_t::actions__gpio_etm_task_action_tA"></span><span class="target" id="structgpio__etm__task__config__t_1a1e64b23995d50b8253fcde47de71d05f"></span><a class="reference internal" href="#_CPPv422gpio_etm_task_action_t" title="gpio_etm_task_action_t"><span class="n"><span class="pre">gpio_etm_task_action_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">actions</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">GPIO_ETM_TASK_ACTION_TYPES</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N22gpio_etm_task_config_t7actionsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of actions to take by the ETM task module on the same GPIO </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.GPIO_ETM_EVENT_EDGE_TYPES">
+<span class="target" id="gpio__etm_8h_1a1250e0ab97d11c22a1c5bbff12e34941"></span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_EVENT_EDGE_TYPES</span></span></span><a class="headerlink" href="#c.GPIO_ETM_EVENT_EDGE_TYPES" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO ETM edge events are POS/NEG/ANY </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.GPIO_ETM_TASK_ACTION_TYPES">
+<span class="target" id="gpio__etm_8h_1adbd735ef0d6c0a6b2985c7759ffbe9d9"></span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_TASK_ACTION_TYPES</span></span></span><a class="headerlink" href="#c.GPIO_ETM_TASK_ACTION_TYPES" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO ETM action tasks are SET/CLEAR/TOGGLE </p>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv421gpio_etm_event_edge_t">
+<span id="_CPPv321gpio_etm_event_edge_t"></span><span id="_CPPv221gpio_etm_event_edge_t"></span><span class="target" id="gpio__etm_8h_1a37d3420916fc7cf3257cccfdfe31ff2b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_event_edge_t</span></span></span><a class="headerlink" href="#_CPPv421gpio_etm_event_edge_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO edges that can be used as ETM event. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_POSE">
+<span id="_CPPv3N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_POSE"></span><span id="_CPPv2N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_POSE"></span><span class="target" id="gpio__etm_8h_1a37d3420916fc7cf3257cccfdfe31ff2bae5296d967335fe6500e2b2c5472e8a36"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_EVENT_EDGE_POS</span></span></span><a class="headerlink" href="#_CPPv4N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_POSE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A rising edge on the GPIO will generate an ETM event signal </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_NEGE">
+<span id="_CPPv3N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_NEGE"></span><span id="_CPPv2N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_NEGE"></span><span class="target" id="gpio__etm_8h_1a37d3420916fc7cf3257cccfdfe31ff2ba26bfea2c522a01fb41aa41bf92a04071"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_EVENT_EDGE_NEG</span></span></span><a class="headerlink" href="#_CPPv4N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_NEGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A falling edge on the GPIO will generate an ETM event signal </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_ANYE">
+<span id="_CPPv3N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_ANYE"></span><span id="_CPPv2N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_ANYE"></span><span class="target" id="gpio__etm_8h_1a37d3420916fc7cf3257cccfdfe31ff2baa15a0cd18288e0042a72b09c030098ed"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_EVENT_EDGE_ANY</span></span></span><a class="headerlink" href="#_CPPv4N21gpio_etm_event_edge_t23GPIO_ETM_EVENT_EDGE_ANYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Any edge on the GPIO can generate an ETM event signal </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv422gpio_etm_task_action_t">
+<span id="_CPPv322gpio_etm_task_action_t"></span><span id="_CPPv222gpio_etm_task_action_t"></span><span class="target" id="gpio__etm_8h_1aee76b8f939ddf5705b98f771b7b3a226"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_etm_task_action_t</span></span></span><a class="headerlink" href="#_CPPv422gpio_etm_task_action_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO actions that can be taken by the ETM task. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_SETE">
+<span id="_CPPv3N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_SETE"></span><span id="_CPPv2N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_SETE"></span><span class="target" id="gpio__etm_8h_1aee76b8f939ddf5705b98f771b7b3a226aa65c7796dff887d4c532e5b65757790f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_TASK_ACTION_SET</span></span></span><a class="headerlink" href="#_CPPv4N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_SETE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the GPIO level to high </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_CLRE">
+<span id="_CPPv3N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_CLRE"></span><span id="_CPPv2N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_CLRE"></span><span class="target" id="gpio__etm_8h_1aee76b8f939ddf5705b98f771b7b3a226ac605475824e09275b68f3951df4a3fb1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_TASK_ACTION_CLR</span></span></span><a class="headerlink" href="#_CPPv4N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_CLRE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clear the GPIO level to low </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_TOGE">
+<span id="_CPPv3N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_TOGE"></span><span id="_CPPv2N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_TOGE"></span><span class="target" id="gpio__etm_8h_1aee76b8f939ddf5705b98f771b7b3a226a73fd504277e8c2a1f870b2fb12dd9f46"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">GPIO_ETM_TASK_ACTION_TOG</span></span></span><a class="headerlink" href="#_CPPv4N22gpio_etm_task_action_t24GPIO_ETM_TASK_ACTION_TOGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Toggle the GPIO level </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id9">
+<h3>Header File<a class="headerlink" href="#id9" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_system/include/esp_systick_etm.h">components/esp_system/include/esp_systick_etm.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_systick_etm.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id10">
+<h3>Functions<a class="headerlink" href="#id10" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431esp_systick_new_etm_alarm_eventiP22esp_etm_event_handle_t">
+<span id="_CPPv331esp_systick_new_etm_alarm_eventiP22esp_etm_event_handle_t"></span><span id="_CPPv231esp_systick_new_etm_alarm_eventiP22esp_etm_event_handle_t"></span><span id="esp_systick_new_etm_alarm_event__i.esp_etm_event_handle_tP"></span><span class="target" id="esp__systick__etm_8h_1afbda7614a826b6cfb28030b039d58ce4"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_systick_new_etm_alarm_event</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">core_id</span></span>, <a class="reference internal" href="#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431esp_systick_new_etm_alarm_eventiP22esp_etm_event_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the ETM event handle of systick hardware's alarm/heartbeat event. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The created ETM event object can be deleted later by calling <code class="docutils literal notranslate"><span class="pre">esp_etm_del_event</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>core_id</strong> -- <strong>[in]</strong> CPU core ID </p></li>
+<li><p><strong>out_event</strong> -- <strong>[out]</strong> Returned ETM event handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Success</p></li>
+<li><p>ESP_ERR_INVALID_ARG Parameter error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id11" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">1</a><span class="fn-bracket">]</span></span>
+<p>Different ESP chip series might have different numbers of ETM channels. For more details, please refer to <em>ESP32-P4 Technical Reference Manual</em> &gt; Chapter <strong>Event Task Matrix (ETM)</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#evntaskmatrix">PDF</a>]. The driver does not forbid you from applying for more channels, but it will return an error when all available hardware resources are used up. Please always check the return value when doing channel allocation (i.e., <a class="reference internal" href="#_CPPv419esp_etm_new_channelPK24esp_etm_channel_config_tP24esp_etm_channel_handle_t" title="esp_etm_new_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_etm_new_channel()</span></code></a>).</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Event Task Matrix (ETM) (api-reference/peripherals/etm)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Event Task Matrix (ETM) (api-reference/peripherals/etm)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="ecdsa.html" class="btn btn-neutral float-left" title="ECDSA Digital Signature Peripheral (ECDSA_DS)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="gpio.html" class="btn btn-neutral float-right" title="GPIO &amp; RTC GPIO" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wi-Fi Vendor Features - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-guides/wifi-driver/wifi-vendor-features.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-guides/wifi-driver/wifi-vendor-features';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Wi-Fi Security" href="../wifi-security.html" />
+    <link rel="prev" title="Wi-Fi Performance and Power Save" href="wifi-performance-and-power-save.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../app_trace.html">Application Level Tracing Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../startup.html">Application Startup Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt-architecture/index.html">Bluetooth<sup>®</sup> Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth<sup>®</sup> Low Energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esp-ble-mesh/ble-mesh-index.html">ESP-BLE-MESH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader.html">Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build-system-v2.html">Build System v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../coexist.html">RF Coexistence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../c.html">C Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus.html">C++ Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code-quality/index.html">Code Quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core_dump.html">Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../current-consumption-measurement-modules.html">Current Consumption Measurement of Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deep-sleep-stub.html">Deep-sleep Wake Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-handling.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esp-wifi-mesh.html">ESP-WIFI-MESH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fatal-errors.html">Fatal Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../file-system-considerations.html">File System Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware-abstraction.html">Hardware Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig/index.html">Project Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linker-script-generation.html">Linker Script Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../low-power-mode/index.html">Low Power Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lwip.html">lwIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory-types.html">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../openthread.html">OpenThread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../performance/index.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reproducible-builds.html">Reproducible Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../RF_calibration.html">RF Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdio.html">Standard I/O and Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread-local-storage.html">Thread Local Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-tests.html">Unit Testing in ESP32-C3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../host-apps.html">Running ESP-IDF Applications on Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb-serial-jtag-console.html">USB Serial/JTAG Controller Console</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Wi-Fi Driver</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="overview.html">Overview</a></li>
+<li class="toctree-l3"><a class="reference internal" href="station-scenarios.html">Station Scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-modes.html">Wi-Fi Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-mac-protocols.html">Wi-Fi MAC Protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-and-roaming.html">Security and Roaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-performance-and-power-save.html">Wi-Fi Performance and Power Save</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Wi-Fi Vendor Features</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#esp-wifi-mesh">ESP-WIFI-MESH</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-80211-packet-send">Wi-Fi 80211 Packet Send</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-vendor-ie-configuration">Wi-Fi Vendor IE Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-channel-state-information">Wi-Fi Channel State Information</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-channel-state-information-configure">Wi-Fi Channel State Information Configure</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-multiple-antennas">Wi-Fi Multiple Antennas</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi-security.html">Wi-Fi Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi-expansion.html">Wi-Fi Expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phy.html">PHY</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Guides</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Wi-Fi Driver</a></li>
+      <li class="breadcrumb-item active">Wi-Fi Vendor Features</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-guides/wifi-driver/wifi-vendor-features.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wi-fi-vendor-features">
+<h1>Wi-Fi Vendor Features<a class="headerlink" href="#wi-fi-vendor-features" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32c3/api-guides/wifi-driver/wifi-vendor-features.html">[中文]</a></p>
+<section id="esp-wifi-mesh">
+<h2>ESP-WIFI-MESH<a class="headerlink" href="#esp-wifi-mesh" title="Permalink to this heading"></a></h2>
+<p>For details, see the <a class="reference internal" href="../esp-wifi-mesh.html"><span class="doc">ESP-WIFI-MESH</span></a>.</p>
+</section>
+<section id="wi-fi-80211-packet-send">
+<h2>Wi-Fi 80211 Packet Send<a class="headerlink" href="#wi-fi-80211-packet-send" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> API can be used to:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Send the beacon, probe request, probe response, and action frame.</p></li>
+<li><p>Send the non-QoS data frame.</p></li>
+</ul>
+</div></blockquote>
+<p>It cannot be used for sending encrypted or QoS frames.</p>
+<section id="preconditions-of-using-esp-wifi-80211-tx">
+<h3>Preconditions of Using <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a><a class="headerlink" href="#preconditions-of-using-esp-wifi-80211-tx" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>The Wi-Fi mode is station, or AP, or station/AP.</p></li>
+<li><p>Either <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_promiscuous(true)</span></code>, or <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a>, or both of these APIs return <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a>. This is because Wi-Fi hardware must be initialized before <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> is called. In ESP32-C3, both <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_promiscuous(true)</span></code> and <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a> can trigger the initialization of Wi-Fi hardware.</p></li>
+<li><p>The parameters of <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> are hereby correctly provided.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="data-rate">
+<h3>Data Rate<a class="headerlink" href="#data-rate" title="Permalink to this heading"></a></h3>
+<blockquote>
+<div><ul class="simple">
+<li><p>The default data rate is 1 Mbps.</p></li>
+<li><p>Can set any rate through <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv429esp_wifi_config_80211_tx_rate16wifi_interface_t15wifi_phy_rate_t" title="esp_wifi_config_80211_tx_rate"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_config_80211_tx_rate()</span></code></a> API.</p></li>
+<li><p>Can set any bandwidth through <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_bandwidth16wifi_interface_t16wifi_bandwidth_t" title="esp_wifi_set_bandwidth"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_bandwidth()</span></code></a> API.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="side-effects-to-avoid-in-different-scenarios">
+<h3>Side-Effects to Avoid in Different Scenarios<a class="headerlink" href="#side-effects-to-avoid-in-different-scenarios" title="Permalink to this heading"></a></h3>
+<p>Theoretically, if the side-effects the API imposes on the Wi-Fi driver or other stations/APs are not considered, a raw 802.11 packet can be sent over the air with any destination MAC, any source MAC, any BSSID, or any other types of packet. However, robust or useful applications should avoid such side-effects. The table below provides some tips and recommendations on how to avoid the side-effects of <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> in different scenarios.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 16.7%" />
+<col style="width: 83.3%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Scenario</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>No Wi-Fi connection</p></td>
+<td><p>In this scenario, no Wi-Fi connection is set up, so there are no side-effects on the Wi-Fi driver. If <code class="docutils literal notranslate"><span class="pre">en_sys_seq==true</span></code>, the Wi-Fi driver is responsible for the sequence control. If <code class="docutils literal notranslate"><span class="pre">en_sys_seq==false</span></code>, the application needs to ensure that the buffer has the correct sequence.</p>
+<p>Theoretically, the MAC address can be any address. However, this may impact other stations/APs with the same MAC/BSSID.</p>
+<p>Side-effect example#1 The application calls <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> to send a beacon with BSSID == mac_x in AP mode, but the mac_x is not the MAC of the AP interface. Moreover, there is another AP, e.g., “other-AP”, whose BSSID is mac_x. If this happens, an “unexpected behavior” may occur, because the stations which connect to the “other-AP” cannot figure out whether the beacon is from the “other-AP” or the <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a>.</p>
+<p>To avoid the above-mentioned side-effects, it is recommended that:</p>
+<ul class="simple">
+<li><p>If <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> is called in station mode, the first MAC should be a multicast MAC or the exact target-device’s MAC, while the second MAC should be that of the station interface.</p></li>
+<li><p>If <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_80211_tx16wifi_interface_tPKvib" title="esp_wifi_80211_tx"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_80211_tx()</span></code></a> is called in AP mode, the first MAC should be a multicast MAC or the exact target-device’s MAC, while the second MAC should be that of the AP interface.</p></li>
+</ul>
+<p>The recommendations above are only for avoiding side-effects and can be ignored when there are good reasons.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Have Wi-Fi connection</p></td>
+<td><p>When the Wi-Fi connection is already set up, and the sequence is controlled by the application, the latter may impact the sequence control of the Wi-Fi connection as a whole. So, the <code class="docutils literal notranslate"><span class="pre">en_sys_seq</span></code> need to be true, otherwise <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code> is returned.</p>
+<p>The MAC-address recommendations in the “No Wi-Fi connection” scenario also apply to this scenario.</p>
+<p>If the Wi-Fi mode is station mode, the MAC address1 is the MAC of AP to which the station is connected, and the MAC address2 is the MAC of station interface, it is said that the packet is sent from the station to AP. Otherwise, if the Wi-Fi is in AP mode, the MAC address1 is the MAC of the station that connects to this AP, and the MAC address2 is the MAC of AP interface, it is said that the packet is sent from the AP to station. To avoid conflicting with Wi-Fi connections, the following checks are applied:</p>
+<ul class="simple">
+<li><p>If the packet type is data and is sent from the station to AP, the ToDS bit in IEEE 80211 frame control should be 1 and the FromDS bit should be 0. Otherwise, the packet will be discarded by Wi-Fi driver.</p></li>
+<li><p>If the packet type is data and is sent from the AP to station, the ToDS bit in IEEE 80211 frame control should be 0 and the FromDS bit should be 1. Otherwise, the packet will be discarded by Wi-Fi driver.</p></li>
+<li><p>If the packet is sent from station to AP or from AP to station, the Power Management, More Data, and Re-Transmission bits should be 0. Otherwise, the packet will be discarded by Wi-Fi driver.</p></li>
+</ul>
+<p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code> is returned if any check fails.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="wi-fi-vendor-ie-configuration">
+<h2>Wi-Fi Vendor IE Configuration<a class="headerlink" href="#wi-fi-vendor-ie-configuration" title="Permalink to this heading"></a></h2>
+<p>By default, all Wi-Fi management frames are processed by the Wi-Fi driver, and the application can ignore them. However, some applications may have to handle the beacon, probe request, probe response, and other management frames. For example, if you insert some vendor-specific IE into the management frames, it is only the management frames which contain this vendor-specific IE that will be processed. In ESP32-C3, <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_vendor_ieb21wifi_vendor_ie_type_t19wifi_vendor_ie_id_tPKv" title="esp_wifi_set_vendor_ie"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_vendor_ie()</span></code></a> and <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv425esp_wifi_set_vendor_ie_cb18esp_vendor_ie_cb_tPv" title="esp_wifi_set_vendor_ie_cb"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_vendor_ie_cb()</span></code></a> are responsible for this kind of tasks.</p>
+</section>
+<section id="wi-fi-channel-state-information">
+<h2>Wi-Fi Channel State Information<a class="headerlink" href="#wi-fi-channel-state-information" title="Permalink to this heading"></a></h2>
+<p>Channel state information (CSI) refers to the channel information of a Wi-Fi connection. In ESP32-C3, this information consists of channel frequency responses of sub-carriers and is estimated when packets are received from the transmitter. Each channel frequency response of sub-carrier is recorded by two bytes of signed characters. The first one is imaginary part and the second one is real part. There are up to three fields of channel frequency responses according to the type of received packet. They are legacy long training field (LLTF), high throughput LTF (HT-LTF), and space time block code HT-LTF (STBC-HT-LTF). For different types of packets which are received on channels with different state, the sub-carrier index and total bytes of signed characters of CSI are shown in the following table.</p>
+<table class="docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p>channel</p></td>
+<td><p>secondary channel</p></td>
+<td colspan="3"><p>none</p></td>
+<td colspan="5"><p>below</p></td>
+<td colspan="5"><p>above</p></td>
+</tr>
+<tr class="row-even"><td rowspan="3"><p>packet</p>
+<p>information</p>
+</td>
+<td><p>signal mode</p></td>
+<td><p>non HT</p></td>
+<td colspan="2"><p>HT</p></td>
+<td><p>non HT</p></td>
+<td colspan="4"><p>HT</p></td>
+<td><p>non HT</p></td>
+<td colspan="4"><p>HT</p></td>
+</tr>
+<tr class="row-odd"><td><p>channel bandwidth</p></td>
+<td><p>20 MHz</p></td>
+<td colspan="2"><p>20 MHz</p></td>
+<td><p>20 MHz</p></td>
+<td colspan="2"><p>20 MHz</p></td>
+<td colspan="2"><p>40 MHz</p></td>
+<td><p>20 MHz</p></td>
+<td colspan="2"><p>20 MHz</p></td>
+<td colspan="2"><p>40 MHz</p></td>
+</tr>
+<tr class="row-even"><td><p>STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>STBC</p></td>
+<td><p>non STBC</p></td>
+<td><p>STBC</p></td>
+</tr>
+<tr class="row-odd"><td rowspan="3"><p>sub-carrier</p>
+<p>index</p>
+</td>
+<td><p>LLTF</p></td>
+<td><p>0~31, -32~-1</p></td>
+<td><p>0~31, -32~-1</p></td>
+<td><p>0~31, -32~-1</p></td>
+<td><p>0~63</p></td>
+<td><p>0~63</p></td>
+<td><p>0~63</p></td>
+<td><p>0~63</p></td>
+<td><p>0~63</p></td>
+<td><p>-64~-1</p></td>
+<td><p>-64~-1</p></td>
+<td><p>-64~-1</p></td>
+<td><p>-64~-1</p></td>
+<td><p>-64~-1</p></td>
+</tr>
+<tr class="row-even"><td><p>HT-LTF</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0~31, -32~-1</p></td>
+<td><p>0~31, -32~-1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0~63</p></td>
+<td><p>0~62</p></td>
+<td><p>0~63, -64~-1</p></td>
+<td><p>0~60, -60~-1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>-64~-1</p></td>
+<td><p>-62~-1</p></td>
+<td><p>0~63, -64~-1</p></td>
+<td><p>0~60, -60~-1</p></td>
+</tr>
+<tr class="row-odd"><td><p>STBC-HT-LTF</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0~31, -32~-1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0~62</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0~60, -60~-1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>-62~-1</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>0~60, -60~-1</p></td>
+</tr>
+<tr class="row-even"><td colspan="2"><p>total bytes</p></td>
+<td><p>128</p></td>
+<td><p>256</p></td>
+<td><p>384</p></td>
+<td><p>128</p></td>
+<td><p>256</p></td>
+<td><p>380</p></td>
+<td><p>384</p></td>
+<td><p>612</p></td>
+<td><p>128</p></td>
+<td><p>256</p></td>
+<td><p>376</p></td>
+<td><p>384</p></td>
+<td><p>612</p></td>
+</tr>
+</tbody>
+</table>
+<p>All of the information in the table can be found in the structure wifi_csi_info_t.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Secondary channel refers to secondary_channel field of rx_ctrl field.</p></li>
+<li><p>Signal mode of packet refers to sig_mode field of rx_ctrl field.</p></li>
+<li><p>Channel bandwidth refers to cwb field of rx_ctrl field.</p></li>
+<li><p>STBC refers to stbc field of rx_ctrl field.</p></li>
+<li><p>Total bytes refers to len field.</p></li>
+<li><p>The CSI data corresponding to each Long Training Field (LTF) type is stored in a buffer starting from the buf field. Each item is stored as two bytes: imaginary part followed by real part. The order of each item is the same as the sub-carrier in the table. The order of LTF is: LLTF, HT-LTF, STBC-HT-LTF. However, all 3 LTFs may not be present, depending on the channel and packet information (see above).</p></li>
+<li><p>If first_word_invalid field of <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv415wifi_csi_info_t" title="wifi_csi_info_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">wifi_csi_info_t</span></code></a> is true, it means that the first four bytes of CSI data is invalid due to a hardware limitation in ESP32-C3.</p></li>
+<li><p>More information like RSSI, noise floor of RF, receiving time and antenna is in the rx_ctrl field.</p></li>
+</ul>
+</div></blockquote>
+<p>When imaginary part and real part data of sub-carrier are used, please refer to the table below.</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>PHY standard</p></th>
+<th class="head"><p>Sub-carrier range</p></th>
+<th class="head"><p>Pilot sub-carrier</p></th>
+<th class="head"><p>Sub-carrier (total/data)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>802.11a/g</p></td>
+<td><p>-26 to +26</p></td>
+<td><p>-21, -7, +7, +21</p></td>
+<td><p>52 total, 48 usable</p></td>
+</tr>
+<tr class="row-odd"><td><p>802.11n, 20 MHz</p></td>
+<td><p>-28 to +28</p></td>
+<td><p>-21, -7, +7, +21</p></td>
+<td><p>56 total, 52 usable</p></td>
+</tr>
+<tr class="row-even"><td><p>802.11n, 40 MHz</p></td>
+<td><p>-57 to +57</p></td>
+<td><p>-53, -25, -11, +11, +25, +53</p></td>
+<td><p>114 total, 108 usable</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>For STBC packet, CSI is provided for every space-time stream without CSD (cyclic shift delay). As each cyclic shift on the additional chains shall be -200 ns, only the CSD angle of first space-time stream is recorded in sub-carrier 0 of HT-LTF and STBC-HT-LTF for there is no channel frequency response in sub-carrier 0. CSD[10:0] is 11 bits, ranging from -pi to pi.</p></li>
+<li><p>If LLTF, HT-LTF, or STBC-HT-LTF is not enabled by calling API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv423esp_wifi_set_csi_configPK17wifi_csi_config_t" title="esp_wifi_set_csi_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_csi_config()</span></code></a>, the total bytes of CSI data will be fewer than that in the table. For example, if LLTF and HT-LTF is not enabled and STBC-HT-LTF is enabled, when a packet is received with the condition above/HT/40MHz/STBC, the total bytes of CSI data is 244 ((61 + 60) * 2 + 2 = 244. The result is aligned to four bytes, and the last two bytes are invalid).</p></li>
+</ul>
+</div>
+</section>
+<section id="wi-fi-channel-state-information-configure">
+<h2>Wi-Fi Channel State Information Configure<a class="headerlink" href="#wi-fi-channel-state-information-configure" title="Permalink to this heading"></a></h2>
+<p>To use Wi-Fi CSI, the following steps need to be done.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Select Wi-Fi CSI in menuconfig. Go to <code class="docutils literal notranslate"><span class="pre">Menuconfig</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Components</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Wi-Fi</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Wi-Fi</span> <span class="pre">CSI</span> <span class="pre">(Channel</span> <span class="pre">State</span> <span class="pre">Information)</span></code>.</p></li>
+<li><p>Set CSI receiving callback function by calling API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_csi_rx_cb13wifi_csi_cb_tPv" title="esp_wifi_set_csi_rx_cb"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_csi_rx_cb()</span></code></a>.</p></li>
+<li><p>Configure CSI by calling API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv423esp_wifi_set_csi_configPK17wifi_csi_config_t" title="esp_wifi_set_csi_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_csi_config()</span></code></a>.</p></li>
+<li><p>Enable CSI by calling API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_set_csib" title="esp_wifi_set_csi"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_csi()</span></code></a>.</p></li>
+</ul>
+</div></blockquote>
+<p>The CSI receiving callback function runs from Wi-Fi task. So, do not do lengthy operations in the callback function. Instead, post necessary data to a queue and handle it from a lower priority task. Because station does not receive any packet when it is disconnected and only receives packets from AP when it is connected, it is suggested to enable sniffer mode to receive more CSI data by calling <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv424esp_wifi_set_promiscuousb" title="esp_wifi_set_promiscuous"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_promiscuous()</span></code></a>.</p>
+</section>
+<section id="wi-fi-multiple-antennas">
+<h2>Wi-Fi Multiple Antennas<a class="headerlink" href="#wi-fi-multiple-antennas" title="Permalink to this heading"></a></h2>
+<p>Please refer to the <a class="reference internal" href="../phy.html"><span class="doc">PHY</span></a>.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Wi-Fi Vendor Features (api-guides/wifi-driver/wifi-vendor-features)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Wi-Fi Vendor Features (api-guides/wifi-driver/wifi-vendor-features)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="wifi-performance-and-power-save.html" class="btn btn-neutral float-left" title="Wi-Fi Performance and Power Save" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wifi-security.html" class="btn btn-neutral float-right" title="Wi-Fi Security" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

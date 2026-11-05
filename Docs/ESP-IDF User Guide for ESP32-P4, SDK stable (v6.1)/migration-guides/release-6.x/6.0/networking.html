@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Networking - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/migration-guides/release-6.x/6.0/networking.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'migration-guides/release-6.x/6.0/networking';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Peripherals" href="peripherals.html" />
+    <link rel="prev" title="Build System" href="build-system.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#esp-idf-5-x-migration-guide">ESP-IDF 5.x Migration Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#esp-idf-6-x-migration-guide">ESP-IDF 6.x Migration Guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Migration from 5.5 to 6.0</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Networking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="peripherals.html">Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="provisioning.html">Provisioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="system.html">System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toolchain.html">Toolchain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../6.1/index.html">Migration from 6.0 to 6.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Migration Guides</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Migration from 5.5 to 6.0</a></li>
+      <li class="breadcrumb-item active">Networking</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/migration-guides/release-6.x/6.0/networking.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="networking">
+<h1>Networking<a class="headerlink" href="#networking" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32p4/migration-guides/release-6.x/6.0/networking.html">[中文]</a></p>
+<section id="ethernet">
+<h2>Ethernet<a class="headerlink" href="#ethernet" title="Permalink to this heading"></a></h2>
+<section id="esp-eth-phy-802-3-reset-hw-api-changes">
+<h3><code class="docutils literal notranslate"><span class="pre">esp_eth_phy_802_3_reset_hw()</span></code> API Changes<a class="headerlink" href="#esp-eth-phy-802-3-reset-hw-api-changes" title="Permalink to this heading"></a></h3>
+<p>This change only applies if you maintain your own Ethernet PHY driver based on <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_eth/src/phy/esp_eth_phy_802_3.c">esp_eth/src/phy/esp_eth_phy_802_3.c</a> common functions. The <a class="reference internal" href="../../../api-reference/network/esp_eth.html#_CPPv426esp_eth_phy_802_3_reset_hwP11phy_802_3_t" title="esp_eth_phy_802_3_reset_hw"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_802_3_reset_hw()</span></code></a> API accepts only one parameter now and resets the Ethernet PHY with internal timing configuration which is defined during initialization. Previously, the API required a <code class="docutils literal notranslate"><span class="pre">reset_assert_us</span></code> parameter to specify the reset pin assertion time. This parameter has been removed.</p>
+<p>Usage example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_eth_phy_802_3_reset_hw</span><span class="p">(</span><span class="n">phy_802_3</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="removed-rmii-clock-kconfig-options">
+<h3>Removed RMII Clock Kconfig Options<a class="headerlink" href="#removed-rmii-clock-kconfig-options" title="Permalink to this heading"></a></h3>
+<p>Removed the following RMII clock Kconfig options from <cite>components/esp_eth</cite>. Clock configuration is now handled exclusively through EMAC config structures.</p>
+<p><strong>Removed Options</strong>:
+- <cite>ETH_PHY_INTERFACE_RMII</cite>, <cite>ETH_RMII_CLK_INPUT</cite>, <cite>ETH_RMII_CLK_OUTPUT</cite>
+- <cite>ETH_RMII_CLK_IN_GPIO</cite>, <cite>ETH_RMII_CLK_OUTPUT_GPIO0</cite>, <cite>ETH_RMII_CLK_OUT_GPIO</cite></p>
+<p><strong>Migration</strong>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Before: Configuration via Kconfig</span>
+<span class="c1">// CONFIG_ETH_RMII_CLK_INPUT=y</span>
+
+<span class="c1">// After: Explicit configuration in code</span>
+<span class="n">eth_esp32_emac_config_t</span><span class="w"> </span><span class="n">emac_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ETH_ESP32_EMAC_DEFAULT_CONFIG</span><span class="p">();</span>
+<span class="n">emac_config</span><span class="p">.</span><span class="n">clock_config</span><span class="p">.</span><span class="n">rmii</span><span class="p">.</span><span class="n">clock_mode</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EMAC_CLK_OUT</span><span class="p">;</span><span class="w">  </span><span class="c1">// or EMAC_CLK_EXT_IN</span>
+<span class="n">emac_config</span><span class="p">.</span><span class="n">clock_config</span><span class="p">.</span><span class="n">rmii</span><span class="p">.</span><span class="n">clock_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w">  </span><span class="c1">// GPIO0 for ESP32</span>
+</pre></div>
+</div>
+<p><strong>Impact</strong>: Applications using <code class="docutils literal notranslate"><span class="pre">ETH_ESP32_EMAC_DEFAULT_CONFIG()</span></code> continue to work. Custom clock configurations must be set explicitly in the EMAC config structure or use the <a class="reference external" href="https://components.espressif.com/components/espressif/ethernet_init">Ethernet Init component</a>.</p>
+</section>
+<section id="ethernet-phy-and-ethernet-spi-module-drivers-are-moved-from-esp-idf-to-external-repo">
+<h3>Ethernet PHY and Ethernet SPI Module drivers are moved from ESP-IDF to external repo<a class="headerlink" href="#ethernet-phy-and-ethernet-spi-module-drivers-are-moved-from-esp-idf-to-external-repo" title="Permalink to this heading"></a></h3>
+<p>The Ethernet PHY and Ethernet SPI Module drivers have been removed from ESP-IDF and have been migrated to <a class="reference external" href="https://github.com/espressif/esp-eth-drivers">esp-eth-drivers</a> repository. If you are using these drivers, you need to use the drivers as component in your project. The drivers are now available in the <a class="reference external" href="https://components.espressif.com/">ESP Component Registry</a>.</p>
+<p><strong>Removed APIs</strong>:
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_ip101()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_lan87xx()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_rtl8201()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_dp83848()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_ksz80xx()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_mac_new_dm9051()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_dm9051()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_mac_new_ksz8851snl()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_ksz8851snl()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_mac_new_w5500()</span></code>
+- <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_eth_phy_new_w5500()</span></code></p>
+<p><strong>Impact</strong>: Applications using Ethernet PHY and Ethernet SPI Module drivers that used to be part of ESP-IDF will no longer work.</p>
+<p><strong>Migration</strong>:</p>
+<p>Add driver component from <a class="reference external" href="https://components.espressif.com/">IDF Component Manager</a> to your project using <cite>idf.py add-dependency</cite> and include <cite>esp_eth_phy_xxxx.h</cite> and <cite>esp_eth_mac_xxxx.h</cite> or use the <a class="reference external" href="https://components.espressif.com/components/espressif/ethernet_init">Ethernet Init component</a>.</p>
+</section>
+<section id="ptp-api-changes">
+<h3>PTP API Changes<a class="headerlink" href="#ptp-api-changes" title="Permalink to this heading"></a></h3>
+<p>Ethernet <cite>esp_eth_ioctl</cite> PTP configuration and control commands have been removed.</p>
+<p><strong>Removed ioctl Commands</strong>:
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_PTP_ENABLE</span></code>
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_S_PTP_TIME</span></code>
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_G_PTP_TIME</span></code>
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_ADJ_PTP_FREQ</span></code>
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_ADJ_PTP_TIME</span></code>
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_S_TARGET_TIME</span></code>
+- <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">eth_mac_esp_io_cmd_t::ETH_MAC_ESP_CMD_S_TARGET_CB</span></code></p>
+<p><strong>Impact</strong>: Applications using the removed ioctl commands will no longer work.</p>
+<p><strong>Migration</strong>:</p>
+<p>Use the new PTP API instead.</p>
+</section>
+</section>
+<section id="esp-netif">
+<h2>ESP-NETIF<a class="headerlink" href="#esp-netif" title="Permalink to this heading"></a></h2>
+<section id="removed-deprecated-esp-netif-next">
+<h3>Removed Deprecated <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_next()</span></code><a class="headerlink" href="#removed-deprecated-esp-netif-next" title="Permalink to this heading"></a></h3>
+<p>The deprecated iteration helper <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_next()</span></code> has been removed from <a class="reference internal" href="../../../api-reference/network/esp_netif.html"><span class="doc">ESP-NETIF</span></a>. This API was inherently unsafe because it did not lock the interface list or the TCP/IP context during iteration.</p>
+<p>Use one of the following alternatives:</p>
+<ul class="simple">
+<li><p>Directly call <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv421esp_netif_next_unsafeP11esp_netif_t" title="esp_netif_next_unsafe"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_next_unsafe()</span></code></a> only in contexts you fully control, or inside <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv420esp_netif_tcpip_exec21esp_netif_callback_fnPv" title="esp_netif_tcpip_exec"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_tcpip_exec()</span></code></a> for safe execution within the TCP/IP context.</p></li>
+<li><p>Use <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv417esp_netif_find_if26esp_netif_find_predicate_tPv" title="esp_netif_find_if"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_find_if()</span></code></a> with a predicate to search for specific interfaces without manual iteration.</p></li>
+</ul>
+<section id="migration">
+<h4>Migration<a class="headerlink" href="#migration" title="Permalink to this heading"></a></h4>
+<p>Before:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_netif_t</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_netif_next</span><span class="p">(</span><span class="n">it</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// use "it"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>After (iterate unsafely in a controlled context):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_netif_t</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_netif_next_unsafe</span><span class="p">(</span><span class="n">it</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// use "it"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Recommended (iterate within TCP/IP context):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">iterate_netifs</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_netif_t</span><span class="w"> </span><span class="o">*</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="k">while</span><span class="w"> </span><span class="p">((</span><span class="n">it</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_netif_next_unsafe</span><span class="p">(</span><span class="n">it</span><span class="p">))</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="c1">// use "it"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Execute iteration safely in TCP/IP context</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_netif_tcpip_exec</span><span class="p">(</span><span class="n">iterate_netifs</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>Alternative (find with predicate):</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">match_by_key</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="n">esp_netif_t</span><span class="w"> </span><span class="o">*</span><span class="n">netif</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">wanted</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">ctx</span><span class="p">;</span>
+<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_netif_get_ifkey</span><span class="p">(</span><span class="n">netif</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">key</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">strcmp</span><span class="p">(</span><span class="n">key</span><span class="p">,</span><span class="w"> </span><span class="n">wanted</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">esp_netif_t</span><span class="w"> </span><span class="o">*</span><span class="n">target</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_netif_find_if</span><span class="p">(</span><span class="n">match_by_key</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="s">"WIFI_STA_DEF"</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">target</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// use "target"</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="dhcp-server-dns-option-behavior">
+<h3>DHCP Server DNS Option Behavior<a class="headerlink" href="#dhcp-server-dns-option-behavior" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">LWIP_DHCPS_ADD_DNS</span></code> macro has been removed.</p>
+<p>Previously, when running a DHCP server on SoftAP, if no DNS offer option was set, the server IP address was automatically advertised as the DNS server.</p>
+<p><strong>Current behavior:</strong></p>
+<p>From this release onward, the DHCP server includes DNS information in its offers only when explicitly configured using <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv422esp_netif_dhcps_optionP11esp_netif_t28esp_netif_dhcp_option_mode_t26esp_netif_dhcp_option_id_tPv8uint32_t" title="esp_netif_dhcps_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_dhcps_option()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">ESP_NETIF_DOMAIN_NAME_SERVER</span></code> option. In that case, the currently configured main and/or backup DNS addresses for the SoftAP interface are sent to clients.</p>
+<p>If the option is not enabled, the DHCP server's own IP address is sent as the DNS server, which preserves the previous default behavior.</p>
+<p><strong>Migration:</strong></p>
+<p>If applications rely on custom DNS settings, developers should:</p>
+<ol class="arabic simple">
+<li><p>Enable the DHCP server to include DNS information in its offers using <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv422esp_netif_dhcps_optionP11esp_netif_t28esp_netif_dhcp_option_mode_t26esp_netif_dhcp_option_id_tPv8uint32_t" title="esp_netif_dhcps_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_dhcps_option()</span></code></a> with the <code class="docutils literal notranslate"><span class="pre">ESP_NETIF_DOMAIN_NAME_SERVER</span></code> option.</p></li>
+<li><p>Configure one or more DNS server addresses for the SoftAP interface using <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv422esp_netif_set_dns_infoP11esp_netif_t20esp_netif_dns_type_tP20esp_netif_dns_info_t" title="esp_netif_set_dns_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_set_dns_info()</span></code></a>.</p></li>
+<li><p>If no DNS information should be sent at all, configure <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv422esp_netif_dhcps_optionP11esp_netif_t28esp_netif_dhcp_option_mode_t26esp_netif_dhcp_option_id_tPv8uint32_t" title="esp_netif_dhcps_option"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_dhcps_option()</span></code></a> but set the DNS server address to <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code> using <a class="reference internal" href="../../../api-reference/network/esp_netif_programming.html#_CPPv422esp_netif_set_dns_infoP11esp_netif_t20esp_netif_dns_type_tP20esp_netif_dns_info_t" title="esp_netif_set_dns_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_netif_set_dns_info()</span></code></a>.</p></li>
+</ol>
+<p>This allows developers to:</p>
+<ul class="simple">
+<li><p>replicate the old behavior (advertising the SoftAP IP),</p></li>
+<li><p>provide custom DNS servers (for example, public resolvers), or</p></li>
+<li><p>suppress DNS information entirely by setting the DNS server to <code class="docutils literal notranslate"><span class="pre">0.0.0.0</span></code>.</p></li>
+</ul>
+</section>
+</section>
+<section id="lwip">
+<h2>LWIP<a class="headerlink" href="#lwip" title="Permalink to this heading"></a></h2>
+<p>The lwIP TCP/IP thread name has changed from &quot;tiT&quot; to &quot;tcpip&quot;.</p>
+<section id="sntp-header-file-removal">
+<h3>SNTP Header File Removal<a class="headerlink" href="#sntp-header-file-removal" title="Permalink to this heading"></a></h3>
+<p>The deprecated <code class="docutils literal notranslate"><span class="pre">sntp.h</span></code> header file has been removed in IDF v6.0. Applications should now include <code class="docutils literal notranslate"><span class="pre">esp_sntp.h</span></code> instead of <code class="docutils literal notranslate"><span class="pre">sntp.h</span></code> for SNTP functionality.</p>
+</section>
+<section id="ping-api-removal">
+<h3>Ping API Removal<a class="headerlink" href="#ping-api-removal" title="Permalink to this heading"></a></h3>
+<p>The deprecated ping APIs and headers have been removed in IDF v6.0:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">esp_ping.h</span></code> header file has been removed</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ping.h</span></code> header file has been removed</p></li>
+<li><p>Functions <code class="docutils literal notranslate"><span class="pre">ping_init()</span></code>, <code class="docutils literal notranslate"><span class="pre">ping_deinit()</span></code>, <code class="docutils literal notranslate"><span class="pre">esp_ping_set_target()</span></code>, <code class="docutils literal notranslate"><span class="pre">esp_ping_get_target()</span></code>, and <code class="docutils literal notranslate"><span class="pre">esp_ping_result()</span></code> have been removed</p></li>
+</ul>
+<p>Applications should now use the socket-based ping API from <code class="docutils literal notranslate"><span class="pre">ping/ping_sock.h</span></code>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"ping/ping_sock.h"</span>
+<span class="c1">// Create ping session</span>
+<span class="n">esp_ping_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ESP_PING_DEFAULT_CONFIG</span><span class="p">();</span>
+<span class="n">config</span><span class="p">.</span><span class="n">target_addr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">target_ip</span><span class="p">;</span>
+<span class="n">esp_ping_callbacks_t</span><span class="w"> </span><span class="n">cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_ping_success</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_ping_success</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_ping_timeout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_ping_timeout</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_ping_end</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">on_ping_end</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">esp_ping_handle_t</span><span class="w"> </span><span class="n">ping</span><span class="p">;</span>
+<span class="n">esp_ping_new_session</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cbs</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ping</span><span class="p">);</span>
+<span class="n">esp_ping_start</span><span class="p">(</span><span class="n">ping</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>For a complete example, see <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/icmp_echo">protocols/icmp_echo</a>.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Networking (migration-guides/release-6.x/6.0/networking)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Networking (migration-guides/release-6.x/6.0/networking)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="build-system.html" class="btn btn-neutral float-left" title="Build System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="peripherals.html" class="btn btn-neutral float-right" title="Peripherals" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RGB Interfaced LCD - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/lcd/rgb_lcd.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/lcd/rgb_lcd';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="MIPI DSI Interfaced LCD" href="dsi_lcd.html" />
+    <link rel="prev" title="I80 Interfaced LCD" href="i80_lcd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../key_manager.html">Key Manager</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">LCD</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#lcd-control-panel-operations">LCD Control Panel Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#lcd-data-panel-operations">LCD Data Panel Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#advanced-frame-buffer-debugging">Advanced Frame Buffer Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#steps-to-add-manufacturer-specific-initialization">Steps to Add Manufacturer Specific Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Peripherals API</a></li>
+          <li class="breadcrumb-item"><a href="index.html">LCD</a></li>
+      <li class="breadcrumb-item active">RGB Interfaced LCD</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/lcd/rgb_lcd.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="rgb-interfaced-lcd">
+<h1>RGB Interfaced LCD<a class="headerlink" href="#rgb-interfaced-lcd" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/lcd/rgb_lcd.html">[中文]</a></p>
+<p>RGB LCD panel is created by <a class="reference internal" href="#_CPPv421esp_lcd_new_rgb_panelPK26esp_lcd_rgb_panel_config_tP22esp_lcd_panel_handle_t" title="esp_lcd_new_rgb_panel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel()</span></code></a>, with various configurations specified in <a class="reference internal" href="#_CPPv426esp_lcd_rgb_panel_config_t" title="esp_lcd_rgb_panel_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t</span></code></a>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t7clk_srcE" title="esp_lcd_rgb_panel_config_t::clk_src"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::clk_src</span></code></a> selects the clock source of the RGB LCD controller. The available clock sources are listed in <a class="reference internal" href="index.html#_CPPv418lcd_clock_source_t" title="lcd_clock_source_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">lcd_clock_source_t</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t10data_widthE" title="esp_lcd_rgb_panel_config_t::data_width"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::data_width</span></code></a> sets number of data lines consumed by the RGB interface. It can be 8/16/24.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::bits_per_pixel</span></code> specifies the number of bits per pixel. This differs from <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t10data_widthE" title="esp_lcd_rgb_panel_config_t::data_width"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::data_width</span></code></a>. By default, if this field is set to 0, the driver will automatically match the bpp to the value set in <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t10data_widthE" title="esp_lcd_rgb_panel_config_t::data_width"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::data_width</span></code></a>. However, in some scenarios, these values need to be different. For instance, a serial RGB interfaced LCD might only require <code class="docutils literal notranslate"><span class="pre">8</span></code> data lines, but the color depth could be <code class="docutils literal notranslate"><span class="pre">RGB888</span></code>, meaning <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::bits_per_pixel</span></code> should be set to <code class="docutils literal notranslate"><span class="pre">24</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14hsync_gpio_numE" title="esp_lcd_rgb_panel_config_t::hsync_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::hsync_gpio_num</span></code></a>, <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14vsync_gpio_numE" title="esp_lcd_rgb_panel_config_t::vsync_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::vsync_gpio_num</span></code></a>, <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t11de_gpio_numE" title="esp_lcd_rgb_panel_config_t::de_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::de_gpio_num</span></code></a>, <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t13pclk_gpio_numE" title="esp_lcd_rgb_panel_config_t::pclk_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::pclk_gpio_num</span></code></a>, <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t13disp_gpio_numE" title="esp_lcd_rgb_panel_config_t::disp_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::disp_gpio_num</span></code></a> and <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14data_gpio_numsE" title="esp_lcd_rgb_panel_config_t::data_gpio_nums"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::data_gpio_nums</span></code></a> are GPIO pins consumed by the RGB LCD controller. If any of them are not used, please set them to <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14dma_burst_sizeE" title="esp_lcd_rgb_panel_config_t::dma_burst_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::dma_burst_size</span></code></a> specifies the size of the DMA transfer burst. Ensure this value is a power of 2.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE" title="esp_lcd_rgb_panel_config_t::bounce_buffer_size_px"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::bounce_buffer_size_px</span></code></a> specifies the size of the bounce buffer. This is required only for the &quot;bounce buffer&quot; mode. For more details, see <a class="reference internal" href="#bounce-buffer-with-single-psram-frame-buffer"><span class="std std-ref">Bounce Buffer with Single PSRAM Frame Buffer</span></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t7timingsE" title="esp_lcd_rgb_panel_config_t::timings"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::timings</span></code></a> specifies the timing parameters unique to the LCD panel. These parameters, detailed in <a class="reference internal" href="#_CPPv420esp_lcd_rgb_timing_t" title="esp_lcd_rgb_timing_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_rgb_timing_t</span></code></a>, include the LCD resolution and blanking porches. Ensure they are set according to your LCD's datasheet.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t11fb_in_psramE" title="esp_lcd_rgb_panel_config_t::fb_in_psram"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::fb_in_psram</span></code></a> determines if the frame buffer should be allocated from PSRAM. For further details, see <a class="reference internal" href="#single-frame-buffer-in-psram"><span class="std std-ref">Single Frame Buffer in PSRAM</span></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t7num_fbsE" title="esp_lcd_rgb_panel_config_t::num_fbs"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::num_fbs</span></code></a> specifies how many frame buffers the driver should allocate. For backward compatibility, setting this to <code class="docutils literal notranslate"><span class="pre">0</span></code> will allocate a single frame buffer. If you don't want to allocate any frame buffer, use <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t5no_fbE" title="esp_lcd_rgb_panel_config_t::no_fb"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::no_fb</span></code></a> instead.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t5no_fbE" title="esp_lcd_rgb_panel_config_t::no_fb"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::no_fb</span></code></a> determines whether frame buffer will be allocated. When it is set, no frame buffer will be allocated. This is also called the <a class="reference internal" href="#bounce-buffer-only"><span class="std std-ref">Bounce Buffer Only</span></a> mode.</p></li>
+</ul>
+</div></blockquote>
+<section id="gpio-matrix-and-iomux-pins">
+<h2>GPIO Matrix and IOMUX Pins<a class="headerlink" href="#gpio-matrix-and-iomux-pins" title="Permalink to this heading"></a></h2>
+<p>On ESP32-P4, RGB signals are routed through the GPIO matrix.</p>
+</section>
+<section id="rgb-lcd-frame-buffer-operation-modes">
+<h2>RGB LCD Frame Buffer Operation Modes<a class="headerlink" href="#rgb-lcd-frame-buffer-operation-modes" title="Permalink to this heading"></a></h2>
+<p>Most of the time, the RGB LCD driver should maintain at least one screen sized frame buffer. According to the number and location of the frame buffer, the driver provides several different buffer modes.</p>
+<section id="single-frame-buffer-in-internal-memory">
+<h3>Single Frame Buffer in Internal Memory<a class="headerlink" href="#single-frame-buffer-in-internal-memory" title="Permalink to this heading"></a></h3>
+<p>This is the default and simplest and you do not have to specify flags or bounce buffer options. A frame buffer is allocated from the internal memory. The frame data is read out by DMA to the LCD verbatim. It needs no CPU intervention to function, but it has the downside that it uses up a fair bit of the limited amount of internal memory.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">panel_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_rgb_panel_config_t</span><span class="w"> </span><span class="n">panel_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="c1">// RGB565 in parallel mode, thus 16 bits in width</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">disp_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DISP_EN</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pclk_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_PCLK</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">vsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_VSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">hsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_HSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">de_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_gpio_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA2</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// other GPIOs</span>
+<span class="w">        </span><span class="c1">// The number of GPIOs here should be the same to the value of "data_width" above</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// The timing parameters should refer to your LCD spec</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PIXEL_CLOCK_HZ</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_V_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_rgb_panel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">panel_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="single-frame-buffer-in-psram">
+<span id="id1"></span><h3>Single Frame Buffer in PSRAM<a class="headerlink" href="#single-frame-buffer-in-psram" title="Permalink to this heading"></a></h3>
+<p>If you have PSRAM and prefer to store the frame buffer there instead of using the limited internal memory, the LCD peripheral can utilize EDMA to fetch frame data directly from PSRAM, bypassing the internal cache. This can be enabled by setting <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t11fb_in_psramE" title="esp_lcd_rgb_panel_config_t::fb_in_psram"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::fb_in_psram</span></code></a> to <code class="docutils literal notranslate"><span class="pre">true</span></code>. The trade-off is that when both the CPU and EDMA need access to PSRAM, the bandwidth is <strong>shared</strong> between them, meaning EDMA and the CPU each get half. If other peripherals are also using EDMA, a high pixel clock might cause LCD peripheral starvation, leading to display corruption. However, with a sufficiently low pixel clock, this approach minimizes CPU intervention.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">panel_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_rgb_panel_config_t</span><span class="w"> </span><span class="n">panel_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="c1">// RGB565 in parallel mode, thus 16 bits in width</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">disp_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DISP_EN</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pclk_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_PCLK</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">vsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_VSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">hsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_HSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">de_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_gpio_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA2</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// other GPIOs</span>
+<span class="w">        </span><span class="c1">// The number of GPIOs here should be the same to the value of "data_width" above</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// The timing parameters should refer to your LCD spec</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PIXEL_CLOCK_HZ</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_V_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">flags</span><span class="p">.</span><span class="n">fb_in_psram</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// allocate frame buffer from PSRAM</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_rgb_panel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">panel_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="double-frame-buffer-in-psram">
+<span id="id2"></span><h3>Double Frame Buffer in PSRAM<a class="headerlink" href="#double-frame-buffer-in-psram" title="Permalink to this heading"></a></h3>
+<p>To prevent tearing effects, the simplest method is to use two screen-sized frame buffers. Given the limited internal memory, these buffers must be allocated from PSRAM. This ensures that the frame buffer being written to by the CPU and the one being read by the EDMA are always distinct and independent. The EDMA will only switch between the two buffers once the current write operation is complete and the frame has been fully transmitted to the LCD. The main drawback of this approach is the need to maintain synchronization between the two frame buffers.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">panel_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_rgb_panel_config_t</span><span class="w"> </span><span class="n">panel_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="c1">// RGB565 in parallel mode, thus 16 bits in width</span>
+<span class="w">    </span><span class="p">.</span><span class="n">num_fbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">     </span><span class="c1">// allocate double frame buffer</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">disp_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DISP_EN</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pclk_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_PCLK</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">vsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_VSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">hsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_HSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">de_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_gpio_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA2</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// other GPIOs</span>
+<span class="w">        </span><span class="c1">// The number of GPIOs here should be the same to the value of "data_width" above</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// The timing parameters should refer to your LCD spec</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PIXEL_CLOCK_HZ</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_V_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">flags</span><span class="p">.</span><span class="n">fb_in_psram</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// allocate frame buffer from PSRAM</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_rgb_panel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">panel_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="user-custom-frame-buffer">
+<span id="id3"></span><h3>User Custom Frame Buffer<a class="headerlink" href="#user-custom-frame-buffer" title="Permalink to this heading"></a></h3>
+<p>User can provide their own frame buffer instead of letting the driver allocate it. In this mode, user needs to manage the lifecycle of the frame buffer by themselves.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">panel_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_rgb_panel_config_t</span><span class="w"> </span><span class="n">panel_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="c1">// RGB565 in parallel mode, thus 16 bits in width</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">disp_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DISP_EN</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pclk_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_PCLK</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">vsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_VSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">hsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_HSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">de_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_gpio_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA2</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// other GPIOs</span>
+<span class="w">        </span><span class="c1">// The number of GPIOs here should be the same to the value of "data_width" above</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// The timing parameters should refer to your LCD spec</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PIXEL_CLOCK_HZ</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_V_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">user_fbs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">user_frame_buffer</span><span class="p">,</span><span class="w"> </span><span class="c1">// use user custom frame buffer</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_rgb_panel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">panel_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="bounce-buffer-with-single-psram-frame-buffer">
+<span id="id4"></span><h3>Bounce Buffer with Single PSRAM Frame Buffer<a class="headerlink" href="#bounce-buffer-with-single-psram-frame-buffer" title="Permalink to this heading"></a></h3>
+<p>This mode allocates two &quot;bounce buffers&quot; from internal memory and a main frame buffer in PSRAM. To enable this mode, set the <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t11fb_in_psramE" title="esp_lcd_rgb_panel_config_t::fb_in_psram"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::fb_in_psram</span></code></a> flag and specify a non-zero value for <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE" title="esp_lcd_rgb_panel_config_t::bounce_buffer_size_px"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::bounce_buffer_size_px</span></code></a>. The bounce buffers only need to hold a few lines of display data, which is much smaller than the main frame buffer. The LCD peripheral uses DMA to read data from one bounce buffer while an interrupt routine uses the CPU DCache to copy data from the main PSRAM frame buffer into the other bounce buffer. Once the LCD peripheral finishes reading from the bounce buffer, the buffers swap roles, allowing the CPU to fill the other one. The advantage of this mode is achieving a higher pixel clock frequency. Since the bounce buffers are larger than the FIFOs in the EDMA path, this method is also more robust against short bandwidth spikes. The downside is a significant increase in CPU usage, and the LCD <strong>CANNOT</strong> function if the external memory cache is disabled, such as during OTA or NVS writes to the main flash.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For optimal performance in this mode, it is highly recommended to enable the &quot;PSRAM XIP (Execute In Place)&quot; feature by turning on the Kconfig option: <a class="reference internal" href="../../kconfig-reference.html#config-spiram-xip-from-psram"><span class="std std-ref">CONFIG_SPIRAM_XIP_FROM_PSRAM</span></a>. This allows the CPU to fetch instructions and read-only data directly from PSRAM instead of the main flash. Additionally, the external memory cache remains active even when writing to the main flash via SPI 1, making it feasible to display an OTA progress bar during your application updates.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This mode also faces issues due to limited PSRAM bandwidth. For instance, if your draw buffers are in PSRAM and their contents are copied to the internal frame buffer by CPU Core 1, while CPU Core 0 is performing another memory copy in the DMA EOF ISR, both CPUs will be accessing PSRAM via cache, sharing its bandwidth. This significantly increases the memory copy time in the DMA EOF ISR, causing the driver to fail in switching the bounce buffer promptly, resulting in a screen shift. On ESP32-S3, the driver can detect this condition and restart in the LCD's VSYNC interrupt handler, although you may still notice flickering on the screen.</p>
+</div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">panel_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_rgb_panel_config_t</span><span class="w"> </span><span class="n">panel_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w"> </span><span class="c1">// RGB565 in parallel mode, thus 16 bits in width</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">bounce_buffer_size_px</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="p">,</span><span class="w"> </span><span class="c1">// allocate 10 lines data as bounce buffer from internal memory</span>
+<span class="w">    </span><span class="p">.</span><span class="n">disp_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DISP_EN</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pclk_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_PCLK</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">vsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_VSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">hsync_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_HSYNC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">de_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_gpio_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA0</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA1</span><span class="p">,</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA2</span><span class="p">,</span>
+<span class="w">        </span><span class="c1">// other GPIOs</span>
+<span class="w">        </span><span class="c1">// The number of GPIOs here should be the same to the value of "data_width" above</span>
+<span class="w">        </span><span class="p">...</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="c1">// The timing parameters should refer to your LCD spec</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timings</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PIXEL_CLOCK_HZ</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_V_RES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">20</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_back_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_front_porch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_pulse_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">flags</span><span class="p">.</span><span class="n">fb_in_psram</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w"> </span><span class="c1">// allocate frame buffer from PSRAM</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_rgb_panel</span><span class="p">(</span><span class="o">&amp;</span><span class="n">panel_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="bounce-buffer-only">
+<span id="id5"></span><h3>Bounce Buffer Only<a class="headerlink" href="#bounce-buffer-only" title="Permalink to this heading"></a></h3>
+<p>This mode is similar to <a class="reference internal" href="#bounce-buffer-with-single-psram-frame-buffer"><span class="std std-ref">Bounce Buffer with Single PSRAM Frame Buffer</span></a>, but there is no PSRAM frame buffer initialized by the LCD driver. Instead, the user supplies a callback function that is responsible for filling the bounce buffers. As this driver does not care where the written pixels come from, this allows for the callback doing e.g., on-the-fly conversion from a smaller, 8-bit-per-pixel PSRAM frame buffer to a 16-bit LCD, or even procedurally generated frame-buffer-less graphics. This option is selected by setting the <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t5no_fbE" title="esp_lcd_rgb_panel_config_t::no_fb"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::no_fb</span></code></a> flag and supplying a <a class="reference internal" href="#_CPPv4N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE" title="esp_lcd_rgb_panel_config_t::bounce_buffer_size_px"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::bounce_buffer_size_px</span></code></a> value. And then register the <a class="reference internal" href="#_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t15on_bounce_emptyE" title="esp_lcd_rgb_panel_event_callbacks_t::on_bounce_empty"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_event_callbacks_t::on_bounce_empty</span></code></a> callback by calling <a class="reference internal" href="#_CPPv442esp_lcd_rgb_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_rgb_panel_event_callbacks_tPv" title="esp_lcd_rgb_panel_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_register_event_callbacks()</span></code></a>.</p>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_lcd/rgb/include/esp_lcd_panel_rgb.h">components/esp_lcd/rgb/include/esp_lcd_panel_rgb.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_lcd_panel_rgb.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_lcd</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_lcd</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_lcd
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_lcd
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421esp_lcd_new_rgb_panelPK26esp_lcd_rgb_panel_config_tP22esp_lcd_panel_handle_t">
+<span id="_CPPv321esp_lcd_new_rgb_panelPK26esp_lcd_rgb_panel_config_tP22esp_lcd_panel_handle_t"></span><span id="_CPPv221esp_lcd_new_rgb_panelPK26esp_lcd_rgb_panel_config_tP22esp_lcd_panel_handle_t"></span><span id="esp_lcd_new_rgb_panel__esp_lcd_rgb_panel_config_tCP.esp_lcd_panel_handle_tP"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a87ae443c415a9cf1de13b0e9720ce67b"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_new_rgb_panel</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_lcd_rgb_panel_config_t" title="esp_lcd_rgb_panel_config_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">rgb_panel_config</span></span>, <a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_panel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421esp_lcd_new_rgb_panelPK26esp_lcd_rgb_panel_config_tP22esp_lcd_panel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create RGB LCD panel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>rgb_panel_config</strong> -- <strong>[in]</strong> RGB panel configuration </p></li>
+<li><p><strong>ret_panel</strong> -- <strong>[out]</strong> Returned LCD panel handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Create RGB LCD panel failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Create RGB LCD panel failed because of out of memory</p></li>
+<li><p>ESP_ERR_NOT_FOUND: Create RGB LCD panel failed because some mandatory hardware resources are not found</p></li>
+<li><p>ESP_OK: Create RGB LCD panel successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv442esp_lcd_rgb_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_rgb_panel_event_callbacks_tPv">
+<span id="_CPPv342esp_lcd_rgb_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_rgb_panel_event_callbacks_tPv"></span><span id="_CPPv242esp_lcd_rgb_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_rgb_panel_event_callbacks_tPv"></span><span id="esp_lcd_rgb_panel_register_event_callbacks__esp_lcd_panel_handle_t.esp_lcd_rgb_panel_event_callbacks_tCP.voidP"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a07f87129b40081cef4f42c3533ce3abb"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_register_event_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv435esp_lcd_rgb_panel_event_callbacks_t" title="esp_lcd_rgb_panel_event_callbacks_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_event_callbacks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">callbacks</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">user_ctx</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv442esp_lcd_rgb_panel_register_event_callbacks22esp_lcd_panel_handle_tPK35esp_lcd_rgb_panel_event_callbacks_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register LCD RGB panel event callbacks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>panel</strong> -- <strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p></li>
+<li><p><strong>callbacks</strong> -- <strong>[in]</strong> Group of callback functions </p></li>
+<li><p><strong>user_ctx</strong> -- <strong>[in]</strong> User data, which will be passed to the callback functions directly </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set event callbacks successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set event callbacks failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Set event callbacks failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426esp_lcd_rgb_panel_set_pclk22esp_lcd_panel_handle_t8uint32_t">
+<span id="_CPPv326esp_lcd_rgb_panel_set_pclk22esp_lcd_panel_handle_t8uint32_t"></span><span id="_CPPv226esp_lcd_rgb_panel_set_pclk22esp_lcd_panel_handle_t8uint32_t"></span><span id="esp_lcd_rgb_panel_set_pclk__esp_lcd_panel_handle_t.uint32_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a459de9dbcaa80287b0c345d80b3e6493"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_set_pclk</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">freq_hz</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426esp_lcd_rgb_panel_set_pclk22esp_lcd_panel_handle_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set frequency of PCLK for RGB LCD panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The PCLK frequency is set in the <code class="docutils literal notranslate"><a class="reference internal" href="#structesp__lcd__rgb__timing__t"><span class="std std-ref"><span class="pre">esp_lcd_rgb_timing_t</span></span></a></code> and gets configured during LCD panel initialization. Usually you don't need to call this function to set the PCLK again, but in some cases, you might want to change the PCLK frequency. e.g. slow down the PCLK frequency to reduce power consumption or to reduce the memory throughput during OTA. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function doesn't cause the hardware to update the PCLK immediately but to record the new frequency and set a flag internally. Only in the next VSYNC event handler, will the driver attempt to update the PCLK frequency.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>panel</strong> -- <strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p></li>
+<li><p><strong>freq_hz</strong> -- <strong>[in]</strong> Frequency of pixel clock, in Hz </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Set PCLK frequency failed because of invalid argument</p></li>
+<li><p>ESP_OK: Set PCLK frequency successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425esp_lcd_rgb_panel_restart22esp_lcd_panel_handle_t">
+<span id="_CPPv325esp_lcd_rgb_panel_restart22esp_lcd_panel_handle_t"></span><span id="_CPPv225esp_lcd_rgb_panel_restart22esp_lcd_panel_handle_t"></span><span id="esp_lcd_rgb_panel_restart__esp_lcd_panel_handle_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a4e720a6f18177f05d82385185d75c20d"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_restart</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425esp_lcd_rgb_panel_restart22esp_lcd_panel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Restart the LCD transmission. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is only supported on ESP32-S3. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function can be useful when the LCD controller is out of sync with the DMA because of insufficient bandwidth. To save the screen from a permanent shift, you can call this function to restart the LCD DMA. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function doesn't restart the DMA immediately but to set a flag internally. Only in the next VSYNC event handler, will the driver attempt to do the restart job. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If CONFIG_LCD_RGB_RESTART_IN_VSYNC is enabled, you don't need to call this function manually, because the restart job will be done automatically in the VSYNC event handler.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>panel</strong> -- <strong>[in]</strong> panel LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Restart the LCD failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Restart the LCD failed because the LCD driver is working in refresh-on-demand mode</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Restarting the LCD is not supported on this target</p></li>
+<li><p>ESP_OK: Restart the LCD successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434esp_lcd_rgb_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz">
+<span id="_CPPv334esp_lcd_rgb_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz"></span><span id="_CPPv234esp_lcd_rgb_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz"></span><span id="esp_lcd_rgb_panel_get_frame_buffer__esp_lcd_panel_handle_t.uint32_t.voidPP.z"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a05e621c4fb9ddb086e6251c97d006883"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_get_frame_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fb_num</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fb0</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434esp_lcd_rgb_panel_get_frame_buffer22esp_lcd_panel_handle_t8uint32_tPPvz" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the address of the frame buffer(s) that allocated by the driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>panel</strong> -- <strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p></li>
+<li><p><strong>fb_num</strong> -- <strong>[in]</strong> Number of frame buffer(s) to get. This value must be the same as the number of the following parameters. </p></li>
+<li><p><strong>fb0</strong> -- <strong>[out]</strong> Returned address of the frame buffer 0 </p></li>
+<li><p><strong>...</strong> -- <strong>[out]</strong> List of other frame buffer addresses </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Get frame buffer address failed because of invalid argument</p></li>
+<li><p>ESP_OK: Get frame buffer address successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425esp_lcd_rgb_panel_refresh22esp_lcd_panel_handle_t">
+<span id="_CPPv325esp_lcd_rgb_panel_refresh22esp_lcd_panel_handle_t"></span><span id="_CPPv225esp_lcd_rgb_panel_refresh22esp_lcd_panel_handle_t"></span><span id="esp_lcd_rgb_panel_refresh__esp_lcd_panel_handle_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1ae02824820f4ff9658e6105c5d65b154b"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_refresh</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425esp_lcd_rgb_panel_refresh22esp_lcd_panel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Manually trigger once transmission of the frame buffer to the LCD panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function should only be called when the RGB panel is working under the <code class="docutils literal notranslate"><span class="pre">refresh_on_demand</span></code> mode.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>panel</strong> -- <strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Start a refresh failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Start a refresh failed because the LCD panel is not created with the <code class="docutils literal notranslate"><span class="pre">refresh_on_demand</span></code> flag enabled.</p></li>
+<li><p>ESP_OK: Start a refresh successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429esp_lcd_rgb_alloc_draw_buffer22esp_lcd_panel_handle_t6size_t8uint32_t">
+<span id="_CPPv329esp_lcd_rgb_alloc_draw_buffer22esp_lcd_panel_handle_t6size_t8uint32_t"></span><span id="_CPPv229esp_lcd_rgb_alloc_draw_buffer22esp_lcd_panel_handle_t6size_t8uint32_t"></span><span id="esp_lcd_rgb_alloc_draw_buffer__esp_lcd_panel_handle_t.s.uint32_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a389a93f880f6ebcc9b72c7c259581277"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_alloc_draw_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">caps</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429esp_lcd_rgb_alloc_draw_buffer22esp_lcd_panel_handle_t6size_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate a draw buffer for RGB LCD panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function differs from the normal 'heap_caps_*' functions in that it can also automatically handle the alignment required by DMA burst, cache line size, etc.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>panel</strong> -- <strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p></li>
+<li><p><strong>size</strong> -- <strong>[in]</strong> Size of memory to be allocated </p></li>
+<li><p><strong>caps</strong> -- <strong>[in]</strong> Bitwise OR of MALLOC_CAP_* flags indicating the type of memory desired for the allocation </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to a new buffer of size 'size' with capabilities 'caps', or NULL if allocation failed </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv436esp_lcd_rgb_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t">
+<span id="_CPPv336esp_lcd_rgb_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t"></span><span id="_CPPv236esp_lcd_rgb_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t"></span><span id="esp_lcd_rgb_panel_set_yuv_conversion__esp_lcd_panel_handle_t.esp_lcd_color_conv_yuv_config_tCP"></span><span class="target" id="esp__lcd__panel__rgb_8h_1ada96c9363c4acb7b2cbf26cef6f5735a"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_set_yuv_conversion</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">panel</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="index.html#_CPPv431esp_lcd_color_conv_yuv_config_t" title="esp_lcd_color_conv_yuv_config_t"><span class="n"><span class="pre">esp_lcd_color_conv_yuv_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436esp_lcd_rgb_panel_set_yuv_conversion22esp_lcd_panel_handle_tPK31esp_lcd_color_conv_yuv_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure how to convert the color format between RGB and YUV. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>panel</strong> -- <strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Configuration of RGB-YUV conversion profile </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG: Configure RGB-YUV conversion failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Configure RGB-YUV conversion failed because the conversion mode is not supported by the hardware</p></li>
+<li><p>ESP_OK: Configure RGB-YUV conversion successfully </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420esp_lcd_rgb_timing_t">
+<span id="_CPPv320esp_lcd_rgb_timing_t"></span><span id="_CPPv220esp_lcd_rgb_timing_t"></span><span id="esp_lcd_rgb_timing_t"></span><span class="target" id="structesp__lcd__rgb__timing__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_timing_t</span></span></span><a class="headerlink" href="#_CPPv420esp_lcd_rgb_timing_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LCD RGB timing structure. </p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">*</span>                                                 <span class="n">Total</span> <span class="n">Width</span>
+<span class="o">*</span>                             <span class="o">&lt;---------------------------------------------------&gt;</span>
+<span class="o">*</span>                       <span class="n">HSYNC</span> <span class="n">width</span> <span class="n">HBP</span>             <span class="n">Active</span> <span class="n">Width</span>                <span class="n">HFP</span>
+<span class="o">*</span>                             <span class="o">&lt;---&gt;&lt;--&gt;&lt;--------------------------------------&gt;&lt;---&gt;</span>
+<span class="o">*</span>                         <span class="n">____</span>    <span class="n">____</span><span class="o">|</span><span class="n">_______________________________________</span><span class="o">|</span><span class="n">____</span><span class="o">|</span>
+<span class="o">*</span>                             <span class="o">|</span><span class="n">___</span><span class="o">|</span>   <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>                                     <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>                         <span class="n">__</span><span class="o">|</span>         <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>            <span class="o">/|</span>\    <span class="o">/|</span>\  <span class="o">|</span>            <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span> <span class="n">VSYNC</span><span class="o">|</span>   <span class="o">|</span>            <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span><span class="n">Width</span>\<span class="o">|/</span>  <span class="o">|</span><span class="n">__</span>          <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>     <span class="o">/|</span>\     <span class="o">|</span>         <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>  <span class="n">VBP</span> <span class="o">|</span>      <span class="o">|</span>         <span class="o">|</span>                                       <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>     \<span class="o">|/</span><span class="n">_____</span><span class="o">|</span><span class="n">_________</span><span class="o">|</span><span class="n">_______________________________________</span><span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>     <span class="o">/|</span>\     <span class="o">|</span>         <span class="o">|</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>    <span class="n">Total</span>    <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>    <span class="n">Height</span>   <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span><span class="n">Active</span><span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span><span class="n">Height</span><span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="n">Active</span> <span class="n">Display</span> <span class="n">Area</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>      <span class="o">|</span>      <span class="o">|</span>         <span class="o">|/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/</span> <span class="o">/|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>     \<span class="o">|/</span><span class="n">_____</span><span class="o">|</span><span class="n">_________</span><span class="o">|</span><span class="n">_______________________________________</span><span class="o">|</span>    <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>     <span class="o">/|</span>\     <span class="o">|</span>                                                      <span class="o">|</span>
+<span class="o">*</span>             <span class="o">|</span>  <span class="n">VFP</span> <span class="o">|</span>      <span class="o">|</span>                                                      <span class="o">|</span>
+<span class="o">*</span>            \<span class="o">|/</span>    \<span class="o">|/</span><span class="n">_____</span><span class="o">|</span><span class="n">______________________________________________________</span><span class="o">|</span>
+<span class="o">*</span>
+</pre></div>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t7pclk_hzE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t7pclk_hzE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t7pclk_hzE"></span><span id="esp_lcd_rgb_timing_t::pclk_hz__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a9175a98e1adaaae9c0fc1d14debdd2cb"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_hz</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t7pclk_hzE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Frequency of pixel clock </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t5h_resE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t5h_resE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t5h_resE"></span><span id="esp_lcd_rgb_timing_t::h_res__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a8e4e9d403f8a5ed1f6b638e96963366a"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">h_res</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t5h_resE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Horizontal resolution, i.e. the number of pixels in a line </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t5v_resE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t5v_resE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t5v_resE"></span><span id="esp_lcd_rgb_timing_t::v_res__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1abc242a4c2ebee6b708368a1a84079163"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">v_res</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t5v_resE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Vertical resolution, i.e. the number of lines in the frame 
+
+ </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t17hsync_pulse_widthE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t17hsync_pulse_widthE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t17hsync_pulse_widthE"></span><span id="esp_lcd_rgb_timing_t::hsync_pulse_width__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a5f342b7f64a18ad40ab32622c7c0f511"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_pulse_width</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t17hsync_pulse_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Horizontal sync width, unit: PCLK period </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t16hsync_back_porchE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t16hsync_back_porchE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t16hsync_back_porchE"></span><span id="esp_lcd_rgb_timing_t::hsync_back_porch__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1abc8231c95b911c78bc85aad132c59509"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_back_porch</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t16hsync_back_porchE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Horizontal back porch, number of PCLK between hsync and start of line active data </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t17hsync_front_porchE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t17hsync_front_porchE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t17hsync_front_porchE"></span><span id="esp_lcd_rgb_timing_t::hsync_front_porch__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a9d8061cbad3ef42a9e44fd4a775ee766"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_front_porch</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t17hsync_front_porchE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Horizontal front porch, number of PCLK between the end of active data and the next hsync </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t17vsync_pulse_widthE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t17vsync_pulse_widthE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t17vsync_pulse_widthE"></span><span id="esp_lcd_rgb_timing_t::vsync_pulse_width__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1afcd6e7206890d85025384c9f3c87771f"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_pulse_width</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t17vsync_pulse_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Vertical sync width, unit: number of lines </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t16vsync_back_porchE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t16vsync_back_porchE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t16vsync_back_porchE"></span><span id="esp_lcd_rgb_timing_t::vsync_back_porch__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1af61ef8611472340538b225f81656927f"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_back_porch</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t16vsync_back_porchE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Vertical back porch, number of invalid lines between vsync and start of frame </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t17vsync_front_porchE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t17vsync_front_porchE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t17vsync_front_porchE"></span><span id="esp_lcd_rgb_timing_t::vsync_front_porch__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a270c99c6e2b41f9f5cab424b5a5a3014"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_front_porch</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t17vsync_front_porchE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Vertical front porch, number of invalid lines between the end of frame and the next vsync </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t14hsync_idle_lowE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t14hsync_idle_lowE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t14hsync_idle_lowE"></span><span id="esp_lcd_rgb_timing_t::hsync_idle_low__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a799b507182d2a51b367322facce7220b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_idle_low</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t14hsync_idle_lowE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The hsync signal is low in IDLE state </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t14vsync_idle_lowE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t14vsync_idle_lowE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t14vsync_idle_lowE"></span><span id="esp_lcd_rgb_timing_t::vsync_idle_low__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1af9df33d9ddd0a6b41479734250263cf7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_idle_low</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t14vsync_idle_lowE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The vsync signal is low in IDLE state </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t12de_idle_highE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t12de_idle_highE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t12de_idle_highE"></span><span id="esp_lcd_rgb_timing_t::de_idle_high__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1abd83e5274a17f85e8893463dbeb172ce"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">de_idle_high</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t12de_idle_highE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The de signal is high in IDLE state </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t15pclk_active_negE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t15pclk_active_negE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t15pclk_active_negE"></span><span id="esp_lcd_rgb_timing_t::pclk_active_neg__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a5ec5b20304cabb93f5a7332b27a990a4"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_active_neg</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t15pclk_active_negE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether the display data is clocked out on the falling edge of PCLK </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t14pclk_idle_highE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t14pclk_idle_highE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t14pclk_idle_highE"></span><span id="esp_lcd_rgb_timing_t::pclk_idle_high__uint32_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a6d037119db921fe6ae2f3fa096ea21d1"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_idle_high</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t14pclk_idle_highE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The PCLK stays at high level in IDLE phase </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_lcd_rgb_timing_t5flagsE">
+<span id="_CPPv3N20esp_lcd_rgb_timing_t5flagsE"></span><span id="_CPPv2N20esp_lcd_rgb_timing_t5flagsE"></span><span id="esp_lcd_rgb_timing_t::flags__esp_lcd_rgb_timing_t"></span><span class="target" id="structesp__lcd__rgb__timing__t_1a33f84b6465f311f32d8b5368dabdaf1b"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420esp_lcd_rgb_timing_t" title="esp_lcd_rgb_timing_t"><span class="n"><span class="pre">esp_lcd_rgb_timing_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N20esp_lcd_rgb_timing_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LCD RGB timing flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430esp_lcd_rgb_panel_event_data_t">
+<span id="_CPPv330esp_lcd_rgb_panel_event_data_t"></span><span id="_CPPv230esp_lcd_rgb_panel_event_data_t"></span><span id="esp_lcd_rgb_panel_event_data_t"></span><span class="target" id="structesp__lcd__rgb__panel__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_event_data_t</span></span></span><a class="headerlink" href="#_CPPv430esp_lcd_rgb_panel_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of RGB LCD panel event data. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv435esp_lcd_rgb_panel_event_callbacks_t">
+<span id="_CPPv335esp_lcd_rgb_panel_event_callbacks_t"></span><span id="_CPPv235esp_lcd_rgb_panel_event_callbacks_t"></span><span id="esp_lcd_rgb_panel_event_callbacks_t"></span><span class="target" id="structesp__lcd__rgb__panel__event__callbacks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_event_callbacks_t</span></span></span><a class="headerlink" href="#_CPPv435esp_lcd_rgb_panel_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Group of supported RGB LCD panel callbacks. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The callbacks are all running under ISR environment </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When CONFIG_LCD_RGB_ISR_IRAM_SAFE is enabled, the callback itself and functions called by it should be placed in IRAM. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t19on_color_trans_doneE">
+<span id="_CPPv3N35esp_lcd_rgb_panel_event_callbacks_t19on_color_trans_doneE"></span><span id="_CPPv2N35esp_lcd_rgb_panel_event_callbacks_t19on_color_trans_doneE"></span><span id="esp_lcd_rgb_panel_event_callbacks_t::on_color_trans_done__esp_lcd_rgb_panel_draw_buf_complete_cb_t"></span><span class="target" id="structesp__lcd__rgb__panel__event__callbacks__t_1a80cc4c73202b7621ad91dec94d5530a0"></span><a class="reference internal" href="#_CPPv440esp_lcd_rgb_panel_draw_buf_complete_cb_t" title="esp_lcd_rgb_panel_draw_buf_complete_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_draw_buf_complete_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_color_trans_done</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t19on_color_trans_doneE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invoked when user's color buffer copied to the internal frame buffer. This is an indicator that the draw buffer can be recycled safely. But doesn't mean the draw buffer finishes the refreshing to the screen. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t8on_vsyncE">
+<span id="_CPPv3N35esp_lcd_rgb_panel_event_callbacks_t8on_vsyncE"></span><span id="_CPPv2N35esp_lcd_rgb_panel_event_callbacks_t8on_vsyncE"></span><span id="esp_lcd_rgb_panel_event_callbacks_t::on_vsync__esp_lcd_rgb_panel_vsync_cb_t"></span><span class="target" id="structesp__lcd__rgb__panel__event__callbacks__t_1a824117f250df4f37aab712dabdeda8fc"></span><a class="reference internal" href="#_CPPv428esp_lcd_rgb_panel_vsync_cb_t" title="esp_lcd_rgb_panel_vsync_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_vsync_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_vsync</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t8on_vsyncE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>VSYNC event callback </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t15on_bounce_emptyE">
+<span id="_CPPv3N35esp_lcd_rgb_panel_event_callbacks_t15on_bounce_emptyE"></span><span id="_CPPv2N35esp_lcd_rgb_panel_event_callbacks_t15on_bounce_emptyE"></span><span id="esp_lcd_rgb_panel_event_callbacks_t::on_bounce_empty__esp_lcd_rgb_panel_bounce_buf_fill_cb_t"></span><span class="target" id="structesp__lcd__rgb__panel__event__callbacks__t_1a6408b7f21d70aaa510a33872d1fa34dc"></span><a class="reference internal" href="#_CPPv438esp_lcd_rgb_panel_bounce_buf_fill_cb_t" title="esp_lcd_rgb_panel_bounce_buf_fill_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_bounce_buf_fill_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_bounce_empty</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t15on_bounce_emptyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bounce buffer empty callback. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t21on_frame_buf_completeE">
+<span id="_CPPv3N35esp_lcd_rgb_panel_event_callbacks_t21on_frame_buf_completeE"></span><span id="_CPPv2N35esp_lcd_rgb_panel_event_callbacks_t21on_frame_buf_completeE"></span><span id="esp_lcd_rgb_panel_event_callbacks_t::on_frame_buf_complete__esp_lcd_rgb_panel_frame_buf_complete_cb_t"></span><span class="target" id="structesp__lcd__rgb__panel__event__callbacks__t_1a4f63841100b24b7ca70e574e78065e08"></span><a class="reference internal" href="#_CPPv441esp_lcd_rgb_panel_frame_buf_complete_cb_t" title="esp_lcd_rgb_panel_frame_buf_complete_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_frame_buf_complete_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_frame_buf_complete</span></span></span><a class="headerlink" href="#_CPPv4N35esp_lcd_rgb_panel_event_callbacks_t21on_frame_buf_completeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invoked when the frame buffer can be reused safely </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426esp_lcd_rgb_panel_config_t">
+<span id="_CPPv326esp_lcd_rgb_panel_config_t"></span><span id="_CPPv226esp_lcd_rgb_panel_config_t"></span><span id="esp_lcd_rgb_panel_config_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_config_t</span></span></span><a class="headerlink" href="#_CPPv426esp_lcd_rgb_panel_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LCD RGB panel configuration structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t7clk_srcE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t7clk_srcE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t7clk_srcE"></span><span id="esp_lcd_rgb_panel_config_t::clk_src__lcd_clock_source_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a2e6df1a0edd4271cb8941c058ae91ad4"></span><a class="reference internal" href="index.html#_CPPv418lcd_clock_source_t" title="lcd_clock_source_t"><span class="n"><span class="pre">lcd_clock_source_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_src</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t7clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clock source for the RGB LCD peripheral </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t7timingsE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t7timingsE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t7timingsE"></span><span id="esp_lcd_rgb_panel_config_t::timings__esp_lcd_rgb_timing_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1afee5d08d703288bb542cd50ccefc73d6"></span><a class="reference internal" href="#_CPPv420esp_lcd_rgb_timing_t" title="esp_lcd_rgb_timing_t"><span class="n"><span class="pre">esp_lcd_rgb_timing_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timings</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t7timingsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RGB timing parameters, including the screen resolution </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t10data_widthE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t10data_widthE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t10data_widthE"></span><span id="esp_lcd_rgb_panel_config_t::data_width__s"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a81bf82b1c75bdec7d1d7a607e8d6cb25"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_width</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t10data_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of data lines </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t15in_color_formatE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t15in_color_formatE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t15in_color_formatE"></span><span id="esp_lcd_rgb_panel_config_t::in_color_format__lcd_color_format_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a5297c8a0c75cf348c5b0804d15e35a3f"></span><a class="reference internal" href="index.html#_CPPv418lcd_color_format_t" title="lcd_color_format_t"><span class="n"><span class="pre">lcd_color_format_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">in_color_format</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t15in_color_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format of the input data (color space and pixel format), which is the format stored in the frame buffer </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t16out_color_formatE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t16out_color_formatE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t16out_color_formatE"></span><span id="esp_lcd_rgb_panel_config_t::out_color_format__lcd_color_format_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a8c937fc5d129fd59b73c41d7bf49ff81"></span><a class="reference internal" href="index.html#_CPPv418lcd_color_format_t" title="lcd_color_format_t"><span class="n"><span class="pre">lcd_color_format_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">out_color_format</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t16out_color_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format of the output data (color space and pixel format), which is the format that the panel device can accept </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t7num_fbsE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t7num_fbsE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t7num_fbsE"></span><span id="esp_lcd_rgb_panel_config_t::num_fbs__s"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a9cf17fce9a603fa40d5d3e835c191f6b"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">num_fbs</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t7num_fbsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of screen-sized frame buffers that allocated by the driver. By default (set to either 0 or 1) only one frame buffer will be used. Maximum number of buffers are 3 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t8user_fbsE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t8user_fbsE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t8user_fbsE"></span><span id="esp_lcd_rgb_panel_config_t::user_fbs__voidPA"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a808b7de4e60f8f3866df8a8d25170b57"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">user_fbs</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">ESP_RGB_LCD_PANEL_MAX_FB_NUM</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t8user_fbsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Array of user-provided frame buffers. If not NULL, the driver will use these buffers instead of allocating its own </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE"></span><span id="esp_lcd_rgb_panel_config_t::bounce_buffer_size_px__s"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a60d9fbcb80c1c7ceb65464d6114d6e7b"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bounce_buffer_size_px</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t21bounce_buffer_size_pxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If it's non-zero, the driver allocates two DRAM bounce buffers for DMA use. DMA fetching from DRAM bounce buffer is much faster than PSRAM frame buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t14dma_burst_sizeE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t14dma_burst_sizeE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t14dma_burst_sizeE"></span><span id="esp_lcd_rgb_panel_config_t::dma_burst_size__s"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1acb20df03d60b981638d96f4f7539cad9"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dma_burst_size</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14dma_burst_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DMA burst size, in bytes </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t14hsync_gpio_numE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t14hsync_gpio_numE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t14hsync_gpio_numE"></span><span id="esp_lcd_rgb_panel_config_t::hsync_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1ac806188d56c2ef828731ddca872195b8"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14hsync_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for HSYNC signal </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t14vsync_gpio_numE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t14vsync_gpio_numE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t14vsync_gpio_numE"></span><span id="esp_lcd_rgb_panel_config_t::vsync_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a3632a72c9671aef1a3579ad81c7f2ec3"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14vsync_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for VSYNC signal </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t11de_gpio_numE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t11de_gpio_numE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t11de_gpio_numE"></span><span id="esp_lcd_rgb_panel_config_t::de_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1ae7f4b3262b567af83f3d289e446e45da"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">de_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t11de_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for DE signal, set to -1 if it's not used </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t13pclk_gpio_numE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t13pclk_gpio_numE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t13pclk_gpio_numE"></span><span id="esp_lcd_rgb_panel_config_t::pclk_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a2f4ec7bedfc4a0e8a72d9ddd32e1f76a"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t13pclk_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for PCLK signal, set to -1 if it's not used </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t13disp_gpio_numE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t13disp_gpio_numE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t13disp_gpio_numE"></span><span id="esp_lcd_rgb_panel_config_t::disp_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a5e63996f12a6b22ad654c7cdc456fe32"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disp_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t13disp_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for display control signal, set to -1 if it's not used </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t14data_gpio_numsE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t14data_gpio_numsE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t14data_gpio_numsE"></span><span id="esp_lcd_rgb_panel_config_t::data_gpio_nums__gpio_num_tA"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a0897317458fec912f46e6a135df873b1"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_gpio_nums</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">ESP_LCD_RGB_BUS_WIDTH_MAX</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t14data_gpio_numsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIOs used for data lines </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t15disp_active_lowE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t15disp_active_lowE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t15disp_active_lowE"></span><span id="esp_lcd_rgb_panel_config_t::disp_active_low__uint32_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1acfa2d92a4c82fffb8437e3b4bc1a036c"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disp_active_low</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t15disp_active_lowE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is enabled, a low level of display control signal can turn the screen on; vice versa </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t17refresh_on_demandE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t17refresh_on_demandE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t17refresh_on_demandE"></span><span id="esp_lcd_rgb_panel_config_t::refresh_on_demand__uint32_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a2eafe6d36f558645c33241166a102d38"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">refresh_on_demand</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t17refresh_on_demandE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is enabled, the host only refresh the frame buffer in <code class="docutils literal notranslate"><span class="pre">esp_lcd_panel_draw_bitmap</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_refresh</span></code>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t11fb_in_psramE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t11fb_in_psramE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t11fb_in_psramE"></span><span id="esp_lcd_rgb_panel_config_t::fb_in_psram__uint32_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1ab4593ea9a87c2758dba7870390188486"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fb_in_psram</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t11fb_in_psramE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is enabled, the frame buffer will be allocated from PSRAM, preferentially </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t9double_fbE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t9double_fbE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t9double_fbE"></span><span id="esp_lcd_rgb_panel_config_t::double_fb__uint32_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a8c635f5252f38b92d81023f34d598b4d"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">double_fb</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t9double_fbE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is enabled, the driver will allocate two screen sized frame buffer, same as num_fbs=2 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t5no_fbE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t5no_fbE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t5no_fbE"></span><span id="esp_lcd_rgb_panel_config_t::no_fb__uint32_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1ae720aff84ed50a68e4cf96832e4a614d"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">no_fb</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t5no_fbE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is enabled, the driver won't allocate frame buffer. Instead, user should fill in the bounce buffer manually in the <code class="docutils literal notranslate"><span class="pre">on_bounce_empty</span></code> callback </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t19bb_invalidate_cacheE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t19bb_invalidate_cacheE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t19bb_invalidate_cacheE"></span><span id="esp_lcd_rgb_panel_config_t::bb_invalidate_cache__uint32_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a36c2311242e97e7ca360503469de8ba3"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bb_invalidate_cache</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t19bb_invalidate_cacheE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this flag is enabled, in bounce back mode we'll do a cache invalidate on the read data, freeing the cache. Can be dangerous if data is written from other core(s). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_lcd_rgb_panel_config_t5flagsE">
+<span id="_CPPv3N26esp_lcd_rgb_panel_config_t5flagsE"></span><span id="_CPPv2N26esp_lcd_rgb_panel_config_t5flagsE"></span><span id="esp_lcd_rgb_panel_config_t::flags__esp_lcd_rgb_panel_config_t"></span><span class="target" id="structesp__lcd__rgb__panel__config__t_1a17bcd290dbd41473d5a891f2d295e74f"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_lcd_rgb_panel_config_t" title="esp_lcd_rgb_panel_config_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N26esp_lcd_rgb_panel_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LCD RGB panel configuration flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_LCD_RGB_BUS_WIDTH_MAX">
+<span class="target" id="esp__lcd__panel__rgb_8h_1a6f3e7149a564349bafdb0e1e1914de8d"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_LCD_RGB_BUS_WIDTH_MAX</span></span></span><a class="headerlink" href="#c.ESP_LCD_RGB_BUS_WIDTH_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_RGB_LCD_PANEL_MAX_FB_NUM">
+<span class="target" id="esp__lcd__panel__rgb_8h_1af123209d1982a82f3ab4bc638b324e91"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_RGB_LCD_PANEL_MAX_FB_NUM</span></span></span><a class="headerlink" href="#c.ESP_RGB_LCD_PANEL_MAX_FB_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv430esp_lcd_rgb_panel_general_cb_t">
+<span id="_CPPv330esp_lcd_rgb_panel_general_cb_t"></span><span id="_CPPv230esp_lcd_rgb_panel_general_cb_t"></span><span id="esp_lcd_rgb_panel_general_cb_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1ae3d5305dc39d51fe61a661b47f6086c4"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_general_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_rgb_panel_event_data_t" title="esp_lcd_rgb_panel_event_data_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv430esp_lcd_rgb_panel_general_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A general function callback prototype for RGB panel driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param panel<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> LCD panel handle, which is created by factory API like <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> RGB panel event data, provided by driver </p>
+</dd>
+<dt class="field-odd">Param user_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User data, passed from <code class="docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_register_event_callbacks()</span></code></p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this function </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv440esp_lcd_rgb_panel_draw_buf_complete_cb_t">
+<span id="_CPPv340esp_lcd_rgb_panel_draw_buf_complete_cb_t"></span><span id="_CPPv240esp_lcd_rgb_panel_draw_buf_complete_cb_t"></span><span id="esp_lcd_rgb_panel_draw_buf_complete_cb_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1ad44cd33f333a1595ca7af91d2a68d8c1"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_rgb_panel_general_cb_t" title="esp_lcd_rgb_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_draw_buf_complete_cb_t</span></span></span><a class="headerlink" href="#_CPPv440esp_lcd_rgb_panel_draw_buf_complete_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when the user draw buffer is complete. The draw buffer can be recycled after this event. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv441esp_lcd_rgb_panel_frame_buf_complete_cb_t">
+<span id="_CPPv341esp_lcd_rgb_panel_frame_buf_complete_cb_t"></span><span id="_CPPv241esp_lcd_rgb_panel_frame_buf_complete_cb_t"></span><span id="esp_lcd_rgb_panel_frame_buf_complete_cb_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a52ff184d45b977cccbd10011db14ef44"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_rgb_panel_general_cb_t" title="esp_lcd_rgb_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_frame_buf_complete_cb_t</span></span></span><a class="headerlink" href="#_CPPv441esp_lcd_rgb_panel_frame_buf_complete_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when a whole frame buffer can be reused safely. The LCD hardware may still need some blank time to finish the refresh. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv428esp_lcd_rgb_panel_vsync_cb_t">
+<span id="_CPPv328esp_lcd_rgb_panel_vsync_cb_t"></span><span id="_CPPv228esp_lcd_rgb_panel_vsync_cb_t"></span><span id="esp_lcd_rgb_panel_vsync_cb_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a17a5cf178efbba5545f60190f4254b8c"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_rgb_panel_general_cb_t" title="esp_lcd_rgb_panel_general_cb_t"><span class="n"><span class="pre">esp_lcd_rgb_panel_general_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_vsync_cb_t</span></span></span><a class="headerlink" href="#_CPPv428esp_lcd_rgb_panel_vsync_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Declare the prototype of the function that will be invoked when the LCD controller sends the VSYNC signal. It means, the LCD hardware should be ready, and after some blank time, the next frame will be flushed to the LCD controller. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv438esp_lcd_rgb_panel_bounce_buf_fill_cb_t">
+<span id="_CPPv338esp_lcd_rgb_panel_bounce_buf_fill_cb_t"></span><span id="_CPPv238esp_lcd_rgb_panel_bounce_buf_fill_cb_t"></span><span id="esp_lcd_rgb_panel_bounce_buf_fill_cb_t"></span><span class="target" id="esp__lcd__panel__rgb_8h_1a3e9db28fa8d017b219c8b9bf483c1e53"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_rgb_panel_bounce_buf_fill_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="index.html#_CPPv422esp_lcd_panel_handle_t" title="esp_lcd_panel_handle_t"><span class="n"><span class="pre">esp_lcd_panel_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">panel</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">bounce_buf</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">pos_px</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n"><span class="pre">len_bytes</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv438esp_lcd_rgb_panel_bounce_buf_fill_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Prototype for function to re-fill a bounce buffer, rather than copying from the frame buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param panel<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> LCD panel handle, returned from <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_rgb_panel</span></code></p>
+</dd>
+<dt class="field-even">Param bounce_buf<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> Bounce buffer to write data into </p>
+</dd>
+<dt class="field-odd">Param pos_px<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> How many pixels already were sent to the display in this frame, in other words, at what pixel the routine should start putting data into bounce_buf </p>
+</dd>
+<dt class="field-even">Param len_bytes<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> Length, in bytes, of the bounce buffer. Routine should fill this length fully. </p>
+</dd>
+<dt class="field-odd">Param user_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> Opaque pointer that was passed from <code class="docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_register_event_callbacks()</span></code></p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this function </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=RGB Interfaced LCD (api-reference/peripherals/lcd/rgb_lcd)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=RGB Interfaced LCD (api-reference/peripherals/lcd/rgb_lcd)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="i80_lcd.html" class="btn btn-neutral float-left" title="I80 Interfaced LCD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="dsi_lcd.html" class="btn btn-neutral float-right" title="MIPI DSI Interfaced LCD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

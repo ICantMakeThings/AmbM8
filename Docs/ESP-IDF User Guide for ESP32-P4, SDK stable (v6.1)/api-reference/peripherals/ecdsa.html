@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ECDSA Digital Signature Peripheral (ECDSA_DS) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/ecdsa.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/ecdsa';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Event Task Matrix (ETM)" href="etm.html" />
+    <link rel="prev" title="Clock Tree" href="clk_tree.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">ECDSA Digital Signature Peripheral (ECDSA_DS)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#supported-features">Supported Features</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#ecdsa-ds-on-esp32-p4">ECDSA_DS on ESP32-P4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#deterministic-signature-generation">Deterministic Signature Generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#non-determinisitic-signature-generation">Non-Determinisitic Signature Generation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-outline">Application Outline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">ECDSA Digital Signature Peripheral (ECDSA_DS)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/ecdsa.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="ecdsa-digital-signature-peripheral-ecdsa-ds">
+<h1>ECDSA Digital Signature Peripheral (ECDSA_DS)<a class="headerlink" href="#ecdsa-digital-signature-peripheral-ecdsa-ds" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/ecdsa.html">[中文]</a></p>
+<p>The ECDSA Digital Signature Peripheral (ECDSA_DS) implements the Elliptic Curve Digital Signature Algorithm (ECDSA), a variant of the Digital Signature Algorithm (DSA) that uses elliptic-curve cryptography.</p>
+<p>ESP32-P4's ECDSA_DS peripheral provides a secure and efficient environment for computing ECDSA signatures. It offers fast computations while ensuring the confidentiality of the signing process to prevent information leakage. ECDSA private key used in the signing process is accessible only to the hardware peripheral, and it is not readable by software.</p>
+<p>The ECDSA_DS peripheral can help to establish <strong>Secure Device Identity</strong> for TLS mutual authentication and similar use-cases.</p>
+<section id="supported-features">
+<h2>Supported Features<a class="headerlink" href="#supported-features" title="Permalink to this heading"></a></h2>
+<p><ul class="simple">
+<li><p>ECDSA digital signature generation and verification</p></li>
+<li><p>Three different elliptic curves, namely P-192, P-256 and P-384 (FIPS 186-3 specification)</p></li>
+<li><p>Three hash algorithms for message hash in the ECDSA operation, namely SHA-224, SHA-256 and SHA-384 (FIPS PUB 180-4 specification)</p></li>
+</ul>
+</p>
+</section>
+<section id="ecdsa-ds-on-esp32-p4">
+<h2>ECDSA_DS on ESP32-P4<a class="headerlink" href="#ecdsa-ds-on-esp32-p4" title="Permalink to this heading"></a></h2>
+<p>On ESP32-P4, the ECDSA_DS module works with a secret key burnt into an eFuse block.</p>
+<p>On ESP32-P4, the ECDSA_DS module also supports storing a secret key in the Key Manager. Refer to <a class="reference internal" href="key_manager.html#key-manager"><span class="std std-ref">Key Manager</span></a> for more details.</p>
+<p>This key is made completely inaccessible (default mode) for any resources outside the cryptographic modules, thus avoiding key leakage.</p>
+<section id="ecdsa-key-storage">
+<h3>ECDSA Key Storage<a class="headerlink" href="#ecdsa-key-storage" title="Permalink to this heading"></a></h3>
+<p>ECDSA private keys are stored in eFuse key blocks. The number of key blocks required depends on the curve size:</p>
+<ul class="simple">
+<li><p><strong>P-256 curve</strong>: Require one eFuse key block (256 bits)</p></li>
+<li><p><strong>P-384 curve</strong>: Requires two eFuse key blocks (512 bits total)</p></li>
+</ul>
+<p>For curves requiring two key blocks (like P-384), configure the following fields:</p>
+<ul class="simple">
+<li><p>Set <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_tls_cfg_t::ecdsa_key_efuse_blk</span></code> to the low block number</p></li>
+<li><p>Set <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_tls_cfg_t::ecdsa_key_efuse_blk_high</span></code> to the high block number</p></li>
+</ul>
+<p>For single-block curves (like P-256), only set <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_tls_cfg_t::ecdsa_key_efuse_blk</span></code> and leave <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_tls_cfg_t::ecdsa_key_efuse_blk_high</span></code> as 0 or unassigned.</p>
+<p>ECDSA key can be programmed externally through <code class="docutils literal notranslate"><span class="pre">idf.py</span></code> script. Here is an example of how to program the ECDSA key:</p>
+<p>Using eFuses to store the ECDSA key:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>idf.py<span class="w"> </span>efuse-burn-key<span class="w"> </span>&lt;BLOCK_NUM&gt;<span class="w"> </span>&lt;/path/to/ecdsa_private_key.pem&gt;<span class="w"> </span>ECDSA_KEY
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Six physical eFuse blocks can be used as keys for the ECDSA_DS module: block 4 ~ block 9. E.g., for block 4 (which is the first key block) , the argument should be <code class="docutils literal notranslate"><span class="pre">BLOCK_KEY0</span></code>.</p>
+</div>
+<p>Using the Key Manager to store the ECDSA key:</p>
+<p>ECDSA private keys can be stored in the Key Manager. Refer to <a class="reference internal" href="key_manager.html#key-manager"><span class="std std-ref">Key Manager</span></a> for more details.</p>
+<p>Deploy an ECDSA key into the Key Manager and store the generated Key Recovery info in the flash memory for persistent keys.</p>
+<p>Alternatively the ECDSA key can also be programmed through the application running on the target.</p>
+<p>Using eFuses to store the ECDSA key:</p>
+<p>Following code snippet uses <a class="reference internal" href="../system/efuse.html#_CPPv419esp_efuse_write_key17esp_efuse_block_t19esp_efuse_purpose_tPKv6size_t" title="esp_efuse_write_key"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_efuse_write_key()</span></code></a> to set physical key block 0 in the eFuse with key purpose as <a class="reference internal" href="../system/efuse.html#_CPPv4N19esp_efuse_purpose_t31ESP_EFUSE_KEY_PURPOSE_ECDSA_KEYE" title="esp_efuse_purpose_t::ESP_EFUSE_KEY_PURPOSE_ECDSA_KEY"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">esp_efuse_purpose_t::ESP_EFUSE_KEY_PURPOSE_ECDSA_KEY</span></code></a>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_efuse.h"</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">key_data</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">esp_err_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_efuse_write_key</span><span class="p">(</span><span class="n">EFUSE_BLK_KEY0</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">ESP_EFUSE_KEY_PURPOSE_ECDSA_KEY</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">key_data</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">key_data</span><span class="p">));</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// written key</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// writing key failed, maybe written already</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="deterministic-signature-generation">
+<h2>Deterministic Signature Generation<a class="headerlink" href="#deterministic-signature-generation" title="Permalink to this heading"></a></h2>
+<p>The ECDSA_DS peripheral of ESP32-P4 also supports generation of deterministic signatures using deterministic derivation of the parameter K as specified in the <a class="reference external" href="https://tools.ietf.org/html/rfc6979">RFC 6979</a> section 3.2.</p>
+</section>
+<section id="non-determinisitic-signature-generation">
+<h2>Non-Determinisitic Signature Generation<a class="headerlink" href="#non-determinisitic-signature-generation" title="Permalink to this heading"></a></h2>
+<section id="dependency-on-trng">
+<h3>Dependency on TRNG<a class="headerlink" href="#dependency-on-trng" title="Permalink to this heading"></a></h3>
+<p>The ECDSA_DS peripheral relies on the hardware True Random Number Generator (TRNG) for its internal entropy requirement for generating non-deterministic signatures. During ECDSA signature creation, the algorithm requires a random integer to be generated as specified in the <a class="reference external" href="https://tools.ietf.org/html/rfc6090">RFC 6090</a> section 5.3.2.</p>
+<p>Please ensure that hardware <a class="reference internal" href="../system/random.html"><span class="doc">RNG</span></a> is enabled before starting ECDSA computations (primarily signing) in the application.</p>
+</section>
+</section>
+<section id="application-outline">
+<h2>Application Outline<a class="headerlink" href="#application-outline" title="Permalink to this heading"></a></h2>
+<p>Please refer to the <a class="reference internal" href="../protocols/esp_tls.html#ecdsa-peri-with-esp-tls"><span class="std std-ref">ECDSA Digital Signature Peripheral (ECDSA_DS) with ESP-TLS</span></a> guide for details on how-to use the ECDSA_DS peripheral for establishing a mutually authenticated TLS connection.</p>
+<p>The ECDSA_DS peripheral in Mbed TLS stack is integrated by overriding the ECDSA signing and verifying APIs. Please note that, the ECDSA_DS peripheral does not support all curves or hash algorithms, and hence for cases where the hardware requirements are not met, the implementation falls back to the software.</p>
+<p>For a particular TLS context, additional APIs have been supplied to populate certain fields (e.g., private key ctx) to differentiate routing to hardware. ESP-TLS layer integrates these APIs internally and hence no additional work is required at the application layer. However, for custom use-cases please refer to API details below.</p>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/mbedtls/port/psa_driver/include/psa_crypto_driver_esp_ecdsa_contexts.h">components/mbedtls/port/psa_driver/include/psa_crypto_driver_esp_ecdsa_contexts.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"psa_crypto_driver_esp_ecdsa_contexts.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">mbedtls</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">mbedtls</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES mbedtls
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES mbedtls
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=ECDSA Digital Signature Peripheral (ECDSA_DS) (api-reference/peripherals/ecdsa)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=ECDSA Digital Signature Peripheral (ECDSA_DS) (api-reference/peripherals/ecdsa)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="clk_tree.html" class="btn btn-neutral float-left" title="Clock Tree" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="etm.html" class="btn btn-neutral float-right" title="Event Task Matrix (ETM)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

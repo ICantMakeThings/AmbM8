@@ -1,0 +1,1426 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera Controller Driver - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/camera_driver.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/camera_driver';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Clock Tree" href="clk_tree.html" />
+    <link rel="prev" title="BitScrambler Driver" href="bitscrambler.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Camera Controller Driver</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Camera Controller Driver</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/camera_driver.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="camera-controller-driver">
+<h1>Camera Controller Driver<a class="headerlink" href="#camera-controller-driver" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/camera_driver.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>ESP32-P4 has the following hardware designed for communication with external camera sensors:</p>
+<p><ul class="simple">
+<li><p>MIPI Camera Serial Interface (MIPI CSI)</p></li>
+<li><p>Digital Video Port via ISP module (ISP DVP)</p></li>
+<li><p>Digital Video Port via LCD_CAM module (LCD_CAM DVP)</p></li>
+</ul>
+</p>
+<p>The camera controller driver provides an interface for these hardware peripherals.</p>
+</section>
+<section id="functional-overview">
+<h2>Functional Overview<a class="headerlink" href="#functional-overview" title="Permalink to this heading"></a></h2>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="#cam-resource-allocation"><span class="std std-ref">Resource Allocation</span></a> – Describes how to allocate and configure camera controller instances, and how to release resources when no longer needed.</p></li>
+<li><p><a class="reference internal" href="#cam-enable-disable"><span class="std std-ref">Enable and Disable the Camera Controller Driver</span></a> – Explains how to enable and disable a camera controller.</p></li>
+<li><p><a class="reference internal" href="#cam-start-stop"><span class="std std-ref">Start and Stop the Camera Controller Driver</span></a> – Details how to start and stop a camera controller.</p></li>
+<li><p><a class="reference internal" href="#cam-receive"><span class="std std-ref">Receive Data from a Camera Sensor</span></a> – Explains how to receive signals from a camera sensor.</p></li>
+<li><p><a class="reference internal" href="#cam-callback"><span class="std std-ref">Register Event Callbacks</span></a> – Describes how to register user-defined event callback functions.</p></li>
+<li><p><a class="reference internal" href="#cam-thread-safety"><span class="std std-ref">Thread Safety</span></a> – Lists APIs that are thread-safe.</p></li>
+<li><p><a class="reference internal" href="#cam-kconfig-options"><span class="std std-ref">Kconfig Options</span></a> – Lists supported Kconfig options that affect driver behavior.</p></li>
+<li><p><a class="reference internal" href="#cam-iram-safe"><span class="std std-ref">IRAM Safety</span></a> – Provides guidance on making CSI interrupt and control functions work reliably when the cache is disabled.</p></li>
+</ul>
+</p>
+<section id="resource-allocation">
+<span id="cam-resource-allocation"></span><h3>Resource Allocation<a class="headerlink" href="#resource-allocation" title="Permalink to this heading"></a></h3>
+<section id="install-the-camera-controller-driver">
+<h4>Install the Camera Controller Driver<a class="headerlink" href="#install-the-camera-controller-driver" title="Permalink to this heading"></a></h4>
+<p>You can implement the camera controller driver using one of the following methods:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv420esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_csi_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_csi_ctlr()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv424esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_isp_dvp_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_isp_dvp_ctlr()</span></code></a></p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_lcd_cam_ctlr()</span></code></p></li>
+</ul>
+</p>
+<p>You can implement a camera controller driver using the CSI peripheral. This requires configuration via <a class="reference internal" href="#_CPPv425esp_cam_ctlr_csi_config_t" title="esp_cam_ctlr_csi_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_csi_config_t</span></code></a>.</p>
+<p>After specifying <a class="reference internal" href="#_CPPv425esp_cam_ctlr_csi_config_t" title="esp_cam_ctlr_csi_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_csi_config_t</span></code></a>, call <a class="reference internal" href="#_CPPv420esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_csi_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_csi_ctlr()</span></code></a> to allocate and initialize a CSI camera controller handle. If successful, this function returns a CSI camera controller handle. See the example below.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_csi.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_csi_config_t</span><span class="w"> </span><span class="n">csi_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">ctlr_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MIPI_CSI_DISP_HSIZE</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MIPI_CSI_DISP_VSIZE_640P</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">lane_bit_rate_mbps</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MIPI_CSI_LANE_BITRATE_MBPS</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">input_data_color_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAM_CTLR_COLOR_RAW8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">output_data_color_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAM_CTLR_COLOR_RGB565</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">data_lane_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">byte_swap_en</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">queue_items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_new_csi_ctlr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">csi_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">handle</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The CSI peripheral in ESP32-P4 requires a stable 2.5 V power supply. Refer to the schematic diagram to ensure the power supply pins are connected to 2.5 V before using the MIPI CSI driver.</p>
+<p>In ESP32-P4, you can power the CSI using the internal adjustable LDO. Connect the LDO channel output pin to the CSI power supply pin. Before initializing the CSI driver, use the API in <a class="reference internal" href="ldo_regulator.html"><span class="doc">Low Dropout Voltage Regulator (LDO)</span></a> to configure the LDO to output 2.5 V.</p>
+<p>You can implement a camera controller driver using the ISP DVP peripheral. This requires configuration via <a class="reference internal" href="#_CPPv426esp_cam_ctlr_isp_dvp_cfg_t" title="esp_cam_ctlr_isp_dvp_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_isp_dvp_cfg_t</span></code></a>.</p>
+<p>After specifying <a class="reference internal" href="#_CPPv426esp_cam_ctlr_isp_dvp_cfg_t" title="esp_cam_ctlr_isp_dvp_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_isp_dvp_cfg_t</span></code></a>, call <a class="reference internal" href="#_CPPv424esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_isp_dvp_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_isp_dvp_ctlr()</span></code></a> to allocate and initialize an ISP DVP camera controller handle. If successful, this function returns an ISP DVP camera controller handle. See the example below.</p>
+<p>Before calling <a class="reference internal" href="#_CPPv424esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_isp_dvp_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_isp_dvp_ctlr()</span></code></a>, create an ISP handle using <a class="reference internal" href="isp.html#_CPPv421esp_isp_new_processorPK23esp_isp_processor_cfg_tP17isp_proc_handle_t" title="esp_isp_new_processor"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_isp_new_processor()</span></code></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_isp_dvp.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/isp.h"</span>
+
+<span class="cp">#define MIPI_CSI_DISP_HSIZE   800   </span><span class="c1">// example value, replace with actual resolution</span>
+<span class="cp">#define MIPI_CSI_DISP_VSIZE   600   </span><span class="c1">// example value, replace with actual resolution</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">isp_proc_handle_t</span><span class="w"> </span><span class="n">isp_proc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">esp_isp_processor_cfg_t</span><span class="w"> </span><span class="n">isp_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">clk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">120</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">input_data_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISP_INPUT_DATA_SOURCE_DVP</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">input_data_color_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISP_COLOR_RAW8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">output_data_color_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ISP_COLOR_RGB565</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">has_line_start_packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">has_line_end_packet</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MIPI_CSI_DISP_HSIZE</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MIPI_CSI_DISP_VSIZE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_isp_new_processor</span><span class="p">(</span><span class="o">&amp;</span><span class="n">isp_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">isp_proc</span><span class="p">));</span>
+
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">cam_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_isp_dvp_cfg_t</span><span class="w"> </span><span class="n">dvp_ctlr_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">data_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="mi">53</span><span class="p">,</span><span class="w"> </span><span class="mi">54</span><span class="p">,</span><span class="w"> </span><span class="mi">52</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="mi">45</span><span class="p">,</span><span class="w"> </span><span class="mi">46</span><span class="p">,</span><span class="w"> </span><span class="mi">47</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">},</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">21</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">hsync_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">23</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">de_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">22</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">io_flags</span><span class="p">.</span><span class="n">vsync_invert</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">queue_items</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_new_isp_dvp_ctlr</span><span class="p">(</span><span class="n">isp_proc</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dvp_ctlr_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cam_handle</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You can implement a camera controller driver using the DVP port of LCD_CAM. This requires configuration via <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_dvp_config_t</span></code>.</p>
+<p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_cam_ctlr_dvp_config_t::exexternal_xtal</span></code>: Set this to use an externally generated xclk. Otherwise, the camera driver generates it internally.</p>
+<p>After specifying <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_lcd_cam_cfg_t</span></code>, call <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_lcd_cam_ctlr()</span></code> to allocate and initialize a DVP camera controller handle. If successful, this function returns a DVP camera controller handle. See the example below.</p>
+<p>After calling <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_dvp_ctlr()</span></code>, allocate a camera buffer that meets alignment constraints, or call <a class="reference internal" href="#_CPPv425esp_cam_ctlr_alloc_buffer21esp_cam_ctlr_handle_t6size_t8uint32_t" title="esp_cam_ctlr_alloc_buffer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_alloc_buffer()</span></code></a> to allocate automatically.</p>
+<p>To configure format conversion, call <a class="reference internal" href="#_CPPv430esp_cam_ctlr_format_conversion21esp_cam_ctlr_handle_tPK29cam_ctlr_format_conv_config_t" title="esp_cam_ctlr_format_conversion"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_format_conversion()</span></code></a>. The driver supports the following conversion types:</p>
+<ul class="simple">
+<li><p>YUV to RGB</p></li>
+<li><p>RGB to YUV</p></li>
+<li><p>YUV to YUV</p></li>
+</ul>
+<p>Supported color ranges:
+* Full range: 0-255 for both RGB and YUV
+* Limited range: RGB 16-240, YUV Y:16-240, U-V:16-235</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_isp_dvp.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">cam_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">esp_cam_ctlr_dvp_pin_config_t</span><span class="w"> </span><span class="n">pin_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DVP_CAM_DATA_WIDTH</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">data_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D0_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D1_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D2_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D3_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D4_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D5_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D6_IO</span><span class="p">,</span>
+<span class="w">            </span><span class="n">EXAMPLE_DVP_CAM_D7_IO</span><span class="p">,</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="p">.</span><span class="n">vsync_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DVP_CAM_VSYNC_IO</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">de_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DVP_CAM_DE_IO</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pclk_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DVP_CAM_PCLK_IO</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">xclk_io</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DVP_CAM_XCLK_IO</span><span class="p">,</span><span class="w"> </span><span class="c1">// Set XCLK pin to generate XCLK signal</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">esp_cam_ctlr_dvp_config_t</span><span class="w"> </span><span class="n">dvp_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">ctlr_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAM_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">h_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONFIG_EXAMPLE_CAM_HRES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">v_res</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CONFIG_EXAMPLE_CAM_VRES</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">input_data_color_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAM_CTLR_COLOR_RGB565</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">output_data_color_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">CAM_CTLR_COLOR_RGB565</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">dma_burst_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">128</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">pin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">&amp;</span><span class="n">pin_cfg</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">bk_buffer_dis</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">xclk_freq</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DVP_CAM_XCLK_FREQ_HZ</span><span class="p">,</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_new_dvp_ctlr</span><span class="p">(</span><span class="o">&amp;</span><span class="n">dvp_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cam_handle</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="uninstall-the-camera-controller-driver">
+<h4>Uninstall the Camera Controller Driver<a class="headerlink" href="#uninstall-the-camera-controller-driver" title="Permalink to this heading"></a></h4>
+<p>To release resources for a camera controller driver that is no longer needed, call <a class="reference internal" href="#_CPPv416esp_cam_ctlr_del21esp_cam_ctlr_handle_t" title="esp_cam_ctlr_del"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_del()</span></code></a>. This releases the underlying hardware.</p>
+</section>
+</section>
+<section id="enable-and-disable-the-camera-controller-driver">
+<span id="cam-enable-disable"></span><h3>Enable and Disable the Camera Controller Driver<a class="headerlink" href="#enable-and-disable-the-camera-controller-driver" title="Permalink to this heading"></a></h3>
+<p>Before operating the camera controller, enable the driver by calling <a class="reference internal" href="#_CPPv419esp_cam_ctlr_enable21esp_cam_ctlr_handle_t" title="esp_cam_ctlr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_enable()</span></code></a>. This switches the driver state from <strong>init</strong> to <strong>enable</strong>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_ctlr_enable</span><span class="p">(</span><span class="n">handle</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To disable the driver and return to the <strong>init</strong> state, call <a class="reference internal" href="#_CPPv420esp_cam_ctlr_disable21esp_cam_ctlr_handle_t" title="esp_cam_ctlr_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_disable()</span></code></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_ctlr_disable</span><span class="p">(</span><span class="n">handle</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="start-and-stop-the-camera-controller-driver">
+<span id="cam-start-stop"></span><h3>Start and Stop the Camera Controller Driver<a class="headerlink" href="#start-and-stop-the-camera-controller-driver" title="Permalink to this heading"></a></h3>
+<p>Before receiving signals from a camera sensor, start the driver by calling <a class="reference internal" href="#_CPPv418esp_cam_ctlr_start21esp_cam_ctlr_handle_t" title="esp_cam_ctlr_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_start()</span></code></a>. This switches the driver state from <strong>enable</strong> to <strong>start</strong>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_log.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_ctlr_start</span><span class="p">(</span><span class="n">handle</span><span class="p">));</span>
+<span class="w">    </span><span class="n">ESP_LOGI</span><span class="p">(</span><span class="s">"CAM"</span><span class="p">,</span><span class="w"> </span><span class="s">"Camera controller started successfully"</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>To stop the driver and return to the <strong>enable</strong> state, call <a class="reference internal" href="#_CPPv417esp_cam_ctlr_stop21esp_cam_ctlr_handle_t" title="esp_cam_ctlr_stop"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_stop()</span></code></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">app_main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_cam_ctlr_handle_t</span><span class="w"> </span><span class="n">handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_ctlr_stop</span><span class="p">(</span><span class="n">handle</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+<section id="receive-data-from-a-camera-sensor">
+<span id="cam-receive"></span><h3>Receive Data from a Camera Sensor<a class="headerlink" href="#receive-data-from-a-camera-sensor" title="Permalink to this heading"></a></h3>
+<p>To receive data from a camera sensor, call <a class="reference internal" href="#_CPPv420esp_cam_ctlr_receive21esp_cam_ctlr_handle_tP20esp_cam_ctlr_trans_t8uint32_t" title="esp_cam_ctlr_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_receive()</span></code></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_err.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_cam_ctlr_receive</span><span class="p">(</span><span class="n">handle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">my_trans</span><span class="p">,</span><span class="w"> </span><span class="n">ESP_CAM_CTLR_MAX_DELAY</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="register-event-callbacks">
+<span id="cam-callback"></span><h3>Register Event Callbacks<a class="headerlink" href="#register-event-callbacks" title="Permalink to this heading"></a></h3>
+<p>After the camera controller driver starts receiving data, it can generate events dynamically. To execute user-defined functions when events occur, register your callback function using <a class="reference internal" href="#_CPPv437esp_cam_ctlr_register_event_callbacks21esp_cam_ctlr_handle_tPK22esp_cam_ctlr_evt_cbs_tPv" title="esp_cam_ctlr_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_register_event_callbacks()</span></code></a>. Supported event callbacks are listed in <a class="reference internal" href="#_CPPv422esp_cam_ctlr_evt_cbs_t" title="esp_cam_ctlr_evt_cbs_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_cam_ctlr_evt_cbs_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N22esp_cam_ctlr_evt_cbs_t16on_get_new_transE" title="esp_cam_ctlr_evt_cbs_t::on_get_new_trans"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_cam_ctlr_evt_cbs_t::on_get_new_trans</span></code></a> – Called after the driver finishes a transaction and attempts to get a new transaction descriptor. Also called in <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">s_ctlr_csi_start()</span></code>. If this callback does not provide a new transaction descriptor, the driver uses the internal backup buffer if the <code class="docutils literal notranslate"><span class="pre">bk_buffer_dis</span></code> flag is set.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N22esp_cam_ctlr_evt_cbs_t17on_trans_finishedE" title="esp_cam_ctlr_evt_cbs_t::on_trans_finished"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_cam_ctlr_evt_cbs_t::on_trans_finished</span></code></a> – Called when the driver finishes a transaction. This function runs in the ISR context. Ensure that it does not block (for example, only use FreeRTOS APIs with the <code class="docutils literal notranslate"><span class="pre">ISR</span></code> suffix).</p></li>
+</ul>
+</section>
+<section id="thread-safety">
+<span id="cam-thread-safety"></span><h3>Thread Safety<a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>The following factory functions are thread-safe and can be called from different RTOS tasks without additional locking:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv420esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_csi_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_csi_ctlr()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv424esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t" title="esp_cam_new_isp_dvp_ctlr"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_new_isp_dvp_ctlr()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv416esp_cam_ctlr_del21esp_cam_ctlr_handle_t" title="esp_cam_ctlr_del"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_cam_ctlr_del()</span></code></a></p></li>
+</ul>
+</p>
+</section>
+<section id="kconfig-options">
+<span id="cam-kconfig-options"></span><h3>Kconfig Options<a class="headerlink" href="#kconfig-options" title="Permalink to this heading"></a></h3>
+<p>The following Kconfig options affect interrupt handler behavior when the cache is disabled:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-cam-ctlr-mipi-csi-isr-cache-safe"><span class="std std-ref">CONFIG_CAM_CTLR_MIPI_CSI_ISR_CACHE_SAFE</span></a>, see <a class="reference internal" href="#cam-thread-safety"><span class="std std-ref">Thread Safety</span></a> for details.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-cam-ctlr-isp-dvp-isr-cache-safe"><span class="std std-ref">CONFIG_CAM_CTLR_ISP_DVP_ISR_CACHE_SAFE</span></a>, see <a class="reference internal" href="#cam-thread-safety"><span class="std std-ref">Thread Safety</span></a> for details.</p></li>
+</ul>
+</p>
+</section>
+<section id="iram-safety">
+<span id="cam-iram-safe"></span><h3>IRAM Safety<a class="headerlink" href="#iram-safety" title="Permalink to this heading"></a></h3>
+<p>By default, CSI interrupts are delayed when the cache is disabled during flash write or erase operations. They are handled after the cache is enabled again.</p>
+<p>The following Kconfig options:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-cam-ctlr-mipi-csi-isr-cache-safe"><span class="std std-ref">CONFIG_CAM_CTLR_MIPI_CSI_ISR_CACHE_SAFE</span></a></p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-cam-ctlr-isp-dvp-isr-cache-safe"><span class="std std-ref">CONFIG_CAM_CTLR_ISP_DVP_ISR_CACHE_SAFE</span></a></p></li>
+</ul>
+</p>
+<ul class="simple">
+<li><p>Enable the interrupt being serviced even when the cache is disabled.</p></li>
+<li><p>Place all functions used by the ISR into IRAM.</p></li>
+<li><p>Place driver object into DRAM (to avoid mapping to PSRAM).</p></li>
+</ul>
+<p>This allows interrupts to run while the cache is disabled, but increases IRAM usage. Ensure that user callbacks and related code/data are IRAM-safe or DRAM-safe when the cache is disabled.</p>
+</section>
+</section>
+<section id="application-examples">
+<h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/camera/mipi_isp_dsi">peripherals/camera/mipi_isp_dsi</a> – Demonstrates how to use the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component to capture signals from a MIPI CSI camera sensor via the ISP module and display them on an LCD screen via a DSI interface.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/camera/dvp_isp_dsi">peripherals/camera/dvp_isp_dsi</a> – Demonstrates how to use the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component to capture signals from a DVP camera sensor via the ISP module and display them on an LCD screen via a DSI interface.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/camera/dvp_dsi">peripherals/camera/dvp_dsi</a> – Demonstrates how to use the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component to capture DVP camera sensor data and display it on a MIPI DSI LCD.</p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_cam/include/esp_cam_ctlr.h">components/esp_driver_cam/include/esp_cam_ctlr.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_cam
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_cam
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419esp_cam_ctlr_enable21esp_cam_ctlr_handle_t">
+<span id="_CPPv319esp_cam_ctlr_enable21esp_cam_ctlr_handle_t"></span><span id="_CPPv219esp_cam_ctlr_enable21esp_cam_ctlr_handle_t"></span><span id="esp_cam_ctlr_enable__esp_cam_ctlr_handle_t"></span><span class="target" id="esp__cam__ctlr_8h_1afc1938ec2b5d6a6f1ea71c21f88d5e17"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419esp_cam_ctlr_enable21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable the ESP CAM controller. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418esp_cam_ctlr_start21esp_cam_ctlr_handle_t">
+<span id="_CPPv318esp_cam_ctlr_start21esp_cam_ctlr_handle_t"></span><span id="_CPPv218esp_cam_ctlr_start21esp_cam_ctlr_handle_t"></span><span id="esp_cam_ctlr_start__esp_cam_ctlr_handle_t"></span><span class="target" id="esp__cam__ctlr_8h_1a2acc7eff222d1c6a25ac4651721af137"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_start</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418esp_cam_ctlr_start21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Start the ESP CAM controller. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417esp_cam_ctlr_stop21esp_cam_ctlr_handle_t">
+<span id="_CPPv317esp_cam_ctlr_stop21esp_cam_ctlr_handle_t"></span><span id="_CPPv217esp_cam_ctlr_stop21esp_cam_ctlr_handle_t"></span><span id="esp_cam_ctlr_stop__esp_cam_ctlr_handle_t"></span><span class="target" id="esp__cam__ctlr_8h_1a6f6e3dfc2f09c04fa02ba417347c67a0"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_stop</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417esp_cam_ctlr_stop21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Stop the ESP CAM controller. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420esp_cam_ctlr_disable21esp_cam_ctlr_handle_t">
+<span id="_CPPv320esp_cam_ctlr_disable21esp_cam_ctlr_handle_t"></span><span id="_CPPv220esp_cam_ctlr_disable21esp_cam_ctlr_handle_t"></span><span id="esp_cam_ctlr_disable__esp_cam_ctlr_handle_t"></span><span class="target" id="esp__cam__ctlr_8h_1ad0bfde6f0c0e01963cad54ea5b52cc67"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420esp_cam_ctlr_disable21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable the ESP CAM controller. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420esp_cam_ctlr_receive21esp_cam_ctlr_handle_tP20esp_cam_ctlr_trans_t8uint32_t">
+<span id="_CPPv320esp_cam_ctlr_receive21esp_cam_ctlr_handle_tP20esp_cam_ctlr_trans_t8uint32_t"></span><span id="_CPPv220esp_cam_ctlr_receive21esp_cam_ctlr_handle_tP20esp_cam_ctlr_trans_t8uint32_t"></span><span id="esp_cam_ctlr_receive__esp_cam_ctlr_handle_t.esp_cam_ctlr_trans_tP.uint32_t"></span><span class="target" id="esp__cam__ctlr_8h_1acc3015a49d64596f117b37e199d41270"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_receive</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span>, <a class="reference internal" href="#_CPPv420esp_cam_ctlr_trans_t" title="esp_cam_ctlr_trans_t"><span class="n"><span class="pre">esp_cam_ctlr_trans_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">trans</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout_ms</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420esp_cam_ctlr_receive21esp_cam_ctlr_handle_tP20esp_cam_ctlr_trans_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Receive data for the given transaction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle. </p></li>
+<li><p><strong>trans</strong> -- <strong>[in]</strong> ESP CAM controller transaction type. </p></li>
+<li><p><strong>timeout_ms</strong> -- <strong>[in]</strong> Timeout. Measurement unit: milliseconds.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416esp_cam_ctlr_del21esp_cam_ctlr_handle_t">
+<span id="_CPPv316esp_cam_ctlr_del21esp_cam_ctlr_handle_t"></span><span id="_CPPv216esp_cam_ctlr_del21esp_cam_ctlr_handle_t"></span><span id="esp_cam_ctlr_del__esp_cam_ctlr_handle_t"></span><span class="target" id="esp__cam__ctlr_8h_1a37148be1390f2a58dd92a487322e6b8d"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_del</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416esp_cam_ctlr_del21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete the ESP CAM controller handle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437esp_cam_ctlr_register_event_callbacks21esp_cam_ctlr_handle_tPK22esp_cam_ctlr_evt_cbs_tPv">
+<span id="_CPPv337esp_cam_ctlr_register_event_callbacks21esp_cam_ctlr_handle_tPK22esp_cam_ctlr_evt_cbs_tPv"></span><span id="_CPPv237esp_cam_ctlr_register_event_callbacks21esp_cam_ctlr_handle_tPK22esp_cam_ctlr_evt_cbs_tPv"></span><span id="esp_cam_ctlr_register_event_callbacks__esp_cam_ctlr_handle_t.esp_cam_ctlr_evt_cbs_tCP.voidP"></span><span class="target" id="esp__cam__ctlr_8h_1a3976103a9c8323a892501b755fa6330f"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_register_event_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422esp_cam_ctlr_evt_cbs_t" title="esp_cam_ctlr_evt_cbs_t"><span class="n"><span class="pre">esp_cam_ctlr_evt_cbs_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cbs</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">user_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437esp_cam_ctlr_register_event_callbacks21esp_cam_ctlr_handle_tPK22esp_cam_ctlr_evt_cbs_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register ESP CAM controller event callbacks. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle. </p></li>
+<li><p><strong>cbs</strong> -- <strong>[in]</strong> ESP CAM controller event callbacks. </p></li>
+<li><p><strong>user_data</strong> -- <strong>[in]</strong> User data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429esp_cam_ctlr_get_frame_buffer21esp_cam_ctlr_handle_t8uint32_tPPKvz">
+<span id="_CPPv329esp_cam_ctlr_get_frame_buffer21esp_cam_ctlr_handle_t8uint32_tPPKvz"></span><span id="_CPPv229esp_cam_ctlr_get_frame_buffer21esp_cam_ctlr_handle_t8uint32_tPPKvz"></span><span id="esp_cam_ctlr_get_frame_buffer__esp_cam_ctlr_handle_t.uint32_t.voidCPP.z"></span><span class="target" id="esp__cam__ctlr_8h_1a677ac4f8b1f582a97bad8eb45ad066ce"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_get_frame_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">fb_num</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">fb0</span></span>, <span class="p"><span class="pre">...</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429esp_cam_ctlr_get_frame_buffer21esp_cam_ctlr_handle_t8uint32_tPPKvz" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the ESP CAM controller internal allocated backup buffer(s) address. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Data in the internal buffer is generally ready when the <code class="docutils literal notranslate"><span class="pre">on_trans_finished</span></code> event occurs.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle. </p></li>
+<li><p><strong>fb_num</strong> -- <strong>[in]</strong> Number of frame buffers to get. This value must match the number of subsequent fbN parameters. </p></li>
+<li><p><strong>fb0</strong> -- <strong>[out]</strong> Address of the first frame buffer. </p></li>
+<li><p><strong>...</strong> -- <strong>[out]</strong> List of other frame buffers, if any.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid driver state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv433esp_cam_ctlr_get_frame_buffer_len21esp_cam_ctlr_handle_tP6size_t">
+<span id="_CPPv333esp_cam_ctlr_get_frame_buffer_len21esp_cam_ctlr_handle_tP6size_t"></span><span id="_CPPv233esp_cam_ctlr_get_frame_buffer_len21esp_cam_ctlr_handle_tP6size_t"></span><span id="esp_cam_ctlr_get_frame_buffer_len__esp_cam_ctlr_handle_t.sP"></span><span class="target" id="esp__cam__ctlr_8h_1ae21d952c232d2186d6e330acdf3c5f87"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_get_frame_buffer_len</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_fb_len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433esp_cam_ctlr_get_frame_buffer_len21esp_cam_ctlr_handle_tP6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the length of the ESP CAM controller internal backup buffer. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle. </p></li>
+<li><p><strong>ret_fb_len</strong> -- <strong>[out]</strong> Optional. The size of each frame buffer. Measurement unit: bytes.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: NULL pointer.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Invalid driver state. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425esp_cam_ctlr_alloc_buffer21esp_cam_ctlr_handle_t6size_t8uint32_t">
+<span id="_CPPv325esp_cam_ctlr_alloc_buffer21esp_cam_ctlr_handle_t6size_t8uint32_t"></span><span id="_CPPv225esp_cam_ctlr_alloc_buffer21esp_cam_ctlr_handle_t6size_t8uint32_t"></span><span id="esp_cam_ctlr_alloc_buffer__esp_cam_ctlr_handle_t.s.uint32_t"></span><span class="target" id="esp__cam__ctlr_8h_1ad1acc4fd81222b6b851471c69429bce3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_alloc_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buf_caps</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425esp_cam_ctlr_alloc_buffer21esp_cam_ctlr_handle_t6size_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate a camera buffer for the ESP CAM controller. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function must be called after <code class="docutils literal notranslate"><span class="pre">esp_cam_new_*_ctlr</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle. </p></li>
+<li><p><strong>size</strong> -- <strong>[in]</strong> Buffer size. Measurement unit: bytes. </p></li>
+<li><p><strong>buf_caps</strong> -- <strong>[in]</strong> Buffer allocation capabilities:<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_SPIRAM</span></code> || <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_DMA</span></code>: Memory in external SPI RAM.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_INTERNAL</span></code> || <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_DMA</span></code>: Memory in internal SRAM.</p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>Buffer pointer on success.</p></li>
+<li><p>NULL on failure. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430esp_cam_ctlr_format_conversion21esp_cam_ctlr_handle_tPK29cam_ctlr_format_conv_config_t">
+<span id="_CPPv330esp_cam_ctlr_format_conversion21esp_cam_ctlr_handle_tPK29cam_ctlr_format_conv_config_t"></span><span id="_CPPv230esp_cam_ctlr_format_conversion21esp_cam_ctlr_handle_tPK29cam_ctlr_format_conv_config_t"></span><span id="esp_cam_ctlr_format_conversion__esp_cam_ctlr_handle_t.cam_ctlr_format_conv_config_tCP"></span><span class="target" id="esp__cam__ctlr_8h_1a0fc9aa1fb0c5e1a377bf55848a7252e8"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_format_conversion</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">cam_ctlr_format_conv_config_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">conv_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430esp_cam_ctlr_format_conversion21esp_cam_ctlr_handle_tPK29cam_ctlr_format_conv_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure format conversion. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>handle</strong> -- <strong>[in]</strong> ESP CAM controller handle. </p></li>
+<li><p><strong>conv_cfg</strong> -- <strong>[in]</strong> Color conversion configuration, containing source and destination formats.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Format conversion not supported by this controller. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id1">
+<h3>Header File<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_cam/include/esp_cam_ctlr_types.h">components/esp_driver_cam/include/esp_cam_ctlr_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_cam
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_cam
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420esp_cam_ctlr_trans_t">
+<span id="_CPPv320esp_cam_ctlr_trans_t"></span><span id="_CPPv220esp_cam_ctlr_trans_t"></span><span id="esp_cam_ctlr_trans_t"></span><span class="target" id="structesp__cam__ctlr__trans__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_trans_t</span></span></span><a class="headerlink" href="#_CPPv420esp_cam_ctlr_trans_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transaction type for the ESP CAM controller. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_cam_ctlr_trans_t6bufferE">
+<span id="_CPPv3N20esp_cam_ctlr_trans_t6bufferE"></span><span id="_CPPv2N20esp_cam_ctlr_trans_t6bufferE"></span><span id="esp_cam_ctlr_trans_t::buffer__voidP"></span><span class="target" id="structesp__cam__ctlr__trans__t_1a43dc4a442880aed3ee06462bba832fd4"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">buffer</span></span></span><a class="headerlink" href="#_CPPv4N20esp_cam_ctlr_trans_t6bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transaction buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_cam_ctlr_trans_t6buflenE">
+<span id="_CPPv3N20esp_cam_ctlr_trans_t6buflenE"></span><span id="_CPPv2N20esp_cam_ctlr_trans_t6buflenE"></span><span id="esp_cam_ctlr_trans_t::buflen__s"></span><span class="target" id="structesp__cam__ctlr__trans__t_1addac078b2a7035adeaf96e8fbd9468e9"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">buflen</span></span></span><a class="headerlink" href="#_CPPv4N20esp_cam_ctlr_trans_t6buflenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the transaction buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_cam_ctlr_trans_t13received_sizeE">
+<span id="_CPPv3N20esp_cam_ctlr_trans_t13received_sizeE"></span><span id="_CPPv2N20esp_cam_ctlr_trans_t13received_sizeE"></span><span id="esp_cam_ctlr_trans_t::received_size__s"></span><span class="target" id="structesp__cam__ctlr__trans__t_1aebabc0299a0de440f0af727103a4639a"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">received_size</span></span></span><a class="headerlink" href="#_CPPv4N20esp_cam_ctlr_trans_t13received_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Received size. This value is written by the driver and indicates the actual received size. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv431esp_cam_ctlr_error_event_data_t">
+<span id="_CPPv331esp_cam_ctlr_error_event_data_t"></span><span id="_CPPv231esp_cam_ctlr_error_event_data_t"></span><span id="esp_cam_ctlr_error_event_data_t"></span><span class="target" id="structesp__cam__ctlr__error__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_error_event_data_t</span></span></span><a class="headerlink" href="#_CPPv431esp_cam_ctlr_error_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ESP CAM controller &quot;error&quot; event data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_cam_ctlr_error_event_data_t17csi_host_err_evtsE">
+<span id="_CPPv3N31esp_cam_ctlr_error_event_data_t17csi_host_err_evtsE"></span><span id="_CPPv2N31esp_cam_ctlr_error_event_data_t17csi_host_err_evtsE"></span><span id="esp_cam_ctlr_error_event_data_t::csi_host_err_evts__uint32_t"></span><span class="target" id="structesp__cam__ctlr__error__event__data__t_1a736e4068447007ea70be7a975409f78c"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">csi_host_err_evts</span></span></span><a class="headerlink" href="#_CPPv4N31esp_cam_ctlr_error_event_data_t17csi_host_err_evtsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bitwise OR of <code class="docutils literal notranslate"><span class="pre">esp_cam_ctlr_csi_host_error_t</span></code>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422esp_cam_ctlr_evt_cbs_t">
+<span id="_CPPv322esp_cam_ctlr_evt_cbs_t"></span><span id="_CPPv222esp_cam_ctlr_evt_cbs_t"></span><span id="esp_cam_ctlr_evt_cbs_t"></span><span class="target" id="structesp__cam__ctlr__evt__cbs__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_evt_cbs_t</span></span></span><a class="headerlink" href="#_CPPv422esp_cam_ctlr_evt_cbs_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event callbacks for the ESP CAM controller. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_cam_ctlr_evt_cbs_t16on_get_new_transE">
+<span id="_CPPv3N22esp_cam_ctlr_evt_cbs_t16on_get_new_transE"></span><span id="_CPPv2N22esp_cam_ctlr_evt_cbs_t16on_get_new_transE"></span><span class="target" id="structesp__cam__ctlr__evt__cbs__t_1ad634f627c87522f227bd224bd4f9ea89"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">on_get_new_trans</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420esp_cam_ctlr_trans_t" title="esp_cam_ctlr_trans_t"><span class="n"><span class="pre">esp_cam_ctlr_trans_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">trans</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N22esp_cam_ctlr_evt_cbs_t16on_get_new_transE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for receiving a new transaction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> ESP CAM controller handle. </p>
+</dd>
+<dt class="field-even">Param trans<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> New transaction. </p>
+</dd>
+<dt class="field-odd">Param user_data<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User-registered data.</p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high-priority task is woken up by this function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_cam_ctlr_evt_cbs_t17on_trans_finishedE">
+<span id="_CPPv3N22esp_cam_ctlr_evt_cbs_t17on_trans_finishedE"></span><span id="_CPPv2N22esp_cam_ctlr_evt_cbs_t17on_trans_finishedE"></span><span class="target" id="structesp__cam__ctlr__evt__cbs__t_1a14822ed97c592c474a124292db7fd5d0"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">on_trans_finished</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420esp_cam_ctlr_trans_t" title="esp_cam_ctlr_trans_t"><span class="n"><span class="pre">esp_cam_ctlr_trans_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">trans</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N22esp_cam_ctlr_evt_cbs_t17on_trans_finishedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for a finished transaction. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> ESP CAM controller handle. </p>
+</dd>
+<dt class="field-even">Param trans<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[out]</strong> Finished transaction. </p>
+</dd>
+<dt class="field-odd">Param user_data<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User-registered data.</p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high-priority task is woken up by this function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_cam_ctlr_evt_cbs_t8on_errorE">
+<span id="_CPPv3N22esp_cam_ctlr_evt_cbs_t8on_errorE"></span><span id="_CPPv2N22esp_cam_ctlr_evt_cbs_t8on_errorE"></span><span class="target" id="structesp__cam__ctlr__evt__cbs__t_1a99c47bcf0960ade17563c128e56ac697"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">on_error</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv431esp_cam_ctlr_error_event_data_t" title="esp_cam_ctlr_error_event_data_t"><span class="n"><span class="pre">esp_cam_ctlr_error_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N22esp_cam_ctlr_evt_cbs_t8on_errorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for when an error is detected. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This callback is invoked from ISR context, so it must not call any blocking APIs. When the controller's ISR cache-safe option is enabled, this callback and its user data must be placed in internal RAM.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param handle<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> ESP CAM controller handle. </p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> Error event data. </p>
+</dd>
+<dt class="field-odd">Param user_data<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User-registered data.</p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high-priority task is woken up by this function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_CAM_CTLR_MAX_DELAY">
+<span class="target" id="esp__cam__ctlr__types_8h_1a6162f4526285230d042905e9ac3462e9"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_MAX_DELAY</span></span></span><a class="headerlink" href="#c.ESP_CAM_CTLR_MAX_DELAY" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum timeout value in ticks for the ESP CAM controller. </p>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421esp_cam_ctlr_handle_t">
+<span id="_CPPv321esp_cam_ctlr_handle_t"></span><span id="_CPPv221esp_cam_ctlr_handle_t"></span><span id="esp_cam_ctlr_handle_t"></span><span class="target" id="esp__cam__ctlr__types_8h_1ad682da87400d8437ebd1a29faf2a7caf"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">esp_cam_ctlr_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></span><a class="headerlink" href="#_CPPv421esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Handle for the ESP CAM controller. </p>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv429esp_cam_ctlr_csi_host_error_t">
+<span id="_CPPv329esp_cam_ctlr_csi_host_error_t"></span><span id="_CPPv229esp_cam_ctlr_csi_host_error_t"></span><span class="target" id="esp__cam__ctlr__types_8h_1ac36532a395293dc5de6ac009f3113a84"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_csi_host_error_t</span></span></span><a class="headerlink" href="#_CPPv429esp_cam_ctlr_csi_host_error_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ESP CAM controller CSI host error flags. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These flags summarize the CSI host error type(s) and avoid exposing hardware bit layout. </p>
+</div>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_PHYE">
+<span id="_CPPv3N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_PHYE"></span><span id="_CPPv2N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_PHYE"></span><span class="target" id="esp__cam__ctlr__types_8h_1ac36532a395293dc5de6ac009f3113a84a71b0c05507318f7964bb254e256e447b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_CSI_HOST_ERR_PHY</span></span></span><a class="headerlink" href="#_CPPv4N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_PHYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PHY error. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29esp_cam_ctlr_csi_host_error_t32ESP_CAM_CTLR_CSI_HOST_ERR_PACKETE">
+<span id="_CPPv3N29esp_cam_ctlr_csi_host_error_t32ESP_CAM_CTLR_CSI_HOST_ERR_PACKETE"></span><span id="_CPPv2N29esp_cam_ctlr_csi_host_error_t32ESP_CAM_CTLR_CSI_HOST_ERR_PACKETE"></span><span class="target" id="esp__cam__ctlr__types_8h_1ac36532a395293dc5de6ac009f3113a84a71e7829c5ad21fb9ab8b36ddbc286604"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_CSI_HOST_ERR_PACKET</span></span></span><a class="headerlink" href="#_CPPv4N29esp_cam_ctlr_csi_host_error_t32ESP_CAM_CTLR_CSI_HOST_ERR_PACKETE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Packet error. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29esp_cam_ctlr_csi_host_error_t31ESP_CAM_CTLR_CSI_HOST_ERR_FRAMEE">
+<span id="_CPPv3N29esp_cam_ctlr_csi_host_error_t31ESP_CAM_CTLR_CSI_HOST_ERR_FRAMEE"></span><span id="_CPPv2N29esp_cam_ctlr_csi_host_error_t31ESP_CAM_CTLR_CSI_HOST_ERR_FRAMEE"></span><span class="target" id="esp__cam__ctlr__types_8h_1ac36532a395293dc5de6ac009f3113a84a72e411607e67aaafe97ff0748e059be4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_CSI_HOST_ERR_FRAME</span></span></span><a class="headerlink" href="#_CPPv4N29esp_cam_ctlr_csi_host_error_t31ESP_CAM_CTLR_CSI_HOST_ERR_FRAMEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Frame boundary or sequence error. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_CRCE">
+<span id="_CPPv3N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_CRCE"></span><span id="_CPPv2N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_CRCE"></span><span class="target" id="esp__cam__ctlr__types_8h_1ac36532a395293dc5de6ac009f3113a84a311dc3e69d3c9b59ae82462ce6fa4952"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_CSI_HOST_ERR_CRC</span></span></span><a class="headerlink" href="#_CPPv4N29esp_cam_ctlr_csi_host_error_t29ESP_CAM_CTLR_CSI_HOST_ERR_CRCE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Frame or payload CRC error. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N29esp_cam_ctlr_csi_host_error_t33ESP_CAM_CTLR_CSI_HOST_ERR_DATA_IDE">
+<span id="_CPPv3N29esp_cam_ctlr_csi_host_error_t33ESP_CAM_CTLR_CSI_HOST_ERR_DATA_IDE"></span><span id="_CPPv2N29esp_cam_ctlr_csi_host_error_t33ESP_CAM_CTLR_CSI_HOST_ERR_DATA_IDE"></span><span class="target" id="esp__cam__ctlr__types_8h_1ac36532a395293dc5de6ac009f3113a84a21252ddb65593bca1af8a0dc8a31de9c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_CSI_HOST_ERR_DATA_ID</span></span></span><a class="headerlink" href="#_CPPv4N29esp_cam_ctlr_csi_host_error_t33ESP_CAM_CTLR_CSI_HOST_ERR_DATA_IDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unrecognized or unsupported data type detected. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id2">
+<h3>Header File<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_cam/csi/include/esp_cam_ctlr_csi.h">components/esp_driver_cam/csi/include/esp_cam_ctlr_csi.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_csi.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_cam
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_cam
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>Functions<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t">
+<span id="_CPPv320esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t"></span><span id="_CPPv220esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t"></span><span id="esp_cam_new_csi_ctlr__esp_cam_ctlr_csi_config_tCP.esp_cam_ctlr_handle_tP"></span><span class="target" id="esp__cam__ctlr__csi_8h_1a668a8e261518ab472158aac65423ad6b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_new_csi_ctlr</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv425esp_cam_ctlr_csi_config_t" title="esp_cam_ctlr_csi_config_t"><span class="n"><span class="pre">esp_cam_ctlr_csi_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420esp_cam_new_csi_ctlrPK25esp_cam_ctlr_csi_config_tP21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create a new ESP CAM CSI controller. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> CSI controller configurations. </p></li>
+<li><p><strong>ret_handle</strong> -- <strong>[out]</strong> Returned ESP CAM controller handle.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_NO_MEM: Out of memory.</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Currently unsupported modes or types.</p></li>
+<li><p>ESP_ERR_NOT_FOUND: CSI is already registered. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id4">
+<h3>Structures<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv428esp_cam_ctlr_csi_data_type_t">
+<span id="_CPPv328esp_cam_ctlr_csi_data_type_t"></span><span id="_CPPv228esp_cam_ctlr_csi_data_type_t"></span><span id="esp_cam_ctlr_csi_data_type_t"></span><span class="target" id="structesp__cam__ctlr__csi__data__type__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_csi_data_type_t</span></span></span><a class="headerlink" href="#_CPPv428esp_cam_ctlr_csi_data_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CSI customized data type configuration. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>By default (by setting this structure to 0), embedded data and standard data type will be supported. Under most conditions, you don't need to set this and can keep these to 0. Set this if you want to use customized data type. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_cam_ctlr_csi_data_type_t14bits_per_pixelE">
+<span id="_CPPv3N28esp_cam_ctlr_csi_data_type_t14bits_per_pixelE"></span><span id="_CPPv2N28esp_cam_ctlr_csi_data_type_t14bits_per_pixelE"></span><span id="esp_cam_ctlr_csi_data_type_t::bits_per_pixel__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__data__type__t_1a44e84f1b0e77355e495bb1143a9a5f02"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bits_per_pixel</span></span></span><a class="headerlink" href="#_CPPv4N28esp_cam_ctlr_csi_data_type_t14bits_per_pixelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bits per pixel, by default it's 0, embedded data and standard data type will be supported </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_cam_ctlr_csi_data_type_t13data_type_minE">
+<span id="_CPPv3N28esp_cam_ctlr_csi_data_type_t13data_type_minE"></span><span id="_CPPv2N28esp_cam_ctlr_csi_data_type_t13data_type_minE"></span><span id="esp_cam_ctlr_csi_data_type_t::data_type_min__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__data__type__t_1acd89a810210a3cb4751dafc3b0e3c2ca"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_type_min</span></span></span><a class="headerlink" href="#_CPPv4N28esp_cam_ctlr_csi_data_type_t13data_type_minE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data type, by default it's 0, embedded data and standard data type will be supported </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_cam_ctlr_csi_data_type_t13data_type_maxE">
+<span id="_CPPv3N28esp_cam_ctlr_csi_data_type_t13data_type_maxE"></span><span id="_CPPv2N28esp_cam_ctlr_csi_data_type_t13data_type_maxE"></span><span id="esp_cam_ctlr_csi_data_type_t::data_type_max__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__data__type__t_1a729185286d52c9781ec6900feb0f1ff5"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_type_max</span></span></span><a class="headerlink" href="#_CPPv4N28esp_cam_ctlr_csi_data_type_t13data_type_maxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data type, by default it's 0, embedded data and standard data type will be supported </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv425esp_cam_ctlr_csi_config_t">
+<span id="_CPPv325esp_cam_ctlr_csi_config_t"></span><span id="_CPPv225esp_cam_ctlr_csi_config_t"></span><span id="esp_cam_ctlr_csi_config_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_csi_config_t</span></span></span><a class="headerlink" href="#_CPPv425esp_cam_ctlr_csi_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ESP CAM CSI controller configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t7ctlr_idE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t7ctlr_idE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t7ctlr_idE"></span><span id="esp_cam_ctlr_csi_config_t::ctlr_id__i"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1aadbf18920f2860cc0ddf8b8780dad7f2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ctlr_id</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t7ctlr_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CSI controller ID. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t7clk_srcE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t7clk_srcE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t7clk_srcE"></span><span id="esp_cam_ctlr_csi_config_t::clk_src__mipi_csi_phy_clock_source_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a513e37b76406bba2866892e513936423"></span><span class="n"><span class="pre">mipi_csi_phy_clock_source_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_src</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t7clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CSI PHY clock source. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t5h_resE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t5h_resE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t5h_resE"></span><span id="esp_cam_ctlr_csi_config_t::h_res__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a5b45de4f7b097291ca3b8baf48fb37e0"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">h_res</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t5h_resE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Input horizontal resolution. Measurement unit: pixels per line. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t5v_resE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t5v_resE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t5v_resE"></span><span id="esp_cam_ctlr_csi_config_t::v_res__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a5dde6b9f7fc8024dd14953e0448d60ec"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">v_res</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t5v_resE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Input vertical resolution. Measurement unit: lines per frame. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t13data_lane_numE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t13data_lane_numE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t13data_lane_numE"></span><span id="esp_cam_ctlr_csi_config_t::data_lane_num__uint8_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a0dc6016989e7a2677f381bc98ef70a54"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_lane_num</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t13data_lane_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of data lanes. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t18lane_bit_rate_mbpsE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t18lane_bit_rate_mbpsE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t18lane_bit_rate_mbpsE"></span><span id="esp_cam_ctlr_csi_config_t::lane_bit_rate_mbps__i"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a5a4ce2f217d895d43d95c6886200b4c7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lane_bit_rate_mbps</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t18lane_bit_rate_mbpsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Lane bit rate. Measurement unit: Mbps. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t21input_data_color_typeE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t21input_data_color_typeE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t21input_data_color_typeE"></span><span id="esp_cam_ctlr_csi_config_t::input_data_color_type__cam_ctlr_color_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1ac06f4c195af90d3c0f273b1f02d27c3e"></span><span class="n"><span class="pre">cam_ctlr_color_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">input_data_color_type</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t21input_data_color_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Input color type. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t22output_data_color_typeE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t22output_data_color_typeE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t22output_data_color_typeE"></span><span id="esp_cam_ctlr_csi_config_t::output_data_color_type__cam_ctlr_color_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1aff1c8e038c846b4c07929e700262a2ed"></span><span class="n"><span class="pre">cam_ctlr_color_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">output_data_color_type</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t22output_data_color_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Output color type. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t9data_typeE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t9data_typeE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t9data_typeE"></span><span id="esp_cam_ctlr_csi_config_t::data_type__esp_cam_ctlr_csi_data_type_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a827a8abb34aa5b59834c15e22d5b905d"></span><a class="reference internal" href="#_CPPv428esp_cam_ctlr_csi_data_type_t" title="esp_cam_ctlr_csi_data_type_t"><span class="n"><span class="pre">esp_cam_ctlr_csi_data_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_type</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t9data_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data type configuration. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t11queue_itemsE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t11queue_itemsE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t11queue_itemsE"></span><span id="esp_cam_ctlr_csi_config_t::queue_items__i"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a1c7c3803279f8632d06bf20525ed2cc1"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">queue_items</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t11queue_itemsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of queue items. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t18input_8bit_swap_enE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t18input_8bit_swap_enE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t18input_8bit_swap_enE"></span><span id="esp_cam_ctlr_csi_config_t::input_8bit_swap_en__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1aed9c63b404d235ebefbccddec6c5ec47"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">input_8bit_swap_en</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t18input_8bit_swap_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to enable input 8bit bit swap. [31:24] [23:16] [15:8] [7:0] -&gt; [7:0] [15:8] [23:16] [31:24] </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t19input_16bit_swap_enE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t19input_16bit_swap_enE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t19input_16bit_swap_enE"></span><span id="esp_cam_ctlr_csi_config_t::input_16bit_swap_en__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a2d30d4766e9fe1a4eac25990e07c8c4a"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">input_16bit_swap_en</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t19input_16bit_swap_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to enable input 16bit bit swap. [31:16] [15:0] -&gt; [15:0] [31:16] </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t12byte_swap_enE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t12byte_swap_enE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t12byte_swap_enE"></span><span id="esp_cam_ctlr_csi_config_t::byte_swap_en__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1ab170bee43c056665c5fb381bac9cf2f2"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">byte_swap_en</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t12byte_swap_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to enable output byte swap. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_cam_ctlr_csi_config_t13bk_buffer_disE">
+<span id="_CPPv3N25esp_cam_ctlr_csi_config_t13bk_buffer_disE"></span><span id="_CPPv2N25esp_cam_ctlr_csi_config_t13bk_buffer_disE"></span><span id="esp_cam_ctlr_csi_config_t::bk_buffer_dis__uint32_t"></span><span class="target" id="structesp__cam__ctlr__csi__config__t_1a4653d765d99281949f8c48f20317c804"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bk_buffer_dis</span></span></span><a class="headerlink" href="#_CPPv4N25esp_cam_ctlr_csi_config_t13bk_buffer_disE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to disable backup buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="target" id="structesp__cam__ctlr__csi__config__t_1af87c3bf80d7c9698dfeb6c622ca23e20"></span><span class="sig-name descname"><span class="pre">struct</span> <span class="pre">esp_cam_ctlr_csi_config_t</span></span></dt>
+<dd><p>Boolean flags. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id5">
+<h3>Header File<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_cam/isp_dvp/include/esp_cam_ctlr_isp_dvp.h">components/esp_driver_cam/isp_dvp/include/esp_cam_ctlr_isp_dvp.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_cam_ctlr_isp_dvp.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_cam</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_cam
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_cam
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id6">
+<h3>Functions<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t">
+<span id="_CPPv324esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t"></span><span id="_CPPv224esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t"></span><span id="esp_cam_new_isp_dvp_ctlr__isp_proc_handle_t.esp_cam_ctlr_isp_dvp_cfg_tCP.esp_cam_ctlr_handle_tP"></span><span class="target" id="esp__cam__ctlr__isp__dvp_8h_1a6a9c012abfd67ce6b022e54ace9a1e1f"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_new_isp_dvp_ctlr</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="isp.html#_CPPv417isp_proc_handle_t" title="isp_proc_handle_t"><span class="n"><span class="pre">isp_proc_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">isp_proc</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_cam_ctlr_isp_dvp_cfg_t" title="esp_cam_ctlr_isp_dvp_cfg_t"><span class="n"><span class="pre">esp_cam_ctlr_isp_dvp_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ctlr_config</span></span>, <a class="reference internal" href="#_CPPv421esp_cam_ctlr_handle_t" title="esp_cam_ctlr_handle_t"><span class="n"><span class="pre">esp_cam_ctlr_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424esp_cam_new_isp_dvp_ctlr17isp_proc_handle_tPK26esp_cam_ctlr_isp_dvp_cfg_tP21esp_cam_ctlr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create a new ESP CAM ISP DVP controller. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>isp_proc</strong> -- <strong>[in]</strong> Processor handle. </p></li>
+<li><p><strong>ctlr_config</strong> -- <strong>[in]</strong> ISP DVP controller configurations. </p></li>
+<li><p><strong>ret_handle</strong> -- <strong>[out]</strong> Returned ESP CAM controller handle.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Success.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument.</p></li>
+<li><p>ESP_ERR_NO_MEM: Out of memory.</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Currently not supported modes or types.</p></li>
+<li><p>ESP_ERR_NOT_FOUND: ISP DVP is already registered. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id7">
+<h3>Structures<a class="headerlink" href="#id7" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426esp_cam_ctlr_isp_dvp_cfg_t">
+<span id="_CPPv326esp_cam_ctlr_isp_dvp_cfg_t"></span><span id="_CPPv226esp_cam_ctlr_isp_dvp_cfg_t"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_cam_ctlr_isp_dvp_cfg_t</span></span></span><a class="headerlink" href="#_CPPv426esp_cam_ctlr_isp_dvp_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ESP CAM ISP DVP controller configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t10data_widthE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t10data_widthE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t10data_widthE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::data_width__cam_ctlr_data_width_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1adff059026b38af0f897d4cddf007dc57"></span><span class="n"><span class="pre">cam_ctlr_data_width_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_width</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t10data_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of data lines. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t7data_ioE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t7data_ioE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t7data_ioE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::data_io__iA"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a48cb24833388ffe80e02823f4c4fef99"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_io</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">ESP_CAM_CTLR_ISP_DVP_DATA_SIG_NUM_MAX</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t7data_ioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ISP DVP data-in IO numbers. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t7pclk_ioE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t7pclk_ioE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t7pclk_ioE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::pclk_io__i"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a7047c15772d129ba4c2026ba924f8a88"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_io</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t7pclk_ioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ISP DVP pclk IO number. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t8hsync_ioE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t8hsync_ioE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t8hsync_ioE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::hsync_io__i"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a204d77e568937d42ca6d647924da5398"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_io</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t8hsync_ioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ISP DVP hsync IO number. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t8vsync_ioE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t8vsync_ioE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t8vsync_ioE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::vsync_io__i"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a1111b720183d5ecae96a6c41b814c612"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_io</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t8vsync_ioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ISP DVP vsync IO number. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t5de_ioE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t5de_ioE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t5de_ioE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::de_io__i"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a3363de8f7068985afdaa3ce6d364be44"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">de_io</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t5de_ioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ISP DVP de IO number. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t11pclk_invertE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t11pclk_invertE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t11pclk_invertE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::pclk_invert__uint32_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1af825e55207c15a503a6e4d44cb37966e"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_invert</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t11pclk_invertE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to invert the pclk signal. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t12hsync_invertE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t12hsync_invertE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t12hsync_invertE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::hsync_invert__uint32_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1ab343fc479aa329ed9fe1808ca58621f6"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">hsync_invert</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t12hsync_invertE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to invert the hsync signal (i.e., active low). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t12vsync_invertE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t12vsync_invertE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t12vsync_invertE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::vsync_invert__uint32_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a0fb882d94fef9e93686ac462211a9054"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vsync_invert</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t12vsync_invertE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to invert the vsync signal (i.e., active high). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t9de_invertE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t9de_invertE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t9de_invertE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::de_invert__uint32_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a938d2bd3eff57e39e0dac575b479b396"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">de_invert</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t9de_invertE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to invert the de signal (i.e., active low). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t8io_flagsE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t8io_flagsE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t8io_flagsE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::io_flags__esp_cam_ctlr_isp_dvp_cfg_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a7f35307ee2a3f7b0f9814ee46ba35039"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_cam_ctlr_isp_dvp_cfg_t" title="esp_cam_ctlr_isp_dvp_cfg_t"><span class="n"><span class="pre">esp_cam_ctlr_isp_dvp_cfg_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">io_flags</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t8io_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ISP DVP IO flags. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t11queue_itemsE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t11queue_itemsE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t11queue_itemsE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::queue_items__i"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a229719c7d5abd8c2e919860df6d18c19"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">queue_items</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t11queue_itemsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Queue items. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t12byte_swap_enE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t12byte_swap_enE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t12byte_swap_enE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::byte_swap_en__uint32_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a2a0dc01c2e6baad3bab5e9509577a5f7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">byte_swap_en</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t12byte_swap_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to enable byte swap. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t13bk_buffer_disE">
+<span id="_CPPv3N26esp_cam_ctlr_isp_dvp_cfg_t13bk_buffer_disE"></span><span id="_CPPv2N26esp_cam_ctlr_isp_dvp_cfg_t13bk_buffer_disE"></span><span id="esp_cam_ctlr_isp_dvp_cfg_t::bk_buffer_dis__uint32_t"></span><span class="target" id="structesp__cam__ctlr__isp__dvp__cfg__t_1a26fd0845cfc3e0f912584e0e8f397d40"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bk_buffer_dis</span></span></span><a class="headerlink" href="#_CPPv4N26esp_cam_ctlr_isp_dvp_cfg_t13bk_buffer_disE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set to 1 to disable backup buffer. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id8">
+<h3>Macros<a class="headerlink" href="#id8" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_CAM_CTLR_ISP_DVP_DATA_SIG_NUM_MAX">
+<span class="target" id="esp__cam__ctlr__isp__dvp_8h_1aee0d810d880dfdb896aad125c36c487e"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_CAM_CTLR_ISP_DVP_DATA_SIG_NUM_MAX</span></span></span><a class="headerlink" href="#c.ESP_CAM_CTLR_ISP_DVP_DATA_SIG_NUM_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Camera Controller Driver (api-reference/peripherals/camera_driver)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Camera Controller Driver (api-reference/peripherals/camera_driver)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="bitscrambler.html" class="btn btn-neutral float-left" title="BitScrambler Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="clk_tree.html" class="btn btn-neutral float-right" title="Clock Tree" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

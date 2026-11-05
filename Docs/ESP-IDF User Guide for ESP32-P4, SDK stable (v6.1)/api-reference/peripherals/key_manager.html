@@ -1,0 +1,1343 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Key Manager - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/key_manager.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/key_manager';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LCD" href="lcd/index.html" />
+    <link rel="prev" title="JPEG Encoder and Decoder" href="jpeg.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Key Manager</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-unique-key-huk">Hardware Unique Key (HUK)</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-deployment-and-key-recovery">Key Deployment and Key Recovery</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#supported-key-types">Supported Key Types</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#key-deployment-modes">Key Deployment Modes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#typical-workflows">Typical Workflows</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#security-considerations">Security Considerations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Key Manager</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/key_manager.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="key-manager">
+<span id="id1"></span><h1>Key Manager<a class="headerlink" href="#key-manager" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/key_manager.html">[中文]</a></p>
+<p>The ESP32-P4's Key Manager peripheral provides hardware-assisted <strong>key deployment and recovery</strong> for cryptographic keys. It allows cryptographic keys to be provisioned and used without storing plaintext key material in flash, RAM, or eFuses.</p>
+<p>The Key Manager is intended for applications that require secure handling of long-term cryptographic keys.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The Key Manager peripheral is only supported on ESP32-P4 chip revision &gt;= v3.0.</p>
+</div>
+<p>Key Manager provides the following properties:</p>
+<ul>
+<li><p><strong>Device uniqueness</strong></p>
+<p>Keys are cryptographically bound to a Hardware Unique Key (HUK) that is unique to each chip.</p>
+</li>
+<li><p><strong>No plaintext key storage</strong></p>
+<p>Key material is never exposed to software accessible memory.</p>
+</li>
+<li><p><strong>Flexible key lifecycle</strong></p>
+<p>Keys can be deployed, recovered, or replaced by a newer key without reprogramming the eFuses for each key.</p>
+</li>
+<li><p><strong>Resistance to physical extraction</strong></p>
+<p>Reading flash or eFuses contents would not reveal usable key material.</p>
+</li>
+</ul>
+<section id="hardware-unique-key-huk">
+<h2>Hardware Unique Key (HUK)<a class="headerlink" href="#hardware-unique-key-huk" title="Permalink to this heading"></a></h2>
+<p>The Hardware Unique Key (HUK) is a device-specific unique key generated entirely in hardware HUK peripheral. It is generated using SRAM Physical Unclonable Function (PUF) and is reconstructed using the HUK recovery info stored in the key recovery info of a Key Manager deployed key. See <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>Chapter Key Manager</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf">PDF</a>] &gt; <strong>HUK Generator</strong> for more details about the HUK peripheral.</p>
+<p>The HUK acts as the root of trust for all keys deployed through the Key Manager.</p>
+</section>
+<section id="key-deployment-and-key-recovery">
+<h2>Key Deployment and Key Recovery<a class="headerlink" href="#key-deployment-and-key-recovery" title="Permalink to this heading"></a></h2>
+<p>The Key Manager operates in two distinct phases:</p>
+<ul>
+<li><p><strong>Key deployment</strong></p>
+<p>A cryptographic key is generated or securely introduced into the chip, and it gets bound to the HUK. This step is usually performed during manufacturing, first boot up or when generating transient or persistent keys during the application runtime.</p>
+</li>
+<li><p><strong>Key recovery</strong></p>
+<p>On subsequent boots, a Key Manager-deployed persistent key is restored using the previously generated key recovery information, without exposing the key value.</p>
+</li>
+</ul>
+<p>During deployment, the Key Manager generates a data structure referred to as <a class="reference internal" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="esp_key_mgr_key_recovery_info_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_key_mgr_key_recovery_info_t</span></code></a>. In case of persistent keys, the applications must store this data in non-volatile storage (for example, flash) in order to recover the key on later boots.</p>
+</section>
+<section id="supported-key-types">
+<h2>Supported Key Types<a class="headerlink" href="#supported-key-types" title="Permalink to this heading"></a></h2>
+<p>The Key Manager can manage keys for the following key types:</p>
+<p><ul class="simple">
+<li><p>ECDSA</p></li>
+<li><p>Flash Encryption (XTS-AES)</p></li>
+<li><p>HMAC</p></li>
+<li><p>Digital Signature peripherals</p></li>
+<li><p>PSRAM Encryption</p></li>
+</ul>
+</p>
+<p>Each key is associated with a <a class="reference internal" href="#_CPPv425esp_key_mgr_key_purpose_t" title="esp_key_mgr_key_purpose_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_key_mgr_key_purpose_t</span></code></a>, which defines how the key can be used by hardware peripherals.</p>
+</section>
+<section id="key-deployment-modes">
+<h2>Key Deployment Modes<a class="headerlink" href="#key-deployment-modes" title="Permalink to this heading"></a></h2>
+<p>The Key Manager provides multiple key deployment modes to support different provisioning and security requirements.</p>
+<section id="random-deploy-mode">
+<h3>Random Deploy Mode<a class="headerlink" href="#random-deploy-mode" title="Permalink to this heading"></a></h3>
+<p>In this mode, the Key Manager generates a random private key internally.</p>
+<ul class="simple">
+<li><p>The key value is never known to the application software.</p></li>
+<li><p>No external key material is required.</p></li>
+<li><p>Intended for use cases where the key does not need to be backed up or exported.</p></li>
+</ul>
+</section>
+<section id="aes-deploy-mode">
+<h3>AES Deploy Mode<a class="headerlink" href="#aes-deploy-mode" title="Permalink to this heading"></a></h3>
+<p>In this mode, a user-specified private key is securely deployed.</p>
+<ul class="simple">
+<li><p>The key is encrypted before being transmitted to the chip.</p></li>
+<li><p>Auxiliary key material is used to protect the deployment process.</p></li>
+<li><p>Intended for factory provisioning scenarios where the key value must be predefined.</p></li>
+</ul>
+</section>
+<section id="ecdh0-deploy-mode">
+<h3>ECDH0 Deploy Mode<a class="headerlink" href="#ecdh0-deploy-mode" title="Permalink to this heading"></a></h3>
+<p>In this mode, a private key is negotiated using Elliptic Curve Diffie-Hellman (ECDH).</p>
+<ul class="simple">
+<li><p>The final private key is never transmitted.</p></li>
+<li><p>The deployment process can occur over an untrusted channel.</p></li>
+<li><p>Intended for high-security provisioning environments.</p></li>
+</ul>
+</section>
+<section id="ecdh1-deploy-mode">
+<h3>ECDH1 Deploy Mode<a class="headerlink" href="#ecdh1-deploy-mode" title="Permalink to this heading"></a></h3>
+<p>This mode is similar to ECDH0 Deploy Mode, with additional flexibility for manufacturing workflows.</p>
+<ul class="simple">
+<li><p>Supports negotiated key deployment using auxiliary recovery data</p></li>
+<li><p>Allows updating deployed keys by replacing auxiliary information</p></li>
+<li><p>Intended for large-scale manufacturing with controlled trust assumptions</p></li>
+</ul>
+<p>For detailed information various deployment modes, see <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>Chapter Key Manager</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf">PDF</a>] &gt; <strong>Section Key Manager</strong>.</p>
+</section>
+</section>
+<section id="typical-workflows">
+<h2>Typical Workflows<a class="headerlink" href="#typical-workflows" title="Permalink to this heading"></a></h2>
+<section id="first-boot-or-manufacturing">
+<h3>First Boot or Manufacturing<a class="headerlink" href="#first-boot-or-manufacturing" title="Permalink to this heading"></a></h3>
+<p>A typical provisioning flow includes:</p>
+<ol class="arabic simple">
+<li><p>Generating the Hardware Unique Key (HUK)</p></li>
+<li><p>Deploying required cryptographic keys using an appropriate deployment mode</p></li>
+<li><p>Storing the generated <code class="docutils literal notranslate"><span class="pre">key_recovery_info</span></code> in non-volatile storage</p></li>
+<li><p>Locking relevant security configuration eFuses, if required</p></li>
+</ol>
+<p>This process is usually performed once per device.</p>
+</section>
+<section id="normal-boot">
+<h3>Normal Boot<a class="headerlink" href="#normal-boot" title="Permalink to this heading"></a></h3>
+<p>During a normal boot:</p>
+<ol class="arabic simple">
+<li><p>The application provides the previously generated and stored <code class="docutils literal notranslate"><span class="pre">key_recovery_info</span></code> of a Key Manager-deployed key.</p></li>
+<li><p>The HUK is reconstructed automatically by hardware.</p></li>
+<li><p>The Key Manager recovers the deployed key internally.</p></li>
+<li><p>Cryptographic peripherals can use the recovered key.</p></li>
+</ol>
+</section>
+</section>
+<section id="security-considerations">
+<h2>Security Considerations<a class="headerlink" href="#security-considerations" title="Permalink to this heading"></a></h2>
+<p>Applications using the Key Manager should consider the following:</p>
+<ul class="simple">
+<li><p>Protect the <code class="docutils literal notranslate"><span class="pre">key_recovery_info</span></code> of a Key Manager-deployed key against unauthorized modification or loss.</p></li>
+<li><p>Lock Key Manager's security-related eFuses after successful key deployment to prevent re-deployment of a key of the same type.</p></li>
+<li><p>Avoid deploying new XTS-AES keys when Flash Encryption is already enabled unless explicitly intended.</p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_security/include/esp_key_mgr.h">components/esp_security/include/esp_key_mgr.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_key_mgr.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_security</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_security</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_security
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_security
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422key_mgr_wait_for_state19esp_key_mgr_state_t">
+<span id="_CPPv322key_mgr_wait_for_state19esp_key_mgr_state_t"></span><span id="_CPPv222key_mgr_wait_for_state19esp_key_mgr_state_t"></span><span id="key_mgr_wait_for_state__esp_key_mgr_state_t"></span><span class="target" id="esp__key__mgr_8h_1a84c81882a2688d45b573deee6689b454"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_mgr_wait_for_state</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419esp_key_mgr_state_t" title="esp_key_mgr_state_t"><span class="n"><span class="pre">esp_key_mgr_state_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">state</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422key_mgr_wait_for_state19esp_key_mgr_state_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for the Key Manager to reach the given state. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>state</strong> -- The state to wait for </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434esp_key_mgr_deploy_key_in_aes_modePK28esp_key_mgr_aes_key_config_tP31esp_key_mgr_key_recovery_info_t">
+<span id="_CPPv334esp_key_mgr_deploy_key_in_aes_modePK28esp_key_mgr_aes_key_config_tP31esp_key_mgr_key_recovery_info_t"></span><span id="_CPPv234esp_key_mgr_deploy_key_in_aes_modePK28esp_key_mgr_aes_key_config_tP31esp_key_mgr_key_recovery_info_t"></span><span id="esp_key_mgr_deploy_key_in_aes_mode__esp_key_mgr_aes_key_config_tCP.esp_key_mgr_key_recovery_info_tP"></span><span class="target" id="esp__key__mgr_8h_1a50e397b440e055df34ee707bbb0973d1"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_deploy_key_in_aes_mode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv428esp_key_mgr_aes_key_config_t" title="esp_key_mgr_aes_key_config_t"><span class="n"><span class="pre">esp_key_mgr_aes_key_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_config</span></span>, <a class="reference internal" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="esp_key_mgr_key_recovery_info_t"><span class="n"><span class="pre">esp_key_mgr_key_recovery_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434esp_key_mgr_deploy_key_in_aes_modePK28esp_key_mgr_aes_key_config_tP31esp_key_mgr_key_recovery_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deploy key in AES deployment mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_config</strong> -- <strong>[in]</strong> AES key configuration </p></li>
+<li><p><strong>key_info</strong> -- <strong>[out]</strong> A writable struct of <a class="reference internal" href="#structesp__key__mgr__key__recovery__info__t"><span class="std std-ref">esp_key_mgr_key_recovery_info_t</span></a> type. The recovery information for the deployed key shall be stored here. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_FAIL or relevant error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv436esp_key_mgr_deploy_key_in_ecdh0_modePK30esp_key_mgr_ecdh0_key_config_tP31esp_key_mgr_key_recovery_info_tP24esp_key_mgr_ecdh0_info_t">
+<span id="_CPPv336esp_key_mgr_deploy_key_in_ecdh0_modePK30esp_key_mgr_ecdh0_key_config_tP31esp_key_mgr_key_recovery_info_tP24esp_key_mgr_ecdh0_info_t"></span><span id="_CPPv236esp_key_mgr_deploy_key_in_ecdh0_modePK30esp_key_mgr_ecdh0_key_config_tP31esp_key_mgr_key_recovery_info_tP24esp_key_mgr_ecdh0_info_t"></span><span id="esp_key_mgr_deploy_key_in_ecdh0_mode__esp_key_mgr_ecdh0_key_config_tCP.esp_key_mgr_key_recovery_info_tP.esp_key_mgr_ecdh0_info_tP"></span><span class="target" id="esp__key__mgr_8h_1aa41b8b8ceb7b61d55d64d30dbf5ddff7"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_deploy_key_in_ecdh0_mode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_key_mgr_ecdh0_key_config_t" title="esp_key_mgr_ecdh0_key_config_t"><span class="n"><span class="pre">esp_key_mgr_ecdh0_key_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_config</span></span>, <a class="reference internal" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="esp_key_mgr_key_recovery_info_t"><span class="n"><span class="pre">esp_key_mgr_key_recovery_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_info</span></span>, <a class="reference internal" href="#_CPPv424esp_key_mgr_ecdh0_info_t" title="esp_key_mgr_ecdh0_info_t"><span class="n"><span class="pre">esp_key_mgr_ecdh0_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ecdh0_key_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436esp_key_mgr_deploy_key_in_ecdh0_modePK30esp_key_mgr_ecdh0_key_config_tP31esp_key_mgr_key_recovery_info_tP24esp_key_mgr_ecdh0_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deploy key in ECDH0 deployment mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_config</strong> -- <strong>[in]</strong> ECDH0 key configuration </p></li>
+<li><p><strong>key_info</strong> -- <strong>[out]</strong> A writable struct of <a class="reference internal" href="#structesp__key__mgr__key__recovery__info__t"><span class="std std-ref">esp_key_mgr_key_recovery_info_t</span></a> type. The recovery key info for the deployed key shall be stored here. </p></li>
+<li><p><strong>ecdh0_key_info</strong> -- <strong>[out]</strong> A writable struct of <a class="reference internal" href="#structesp__key__mgr__ecdh0__info__t"><span class="std std-ref">esp_key_mgr_ecdh0_info_t</span></a> type. The ECDH0 info to recover the actual key shall be stored here. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_FAIL or relevant error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv436esp_key_mgr_deploy_key_in_ecdh1_modePK30esp_key_mgr_ecdh1_key_config_tP31esp_key_mgr_key_recovery_info_t">
+<span id="_CPPv336esp_key_mgr_deploy_key_in_ecdh1_modePK30esp_key_mgr_ecdh1_key_config_tP31esp_key_mgr_key_recovery_info_t"></span><span id="_CPPv236esp_key_mgr_deploy_key_in_ecdh1_modePK30esp_key_mgr_ecdh1_key_config_tP31esp_key_mgr_key_recovery_info_t"></span><span id="esp_key_mgr_deploy_key_in_ecdh1_mode__esp_key_mgr_ecdh1_key_config_tCP.esp_key_mgr_key_recovery_info_tP"></span><span class="target" id="esp__key__mgr_8h_1a0468e96f6764d5809e705fafba74851e"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_deploy_key_in_ecdh1_mode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_key_mgr_ecdh1_key_config_t" title="esp_key_mgr_ecdh1_key_config_t"><span class="n"><span class="pre">esp_key_mgr_ecdh1_key_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_config</span></span>, <a class="reference internal" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="esp_key_mgr_key_recovery_info_t"><span class="n"><span class="pre">esp_key_mgr_key_recovery_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv436esp_key_mgr_deploy_key_in_ecdh1_modePK30esp_key_mgr_ecdh1_key_config_tP31esp_key_mgr_key_recovery_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deploy key in ECDH1 deployment mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_config</strong> -- <strong>[in]</strong> ECDH1 key configuration </p></li>
+<li><p><strong>key_info</strong> -- <strong>[out]</strong> A writable struct of <a class="reference internal" href="#structesp__key__mgr__key__recovery__info__t"><span class="std std-ref">esp_key_mgr_key_recovery_info_t</span></a> type. The recovery key info for the deployed key shall be stored here. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_FAIL or relevant error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437esp_key_mgr_deploy_key_in_random_modePK31esp_key_mgr_random_key_config_tP31esp_key_mgr_key_recovery_info_t">
+<span id="_CPPv337esp_key_mgr_deploy_key_in_random_modePK31esp_key_mgr_random_key_config_tP31esp_key_mgr_key_recovery_info_t"></span><span id="_CPPv237esp_key_mgr_deploy_key_in_random_modePK31esp_key_mgr_random_key_config_tP31esp_key_mgr_key_recovery_info_t"></span><span id="esp_key_mgr_deploy_key_in_random_mode__esp_key_mgr_random_key_config_tCP.esp_key_mgr_key_recovery_info_tP"></span><span class="target" id="esp__key__mgr_8h_1abc01905e8045652ac986796ea4dc789b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_deploy_key_in_random_mode</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv431esp_key_mgr_random_key_config_t" title="esp_key_mgr_random_key_config_t"><span class="n"><span class="pre">esp_key_mgr_random_key_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_config</span></span>, <a class="reference internal" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="esp_key_mgr_key_recovery_info_t"><span class="n"><span class="pre">esp_key_mgr_key_recovery_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437esp_key_mgr_deploy_key_in_random_modePK31esp_key_mgr_random_key_config_tP31esp_key_mgr_key_recovery_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deploy key in Random deployment mode. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>key_config</strong> -- <strong>[in]</strong> Random key configuration </p></li>
+<li><p><strong>key_info</strong> -- <strong>[out]</strong> A writable struct of <a class="reference internal" href="#structesp__key__mgr__key__recovery__info__t"><span class="std std-ref">esp_key_mgr_key_recovery_info_t</span></a> type. The recovery key info for the deployed key shall be stored here. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_FAIL or relevant error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424esp_key_mgr_activate_keyP31esp_key_mgr_key_recovery_info_t">
+<span id="_CPPv324esp_key_mgr_activate_keyP31esp_key_mgr_key_recovery_info_t"></span><span id="_CPPv224esp_key_mgr_activate_keyP31esp_key_mgr_key_recovery_info_t"></span><span id="esp_key_mgr_activate_key__esp_key_mgr_key_recovery_info_tP"></span><span class="target" id="esp__key__mgr_8h_1a587f609440fb2f07f9b265314f7ed635"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_activate_key</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="esp_key_mgr_key_recovery_info_t"><span class="n"><span class="pre">esp_key_mgr_key_recovery_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">key_recovery_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424esp_key_mgr_activate_keyP31esp_key_mgr_key_recovery_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Recover and Activate a key from the given key info. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Once a key of particular type is activated through Key Manager, then a different key of the same type cannot be activated at the same time. This key must be deactivated first through a call to esp_key_mgr_deactivate_key() before activating other key of the same type.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key_recovery_info</strong> -- <strong>[in]</strong> The key recovery info required to recover the key </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_FAIL or relevant error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426esp_key_mgr_deactivate_key22esp_key_mgr_key_type_t">
+<span id="_CPPv326esp_key_mgr_deactivate_key22esp_key_mgr_key_type_t"></span><span id="_CPPv226esp_key_mgr_deactivate_key22esp_key_mgr_key_type_t"></span><span id="esp_key_mgr_deactivate_key__esp_key_mgr_key_type_t"></span><span class="target" id="esp__key__mgr_8h_1a73cfcdc5ee39f4aa3f2eca81bea55a18"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_deactivate_key</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_type_t" title="esp_key_mgr_key_type_t"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">key_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426esp_key_mgr_deactivate_key22esp_key_mgr_key_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>De-activate a key of the given type. </p>
+<p>The key which is de-activated can no longer be used for any operation.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key_type</strong> -- <strong>[in]</strong> The type of the key to deactivate </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_FAIL or relevant error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv428esp_key_mgr_aes_key_config_t">
+<span id="_CPPv328esp_key_mgr_aes_key_config_t"></span><span id="_CPPv228esp_key_mgr_aes_key_config_t"></span><span id="esp_key_mgr_aes_key_config_t"></span><span class="target" id="structesp__key__mgr__aes__key__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_aes_key_config_t</span></span></span><a class="headerlink" href="#_CPPv428esp_key_mgr_aes_key_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration for deploying a key in AES mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t8key_typeE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t8key_typeE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t8key_typeE"></span><span id="esp_key_mgr_aes_key_config_t::key_type__esp_key_mgr_key_type_t"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1a27f614c1a958224ef3f88f71df565cab"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_type_t" title="esp_key_mgr_key_type_t"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_type</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t8key_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of key to deploy </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t7key_lenE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t7key_lenE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t7key_lenE"></span><span id="esp_key_mgr_aes_key_config_t::key_len__esp_key_mgr_key_len_t"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1aedad9f8aa8d6af4ec7894abe02d83d4e"></span><a class="reference internal" href="#_CPPv421esp_key_mgr_key_len_t" title="esp_key_mgr_key_len_t"><span class="n"><span class="pre">esp_key_mgr_key_len_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_len</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t7key_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t26use_pre_generated_huk_infoE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t26use_pre_generated_huk_infoE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t26use_pre_generated_huk_infoE"></span><span id="esp_key_mgr_aes_key_config_t::use_pre_generated_huk_info__b"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1a3237e6e97ce0bc5da492751f03b2450d"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_pre_generated_huk_info</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t26use_pre_generated_huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use pre-generated HUK info if true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t29use_pre_generated_sw_init_keyE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t29use_pre_generated_sw_init_keyE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t29use_pre_generated_sw_init_keyE"></span><span id="esp_key_mgr_aes_key_config_t::use_pre_generated_sw_init_key__b"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1aa59fe3353dd630e31351a6a98207fe11"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_pre_generated_sw_init_key</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t29use_pre_generated_sw_init_keyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use pre-generated software init key if true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t8huk_infoE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t8huk_infoE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t8huk_infoE"></span><span id="esp_key_mgr_aes_key_config_t::huk_info__esp_key_mgr_huk_info_t"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1a5574068b656de165098ca5205eea9277"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_huk_info_t" title="esp_key_mgr_huk_info_t"><span class="n"><span class="pre">esp_key_mgr_huk_info_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">huk_info</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t8huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK recovery info </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t11sw_init_keyE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t11sw_init_keyE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t11sw_init_keyE"></span><span id="esp_key_mgr_aes_key_config_t::sw_init_key__uint8_tA"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1afb3a15fa72acac7d81c10ca016f50855"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sw_init_key</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_SW_INIT_KEY_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t11sw_init_keyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Software init key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t7k2_infoE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t7k2_infoE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t7k2_infoE"></span><span id="esp_key_mgr_aes_key_config_t::k2_info__uint8_tA"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1afff11d28ddce40d7d11a0c35e528970c"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k2_info</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_K2_INFO_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t7k2_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>K2 info for AES deployment </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_aes_key_config_t12k1_encryptedE">
+<span id="_CPPv3N28esp_key_mgr_aes_key_config_t12k1_encryptedE"></span><span id="_CPPv2N28esp_key_mgr_aes_key_config_t12k1_encryptedE"></span><span id="esp_key_mgr_aes_key_config_t::k1_encrypted__uint8_tAA"></span><span class="target" id="structesp__key__mgr__aes__key__config__t_1a914017b559f45649825aece3889cf010"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k1_encrypted</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_K1_ENCRYPTED_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_aes_key_config_t12k1_encryptedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Encrypted K1 key data </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430esp_key_mgr_ecdh0_key_config_t">
+<span id="_CPPv330esp_key_mgr_ecdh0_key_config_t"></span><span id="_CPPv230esp_key_mgr_ecdh0_key_config_t"></span><span id="esp_key_mgr_ecdh0_key_config_t"></span><span class="target" id="structesp__key__mgr__ecdh0__key__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_ecdh0_key_config_t</span></span></span><a class="headerlink" href="#_CPPv430esp_key_mgr_ecdh0_key_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration for deploying a key in ECDH0 mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh0_key_config_t8key_typeE">
+<span id="_CPPv3N30esp_key_mgr_ecdh0_key_config_t8key_typeE"></span><span id="_CPPv2N30esp_key_mgr_ecdh0_key_config_t8key_typeE"></span><span id="esp_key_mgr_ecdh0_key_config_t::key_type__esp_key_mgr_key_type_t"></span><span class="target" id="structesp__key__mgr__ecdh0__key__config__t_1aeead6b763f53c10dad6e53d400bd6117"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_type_t" title="esp_key_mgr_key_type_t"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_type</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh0_key_config_t8key_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of key to deploy </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh0_key_config_t7key_lenE">
+<span id="_CPPv3N30esp_key_mgr_ecdh0_key_config_t7key_lenE"></span><span id="_CPPv2N30esp_key_mgr_ecdh0_key_config_t7key_lenE"></span><span id="esp_key_mgr_ecdh0_key_config_t::key_len__esp_key_mgr_key_len_t"></span><span class="target" id="structesp__key__mgr__ecdh0__key__config__t_1af3cd61f3f5d625408d4aedd6c20ce75e"></span><a class="reference internal" href="#_CPPv421esp_key_mgr_key_len_t" title="esp_key_mgr_key_len_t"><span class="n"><span class="pre">esp_key_mgr_key_len_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_len</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh0_key_config_t7key_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh0_key_config_t26use_pre_generated_huk_infoE">
+<span id="_CPPv3N30esp_key_mgr_ecdh0_key_config_t26use_pre_generated_huk_infoE"></span><span id="_CPPv2N30esp_key_mgr_ecdh0_key_config_t26use_pre_generated_huk_infoE"></span><span id="esp_key_mgr_ecdh0_key_config_t::use_pre_generated_huk_info__b"></span><span class="target" id="structesp__key__mgr__ecdh0__key__config__t_1a5e12253e63e240f4703557a35eaf3e32"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_pre_generated_huk_info</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh0_key_config_t26use_pre_generated_huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use pre-generated HUK info if true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh0_key_config_t8huk_infoE">
+<span id="_CPPv3N30esp_key_mgr_ecdh0_key_config_t8huk_infoE"></span><span id="_CPPv2N30esp_key_mgr_ecdh0_key_config_t8huk_infoE"></span><span id="esp_key_mgr_ecdh0_key_config_t::huk_info__esp_key_mgr_huk_info_t"></span><span class="target" id="structesp__key__mgr__ecdh0__key__config__t_1acd2fb9201b16130cb2e8ec1a4b43ed8b"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_huk_info_t" title="esp_key_mgr_huk_info_t"><span class="n"><span class="pre">esp_key_mgr_huk_info_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">huk_info</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh0_key_config_t8huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK recovery info </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh0_key_config_t4k1_GE">
+<span id="_CPPv3N30esp_key_mgr_ecdh0_key_config_t4k1_GE"></span><span id="_CPPv2N30esp_key_mgr_ecdh0_key_config_t4k1_GE"></span><span id="esp_key_mgr_ecdh0_key_config_t::k1_G__uint8_tAA"></span><span class="target" id="structesp__key__mgr__ecdh0__key__config__t_1ad22f6df103306d5b773e7da30e0421cb"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k1_G</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_ECDH0_INFO_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh0_key_config_t4k1_GE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>K1*G points for ECDH0 deployment </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430esp_key_mgr_ecdh1_key_config_t">
+<span id="_CPPv330esp_key_mgr_ecdh1_key_config_t"></span><span id="_CPPv230esp_key_mgr_ecdh1_key_config_t"></span><span id="esp_key_mgr_ecdh1_key_config_t"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_ecdh1_key_config_t</span></span></span><a class="headerlink" href="#_CPPv430esp_key_mgr_ecdh1_key_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration for deploying a key in ECDH1 mode. </p>
+<p>ECDH1 requires the same init_key/k2_info inputs as AES mode plus the ECDH k1*G public point(s). Unlike ECDH0, k2*G is computed by the user locally and is not read back from the Key Manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t8key_typeE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t8key_typeE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t8key_typeE"></span><span id="esp_key_mgr_ecdh1_key_config_t::key_type__esp_key_mgr_key_type_t"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1ac231e29772d8059ddd43884f965453e7"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_type_t" title="esp_key_mgr_key_type_t"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_type</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t8key_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of key to deploy </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t7key_lenE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t7key_lenE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t7key_lenE"></span><span id="esp_key_mgr_ecdh1_key_config_t::key_len__esp_key_mgr_key_len_t"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1ada3a43cfb465c601a37e2c27e7f7e52b"></span><a class="reference internal" href="#_CPPv421esp_key_mgr_key_len_t" title="esp_key_mgr_key_len_t"><span class="n"><span class="pre">esp_key_mgr_key_len_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_len</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t7key_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t26use_pre_generated_huk_infoE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t26use_pre_generated_huk_infoE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t26use_pre_generated_huk_infoE"></span><span id="esp_key_mgr_ecdh1_key_config_t::use_pre_generated_huk_info__b"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1ae22f35fc09651c8bc33c81971e2ac6c3"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_pre_generated_huk_info</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t26use_pre_generated_huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use pre-generated HUK info if true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t29use_pre_generated_sw_init_keyE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t29use_pre_generated_sw_init_keyE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t29use_pre_generated_sw_init_keyE"></span><span id="esp_key_mgr_ecdh1_key_config_t::use_pre_generated_sw_init_key__b"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1ac17bf01e35a02228d15557f3483239c6"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_pre_generated_sw_init_key</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t29use_pre_generated_sw_init_keyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use pre-generated software init key if true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t8huk_infoE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t8huk_infoE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t8huk_infoE"></span><span id="esp_key_mgr_ecdh1_key_config_t::huk_info__esp_key_mgr_huk_info_t"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1a18e985c7814bebd3ca276d36d4513f7f"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_huk_info_t" title="esp_key_mgr_huk_info_t"><span class="n"><span class="pre">esp_key_mgr_huk_info_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">huk_info</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t8huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK recovery info </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t11sw_init_keyE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t11sw_init_keyE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t11sw_init_keyE"></span><span id="esp_key_mgr_ecdh1_key_config_t::sw_init_key__uint8_tA"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1a2726a449ad052a47aa41f703fca2539b"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sw_init_key</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_SW_INIT_KEY_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t11sw_init_keyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Software init key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t7k2_infoE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t7k2_infoE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t7k2_infoE"></span><span id="esp_key_mgr_ecdh1_key_config_t::k2_info__uint8_tA"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1ab7218aaecc69bb29081c1cc846b26813"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k2_info</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_K2_INFO_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t7k2_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>K2 info for ECDH1 deployment </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_ecdh1_key_config_t4k1_GE">
+<span id="_CPPv3N30esp_key_mgr_ecdh1_key_config_t4k1_GE"></span><span id="_CPPv2N30esp_key_mgr_ecdh1_key_config_t4k1_GE"></span><span id="esp_key_mgr_ecdh1_key_config_t::k1_G__uint8_tAA"></span><span class="target" id="structesp__key__mgr__ecdh1__key__config__t_1a48f027d06ff35642f5a067a413160c45"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k1_G</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_ECDH0_INFO_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_ecdh1_key_config_t4k1_GE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>K1*G points for ECDH1 deployment </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv431esp_key_mgr_random_key_config_t">
+<span id="_CPPv331esp_key_mgr_random_key_config_t"></span><span id="_CPPv231esp_key_mgr_random_key_config_t"></span><span id="esp_key_mgr_random_key_config_t"></span><span class="target" id="structesp__key__mgr__random__key__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_random_key_config_t</span></span></span><a class="headerlink" href="#_CPPv431esp_key_mgr_random_key_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration for deploying a key in Random mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_random_key_config_t8key_typeE">
+<span id="_CPPv3N31esp_key_mgr_random_key_config_t8key_typeE"></span><span id="_CPPv2N31esp_key_mgr_random_key_config_t8key_typeE"></span><span id="esp_key_mgr_random_key_config_t::key_type__esp_key_mgr_key_type_t"></span><span class="target" id="structesp__key__mgr__random__key__config__t_1aaaf02bc8b2ca33adc1ae43a474bbfd02"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_type_t" title="esp_key_mgr_key_type_t"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_type</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_random_key_config_t8key_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of key to deploy </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_random_key_config_t7key_lenE">
+<span id="_CPPv3N31esp_key_mgr_random_key_config_t7key_lenE"></span><span id="_CPPv2N31esp_key_mgr_random_key_config_t7key_lenE"></span><span id="esp_key_mgr_random_key_config_t::key_len__esp_key_mgr_key_len_t"></span><span class="target" id="structesp__key__mgr__random__key__config__t_1ac142578b7a0351989bacb0a6ec24a059"></span><a class="reference internal" href="#_CPPv421esp_key_mgr_key_len_t" title="esp_key_mgr_key_len_t"><span class="n"><span class="pre">esp_key_mgr_key_len_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_len</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_random_key_config_t7key_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_random_key_config_t26use_pre_generated_huk_infoE">
+<span id="_CPPv3N31esp_key_mgr_random_key_config_t26use_pre_generated_huk_infoE"></span><span id="_CPPv2N31esp_key_mgr_random_key_config_t26use_pre_generated_huk_infoE"></span><span id="esp_key_mgr_random_key_config_t::use_pre_generated_huk_info__b"></span><span class="target" id="structesp__key__mgr__random__key__config__t_1a84c14c891292da85032a0db342b46a62"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_pre_generated_huk_info</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_random_key_config_t26use_pre_generated_huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use pre-generated HUK info if true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_random_key_config_t8huk_infoE">
+<span id="_CPPv3N31esp_key_mgr_random_key_config_t8huk_infoE"></span><span id="_CPPv2N31esp_key_mgr_random_key_config_t8huk_infoE"></span><span id="esp_key_mgr_random_key_config_t::huk_info__esp_key_mgr_huk_info_t"></span><span class="target" id="structesp__key__mgr__random__key__config__t_1a7319c29e7f44e7b29f2159df953a1a11"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_huk_info_t" title="esp_key_mgr_huk_info_t"><span class="n"><span class="pre">esp_key_mgr_huk_info_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">huk_info</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_random_key_config_t8huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK recovery info </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424esp_key_mgr_ecdh0_info_t">
+<span id="_CPPv324esp_key_mgr_ecdh0_info_t"></span><span id="_CPPv224esp_key_mgr_ecdh0_info_t"></span><span id="esp_key_mgr_ecdh0_info_t"></span><span class="target" id="structesp__key__mgr__ecdh0__info__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_ecdh0_info_t</span></span></span><a class="headerlink" href="#_CPPv424esp_key_mgr_ecdh0_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ECDH0 key info generated during ECDH0 deployment. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_key_mgr_ecdh0_info_t8key_typeE">
+<span id="_CPPv3N24esp_key_mgr_ecdh0_info_t8key_typeE"></span><span id="_CPPv2N24esp_key_mgr_ecdh0_info_t8key_typeE"></span><span id="esp_key_mgr_ecdh0_info_t::key_type__esp_key_mgr_key_type_t"></span><span class="target" id="structesp__key__mgr__ecdh0__info__t_1a87340c5ecb4fa129ba8e6326c3137524"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_type_t" title="esp_key_mgr_key_type_t"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_type</span></span></span><a class="headerlink" href="#_CPPv4N24esp_key_mgr_ecdh0_info_t8key_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_key_mgr_ecdh0_info_t7key_lenE">
+<span id="_CPPv3N24esp_key_mgr_ecdh0_info_t7key_lenE"></span><span id="_CPPv2N24esp_key_mgr_ecdh0_info_t7key_lenE"></span><span id="esp_key_mgr_ecdh0_info_t::key_len__esp_key_mgr_key_len_t"></span><span class="target" id="structesp__key__mgr__ecdh0__info__t_1acb78029bd66df6247cad79c4e97713d6"></span><a class="reference internal" href="#_CPPv421esp_key_mgr_key_len_t" title="esp_key_mgr_key_len_t"><span class="n"><span class="pre">esp_key_mgr_key_len_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_len</span></span></span><a class="headerlink" href="#_CPPv4N24esp_key_mgr_ecdh0_info_t7key_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_key_mgr_ecdh0_info_t4k2_GE">
+<span id="_CPPv3N24esp_key_mgr_ecdh0_info_t4k2_GE"></span><span id="_CPPv2N24esp_key_mgr_ecdh0_info_t4k2_GE"></span><span id="esp_key_mgr_ecdh0_info_t::k2_G__uint8_tAA"></span><span class="target" id="structesp__key__mgr__ecdh0__info__t_1abfe038c68fb0bf319f909b95d8038f4a"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">k2_G</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_MGR_ECDH0_INFO_SIZE</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N24esp_key_mgr_ecdh0_info_t4k2_GE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>K2*G points from ECDH0 deployment </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_SW_INIT_KEY_SIZE">
+<span class="target" id="esp__key__mgr_8h_1a73ec76401e6d06e5f114714f8989b003"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_SW_INIT_KEY_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_SW_INIT_KEY_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_ASSIST_INFO_SIZE">
+<span class="target" id="esp__key__mgr_8h_1af5125bb3b5e4f7818a319605c92972c8"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_ASSIST_INFO_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_ASSIST_INFO_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_KEY_RECOVERY_INFO_SIZE">
+<span class="target" id="esp__key__mgr_8h_1a079155c0bf86405f49939c644bbb527d"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_KEY_RECOVERY_INFO_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_KEY_RECOVERY_INFO_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_HUK_INFO_SIZE">
+<span class="target" id="esp__key__mgr_8h_1af459fea3a6cac602facc65b849a17ef6"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_HUK_INFO_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_HUK_INFO_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_HUK_RISK_ALERT_LEVEL">
+<span class="target" id="esp__key__mgr_8h_1aebd3930bbf48ad5f9bb9ac773aaee37c"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_HUK_RISK_ALERT_LEVEL</span></span></span><a class="headerlink" href="#c.KEY_MGR_HUK_RISK_ALERT_LEVEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_KEY_INFO_SIZE">
+<span class="target" id="esp__key__mgr_8h_1a5a24a8ac69c7fa526ae5af7903f44253"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_KEY_INFO_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_KEY_INFO_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_K2_INFO_SIZE">
+<span class="target" id="esp__key__mgr_8h_1a00f52a2d8ec81393497ba53843db514d"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_K2_INFO_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_K2_INFO_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_K1_ENCRYPTED_SIZE">
+<span class="target" id="esp__key__mgr_8h_1a46ba5f5839b98e9117c3fc8c02ad5314"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_K1_ENCRYPTED_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_K1_ENCRYPTED_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_ECDH0_INFO_SIZE">
+<span class="target" id="esp__key__mgr_8h_1ad5edb2432fdc1221c89a5fee2d9e6bb0"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_ECDH0_INFO_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_ECDH0_INFO_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_PLAINTEXT_KEY_SIZE">
+<span class="target" id="esp__key__mgr_8h_1a5f0ede1babe66206ce50f573b94a9447"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_PLAINTEXT_KEY_SIZE</span></span></span><a class="headerlink" href="#c.KEY_MGR_PLAINTEXT_KEY_SIZE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="id2">
+<h3>Header File<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hal_security/include/hal/key_mgr_types.h">components/esp_hal_security/include/hal/key_mgr_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"hal/key_mgr_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_hal_security</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_hal_security</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_hal_security
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_hal_security
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3>Structures<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422esp_key_mgr_huk_info_t">
+<span id="_CPPv322esp_key_mgr_huk_info_t"></span><span id="_CPPv222esp_key_mgr_huk_info_t"></span><span id="esp_key_mgr_huk_info_t"></span><span class="target" id="structesp__key__mgr__huk__info__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_huk_info_t</span></span></span><a class="headerlink" href="#_CPPv422esp_key_mgr_huk_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK info structure, stores HUK recovery information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_huk_info_t4infoE">
+<span id="_CPPv3N22esp_key_mgr_huk_info_t4infoE"></span><span id="_CPPv2N22esp_key_mgr_huk_info_t4infoE"></span><span id="esp_key_mgr_huk_info_t::info__uint8_tA"></span><span class="target" id="structesp__key__mgr__huk__info__t_1ac1f0373f1d0d60adad37c5eb73a4cc00"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">info</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">HUK_INFO_LEN</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_huk_info_t4infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK info data </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_huk_info_t3crcE">
+<span id="_CPPv3N22esp_key_mgr_huk_info_t3crcE"></span><span id="_CPPv2N22esp_key_mgr_huk_info_t3crcE"></span><span id="esp_key_mgr_huk_info_t::crc__uint32_t"></span><span class="target" id="structesp__key__mgr__huk__info__t_1a3d42beebde64317b6a52e8656f30e725"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">crc</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_huk_info_t3crcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CRC of the HUK info </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422esp_key_mgr_key_info_t">
+<span id="_CPPv322esp_key_mgr_key_info_t"></span><span id="_CPPv222esp_key_mgr_key_info_t"></span><span id="esp_key_mgr_key_info_t"></span><span class="target" id="structesp__key__mgr__key__info__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_info_t</span></span></span><a class="headerlink" href="#_CPPv422esp_key_mgr_key_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key info structure, stores key recovery information (512 bits) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_info_t4infoE">
+<span id="_CPPv3N22esp_key_mgr_key_info_t4infoE"></span><span id="_CPPv2N22esp_key_mgr_key_info_t4infoE"></span><span id="esp_key_mgr_key_info_t::info__uint8_tA"></span><span class="target" id="structesp__key__mgr__key__info__t_1a02cd5fada21d9bd5f3dd6704905a198d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">info</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">KEY_INFO_LEN</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_info_t4infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key info data </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_info_t3crcE">
+<span id="_CPPv3N22esp_key_mgr_key_info_t3crcE"></span><span id="_CPPv2N22esp_key_mgr_key_info_t3crcE"></span><span id="esp_key_mgr_key_info_t::crc__uint32_t"></span><span class="target" id="structesp__key__mgr__key__info__t_1a2c2033bc29d10cd634b641f527c126db"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">crc</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_info_t3crcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CRC of the key info </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv431esp_key_mgr_key_recovery_info_t">
+<span id="_CPPv331esp_key_mgr_key_recovery_info_t"></span><span id="_CPPv231esp_key_mgr_key_recovery_info_t"></span><span id="esp_key_mgr_key_recovery_info_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_recovery_info_t</span></span></span><a class="headerlink" href="#_CPPv431esp_key_mgr_key_recovery_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key recovery info structure containing all data needed to recover a deployed key. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t5magicE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t5magicE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t5magicE"></span><span id="esp_key_mgr_key_recovery_info_t::magic__uint32_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1a602cb03afcf25595a314c3bb7cb6cfbe"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">magic</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t5magicE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Magic number for validation </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t7versionE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t7versionE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t7versionE"></span><span id="esp_key_mgr_key_recovery_info_t::version__uint32_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1a746f47b7e9f8fa18b1f24c28e63bba47"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">version</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t7versionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Version for backward compatibility </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t8key_typeE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t8key_typeE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t8key_typeE"></span><span id="esp_key_mgr_key_recovery_info_t::key_type__uint8_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1a0b839a6a384d4e4c4369b626cdc2cf79"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_type</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t8key_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of the deployed key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t7key_lenE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t7key_lenE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t7key_lenE"></span><span id="esp_key_mgr_key_recovery_info_t::key_len__uint8_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1a023d8e8d4143d43be7aa91a54d99dd2e"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_len</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t7key_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the deployed key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t19key_deployment_modeE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t19key_deployment_modeE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t19key_deployment_modeE"></span><span id="esp_key_mgr_key_recovery_info_t::key_deployment_mode__uint8_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1a4f494f2d1bf7c12898df62d1c69590bc"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_deployment_mode</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t19key_deployment_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deployment mode used for the key </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t8reservedE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t8reservedE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t8reservedE"></span><span id="esp_key_mgr_key_recovery_info_t::reserved__uint8_tA"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1aad2a136d5474b195bad5df5e33ba23ab"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reserved</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">13</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t8reservedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reserved for future use </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t8huk_infoE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t8huk_infoE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t8huk_infoE"></span><span id="esp_key_mgr_key_recovery_info_t::huk_info__esp_key_mgr_huk_info_t"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1a90719eb4780378683b3637c130b13126"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_huk_info_t" title="esp_key_mgr_huk_info_t"><span class="n"><span class="pre">esp_key_mgr_huk_info_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">huk_info</span></span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t8huk_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>HUK recovery info </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N31esp_key_mgr_key_recovery_info_t8key_infoE">
+<span id="_CPPv3N31esp_key_mgr_key_recovery_info_t8key_infoE"></span><span id="_CPPv2N31esp_key_mgr_key_recovery_info_t8key_infoE"></span><span id="esp_key_mgr_key_recovery_info_t::key_info__esp_key_mgr_key_info_tA"></span><span class="target" id="structesp__key__mgr__key__recovery__info__t_1afb3b35416be4ca0903f4caffdf553d11"></span><a class="reference internal" href="#_CPPv422esp_key_mgr_key_info_t" title="esp_key_mgr_key_info_t"><span class="n"><span class="pre">esp_key_mgr_key_info_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">key_info</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">2</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N31esp_key_mgr_key_recovery_info_t8key_infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key info (up to 2 entries for XTS-AES-256) </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id4">
+<h3>Macros<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_MGR_ASSIST_INFO_LEN">
+<span class="target" id="key__mgr__types_8h_1a880ad8826761eb00aeaed2b660cb3d99"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_MGR_ASSIST_INFO_LEN</span></span></span><a class="headerlink" href="#c.KEY_MGR_ASSIST_INFO_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.HUK_INFO_LEN">
+<span class="target" id="key__mgr__types_8h_1a35da44535bb0f9e7aa9ed6d4498caf47"></span><span class="sig-name descname"><span class="n"><span class="pre">HUK_INFO_LEN</span></span></span><a class="headerlink" href="#c.HUK_INFO_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_INFO_LEN">
+<span class="target" id="key__mgr__types_8h_1a2fa85ce8eb22e9839debc3dfa9a34591"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_INFO_LEN</span></span></span><a class="headerlink" href="#c.KEY_INFO_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.KEY_HUK_SECTOR_MAGIC">
+<span class="target" id="key__mgr__types_8h_1a5c4f54346cc7c6cbf3e3b9041f5433de"></span><span class="sig-name descname"><span class="n"><span class="pre">KEY_HUK_SECTOR_MAGIC</span></span></span><a class="headerlink" href="#c.KEY_HUK_SECTOR_MAGIC" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv419esp_key_mgr_state_t">
+<span id="_CPPv319esp_key_mgr_state_t"></span><span id="_CPPv219esp_key_mgr_state_t"></span><span class="target" id="key__mgr__types_8h_1a2ad2e32e55853a5d09afc1941b15081e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_state_t</span></span></span><a class="headerlink" href="#_CPPv419esp_key_mgr_state_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>State of Key Manager: idle, load, gain or busy. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_IDLEE">
+<span id="_CPPv3N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_IDLEE"></span><span id="_CPPv2N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_IDLEE"></span><span class="target" id="key__mgr__types_8h_1a2ad2e32e55853a5d09afc1941b15081eaed91b8137114233b5f1e6cfc907500f7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_STATE_IDLE</span></span></span><a class="headerlink" href="#_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_IDLEE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_LOADE">
+<span id="_CPPv3N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_LOADE"></span><span id="_CPPv2N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_LOADE"></span><span class="target" id="key__mgr__types_8h_1a2ad2e32e55853a5d09afc1941b15081ea9b960b93d92d88d2a669e16fb1d314cc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_STATE_LOAD</span></span></span><a class="headerlink" href="#_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_LOADE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_GAINE">
+<span id="_CPPv3N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_GAINE"></span><span id="_CPPv2N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_GAINE"></span><span class="target" id="key__mgr__types_8h_1a2ad2e32e55853a5d09afc1941b15081eac9f9f8c564ab264548c9dcb8a7c94bea"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_STATE_GAIN</span></span></span><a class="headerlink" href="#_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_GAINE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_BUSYE">
+<span id="_CPPv3N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_BUSYE"></span><span id="_CPPv2N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_BUSYE"></span><span class="target" id="key__mgr__types_8h_1a2ad2e32e55853a5d09afc1941b15081ea9c79f7dd5e057f2afb002ccf21452284"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_STATE_BUSY</span></span></span><a class="headerlink" href="#_CPPv4N19esp_key_mgr_state_t22ESP_KEY_MGR_STATE_BUSYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv421esp_key_mgr_key_len_t">
+<span id="_CPPv321esp_key_mgr_key_len_t"></span><span id="_CPPv221esp_key_mgr_key_len_t"></span><span class="target" id="key__mgr__types_8h_1a7589e0bd5ae1e1ae2c9badefc3d56772"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_len_t</span></span></span><a class="headerlink" href="#_CPPv421esp_key_mgr_key_len_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the deployed key (XTS-AES, ECDSA) </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_192E">
+<span id="_CPPv3N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_192E"></span><span id="_CPPv2N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_192E"></span><span class="target" id="key__mgr__types_8h_1a7589e0bd5ae1e1ae2c9badefc3d56772ab5d8496692ca351dfdeafbabed0dff45"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_ECDSA_LEN_192</span></span></span><a class="headerlink" href="#_CPPv4N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_192E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_256E">
+<span id="_CPPv3N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_256E"></span><span id="_CPPv2N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_256E"></span><span class="target" id="key__mgr__types_8h_1a7589e0bd5ae1e1ae2c9badefc3d56772ad2bca5e3e59dc161fbe6faf2a146cd69"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_ECDSA_LEN_256</span></span></span><a class="headerlink" href="#_CPPv4N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_256E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_384E">
+<span id="_CPPv3N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_384E"></span><span id="_CPPv2N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_384E"></span><span class="target" id="key__mgr__types_8h_1a7589e0bd5ae1e1ae2c9badefc3d56772a3cae8af472d11f4fcdeab15828ae009c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_ECDSA_LEN_384</span></span></span><a class="headerlink" href="#_CPPv4N21esp_key_mgr_key_len_t25ESP_KEY_MGR_ECDSA_LEN_384E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_128E">
+<span id="_CPPv3N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_128E"></span><span id="_CPPv2N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_128E"></span><span class="target" id="key__mgr__types_8h_1a7589e0bd5ae1e1ae2c9badefc3d56772a9d8710ae20e27204d4223821b478ecbb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_XTS_AES_LEN_128</span></span></span><a class="headerlink" href="#_CPPv4N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_128E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_256E">
+<span id="_CPPv3N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_256E"></span><span id="_CPPv2N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_256E"></span><span class="target" id="key__mgr__types_8h_1a7589e0bd5ae1e1ae2c9badefc3d56772afdd43ecb81f10c1c31a8b07c7daa50bc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_XTS_AES_LEN_256</span></span></span><a class="headerlink" href="#_CPPv4N21esp_key_mgr_key_len_t27ESP_KEY_MGR_XTS_AES_LEN_256E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv422esp_key_mgr_key_type_t">
+<span id="_CPPv322esp_key_mgr_key_type_t"></span><span id="_CPPv222esp_key_mgr_key_type_t"></span><span class="target" id="key__mgr__types_8h_1a7e83e956ff726ff3fcae27b3af136d75"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_type_t</span></span></span><a class="headerlink" href="#_CPPv422esp_key_mgr_key_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of the key. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_type_t21ESP_KEY_MGR_ECDSA_KEYE">
+<span id="_CPPv3N22esp_key_mgr_key_type_t21ESP_KEY_MGR_ECDSA_KEYE"></span><span id="_CPPv2N22esp_key_mgr_key_type_t21ESP_KEY_MGR_ECDSA_KEYE"></span><span class="target" id="key__mgr__types_8h_1a7e83e956ff726ff3fcae27b3af136d75ac31ef18f35d5eec307e6f2c7adacf6c4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_ECDSA_KEY</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_type_t21ESP_KEY_MGR_ECDSA_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_type_t29ESP_KEY_MGR_FLASH_XTS_AES_KEYE">
+<span id="_CPPv3N22esp_key_mgr_key_type_t29ESP_KEY_MGR_FLASH_XTS_AES_KEYE"></span><span id="_CPPv2N22esp_key_mgr_key_type_t29ESP_KEY_MGR_FLASH_XTS_AES_KEYE"></span><span class="target" id="key__mgr__types_8h_1a7e83e956ff726ff3fcae27b3af136d75a39620d6ed10eb0222913ff28f0ef51a7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_FLASH_XTS_AES_KEY</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_type_t29ESP_KEY_MGR_FLASH_XTS_AES_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_type_t20ESP_KEY_MGR_HMAC_KEYE">
+<span id="_CPPv3N22esp_key_mgr_key_type_t20ESP_KEY_MGR_HMAC_KEYE"></span><span id="_CPPv2N22esp_key_mgr_key_type_t20ESP_KEY_MGR_HMAC_KEYE"></span><span class="target" id="key__mgr__types_8h_1a7e83e956ff726ff3fcae27b3af136d75afc7830ab6064c5ec8eda4bbb5028d7af"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_HMAC_KEY</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_type_t20ESP_KEY_MGR_HMAC_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_type_t18ESP_KEY_MGR_DS_KEYE">
+<span id="_CPPv3N22esp_key_mgr_key_type_t18ESP_KEY_MGR_DS_KEYE"></span><span id="_CPPv2N22esp_key_mgr_key_type_t18ESP_KEY_MGR_DS_KEYE"></span><span class="target" id="key__mgr__types_8h_1a7e83e956ff726ff3fcae27b3af136d75aa785c63c70a55a1839e0b4b14c7cbf87"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_DS_KEY</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_type_t18ESP_KEY_MGR_DS_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22esp_key_mgr_key_type_t29ESP_KEY_MGR_PSRAM_XTS_AES_KEYE">
+<span id="_CPPv3N22esp_key_mgr_key_type_t29ESP_KEY_MGR_PSRAM_XTS_AES_KEYE"></span><span id="_CPPv2N22esp_key_mgr_key_type_t29ESP_KEY_MGR_PSRAM_XTS_AES_KEYE"></span><span class="target" id="key__mgr__types_8h_1a7e83e956ff726ff3fcae27b3af136d75a7e36a180789be3e7492e6a8dc58850a7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_PSRAM_XTS_AES_KEY</span></span></span><a class="headerlink" href="#_CPPv4N22esp_key_mgr_key_type_t29ESP_KEY_MGR_PSRAM_XTS_AES_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423esp_key_mgr_key_usage_t">
+<span id="_CPPv323esp_key_mgr_key_usage_t"></span><span id="_CPPv223esp_key_mgr_key_usage_t"></span><span class="target" id="key__mgr__types_8h_1a3c19880d2015ace6c18b8743da87ade3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_usage_t</span></span></span><a class="headerlink" href="#_CPPv423esp_key_mgr_key_usage_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key Manager key usage type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_key_mgr_key_usage_t23ESP_KEY_MGR_USE_OWN_KEYE">
+<span id="_CPPv3N23esp_key_mgr_key_usage_t23ESP_KEY_MGR_USE_OWN_KEYE"></span><span id="_CPPv2N23esp_key_mgr_key_usage_t23ESP_KEY_MGR_USE_OWN_KEYE"></span><span class="target" id="key__mgr__types_8h_1a3c19880d2015ace6c18b8743da87ade3a3b8f41dc926cf6d4dacbf0fbfb45188c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_USE_OWN_KEY</span></span></span><a class="headerlink" href="#_CPPv4N23esp_key_mgr_key_usage_t23ESP_KEY_MGR_USE_OWN_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USE_EFUSE_KEYE">
+<span id="_CPPv3N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USE_EFUSE_KEYE"></span><span id="_CPPv2N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USE_EFUSE_KEYE"></span><span class="target" id="key__mgr__types_8h_1a3c19880d2015ace6c18b8743da87ade3af2ea439aac789997b23995761476a35d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_USE_EFUSE_KEY</span></span></span><a class="headerlink" href="#_CPPv4N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USE_EFUSE_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USAGE_INVALIDE">
+<span id="_CPPv3N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USAGE_INVALIDE"></span><span id="_CPPv2N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USAGE_INVALIDE"></span><span class="target" id="key__mgr__types_8h_1a3c19880d2015ace6c18b8743da87ade3aacc7f2f75475edfe2def0d601045becb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_USAGE_INVALID</span></span></span><a class="headerlink" href="#_CPPv4N23esp_key_mgr_key_usage_t25ESP_KEY_MGR_USAGE_INVALIDE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv425esp_key_mgr_key_purpose_t">
+<span id="_CPPv325esp_key_mgr_key_purpose_t"></span><span id="_CPPv225esp_key_mgr_key_purpose_t"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_purpose_t</span></span></span><a class="headerlink" href="#_CPPv425esp_key_mgr_key_purpose_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key Purpose to be set for a particular key in the Key Manager. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t31ESP_KEY_MGR_KEY_PURPOSE_INVALIDE">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t31ESP_KEY_MGR_KEY_PURPOSE_INVALIDE"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t31ESP_KEY_MGR_KEY_PURPOSE_INVALIDE"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea1904ccba2b8384733ff06cb4722f8c37"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_INVALID</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t31ESP_KEY_MGR_KEY_PURPOSE_INVALIDE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_192E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_192E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_192E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea36c8acc944c2f1c746901d7912f1a67e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_ECDSA_192</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_192E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_256E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_256E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_256E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea56a306984e0ab64a7fd43eecc55b29b4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_ECDSA_256</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_ECDSA_256E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_1E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_1E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_1E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea3276180c95def545f624f923c18955ea"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_1</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_1E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_1E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_1E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_1E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92eacf966b0299cc529dd1804bef65105122"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_1</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_1E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_2E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_2E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_2E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92eaaacd57dbba753edc84aeb634a90d6e71"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_2</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_FLASH_256_2E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_2E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_2E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_2E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92eaaa8e4fe3a8c74b021d3f4b7c05abef4d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_2</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t37ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_256_2E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_FLASH_128E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_FLASH_128E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_FLASH_128E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92eadd1f86f0fb305e075cd4b8985a67ac47"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_FLASH_128</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_FLASH_128E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_128E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_128E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_128E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea00eec370e50743173a95ec74a3d332c1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_128</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_XTS_AES_128E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t28ESP_KEY_MGR_KEY_PURPOSE_HMACE">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t28ESP_KEY_MGR_KEY_PURPOSE_HMACE"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t28ESP_KEY_MGR_KEY_PURPOSE_HMACE"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea43f422e12c76bb8f2bf29623caad3a94"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_HMAC</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t28ESP_KEY_MGR_KEY_PURPOSE_HMACE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t26ESP_KEY_MGR_KEY_PURPOSE_DSE">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t26ESP_KEY_MGR_KEY_PURPOSE_DSE"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t26ESP_KEY_MGR_KEY_PURPOSE_DSE"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea81677d701c2618c7f11bdf68843c8b63"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_DS</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t26ESP_KEY_MGR_KEY_PURPOSE_DSE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_1E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_1E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_1E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea902fcc7bbb2906efa344cf4fe685faef"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_1</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_1E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_2E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_2E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_2E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92eaeca093253b8157a58f38486b5d4a10bc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_2</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_PSRAM_256_2E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_PSRAM_128E">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_PSRAM_128E"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_PSRAM_128E"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ea071e2444f85ccfa249ba60adcb79f695"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_PSRAM_128</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t33ESP_KEY_MGR_KEY_PURPOSE_PSRAM_128E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_LE">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_LE"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_LE"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92ead1082eab768497c8fb299ac4b088175e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_L</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_LE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_HE">
+<span id="_CPPv3N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_HE"></span><span id="_CPPv2N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_HE"></span><span class="target" id="key__mgr__types_8h_1aedfe2652eab78a3cced1fdc521faa92eaf01c4a92cc1b7c70db19f1e4ae42c9d8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_H</span></span></span><a class="headerlink" href="#_CPPv4N25esp_key_mgr_key_purpose_t35ESP_KEY_MGR_KEY_PURPOSE_ECDSA_384_HE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv432esp_key_mgr_key_generator_mode_t">
+<span id="_CPPv332esp_key_mgr_key_generator_mode_t"></span><span id="_CPPv232esp_key_mgr_key_generator_mode_t"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_key_generator_mode_t</span></span></span><a class="headerlink" href="#_CPPv432esp_key_mgr_key_generator_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key Manager Generator mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_RANDOME">
+<span id="_CPPv3N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_RANDOME"></span><span id="_CPPv2N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_RANDOME"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91a3d7b17a3a982044f11c6bc0938442ae4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEYGEN_MODE_RANDOM</span></span></span><a class="headerlink" href="#_CPPv4N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_RANDOME" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32esp_key_mgr_key_generator_mode_t27ESP_KEY_MGR_KEYGEN_MODE_AESE">
+<span id="_CPPv3N32esp_key_mgr_key_generator_mode_t27ESP_KEY_MGR_KEYGEN_MODE_AESE"></span><span id="_CPPv2N32esp_key_mgr_key_generator_mode_t27ESP_KEY_MGR_KEYGEN_MODE_AESE"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91aba38e3e5c4a071125d21500875d2f55d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEYGEN_MODE_AES</span></span></span><a class="headerlink" href="#_CPPv4N32esp_key_mgr_key_generator_mode_t27ESP_KEY_MGR_KEYGEN_MODE_AESE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH0E">
+<span id="_CPPv3N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH0E"></span><span id="_CPPv2N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH0E"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91aa756da12880a68a386f881398adf0387"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEYGEN_MODE_ECDH0</span></span></span><a class="headerlink" href="#_CPPv4N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH0E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH1E">
+<span id="_CPPv3N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH1E"></span><span id="_CPPv2N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH1E"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91af9229d97c5dc6e5f1002fa16eea98d24"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEYGEN_MODE_ECDH1</span></span></span><a class="headerlink" href="#_CPPv4N32esp_key_mgr_key_generator_mode_t29ESP_KEY_MGR_KEYGEN_MODE_ECDH1E" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32esp_key_mgr_key_generator_mode_t31ESP_KEY_MGR_KEYGEN_MODE_RECOVERE">
+<span id="_CPPv3N32esp_key_mgr_key_generator_mode_t31ESP_KEY_MGR_KEYGEN_MODE_RECOVERE"></span><span id="_CPPv2N32esp_key_mgr_key_generator_mode_t31ESP_KEY_MGR_KEYGEN_MODE_RECOVERE"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91a8b83c8d8e306f343cea25271580739a2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEYGEN_MODE_RECOVER</span></span></span><a class="headerlink" href="#_CPPv4N32esp_key_mgr_key_generator_mode_t31ESP_KEY_MGR_KEYGEN_MODE_RECOVERE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_EXPORTE">
+<span id="_CPPv3N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_EXPORTE"></span><span id="_CPPv2N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_EXPORTE"></span><span class="target" id="key__mgr__types_8h_1a4cbb32dbe40335073598926ea9e71c91a9c39db46dc7fe11f18d27be127167730"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_KEYGEN_MODE_EXPORT</span></span></span><a class="headerlink" href="#_CPPv4N32esp_key_mgr_key_generator_mode_t30ESP_KEY_MGR_KEYGEN_MODE_EXPORTE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv428esp_key_mgr_interrupt_type_t">
+<span id="_CPPv328esp_key_mgr_interrupt_type_t"></span><span id="_CPPv228esp_key_mgr_interrupt_type_t"></span><span class="target" id="key__mgr__types_8h_1af21ed1f0e7df3e32842c479355fb0ee3"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_interrupt_type_t</span></span></span><a class="headerlink" href="#_CPPv428esp_key_mgr_interrupt_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Key Manager interrupt types. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PREP_DONEE">
+<span id="_CPPv3N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PREP_DONEE"></span><span id="_CPPv2N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PREP_DONEE"></span><span class="target" id="key__mgr__types_8h_1af21ed1f0e7df3e32842c479355fb0ee3a7f8234342c00119cbc8ff0f691799e08"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_INT_PREP_DONE</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PREP_DONEE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PROC_DONEE">
+<span id="_CPPv3N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PROC_DONEE"></span><span id="_CPPv2N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PROC_DONEE"></span><span class="target" id="key__mgr__types_8h_1af21ed1f0e7df3e32842c479355fb0ee3afcb96df3e38de8ea8a47f3e69b0df4e1"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_INT_PROC_DONE</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_PROC_DONEE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_POST_DONEE">
+<span id="_CPPv3N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_POST_DONEE"></span><span id="_CPPv2N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_POST_DONEE"></span><span class="target" id="key__mgr__types_8h_1af21ed1f0e7df3e32842c479355fb0ee3a7dc5470143c87745cf8bae7c8ad1a26b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_INT_POST_DONE</span></span></span><a class="headerlink" href="#_CPPv4N28esp_key_mgr_interrupt_type_t25ESP_KEY_MGR_INT_POST_DONEE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv430esp_key_mgr_force_use_km_key_t">
+<span id="_CPPv330esp_key_mgr_force_use_km_key_t"></span><span id="_CPPv230esp_key_mgr_force_use_km_key_t"></span><span class="target" id="key__mgr__types_8h_1a1262aaf59da2197edd1e9439d07e1d8f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_key_mgr_force_use_km_key_t</span></span></span><a class="headerlink" href="#_CPPv430esp_key_mgr_force_use_km_key_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Force use key manager key type. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is used to force the key manager to use a specific key type. </p>
+</div>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_force_use_km_key_t34ESP_KEY_MGR_FORCE_USE_KM_ECDSA_KEYE">
+<span id="_CPPv3N30esp_key_mgr_force_use_km_key_t34ESP_KEY_MGR_FORCE_USE_KM_ECDSA_KEYE"></span><span id="_CPPv2N30esp_key_mgr_force_use_km_key_t34ESP_KEY_MGR_FORCE_USE_KM_ECDSA_KEYE"></span><span class="target" id="key__mgr__types_8h_1a1262aaf59da2197edd1e9439d07e1d8fa7af3234983febc64daf0ec10763d5d19"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_FORCE_USE_KM_ECDSA_KEY</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_force_use_km_key_t34ESP_KEY_MGR_FORCE_USE_KM_ECDSA_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_force_use_km_key_t36ESP_KEY_MGR_FORCE_USE_KM_XTS_AES_KEYE">
+<span id="_CPPv3N30esp_key_mgr_force_use_km_key_t36ESP_KEY_MGR_FORCE_USE_KM_XTS_AES_KEYE"></span><span id="_CPPv2N30esp_key_mgr_force_use_km_key_t36ESP_KEY_MGR_FORCE_USE_KM_XTS_AES_KEYE"></span><span class="target" id="key__mgr__types_8h_1a1262aaf59da2197edd1e9439d07e1d8fa794b14673021762601c8b20866a4c4e8"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_FORCE_USE_KM_XTS_AES_KEY</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_force_use_km_key_t36ESP_KEY_MGR_FORCE_USE_KM_XTS_AES_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_force_use_km_key_t33ESP_KEY_MGR_FORCE_USE_KM_HMAC_KEYE">
+<span id="_CPPv3N30esp_key_mgr_force_use_km_key_t33ESP_KEY_MGR_FORCE_USE_KM_HMAC_KEYE"></span><span id="_CPPv2N30esp_key_mgr_force_use_km_key_t33ESP_KEY_MGR_FORCE_USE_KM_HMAC_KEYE"></span><span class="target" id="key__mgr__types_8h_1a1262aaf59da2197edd1e9439d07e1d8fa34790ab403056491c90b90c4edda9336"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_FORCE_USE_KM_HMAC_KEY</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_force_use_km_key_t33ESP_KEY_MGR_FORCE_USE_KM_HMAC_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_key_mgr_force_use_km_key_t31ESP_KEY_MGR_FORCE_USE_KM_DS_KEYE">
+<span id="_CPPv3N30esp_key_mgr_force_use_km_key_t31ESP_KEY_MGR_FORCE_USE_KM_DS_KEYE"></span><span id="_CPPv2N30esp_key_mgr_force_use_km_key_t31ESP_KEY_MGR_FORCE_USE_KM_DS_KEYE"></span><span class="target" id="key__mgr__types_8h_1a1262aaf59da2197edd1e9439d07e1d8fa3689ee21e391cdd116ddf4f387b4a80d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ESP_KEY_MGR_FORCE_USE_KM_DS_KEY</span></span></span><a class="headerlink" href="#_CPPv4N30esp_key_mgr_force_use_km_key_t31ESP_KEY_MGR_FORCE_USE_KM_DS_KEYE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+<section id="examples">
+<h2>Examples<a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p>See <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/security/key_manager">security/key_manager</a> for an example demonstrating key deployment using the Key Manager and using the deployed key to perform signing operations.</p>
+<p>This example shows how to:</p>
+<ul class="simple">
+<li><p>Initialize the Key Manager</p></li>
+<li><p>Deploy keys using the AES deployment mode</p></li>
+<li><p>Use the PSA interface to perform signing operations using the Key Manager deployed key</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Key Manager (api-reference/peripherals/key_manager)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Key Manager (api-reference/peripherals/key_manager)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="jpeg.html" class="btn btn-neutral float-left" title="JPEG Encoder and Decoder" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="lcd/index.html" class="btn btn-neutral float-right" title="LCD" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

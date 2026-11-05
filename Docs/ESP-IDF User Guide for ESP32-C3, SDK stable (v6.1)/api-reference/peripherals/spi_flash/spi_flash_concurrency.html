@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Concurrency Constraints for Flash on SPI0/1 - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/spi_flash/spi_flash_concurrency.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/spi_flash/spi_flash_concurrency';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="SPI Features" href="../spi_features.html" />
+    <link rel="prev" title="Overriding Default Chip Drivers" href="spi_flash_override_driver.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth/index.html">Bluetooth<sup>®</sup> API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">SPI Flash API</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#support-for-features-of-flash-chips">Support for Features of Flash Chips</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#initializing-a-flash-device">Initializing a Flash Device</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#spi-flash-access-api">SPI Flash Access API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#spi-flash-size">SPI Flash Size</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#concurrency-constraints-for-flash-on-spi1">Concurrency Constraints for Flash on SPI1</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#spi-flash-encryption">SPI Flash Encryption</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#memory-mapping-api">Memory Mapping API</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#spi-flash-implementation">SPI Flash Implementation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#implementation-details">Implementation Details</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#internal-memory-saving-for-flash-driver">Internal Memory Saving For Flash Driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#related-documents">Related Documents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#api-reference-spi-flash">API Reference - SPI Flash</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#api-reference-flash-encrypt">API Reference - Flash Encrypt</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Peripherals API</a></li>
+          <li class="breadcrumb-item"><a href="index.html">SPI Flash API</a></li>
+      <li class="breadcrumb-item active">Concurrency Constraints for Flash on SPI0/1</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/spi_flash/spi_flash_concurrency.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="concurrency-constraints-for-flash-on-spi0-1">
+<span id="concurrency-constraints-flash"></span><h1>Concurrency Constraints for Flash on SPI0/1<a class="headerlink" href="#concurrency-constraints-for-flash-on-spi0-1" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32c3/api-reference/peripherals/spi_flash/spi_flash_concurrency.html">[中文]</a></p>
+<p>The SPI0/1 bus is shared between the cache and the SPI1 peripheral (controlled by the drivers including this SPI Flash driver). Operations to SPI1 may cause significant influence to the cache and hence the whole system. There are no such constraints and impacts for flash chips connected to other SPI buses, which are not covered in this document.</p>
+<p>There are three kinds of activities that can happen on SPI0/1 bus:</p>
+<ul>
+<li><p>Flash writing operations (via SPI1). For example, erasing, page programming, or status register writing commands (e.g., <code class="docutils literal notranslate"><span class="pre">SE</span></code>, <code class="docutils literal notranslate"><span class="pre">PP</span></code>, and <code class="docutils literal notranslate"><span class="pre">WRSR</span></code>). During these commands, the flash is in a unreadable state. The CPU and the cache have to wait until the writing command is completed. APIs below can trigger writing commands:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>Calling non_encrypted SPI flash write API (<a class="reference internal" href="index.html#_CPPv415esp_flash_writeP11esp_flash_tPKv8uint32_t8uint32_t" title="esp_flash_write"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_write()</span></code></a>, <a class="reference internal" href="index.html#_CPPv422esp_flash_erase_regionP11esp_flash_t8uint32_t8uint32_t" title="esp_flash_erase_region"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_erase_region()</span></code></a>, etc.)</p></li>
+<li><p>Calling <a class="reference internal" href="index.html#_CPPv425esp_flash_write_encryptedP11esp_flash_t8uint32_tPKv8uint32_t" title="esp_flash_write_encrypted"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_write_encrypted()</span></code></a></p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Short operations (via SPI1, includes non-writing flash commands). APIs below can trigger short operations:</p>
+<blockquote>
+<div><p><ul class="simple">
+<li><p>Calling non_encrypted SPI flash read API (<a class="reference internal" href="index.html#_CPPv414esp_flash_readP11esp_flash_tPv8uint32_t8uint32_t" title="esp_flash_read"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_read()</span></code></a>, etc.)</p></li>
+</ul>
+</p>
+</div></blockquote>
+</li>
+<li><p>Cache read (via SPI0). Following API and operations can trigger cache read:</p>
+<blockquote>
+<div><ul>
+<li><p>Code execution from SPI Flash or PSRAM</p></li>
+<li><p>Fetch static data of .data/.rodata/.bss segment from SPI Flash or PSRAM</p></li>
+<li><p>All other read/write operation to the PSRAM via the heap or <cite>esp_himem</cite></p></li>
+<li><p>Read from area mapped to SPI Flash, includes:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>mmap-like functions: <a class="reference internal" href="index.html#_CPPv414spi_flash_mmap6size_t6size_t21spi_flash_mmap_flag_tPPKvP23spi_flash_mmap_handle_t" title="spi_flash_mmap"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_flash_mmap()</span></code></a>, <a class="reference internal" href="index.html#_CPPv420spi_flash_mmap_pagesPKi6size_t21spi_flash_mmap_flag_tPPKvP23spi_flash_mmap_handle_t" title="spi_flash_mmap_pages"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_flash_mmap_pages()</span></code></a>, <a class="reference internal" href="../../system/mm.html#_CPPv411esp_mmu_map11esp_paddr_t6size_t12mmu_target_t14mmu_mem_caps_tiPPv" title="esp_mmu_map"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_mmu_map()</span></code></a>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">bootloader_mmap()</span></code>, and <a class="reference internal" href="../../storage/partition.html#_CPPv418esp_partition_mmapPK15esp_partition_t6size_t6size_t25esp_partition_mmap_flag_tPPKvP27esp_partition_mmap_handle_t" title="esp_partition_mmap"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_partition_mmap()</span></code></a>.</p></li>
+<li><p>Functions relying on <a class="reference internal" href="index.html#_CPPv414spi_flash_mmap6size_t6size_t21spi_flash_mmap_flag_tPPKvP23spi_flash_mmap_handle_t" title="spi_flash_mmap"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_flash_mmap()</span></code></a>: <a class="reference internal" href="../../storage/partition.html#_CPPv418esp_partition_find20esp_partition_type_t23esp_partition_subtype_tPKc" title="esp_partition_find"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_partition_find()</span></code></a>, <a class="reference internal" href="../../storage/partition.html#_CPPv431esp_partition_register_externalP11esp_flash_t6size_t6size_tPKc20esp_partition_type_t23esp_partition_subtype_tPPK15esp_partition_t" title="esp_partition_register_external"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_partition_register_external()</span></code></a>.</p></li>
+<li><p>Encrypted flash read/write APIs <a class="reference internal" href="index.html#_CPPv424esp_flash_read_encryptedP11esp_flash_t8uint32_tPv8uint32_t" title="esp_flash_read_encrypted"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_read_encrypted()</span></code></a> and <a class="reference internal" href="index.html#_CPPv425esp_flash_write_encryptedP11esp_flash_t8uint32_tPKv8uint32_t" title="esp_flash_write_encrypted"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_write_encrypted()</span></code></a> (on esp32, or for data validation).</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<p>All SPI flash APIs are exclusive to each other by some internal mutex provided by the driver.</p>
+<p>For all SPI1 operations (read/write), caches are disabled during these operations by default. Most tasks will be disabled, and access to Flash/PSRAM is forbidden. See <a class="reference internal" href="#cache-disabled"><span class="std std-ref">Cache Disabled (Default)</span></a> for more details.</p>
+<p>Some options help reduce the impact of cache disabling. The impact of write operations differs between modes.</p>
+<ul>
+<li><p><strong>Auto Suspend</strong>: In this mode, when cache access to flash misses during flash erase/write operations, it is allowed to suspend the flash writing to read from it transparently with some latency. As a result, caches are kept enabled and code execution won't be affected so much during writing operations.</p>
+<blockquote>
+<div><p>This is an optional feature that depends on special SPI Flash models, hence disabled by default. See <a class="reference internal" href="spi_flash_optional_feature.html"><span class="doc">Optional Features for Flash</span></a> and <a class="reference internal" href="#auto-suspend"><span class="std std-ref">Flash Auto Suspend Feature</span></a> for more details.</p>
+</div></blockquote>
+</li>
+</ul>
+<p>See <a class="reference internal" href="index.html#esp-flash-os-func"><span class="std std-ref">OS Functions</span></a> and <a class="reference internal" href="../spi_features.html#spi-bus-lock"><span class="std std-ref">SPI Bus Lock</span></a> for the detailed information of software implementation.</p>
+<section id="cache-disabled-default">
+<span id="cache-disabled"></span><h2>Cache Disabled (Default)<a class="headerlink" href="#cache-disabled-default" title="Permalink to this heading"></a></h2>
+<p>By default, caches are disabled during SPI1 operations (read/write). All SPI1 operations will automatically and transparently disable the caches.</p>
+<p>When the caches are disabled, all non-IRAM-safe interrupts will be disabled, and all other tasks are suspended. Only IRAM-safe interrupt handlers will be executed. These will be restored when the Flash operation completes.</p>
+<p>See <a class="reference internal" href="#iram-safe-interrupt-handlers"><span class="std std-ref">IRAM-Safe Interrupt Handlers</span></a> for information on how to prevent an interrupt handler from being disabled when the cache is disabled.</p>
+<p>When the cache is disabled, all CPUs should execute code and access data only from internal RAM. For differences between internal RAM (e.g., IRAM, DRAM) and flash cache, please refer to the <a class="reference internal" href="../../../api-guides/memory-types.html#memory-layout"><span class="std std-ref">application memory layout</span></a> documentation.</p>
+<section id="iram-safe-interrupt-handlers">
+<span id="id1"></span><h3>IRAM-Safe Interrupt Handlers<a class="headerlink" href="#iram-safe-interrupt-handlers" title="Permalink to this heading"></a></h3>
+<p>For interrupt handlers which need to execute when the cache is disabled (e.g., for low latency operations), set the <code class="docutils literal notranslate"><span class="pre">ESP_INTR_FLAG_IRAM</span></code> flag when the <a class="reference internal" href="../../system/intr_alloc.html"><span class="doc">interrupt handler is registered</span></a>.</p>
+<p>You must ensure that all data and functions accessed by these interrupt handlers, including the ones that handlers call, are located in IRAM or DRAM. See <a class="reference internal" href="../../../api-guides/memory-types.html#how-to-place-code-in-iram"><span class="std std-ref">How to Place Code in IRAM</span></a>.</p>
+<p>If a function or symbol is not correctly put into IRAM/DRAM, and the interrupt handler reads from the flash cache during a flash operation, it will cause a crash. This may be due to an Illegal Instruction exception (for code which should be in IRAM) or garbage data being read (for constant data which should be in DRAM).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When working with strings in ISRs, it is not advised to use <code class="docutils literal notranslate"><span class="pre">printf</span></code> and other output functions. For debugging purposes, use <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ESP_DRAM_LOGE()</span></code> and similar macros when logging from ISRs. Make sure that both <code class="docutils literal notranslate"><span class="pre">TAG</span></code> and format string are placed into <code class="docutils literal notranslate"><span class="pre">DRAM</span></code> in that case.</p>
+</div>
+</section>
+<section id="non-iram-safe-interrupt-handlers">
+<h3>Non-IRAM-Safe Interrupt Handlers<a class="headerlink" href="#non-iram-safe-interrupt-handlers" title="Permalink to this heading"></a></h3>
+<p>If the <code class="docutils literal notranslate"><span class="pre">ESP_INTR_FLAG_IRAM</span></code> flag is not set when registering, the interrupt handler will not be executed when the caches are disabled. Once the caches are restored, the non-IRAM-safe interrupts will be re-enabled. After this moment, the interrupt handler will run normally again. This means that as long as caches are disabled, the corresponding hardware events will not occur.</p>
+</section>
+</section>
+<section id="flash-auto-suspend-feature">
+<span id="auto-suspend"></span><h2>Flash Auto Suspend Feature<a class="headerlink" href="#flash-auto-suspend-feature" title="Permalink to this heading"></a></h2>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<ol class="arabic simple">
+<li><p>The flash chip you are using should have a suspend/resume feature.</p></li>
+<li><p>The MSPI hardware should support the auto-suspend feature, i.e., hardware can send suspend command automatically.</p></li>
+</ol>
+<p>If you use suspend feature on an unsupported chip, it may cause a severe crash. Therefore, we strongly suggest you reading the flash chip datasheets first. Ensure the flash chip satisfies the following conditions at minimum.</p>
+<ol class="arabic simple">
+<li><p>With the current software implementation, SUS bit in status registers should in SR2 bit7 or SR bit15.</p></li>
+<li><p>With the current software implementation, suspend command should be 75H, with resume command being 7AH.</p></li>
+<li><p>When the flash is successfully suspended, all address of the flash, except from the section/block being erased, can be read correctly. At this state，resume can be sent immediately as well.</p></li>
+<li><p>When the flash is successfully resumed, another suspend can be sent immediately at this state.</p></li>
+</ol>
+</div>
+<p>When <a class="reference internal" href="../../kconfig-reference.html#config-spi-flash-auto-suspend"><span class="std std-ref">CONFIG_SPI_FLASH_AUTO_SUSPEND</span></a> is enabled, the caches will be kept enabled. They would be disabled if <a class="reference internal" href="../../kconfig-reference.html#config-spi-flash-auto-suspend"><span class="std std-ref">CONFIG_SPI_FLASH_AUTO_SUSPEND</span></a> is disabled. The hardware handles the arbitration between SPI0 and SPI1. If the SPI1 operation is short, such as a reading operation, the CPU and the cache will wait until the SPI1 operation is completed. However, during processes like erasing, page programming, or status register writing (e.g., <code class="docutils literal notranslate"><span class="pre">SE</span></code>, <code class="docutils literal notranslate"><span class="pre">PP</span></code>, and <code class="docutils literal notranslate"><span class="pre">WRSR</span></code>), an auto suspend will happen, interrupting the ongoing flash operation. This allows the CPU to access data from the cache and flash within limited time.</p>
+<p>This approach allows certain code/variables to be stored in flash/PSRAM instead of IRAM/DRAM, while still being executable during flash erasing. This reduces the usage of IRAM/DRAM.</p>
+<p>Please note that this feature comes with the overhead of flash suspend/resume. Frequent interruptions during flash erasing can significantly prolong the erasing process. To avoid this, you may use FreeRTOS task priorities to ensure that only real-time critical tasks are executed at a higher priority than flash erasing, allowing the flash erasing to complete in reasonable time.</p>
+<p>There are three kinds of code:</p>
+<ol class="arabic simple">
+<li><p>Critical code: inside IRAM/DRAM. This kind of code usually has high performance requirements, related to cache/flash/PSRAM, or is called very often.</p></li>
+<li><p>Cached code: inside flash/PSRAM. This kind of code has lower performance requirements or is called less often. They will execute during erasing, with some overhead.</p></li>
+<li><p>Low-priority code: inside flash/PSRAM and disabled during erasing. This kind of code should be forbidden from being executed to avoid affecting the flash erasing, by setting a lower task priority than the erasing task.</p></li>
+</ol>
+<p>Regarding the flash suspend feature usage and corresponding response time delay, please also see the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/system/flash_suspend">system/flash_suspend</a> example.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The flash auto suspend feature relies heavily on strict timing. You can see it as a kind of optimization plan, which means that you cannot use it in every situation, like high requirement of real-time system or triggering interrupt very frequently (e.g., LCD flush, bluetooth, Wi-Fi, etc.). You should take following steps to evaluate what kind of ISR can be used together with flash suspend.</p>
+
+<div style="overflow-x:auto">
+<script type="WaveDrom">
+{
+    "signal": [
+    {
+        "name": "SPI1(flash)",
+        "wave": "x73...|.8x........8x3..",
+        "data": ["PE", "Programming...", "SUS", "RES", "CONTINUE.."],
+        "node":".........E.........FG" },
+    {
+        "name": "SPI0(cache)",
+        "wave": "x.........3...|.x......",
+        "data":["READ"], "node": "..........D" },
+    {
+        "name": "ISR", "wave": "0......1.........0...1.",
+        "data":["1"], "node": ".......a.........b...c" },
+    {
+        "node": ".......A.............C"}
+    ],
+    "edge": [
+        "A+C ISR interval",
+        "E~D tsus", "F~G tsus",
+        "a~b ISR time"
+    ]
+}
+
+</script>
+</div>
+<p>As you can see from the diagram, two key values should be noted:</p>
+<ol class="arabic simple">
+<li><p>ISR time: The ISR time cannot be very long, at least not larger than the value you set in <code class="docutils literal notranslate"><span class="pre">IWDT</span></code>. But it will significantly lengthen the erasing/writing completion time.</p></li>
+<li><p>ISR interval: ISR cannot be triggered very often. The most important time is the <strong>ISR interval minus ISR time</strong> (from point b to point c in the diagram). During this time, SPI1 will send resume command to restart the operation. However, it needs a time <code class="docutils literal notranslate"><span class="pre">tsus</span></code> for preparation, and the typical value of <code class="docutils literal notranslate"><span class="pre">tsus</span></code> is about <strong>40 us</strong>. If SPI1 cannot resume the operation but another suspend command comes, it will cause CPU starve and <code class="docutils literal notranslate"><span class="pre">TWDT</span></code> may be triggered.</p></li>
+</ol>
+<p>The <code class="docutils literal notranslate"><span class="pre">tsus</span></code> time mentioned in point 2 can be found by looking through the flash datasheets, usually in the AC CHARACTERISTICS section. Users needs to make sure that the <code class="docutils literal notranslate"><span class="pre">tsus</span></code> value obtained from the datasheets is not greater than the <a class="reference internal" href="../../kconfig-reference.html#config-spi-flash-suspend-tsus-val-us"><span class="std std-ref">CONFIG_SPI_FLASH_SUSPEND_TSUS_VAL_US</span></a> value in Kconfig.</p>
+<p>Furthermore, the flash suspend might be delayed. If both the CPU and the cache access the flash via SPI0 frequently and SPI1 sends the suspend command frequently as well, the efficiency of MSPI data transfer will be influenced. So, we have a <strong>lock</strong> inside to prevent this. When SPI1 sends the suspend command, SPI0 will take over memory SPI bus and take the lock. After SPI0 finishes sending data, it will retain control of the memory SPI bus until the lock delay period time finishes. During this lock delay period, if there is any other SPI0 transaction, then the SPI0 transaction will be proceeded and a new lock delay period will start. Otherwise, SPI0 will release the memory bus and start SPI0/1 arbitration.</p>
+</div>
+<section id="advanced-suspend-resume-usage">
+<h3>Advanced Suspend-resume Usage<a class="headerlink" href="#advanced-suspend-resume-usage" title="Permalink to this heading"></a></h3>
+<p>In the default configuration, flash suspend is issued automatically by hardware, and the resume is also handled by hardware at an appropriate moment, while a fixed time delay is used to wait for the suspend command to take effect. This implementation already covers the majority of use cases. However, in scenarios that have stricter requirements on real-time response, performance, or suspend granularity, ESP-IDF also provides additional advanced configuration options for fine-tuning the suspend-resume behavior.</p>
+<ol class="arabic simple">
+<li><p>Detect Whether Suspend Has Taken Effect via Flash Register</p></li>
+</ol>
+<p>Normally, after issuing the suspend command, the hardware waits for a fixed period of time defined by <code class="docutils literal notranslate"><span class="pre">tsus</span></code> before handing the memory bus back to SPI0/CPU. Because this delay must be configured according to the worst case given in the datasheet, it is conservative in most situations.</p>
+<p>By enabling <a class="reference internal" href="../../kconfig-reference.html#config-spi-flash-auto-check-suspend-status"><span class="std std-ref">CONFIG_SPI_FLASH_AUTO_CHECK_SUSPEND_STATUS</span></a>, the hardware will instead poll the <code class="docutils literal notranslate"><span class="pre">WIP</span></code> bit in the flash status register to determine whether the suspend command has actually taken effect, rather than waiting for the fixed time given by <a class="reference internal" href="../../kconfig-reference.html#config-spi-flash-suspend-tsus-val-us"><span class="std std-ref">CONFIG_SPI_FLASH_SUSPEND_TSUS_VAL_US</span></a>. Since the actual suspend setup time is usually much shorter than the maximum value listed in the datasheet, this approach can significantly reduce the overhead during suspend and improve overall performance.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Before enabling this option, please confirm that the behavior of the <code class="docutils literal notranslate"><span class="pre">WIP</span></code> bit after suspend on your flash chip matches the expectation. Most flash chips that support suspend/resume satisfy this requirement, but it is still recommended to consult the corresponding datasheet to verify it.</p>
+</div>
+<ol class="arabic simple" start="2">
+<li><p>Software-controlled Flash Resume</p></li>
+</ol>
+<p>Normally, after the flash is suspended, the hardware will automatically arrange an appropriate moment to send the resume command, allowing the flash to continue its original erase/write operation. This implementation is transparent to software, but it has a side effect: while a high-priority task or interrupt is still running, the hardware may again initiate a suspend/resume sequence, which interrupts those tasks and affects the continuity and timing of their execution.</p>
+<p>By enabling <a class="reference internal" href="../../kconfig-reference.html#config-spi-flash-software-resume"><span class="std std-ref">CONFIG_SPI_FLASH_SOFTWARE_RESUME</span></a>, the hardware auto-resume feature is disabled, and the flash resume operation is instead issued by software at an appropriate point. With this option enabled, once the flash is suspended it will stay suspended until software explicitly resumes it. In the SPI1 wait-idle flow, software actively checks the flash's suspend state, and if it finds the flash in a suspended state, it calls the driver's resume interface to let the flash continue the original operation. This means that the resume command is only issued after the high-priority task or interrupt has truly finished and software has returned to the SPI1 operation context, avoiding repeated bus preemption caused by suspend-resume on high-priority paths.</p>
+<p>Because this mechanism relies on the software layer to perform resume at well-defined execution points, and the current implementation does not provide corresponding protection for multi-core scenarios, this option has the following limitations:</p>
+<ul class="simple">
+<li><p>It is only supported on single-core scenarios. <a class="reference internal" href="../../kconfig-reference.html#config-freertos-unicore"><span class="std std-ref">CONFIG_FREERTOS_UNICORE</span></a> must be enabled.</p></li>
+<li><p>It is an experimental feature and is only visible after <a class="reference internal" href="../../kconfig-reference.html#config-idf-experimental-features"><span class="std std-ref">CONFIG_IDF_EXPERIMENTAL_FEATURES</span></a> is enabled.</p></li>
+<li><p>This feature improves the continuity of interrupt response and the overall application performance. However, it also increases the time needed to complete a single flash operation.</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Concurrency Constraints for Flash on SPI0/1 (api-reference/peripherals/spi_flash/spi_flash_concurrency)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Concurrency Constraints for Flash on SPI0/1 (api-reference/peripherals/spi_flash/spi_flash_concurrency)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spi_flash_override_driver.html" class="btn btn-neutral float-left" title="Overriding Default Chip Drivers" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../spi_features.html" class="btn btn-neutral float-right" title="SPI Features" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

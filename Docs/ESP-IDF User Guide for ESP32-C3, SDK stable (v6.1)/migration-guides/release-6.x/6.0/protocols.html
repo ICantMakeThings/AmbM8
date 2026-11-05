@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Protocols - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/migration-guides/release-6.x/6.0/protocols.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'migration-guides/release-6.x/6.0/protocols';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Wi-Fi" href="wifi.html" />
+    <link rel="prev" title="Provisioning" href="provisioning.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#esp-idf-5-x-migration-guide">ESP-IDF 5.x Migration Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#esp-idf-6-x-migration-guide">ESP-IDF 6.x Migration Guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Migration from 5.5 to 6.0</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="peripherals.html">Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="provisioning.html">Provisioning</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wifi.html">Wi-Fi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="system.html">System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toolchain.html">Toolchain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../6.1/index.html">Migration from 6.0 to 6.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Migration Guides</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Migration from 5.5 to 6.0</a></li>
+      <li class="breadcrumb-item active">Protocols</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/migration-guides/release-6.x/6.0/protocols.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="protocols">
+<h1>Protocols<a class="headerlink" href="#protocols" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32c3/migration-guides/release-6.x/6.0/protocols.html">[中文]</a></p>
+<section id="json">
+<h2>JSON<a class="headerlink" href="#json" title="Permalink to this heading"></a></h2>
+<section id="removed-built-in-json-component">
+<h3>Removed Built-in JSON Component<a class="headerlink" href="#removed-built-in-json-component" title="Permalink to this heading"></a></h3>
+<p>The built-in <code class="docutils literal notranslate"><span class="pre">json</span></code> component has been removed from ESP-IDF. Users should migrate to using the <code class="docutils literal notranslate"><span class="pre">espressif/cjson</span></code> component from the <a class="reference external" href="https://components.espressif.com/">IDF Component Manager</a>.</p>
+<section id="migration-steps">
+<h4>Migration Steps<a class="headerlink" href="#migration-steps" title="Permalink to this heading"></a></h4>
+<ol class="arabic">
+<li><p><strong>Remove json from CMakeLists.txt</strong></p>
+<p>In your component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>, remove <code class="docutils literal notranslate"><span class="pre">json</span></code> from the <code class="docutils literal notranslate"><span class="pre">REQUIRES</span></code> or <code class="docutils literal notranslate"><span class="pre">PRIV_REQUIRES</span></code> list:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Before</span>
+<span class="nb">idf_component_register</span><span class="p">(</span><span class="s">SRCS</span><span class="w"> </span><span class="s2">"main.c"</span>
+<span class="w">                       </span><span class="s">PRIV_REQUIRES</span><span class="w"> </span><span class="s">json</span><span class="w"> </span><span class="s">esp_http_server</span><span class="p">)</span>
+
+<span class="c"># After</span>
+<span class="nb">idf_component_register</span><span class="p">(</span><span class="s">SRCS</span><span class="w"> </span><span class="s2">"main.c"</span>
+<span class="w">                       </span><span class="s">PRIV_REQUIRES</span><span class="w"> </span><span class="s">esp_http_server</span><span class="p">)</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>Add espressif/cjson to idf_component.yml</strong></p>
+<p>Add the <code class="docutils literal notranslate"><span class="pre">espressif/cjson</span></code> dependency to your component's <code class="docutils literal notranslate"><span class="pre">idf_component.yml</span></code> file. If this file doesn't exist, create it in your component directory (e.g., <code class="docutils literal notranslate"><span class="pre">main/idf_component.yml</span></code>):</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">espressif/cjson</span><span class="p">:</span><span class="w"> </span><span class="s">"^1.7.19"</span>
+</pre></div>
+</div>
+</li>
+<li><p><strong>No Code Changes Required</strong></p>
+<p>The API remains the same. Your existing code using cJSON functions will continue to work without modifications:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"cJSON.h"</span>
+
+<span class="c1">// Existing code works unchanged</span>
+<span class="n">cJSON</span><span class="w"> </span><span class="o">*</span><span class="n">root</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cJSON_Parse</span><span class="p">(</span><span class="n">json_string</span><span class="p">);</span>
+<span class="n">cJSON</span><span class="w"> </span><span class="o">*</span><span class="n">item</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">cJSON_GetObjectItem</span><span class="p">(</span><span class="n">root</span><span class="p">,</span><span class="w"> </span><span class="s">"key"</span><span class="p">);</span>
+<span class="n">cJSON_Delete</span><span class="p">(</span><span class="n">root</span><span class="p">);</span>
+</pre></div>
+</div>
+</li>
+</ol>
+<p>For more information:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://components.espressif.com/components/espressif/cjson">espressif/cjson component</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/idf-extra-components/tree/master/cjson">cJSON on GitHub</a></p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="esp-tls">
+<h2>ESP-TLS<a class="headerlink" href="#esp-tls" title="Permalink to this heading"></a></h2>
+<section id="removed-wolfssl-support">
+<h3>Removed wolfSSL Support<a class="headerlink" href="#removed-wolfssl-support" title="Permalink to this heading"></a></h3>
+<p>The built-in wolfSSL TLS stack support has been removed from ESP-TLS. Users who were using wolfSSL should migrate to either:</p>
+<ol class="arabic simple">
+<li><p><strong>mbedTLS (Recommended)</strong>: The default TLS stack, fully integrated and maintained within ESP-IDF.</p></li>
+<li><p><strong>Custom TLS Stack</strong>: Register your own TLS implementation using the new custom stack API (see Option B below).</p></li>
+</ol>
+<p><strong>Removed Kconfig Options</strong></p>
+<p>The following Kconfig options have been removed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_USING_WOLFSSL</span></code> - Use <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_USING_MBEDTLS</span></code> or <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_CUSTOM_STACK</span></code> instead</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_DEBUG_WOLFSSL</span></code> - For mbedTLS debugging, use <code class="docutils literal notranslate"><span class="pre">CONFIG_MBEDTLS_DEBUG</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_OCSP_CHECKALL</span></code> - OCSP functionality should be handled by the chosen TLS stack</p></li>
+</ul>
+<p><strong>Migration Steps for wolfSSL Users</strong></p>
+<p>If your project was using wolfSSL via ESP-TLS:</p>
+<ol class="arabic">
+<li><p><strong>Option A - Switch to mbedTLS</strong></p>
+<ul class="simple">
+<li><p>Remove <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_USING_WOLFSSL=y</span></code> from your sdkconfig</p></li>
+<li><p>The default <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_USING_MBEDTLS</span></code> will be used automatically</p></li>
+<li><p>No code changes required for standard TLS operations</p></li>
+</ul>
+</li>
+<li><p><strong>Option B - Use Custom Stack API</strong></p>
+<p>If you need to continue using wolfSSL or another TLS library, you can register it as a custom stack:</p>
+<ul class="simple">
+<li><p>Enable <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_TLS_CUSTOM_STACK</span></code> in menuconfig</p></li>
+<li><p>Implement the <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv419esp_tls_stack_ops_t" title="esp_tls_stack_ops_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_tls_stack_ops_t</span></code></a> interface for your TLS library</p></li>
+<li><p>Call <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv422esp_tls_register_stackPK19esp_tls_stack_ops_tPv" title="esp_tls_register_stack"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_tls_register_stack()</span></code></a> before creating any TLS connections</p></li>
+</ul>
+<p>For detailed documentation on implementing a custom TLS stack, see <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#esp-tls-custom-stack"><span class="std std-ref">Custom TLS Stack Support</span></a>.</p>
+</li>
+</ol>
+</section>
+<section id="removed-deprecated-api">
+<h3>Removed Deprecated API<a class="headerlink" href="#removed-deprecated-api" title="Permalink to this heading"></a></h3>
+<p>The deprecated <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_tls_conn_http_new()</span></code> function has been removed. Use either:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv426esp_tls_conn_http_new_syncPKcPK13esp_tls_cfg_tP9esp_tls_t" title="esp_tls_conn_http_new_sync"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_tls_conn_http_new_sync()</span></code></a> for blocking connections</p></li>
+<li><p><a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv427esp_tls_conn_http_new_asyncPKcPK13esp_tls_cfg_tP9esp_tls_t" title="esp_tls_conn_http_new_async"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_tls_conn_http_new_async()</span></code></a> for non-blocking connections</p></li>
+</ul>
+<p>The new API requires you to create the <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv49esp_tls_t" title="esp_tls_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_tls_t</span></code></a> structure using <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv412esp_tls_initv" title="esp_tls_init"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_tls_init()</span></code></a> and provides better control over the connection process.</p>
+</section>
+<section id="unified-private-key-interface">
+<h3>Unified Private Key Interface<a class="headerlink" href="#unified-private-key-interface" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">use_secure_element</span></code> field in <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv411esp_tls_cfg" title="esp_tls_cfg"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_tls_cfg</span></code></a>, <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#_CPPv418esp_tls_cfg_server" title="esp_tls_cfg_server"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_tls_cfg_server</span></code></a>, and <a class="reference internal" href="../../../api-reference/protocols/esp_https_server.html#_CPPv416httpd_ssl_config" title="httpd_ssl_config"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">httpd_ssl_config</span></code></a> is deprecated and no longer functional: setting it to <code class="docutils literal notranslate"><span class="pre">true</span></code> makes the connection (or server start) fail with <code class="docutils literal notranslate"><span class="pre">ESP_ERR_NOT_SUPPORTED</span></code>. The field is kept only for source compatibility and will be removed in the next major release. The ATECC608A secure element and all other hardware-backed key sources (DS peripheral, ECDSA peripheral, Key Manager) are now accessed through a unified <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_key_config_t</span></code> interface via PSA Crypto key IDs.</p>
+<p><strong>Migration Steps</strong></p>
+<ol class="arabic simple">
+<li><p>Replace <code class="docutils literal notranslate"><span class="pre">use_secure_element</span> <span class="pre">=</span> <span class="pre">true</span></code> with the new <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_key_config_t</span></code> using <code class="docutils literal notranslate"><span class="pre">ESP_KEY_SOURCE_PSA</span></code> and a PSA key ID obtained from <code class="docutils literal notranslate"><span class="pre">psa_import_key()</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">atcab_init()</span></code> call is no longer performed internally by ESP-TLS. Applications using the ATECC608A must ensure the secure element is initialized at the application level before use. Refer to the <a class="reference external" href="https://github.com/espressif/esp-cryptoauthlib">esp-cryptoauthlib documentation</a> for details.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">esp_transport_ssl_use_secure_element()</span></code> function in <code class="docutils literal notranslate"><span class="pre">tcp_transport</span></code> is deprecated and no longer functional (the connection will fail with <code class="docutils literal notranslate"><span class="pre">ESP_ERR_NOT_SUPPORTED</span></code>). Use <code class="docutils literal notranslate"><span class="pre">esp_transport_ssl_set_client_key_config()</span></code> instead.</p></li>
+<li><p>The Kconfig options for the secure element driver have been consolidated from <code class="docutils literal notranslate"><span class="pre">CONFIG_MBEDTLS_ATCA_HW_ECDSA_SIGN</span></code> / <code class="docutils literal notranslate"><span class="pre">CONFIG_MBEDTLS_ATCA_HW_ECDSA_VERIFY</span></code> into a single <code class="docutils literal notranslate"><span class="pre">CONFIG_MBEDTLS_SECURE_ELEMENT_DRIVER_ENABLED</span></code>. The old names are automatically mapped via <code class="docutils literal notranslate"><span class="pre">sdkconfig.rename</span></code>.</p></li>
+</ol>
+<p>For detailed usage examples, see <a class="reference internal" href="../../../api-reference/protocols/esp_tls.html#atecc608a-with-esp-tls"><span class="std std-ref">ATECC608A (Secure Element) with ESP-TLS</span></a>.</p>
+</section>
+</section>
+<section id="esp-http-server">
+<h2>ESP HTTP Server<a class="headerlink" href="#esp-http-server" title="Permalink to this heading"></a></h2>
+<section id="websocket-handler-no-longer-called-during-handshake">
+<h3>WebSocket Handler No Longer Called During Handshake<a class="headerlink" href="#websocket-handler-no-longer-called-during-handshake" title="Permalink to this heading"></a></h3>
+<p>From v6.0.1, the URI handler registered for a WebSocket endpoint is <strong>no longer called</strong> during the WebSocket handshake.</p>
+<p>Prior to this change, the handler was invoked with <code class="docutils literal notranslate"><span class="pre">req-&gt;method</span> <span class="pre">==</span> <span class="pre">HTTP_GET</span></code> immediately after the handshake completed, which applications used for connection-time initialization:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Pre-v6.0.1 pattern — no longer works from v6.0.1 onwards */</span>
+<span class="k">static</span><span class="w"> </span><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">ws_handler</span><span class="p">(</span><span class="n">httpd_req_t</span><span class="w"> </span><span class="o">*</span><span class="n">req</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">req</span><span class="o">-&gt;</span><span class="n">method</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">HTTP_GET</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"New WebSocket connection established"</span><span class="p">);</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="cm">/* Handle WebSocket frames ... */</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>From v6.0.1, the handler is invoked only for subsequent WebSocket data frames, so the <code class="docutils literal notranslate"><span class="pre">HTTP_GET</span></code> check is no longer needed in frame handlers.</p>
+<section id="migration-options">
+<h4>Migration Options<a class="headerlink" href="#migration-options" title="Permalink to this heading"></a></h4>
+<p><strong>Option 1 (Recommended)</strong> — Move connection-time logic into a dedicated post-handshake callback:</p>
+<ol class="arabic simple">
+<li><p>Enable <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-httpd-ws-post-handshake-cb-support"><span class="std std-ref">CONFIG_HTTPD_WS_POST_HANDSHAKE_CB_SUPPORT</span></a> in menuconfig.</p></li>
+<li><p>Register a <code class="docutils literal notranslate"><span class="pre">ws_post_handshake_cb</span></code> on the <code class="docutils literal notranslate"><span class="pre">httpd_uri_t</span></code> struct. The frame handler remains clean with no <code class="docutils literal notranslate"><span class="pre">HTTP_GET</span></code> check.</p></li>
+</ol>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">ws_on_connect</span><span class="p">(</span><span class="n">httpd_req_t</span><span class="w"> </span><span class="o">*</span><span class="n">req</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGI</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"New WebSocket connection established"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">esp_err_t</span><span class="w"> </span><span class="nf">ws_handler</span><span class="p">(</span><span class="n">httpd_req_t</span><span class="w"> </span><span class="o">*</span><span class="n">req</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Handle WebSocket frames only */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">httpd_uri_t</span><span class="w"> </span><span class="n">ws_uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">uri</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s">"/ws"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">method</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">HTTP_GET</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">handler</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">ws_handler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">is_websocket</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ws_post_handshake_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws_on_connect</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p><strong>Option 2 (Minimal change)</strong> — Set <code class="docutils literal notranslate"><span class="pre">.ws_post_handshake_cb</span></code> to the same function as <code class="docutils literal notranslate"><span class="pre">.handler</span></code>:</p>
+<ol class="arabic simple">
+<li><p>Enable <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-httpd-ws-post-handshake-cb-support"><span class="std std-ref">CONFIG_HTTPD_WS_POST_HANDSHAKE_CB_SUPPORT</span></a> in menuconfig.</p></li>
+<li><p>Set <code class="docutils literal notranslate"><span class="pre">.ws_post_handshake_cb</span> <span class="pre">=</span> <span class="pre">ws_handler</span></code> in the URI registration. The existing <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">(req-&gt;method</span> <span class="pre">==</span> <span class="pre">HTTP_GET)</span></code> check inside the handler continues to work without any further code changes.</p></li>
+</ol>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">httpd_uri_t</span><span class="w"> </span><span class="n">ws_uri</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">uri</span><span class="w">                  </span><span class="o">=</span><span class="w"> </span><span class="s">"/ws"</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">method</span><span class="w">               </span><span class="o">=</span><span class="w"> </span><span class="n">HTTP_GET</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">handler</span><span class="w">              </span><span class="o">=</span><span class="w"> </span><span class="n">ws_handler</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">is_websocket</span><span class="w">         </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ws_post_handshake_cb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ws_handler</span><span class="p">,</span><span class="w">   </span><span class="cm">/* same function restores old behavior */</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="esp-modbus">
+<h2>ESP-Modbus<a class="headerlink" href="#esp-modbus" title="Permalink to this heading"></a></h2>
+<p>The Espressif ESP-Modbus Library (esp-modbus) supports Modbus communication in the networks based on RS485, Wi-Fi, and Ethernet interfaces.</p>
+<p>The component <code class="docutils literal notranslate"><span class="pre">esp-modbus</span> <span class="pre">v2</span> <span class="pre">(v2.x.x)</span></code> is the current supported component version:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-modbus/tree/main">ESP-Modbus component on GitHub</a></p></li>
+</ul>
+<section id="documentation">
+<h3>Documentation<a class="headerlink" href="#documentation" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.espressif.com/projects/esp-modbus/en/stable">ESP-MODBUS stable documentation v2.x.x</a></p></li>
+<li><p><a class="reference external" href="https://docs.espressif.com/projects/esp-modbus/en/v1">Documentation for legacy version v1.x.x</a></p></li>
+</ul>
+</section>
+<section id="application-examples">
+<h3>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h3>
+<p>Since ESP-IDF version v6.0, the examples for component <code class="docutils literal notranslate"><span class="pre">esp-modbus</span> <span class="pre">v1</span></code> which is obsolete have been removed from ESP-IDF.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/release/v5.5/examples/protocols/modbus">legacy esp-modbus v1.x.x examples (esp-idf v5.5)</a></p></li>
+</ul>
+<p>The examples below demonstrate the ESP-Modbus library of serial and TCP ports for both slave and master implementations respectively.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-modbus/tree/main/examples/serial/mb_serial_slave">mb_serial_slave</a> - demonstrates how to use ESP32-C3 as a Modbus serial slave device with the esp-modbus stack, enabling an external Modbus host to read and write device parameters using the Modbus protocol.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-modbus/tree/main/examples/serial/mb_serial_master">mb_serial_master</a> - demonstrates how to use the esp-modbus stack port on ESP32-C3 as a Modbus serial master device, capable of reading and writing values from slave devices in a Modbus segment.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-modbus/tree/main/examples/tcp/mb_tcp_slave">mb_tcp_slave</a> - demonstrates the esp-modbus TCP slave stack port, allowing an external Modbus host to read and write device parameters via the Modbus protocol.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-modbus/tree/main/examples/tcp/mb_tcp_master">mb_tcp_master</a> - demonstrates how to use the esp-modbus stack port on ESP32-C3 as a Modbus TCP master device, capable of reading and writing values from slave devices in a Modbus network.</p></li>
+</ul>
+<p>Please refer to the <code class="docutils literal notranslate"><span class="pre">README.md</span></code> documents of each specific example for details.</p>
+</section>
+<section id="discussions">
+<h3>Discussions<a class="headerlink" href="#discussions" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-modbus/discussions">Discussions for version v2</a></p></li>
+</ul>
+</section>
+</section>
+<section id="esp-mqtt">
+<h2>ESP-MQTT<a class="headerlink" href="#esp-mqtt" title="Permalink to this heading"></a></h2>
+<p>Breaking change: ESP-MQTT moved to a managed component and example set updated.</p>
+<ul class="simple">
+<li><p>The ESP-MQTT component has been removed from ESP-IDF and is now a managed component: <code class="docutils literal notranslate"><span class="pre">espressif/mqtt</span></code>.</p>
+<ul>
+<li><p>To add the component to an application, run <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">add-dependency</span> <span class="pre">espressif/mqtt</span></code>.</p></li>
+<li><p>Include headers and APIs remain the same (<code class="docutils literal notranslate"><span class="pre">mqtt_client.h</span></code>), but the component is fetched via the Component Manager.</p></li>
+</ul>
+</li>
+<li><p>Example changes in ESP-IDF:</p>
+<ul>
+<li><p>Legacy MQTT TLS examples under <code class="docutils literal notranslate"><span class="pre">examples/protocols/mqtt/ssl*</span></code> were removed.</p></li>
+<li><p>New reference examples are available:</p>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/mqtt">protocols/mqtt</a>: MQTT over TLS.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/mqtt5">protocols/mqtt5</a>: MQTT v5.0 over TLS.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Protocols (migration-guides/release-6.x/6.0/protocols)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Protocols (migration-guides/release-6.x/6.0/protocols)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="provisioning.html" class="btn btn-neutral float-left" title="Provisioning" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="wifi.html" class="btn btn-neutral float-right" title="Wi-Fi" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

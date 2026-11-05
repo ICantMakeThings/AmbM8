@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Peripherals - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/migration-guides/release-6.x/6.0/peripherals.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'migration-guides/release-6.x/6.0/peripherals';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Provisioning" href="provisioning.html" />
+    <link rel="prev" title="Networking" href="networking.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#esp-idf-5-x-migration-guide">ESP-IDF 5.x Migration Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#esp-idf-6-x-migration-guide">ESP-IDF 6.x Migration Guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Migration from 5.5 to 6.0</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="provisioning.html">Provisioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="wifi.html">Wi-Fi</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="system.html">System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toolchain.html">Toolchain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../6.1/index.html">Migration from 6.0 to 6.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Migration Guides</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Migration from 5.5 to 6.0</a></li>
+      <li class="breadcrumb-item active">Peripherals</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/migration-guides/release-6.x/6.0/peripherals.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="peripherals">
+<h1>Peripherals<a class="headerlink" href="#peripherals" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32c3/migration-guides/release-6.x/6.0/peripherals.html">[中文]</a></p>
+<section id="common-changes">
+<h2>Common Changes<a class="headerlink" href="#common-changes" title="Permalink to this heading"></a></h2>
+<section id="legacy-driver-dependencies-removal">
+<h3>Legacy Driver Dependencies Removal<a class="headerlink" href="#legacy-driver-dependencies-removal" title="Permalink to this heading"></a></h3>
+<p>The legacy driver component <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/driver">driver</a> has been deprecated and no longer contains public dependencies on the following driver components:</p>
+<p><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_ana_cmpr">esp_driver_ana_cmpr</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_dac">esp_driver_dac</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_gptimer">esp_driver_gptimer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_i2s">esp_driver_i2s</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_ledc">esp_driver_ledc</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_mcpwm">esp_driver_mcpwm</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_parlio">esp_driver_parlio</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_pcnt">esp_driver_pcnt</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_rmt">esp_driver_rmt</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_sdio">esp_driver_sdio</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_sdm">esp_driver_sdm</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_sdmmc">esp_driver_sdmmc</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_sdspi">esp_driver_sdspi</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_spi">esp_driver_spi</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_tsens">esp_driver_tsens</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_twai">esp_driver_twai</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_uart">esp_driver_uart</a></p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_usb_serial_jtag">esp_driver_usb_serial_jtag</a></p></li>
+</ul>
+</p>
+<p>If your project uses legacy <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/driver">driver</a> component, it is strongly recommended to remove <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/driver">driver</a> component dependencies, and add new driver component (usually <code class="docutils literal notranslate"><span class="pre">esp_driver_xxx</span></code>) dependencies to your project.</p>
+<p>If you still need to keep legacy <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/driver">driver</a> component (e.g. your project depends on the legacy <code class="docutils literal notranslate"><span class="pre">i2c</span></code> driver), please keep the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/driver">driver</a> component remaining in the dependency list of your project (usually <code class="docutils literal notranslate"><span class="pre">&lt;project_root&gt;/main/CMakeLists.txt</span></code>), and manually add component dependencies that are no longer included in <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/driver">driver</a> as needed.</p>
+</section>
+<section id="all-drivers-io-loop-back-configuration-have-been-removed">
+<h3>All drivers' <code class="docutils literal notranslate"><span class="pre">io_loop_back</span></code> configuration have been removed<a class="headerlink" href="#all-drivers-io-loop-back-configuration-have-been-removed" title="Permalink to this heading"></a></h3>
+<p>Different driver objects can share the same GPIO number, enabling more complex functionalities. For example, you can bind the TX and RX channels of the RMT peripheral to the same GPIO to simulate 1-Wire bus read and write timing. In previous versions, you needed to configure the <code class="docutils literal notranslate"><span class="pre">io_loop_back</span></code> setting in the driver to achieve this &quot;loopback&quot; functionality. Now, this configuration has been removed. Simply configuring the same GPIO number in different drivers will achieve the same functionality.</p>
+</section>
+<section id="peripheral-clock-gating">
+<h3>Peripheral Clock Gating<a class="headerlink" href="#peripheral-clock-gating" title="Permalink to this heading"></a></h3>
+<p>Peripheral clock gating is managed within the driver layer. Users do not need to manually handle peripheral module clock gating. Its corresponding APIs are included via a private header file <code class="docutils literal notranslate"><span class="pre">esp_private/periph_ctrl.h</span></code>. There used to be another header file <code class="docutils literal notranslate"><span class="pre">driver/periph_ctrl.h</span></code> for the same purpose, which is now removed.</p>
+</section>
+<section id="rtc-subsystem-control">
+<h3>RTC Subsystem Control<a class="headerlink" href="#rtc-subsystem-control" title="Permalink to this heading"></a></h3>
+<p>Low power modules usually share some common resources like interrupt number. To avoid conflicts, some private APIs are created in the <code class="docutils literal notranslate"><span class="pre">esp_private/rtc_ctrl.h</span></code> header file to manage these shared resources with ease. There used to be another header file <code class="docutils literal notranslate"><span class="pre">driver/rtc_cntl.h</span></code> for the same purpose, which is now removed.</p>
+</section>
+<section id="removal-of-freertos-dependencies-from-driver-header-files">
+<h3>Removal of FreeRTOS Dependencies from Driver Header Files<a class="headerlink" href="#removal-of-freertos-dependencies-from-driver-header-files" title="Permalink to this heading"></a></h3>
+<p>Starting from v6.0, to improve the portability of IDF drivers, all public driver header files no longer include operating-system–specific (FreeRTOS) headers. Therefore, application code that previously relied on this implicit inclusion must explicitly include the corresponding FreeRTOS headers when using v6.0 or later.</p>
+</section>
+</section>
+<section id="adc">
+<h2>ADC<a class="headerlink" href="#adc" title="Permalink to this heading"></a></h2>
+<p>The legacy ADC driver <code class="docutils literal notranslate"><span class="pre">driver/adc.h</span></code> is deprecated since version 5.0 (see <a class="reference internal" href="../../release-5.x/5.0/peripherals.html#deprecate-adc-driver"><span class="std std-ref">ADC</span></a>). Starting from version 6.0, the legacy driver is completely removed. The new driver is placed in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_adc">esp_adc</a>, and the header file path is <code class="docutils literal notranslate"><span class="pre">esp_adc/adc_oneshot.h</span></code>, <code class="docutils literal notranslate"><span class="pre">esp_adc/adc_continuous.h</span></code>, <code class="docutils literal notranslate"><span class="pre">esp_adc/adc_cali.h</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_adc/adc_cali_scheme.h</span></code>.</p>
+</section>
+<section id="rmt">
+<h2>RMT<a class="headerlink" href="#rmt" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">io_od_mode</span></code> member in the <a class="reference internal" href="../../../api-reference/peripherals/rmt.html#_CPPv423rmt_tx_channel_config_t" title="rmt_tx_channel_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">rmt_tx_channel_config_t</span></code></a> configuration structure has been removed. If you want to use open-drain mode, you need to manually call the <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_od_enable()</span></code> function.</p>
+</section>
+<section id="gpio">
+<h2>GPIO<a class="headerlink" href="#gpio" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_iomux_in()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_iomux_out()</span></code> have been replaced by <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_iomux_input()</span></code> and <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_iomux_output()</span></code>, and have been moved to <code class="docutils literal notranslate"><span class="pre">esp_private/gpio.h</span></code> header file as private APIs for internal use only.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">rom_</span></code> prefix has been added to all GPIO ROM APIs in <code class="docutils literal notranslate"><span class="pre">components/esp_rom/esp32xx/include/esp32xx/rom/gpio.h</span></code>. For example, <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_iomux_in()</span></code> is now <code class="xref py py-func docutils literal notranslate"><span class="pre">rom_gpio_iomux_in()</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">MAX_PAD_GPIO_NUM</span></code>, <code class="docutils literal notranslate"><span class="pre">MAX_GPIO_NUM</span></code>, and <code class="docutils literal notranslate"><span class="pre">DIG_IO_HOLD_BIT_SHIFT</span></code> macros have been removed.</p></li>
+<li><p>Added the <a class="reference internal" href="../../../api-reference/system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_err_t</span></code></a> return type to <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_uninstall_isr_service()</span></code>.</p></li>
+</ul>
+<section id="gpio-deep-sleep-wakeup-apis-removed">
+<h3>GPIO Deep Sleep Wakeup APIs Removed<a class="headerlink" href="#gpio-deep-sleep-wakeup-apis-removed" title="Permalink to this heading"></a></h3>
+<p>The following GPIO driver APIs have been removed:</p>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_deep_sleep_wakeup_enable()</span></code> - Use <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_wakeup_enable_on_hp_periph_powerdown_sleep()</span></code> instead</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_deep_sleep_wakeup_disable()</span></code> - Use <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_wakeup_disable_on_hp_periph_powerdown_sleep()</span></code> instead</p></li>
+</ul>
+<p>The deprecated macro <code class="docutils literal notranslate"><span class="pre">GPIO_IS_DEEP_SLEEP_WAKEUP_VALID_GPIO()</span></code> has been removed. Use <code class="docutils literal notranslate"><span class="pre">GPIO_IS_HP_PERIPH_PD_WAKEUP_VALID_IO()</span></code> instead.</p>
+<p><strong>Migration Example:</strong></p>
+<p>Old code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/gpio.h"</span>
+
+<span class="c1">// Enable GPIO wakeup</span>
+<span class="n">gpio_deep_sleep_wakeup_enable</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_INTR_LOW_LEVEL</span><span class="p">);</span>
+
+<span class="c1">// Check validity</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GPIO_IS_DEEP_SLEEP_WAKEUP_VALID_GPIO</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>New code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/gpio.h"</span>
+
+<span class="c1">// Enable GPIO wakeup (works for both deep sleep and light sleep with peripheral powerdown)</span>
+<span class="n">gpio_wakeup_enable_on_hp_periph_powerdown_sleep</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_INTR_LOW_LEVEL</span><span class="p">);</span>
+
+<span class="c1">// Check validity</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GPIO_IS_HP_PERIPH_PD_WAKEUP_VALID_IO</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>For more details, see the <a class="reference internal" href="system.html#gpio-wakeup-api-changes"><span class="std std-ref">GPIO Wakeup API Changes</span></a> section in the System migration guide.</p>
+</section>
+</section>
+<section id="ledc">
+<h2>LEDC<a class="headerlink" href="#ledc" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">ledc_timer_set()</span></code> has been removed. Use <code class="xref py py-func docutils literal notranslate"><span class="pre">ledc_timer_config()</span></code> or <code class="xref py py-func docutils literal notranslate"><span class="pre">ledc_set_freq()</span></code> instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LEDC_APB_CLK_HZ</span></code> and <code class="docutils literal notranslate"><span class="pre">LEDC_REF_CLK_HZ</span></code> have been removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">LEDC_SLOW_CLK_RTC8M</span></code> macro has been removed. Please use <code class="docutils literal notranslate"><span class="pre">LEDC_SLOW_CLK_RC_FAST</span></code> instead.</p></li>
+<li><p>Removed esp_driver_gpio as a public required component from esp_driver_ledc.</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">ledc_isr_register()</span></code> has been deprecated. LEDC interrupt handling is implemented by driver itself, please only register event callbacks if necessary.</p></li>
+<li><p><a class="reference internal" href="../../../api-reference/peripherals/ledc.html#_CPPv4N21ledc_channel_config_t9intr_typeE" title="ledc_channel_config_t::intr_type"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ledc_channel_config_t::intr_type</span></code></a> has been deprecated. <cite>LEDC_INTR_FADE_END</cite> interrupt enable / disable control is handled by the driver internally. Users can still register a callback for this interrupt by <a class="reference internal" href="../../../api-reference/peripherals/ledc.html#_CPPv416ledc_cb_register11ledc_mode_t14ledc_channel_tP10ledc_cbs_tPv" title="ledc_cb_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ledc_cb_register()</span></code></a>.</p></li>
+<li><p><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">soc_periph_ledc_clk_src_legacy_t::LEDC_USE_RTC8M_CLK</span></code> has been removed. Please use <code class="docutils literal notranslate"><span class="pre">LEDC_USE_RC_FAST_CLK</span></code> instead.</p></li>
+</ul>
+</section>
+<section id="uart">
+<h2>UART<a class="headerlink" href="#uart" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">UART_FIFO_LEN</span></code> macro has been removed. Please use <code class="docutils literal notranslate"><span class="pre">UART_HW_FIFO_LEN</span></code> instead.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">soc/uart_channel.h</span></code> header file has been removed. All UART GPIO lookup macros can be found in <code class="docutils literal notranslate"><span class="pre">soc/uart_pins.h</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">UART_NUM_0_TXD_DIRECT_GPIO_NUM</span></code> is equivalent to <code class="docutils literal notranslate"><span class="pre">U0TXD_GPIO_NUM</span></code>.</p></li>
+</ul>
+</section>
+<section id="i2c">
+<h2>I2C<a class="headerlink" href="#i2c" title="Permalink to this heading"></a></h2>
+<section id="legacy-i2c-driver-end-of-life">
+<h3>Legacy I2C Driver End-of-Life<a class="headerlink" href="#legacy-i2c-driver-end-of-life" title="Permalink to this heading"></a></h3>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The legacy I2C driver (<code class="docutils literal notranslate"><span class="pre">driver/i2c.h</span></code>) has been marked as <strong>End-of-Life (EOL)</strong> in ESP-IDF v6.0 and is scheduled for <strong>removal in v7.0</strong>.</p>
+<ul class="simple">
+<li><p>ESP-IDF will not provide updates, bug fixes, or security patches for the legacy driver timely.</p></li>
+<li><p>Users are strongly recommended to migrate to the new I2C drivers: <code class="docutils literal notranslate"><span class="pre">driver/i2c_master.h</span></code> and <code class="docutils literal notranslate"><span class="pre">driver/i2c_slave.h</span></code>.</p></li>
+<li><p>To temporarily suppress the compile-time warning, enable <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Legacy</span> <span class="pre">Driver</span> <span class="pre">Configurations</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Legacy</span> <span class="pre">I2C</span> <span class="pre">Driver</span> <span class="pre">Configurations</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Suppress</span> <span class="pre">legacy</span> <span class="pre">driver</span> <span class="pre">deprecated</span> <span class="pre">warning</span></code> in menuconfig.</p></li>
+</ul>
+</div>
+<p>The new I2C drivers provide improved slave and master functionality. For details, please refer to the <a class="reference internal" href="../../release-5.x/5.2/peripherals.html#migration-guide-i2c-driver-5-2"><span class="std std-ref">I2C Migration Guide</span></a> and the <a class="reference internal" href="../../../api-reference/peripherals/i2c.html"><span class="doc">I2C Driver Programming Guide</span></a>.</p>
+</section>
+<section id="i2c-slave-driver-updates">
+<h3>I2C Slave Driver Updates<a class="headerlink" href="#i2c-slave-driver-updates" title="Permalink to this heading"></a></h3>
+<p>The I2C slave driver has been redesigned in v5.4. In the current version, the old I2C slave driver has been removed.</p>
+<section id="major-changes-in-concepts">
+<h4>Major Changes in Concepts<a class="headerlink" href="#major-changes-in-concepts" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>Previously, the I2C slave driver performed active read and write operations. In the new version, these operations are handled passively via callbacks triggered by master events, aligning with standard I2C slave behavior.</p></li>
+</ul>
+</section>
+<section id="major-changes-in-usage">
+<h4>Major Changes in Usage<a class="headerlink" href="#major-changes-in-usage" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_slave_receive</span></code> has been removed. In the new driver, data reception is handled via callbacks.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_slave_transmit</span></code> has been replaced by <code class="docutils literal notranslate"><span class="pre">i2c_slave_write</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_slave_write_ram</span></code> has been removed.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_slave_read_ram</span></code> has been removed.</p></li>
+</ul>
+</section>
+</section>
+<section id="i2c-master-driver-updates">
+<h3>I2C Master Driver Updates<a class="headerlink" href="#i2c-master-driver-updates" title="Permalink to this heading"></a></h3>
+<p>The I2C master driver also has some changes in its API definitions.</p>
+<section id="id1">
+<h4>Major Changes in Usage<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<p>Following functions now will return <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_RESPONSE</span></code> instead of <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code> when NACK from the bus is detected:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_master_transmit</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_master_multi_buffer_transmit</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_master_transmit_receive</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">i2c_master_execute_defined_operations</span></code></p></li>
+</ul>
+</section>
+</section>
+</section>
+<section id="legacy-timer-group-driver-is-removed">
+<h2>Legacy Timer Group Driver is Removed<a class="headerlink" href="#legacy-timer-group-driver-is-removed" title="Permalink to this heading"></a></h2>
+<p>The legacy timer group driver <code class="docutils literal notranslate"><span class="pre">driver/timer.h</span></code> is deprecated since version 5.0 (see <a class="reference internal" href="../../release-5.x/5.0/peripherals.html#deprecate-gptimer-legacy-driver"><span class="std std-ref">Legacy Timer Group Driver is Deprecated</span></a>). Starting from version 6.0, the legacy driver is completely removed. The new driver is placed in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_gptimer">esp_driver_gptimer</a>, and the header file path is <code class="docutils literal notranslate"><span class="pre">driver/gptimer.h</span></code>.</p>
+</section>
+<section id="legacy-i2s-driver-is-removed">
+<h2>Legacy I2S Driver is Removed<a class="headerlink" href="#legacy-i2s-driver-is-removed" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The legacy i2s driver <code class="docutils literal notranslate"><span class="pre">driver/i2s.h</span></code> is deprecated since version 5.0 (see <a class="reference internal" href="../../release-5.x/5.0/peripherals.html#deprecate-i2s-legacy-driver"><span class="std std-ref">I2S Driver</span></a>). Starting from version 6.0, the legacy driver is completely removed. The new driver is placed in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_i2s">esp_driver_i2s</a>, and the header file path is <code class="docutils literal notranslate"><span class="pre">driver/i2s_std.h</span></code>, <code class="docutils literal notranslate"><span class="pre">driver/i2s_pdm.h</span></code> and <code class="docutils literal notranslate"><span class="pre">driver/i2s_tdm.h</span></code>.</p></li>
+<li><p>API <code class="docutils literal notranslate"><span class="pre">i2s_set_adc_mode</span></code>,  <code class="docutils literal notranslate"><span class="pre">i2s_adc_enable</span></code> and <code class="docutils literal notranslate"><span class="pre">i2s_adc_disable</span></code> are deprecated since version 5.0. Starting from version 6.0, these APIs are completely removed.</p></li>
+</ul>
+</section>
+<section id="legacy-rmt-driver-is-removed">
+<h2>Legacy RMT Driver is Removed<a class="headerlink" href="#legacy-rmt-driver-is-removed" title="Permalink to this heading"></a></h2>
+<p>The legacy RMT driver <code class="docutils literal notranslate"><span class="pre">driver/rmt.h</span></code> is deprecated since version 5.0 (see <a class="reference internal" href="../../release-5.x/5.0/peripherals.html#deprecate-rmt-legacy-driver"><span class="std std-ref">Legacy RMT Driver is Deprecated</span></a>). Starting from version 6.0, the legacy driver is completely removed. The new driver is placed in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_rmt">esp_driver_rmt</a>, and the header file path is <code class="docutils literal notranslate"><span class="pre">driver/rmt_tx.h</span></code>, <code class="docutils literal notranslate"><span class="pre">driver/rmt_rx.h</span></code> and <code class="docutils literal notranslate"><span class="pre">driver/rmt_encoder.h</span></code>.</p>
+</section>
+<section id="dma-driver">
+<h2>DMA Driver<a class="headerlink" href="#dma-driver" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The DMA core driver has been moved out of the original <code class="docutils literal notranslate"><span class="pre">esp_hw_support</span></code> component and is now provided as a separate <code class="docutils literal notranslate"><span class="pre">esp_driver_dma</span></code> component. If you are using the <code class="docutils literal notranslate"><span class="pre">esp_async_memcpy.h</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_dma_utils.h</span></code> drivers, please ensure that you add a dependency on the <code class="docutils literal notranslate"><span class="pre">esp_driver_dma</span></code> component in your project.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">GDMA_ISR_IRAM_SAFE</span></code> Kconfig option has been removed due to potential risks. Now, the interrupt behavior of different DMA channels during Cache disabled periods are independent of each other.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">gdma_new_channel</span></code> is removed. When requesting a GDMA channel, use either <code class="docutils literal notranslate"><span class="pre">gdma_new_ahb_channel</span></code> or <code class="docutils literal notranslate"><span class="pre">gdma_new_axi_channel</span></code> according to the bus type.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">sram_trans_align</span></code> and <code class="docutils literal notranslate"><span class="pre">psram_trans_align</span></code> members have been removed from <a class="reference internal" href="../../../api-reference/peripherals/async_memcpy.html#_CPPv421async_memcpy_config_t" title="async_memcpy_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_memcpy_config_t</span></code></a>. Use <a class="reference internal" href="../../../api-reference/peripherals/async_memcpy.html#_CPPv4N21async_memcpy_config_t14dma_burst_sizeE" title="async_memcpy_config_t::dma_burst_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_memcpy_config_t::dma_burst_size</span></code></a> to set the DMA burst transfer size.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">esp_dma_capable_malloc</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_dma_capable_calloc</span></code> functions have been removed. Use <a class="reference internal" href="../../../api-reference/system/mem_alloc.html#_CPPv416heap_caps_malloc6size_t8uint32_t" title="heap_caps_malloc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">heap_caps_malloc()</span></code></a> and <a class="reference internal" href="../../../api-reference/system/mem_alloc.html#_CPPv416heap_caps_calloc6size_t6size_t8uint32_t" title="heap_caps_calloc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">heap_caps_calloc()</span></code></a> from <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/heap/include/esp_heap_caps.h">heap/include/esp_heap_caps.h</a> with <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_DMA|MALLOC_CAP_CACHE_ALIGNED</span></code> to allocate memory suitable for DMA and cache alignment.</p></li>
+</ul>
+</section>
+<section id="sdmmc">
+<h2>SDMMC<a class="headerlink" href="#sdmmc" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">get_dma_info</span></code> member in the <a class="reference internal" href="../../../api-reference/storage/sdmmc.html#_CPPv412sdmmc_host_t" title="sdmmc_host_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">sdmmc_host_t</span></code></a> structure, as well as the <code class="docutils literal notranslate"><span class="pre">sdspi_host_get_dma_info</span></code> and <code class="docutils literal notranslate"><span class="pre">sdmmc_host_get_dma_info</span></code> functions, have been removed. DMA configuration is now handled internally by the driver.</p></li>
+</ul>
+</section>
+<section id="legacy-temperature-sensor-driver-is-removed">
+<h2>Legacy Temperature Sensor Driver is Removed<a class="headerlink" href="#legacy-temperature-sensor-driver-is-removed" title="Permalink to this heading"></a></h2>
+<p>The legacy temperature sensor driver <code class="docutils literal notranslate"><span class="pre">driver/temp_sensor.h</span></code> is deprecated since version 5.0 (see <a class="reference internal" href="../../release-5.x/5.0/peripherals.html#deprecate-tsens-legacy-driver"><span class="std std-ref">Legacy Temperature Sensor Driver is Deprecated</span></a>). Starting from version 6.0, the legacy driver is completely removed. The new driver is placed in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_tsens">esp_driver_tsens</a>, and the header file path is <code class="docutils literal notranslate"><span class="pre">driver/temperature_sensor.h</span></code>.</p>
+</section>
+<section id="legacy-sigma-delta-modulator-driver-is-removed">
+<h2>Legacy Sigma-Delta Modulator Driver is Removed<a class="headerlink" href="#legacy-sigma-delta-modulator-driver-is-removed" title="Permalink to this heading"></a></h2>
+<p>The legacy Sigma-Delta Modulator driver <code class="docutils literal notranslate"><span class="pre">driver/sigmadelta.h</span></code> is deprecated since version 5.0 (see <a class="reference internal" href="../../release-5.x/5.0/peripherals.html#deprecate-sdm-legacy-driver"><span class="std std-ref">Legacy Sigma-Delta Modulator Driver is Deprecated</span></a>). Starting from version 6.0, the legacy driver is completely removed. The new driver is placed in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/esp_driver_sdm">esp_driver_sdm</a>, and the header file path is <code class="docutils literal notranslate"><span class="pre">driver/sdm.h</span></code>.</p>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">sdm_channel_set_duty()</span></code> has been removed. Use <code class="xref py py-func docutils literal notranslate"><span class="pre">sdm_channel_set_pulse_density()</span></code> instead.</p></li>
+</ul>
+</section>
+<section id="lcd">
+<h2>LCD<a class="headerlink" href="#lcd" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The GPIO number type in the LCD driver has been changed from <code class="docutils literal notranslate"><span class="pre">int</span></code> to the more type-safe <code class="docutils literal notranslate"><span class="pre">gpio_num_t</span></code>. For example, instead of using <code class="docutils literal notranslate"><span class="pre">5</span></code> as the GPIO number, you now need to use <code class="docutils literal notranslate"><span class="pre">GPIO_NUM_5</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">psram_trans_align</span></code> and <code class="docutils literal notranslate"><span class="pre">sram_trans_align</span></code> members in the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_i80_bus_config_t</span></code> structure have been replaced by the <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_i80_bus_config_t::dma_burst_size</span></code> member, which sets the DMA burst transfer size.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">psram_trans_align</span></code> and <code class="docutils literal notranslate"><span class="pre">sram_trans_align</span></code> members in the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t</span></code> structure have also been replaced by the <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::dma_burst_size</span></code> member for configuring the DMA burst transfer size.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">color_space</span></code> and <code class="docutils literal notranslate"><span class="pre">rgb_endian</span></code> configuration options in the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t</span></code> structure have been replaced by the <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::rgb_ele_order</span></code> member, which sets the RGB element order. The corresponding types <code class="docutils literal notranslate"><span class="pre">lcd_color_rgb_endian_t</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_lcd_color_space_t</span></code> have also been removed; use <a class="reference internal" href="../../../api-reference/peripherals/lcd/index.html#_CPPv423lcd_rgb_element_order_t" title="lcd_rgb_element_order_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">lcd_rgb_element_order_t</span></code></a> instead.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">esp_lcd_panel_disp_off</span></code> function has been removed. Please use the <code class="xref py py-func docutils literal notranslate"><span class="pre">esp_lcd_panel_disp_on_off()</span></code> function to control display on/off.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">on_bounce_frame_finish</span></code> member in <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_event_callbacks_t</span></code> has been replaced by <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_event_callbacks_t::on_frame_buf_complete</span></code>, which indicates that a complete frame buffer can be safely reused.</p></li>
+<li><p>The LCD IO layer driver for the I2C interface previously had two implementations, based on the new and legacy I2C master bus drivers. As the legacy I2C driver is being deprecated, support for it in the LCD IO layer has been removed. Only the APIs provided in <code class="docutils literal notranslate"><span class="pre">driver/i2c_master.h</span></code> are now used.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pixel_format</span></code> member in the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t</span></code> structure has been removed. It is recommended to only use <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t::in_color_format</span></code> to set the MIPI DSI driver's input pixel data format.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bits_per_pixel</span></code> member in the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t</span></code> structure has been removed. The color depth of the internal framebuffer is now determined by the <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_config_t::in_color_format</span></code> member.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_set_color_conversion</span></code> function is replaced by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_set_yuv_conversion()</span></code> to set YUV to RGB color conversion profile.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_lcd_rgb_panel_set_yuv_conversion()</span></code> function has a different signature. The <code class="docutils literal notranslate"><span class="pre">esp_lcd_yuv_conv_config_t</span></code> configuration type is now replaced by <a class="reference internal" href="../../../api-reference/peripherals/lcd/index.html#_CPPv431esp_lcd_color_conv_yuv_config_t" title="esp_lcd_color_conv_yuv_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_color_conv_yuv_config_t</span></code></a>.</p></li>
+<li><p>The NT35510 LCD device driver has been moved out of ESP-IDF and is now hosted in the <a class="reference external" href="https://components.espressif.com/components/espressif/esp_lcd_nt35510/versions/1.0.0/readme">ESP Component Registry</a>. If your project uses the NT35510 driver, you can add it to your project by running <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">add-dependency</span> <span class="pre">&quot;espressif/esp_lcd_nt35510&quot;</span></code>.</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">use_dma2d</span></code> member in the <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_config_t</span></code> has been removed. Please use the <code class="xref py py-func docutils literal notranslate"><span class="pre">esp_lcd_dpi_panel_enable_dma2d()</span></code> function to enable DMA2D for the DPI panel. When not using DMA2D, the binary file size can be reduced by around 10KB.</p></li>
+</ul>
+</section>
+<section id="color-types">
+<h2>Color Types<a class="headerlink" href="#color-types" title="Permalink to this heading"></a></h2>
+<p>The following types in the <code class="docutils literal notranslate"><span class="pre">components/hal/include/hal/color_types.h</span></code> header file have been removed. Please use FourCC format (<code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_color_fourcc_t</span></code>) instead:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">color_space_t</span></code> - The color space enumeration type has been removed. Please use FourCC format to specify color space and pixel format.</p></li>
+<li><p><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">color_space_pixel_format_t</span></code> - The color space pixel format union has been removed. Please use <code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_color_fourcc_t</span></code> type and corresponding FourCC macro definitions to specify pixel format.</p></li>
+</ul>
+<p>Migration example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cm">/* Old */</span>
+<span class="n">color_space_pixel_format_t</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">color_space</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_SPACE_RGB</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pixel_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_PIXEL_RGB565</span>
+<span class="p">};</span>
+
+<span class="cm">/* New */</span>
+<span class="n">esp_color_fourcc_t</span><span class="w"> </span><span class="n">format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ESP_COLOR_FOURCC_RGB565</span><span class="p">;</span>
+</pre></div>
+</div>
+</section>
+<section id="spi">
+<h2>SPI<a class="headerlink" href="#spi" title="Permalink to this heading"></a></h2>
+<ul>
+<li><p>The <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-spi-master-in-iram"><span class="std std-ref">CONFIG_SPI_MASTER_IN_IRAM</span></a> option is now invisible by default in menuconfig and depends on <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-freertos-in-iram"><span class="std std-ref">CONFIG_FREERTOS_IN_IRAM</span></a>. This change was made to prevent potential crashes when SPI functions in IRAM call FreeRTOS functions that are placed in flash.</p></li>
+<li><p>To enable SPI master IRAM optimization:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> → <code class="docutils literal notranslate"><span class="pre">FreeRTOS</span></code> → <code class="docutils literal notranslate"><span class="pre">Port</span></code> in menuconfig.</p></li>
+<li><p>Enable <code class="docutils literal notranslate"><span class="pre">Place</span> <span class="pre">FreeRTOS</span> <span class="pre">functions</span> <span class="pre">in</span> <span class="pre">IRAM</span></code> (<a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-freertos-in-iram"><span class="std std-ref">CONFIG_FREERTOS_IN_IRAM</span></a>).</p></li>
+<li><p>Navigate to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> → <code class="docutils literal notranslate"><span class="pre">ESP-Driver:SPI</span> <span class="pre">Configurations</span></code> in menuconfig.</p></li>
+<li><p>Enable <code class="docutils literal notranslate"><span class="pre">Place</span> <span class="pre">transmitting</span> <span class="pre">functions</span> <span class="pre">of</span> <span class="pre">SPI</span> <span class="pre">master</span> <span class="pre">into</span> <span class="pre">IRAM</span></code> (<a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-spi-master-in-iram"><span class="std std-ref">CONFIG_SPI_MASTER_IN_IRAM</span></a>).</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Note that enabling <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-freertos-in-iram"><span class="std std-ref">CONFIG_FREERTOS_IN_IRAM</span></a> will increase IRAM usage. Consider this trade-off when optimizing for SPI performance.</p>
+</div>
+</div></blockquote>
+</li>
+<li><p>Deprecated HSPI and VSPI related IOMUX pin macros on ESP32 and ESP32S2 have been removed.</p></li>
+</ul>
+</section>
+<section id="psram">
+<h2>PSRAM<a class="headerlink" href="#psram" title="Permalink to this heading"></a></h2>
+<p>Deprecated header file <code class="docutils literal notranslate"><span class="pre">esp_spiram.h</span></code> has been removed. Please use <code class="docutils literal notranslate"><span class="pre">esp_psram.h</span></code> instead.</p>
+</section>
+<section id="spi-flash-driver">
+<h2>SPI Flash Driver<a class="headerlink" href="#spi-flash-driver" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Deprecated <code class="docutils literal notranslate"><span class="pre">enum</span></code> type <code class="docutils literal notranslate"><span class="pre">esp_flash_speed_t</span></code> has been removed. The main flash speed is controlled by <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-esptoolpy-flashfreq"><span class="std std-ref">CONFIG_ESPTOOLPY_FLASHFREQ</span></a> option.</p></li>
+<li><p>Deprecated header file <code class="docutils literal notranslate"><span class="pre">esp_spi_flash.h</span></code> has been removed. Please use <code class="docutils literal notranslate"><span class="pre">spi_flash_mmap.h</span></code> instead.</p></li>
+<li><p>Deprecated API <code class="docutils literal notranslate"><span class="pre">spi_flash_dump_counters</span></code> has been removed. Please use <a class="reference internal" href="../../../api-reference/peripherals/spi_flash/index.html#_CPPv423esp_flash_dump_countersP4FILE" title="esp_flash_dump_counters"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_dump_counters()</span></code></a> instead.</p></li>
+<li><p>Deprecated API <code class="docutils literal notranslate"><span class="pre">spi_flash_get_counters</span></code> has been removed. Please use <a class="reference internal" href="../../../api-reference/peripherals/spi_flash/index.html#_CPPv422esp_flash_get_countersv" title="esp_flash_get_counters"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_get_counters()</span></code></a> instead.</p></li>
+<li><p>Deprecated API <code class="docutils literal notranslate"><span class="pre">spi_flash_reset_counters</span></code> has been removed. Please use <a class="reference internal" href="../../../api-reference/peripherals/spi_flash/index.html#_CPPv424esp_flash_reset_countersv" title="esp_flash_reset_counters"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_reset_counters()</span></code></a> instead.</p></li>
+<li><p>New argument <code class="docutils literal notranslate"><span class="pre">flags</span></code> is added to <code class="docutils literal notranslate"><span class="pre">esp_flash_os_functions_t::start</span></code>. Caller and implementer should handle this argument properly.</p></li>
+<li><p>Kconfig option <code class="docutils literal notranslate"><span class="pre">CONFIG_SPI_FLASH_ROM_DRIVER_PATCH</span></code> has been removed. Considering that this option is unlikely to be widely used by users and may cause serious issues if misused, it has been decided to remove it.</p></li>
+</ul>
+<section id="header-file-reorganization">
+<h3>Header File Reorganization<a class="headerlink" href="#header-file-reorganization" title="Permalink to this heading"></a></h3>
+<p>Several internal header files have been reorganized to better reflect their visibility and intended usage:</p>
+<ul>
+<li><p><strong>Flash chip driver related headers</strong> have been moved to <code class="docutils literal notranslate"><span class="pre">esp_flash_chips/</span></code> directory:
+- <code class="docutils literal notranslate"><span class="pre">spi_flash_chip_driver.h</span></code>
+- <code class="docutils literal notranslate"><span class="pre">spi_flash_chip_*.h</span></code>
+- <code class="docutils literal notranslate"><span class="pre">spi_flash_defs.h</span></code>
+- <code class="docutils literal notranslate"><span class="pre">spi_flash_override.h</span></code>
+- <code class="docutils literal notranslate"><span class="pre">esp_flash_types.h</span></code>
+- The <code class="docutils literal notranslate"><span class="pre">esp_flash_t</span></code> structure definition has been moved from <code class="docutils literal notranslate"><span class="pre">esp_flash.h</span></code> to <code class="docutils literal notranslate"><span class="pre">esp_flash_chips/esp_flash_types.h</span></code>. Applications should not access structure members directly; use the public APIs instead (e.g., use <a class="reference internal" href="../../../api-reference/peripherals/spi_flash/index.html#_CPPv418esp_flash_get_sizeP11esp_flash_tP8uint32_t" title="esp_flash_get_size"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_flash_get_size()</span></code></a> instead of accessing <code class="docutils literal notranslate"><span class="pre">chip-&gt;size</span></code> directly).
+- The <code class="docutils literal notranslate"><span class="pre">esp_flash_os_functions_t</span></code> structure definition has been moved from <code class="docutils literal notranslate"><span class="pre">esp_flash.h</span></code> to <code class="docutils literal notranslate"><span class="pre">esp_flash_chips/esp_flash_types.h</span></code>.
+- The <code class="docutils literal notranslate"><span class="pre">spi_flash_chip_t</span></code> type forward declaration has been removed from <code class="docutils literal notranslate"><span class="pre">esp_flash.h</span></code> and all ROM headers (<code class="docutils literal notranslate"><span class="pre">components/esp_rom/esp32xx/include/esp32xx/rom/esp_flash.h</span></code>). The type is now only defined in <code class="docutils literal notranslate"><span class="pre">esp_flash_chips/esp_flash_types.h</span></code>. Applications should not use this type directly; it is only intended for custom chip driver implementations.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The headers in <code class="docutils literal notranslate"><span class="pre">esp_flash_chips/</span></code> are <strong>semi-public</strong> - they are intended for expert users who need to implement custom chip drivers for unsupported flash chips, but they are <strong>not considered stable API</strong> and may change without notice. For most use cases, you should use the public APIs in <code class="docutils literal notranslate"><span class="pre">esp_flash.h</span></code> instead. See <a class="reference internal" href="../../../api-reference/peripherals/spi_flash/spi_flash_override_driver.html"><span class="doc">Override Driver for SPI Flash</span></a> for more details.</p>
+</div>
+</li>
+<li><p><strong>Internal headers</strong> have been moved to <code class="docutils literal notranslate"><span class="pre">esp_private/</span></code> directory and not included in the public (stable) header files:
+- <code class="docutils literal notranslate"><span class="pre">esp_flash_internal.h</span></code>
+- <code class="docutils literal notranslate"><span class="pre">memspi_host_driver.h</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="touch-element">
+<h2>Touch Element<a class="headerlink" href="#touch-element" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">touch_element</span></code> component is moved to <a class="reference external" href="https://components.espressif.com/components/espressif/touch_element/versions/1.0.0/readme">ESP Component Registry</a>.</p>
+<p>You can add this dependency to your project by running <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">add-dependency</span> <span class="pre">&quot;espressif/touch_element&quot;</span></code>.</p>
+</section>
+<section id="touch-sensor">
+<h2>Touch Sensor<a class="headerlink" href="#touch-sensor" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">touch_sensor_sample_config_t::bypass_shield_output</span></code> member for version 3 touch sensor has been removed because it is not supported in the version 3 hardware.</p>
+<p>The dependencies of legacy touch sensor driver are removed from ULP touch driver, now you need to use <code class="docutils literal notranslate"><span class="pre">int</span></code> instead of <code class="docutils literal notranslate"><span class="pre">touch_pad_t</span></code> to indicate the touch channel ID.</p>
+</section>
+<section id="i2s">
+<h2>I2S<a class="headerlink" href="#i2s" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">i2s_port_t</span></code> type has been removed. Please use <code class="docutils literal notranslate"><span class="pre">int</span></code> type instead. Its enum items <code class="docutils literal notranslate"><span class="pre">I2S_NUM_0</span></code>, <code class="docutils literal notranslate"><span class="pre">I2S_NUM_1</span></code>, <code class="docutils literal notranslate"><span class="pre">I2S_NUM_2</span></code> and <code class="docutils literal notranslate"><span class="pre">I2S_NUM_AUTO</span></code> have been replaced by macro definitions to ensure compatibility.</p></li>
+</ul>
+</section>
+<section id="usb">
+<h2>USB<a class="headerlink" href="#usb" title="Permalink to this heading"></a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">usb</span></code> component has been moved to <a class="reference external" href="https://components.espressif.com/components/espressif/usb">ESP Component Registry</a>.</p>
+<p>You can add this dependency to your project by running <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">add-dependency</span> <span class="pre">&quot;espressif/usb&quot;</span></code>.</p>
+</section>
+<section id="twai">
+<h2>TWAI<a class="headerlink" href="#twai" title="Permalink to this heading"></a></h2>
+<p>TWAI has provided a new driver interface in version 5.5, which supports more flexible configurations and richer features. The legacy driver is not recommended to be used anymore. Please refer to the 5.5 migration guide <a class="reference internal" href="../../release-5.x/5.5/peripherals.html"><span class="doc">TWAI migration guide</span></a> and the new driver programming guide <a class="reference internal" href="../../../api-reference/peripherals/twai.html"><span class="doc">TWAI driver programming guide</span></a> for migration.</p>
+<p>If you still need to use the legacy driver, you can enable the configuration option <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-twai-suppress-deprecate-warn"><span class="std std-ref">CONFIG_TWAI_SUPPRESS_DEPRECATE_WARN</span></a> to close the deprecation warnings.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Peripherals (migration-guides/release-6.x/6.0/peripherals)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Peripherals (migration-guides/release-6.x/6.0/peripherals)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="networking.html" class="btn btn-neutral float-left" title="Networking" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="provisioning.html" class="btn btn-neutral float-right" title="Provisioning" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

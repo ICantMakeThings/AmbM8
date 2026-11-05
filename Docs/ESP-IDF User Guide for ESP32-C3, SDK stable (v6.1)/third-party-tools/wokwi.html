@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wokwi - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/third-party-tools/wokwi.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'third-party-tools/wokwi';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="VisualGDB" href="visualgdb.html" />
+    <link rel="prev" title="CLion" href="clion.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../resources.html">Resources</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="platformio.html">PlatformIO</a></li>
+<li class="toctree-l2"><a class="reference internal" href="clion.html">CLion</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Wokwi</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#what-is-wokwi">What Is Wokwi?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#key-features">Key Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#installation">Installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#configuration">Configuration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#ide-integration">IDE Integration</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#testing-with-pytest-embedded">Testing with pytest-embedded</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#advanced-features">Advanced Features</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="visualgdb.html">VisualGDB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../resources.html#useful-links">Useful Links</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../resources.html">Resources</a></li>
+      <li class="breadcrumb-item active">Wokwi</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/third-party-tools/wokwi.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="wokwi">
+<span id="id1"></span><h1>Wokwi<a class="headerlink" href="#wokwi" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../zh_CN/v6.1/esp32c3/third-party-tools/wokwi.html">[中文]</a></p>
+<section id="what-is-wokwi">
+<h2>What Is Wokwi?<a class="headerlink" href="#what-is-wokwi" title="Permalink to this heading"></a></h2>
+<p><a class="reference external" href="https://wokwi.com/esp32">Wokwi</a> is an online electronics simulator. You can use it to simulate most of the Espressif chips and supported parts and sensors.</p>
+<p>Wokwi provides a browser-based interface and IDE integrations that offer a simple and intuitive way to start coding your next IoT project within seconds. It supports ESP-IDF projects and provides Wi-Fi simulation, virtual logic analyzers, advanced debugging with GDB and screenshot capture for automated testing.</p>
+</section>
+<section id="key-features">
+<h2>Key Features<a class="headerlink" href="#key-features" title="Permalink to this heading"></a></h2>
+<p>Wokwi provides many features for embedded development:</p>
+<ul class="simple">
+<li><p><strong>Wi-Fi Simulation</strong>: Test IoT projects without physical hardware.</p></li>
+<li><p><strong>Virtual Logic Analyzers</strong>: Debug digital signals and timing.</p></li>
+<li><p><strong>Advanced GDB Debugging</strong>: Set breakpoints and inspect variables.</p></li>
+<li><p><strong>VS Code Integration</strong>: Develop and simulate directly from VS Code.</p></li>
+<li><p><strong>CLion Plugin</strong>: Professional development workflow with <a class="reference external" href="https://plugins.jetbrains.com/plugin/23826-wokwi-simulator">CLion</a>.</p></li>
+<li><p><strong>Screenshot Capture</strong>: Automated visual testing for CI/CD.</p></li>
+<li><p><strong>Custom Chips API</strong>: Build your own virtual chips in addition to main MCU.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Simulation results may differ from real hardware. Always test your project on actual hardware before deployment.</p>
+</div>
+</section>
+<section id="installation">
+<h2>Installation<a class="headerlink" href="#installation" title="Permalink to this heading"></a></h2>
+<p>Wokwi can be used in three ways:</p>
+<dl class="simple">
+<dt><strong>Browser-based (Online)</strong></dt><dd><p>Visit <a class="reference external" href="https://wokwi.com/esp32">wokwi.com</a> to start simulating immediately in your browser. No installation required.</p>
+</dd>
+<dt><strong>VS Code Extension</strong></dt><dd><p>Install the <a class="reference external" href="https://docs.wokwi.com/vscode/getting-started">Wokwi for VS Code extension</a> to integrate simulation directly into your development environment.</p>
+</dd>
+<dt><strong>CLion Plugin</strong></dt><dd><p>Install the <a class="reference external" href="https://plugins.jetbrains.com/plugin/23826-wokwi-simulator">Wokwi Simulator plugin</a> for CLion to use Wokwi with professional IDE features and embedded development tools.</p>
+</dd>
+</dl>
+</section>
+<section id="configuration">
+<h2>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h2>
+<p><strong>Setting Up a Project with wokwi-cli</strong></p>
+<p>For local development and CI/CD integration, you can use <code class="docutils literal notranslate"><span class="pre">wokwi-cli</span></code> to configure your ESP-IDF project for Wokwi simulation.</p>
+<p>To install <code class="docutils literal notranslate"><span class="pre">wokwi-cli</span></code>, please refer to the <a class="reference external" href="https://docs.wokwi.com/wokwi-ci/cli-installation">official Wokwi CLI installation guide</a>.</p>
+<p>Once installed, run the following command in your ESP-IDF project directory:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>wokwi-cli<span class="w"> </span>init
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">wokwi-cli</span> <span class="pre">init</span></code> command will prompt you with a few questions and automatically create the necessary configuration files in your project directory.</p>
+<p>Wokwi projects are configured using two main files:</p>
+<ul class="simple">
+<li><p><strong>wokwi.toml</strong>: A configuration file that specifies firmware paths, ELF files for debugging, and simulator settings.</p></li>
+<li><p><strong>diagram.json</strong>: A circuit diagram file that describes the board, connected components, and their wiring.</p></li>
+</ul>
+<p>For detailed information about configuration files, see the <a class="reference external" href="https://docs.wokwi.com/vscode/project-config">Wokwi project configuration guide</a>.</p>
+<p>You are encouraged to read the official <a class="reference external" href="https://docs.wokwi.com/guides/esp32">ESP32 Simulation guide</a> to understand which boards, languages, and features are supported by Wokwi.</p>
+</section>
+<section id="ide-integration">
+<h2>IDE Integration<a class="headerlink" href="#ide-integration" title="Permalink to this heading"></a></h2>
+<p><strong>VS Code</strong></p>
+<p>To use Wokwi with VS Code:</p>
+<ol class="arabic simple">
+<li><p>Install the <a class="reference external" href="https://marketplace.visualstudio.com/items?itemName=wokwi.wokwi-vscode">Wokwi for VS Code extension</a>.</p></li>
+<li><p>Create <code class="docutils literal notranslate"><span class="pre">wokwi.toml</span></code> and <code class="docutils literal notranslate"><span class="pre">diagram.json</span></code> files in your project.</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">F1</span></code> and select <code class="docutils literal notranslate"><span class="pre">Wokwi:</span> <span class="pre">Start</span> <span class="pre">Simulator</span></code> to begin simulation.</p></li>
+</ol>
+<p><strong>CLion</strong></p>
+<p>The <a class="reference external" href="https://plugins.jetbrains.com/plugin/23826-wokwi-simulator">Wokwi Simulator plugin for CLion</a> provides:</p>
+<ul class="simple">
+<li><p>Integration with CLion's embedded development tools.</p></li>
+<li><p>Professional debugging workflow.</p></li>
+<li><p>Support for ESP-IDF projects.</p></li>
+<li><p>Seamless simulator access from the IDE.</p></li>
+</ul>
+<p><strong>Espressif IDE</strong></p>
+<p>Version 2.9.0 and later of <a class="reference external" href="https://developer.espressif.com/blog/how-to-use-wokwi-simulator-with-espressif-ide/">Espressif IDE</a> includes Wokwi integration:</p>
+<ul class="simple">
+<li><p>Build applications in the IDE.</p></li>
+<li><p>Flash directly to the Wokwi simulator.</p></li>
+<li><p>View serial monitor output in the IDE console while communicating with the simulator.</p></li>
+</ul>
+</section>
+<section id="testing-with-pytest-embedded">
+<h2>Testing with pytest-embedded<a class="headerlink" href="#testing-with-pytest-embedded" title="Permalink to this heading"></a></h2>
+<p>Wokwi integrates with ESP-IDF's testing framework through <a class="reference external" href="https://pypi.org/project/pytest-embedded-wokwi/">pytest-embedded-wokwi</a>. This enables:</p>
+<ul class="simple">
+<li><p>Automated unit and integration testing.</p></li>
+<li><p>CI/CD pipeline integration with GitHub Actions.</p></li>
+<li><p>Screenshot validation for visual testing.</p></li>
+<li><p>Regression testing without physical hardware.</p></li>
+</ul>
+<p><strong>Basic Usage</strong></p>
+<p>Run Wokwi simulations from the command line with <code class="docutils literal notranslate"><span class="pre">wokwi-cli</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Run simulation and expect specific text in output</span>
+wokwi-cli<span class="w"> </span>--timeout<span class="w"> </span><span class="m">5000</span><span class="w"> </span>--expect-text<span class="w"> </span><span class="s2">"Hello World"</span>
+
+<span class="c1"># Take a screenshot after 4.5 seconds</span>
+wokwi-cli<span class="w"> </span>--screenshot-part<span class="w"> </span>esp<span class="w"> </span>--screenshot-time<span class="w"> </span><span class="m">4500</span><span class="w"> </span>--screenshot-file<span class="w"> </span>screenshot.png
+
+<span class="c1"># Save serial output to a file</span>
+wokwi-cli<span class="w"> </span>--serial-log-file<span class="w"> </span>output.log<span class="w"> </span>--timeout<span class="w"> </span><span class="m">10000</span>
+</pre></div>
+</div>
+<p>For a complete project template with CI/CD configured, see the <a class="reference external" href="https://github.com/wokwi/wokwi-esp-test-template">ESP-IDF Project Template with CI and Wokwi</a>.</p>
+<p><strong>Related Resources</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/pytest-embedded-wokwi/">pytest-embedded-wokwi Documentation</a></p></li>
+<li><p><a class="reference external" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32/contribute/esp-idf-tests-with-pytest.html">ESP-IDF Tests with Pytest Guide</a></p></li>
+<li><p><a class="reference external" href="https://docs.espressif.com/projects/pytest-embedded">pytest-embedded 2.x Documentation</a></p></li>
+</ul>
+</section>
+<section id="advanced-features">
+<h2>Advanced Features<a class="headerlink" href="#advanced-features" title="Permalink to this heading"></a></h2>
+<p><strong>Debugging</strong></p>
+<p>Wokwi provides built-in GDB server support for advanced debugging:</p>
+<ol class="arabic">
+<li><p>Add to <code class="docutils literal notranslate"><span class="pre">wokwi.toml</span></code>:</p>
+<div class="highlight-toml notranslate"><div class="highlight"><pre><span></span><span class="k">[wokwi]</span>
+<span class="n">version</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span>
+<span class="n">firmware</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'build/your_app.bin'</span>
+<span class="n">elf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">'build/your_app.elf'</span>
+<span class="n">gdbServerPort</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3333</span>
+</pre></div>
+</div>
+</li>
+<li><p>Create a VS Code launch configuration (<code class="docutils literal notranslate"><span class="pre">.vscode/launch.json</span></code>):</p>
+<div class="highlight-json notranslate"><div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="w">  </span><span class="nt">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.2.0"</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">"configurations"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="p">{</span>
+<span class="w">      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Wokwi GDB"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"cppdbg"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"request"</span><span class="p">:</span><span class="w"> </span><span class="s2">"launch"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"program"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}/build/your_app.elf"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"cwd"</span><span class="p">:</span><span class="w"> </span><span class="s2">"${workspaceFolder}"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"MIMode"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gdb"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"miDebuggerPath"</span><span class="p">:</span><span class="w"> </span><span class="s2">"xtensa-esp32-elf-gdb"</span><span class="p">,</span>
+<span class="w">      </span><span class="nt">"miDebuggerServerAddress"</span><span class="p">:</span><span class="w"> </span><span class="s2">"localhost:3333"</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">]</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</li>
+<li><p>Start simulator with <code class="docutils literal notranslate"><span class="pre">F1</span></code> → <code class="docutils literal notranslate"><span class="pre">Wokwi:</span> <span class="pre">Start</span> <span class="pre">Simulator</span> <span class="pre">and</span> <span class="pre">Wait</span> <span class="pre">for</span> <span class="pre">Debugger</span></code>.</p></li>
+<li><p>Press <code class="docutils literal notranslate"><span class="pre">F5</span></code> in VS Code to attach the debugger.</p></li>
+</ol>
+<p>For more details, see the <a class="reference external" href="https://docs.wokwi.com/guides/debugger">Wokwi debugging guide</a>.</p>
+<p><strong>Wi-Fi Networking</strong></p>
+<p>Wokwi supports Wi-Fi simulation for IoT projects. See the <a class="reference external" href="https://docs.wokwi.com/guides/esp32-wifi">ESP32 Wi-Fi networking guide</a> for information on:</p>
+<ul class="simple">
+<li><p>Connecting to Wi-Fi networks.</p></li>
+<li><p>MQTT, HTTP, and HTTPS protocols.</p></li>
+<li><p>WebSocket communication.</p></li>
+<li><p>Network testing without physical hardware.</p></li>
+</ul>
+<p><strong>CI/CD Integration</strong></p>
+<p>Automate testing in GitHub Actions using Wokwi:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Simulate &amp; take screenshot</span>
+<span class="w">  </span><span class="nt">run</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">    </span><span class="no">wokwi-cli \</span>
+<span class="w">      </span><span class="no">--screenshot-part "esp" \</span>
+<span class="w">      </span><span class="no">--screenshot-time 5000 \</span>
+<span class="w">      </span><span class="no">--screenshot-file "screenshot-${{ matrix.board }}.png" \</span>
+<span class="w">      </span><span class="no">"boards/${{ matrix.board }}"</span>
+
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Upload screenshot</span>
+<span class="w">  </span><span class="nt">uses</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">actions/upload-artifact@v4</span>
+<span class="w">  </span><span class="nt">with</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">screenshot-${{ matrix.board }}</span>
+<span class="w">    </span><span class="nt">path</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">screenshot-${{ matrix.board }}.png</span>
+</pre></div>
+</div>
+<p>This enables automated visual regression testing and ensures consistent behavior across commits.</p>
+</section>
+<section id="resources">
+<h2>Resources<a class="headerlink" href="#resources" title="Permalink to this heading"></a></h2>
+<p><strong>Videos</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://youtu.be/8PTYnNFK1pw">DevCon24 - Flash Less, Do More: The Magic of Virtual Hardware</a>: Learn about the power of simulation for embedded development</p></li>
+</ul>
+<p><strong>Documentation</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.wokwi.com">Wokwi Documentation</a>: Comprehensive resource for all Wokwi features</p></li>
+<li><p><a class="reference external" href="https://docs.wokwi.com/guides/esp32">ESP32 Simulation Guide</a>: Supported boards, languages, and features</p></li>
+<li><p><a class="reference external" href="https://docs.wokwi.com/guides/esp32-wifi">ESP32 Wi-Fi Networking</a>: Wi-Fi simulation for IoT projects</p></li>
+<li><p><a class="reference external" href="https://docs.wokwi.com/vscode/getting-started">VS Code Integration</a>: Setup and configuration guide</p></li>
+<li><p><a class="reference external" href="https://plugins.jetbrains.com/plugin/23826-wokwi-simulator">CLion Plugin</a>: CLion integration details</p></li>
+<li><p><a class="reference external" href="https://developer.espressif.com/tags/wokwi/">Wokwi Articles on Developer Portal</a>: Collection of tutorials and use cases</p></li>
+</ul>
+<p><strong>Getting Help</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://discord.gg/wokwi">Wokwi Community</a>: Join the Wokwi Discord server to get help from the community</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Wokwi (third-party-tools/wokwi)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Wokwi (third-party-tools/wokwi)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="clion.html" class="btn btn-neutral float-left" title="CLion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="visualgdb.html" class="btn btn-neutral float-right" title="VisualGDB" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

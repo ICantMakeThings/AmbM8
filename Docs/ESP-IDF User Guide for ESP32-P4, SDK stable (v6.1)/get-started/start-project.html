@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build the Project - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/get-started/start-project.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'get-started/start-project';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Build the Project</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/get-started/start-project.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-the-project">
+<h1>Build the Project<a class="headerlink" href="#build-the-project" title="Permalink to this heading"></a></h1>
+<p>Build the project by running:</p>
+<div class="highlight-batch notranslate"><div class="highlight"><pre><span></span>idf.py build
+</pre></div>
+</div>
+<p>This command compiles the application and all ESP-IDF components, then it generates the bootloader, partition table, and application binaries.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$ idf.py build
+Running cmake in directory /path/to/hello_world/build
+Executing "cmake -G Ninja --warn-uninitialized /path/to/hello_world"...
+Warn about uninitialized values.
+-- Found Git: /usr/bin/git (found version "2.17.0")
+-- Building empty aws_iot component due to configuration
+-- Component names: ...
+-- Component paths: ...
+
+... (more lines of build system output)
+
+[527/527] Generating hello_world.bin
+esptool v5.0.2
+
+Project build complete. To flash, run:
+  idf.py flash
+or
+  idf.py -p PORT flash
+or
+  esptool -p (PORT) -b 921600 write-flash --flash-mode dio --flash-size detect --flash-freq 40m 0x10000 build/hello_world.bin  build 0x1000 build/bootloader/bootloader.bin 0x8000 build/partition_table/partition-table.bin
+</pre></div>
+</div>
+<p>If there are no errors, the build finishes by generating the firmware binary .bin files.</p>
+</section>
+<section id="flash-onto-the-device">
+<h1>Flash onto the Device<a class="headerlink" href="#flash-onto-the-device" title="Permalink to this heading"></a></h1>
+<p>To flash the binaries that you just built for the ESP32-P4 in the previous step, you need to run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>idf.py<span class="w"> </span>-p<span class="w"> </span>PORT<span class="w"> </span>flash
+</pre></div>
+</div>
+<p>Replace <code class="docutils literal notranslate"><span class="pre">PORT</span></code> with your ESP32-P4 board's USB port name. If the <code class="docutils literal notranslate"><span class="pre">PORT</span></code> is not defined, the <a class="reference internal" href="../api-guides/build-system.html#idf-py"><span class="std std-ref">idf.py</span></a> will try to connect automatically using the available USB ports.</p>
+<p>For more information on <code class="docutils literal notranslate"><span class="pre">idf.py</span></code> arguments, see <a class="reference internal" href="../api-guides/build-system.html#idf-py"><span class="std std-ref">idf.py</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The option <code class="docutils literal notranslate"><span class="pre">flash</span></code> automatically builds and flashes the project, so running <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">build</span></code> is not necessary.</p>
+</div>
+<p>Encountered Issues While Flashing? See the &quot;Additional Tips&quot; below. You can also refer to <a class="reference internal" href="flashing-troubleshooting.html"><span class="doc">Flashing Troubleshooting</span></a> page or <a class="reference internal" href="establish-serial-connection.html"><span class="doc">Establish Serial Connection with ESP32-P4</span></a> for more detailed information.</p>
+<section id="normal-operation">
+<h2>Normal Operation<a class="headerlink" href="#normal-operation" title="Permalink to this heading"></a></h2>
+<p>When flashing, you will see the output log similar to the following:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>...
+esptool --chip esp32p4 -p /dev/ttyUSB0 -b 460800 --before=default-reset --after=hard-reset write-flash --flash-mode dio --flash-freq 80m --flash-size 2MB 0x2000 bootloader/bootloader.bin 0x8000 partition_table/partition-table.bin 0x10000 hello_world.bin
+esptool v5.0.2
+Connected to ESP32-P4 on /dev/ttyUSB0:
+Chip type:          ESP32-P4 (revision v1.0)
+Features:           Dual Core + LP Core, 400MHz
+Crystal frequency:  40MHz
+MAC:                60:55:f9:fc:00:a2
+
+Stub flasher running.
+Changing baud rate to 460800...
+Changed.
+
+Configuring flash size...
+Flash will be erased from 0x00002000 to 0x00007fff...
+Flash will be erased from 0x00008000 to 0x00008fff...
+Flash will be erased from 0x00010000 to 0x00038fff...
+SHA digest in image updated.
+Wrote 22896 bytes (13985 compressed) at 0x00002000 in 0.4 seconds (477.0 kbit/s).
+Hash of data verified.
+Wrote 3072 bytes (103 compressed) at 0x00008000 in 0.1 seconds (416.6 kbit/s).
+Hash of data verified.
+Wrote 164496 bytes (87363 compressed) at 0x00010000 in 1.4 seconds (931.3 kbit/s).
+Hash of data verified.
+
+Hard resetting via RTS pin...
+</pre></div>
+</div>
+<p>If there are no issues by the end of the flash process, the board will reboot and start up the &quot;hello_world&quot; application.</p>
+<p>If you would like to use the Eclipse or VS Code IDE instead of running <code class="docutils literal notranslate"><span class="pre">idf.py</span></code>, check out <a class="reference external" href="https://github.com/espressif/idf-eclipse-plugin/blob/master/README.md">Eclipse Plugin</a>, <a class="reference external" href="https://github.com/espressif/vscode-esp-idf-extension/blob/master/docs/tutorial/install.md">VSCode Extension</a>.</p>
+</section>
+</section>
+<section id="monitor-the-output">
+<h1>Monitor the Output<a class="headerlink" href="#monitor-the-output" title="Permalink to this heading"></a></h1>
+<p>To check if &quot;hello_world&quot; is indeed running, type <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">-p</span> <span class="pre">PORT</span> <span class="pre">monitor</span></code> (Do not forget to replace PORT with your serial port name).</p>
+<p>This command launches the <a class="reference internal" href="../api-guides/tools/idf-monitor.html"><span class="doc">IDF Monitor</span></a> application.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>idf.py<span class="w"> </span>-p<span class="w"> </span>&lt;PORT&gt;<span class="w"> </span>monitor
+Running<span class="w"> </span>idf_monitor<span class="w"> </span><span class="k">in</span><span class="w"> </span>directory<span class="w"> </span><span class="o">[</span>...<span class="o">]</span>/esp/hello_world/build
+Executing<span class="w"> </span><span class="s2">"python [...]/esp-idf/tools/idf_monitor.py -b 115200 [...]/esp/hello_world/build/hello_world.elf"</span>...
+---<span class="w"> </span>idf_monitor<span class="w"> </span>on<span class="w"> </span>&lt;PORT&gt;<span class="w"> </span><span class="m">115200</span><span class="w"> </span>---
+---<span class="w"> </span>Quit:<span class="w"> </span>Ctrl+<span class="o">]</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>Menu:<span class="w"> </span>Ctrl+T<span class="w"> </span><span class="p">|</span><span class="w"> </span>Help:<span class="w"> </span>Ctrl+T<span class="w"> </span>followed<span class="w"> </span>by<span class="w"> </span>Ctrl+H<span class="w"> </span>---
+ets<span class="w"> </span>Jun<span class="w">  </span><span class="m">8</span><span class="w"> </span><span class="m">2016</span><span class="w"> </span><span class="m">00</span>:22:57
+
+rst:0x1<span class="w"> </span><span class="o">(</span>POWERON_RESET<span class="o">)</span>,boot:0x13<span class="w"> </span><span class="o">(</span>SPI_FAST_FLASH_BOOT<span class="o">)</span>
+ets<span class="w"> </span>Jun<span class="w">  </span><span class="m">8</span><span class="w"> </span><span class="m">2016</span><span class="w"> </span><span class="m">00</span>:22:57
+...
+</pre></div>
+</div>
+<p>After startup and diagnostic logs scroll up, you should see &quot;Hello world!&quot; printed out by the application.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>    ...
+    Hello world!
+    Restarting in 10 seconds...
+    This is esp32p4 chip with 2 CPU core(s), silicon revision v0.0, 2 MB external flash
+Minimum free heap size: 618848 bytes
+    Restarting in 9 seconds...
+    Restarting in 8 seconds...
+    Restarting in 7 seconds...
+</pre></div>
+</div>
+<p>To exit IDF monitor use the shortcut <code class="docutils literal notranslate"><span class="pre">Ctrl+]</span></code>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You can combine building, flashing and monitoring into one step by running:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">p</span> <span class="n">PORT</span> <span class="n">flash</span> <span class="n">monitor</span>
+</pre></div>
+</div>
+</div>
+<p>See also:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../api-guides/tools/idf-monitor.html"><span class="doc">IDF Monitor</span></a> for handy shortcuts and more details on using IDF monitor.</p></li>
+<li><p><a class="reference internal" href="../api-guides/build-system.html#idf-py"><span class="std std-ref">idf.py</span></a> for a full reference of <code class="docutils literal notranslate"><span class="pre">idf.py</span></code> commands and options.</p></li>
+</ul>
+<p><strong>That is all that you need to get started with ESP32-P4!</strong></p>
+<p>Now you are ready to try some other <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples">examples</a>, or go straight to developing your own applications.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Some of examples do not support ESP32-P4 because required hardware is not included in ESP32-P4 so it cannot be supported.</p>
+<p>If building an example, please check the README file for the <code class="docutils literal notranslate"><span class="pre">Supported</span> <span class="pre">Targets</span></code> table. If this is present including ESP32-P4 target, or the table does not exist at all, the example will work on ESP32-P4.</p>
+</div>
+</section>
+<section id="additional-tips">
+<h1>Additional Tips<a class="headerlink" href="#additional-tips" title="Permalink to this heading"></a></h1>
+<section id="permission-denied-issue">
+<h2>Permission Denied Issue<a class="headerlink" href="#permission-denied-issue" title="Permalink to this heading"></a></h2>
+<p>With some Linux distributions, you may get the error message similar to <code class="docutils literal notranslate"><span class="pre">Could</span> <span class="pre">not</span> <span class="pre">open</span> <span class="pre">port</span> <span class="pre">&lt;PORT&gt;:</span> <span class="pre">Permission</span> <span class="pre">denied:</span> <span class="pre">'&lt;PORT&gt;'</span></code> when flashing the ESP32-P4. <a class="reference internal" href="establish-serial-connection.html#linux-dialout-group"><span class="std std-ref">This can be solved by adding the current user to the specific group</span></a>, such as <code class="docutils literal notranslate"><span class="pre">dialout</span></code> or <code class="docutils literal notranslate"><span class="pre">uucp</span></code> group.</p>
+</section>
+<section id="python-compatibility">
+<h2>Python Compatibility<a class="headerlink" href="#python-compatibility" title="Permalink to this heading"></a></h2>
+<p>ESP-IDF supports Python 3.10 or newer. It is recommended to upgrade your operating system to a recent version satisfying this requirement. Other options include the installation of Python from <a class="reference external" href="https://www.python.org/downloads/">sources</a> or the use of a Python version management system such as <a class="reference external" href="https://github.com/pyenv/pyenv">pyenv</a>.</p>
+</section>
+<section id="flash-erase">
+<h2>Flash Erase<a class="headerlink" href="#flash-erase" title="Permalink to this heading"></a></h2>
+<p>Erasing the flash is also possible. To erase the entire flash memory you can run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>idf.py<span class="w"> </span>-p<span class="w"> </span>PORT<span class="w"> </span>erase-flash
+</pre></div>
+</div>
+<p>For erasing the OTA data, if present, you can run this command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>idf.py<span class="w"> </span>-p<span class="w"> </span>PORT<span class="w"> </span>erase-otadata
+</pre></div>
+</div>
+<p>The flash erase command can take a while to be done. Do not disconnect your device while the flash erasing is in progress.</p>
+</section>
+</section>
+<section id="related-documents">
+<h1>Related Documents<a class="headerlink" href="#related-documents" title="Permalink to this heading"></a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="establish-serial-connection.html"><span class="doc">Establish Serial Connection with ESP32-P4</span></a></p></li>
+<li><p><a class="reference internal" href="../api-guides/tools/idf-monitor.html"><span class="doc">IDF Monitor</span></a></p></li>
+</ul>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Build the Project (get-started/start-project)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Build the Project (get-started/start-project)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1058 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Temperature Sensor - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/temp_sensor.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/temp_sensor';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Capacitive Touch Sensor" href="cap_touch_sens.html" />
+    <link rel="prev" title="Voice Activity Detection (VAD)" href="vad.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Temperature Sensor</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#unexpected-behaviors">Unexpected Behaviors</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Temperature Sensor</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/temp_sensor.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="temperature-sensor">
+<h1>Temperature Sensor<a class="headerlink" href="#temperature-sensor" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/temp_sensor.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The ESP32-P4 has a built-in sensor used to measure the chip's internal temperature. The temperature sensor module contains an 8-bit Sigma-Delta analog-to-digital converter (ADC) and a digital-to-analog converter (DAC) to compensate for the temperature measurement.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The temperature sensor is designed primarily to measure the temperature <strong>inside</strong> the silicon. The sensor can reflect the temperature changes very well but it can't give a precise measurement value. So it's not recommended to use it for ambient temperature measurement.</p>
+</div>
+</section>
+<section id="functional-overview">
+<h2>Functional Overview<a class="headerlink" href="#functional-overview" title="Permalink to this heading"></a></h2>
+<p>The description of the temperature sensor functionality is divided into the following sections:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="#temp-resource-allocation"><span class="std std-ref">Resource Allocation</span></a> - covers which parameters should be set up to get a temperature sensor handle and how to recycle the resources when the temperature sensor finishes working.</p></li>
+<li><p><a class="reference internal" href="#temp-enable-and-disable-temperature-sensor"><span class="std std-ref">Enable and Disable Temperature Sensor</span></a> - covers how to enable and disable the temperature sensor.</p></li>
+<li><p><a class="reference internal" href="#temp-get-temperature-value"><span class="std std-ref">Get Temperature Value</span></a> - covers how to get the real-time temperature value.</p></li>
+<li><p><a class="reference internal" href="#temp-install-temperature-threshold-callback"><span class="std std-ref">Install Temperature Threshold Callback</span></a> - describes how to register a temperature threshold callback.</p></li>
+<li><p><a class="reference internal" href="#temp-power-management"><span class="std std-ref">Power Management</span></a> - covers how the temperature sensor is affected when changing power mode (e.g., Light-sleep mode).</p></li>
+<li><p><a class="reference internal" href="#temp-iram-safe"><span class="std std-ref">IRAM Safe</span></a> - describes tips on how to make the temperature sensor interrupt work better along with a disabled cache.</p></li>
+<li><p><a class="reference internal" href="#temp-thread-safety"><span class="std std-ref">Thread Safety</span></a> - covers how to make the driver to be thread-safe.</p></li>
+<li><p><a class="reference internal" href="#temperature-sensor-etm-event-and-task"><span class="std std-ref">ETM Event and Task</span></a> - describes what the events and tasks can be connected to the ETM channel.</p></li>
+</ul>
+</p>
+<section id="resource-allocation">
+<span id="temp-resource-allocation"></span><h3>Resource Allocation<a class="headerlink" href="#resource-allocation" title="Permalink to this heading"></a></h3>
+<p>The ESP32-P4 has just one built-in temperature sensor hardware. The temperature sensor instance is represented by <a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_handle_t</span></code></a>, which is also the bond of the context. By using <a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_handle_t</span></code></a>, the temperature sensor properties can be accessed and modified in different function calls to control and manage the temperature sensor. The variable would always be the parameter of the temperature APIs with the information of hardware and configurations, so you can just create a pointer of type <a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_handle_t</span></code></a> and passing to APIs as needed.</p>
+<p>In order to install a built-in temperature sensor instance, the first thing is to evaluate the temperature range in your detection environment. For example, if the testing environment is in a room, the range you evaluate might be 10 °C ~ 30 °C; if the testing in a lamp bulb, the range you evaluate might be 60 °C ~ 110 °C. Based on that, configuration structure <a class="reference internal" href="#_CPPv427temperature_sensor_config_t" title="temperature_sensor_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_config_t</span></code></a> should be defined in advance:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">range_min</span></code>: The minimum value of the testing range you have evaluated.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">range_max</span></code>: The maximum value of the testing range you have evaluated.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">allow_pd</span></code> configures if the driver allows the system to power down the peripheral in light sleep mode. Before entering sleep, the system will backup the temperature sensor register context, which will be restored later when the system exit the sleep mode. Powering down the peripheral can save more power, but at the cost of more memory consumed to save the register context. It's a tradeoff between power consumption and memory consumption. This configuration option relies on specific hardware feature, if you enable it on an unsupported chip, you will see error message like <code class="docutils literal notranslate"><span class="pre">not</span> <span class="pre">able</span> <span class="pre">to</span> <span class="pre">power</span> <span class="pre">down</span> <span class="pre">in</span> <span class="pre">light</span> <span class="pre">sleep</span></code>.</p></li>
+</ul>
+<p>After the ranges are set, the structure could be passed to <a class="reference internal" href="#_CPPv426temperature_sensor_installPK27temperature_sensor_config_tP27temperature_sensor_handle_t" title="temperature_sensor_install"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code></a>, which will instantiate the temperature sensor instance and return a handle.</p>
+<p>As mentioned above, different measure ranges have different measurement errors. You do not need to care about the measurement error because we have an internal mechanism to choose the minimum error according to the given range.</p>
+<p>If the temperature sensor is no longer needed, you need to call <a class="reference internal" href="#_CPPv428temperature_sensor_uninstall27temperature_sensor_handle_t" title="temperature_sensor_uninstall"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_uninstall()</span></code></a> to free the temperature sensor resource.</p>
+<section id="creating-a-temperature-sensor-handle">
+<h4>Creating a Temperature Sensor Handle<a class="headerlink" href="#creating-a-temperature-sensor-handle" title="Permalink to this heading"></a></h4>
+<ul class="simple">
+<li><p>Step 1: Evaluate the testing range. In this example, the range is 20 °C ~ 50 °C.</p></li>
+<li><p>Step 2: Configure the range and obtain a handle.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">temperature_sensor_handle_t</span><span class="w"> </span><span class="n">temp_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">temperature_sensor_config_t</span><span class="w"> </span><span class="n">temp_sensor_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TEMPERATURE_SENSOR_CONFIG_DEFAULT</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="w"> </span><span class="mi">50</span><span class="p">);</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">temperature_sensor_install</span><span class="p">(</span><span class="o">&amp;</span><span class="n">temp_sensor_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">temp_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="enable-and-disable-temperature-sensor">
+<span id="temp-enable-and-disable-temperature-sensor"></span><h3>Enable and Disable Temperature Sensor<a class="headerlink" href="#enable-and-disable-temperature-sensor" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Enable the temperature sensor by calling <a class="reference internal" href="#_CPPv425temperature_sensor_enable27temperature_sensor_handle_t" title="temperature_sensor_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_enable()</span></code></a>. The internal temperature sensor circuit will start to work. The driver state will transit from init to enable.</p></li>
+<li><p>To Disable the temperature sensor, please call <a class="reference internal" href="#_CPPv426temperature_sensor_disable27temperature_sensor_handle_t" title="temperature_sensor_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_disable()</span></code></a>.</p></li>
+</ol>
+</section>
+<section id="get-temperature-value">
+<span id="temp-get-temperature-value"></span><h3>Get Temperature Value<a class="headerlink" href="#get-temperature-value" title="Permalink to this heading"></a></h3>
+<p>After the temperature sensor is enabled by <a class="reference internal" href="#_CPPv425temperature_sensor_enable27temperature_sensor_handle_t" title="temperature_sensor_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_enable()</span></code></a>, you can get the current temperature by calling <a class="reference internal" href="#_CPPv430temperature_sensor_get_celsius27temperature_sensor_handle_tPf" title="temperature_sensor_get_celsius"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_get_celsius()</span></code></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Enable temperature sensor</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">temperature_sensor_enable</span><span class="p">(</span><span class="n">temp_handle</span><span class="p">));</span>
+<span class="c1">// Get converted sensor data</span>
+<span class="kt">float</span><span class="w"> </span><span class="n">tsens_out</span><span class="p">;</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">temperature_sensor_get_celsius</span><span class="p">(</span><span class="n">temp_handle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">tsens_out</span><span class="p">));</span>
+<span class="n">printf</span><span class="p">(</span><span class="s">"Temperature in %f °C</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">tsens_out</span><span class="p">);</span>
+<span class="c1">// Disable the temperature sensor if it is not needed and save the power</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">temperature_sensor_disable</span><span class="p">(</span><span class="n">temp_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="install-temperature-threshold-callback">
+<span id="temp-install-temperature-threshold-callback"></span><h3>Install Temperature Threshold Callback<a class="headerlink" href="#install-temperature-threshold-callback" title="Permalink to this heading"></a></h3>
+<p>ESP32-P4 supports automatically triggering to monitor the temperature value continuously. When the temperature value reaches a given threshold, an interrupt will happen. Thus you can install your own interrupt callback functions to do what they want, e.g., alarm, restart, etc. The following information indicates how to prepare a threshold callback.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N36temperature_sensor_event_callbacks_t12on_thresholdE" title="temperature_sensor_event_callbacks_t::on_threshold"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">temperature_sensor_event_callbacks_t::on_threshold</span></code></a>: As this function is called within the ISR context, you must ensure that the function does not attempt to block, e.g., by making sure that only FreeRTOS APIs with the <code class="docutils literal notranslate"><span class="pre">ISR</span></code> suffix are called from within the function, etc. The function prototype is declared in <a class="reference internal" href="#_CPPv422temperature_thres_cb_t" title="temperature_thres_cb_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_thres_cb_t</span></code></a>.</p></li>
+</ul>
+<p>You can save your own context to <a class="reference internal" href="#_CPPv437temperature_sensor_register_callbacks27temperature_sensor_handle_tPK36temperature_sensor_event_callbacks_tPv" title="temperature_sensor_register_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_register_callbacks()</span></code></a> as well, via the parameter <code class="docutils literal notranslate"><span class="pre">user_arg</span></code>. The user data will be directly passed to the callback function.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">IRAM_ATTR</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">temp_sensor_monitor_cbs</span><span class="p">(</span><span class="n">temperature_sensor_handle_t</span><span class="w"> </span><span class="n">tsens</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">temperature_sensor_threshold_event_data_t</span><span class="w"> </span><span class="o">*</span><span class="n">edata</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_data</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_DRAM_LOGI</span><span class="p">(</span><span class="s">"tsens"</span><span class="p">,</span><span class="w"> </span><span class="s">"Temperature value is higher or lower than threshold, value is %d</span><span class="se">\n</span><span class="s">...</span><span class="se">\n\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">celsius_value</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Callback configurations</span>
+<span class="n">temperature_sensor_abs_threshold_config_t</span><span class="w"> </span><span class="n">threshold_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">high_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">50</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">low_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-10</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="c1">// Set absolute value monitor threshold.</span>
+<span class="n">temperature_sensor_set_absolute_threshold</span><span class="p">(</span><span class="n">temp_sensor</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">threshold_cfg</span><span class="p">);</span>
+<span class="c1">// Register interrupt callback</span>
+<span class="n">temperature_sensor_event_callbacks_t</span><span class="w"> </span><span class="n">cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_threshold</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">temp_sensor_monitor_cbs</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="c1">// Install temperature callback.</span>
+<span class="n">temperature_sensor_register_callbacks</span><span class="p">(</span><span class="n">temp_sensor</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cbs</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="power-management">
+<span id="temp-power-management"></span><h3>Power Management<a class="headerlink" href="#power-management" title="Permalink to this heading"></a></h3>
+<p>As the temperature sensor does not use the APB clock, it will keep working no matter if the power management is enabled with <code class="docutils literal notranslate"><span class="pre">CONFIG_PM_ENABLE</span></code>.</p>
+</section>
+<section id="iram-safe">
+<span id="temp-iram-safe"></span><h3>IRAM Safe<a class="headerlink" href="#iram-safe" title="Permalink to this heading"></a></h3>
+<p>By default, the temperature sensor interrupt will be deferred when the cache is disabled for reasons like writing/erasing flash. Thus the event callback functions will not get executed in time, which is not expected in a real-time application.</p>
+<p>There is a Kconfig option <a class="reference internal" href="../kconfig-reference.html#config-temp-sensor-isr-iram-safe"><span class="std std-ref">CONFIG_TEMP_SENSOR_ISR_IRAM_SAFE</span></a> that will:</p>
+<ol class="arabic simple">
+<li><p>Enable the interrupt that is being serviced even when the cache is disabled.</p></li>
+<li><p>Place all functions that are used by the ISR into IRAM.</p></li>
+</ol>
+<p>This allows the interrupt to run while the cache is disabled but comes at the cost of increased IRAM consumption.</p>
+</section>
+<section id="thread-safety">
+<span id="temp-thread-safety"></span><h3>Thread Safety<a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>In the temperature sensor driver, we do not add any protection to ensure the thread safety, because typically this driver is only supposed to be used in one task. If you have to use this driver in different tasks, please add extra locks to protect it.</p>
+</section>
+<section id="etm-event-and-task">
+<span id="temperature-sensor-etm-event-and-task"></span><h3>ETM Event and Task<a class="headerlink" href="#etm-event-and-task" title="Permalink to this heading"></a></h3>
+<p>Temperature Sensor is able to generate events that can interact with the <a class="reference internal" href="etm.html"><span class="doc">ETM</span></a> module. The supported events are listed in the <a class="reference internal" href="#_CPPv435temperature_sensor_etm_event_type_t" title="temperature_sensor_etm_event_type_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_etm_event_type_t</span></code></a>. You can call <a class="reference internal" href="#_CPPv432temperature_sensor_new_etm_event27temperature_sensor_handle_tPK37temperature_sensor_etm_event_config_tP22esp_etm_event_handle_t" title="temperature_sensor_new_etm_event"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_new_etm_event()</span></code></a> to get the corresponding ETM event handle. The supported tasks are listed in the <a class="reference internal" href="#_CPPv434temperature_sensor_etm_task_type_t" title="temperature_sensor_etm_task_type_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_etm_task_type_t</span></code></a>. You can call <a class="reference internal" href="#_CPPv431temperature_sensor_new_etm_task27temperature_sensor_handle_tPK36temperature_sensor_etm_task_config_tP21esp_etm_task_handle_t" title="temperature_sensor_new_etm_task"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_new_etm_task()</span></code></a> to get the corresponding ETM task handle.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE" title="TEMPERATURE_SENSOR_EVENT_OVER_LIMIT"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">TEMPERATURE_SENSOR_EVENT_OVER_LIMIT</span></code></a> for <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">temperature_sensor_etm_event_type_t::event_type</span></code> depends on what kind of threshold you set first. If you set the absolute threshold by <a class="reference internal" href="#_CPPv441temperature_sensor_set_absolute_threshold27temperature_sensor_handle_tPK41temperature_sensor_abs_threshold_config_t" title="temperature_sensor_set_absolute_threshold"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_set_absolute_threshold()</span></code></a>, then the <a class="reference internal" href="#_CPPv4N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE" title="TEMPERATURE_SENSOR_EVENT_OVER_LIMIT"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">TEMPERATURE_SENSOR_EVENT_OVER_LIMIT</span></code></a> refers to absolute threshold. Likewise, if you set the delta threshold by <a class="reference internal" href="#_CPPv438temperature_sensor_set_delta_threshold27temperature_sensor_handle_tPK43temperature_sensor_delta_threshold_config_t" title="temperature_sensor_set_delta_threshold"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">temperature_sensor_set_delta_threshold()</span></code></a>, then the <a class="reference internal" href="#_CPPv4N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE" title="TEMPERATURE_SENSOR_EVENT_OVER_LIMIT"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">TEMPERATURE_SENSOR_EVENT_OVER_LIMIT</span></code></a> refers to delta threshold.</p></li>
+</ul>
+</div>
+<p>For how to connect the event and task to an ETM channel, please refer to the <a class="reference internal" href="etm.html"><span class="doc">ETM</span></a> documentation.</p>
+</section>
+</section>
+<section id="unexpected-behaviors">
+<h2>Unexpected Behaviors<a class="headerlink" href="#unexpected-behaviors" title="Permalink to this heading"></a></h2>
+<ol class="arabic">
+<li><p>The value you get from the chip is usually different from the ambient temperature. It is because the temperature sensor is built inside the chip. To some extent, it measures the temperature of the chip.</p></li>
+<li><p>When installing the temperature sensor, the driver may print <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">boundary</span> <span class="pre">you</span> <span class="pre">gave</span> <span class="pre">cannot</span> <span class="pre">meet</span> <span class="pre">the</span> <span class="pre">range</span> <span class="pre">of</span> <span class="pre">internal</span> <span class="pre">temperature</span> <span class="pre">sensor</span></code>. It is because the built-in temperature sensor has a testing limit. The error comes from the incorrect configuration of <a class="reference internal" href="#_CPPv427temperature_sensor_config_t" title="temperature_sensor_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">temperature_sensor_config_t</span></code></a> as follow:</p>
+<blockquote>
+<div><ol class="arabic simple">
+<li><p>Totally out of range, like 200 °C ~ 300 °C.</p></li>
+<li><p>Cross the boundary of each predefined measurement. like 40 °C ~ 110 °C.</p></li>
+</ol>
+</div></blockquote>
+</li>
+</ol>
+</section>
+<section id="application-examples">
+<h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/temperature_sensor/temp_sensor">peripherals/temperature_sensor/temp_sensor</a> demonstrates how to use the built-in temperature sensor, showcasing the measurement range and error based on different DAC levels and offsets.</p></li>
+</ul>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/temperature_sensor/temp_sensor_monitor">peripherals/temperature_sensor/temp_sensor_monitor</a> demonstrates how to use the temperature sensor to automatically monitor temperature values continuously, triggering an interrupt when a specific value is reached or when the change between two consecutive samplings is larger/smaller than the settings.</p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_tsens/include/driver/temperature_sensor.h">components/esp_driver_tsens/include/driver/temperature_sensor.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/temperature_sensor.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_tsens</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_tsens</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_tsens
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_tsens
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426temperature_sensor_installPK27temperature_sensor_config_tP27temperature_sensor_handle_t">
+<span id="_CPPv326temperature_sensor_installPK27temperature_sensor_config_tP27temperature_sensor_handle_t"></span><span id="_CPPv226temperature_sensor_installPK27temperature_sensor_config_tP27temperature_sensor_handle_t"></span><span id="temperature_sensor_install__temperature_sensor_config_tCP.temperature_sensor_handle_tP"></span><span class="target" id="temperature__sensor_8h_1a7f1cbca8867255b46057662d49b19fb1"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_install</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv427temperature_sensor_config_t" title="temperature_sensor_config_t"><span class="n"><span class="pre">temperature_sensor_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">tsens_config</span></span>, <a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_tsens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426temperature_sensor_installPK27temperature_sensor_config_tP27temperature_sensor_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Install temperature sensor driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens_config</strong> -- Pointer to config structure. </p></li>
+<li><p><strong>ret_tsens</strong> -- Return the pointer of temperature sensor handle. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK if succeed </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv428temperature_sensor_uninstall27temperature_sensor_handle_t">
+<span id="_CPPv328temperature_sensor_uninstall27temperature_sensor_handle_t"></span><span id="_CPPv228temperature_sensor_uninstall27temperature_sensor_handle_t"></span><span id="temperature_sensor_uninstall__temperature_sensor_handle_t"></span><span class="target" id="temperature__sensor_8h_1a340ccee2bf8a0f085f2ffc9f6fe644a4"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_uninstall</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv428temperature_sensor_uninstall27temperature_sensor_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Uninstall the temperature sensor driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK if succeed. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425temperature_sensor_enable27temperature_sensor_handle_t">
+<span id="_CPPv325temperature_sensor_enable27temperature_sensor_handle_t"></span><span id="_CPPv225temperature_sensor_enable27temperature_sensor_handle_t"></span><span id="temperature_sensor_enable__temperature_sensor_handle_t"></span><span class="target" id="temperature__sensor_8h_1a8de522ceac71f0dd844f6fc3f2983891"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425temperature_sensor_enable27temperature_sensor_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable the temperature sensor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if temperature sensor is enabled already. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426temperature_sensor_disable27temperature_sensor_handle_t">
+<span id="_CPPv326temperature_sensor_disable27temperature_sensor_handle_t"></span><span id="_CPPv226temperature_sensor_disable27temperature_sensor_handle_t"></span><span id="temperature_sensor_disable__temperature_sensor_handle_t"></span><span class="target" id="temperature__sensor_8h_1aa34146a3549cab681e08afcb243acfe8"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426temperature_sensor_disable27temperature_sensor_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable temperature sensor. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if temperature sensor is not enabled yet. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430temperature_sensor_get_celsius27temperature_sensor_handle_tPf">
+<span id="_CPPv330temperature_sensor_get_celsius27temperature_sensor_handle_tPf"></span><span id="_CPPv230temperature_sensor_get_celsius27temperature_sensor_handle_tPf"></span><span id="temperature_sensor_get_celsius__temperature_sensor_handle_t.floatP"></span><span class="target" id="temperature__sensor_8h_1aa9a379687e42fc0ccb9e63477d3ac0b3"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_get_celsius</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span>, <span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_celsius</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430temperature_sensor_get_celsius27temperature_sensor_handle_tPf" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read temperature sensor data that is converted to degrees Celsius. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Should not be called from interrupt.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p></li>
+<li><p><strong>out_celsius</strong> -- The measure output value. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Success</p></li>
+<li><p>ESP_ERR_INVALID_ARG invalid arguments</p></li>
+<li><p>ESP_ERR_INVALID_STATE Temperature sensor is not enabled yet.</p></li>
+<li><p>ESP_FAIL Parse the sensor data into ambient temperature failed (e.g. out of the range). </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv441temperature_sensor_set_absolute_threshold27temperature_sensor_handle_tPK41temperature_sensor_abs_threshold_config_t">
+<span id="_CPPv341temperature_sensor_set_absolute_threshold27temperature_sensor_handle_tPK41temperature_sensor_abs_threshold_config_t"></span><span id="_CPPv241temperature_sensor_set_absolute_threshold27temperature_sensor_handle_tPK41temperature_sensor_abs_threshold_config_t"></span><span id="temperature_sensor_set_absolute_threshold__temperature_sensor_handle_t.temperature_sensor_abs_threshold_config_tCP"></span><span class="target" id="temperature__sensor_8h_1a9175636825822a71621c53528294d67b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_set_absolute_threshold</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv441temperature_sensor_abs_threshold_config_t" title="temperature_sensor_abs_threshold_config_t"><span class="n"><span class="pre">temperature_sensor_abs_threshold_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">abs_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv441temperature_sensor_set_absolute_threshold27temperature_sensor_handle_tPK41temperature_sensor_abs_threshold_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set temperature sensor absolute mode automatic monitor. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function should not be called with <code class="docutils literal notranslate"><span class="pre">temperature_sensor_set_delta_threshold</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p></li>
+<li><p><strong>abs_cfg</strong> -- Configuration of temperature sensor absolute mode interrupt, see <code class="docutils literal notranslate"><a class="reference internal" href="#structtemperature__sensor__abs__threshold__config__t"><span class="std std-ref"><span class="pre">temperature_sensor_abs_threshold_config_t</span></span></a></code>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set absolute threshold successfully.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Set absolute threshold failed because of wrong state.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set absolute threshold failed because of invalid argument. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv438temperature_sensor_set_delta_threshold27temperature_sensor_handle_tPK43temperature_sensor_delta_threshold_config_t">
+<span id="_CPPv338temperature_sensor_set_delta_threshold27temperature_sensor_handle_tPK43temperature_sensor_delta_threshold_config_t"></span><span id="_CPPv238temperature_sensor_set_delta_threshold27temperature_sensor_handle_tPK43temperature_sensor_delta_threshold_config_t"></span><span id="temperature_sensor_set_delta_threshold__temperature_sensor_handle_t.temperature_sensor_delta_threshold_config_tCP"></span><span class="target" id="temperature__sensor_8h_1a1d0abf29d107fe09c3701d446ba823e2"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_set_delta_threshold</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv443temperature_sensor_delta_threshold_config_t" title="temperature_sensor_delta_threshold_config_t"><span class="n"><span class="pre">temperature_sensor_delta_threshold_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">delta_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv438temperature_sensor_set_delta_threshold27temperature_sensor_handle_tPK43temperature_sensor_delta_threshold_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set temperature sensor differential mode automatic monitor. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function should not be called with <code class="docutils literal notranslate"><span class="pre">temperature_sensor_set_absolute_threshold</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p></li>
+<li><p><strong>delta_cfg</strong> -- Configuration of temperature sensor delta mode interrupt, see <code class="docutils literal notranslate"><a class="reference internal" href="#structtemperature__sensor__delta__threshold__config__t"><span class="std std-ref"><span class="pre">temperature_sensor_delta_threshold_config_t</span></span></a></code>. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set differential value threshold successfully.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Set absolute threshold failed because of wrong state.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set differential value threshold failed because of invalid argument. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437temperature_sensor_register_callbacks27temperature_sensor_handle_tPK36temperature_sensor_event_callbacks_tPv">
+<span id="_CPPv337temperature_sensor_register_callbacks27temperature_sensor_handle_tPK36temperature_sensor_event_callbacks_tPv"></span><span id="_CPPv237temperature_sensor_register_callbacks27temperature_sensor_handle_tPK36temperature_sensor_event_callbacks_tPv"></span><span id="temperature_sensor_register_callbacks__temperature_sensor_handle_t.temperature_sensor_event_callbacks_tCP.voidP"></span><span class="target" id="temperature__sensor_8h_1a55e1699a64122e91482616a1d35ca59f"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_register_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv436temperature_sensor_event_callbacks_t" title="temperature_sensor_event_callbacks_t"><span class="n"><span class="pre">temperature_sensor_event_callbacks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cbs</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">user_arg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437temperature_sensor_register_callbacks27temperature_sensor_handle_tPK36temperature_sensor_event_callbacks_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Install temperature sensor interrupt callback. Temperature sensor interrupt will be enabled at same time. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens</strong> -- The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p></li>
+<li><p><strong>cbs</strong> -- Pointer to the group of temperature sensor interrupt callbacks. </p></li>
+<li><p><strong>user_arg</strong> -- Callback argument.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set event callbacks successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set event callbacks failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Set event callbacks failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv427temperature_sensor_config_t">
+<span id="_CPPv327temperature_sensor_config_t"></span><span id="_CPPv227temperature_sensor_config_t"></span><span id="temperature_sensor_config_t"></span><span class="target" id="structtemperature__sensor__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_config_t</span></span></span><a class="headerlink" href="#_CPPv427temperature_sensor_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration of measurement range for the temperature sensor. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you see the log <code class="docutils literal notranslate"><span class="pre">the</span> <span class="pre">boundary</span> <span class="pre">you</span> <span class="pre">gave</span> <span class="pre">cannot</span> <span class="pre">meet</span> <span class="pre">the</span> <span class="pre">range</span> <span class="pre">of</span> <span class="pre">internal</span> <span class="pre">temperature</span> <span class="pre">sensor</span></code>. You may need to refer to predefined range listed doc <code class="docutils literal notranslate"><span class="pre">api-reference/peripherals/Temperature</span> <span class="pre">sensor</span></code>. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27temperature_sensor_config_t9range_minE">
+<span id="_CPPv3N27temperature_sensor_config_t9range_minE"></span><span id="_CPPv2N27temperature_sensor_config_t9range_minE"></span><span id="temperature_sensor_config_t::range_min__i"></span><span class="target" id="structtemperature__sensor__config__t_1a1c7d3d80a253608c2c77d0f519530852"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_min</span></span></span><a class="headerlink" href="#_CPPv4N27temperature_sensor_config_t9range_minE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>the minimum value of the temperature you want to test </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27temperature_sensor_config_t9range_maxE">
+<span id="_CPPv3N27temperature_sensor_config_t9range_maxE"></span><span id="_CPPv2N27temperature_sensor_config_t9range_maxE"></span><span id="temperature_sensor_config_t::range_max__i"></span><span class="target" id="structtemperature__sensor__config__t_1a20ce046edbcc2ec4f9826cbfcda27dff"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">range_max</span></span></span><a class="headerlink" href="#_CPPv4N27temperature_sensor_config_t9range_maxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>the maximum value of the temperature you want to test </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27temperature_sensor_config_t7clk_srcE">
+<span id="_CPPv3N27temperature_sensor_config_t7clk_srcE"></span><span id="_CPPv2N27temperature_sensor_config_t7clk_srcE"></span><span id="temperature_sensor_config_t::clk_src__temperature_sensor_clk_src_t"></span><span class="target" id="structtemperature__sensor__config__t_1a684fa43992e34c035d6ffbc1930dfb58"></span><a class="reference internal" href="#_CPPv428temperature_sensor_clk_src_t" title="temperature_sensor_clk_src_t"><span class="n"><span class="pre">temperature_sensor_clk_src_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_src</span></span></span><a class="headerlink" href="#_CPPv4N27temperature_sensor_config_t7clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>the clock source of the temperature sensor. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27temperature_sensor_config_t8allow_pdE">
+<span id="_CPPv3N27temperature_sensor_config_t8allow_pdE"></span><span id="_CPPv2N27temperature_sensor_config_t8allow_pdE"></span><span id="temperature_sensor_config_t::allow_pd__uint32_t"></span><span class="target" id="structtemperature__sensor__config__t_1a493b1824c1fe6dc07fb0376ff1abdcb5"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allow_pd</span></span></span><a class="headerlink" href="#_CPPv4N27temperature_sensor_config_t8allow_pdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set, the driver will backup/restore the temperature sensor registers before/after entering/exist sleep mode. By this approach, the system can power off temperature sensor's power domain. This can save power, but at the expense of more RAM being consumed </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27temperature_sensor_config_t5flagsE">
+<span id="_CPPv3N27temperature_sensor_config_t5flagsE"></span><span id="_CPPv2N27temperature_sensor_config_t5flagsE"></span><span id="temperature_sensor_config_t::flags__temperature_sensor_config_t"></span><span class="target" id="structtemperature__sensor__config__t_1ae5d4b2170161c054ebdd1637e5098b50"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv427temperature_sensor_config_t" title="temperature_sensor_config_t"><span class="n"><span class="pre">temperature_sensor_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N27temperature_sensor_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature sensor config flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv441temperature_sensor_threshold_event_data_t">
+<span id="_CPPv341temperature_sensor_threshold_event_data_t"></span><span id="_CPPv241temperature_sensor_threshold_event_data_t"></span><span id="temperature_sensor_threshold_event_data_t"></span><span class="target" id="structtemperature__sensor__threshold__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_threshold_event_data_t</span></span></span><a class="headerlink" href="#_CPPv441temperature_sensor_threshold_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature sensor event data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N41temperature_sensor_threshold_event_data_t13celsius_valueE">
+<span id="_CPPv3N41temperature_sensor_threshold_event_data_t13celsius_valueE"></span><span id="_CPPv2N41temperature_sensor_threshold_event_data_t13celsius_valueE"></span><span id="temperature_sensor_threshold_event_data_t::celsius_value__i"></span><span class="target" id="structtemperature__sensor__threshold__event__data__t_1a36376003299a666c5cc4da2881930323"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">celsius_value</span></span></span><a class="headerlink" href="#_CPPv4N41temperature_sensor_threshold_event_data_t13celsius_valueE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Celsius value in interrupt callback. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N41temperature_sensor_threshold_event_data_t14intr_conditionE">
+<span id="_CPPv3N41temperature_sensor_threshold_event_data_t14intr_conditionE"></span><span id="_CPPv2N41temperature_sensor_threshold_event_data_t14intr_conditionE"></span><span id="temperature_sensor_threshold_event_data_t::intr_condition__temperature_val_intr_condition_t"></span><span class="target" id="structtemperature__sensor__threshold__event__data__t_1ae6d9a66d31f36f8e3f706792ef5df996"></span><a class="reference internal" href="#_CPPv432temperature_val_intr_condition_t" title="temperature_val_intr_condition_t"><span class="n"><span class="pre">temperature_val_intr_condition_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">intr_condition</span></span></span><a class="headerlink" href="#_CPPv4N41temperature_sensor_threshold_event_data_t14intr_conditionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Can be used to judge temperature sensor interrupts in which reason </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv436temperature_sensor_event_callbacks_t">
+<span id="_CPPv336temperature_sensor_event_callbacks_t"></span><span id="_CPPv236temperature_sensor_event_callbacks_t"></span><span id="temperature_sensor_event_callbacks_t"></span><span class="target" id="structtemperature__sensor__event__callbacks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_event_callbacks_t</span></span></span><a class="headerlink" href="#_CPPv436temperature_sensor_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Group of temperature sensor callback functions, all of them will be run in ISR. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N36temperature_sensor_event_callbacks_t12on_thresholdE">
+<span id="_CPPv3N36temperature_sensor_event_callbacks_t12on_thresholdE"></span><span id="_CPPv2N36temperature_sensor_event_callbacks_t12on_thresholdE"></span><span id="temperature_sensor_event_callbacks_t::on_threshold__temperature_thres_cb_t"></span><span class="target" id="structtemperature__sensor__event__callbacks__t_1adbb0436ea5fbc847c4d16ed4db427eb0"></span><a class="reference internal" href="#_CPPv422temperature_thres_cb_t" title="temperature_thres_cb_t"><span class="n"><span class="pre">temperature_thres_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_threshold</span></span></span><a class="headerlink" href="#_CPPv4N36temperature_sensor_event_callbacks_t12on_thresholdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature value interrupt callback </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv441temperature_sensor_abs_threshold_config_t">
+<span id="_CPPv341temperature_sensor_abs_threshold_config_t"></span><span id="_CPPv241temperature_sensor_abs_threshold_config_t"></span><span id="temperature_sensor_abs_threshold_config_t"></span><span class="target" id="structtemperature__sensor__abs__threshold__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_abs_threshold_config_t</span></span></span><a class="headerlink" href="#_CPPv441temperature_sensor_abs_threshold_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Config options for temperature value absolute interrupt. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N41temperature_sensor_abs_threshold_config_t14high_thresholdE">
+<span id="_CPPv3N41temperature_sensor_abs_threshold_config_t14high_thresholdE"></span><span id="_CPPv2N41temperature_sensor_abs_threshold_config_t14high_thresholdE"></span><span id="temperature_sensor_abs_threshold_config_t::high_threshold__float"></span><span class="target" id="structtemperature__sensor__abs__threshold__config__t_1a5c886a7e47dfef6a8b33fde7dd2bd589"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">high_threshold</span></span></span><a class="headerlink" href="#_CPPv4N41temperature_sensor_abs_threshold_config_t14high_thresholdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>High threshold value(Celsius). Interrupt will be triggered if temperature value is higher than this value </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N41temperature_sensor_abs_threshold_config_t13low_thresholdE">
+<span id="_CPPv3N41temperature_sensor_abs_threshold_config_t13low_thresholdE"></span><span id="_CPPv2N41temperature_sensor_abs_threshold_config_t13low_thresholdE"></span><span id="temperature_sensor_abs_threshold_config_t::low_threshold__float"></span><span class="target" id="structtemperature__sensor__abs__threshold__config__t_1a6c8db76e6352c597ab979bfd30970f58"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">low_threshold</span></span></span><a class="headerlink" href="#_CPPv4N41temperature_sensor_abs_threshold_config_t13low_thresholdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Low threshold value(Celsius). Interrupt will be triggered if temperature value is lower than this value </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv443temperature_sensor_delta_threshold_config_t">
+<span id="_CPPv343temperature_sensor_delta_threshold_config_t"></span><span id="_CPPv243temperature_sensor_delta_threshold_config_t"></span><span id="temperature_sensor_delta_threshold_config_t"></span><span class="target" id="structtemperature__sensor__delta__threshold__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_delta_threshold_config_t</span></span></span><a class="headerlink" href="#_CPPv443temperature_sensor_delta_threshold_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Config options for temperature value delta interrupt. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N43temperature_sensor_delta_threshold_config_t14increase_deltaE">
+<span id="_CPPv3N43temperature_sensor_delta_threshold_config_t14increase_deltaE"></span><span id="_CPPv2N43temperature_sensor_delta_threshold_config_t14increase_deltaE"></span><span id="temperature_sensor_delta_threshold_config_t::increase_delta__float"></span><span class="target" id="structtemperature__sensor__delta__threshold__config__t_1ae57d320f1ffffe7b058339e74365a79d"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">increase_delta</span></span></span><a class="headerlink" href="#_CPPv4N43temperature_sensor_delta_threshold_config_t14increase_deltaE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Interrupt will be triggered if the temperature increment of two consecutive samplings if larger than <code class="docutils literal notranslate"><span class="pre">increase_delta</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N43temperature_sensor_delta_threshold_config_t14decrease_deltaE">
+<span id="_CPPv3N43temperature_sensor_delta_threshold_config_t14decrease_deltaE"></span><span id="_CPPv2N43temperature_sensor_delta_threshold_config_t14decrease_deltaE"></span><span id="temperature_sensor_delta_threshold_config_t::decrease_delta__float"></span><span class="target" id="structtemperature__sensor__delta__threshold__config__t_1a14de2d24e6e3556b675fb06a46569a8e"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">decrease_delta</span></span></span><a class="headerlink" href="#_CPPv4N43temperature_sensor_delta_threshold_config_t14decrease_deltaE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Interrupt will be triggered if the temperature decrement of two consecutive samplings if smaller than <code class="docutils literal notranslate"><span class="pre">decrease_delta</span></code></p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.TEMPERATURE_SENSOR_CONFIG_DEFAULT">
+<span class="target" id="temperature__sensor_8h_1ac7719ef9ad9fec4a30be7c00f4e9bc3c"></span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_SENSOR_CONFIG_DEFAULT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">min</span></span>, <span class="n"><span class="pre">max</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.TEMPERATURE_SENSOR_CONFIG_DEFAULT" title="Permalink to this definition"></a><br /></dt>
+<dd><p><a class="reference internal" href="#structtemperature__sensor__config__t"><span class="std std-ref">temperature_sensor_config_t</span></a> default constructor </p>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv427temperature_sensor_handle_t">
+<span id="_CPPv327temperature_sensor_handle_t"></span><span id="_CPPv227temperature_sensor_handle_t"></span><span id="temperature_sensor_handle_t"></span><span class="target" id="temperature__sensor_8h_1aa085227990c7231c3d44baa742bd689a"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">temperature_sensor_obj_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></span><a class="headerlink" href="#_CPPv427temperature_sensor_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of temperature sensor driver handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv422temperature_thres_cb_t">
+<span id="_CPPv322temperature_thres_cb_t"></span><span id="_CPPv222temperature_thres_cb_t"></span><span id="temperature_thres_cb_t"></span><span class="target" id="temperature__sensor_8h_1a9051c9cdf00b7ce4b21fd98f6bfd5732"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">temperature_thres_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">tsens</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv441temperature_sensor_threshold_event_data_t" title="temperature_sensor_threshold_event_data_t"><span class="n"><span class="pre">temperature_sensor_threshold_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv422temperature_thres_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for temperature sensor threshold interrupt. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param tsens<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> The handle created by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code>. </p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> temperature sensor event data, fed by driver. </p>
+</dd>
+<dt class="field-odd">Param user_data<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User data, set in <code class="docutils literal notranslate"><span class="pre">temperature_sensor_register_callbacks()</span></code>. </p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this function. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv432temperature_val_intr_condition_t">
+<span id="_CPPv332temperature_val_intr_condition_t"></span><span id="_CPPv232temperature_val_intr_condition_t"></span><span class="target" id="temperature__sensor_8h_1a189b09d9b83e0ea5836e5f62b3f01128"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_val_intr_condition_t</span></span></span><a class="headerlink" href="#_CPPv432temperature_val_intr_condition_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enum for temperature sensor interrupt condition. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32temperature_val_intr_condition_t42TEMPERATURE_VAL_HIGHER_THAN_HIGH_THRESHOLDE">
+<span id="_CPPv3N32temperature_val_intr_condition_t42TEMPERATURE_VAL_HIGHER_THAN_HIGH_THRESHOLDE"></span><span id="_CPPv2N32temperature_val_intr_condition_t42TEMPERATURE_VAL_HIGHER_THAN_HIGH_THRESHOLDE"></span><span class="target" id="temperature__sensor_8h_1a189b09d9b83e0ea5836e5f62b3f01128a9ceff2cdbbc3bb8811151af367344def"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_VAL_HIGHER_THAN_HIGH_THRESHOLD</span></span></span><a class="headerlink" href="#_CPPv4N32temperature_val_intr_condition_t42TEMPERATURE_VAL_HIGHER_THAN_HIGH_THRESHOLDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>temperature sensor value is higher than high threshold </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N32temperature_val_intr_condition_t40TEMPERATURE_VAL_LOWER_THAN_LOW_THRESHOLDE">
+<span id="_CPPv3N32temperature_val_intr_condition_t40TEMPERATURE_VAL_LOWER_THAN_LOW_THRESHOLDE"></span><span id="_CPPv2N32temperature_val_intr_condition_t40TEMPERATURE_VAL_LOWER_THAN_LOW_THRESHOLDE"></span><span class="target" id="temperature__sensor_8h_1a189b09d9b83e0ea5836e5f62b3f01128a8eace360eabc84c9903c001eab779bec"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_VAL_LOWER_THAN_LOW_THRESHOLD</span></span></span><a class="headerlink" href="#_CPPv4N32temperature_val_intr_condition_t40TEMPERATURE_VAL_LOWER_THAN_LOW_THRESHOLDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>temperature sensor value is lower than low threshold </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id1">
+<h3>Header File<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hal_ana_conv/include/hal/temperature_sensor_types.h">components/esp_hal_ana_conv/include/hal/temperature_sensor_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"hal/temperature_sensor_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_hal_ana_conv</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_hal_ana_conv</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_hal_ana_conv
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_hal_ana_conv
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h3>Type Definitions<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv428temperature_sensor_clk_src_t">
+<span id="_CPPv328temperature_sensor_clk_src_t"></span><span id="_CPPv228temperature_sensor_clk_src_t"></span><span id="temperature_sensor_clk_src_t"></span><span class="target" id="temperature__sensor__types_8h_1adc86cbe6e9c0d7f875ae40c5ce2b7fa4"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="clk_tree.html#_CPPv439soc_periph_temperature_sensor_clk_src_t" title="soc_periph_temperature_sensor_clk_src_t"><span class="n"><span class="pre">soc_periph_temperature_sensor_clk_src_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_clk_src_t</span></span></span><a class="headerlink" href="#_CPPv428temperature_sensor_clk_src_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>temperature sensor clock source </p>
+</dd></dl>
+
+</section>
+<section id="id3">
+<h3>Enumerations<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv435temperature_sensor_etm_event_type_t">
+<span id="_CPPv335temperature_sensor_etm_event_type_t"></span><span id="_CPPv235temperature_sensor_etm_event_type_t"></span><span class="target" id="temperature__sensor__types_8h_1a74c94dfc574badeb1823fa3fdb72c547"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_etm_event_type_t</span></span></span><a class="headerlink" href="#_CPPv435temperature_sensor_etm_event_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>temperature sensor event types enum </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE">
+<span id="_CPPv3N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE"></span><span id="_CPPv2N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE"></span><span class="target" id="temperature__sensor__types_8h_1a74c94dfc574badeb1823fa3fdb72c547a3bb411a10834ece4521d284ed6c7a609"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_SENSOR_EVENT_OVER_LIMIT</span></span></span><a class="headerlink" href="#_CPPv4N35temperature_sensor_etm_event_type_t35TEMPERATURE_SENSOR_EVENT_OVER_LIMITE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature sensor over limit event </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N35temperature_sensor_etm_event_type_t28TEMPERATURE_SENSOR_EVENT_MAXE">
+<span id="_CPPv3N35temperature_sensor_etm_event_type_t28TEMPERATURE_SENSOR_EVENT_MAXE"></span><span id="_CPPv2N35temperature_sensor_etm_event_type_t28TEMPERATURE_SENSOR_EVENT_MAXE"></span><span class="target" id="temperature__sensor__types_8h_1a74c94dfc574badeb1823fa3fdb72c547ab8e95e9275f01e59549743fb264b1921"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_SENSOR_EVENT_MAX</span></span></span><a class="headerlink" href="#_CPPv4N35temperature_sensor_etm_event_type_t28TEMPERATURE_SENSOR_EVENT_MAXE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of temperature sensor events </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv434temperature_sensor_etm_task_type_t">
+<span id="_CPPv334temperature_sensor_etm_task_type_t"></span><span id="_CPPv234temperature_sensor_etm_task_type_t"></span><span class="target" id="temperature__sensor__types_8h_1aaeafb11a6c6ab91635af7b3800861e17"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_etm_task_type_t</span></span></span><a class="headerlink" href="#_CPPv434temperature_sensor_etm_task_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>temperature sensor task types enum </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N34temperature_sensor_etm_task_type_t29TEMPERATURE_SENSOR_TASK_STARTE">
+<span id="_CPPv3N34temperature_sensor_etm_task_type_t29TEMPERATURE_SENSOR_TASK_STARTE"></span><span id="_CPPv2N34temperature_sensor_etm_task_type_t29TEMPERATURE_SENSOR_TASK_STARTE"></span><span class="target" id="temperature__sensor__types_8h_1aaeafb11a6c6ab91635af7b3800861e17a60dc26789ccf7cf8f893d03d3651122a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_SENSOR_TASK_START</span></span></span><a class="headerlink" href="#_CPPv4N34temperature_sensor_etm_task_type_t29TEMPERATURE_SENSOR_TASK_STARTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature sensor start task </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N34temperature_sensor_etm_task_type_t28TEMPERATURE_SENSOR_TASK_STOPE">
+<span id="_CPPv3N34temperature_sensor_etm_task_type_t28TEMPERATURE_SENSOR_TASK_STOPE"></span><span id="_CPPv2N34temperature_sensor_etm_task_type_t28TEMPERATURE_SENSOR_TASK_STOPE"></span><span class="target" id="temperature__sensor__types_8h_1aaeafb11a6c6ab91635af7b3800861e17a6b1185bf282238f78057548469ec5dab"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_SENSOR_TASK_STOP</span></span></span><a class="headerlink" href="#_CPPv4N34temperature_sensor_etm_task_type_t28TEMPERATURE_SENSOR_TASK_STOPE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature sensor stop task </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N34temperature_sensor_etm_task_type_t27TEMPERATURE_SENSOR_TASK_MAXE">
+<span id="_CPPv3N34temperature_sensor_etm_task_type_t27TEMPERATURE_SENSOR_TASK_MAXE"></span><span id="_CPPv2N34temperature_sensor_etm_task_type_t27TEMPERATURE_SENSOR_TASK_MAXE"></span><span class="target" id="temperature__sensor__types_8h_1aaeafb11a6c6ab91635af7b3800861e17aba0277cfd50837257098e6cf22d2f0de"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">TEMPERATURE_SENSOR_TASK_MAX</span></span></span><a class="headerlink" href="#_CPPv4N34temperature_sensor_etm_task_type_t27TEMPERATURE_SENSOR_TASK_MAXE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of temperature sensor tasks </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id4">
+<h3>Header File<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_tsens/include/driver/temperature_sensor_etm.h">components/esp_driver_tsens/include/driver/temperature_sensor_etm.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/temperature_sensor_etm.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_tsens</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_tsens</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_tsens
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_tsens
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h3>Functions<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432temperature_sensor_new_etm_event27temperature_sensor_handle_tPK37temperature_sensor_etm_event_config_tP22esp_etm_event_handle_t">
+<span id="_CPPv332temperature_sensor_new_etm_event27temperature_sensor_handle_tPK37temperature_sensor_etm_event_config_tP22esp_etm_event_handle_t"></span><span id="_CPPv232temperature_sensor_new_etm_event27temperature_sensor_handle_tPK37temperature_sensor_etm_event_config_tP22esp_etm_event_handle_t"></span><span id="temperature_sensor_new_etm_event__temperature_sensor_handle_t.temperature_sensor_etm_event_config_tCP.esp_etm_event_handle_tP"></span><span class="target" id="temperature__sensor__etm_8h_1ab435fa2754492f90c366c271184ccf74"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_new_etm_event</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv437temperature_sensor_etm_event_config_t" title="temperature_sensor_etm_event_config_t"><span class="n"><span class="pre">temperature_sensor_etm_event_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="etm.html#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432temperature_sensor_new_etm_event27temperature_sensor_handle_tPK37temperature_sensor_etm_event_config_tP22esp_etm_event_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the ETM event for Temperature Sensor. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The created ETM event object can be deleted later by calling <code class="docutils literal notranslate"><span class="pre">esp_etm_del_event</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens</strong> -- <strong>[in]</strong> Temperature Sensor handle, allocated by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code></p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Temperature Sensor ETM event configuration </p></li>
+<li><p><strong>out_event</strong> -- <strong>[out]</strong> Returned ETM event handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Get ETM event successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Get ETM event failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Get ETM event failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431temperature_sensor_new_etm_task27temperature_sensor_handle_tPK36temperature_sensor_etm_task_config_tP21esp_etm_task_handle_t">
+<span id="_CPPv331temperature_sensor_new_etm_task27temperature_sensor_handle_tPK36temperature_sensor_etm_task_config_tP21esp_etm_task_handle_t"></span><span id="_CPPv231temperature_sensor_new_etm_task27temperature_sensor_handle_tPK36temperature_sensor_etm_task_config_tP21esp_etm_task_handle_t"></span><span id="temperature_sensor_new_etm_task__temperature_sensor_handle_t.temperature_sensor_etm_task_config_tCP.esp_etm_task_handle_tP"></span><span class="target" id="temperature__sensor__etm_8h_1a78db5fca152ff636b7062f611ea331e2"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_new_etm_task</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv427temperature_sensor_handle_t" title="temperature_sensor_handle_t"><span class="n"><span class="pre">temperature_sensor_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">tsens</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv436temperature_sensor_etm_task_config_t" title="temperature_sensor_etm_task_config_t"><span class="n"><span class="pre">temperature_sensor_etm_task_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="etm.html#_CPPv421esp_etm_task_handle_t" title="esp_etm_task_handle_t"><span class="n"><span class="pre">esp_etm_task_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_task</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431temperature_sensor_new_etm_task27temperature_sensor_handle_tPK36temperature_sensor_etm_task_config_tP21esp_etm_task_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the ETM task for Temperature Sensor. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The created ETM task object can be deleted later by calling <code class="docutils literal notranslate"><span class="pre">esp_etm_del_task</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>tsens</strong> -- <strong>[in]</strong> Temperature Sensor, allocated by <code class="docutils literal notranslate"><span class="pre">temperature_sensor_install()</span></code></p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Temperature Sensor ETM task configuration </p></li>
+<li><p><strong>out_task</strong> -- <strong>[out]</strong> Returned ETM task handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Get ETM task successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Get ETM task failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Get ETM task failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id6">
+<h3>Structures<a class="headerlink" href="#id6" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv437temperature_sensor_etm_event_config_t">
+<span id="_CPPv337temperature_sensor_etm_event_config_t"></span><span id="_CPPv237temperature_sensor_etm_event_config_t"></span><span id="temperature_sensor_etm_event_config_t"></span><span class="target" id="structtemperature__sensor__etm__event__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_etm_event_config_t</span></span></span><a class="headerlink" href="#_CPPv437temperature_sensor_etm_event_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature Sensor ETM event configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N37temperature_sensor_etm_event_config_t10event_typeE">
+<span id="_CPPv3N37temperature_sensor_etm_event_config_t10event_typeE"></span><span id="_CPPv2N37temperature_sensor_etm_event_config_t10event_typeE"></span><span id="temperature_sensor_etm_event_config_t::event_type__temperature_sensor_etm_event_type_t"></span><span class="target" id="structtemperature__sensor__etm__event__config__t_1a1da424463959e0a4d94a3f6bd2fd3e28"></span><a class="reference internal" href="#_CPPv435temperature_sensor_etm_event_type_t" title="temperature_sensor_etm_event_type_t"><span class="n"><span class="pre">temperature_sensor_etm_event_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">event_type</span></span></span><a class="headerlink" href="#_CPPv4N37temperature_sensor_etm_event_config_t10event_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature Sensor ETM event type </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv436temperature_sensor_etm_task_config_t">
+<span id="_CPPv336temperature_sensor_etm_task_config_t"></span><span id="_CPPv236temperature_sensor_etm_task_config_t"></span><span id="temperature_sensor_etm_task_config_t"></span><span class="target" id="structtemperature__sensor__etm__task__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">temperature_sensor_etm_task_config_t</span></span></span><a class="headerlink" href="#_CPPv436temperature_sensor_etm_task_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature Sensor ETM task configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N36temperature_sensor_etm_task_config_t9task_typeE">
+<span id="_CPPv3N36temperature_sensor_etm_task_config_t9task_typeE"></span><span id="_CPPv2N36temperature_sensor_etm_task_config_t9task_typeE"></span><span id="temperature_sensor_etm_task_config_t::task_type__temperature_sensor_etm_task_type_t"></span><span class="target" id="structtemperature__sensor__etm__task__config__t_1a8928fc8bad47170edc7d3d015c53b9e1"></span><a class="reference internal" href="#_CPPv434temperature_sensor_etm_task_type_t" title="temperature_sensor_etm_task_type_t"><span class="n"><span class="pre">temperature_sensor_etm_task_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">task_type</span></span></span><a class="headerlink" href="#_CPPv4N36temperature_sensor_etm_task_config_t9task_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Temperature Sensor ETM task type </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Temperature Sensor (api-reference/peripherals/temp_sensor)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Temperature Sensor (api-reference/peripherals/temp_sensor)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="vad.html" class="btn btn-neutral float-left" title="Voice Activity Detection (VAD)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="cap_touch_sens.html" class="btn btn-neutral float-right" title="Capacitive Touch Sensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

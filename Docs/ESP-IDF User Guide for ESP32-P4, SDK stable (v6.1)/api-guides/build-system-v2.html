@@ -1,0 +1,1079 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Build System v2 - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-guides/build-system-v2.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-guides/build-system-v2';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="C Support" href="c.html" />
+    <link rel="prev" title="Build System" href="build-system.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app_trace.html">Application Level Tracing Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html">Application Startup Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Build System v2</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-project">Creating a New Project</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#creating-a-new-component">Creating a New Component</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-component-compatible-with-v1-and-v2">Creating a Component Compatible with v1 and v2</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#creating-a-component-for-v2-only">Creating a Component for v2 Only</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#build-event-callback-framework">Build Event Callback Framework</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#breaking-changes-for-v1-components">Breaking Changes for v1 Components</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#updating-component-for-v2-compatibility">Updating Component for v2 Compatibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#idf-build-add-post-elf-dependency-and-idf-build-get-post-elf-dependencies-are-unavailable"><code class="docutils literal notranslate"><span class="pre">idf_build_add_post_elf_dependency</span></code> and <code class="docutils literal notranslate"><span class="pre">idf_build_get_post_elf_dependencies</span></code> are Unavailable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-build-components-build-property-is-unavailable">The <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> Build Property is Unavailable</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#standardized-kconfig-and-kconfig-projbuild-file-names">Standardized <code class="docutils literal notranslate"><span class="pre">Kconfig</span></code> and <code class="docutils literal notranslate"><span class="pre">Kconfig.projbuild</span></code> File Names</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#component-configuration-visibility">Component Configuration Visibility</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#recursive-evaluation-of-components">Recursive Evaluation of Components</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-project-include-cmake-files-are-included-in-a-non-specific-order">The <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> Files are Included in a Non-Specific Order</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#strict-component-precedence">Strict Component Precedence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#the-behavior-of-idf-component-optional-requires-has-changed">The Behavior of <code class="docutils literal notranslate"><span class="pre">idf_component_optional_requires</span></code> has Changed</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#api-reference">API Reference</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#variables">Variables</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#macros">Macros</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="c.html">C Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cplusplus.html">C++ Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality/index.html">Code Quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dump.html">Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="current-consumption-measurement-modules.html">Current Consumption Measurement of Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="dfu.html">Device Firmware Upgrade via USB</a></li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-ram.html">Support for External RAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fatal-errors.html">Fatal Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-system-considerations.html">File System Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-abstraction.html">Hardware Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig/index.html">Project Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linker-script-generation.html">Linker Script Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="low-power-mode/index.html">Low Power Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lwip.html">lwIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory-types.html">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openthread.html">OpenThread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance/index.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducible-builds.html">Reproducible Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdio.html">Standard I/O and Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread-local-storage.html">Thread Local Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/index.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit-tests.html">Unit Testing in ESP32-P4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host-apps.html">Running ESP-IDF Applications on Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usb-serial-jtag-console.html">USB Serial/JTAG Controller Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi-expansion.html">Wi-Fi Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Guides</a></li>
+      <li class="breadcrumb-item active">Build System v2</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-guides/build-system-v2.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="build-system-v2">
+<h1>Build System v2<a class="headerlink" href="#build-system-v2" title="Permalink to this heading"></a></h1>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>Build System v2 is currently available as a <strong>Technical Preview</strong> intended for <strong>testing and evaluation</strong>. Features, functionality, and performance are <strong>subject to change without notice</strong>, and <strong>production use is not recommended</strong> at this stage.</p>
+</div>
+<p>ESP-IDF CMake-based build system v2, referred to in this documentation simply as v2 or build system, is a successor to the original CMake-based <a class="reference internal" href="build-system.html"><span class="doc">Build System</span></a>, referred to as v1. The v2 addresses limitations introduced in the previous version while trying to maintain backward compatibility for components written for v1. The most significant changes include the ability to use Kconfig variables to specify component dependencies, the removal of early component evaluation using CMake script mode, and support for writing components using the native CMake approach. While v2 aims to be as backward compatible with v1 as possible, meaning most components written for v1 should work without modification with v2, there are design differences between v1 and v2 that may require changes in v1 components to work with v2. The incompatibilities are described in <a class="reference internal" href="#cmakev2-breaking-changes"><span class="std std-ref">Breaking Changes for v1 Components</span></a>.</p>
+<p>Example applications for Build System v2 are described in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/build_system/cmakev2">Build System v2 examples README </a>.</p>
+<section id="creating-a-new-project">
+<h2>Creating a New Project<a class="headerlink" href="#creating-a-new-project" title="Permalink to this heading"></a></h2>
+<p>Below is the minimal project's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file, which should suffice for most projects:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">cmake_minimum_required</span><span class="p">(</span><span class="s">VERSION</span><span class="w"> </span><span class="s">3.22</span><span class="p">)</span>
+<span class="nb">include</span><span class="p">(</span><span class="o">$ENV{</span><span class="nv">IDF_PATH</span><span class="o">}</span><span class="s">/tools/cmakev2/idf.cmake</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">myProject</span><span class="w"> </span><span class="s">C</span><span class="w"> </span><span class="s">CXX</span><span class="w"> </span><span class="s">ASM</span><span class="p">)</span>
+<span class="nb">idf_project_default</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>The order of commands in the project's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> is important. First, the <code class="docutils literal notranslate"><span class="pre">cmake_minimum_required</span></code> command must be called to specify the minimum required version of CMake.</p>
+<p>Next, include <code class="docutils literal notranslate"><span class="pre">idf.cmake</span></code>, which provides the build system functionality. It performs the necessary build system initialization tasks and toolchain configuration, which must be completed before invoking CMake’s <code class="docutils literal notranslate"><span class="pre">project()</span></code> command.</p>
+<p>Once the build system is initialized, the <code class="docutils literal notranslate"><span class="pre">project()</span></code> command should be executed. It sets up project related variables, initializes the toolchain for the required languages, and performs other CMake specific initialization steps.</p>
+<p>Finally, the <a class="reference internal" href="#cmakev2-macro-idf_project_default"><em>idf_project_default</em></a> function creates the default project executable based on the <code class="docutils literal notranslate"><span class="pre">main</span></code> component and its transitive dependencies. It also generates binary images and adds related targets such as <code class="docutils literal notranslate"><span class="pre">flash</span></code> and <code class="docutils literal notranslate"><span class="pre">menuconfig</span></code>.</p>
+</section>
+<section id="creating-a-new-component">
+<h2>Creating a New Component<a class="headerlink" href="#creating-a-new-component" title="Permalink to this heading"></a></h2>
+<p>This section explains how to create a new component. The preferred and generally sufficient method is described in <a class="reference internal" href="#cmakev2-creating-compatible-component"><span class="std std-ref">Creating a Component Compatible with v1 and v2</span></a>. However, if you need more control or prefer a native CMake approach without concern for v1 compatibility, see <a class="reference internal" href="#cmakev2-creating-v2-component"><span class="std std-ref">Creating a Component for v2 Only</span></a>.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Always ensure that all variables used within the component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> are initialized before use. The component might be evaluated in the context of other component where some variables may already be set. A common example is appending to CMake's list without explicitly initializing the list variable first.</p>
+</div>
+<section id="creating-a-component-compatible-with-v1-and-v2">
+<span id="cmakev2-creating-compatible-component"></span><h3>Creating a Component Compatible with v1 and v2<a class="headerlink" href="#creating-a-component-compatible-with-v1-and-v2" title="Permalink to this heading"></a></h3>
+<p>The recommended method for creating a new component is to use the <a class="reference internal" href="#cmakev2-function-idf_component_register"><em>idf_component_register</em></a> function. This function is provided in v2 to maintain backward compatibility with v1 and remains the preferred approach for creating components that work with both versions. The only difference between the v1 and v2 versions of this function is that the v2 version does not support the <code class="docutils literal notranslate"><span class="pre">KCONFIG</span></code> and <code class="docutils literal notranslate"><span class="pre">KCONFIG_PROJBUILD</span></code> options when using Kconfig filenames that do not follow the <a class="reference internal" href="#cmakev2-standardized-kconfigs"><span class="std std-ref">Standardized Kconfig and Kconfig.projbuild File Names</span></a>. For components that require functionality beyond what <a class="reference internal" href="#cmakev2-function-idf_component_register"><em>idf_component_register</em></a> provides, please refer to <a class="reference internal" href="#cmakev2-breaking-changes"><span class="std std-ref">Breaking Changes for v1 Components</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id1">
+<div class="code-block-caption"><span class="caption-text">Minimal Component CMakeLists.txt</span><a class="headerlink" href="#id1" title="Permalink to this code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_register</span><span class="p">(</span><span class="s">SRCS</span><span class="w"> </span><span class="s2">"foo.c"</span><span class="w"> </span><span class="s2">"bar.c"</span>
+<span class="w">                       </span><span class="s">INCLUDE_DIRS</span><span class="w"> </span><span class="s2">"include"</span>
+<span class="w">                       </span><span class="s">REQUIRES</span><span class="w"> </span><span class="s">mbedtls</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="creating-a-component-for-v2-only">
+<span id="cmakev2-creating-v2-component"></span><h3>Creating a Component for v2 Only<a class="headerlink" href="#creating-a-component-for-v2-only" title="Permalink to this heading"></a></h3>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This section describes how to create a component for v2, which is not compatible or usable with v1. To create a component that works with both versions, it is recommended to follow <a class="reference internal" href="#cmakev2-creating-compatible-component"><span class="std std-ref">Creating a Component Compatible with v1 and v2</span></a>.</p>
+</div>
+<p>This section demonstrates how to create a new component using a simple component named <code class="docutils literal notranslate"><span class="pre">esp_target_info</span></code> as an example. This component provides the <code class="docutils literal notranslate"><span class="pre">print_esp_target_info</span></code> function, which, when invoked, displays basic information about the target.</p>
+<p>The layout of the component's directory is organized as follows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>esp_target_info
+├──<span class="w"> </span>include
+│<span class="w">   </span>└──<span class="w"> </span>esp_target_info.h
+├──<span class="w"> </span>srcs
+│<span class="w">   </span>└──<span class="w"> </span>esp_target_info.c
+├──<span class="w"> </span>CMakeLists.txt
+├──<span class="w"> </span>esp_target_info.ld
+└──<span class="w"> </span>linker.lf
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">esp_target_info.h</span></code> header file provides the <code class="docutils literal notranslate"><span class="pre">print_esp_target_info</span></code> function declaration as its sole public interface, intended for use by other components.</p>
+<div class="literal-block-wrapper docutils container" id="id2">
+<div class="code-block-caption"><span class="caption-text">include/esp_target_info.h</span><a class="headerlink" href="#id2" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#ifndef _ESP_TARGET_INFO_</span>
+<span class="cp">#define _ESP_TARGET_INFO_</span>
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_esp_target_info</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+<span class="cp">#endif</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">esp_target_info.c</span></code> file contains the definition for the <code class="docutils literal notranslate"><span class="pre">print_esp_target_info</span></code> function. This function outputs the target name based on the configuration <code class="docutils literal notranslate"><span class="pre">CONFIG_IDF_TARGET</span></code> variable, the number of CPU cores as obtained from the <code class="docutils literal notranslate"><span class="pre">esp_hw_support</span></code> component, the available free heap size from the <code class="docutils literal notranslate"><span class="pre">esp_system</span></code> component, and the flash size from the <code class="docutils literal notranslate"><span class="pre">spi_flash</span></code> component.</p>
+<div class="literal-block-wrapper docutils container" id="id3">
+<div class="code-block-caption"><span class="caption-text">srcs/esp_target_info.c</span><a class="headerlink" href="#id3" title="Permalink to this code"></a></div>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;stdio.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;inttypes.h&gt;</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_chip_info.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_flash.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_system.h"</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">esp_target_chip_info</span><span class="p">(</span><span class="n">esp_chip_info_t</span><span class="o">*</span><span class="p">);</span>
+
+<span class="kt">void</span><span class="w"> </span><span class="nf">print_esp_target_info</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">esp_chip_info_t</span><span class="w"> </span><span class="n">chip_info</span><span class="p">;</span>
+<span class="w">    </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">flash_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="w">    </span><span class="n">esp_target_chip_info</span><span class="p">(</span><span class="o">&amp;</span><span class="n">chip_info</span><span class="p">);</span>
+<span class="w">    </span><span class="n">esp_flash_get_size</span><span class="p">(</span><span class="nb">NULL</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">flash_size</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"target: %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">CONFIG_IDF_TARGET</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"cpu cores: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">chip_info</span><span class="p">.</span><span class="n">cores</span><span class="p">);</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"free heap size: %"</span><span class="w"> </span><span class="n">PRIu32</span><span class="w"> </span><span class="s">"</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">esp_get_minimum_free_heap_size</span><span class="p">());</span>
+<span class="w">    </span><span class="n">printf</span><span class="p">(</span><span class="s">"flash size: %"</span><span class="w"> </span><span class="n">PRIu32</span><span class="w"> </span><span class="s">"B</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">flash_size</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">esp_target_info.ld</span></code> linker script defines an additional symbol, <code class="docutils literal notranslate"><span class="pre">esp_target_chip_info</span></code>, which serves as an alias for the <code class="docutils literal notranslate"><span class="pre">esp_chip_info</span></code> function. This alias is used in <code class="docutils literal notranslate"><span class="pre">esp_target_info.c</span></code> to obtain chip information instead of directly calling the <code class="docutils literal notranslate"><span class="pre">esp_chip_info</span></code> function. This serves no real purpose and is merely an example of a working linker script used in the demonstration.</p>
+<div class="literal-block-wrapper docutils container" id="id4">
+<div class="code-block-caption"><span class="caption-text">esp_target_info.ld</span><a class="headerlink" href="#id4" title="Permalink to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">esp_target_chip_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>esp_chip_info<span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">linker.lf</span></code> is a linker fragment that determines the placement of <code class="docutils literal notranslate"><span class="pre">print_esp_target_info</span></code> in IRAM instead of flash. This is merely an example for demonstration purposes. For more details on linker fragments, please refer to <a class="reference internal" href="linker-script-generation.html"><span class="doc">Linker Script Generation</span></a>.</p>
+<div class="literal-block-wrapper docutils container" id="id5">
+<div class="code-block-caption"><span class="caption-text">linker.lf</span><a class="headerlink" href="#id5" title="Permalink to this code"></a></div>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">[</span>mapping:esp_target_info<span class="o">]</span>
+archive:<span class="w"> </span>libesp_target_info.a
+entries:
+<span class="w">    </span>print_esp_target_info<span class="w"> </span><span class="o">(</span>noflash<span class="o">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, let's describe how the aforementioned sources can be integrated as a component for the build system by defining the component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file.</p>
+<p>Create a static library target with the target name stored in the <code class="docutils literal notranslate"><span class="pre">COMPONENT_TARGET</span></code> variable for the <code class="docutils literal notranslate"><span class="pre">srcs/esp_target_info.c</span></code> source file, and add the <code class="docutils literal notranslate"><span class="pre">include</span></code> directory as the component's directory with public header files.</p>
+<div class="literal-block-wrapper docutils container" id="id6">
+<div class="code-block-caption"><span class="caption-text">CMakeLists.txt</span><a class="headerlink" href="#id6" title="Permalink to this code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="nb">add_library</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">STATIC</span>
+</span><span class="hll"><span class="linenos"> 2</span><span class="w">    </span><span class="s2">"srcs/esp_target_info.c"</span>
+</span><span class="hll"><span class="linenos"> 3</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos"> 4</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/include</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="p">)</span>
+</span><span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">esp_hw_support</span><span class="p">)</span>
+<span class="linenos">10</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">spi_flash</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">esp_system</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="linenos">14</span><span class="w">    </span><span class="s">idf::esp_hw_support</span>
+<span class="linenos">15</span><span class="w">    </span><span class="s">idf::spi_flash</span>
+<span class="linenos">16</span><span class="w">    </span><span class="s">idf::esp_system</span>
+<span class="linenos">17</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">WHOLE_ARCHIVE</span><span class="w"> </span><span class="s">TRUE</span><span class="p">)</span>
+<span class="linenos">20</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">LDFRAGMENTS</span><span class="w"> </span><span class="s">linker.lf</span><span class="w"> </span><span class="s">APPEND</span><span class="p">)</span>
+<span class="linenos">21</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">LINKER_SCRIPTS</span><span class="w"> </span><span class="s">esp_target_info.ld</span><span class="w"> </span><span class="s">APPEND</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="nb">target_link_options</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s2">"SHELL:-u esp_chip_info"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>When a component is evaluated by the build system, the <code class="docutils literal notranslate"><span class="pre">COMPONENT_TARGET</span></code> variable is assigned a target name that the component is responsible for creating. This target represents the component within the build and is linked to the component interface target managed by the build system. The component interface target is what other components use to declare dependencies on this component. Other components can obtain a component’s interface target using the <a class="reference internal" href="#cmakev2-function-idf_component_include"><em>idf_component_include</em></a> function and link to it as needed.</p>
+<p>Include all required components and link them to the component's target.</p>
+<div class="literal-block-wrapper docutils container" id="id7">
+<div class="code-block-caption"><span class="caption-text">CMakeLists.txt</span><a class="headerlink" href="#id7" title="Permalink to this code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">add_library</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">STATIC</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="s2">"srcs/esp_target_info.c"</span>
+<span class="linenos"> 3</span><span class="p">)</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/include</span>
+<span class="linenos"> 7</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="hll"><span class="linenos"> 9</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">esp_hw_support</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">10</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">spi_flash</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">11</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">esp_system</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">12</span>
+</span><span class="hll"><span class="linenos">13</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span>
+</span><span class="hll"><span class="linenos">14</span><span class="w">    </span><span class="s">idf::esp_hw_support</span>
+</span><span class="hll"><span class="linenos">15</span><span class="w">    </span><span class="s">idf::spi_flash</span>
+</span><span class="hll"><span class="linenos">16</span><span class="w">    </span><span class="s">idf::esp_system</span>
+</span><span class="hll"><span class="linenos">17</span><span class="p">)</span>
+</span><span class="linenos">18</span>
+<span class="linenos">19</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">WHOLE_ARCHIVE</span><span class="w"> </span><span class="s">TRUE</span><span class="p">)</span>
+<span class="linenos">20</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">LDFRAGMENTS</span><span class="w"> </span><span class="s">linker.lf</span><span class="w"> </span><span class="s">APPEND</span><span class="p">)</span>
+<span class="linenos">21</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">LINKER_SCRIPTS</span><span class="w"> </span><span class="s">esp_target_info.ld</span><span class="w"> </span><span class="s">APPEND</span><span class="p">)</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="nb">target_link_options</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s2">"SHELL:-u esp_chip_info"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The v1 automatically adds component dependencies in certain situations. For instance, if the <code class="docutils literal notranslate"><span class="pre">main</span></code> component does not specify its dependencies, all components identified by the build system are added as dependencies to the <code class="docutils literal notranslate"><span class="pre">main</span></code> component. Additionally, component dependencies specified in <code class="docutils literal notranslate"><span class="pre">idf_component.yaml</span></code> for the component manager are also added as dependencies to the component. In contrast, the v2 does not automatically add any dependencies, all component dependencies must be explicitly stated.</p>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">esp_target_info</span></code> component uses functionality from other components, namely <code class="docutils literal notranslate"><span class="pre">esp_hw_support</span></code>, <code class="docutils literal notranslate"><span class="pre">esp_system</span></code>, and <code class="docutils literal notranslate"><span class="pre">spi_flash</span></code>, to collect basic information about the target. Therefore, it must declare its dependencies on these components. The component acquires the required component interface targets using the <a class="reference internal" href="#cmakev2-function-idf_component_include"><em>idf_component_include</em></a> function.</p>
+<p>Each component is evaluated exactly once by the <a class="reference internal" href="#cmakev2-function-idf_component_include"><em>idf_component_include</em></a> function. This function essentially invokes CMake’s <code class="docutils literal notranslate"><span class="pre">add_subdirectory</span></code> for the specified component directory and links the <code class="docutils literal notranslate"><span class="pre">COMPONENT_TARGET</span></code> created by that component with its interface target.</p>
+<p>The interface target can then be used by other components to declare dependencies. It can be referenced directly via a predefined alias named <code class="docutils literal notranslate"><span class="pre">idf::&lt;component</span> <span class="pre">name&gt;</span></code>, which provides a convenient and literal way to reference a component’s interface target, as shown in the example above.</p>
+<p>The <a class="reference internal" href="#cmakev2-function-idf_component_include"><em>idf_component_include</em></a> function also supports an <code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code> option that allows storing the component’s interface target name in a variable. This approach is useful in more complex cases where the target needs to be passed to other CMake functions, stored in lists, or referenced programmatically.</p>
+<div class="literal-block-wrapper docutils container" id="id8">
+<div class="code-block-caption"><span class="caption-text">Declaring component dependencies using interface target variable</span><a class="headerlink" href="#id8" title="Permalink to this code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">spi_flash</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s">spi_flash_iface</span><span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">spi_flash_iface</span><span class="o">}</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Component dependencies can be conditionally expressed based on the configuration. When a component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> is evaluated by the build system, the configuration for all discovered components is available. If a component needs to declare a conditional dependency based on a configuration variable, it must ensure that the component is included in the build system first before using it by including the component with the <a class="reference internal" href="#cmakev2-function-idf_component_include"><em>idf_component_include</em></a> function. For example, if a component has a conditional dependency on the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component based on the <code class="docutils literal notranslate"><span class="pre">CONFIG_VFS_SUPPORT_IO</span></code> configuration option being set, it needs to include the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component before linking it to the component target.</p>
+<div class="literal-block-wrapper docutils container" id="id9">
+<div class="code-block-caption"><span class="caption-text">Declaring optional component dependency</span><a class="headerlink" href="#id9" title="Permalink to this code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">CONFIG_VFS_SUPPORT_IO</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">vfs</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">        </span><span class="s">idf::vfs</span>
+<span class="w">    </span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Always ensure that the required component is included before using it. The presence of certain component configuration options does not guarantee that the component will be included in the project build.</p>
+</div>
+<p>Set miscellaneous component properties. This primarily serves as an example to demonstrate other commonly used features that the component may configure.</p>
+<div class="literal-block-wrapper docutils container" id="id10">
+<div class="code-block-caption"><span class="caption-text">CMakeLists.txt</span><a class="headerlink" href="#id10" title="Permalink to this code"></a></div>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="nb">add_library</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">STATIC</span>
+<span class="linenos"> 2</span><span class="w">    </span><span class="s2">"srcs/esp_target_info.c"</span>
+<span class="linenos"> 3</span><span class="p">)</span>
+<span class="linenos"> 4</span>
+<span class="linenos"> 5</span><span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span>
+<span class="linenos"> 6</span><span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_LIST_DIR</span><span class="o">}</span><span class="s">/include</span>
+<span class="linenos"> 7</span><span class="p">)</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">esp_hw_support</span><span class="p">)</span>
+<span class="linenos">10</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">spi_flash</span><span class="p">)</span>
+<span class="linenos">11</span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">esp_system</span><span class="p">)</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="linenos">14</span><span class="w">    </span><span class="s">idf::esp_hw_support</span>
+<span class="linenos">15</span><span class="w">    </span><span class="s">idf::spi_flash</span>
+<span class="linenos">16</span><span class="w">    </span><span class="s">idf::esp_system</span>
+<span class="linenos">17</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="hll"><span class="linenos">19</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">WHOLE_ARCHIVE</span><span class="w"> </span><span class="s">TRUE</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">20</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">LDFRAGMENTS</span><span class="w"> </span><span class="s">linker.lf</span><span class="w"> </span><span class="s">APPEND</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">21</span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">LINKER_SCRIPTS</span><span class="w"> </span><span class="s">esp_target_info.ld</span><span class="w"> </span><span class="s">APPEND</span><span class="p">)</span>
+</span><span class="hll"><span class="linenos">22</span>
+</span><span class="hll"><span class="linenos">23</span><span class="nb">target_link_options</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s2">"SHELL:-u esp_chip_info"</span><span class="p">)</span>
+</span></pre></div>
+</div>
+</div>
+<dl class="simple">
+<dt>WHOLE_ARCHIVE:</dt><dd><p>Include all object files from the component's static library when linked.</p>
+</dd>
+<dt>LDFRAGMENTS:</dt><dd><p>Include files from this property to be processed with the <a class="reference internal" href="linker-script-generation.html"><span class="doc">Linker Script Generation</span></a>.</p>
+</dd>
+<dt>LINKER_SCRIPTS:</dt><dd><p>Include files from this property in the link command line as linker scripts.</p>
+</dd>
+</dl>
+<p>Also ensure that the <code class="docutils literal notranslate"><span class="pre">esp_chip_info</span></code> function is retained in the final binary even when section garbage collection, <code class="docutils literal notranslate"><span class="pre">--gc-sections</span></code>, is enabled. This is required because <code class="docutils literal notranslate"><span class="pre">esp_target_info.ld</span></code> defines <code class="docutils literal notranslate"><span class="pre">esp_target_chip_info</span></code> as an alias for <code class="docutils literal notranslate"><span class="pre">esp_chip_info</span></code>, and without forcing the linker to include it, the underlying <code class="docutils literal notranslate"><span class="pre">esp_chip_info</span></code> function could be discarded as unused.</p>
+</section>
+</section>
+<section id="build-event-callback-framework">
+<span id="cmakev2-build-event-callbacks"></span><h2>Build Event Callback Framework<a class="headerlink" href="#build-event-callback-framework" title="Permalink to this heading"></a></h2>
+<p>The build system allows components to register callbacks that are invoked at specific points in the build lifecycle. This provides a generic way for components to run custom steps (for example, running a tool on the executable or adding dependencies) without relying on internal build targets or properties.</p>
+<p>Components register a callback in their <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> using <a class="reference internal" href="#cmakev2-function-idf_component_register_build_event_callback"><em>idf_component_register_build_event_callback</em></a>. The callback must be a CMake function defined in the same file. At the specified event, the build system invokes the callback and passes the relevant CMake target as the first argument (for example, the executable target for <code class="docutils literal notranslate"><span class="pre">POST_ELF</span></code>).</p>
+<p>Currently supported events:</p>
+<ul class="simple">
+<li><p><strong>POST_ELF</strong> — Fired after the executable target is created and linked, but before the binary (<code class="docutils literal notranslate"><span class="pre">.bin</span></code>) image is generated. The callback receives the executable target name. Use this to perform actions on the ELF by attaching a <code class="docutils literal notranslate"><span class="pre">POST_BUILD</span></code> command to the executable with <code class="docutils literal notranslate"><span class="pre">add_custom_command(TARGET</span> <span class="pre">...</span> <span class="pre">POST_BUILD</span> <span class="pre">...)</span></code>.</p></li>
+</ul>
+<p>Example: perform actions on the ELF after linking:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># In project_include.cmake</span>
+<span class="nb">function</span><span class="p">(</span><span class="s">my_post_elf_hook</span><span class="w"> </span><span class="s">target</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">add_custom_command</span><span class="p">(</span><span class="s">TARGET</span><span class="w"> </span><span class="o">${</span><span class="nv">target</span><span class="o">}</span><span class="w"> </span><span class="s">POST_BUILD</span>
+<span class="w">        </span><span class="s">COMMAND</span><span class="w"> </span><span class="s">my_tool</span><span class="w"> </span><span class="s2">"$&lt;TARGET_FILE:${target}&gt;"</span>
+<span class="w">        </span><span class="s">COMMENT</span><span class="w"> </span><span class="s2">"Running my_tool on the executable"</span><span class="p">)</span>
+<span class="nb">endfunction</span><span class="p">()</span>
+
+<span class="nb">idf_component_register_build_event_callback</span><span class="p">(</span><span class="s">EVENT</span><span class="w"> </span><span class="s">POST_ELF</span><span class="w"> </span><span class="s">CALLBACK</span><span class="w"> </span><span class="s">my_post_elf_hook</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Additional build events may be added in future when required.</p>
+</section>
+<section id="breaking-changes-for-v1-components">
+<span id="cmakev2-breaking-changes"></span><h2>Breaking Changes for v1 Components<a class="headerlink" href="#breaking-changes-for-v1-components" title="Permalink to this heading"></a></h2>
+<p>While most of the v1 components should be usable without any modifications in v2, there are some differences between v1 and v2 that might require changes to v1 components. This section outlines the breaking changes that may occur if a v1 component is used with v2 and explains how the component can be modified to work with both v1 and v2.</p>
+<section id="updating-component-for-v2-compatibility">
+<h3>Updating Component for v2 Compatibility<a class="headerlink" href="#updating-component-for-v2-compatibility" title="Permalink to this heading"></a></h3>
+<p>If a component needs to be evaluated with both v1 and v2, and requires modifications to function with v2, the <code class="docutils literal notranslate"><span class="pre">IDF_BUILD_V2</span></code> variable can be used by the component to determine whether it is being evaluated under v1 or v2, and adjust its behavior accordingly. The <code class="docutils literal notranslate"><span class="pre">IDF_BUILD_V2</span></code> is set when the component is evaluated with v2. This variable can be used to conditionally adjust only small parts of the existing v1 component, or a completely new <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> can be created for v2 and conditionally included in the v1 component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>. For more information on how to write a v2 component, please see <a class="reference internal" href="#creating-a-new-component">Creating a New Component</a>.</p>
+<p>Below is the <code class="docutils literal notranslate"><span class="pre">hello_world</span></code> example component with its <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> adjusted to include and evaluate the separate v2 component <code class="docutils literal notranslate"><span class="pre">CMakeLists_v2.txt</span></code> if evaluated under v2.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The existing v1 <code class="docutils literal notranslate"><span class="pre">hello_world</span></code> component should function without modification in v2. This is just a simple example of how <code class="docutils literal notranslate"><span class="pre">IDF_BUILD_V2</span></code> can be used to evaluate different component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> files for v1 and v2.</p>
+</div>
+<p>Adjusted original v1 hello_world example <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">IDF_BUILD_V2</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Include component CMake code for v2 and return.</span>
+<span class="w">    </span><span class="nb">include</span><span class="p">(</span><span class="s">CMakeLists_v2.txt</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">return</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+
+<span class="c"># Here follows the original component CMake code for v1.</span>
+<span class="nb">idf_component_register</span><span class="p">(</span><span class="s">SRCS</span><span class="w"> </span><span class="s2">"hello_world_main.c"</span>
+<span class="w">                       </span><span class="s">PRIV_REQUIRES</span><span class="w"> </span><span class="s">spi_flash</span>
+<span class="w">                       </span><span class="s">INCLUDE_DIRS</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The hello_world example <code class="docutils literal notranslate"><span class="pre">CMakeLists_v2.txt</span></code> for v2.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">spi_flash</span><span class="p">)</span>
+
+<span class="nb">add_library</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">STATIC</span>
+<span class="w">    </span><span class="s2">"hello_world_main.c"</span>
+<span class="p">)</span>
+
+<span class="nb">target_include_directories</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span>
+<span class="w">    </span><span class="s2">"${CMAKE_CURRENT_LIST_DIR}"</span>
+<span class="p">)</span>
+
+<span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span>
+<span class="w">    </span><span class="s">idf::spi_flash</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="idf-build-add-post-elf-dependency-and-idf-build-get-post-elf-dependencies-are-unavailable">
+<h3><code class="docutils literal notranslate"><span class="pre">idf_build_add_post_elf_dependency</span></code> and <code class="docutils literal notranslate"><span class="pre">idf_build_get_post_elf_dependencies</span></code> are Unavailable<a class="headerlink" href="#idf-build-add-post-elf-dependency-and-idf-build-get-post-elf-dependencies-are-unavailable" title="Permalink to this heading"></a></h3>
+<p>In v1, components that need to run a step after the executable is linked but before the binary image is generated use <code class="docutils literal notranslate"><span class="pre">idf_build_add_post_elf_dependency</span></code> to register a dependency and <code class="docutils literal notranslate"><span class="pre">idf_build_get_post_elf_dependencies</span></code> to retrieve the list of such dependencies (see the <a class="reference internal" href="build-system.html"><span class="doc">build system</span></a> API). These functions are <strong>not available</strong> in v2.</p>
+<p>In v2, use the <a class="reference internal" href="#cmakev2-build-event-callbacks"><span class="std std-ref">Build Event Callback Framework</span></a> instead. Register a <strong>POST_ELF</strong> callback with <a class="reference internal" href="#cmakev2-function-idf_component_register_build_event_callback"><em>idf_component_register_build_event_callback</em></a> in your component's <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code>. The callback receives the executable target name; use it to attach a <code class="docutils literal notranslate"><span class="pre">POST_BUILD</span></code> command (e.g. with <code class="docutils literal notranslate"><span class="pre">add_custom_command(TARGET</span> <span class="pre">...</span> <span class="pre">POST_BUILD</span> <span class="pre">...)</span></code>) or to add custom targets that depend on the executable. This achieves the same ordering (run after ELF, before binary) without relying on internal build properties.</p>
+</section>
+<section id="the-build-components-build-property-is-unavailable">
+<h3>The <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> Build Property is Unavailable<a class="headerlink" href="#the-build-components-build-property-is-unavailable" title="Permalink to this heading"></a></h3>
+<p>The v1, by design, collects components built by the project in the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property. This is achieved by evaluating components early using the CMake script mode and collecting components based on their dependencies as provided in <a class="reference internal" href="#cmakev2-function-idf_component_register"><em>idf_component_register</em></a>. Later, the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> are evaluated again using CMake's <code class="docutils literal notranslate"><span class="pre">add_subdirectory</span></code>. This approach imposes several restrictions. First, components cannot express their dependencies based on Kconfig variables because Kconfig variables are not known during the early evaluation. Second, the CMake script mode does not allow CMake commands that define build targets or actions, which caused confusion about which commands can be used in a component and when they are actually evaluated. The v2 removes this two-stage component evaluation, and hence the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property doesn't exist in v2. Any attempt to obtain the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property with <a class="reference internal" href="#cmakev2-function-idf_build_get_property"><em>idf_build_get_property</em></a> will result in an error. The <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property was primarily used in v1 by components to discover which other components were being built by the project and to adjust their behavior, for example, by adding additional source files. In v2, the functionality of the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property can be replaced with the <code class="docutils literal notranslate"><span class="pre">$&lt;TARGET_EXISTS:tgt&gt;</span></code> generator expression.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">esp_eth</span></code> component is compiled with the additional <code class="docutils literal notranslate"><span class="pre">esp_eth_netif_glue.c</span></code> file if the <code class="docutils literal notranslate"><span class="pre">esp_netif</span></code> component is also being built in v1 with:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_build_get_property</span><span class="p">(</span><span class="s">components_to_build</span><span class="w"> </span><span class="s">BUILD_COMPONENTS</span><span class="p">)</span>
+<span class="nb">if</span><span class="p">(</span><span class="s">esp_netif</span><span class="w"> </span><span class="s">IN_LIST</span><span class="w"> </span><span class="s">components_to_build</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">srcs</span><span class="w"> </span><span class="s2">"src/esp_eth_netif_glue.c"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>To use the <code class="docutils literal notranslate"><span class="pre">esp_eth</span></code> component with v2, the usage of <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> has to be replaced with:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">IDF_BUILD_V2</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_sources</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_TARGET</span><span class="o">}</span><span class="w"> </span><span class="s">PRIVATE</span><span class="w"> </span><span class="s2">"$&lt;$&lt;TARGET_EXISTS:idf::esp_netif&gt;:src/esp_eth_netif_glue.c&gt;"</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">idf_build_get_property</span><span class="p">(</span><span class="s">components_to_build</span><span class="w"> </span><span class="s">BUILD_COMPONENTS</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">if</span><span class="p">(</span><span class="s">esp_netif</span><span class="w"> </span><span class="s">IN_LIST</span><span class="w"> </span><span class="s">components_to_build</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">srcs</span><span class="w"> </span><span class="s2">"src/esp_eth_netif_glue.c"</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">endif</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">$&lt;TARGET_EXISTS:tgt&gt;</span></code> generator expression should work for both v1 and v2. The <code class="docutils literal notranslate"><span class="pre">IDF_BUILD_V2</span></code> is used to demonstrate the different approaches in v1 and v2.</p>
+</div>
+</section>
+<section id="standardized-kconfig-and-kconfig-projbuild-file-names">
+<span id="cmakev2-standardized-kconfigs"></span><h3>Standardized <code class="docutils literal notranslate"><span class="pre">Kconfig</span></code> and <code class="docutils literal notranslate"><span class="pre">Kconfig.projbuild</span></code> File Names<a class="headerlink" href="#standardized-kconfig-and-kconfig-projbuild-file-names" title="Permalink to this heading"></a></h3>
+<p>The v1 allows the use of <code class="docutils literal notranslate"><span class="pre">Kconfig</span></code> and <code class="docutils literal notranslate"><span class="pre">Kconfig.projbuild</span></code> with custom file names in <a class="reference internal" href="#cmakev2-function-idf_component_register"><em>idf_component_register</em></a>. This is possible because, in v1, the components participating in the project build are collected during early component evaluation, allowing for the specification of custom names for the Kconfig files. The v2 does not perform early evaluation, and the Kconfig files are collected based on the fixed <code class="docutils literal notranslate"><span class="pre">Kconfig</span></code> and <code class="docutils literal notranslate"><span class="pre">Kconfig.projbuild</span></code> file names, which must be present in the component's root directory. This can be resolved by renaming the Kconfig files that do not conform to this naming convention or by including them in Kconfig files that comply with this convention.</p>
+</section>
+<section id="component-configuration-visibility">
+<h3>Component Configuration Visibility<a class="headerlink" href="#component-configuration-visibility" title="Permalink to this heading"></a></h3>
+<p>In v1, the <code class="docutils literal notranslate"><span class="pre">sdkconfig</span></code> is generated based on Kconfig files provided by components that are part of the project build. This means that if a component is not included in the project build, for instance, if it is not required as a dependency of another component, its configuration will not be visible or available when components are evaluated. In v2, the <code class="docutils literal notranslate"><span class="pre">sdkconfig</span></code> is generated based on Kconfig files for all available components. This means the presence of some configuration options does not guarantee that the component providing this configuration option is participating in the build, unlike in v1.</p>
+<p>For example, in v1, the following condition in the <code class="docutils literal notranslate"><span class="pre">esp_vfs_console</span></code> component links the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component to the <code class="docutils literal notranslate"><span class="pre">esp_vfs_console</span></code> component based on the <code class="docutils literal notranslate"><span class="pre">CONFIG_VFS_SUPPORT_IO</span></code> configuration option being set. This works in v1 because the <code class="docutils literal notranslate"><span class="pre">CONFIG_VFS_SUPPORT_IO</span></code> configuration option is not available if the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component is not participating in the project build.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">CONFIG_VFS_SUPPORT_IO</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_LIB</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">idf::vfs</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Make sure esp_vfs_console_register gets called at startup stage</span>
+<span class="w">    </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_LIB</span><span class="o">}</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s2">"-u esp_vfs_include_console_register"</span><span class="p">)</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>In contrast, in v2, configuration for all discovered components is available. This means that even if a component does not participate in the project build, its configuration will still be accessible. If the <code class="docutils literal notranslate"><span class="pre">CONFIG_VFS_SUPPORT_IO</span></code> configuration option is set by default, the condition will evaluate as true in v2, even if the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component is not participating in the project build and the <code class="docutils literal notranslate"><span class="pre">idf::vfs</span></code> target does not exist. The <code class="docutils literal notranslate"><span class="pre">$&lt;TARGET_EXISTS:tgt&gt;</span></code> generator expression can be used to express such dependencies in v2.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">if</span><span class="p">(</span><span class="s">IDF_BUILD_V2</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_LIB</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s2">"$&lt;$&lt;TARGET_EXISTS:idf::vfs&gt;:idf::vfs&gt;"</span><span class="p">)</span>
+<span class="w">    </span><span class="c"># Make sure esp_vfs_console_register gets called at startup stage</span>
+<span class="w">    </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_LIB</span><span class="o">}</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s2">"$&lt;$&lt;TARGET_EXISTS:idf::vfs&gt;:-u esp_vfs_include_console_register&gt;"</span><span class="p">)</span>
+<span class="nb">else</span><span class="p">()</span>
+<span class="w">    </span><span class="nb">if</span><span class="p">(</span><span class="s">CONFIG_VFS_SUPPORT_IO</span><span class="p">)</span>
+<span class="w">        </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_LIB</span><span class="o">}</span><span class="w"> </span><span class="s">PUBLIC</span><span class="w"> </span><span class="s">idf::vfs</span><span class="p">)</span>
+<span class="w">        </span><span class="c"># Make sure esp_vfs_console_register gets called at startup stage</span>
+<span class="w">        </span><span class="nb">target_link_libraries</span><span class="p">(</span><span class="o">${</span><span class="nv">COMPONENT_LIB</span><span class="o">}</span><span class="w"> </span><span class="s">INTERFACE</span><span class="w"> </span><span class="s2">"-u esp_vfs_include_console_register"</span><span class="p">)</span>
+<span class="w">    </span><span class="nb">endif</span><span class="p">()</span>
+<span class="nb">endif</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">$&lt;TARGET_EXISTS:tgt&gt;</span></code> generator expression should work for both v1 and v2. The <code class="docutils literal notranslate"><span class="pre">IDF_BUILD_V2</span></code> is used to demonstrate the different approaches in v1 and v2.</p>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>This change applies not only to a component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> but also to its source files. The component's code can no longer assume that the functionality of other components is available simply because their Kconfig variables are set. For example, if the <code class="docutils literal notranslate"><span class="pre">CONFIG_VFS_SUPPORT_IO</span></code> configuration variable is set and the component's code depends on the functionality of the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component, it cannot merely check <code class="docutils literal notranslate"><span class="pre">CONFIG_VFS_SUPPORT_IO</span></code> in the source code. It must ensure that the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component is included in the project build and that the component has a declared dependency on the <code class="docutils literal notranslate"><span class="pre">vfs</span></code> component in its <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+</div>
+</section>
+<section id="recursive-evaluation-of-components">
+<h3>Recursive Evaluation of Components<a class="headerlink" href="#recursive-evaluation-of-components" title="Permalink to this heading"></a></h3>
+<p>In v1, the components participating in the project build are collected in the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property during the early evaluation phase, prior to their evaluation with <code class="docutils literal notranslate"><span class="pre">add_subdirectory</span></code>. This means that v1 is aware of all components participating in the project build and their dependencies before CMake evaluates them with the <code class="docutils literal notranslate"><span class="pre">add_subdirectory</span></code> call. This allows v1 to evaluate components in a non-recursive manner and within a relatively predictable environment with minimal variables set. In contrast, v2 does not perform early component evaluation and components are added based on the requirements observed during their evaluation. This means a component can be evaluated recursively within the scope of another component's variables if it is a dependency of that component. In other words, if component A requires component B, then when B is evaluated, it can access the variables of A. Hence, it's important to ensure that all variables used by the component are properly initialized before usage. A typical problem involves CMake lists and the <code class="docutils literal notranslate"><span class="pre">APPEND</span></code> operation.</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Wrong</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">srcs</span><span class="w"> </span><span class="s">main.c</span><span class="p">)</span>
+
+<span class="c"># Correct</span>
+<span class="nb">set</span><span class="p">(</span><span class="s">srcs</span><span class="p">)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">srcs</span><span class="w"> </span><span class="s">main.c</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="the-project-include-cmake-files-are-included-in-a-non-specific-order">
+<h3>The <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> Files are Included in a Non-Specific Order<a class="headerlink" href="#the-project-include-cmake-files-are-included-in-a-non-specific-order" title="Permalink to this heading"></a></h3>
+<p>In v1, the <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> files from components are included in the order specified by the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property. The components in <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> are sorted based on their requirements, as determined during early evaluation. This means a given component's <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> is included only after all <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> files for its dependencies have been included. This holds true as long as there is no cyclic dependency between components. In contrast, v2 does not perform early evaluation of components, and <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> does not exist. Therefore, in v2, the <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> files are included for all discovered components, not just those participating in the project build, and they are included in the order in which the components are discovered by v2. As a result, cross-file functionality at the global scope between <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> files can no longer be relied upon in v2.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It is still possible to call functions or macros defined in another <code class="docutils literal notranslate"><span class="pre">project_include.cmake</span></code> file, provided they are invoked within a CMake function or another non-global scope. Only global-scope interactions are unreliable in v2.</p>
+</div>
+</section>
+<section id="strict-component-precedence">
+<h3>Strict Component Precedence<a class="headerlink" href="#strict-component-precedence" title="Permalink to this heading"></a></h3>
+<p>The v2 strictly adheres to the component precedence for components with the same name, as described in <a class="reference internal" href="build-system.html#cmake-components-same-name"><span class="std std-ref">Multiple Components with the Same Name</span></a>. While v1 allows components discovered in directories specified with the <code class="docutils literal notranslate"><span class="pre">EXTRA_COMPONENT_DIRS</span></code> variable to be overridden by <a class="reference external" href="https://docs.espressif.com/projects/idf-component-manager/en/latest/reference/manifest_file.html#local-directory-dependencies">Local Directory Dependencies</a> specified in the <code class="docutils literal notranslate"><span class="pre">idf_component.yml</span></code> manifest file, this is no longer possible in v2.</p>
+</section>
+<section id="the-behavior-of-idf-component-optional-requires-has-changed">
+<h3>The Behavior of <code class="docutils literal notranslate"><span class="pre">idf_component_optional_requires</span></code> has Changed<a class="headerlink" href="#the-behavior-of-idf-component-optional-requires-has-changed" title="Permalink to this heading"></a></h3>
+<p>In v1, the <code class="docutils literal notranslate"><span class="pre">idf_component_optional_requires</span></code> function adds a dependency on a specified component only if that component is already included in the build (for instance, if it is already required by another component). To achieve this, v1 examines the <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> build property, which is generated during the early evaluation phase and lists all components involved in the build.</p>
+<p>In v2, there is no early collection phase and <code class="docutils literal notranslate"><span class="pre">BUILD_COMPONENTS</span></code> does not exist. The build system discovers components as it evaluates dependencies. So v2 cannot use the same &quot;only if already in the build&quot; check; it has to choose a different rule.</p>
+<p>The build system supports two behaviors, controlled by the <code class="docutils literal notranslate"><span class="pre">IDF_COMPONENT_OPTIONAL_REQUIRES_MODE</span></code> build property:</p>
+<ul class="simple">
+<li><p><strong>IMMEDIATE (default)</strong> — When a component calls <code class="docutils literal notranslate"><span class="pre">idf_component_optional_requires(type</span> <span class="pre">req_component)</span></code>, the build system includes <code class="docutils literal notranslate"><span class="pre">req_component</span></code> and links it to the caller if it is recognized (discovered). No check is made whether the rest of the project actually needs that component. This is safe for multi-binary projects (multiple executables or binaries), but it can pull in more components than necessary and increase build time.</p></li>
+<li><p><strong>DEFERRED</strong> — The build system does not include or link immediately. It records the request and resolves it later in <code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_build_library</span></code>: the optional component is linked only if it ends up in that library's dependency graph. This matches v1 semantics and keeps the number of linked components minimal. It <strong>must not</strong> be used when building more than one library (see below).</p></li>
+</ul>
+<p>A multi-binary project is one that creates more than one executable or binary (for example, several application executables built from the same tree). Such a project calls <code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_build_library</span></code> or <code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_build_executable</span></code> more than once. In v2, component targets are shared globally across all libraries. If <code class="docutils literal notranslate"><span class="pre">IDF_COMPONENT_OPTIONAL_REQUIRES_MODE</span></code> is set to <strong>DEFERRED</strong>, the build system resolves optional requirements when it processes each library. When it processes the second or a later library, it may add new links to component targets that are already used by the first library. The first library's metadata (such as the list of linker fragments or linked components) was already computed when that library was processed and is not updated. As a result, linker script generation and section placement for the first library can be incorrect or stale. For this reason, DEFERRED mode is not allowed when more than one library is built; the build fails with an error in that case. <strong>IMMEDIATE</strong> mode does not have this problem, because optional requirements are applied during component evaluation, before any per-library metadata is computed. The side effect of the IMMEDIATE mode is that it can pull in more components than necessary and increase build time.</p>
+<p><a class="reference internal" href="#cmakev2-macro-idf_project_default"><em>idf_project_default</em></a> (the usual entry point for a single-executable project) sets <code class="docutils literal notranslate"><span class="pre">IDF_COMPONENT_OPTIONAL_REQUIRES_MODE</span></code> to <strong>DEFERRED</strong> before building the default executable when no libraries have been created yet. So if your project uses <code class="docutils literal notranslate"><span class="pre">idf_project_default()</span></code> and builds only one executable, you get DEFERRED behavior automatically and do not need to do anything.</p>
+<p>If you do not use <a class="reference internal" href="#cmakev2-macro-idf_project_default"><em>idf_project_default</em></a> and instead call <code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_project_init</span></code> and then the lower-level API (<code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_build_executable</span></code>, <code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_build_library</span></code>) yourself, the default mode is <strong>IMMEDIATE</strong>. If you build only one library/executable and want the same efficient, v1-like behavior as <code class="docutils literal notranslate"><span class="pre">idf_project_default</span></code>, you must set the mode to DEFERRED yourself after project init:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_project_init</span><span class="p">()</span>
+<span class="nb">idf_build_set_property</span><span class="p">(</span><span class="s">IDF_COMPONENT_OPTIONAL_REQUIRES_MODE</span><span class="w"> </span><span class="s">DEFERRED</span><span class="p">)</span>
+<span class="nb">idf_build_executable</span><span class="p">(</span><span class="s">my_app</span><span class="w"> </span><span class="s">COMPONENTS</span><span class="w"> </span><span class="s">main</span><span class="w"> </span><span class="s">...</span><span class="p">)</span>
+<span class="c"># ... rest of your project ...</span>
+</pre></div>
+</div>
+<p>Do <strong>not</strong> set <code class="docutils literal notranslate"><span class="pre">IDF_COMPONENT_OPTIONAL_REQUIRES_MODE</span></code> to <code class="docutils literal notranslate"><span class="pre">DEFERRED</span></code> if you build multiple libraries; the build will error. Keep the default IMMEDIATE in that case.</p>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<p>This section contains an automatically generated API reference from the build
+system v2 CMake source code.</p>
+<section id="variables">
+<span id="cmakev2-variables"></span><h3>Variables<a class="headerlink" href="#variables" title="Permalink to this heading"></a></h3>
+</section>
+<section id="functions">
+<span id="cmakev2-functions"></span><h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_build_get_property">
+<span class="sig-name descname"><span class="pre">idf_build_get_property</span></span><a class="headerlink" href="#cmakev2-function-idf_build_get_property" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_build_get_property</span><span class="p">(</span><span class="s">&lt;var&gt;</span><span class="w"> </span><span class="s">&lt;property&gt;</span><span class="w"> </span><span class="s">[GENERATOR_EXPRESSION]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>variable[out]</em></p>
+<blockquote>
+<div><p>Variable to store the value in.</p>
+</div></blockquote>
+<p><em>property[in]</em></p>
+<blockquote>
+<div><p>Property name to get the value of.</p>
+</div></blockquote>
+<p><em>GENERATOR_EXPRESSION[in]</em></p>
+<blockquote>
+<div><p>Obtain the generator expression for the property rather than the actual
+value.</p>
+</div></blockquote>
+<p>Get the value of the specified property related to the ESP-IDF build.</p>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_build_set_property">
+<span class="sig-name descname"><span class="pre">idf_build_set_property</span></span><a class="headerlink" href="#cmakev2-function-idf_build_set_property" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_build_set_property</span><span class="p">(</span><span class="s">&lt;property&gt;</span><span class="w"> </span><span class="s">&lt;value&gt;</span><span class="w"> </span><span class="s">[APPEND]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>property[in]</em></p>
+<blockquote>
+<div><p>Property name.</p>
+</div></blockquote>
+<p><em>value[in]</em></p>
+<blockquote>
+<div><p>Property value.</p>
+</div></blockquote>
+<p><em>APPEND</em></p>
+<blockquote>
+<div><p>Append the value to the property's current value instead of replacing
+it.</p>
+</div></blockquote>
+<p>Set the value of the specified property related to the ESP-IDF build. The
+property is also added to the internal list of build properties if it isn't
+already there.</p>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_get_property">
+<span class="sig-name descname"><span class="pre">idf_component_get_property</span></span><a class="headerlink" href="#cmakev2-function-idf_component_get_property" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_get_property</span><span class="p">(</span><span class="s">&lt;variable&gt;</span><span class="w"> </span><span class="s">&lt;component&gt;</span><span class="w"> </span><span class="s">&lt;property&gt;</span><span class="w"> </span><span class="s">[GENERATOR_EXPRESSION]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>variable[out]</em></p>
+<blockquote>
+<div><p>Variable to store the value in.</p>
+</div></blockquote>
+<p><em>component[in]</em></p>
+<blockquote>
+<div><p>Component name, target, target alias or interface.</p>
+</div></blockquote>
+<p><em>property[in]</em></p>
+<blockquote>
+<div><p>Property name to get the value of.</p>
+</div></blockquote>
+<p><em>GENERATOR_EXPRESSION</em></p>
+<blockquote>
+<div><p>Obtain the generator expression for the property rather than the actual
+value.</p>
+</div></blockquote>
+<p>Retrieve the value of the specified component property.</p>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_include">
+<span class="sig-name descname"><span class="pre">idf_component_include</span></span><a class="headerlink" href="#cmakev2-function-idf_component_include" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_include</span><span class="p">(</span><span class="s">&lt;name&gt;</span>
+<span class="w">                      </span><span class="s">[INTERFACE</span><span class="w"> </span><span class="s">&lt;variable&gt;]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>name[in]</em></p>
+<blockquote>
+<div><p>Component name.</p>
+</div></blockquote>
+<p><em>INTERFACE[out,opt]</em></p>
+<blockquote>
+<div><p>Optional variable where the name of the target interface for the
+included component will be stored.</p>
+</div></blockquote>
+<p>This is a core function of the build system, responsible for including the
+specified component, as indicated by the <code class="docutils literal notranslate"><span class="pre">name</span></code> option, into the build
+process. It does this by evaluating the component through the
+<code class="docutils literal notranslate"><span class="pre">add_subdirectory</span></code> call for the component's directory. The component is
+responsible for creating its own CMake target, with the target name
+provided via the <code class="docutils literal notranslate"><span class="pre">COMPONENT_TARGET</span></code> variable. This target is linked to
+the component's interface target, which is managed internally by the build
+system. The component's interface target is used by other components to
+establish their dependencies.</p>
+<p>When the <code class="docutils literal notranslate"><span class="pre">INTERFACE</span></code> variable is provided, the name of the included
+component interface target will be stored in it.</p>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_mock">
+<span class="sig-name descname"><span class="pre">idf_component_mock</span></span><a class="headerlink" href="#cmakev2-function-idf_component_mock" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_mock</span><span class="p">(</span><span class="s">[INCLUDE_DIRS</span><span class="w"> </span><span class="s">&lt;dir&gt;...]</span>
+<span class="w">                   </span><span class="s">[MOCK_HEADER_FILES</span><span class="w"> </span><span class="s">&lt;file&gt;...]</span>
+<span class="w">                   </span><span class="s">[REQUIRES</span><span class="w"> </span><span class="s">&lt;component&gt;...]</span>
+<span class="w">                   </span><span class="s">[MOCK_SUBDIR</span><span class="w"> </span><span class="s">&lt;subdir&gt;]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>INCLUDE_DIRS[in,opt]</em></p>
+<blockquote>
+<div><p>Include directories for the header files provided in MOCK_HEADER_FILES.</p>
+</div></blockquote>
+<p><em>MOCK_HEADER_FILES[in,opt]</em></p>
+<blockquote>
+<div><p>Header files from which CMock generates mock implementations.</p>
+</div></blockquote>
+<p><em>REQUIRES[in,opt]</em></p>
+<blockquote>
+<div><p>Additional components required by the mock component.</p>
+</div></blockquote>
+<p><em>MOCK_SUBDIR[in,opt]</em></p>
+<blockquote>
+<div><p>Subdirectory under the mocks output where generated files are placed.</p>
+</div></blockquote>
+<p>Create a mock component using CMock and register it with the build system.
+This is a compatibility shim matching the v1 <code class="docutils literal notranslate"><span class="pre">idf_component_mock</span></code>
+function in <code class="docutils literal notranslate"><span class="pre">tools/cmake/component.cmake</span></code>.  It generates Mock*.c and
+Mock*.h files from the given headers using Ruby + CMock, then delegates to
+<code class="docutils literal notranslate"><span class="pre">idf_component_register</span></code> so the mock participates in normal dependency
+resolution.</p>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_optional_requires">
+<span class="sig-name descname"><span class="pre">idf_component_optional_requires</span></span><a class="headerlink" href="#cmakev2-function-idf_component_optional_requires" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_optional_requires</span><span class="p">(</span><span class="s">&lt;type&gt;</span><span class="w"> </span><span class="s">&lt;component&gt;...</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>type[in]</em></p>
+<blockquote>
+<div><p>Type of dependency: PRIVATE, PUBLIC or INTERFACE</p>
+</div></blockquote>
+<p><em>component[in]</em></p>
+<blockquote>
+<div><p>The component name that should be added as a dependency to the
+evaluated component. It may be provided multiple times.</p>
+</div></blockquote>
+<p>Add a dependency on a specific component only if the component is
+recognized by the build system. The behavior is controlled by the
+<code class="docutils literal notranslate"><span class="pre">IDF_COMPONENT_OPTIONAL_REQUIRES_MODE</span></code> build property:</p>
+<ul class="simple">
+<li><p><strong>IMMEDIATE</strong> (default): Include the component and link it to the
+caller if it is discovered. Safe for multi-library projects but may
+pull in more components than strictly needed.</p></li>
+<li><p><strong>DEFERRED</strong>: Do not include or link immediately; record the request
+and resolve it in <code class="xref cmakev2 cmakev2-ref docutils literal notranslate"><span class="pre">idf_build_library</span></code> so that the
+component is linked only when it is part of the library's dependency
+graph. Matches v1 semantics and reduces unnecessary components, but
+must not be used when building multiple libraries (see docs).</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function should be avoided in cmakev2, where
+dependencies should be added based on configuration options. This is purely
+for backward compatibility with cmakev1.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In multi-library projects with <strong>DEFERRED</strong> mode, optional requires
+resolved when processing a later library apply globally to shared
+component targets. Earlier libraries then link that optional component
+too, but their per-library metadata (e.g. linker fragments) was
+already computed and is not updated. DEFERRED mode is therefore
+disallowed when more than one library is built.</p>
+</div>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_register">
+<span class="sig-name descname"><span class="pre">idf_component_register</span></span><a class="headerlink" href="#cmakev2-function-idf_component_register" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_register</span><span class="p">(</span><span class="s">[SRCS</span><span class="w"> </span><span class="s">&lt;file&gt;..]</span>
+<span class="w">                       </span><span class="s">[SRC_DIRS</span><span class="w"> </span><span class="s">&lt;dir&gt;...]</span>
+<span class="w">                       </span><span class="s">[EXCLUDE_SRCS</span><span class="w"> </span><span class="s">&lt;file&gt;...]</span>
+<span class="w">                       </span><span class="s">[INCLUDE_DIRS</span><span class="w"> </span><span class="s">&lt;dir&gt;...]</span>
+<span class="w">                       </span><span class="s">[PRIV_INCLUDE_DIRS</span><span class="w"> </span><span class="s">&lt;dir&gt;...]</span>
+<span class="w">                       </span><span class="s">[LDFRAGMENTS</span><span class="w"> </span><span class="s">&lt;file&gt;...]</span>
+<span class="w">                       </span><span class="s">[REQUIRES</span><span class="w"> </span><span class="s">&lt;component&gt;...]</span>
+<span class="w">                       </span><span class="s">[PRIV_REQUIRES</span><span class="w"> </span><span class="s">&lt;component&gt;...]</span>
+<span class="w">                       </span><span class="s">[REQUIRED_IDF_TARGETS</span><span class="w"> </span><span class="s">&lt;target&gt;...]</span>
+<span class="w">                       </span><span class="s">[EMBED_FILES</span><span class="w"> </span><span class="s">&lt;file&gt;...]</span>
+<span class="w">                       </span><span class="s">[EMBED_TXTFILES</span><span class="w"> </span><span class="s">&lt;file&gt;...]</span>
+<span class="w">                       </span><span class="s">[WHOLE_ARCHIVE]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>SRCS[in,opt]</em></p>
+<blockquote>
+<div><p>List of source files for the component.</p>
+</div></blockquote>
+<p><em>SRC_DIRS[in,opt]</em></p>
+<blockquote>
+<div><p>List of source directories to search for source files (.c, .cpp, .S);
+ignored when SRCS is specified.</p>
+</div></blockquote>
+<p><em>EXCLUDE_SRCS[in,opt]</em></p>
+<blockquote>
+<div><p>List of source files to exclude from the designated source directories.</p>
+</div></blockquote>
+<p><em>INCLUDE_DIRS[in,opt]</em></p>
+<blockquote>
+<div><p>List of public include directories for the created component library.</p>
+</div></blockquote>
+<p><em>PRIV_INCLUDE_DIRS[in,opt]</em></p>
+<blockquote>
+<div><p>List of private include directories for the newly created component
+library.</p>
+</div></blockquote>
+<p><em>LDFRAGMENTS[in,opt]</em></p>
+<blockquote>
+<div><p>List of linker script fragments for the component.</p>
+</div></blockquote>
+<p><em>REQUIRES[in,opt]</em></p>
+<blockquote>
+<div><p>List of publicly required components based on usage requirements.</p>
+</div></blockquote>
+<p><em>PRIV_REQUIRES[in,opt]</em></p>
+<blockquote>
+<div><p>List of privately required components based on usage requirements.</p>
+</div></blockquote>
+<p><em>REQUIRED_IDF_TARGETS[in,opt]</em></p>
+<blockquote>
+<div><p>List of IDF build targets supported exclusively by the component.</p>
+</div></blockquote>
+<p><em>EMBED_FILES[in,opt]</em></p>
+<blockquote>
+<div><p>List of binary files to embed with the component.</p>
+</div></blockquote>
+<p><em>EMBED_TXTFILES[in,opt]</em></p>
+<blockquote>
+<div><p>List of text files to embed with the component.</p>
+</div></blockquote>
+<p><em>WHOLE_ARCHIVE[in,opt]</em></p>
+<blockquote>
+<div><p>Link the component as --whole-archive.</p>
+</div></blockquote>
+<p>Register a new component with the build system using the provided options.
+This function also automatically links all commonly required and managed
+components to the component's target.</p>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_register_build_event_callback">
+<span class="sig-name descname"><span class="pre">idf_component_register_build_event_callback</span></span><a class="headerlink" href="#cmakev2-function-idf_component_register_build_event_callback" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_register_build_event_callback</span><span class="p">(</span><span class="s">EVENT</span><span class="w"> </span><span class="s">&lt;event&gt;</span><span class="w"> </span><span class="s">CALLBACK</span><span class="w"> </span><span class="s">&lt;function-name&gt;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>EVENT[in]</em></p>
+<blockquote>
+<div><p>Build lifecycle event at which the callback will be invoked. Currently
+only <code class="docutils literal notranslate"><span class="pre">POST_ELF</span></code> is supported.</p>
+</div></blockquote>
+<p><em>CALLBACK[in]</em></p>
+<blockquote>
+<div><p>Name of a CMake function defined in the component's project_include.cmake file.
+The build system calls this function with the primary CMake target as its argument
+at the specified event point. For <code class="docutils literal notranslate"><span class="pre">POST_ELF</span></code> this is the executable target.</p>
+</div></blockquote>
+<p>Example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span># project_include.cmake
+function(my_component_post_elf_hook target)
+    add_custom_command(TARGET ${target} POST_BUILD
+        COMMAND my_tool "$&lt;TARGET_FILE:${target}&gt;")
+endfunction()
+
+idf_component_register_build_event_callback(
+    EVENT    POST_ELF
+    CALLBACK my_component_post_elf_hook)
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="cmakev2 function">
+<dt class="sig sig-object cmakev2" id="cmakev2-function-idf_component_set_property">
+<span class="sig-name descname"><span class="pre">idf_component_set_property</span></span><a class="headerlink" href="#cmakev2-function-idf_component_set_property" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_component_set_property</span><span class="p">(</span><span class="s">&lt;component&gt;</span><span class="w"> </span><span class="s">&lt;property&gt;</span><span class="w"> </span><span class="s">&lt;value&gt;</span><span class="w"> </span><span class="s">[APPEND]</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><em>component[in]</em></p>
+<blockquote>
+<div><p>Component name, target, target alias or interface.</p>
+</div></blockquote>
+<p><em>property[in]</em></p>
+<blockquote>
+<div><p>Property name.</p>
+</div></blockquote>
+<p><em>value[in]</em></p>
+<blockquote>
+<div><p>Property value.</p>
+</div></blockquote>
+<p><em>APPEND</em></p>
+<blockquote>
+<div><p>Append the value to the property's current value instead of replacing
+it.</p>
+</div></blockquote>
+<p>Set the value of the specified component property. The property is also
+added to the internal list of component properties if it isn't already
+there.</p>
+</dd></dl>
+
+</section>
+<section id="macros">
+<span id="cmakev2-macros"></span><h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cmakev2 macro">
+<dt class="sig sig-object cmakev2" id="cmakev2-macro-idf_project_default">
+<span class="sig-name descname"><span class="pre">idf_project_default</span></span><a class="headerlink" href="#cmakev2-macro-idf_project_default" title="Permalink to this definition"></a></dt>
+<dd><div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="nb">idf_project_default</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Create a default project executable based on the main component and its
+transitive dependencies. The executable name is derived from the
+<code class="docutils literal notranslate"><span class="pre">PROJECT_NAME</span></code> variable, which by default uses the <code class="docutils literal notranslate"><span class="pre">CMAKE_PROJECT_NAME</span></code>
+value specified in the CMake's <code class="docutils literal notranslate"><span class="pre">project()</span></code> call.</p>
+<p>Generate the binary image for the executable, signed or unsigned based on
+the configuration, and add flash targets for it.</p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Build System v2 (api-guides/build-system-v2)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Build System v2 (api-guides/build-system-v2)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="build-system.html" class="btn btn-neutral float-left" title="Build System" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="c.html" class="btn btn-neutral float-right" title="C Support" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asynchronous Memory Copy - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/async_memcpy.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/async_memcpy';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="BitScrambler Driver" href="bitscrambler.html" />
+    <link rel="prev" title="Asynchronous Color Conversion" href="async_color_convert.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Asynchronous Memory Copy</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configure-and-install-driver">Configure and Install Driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#send-memory-copy-request">Send Memory Copy Request</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#uninstall-driver">Uninstall Driver</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#etm-event">ETM Event</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Asynchronous Memory Copy</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/async_memcpy.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asynchronous-memory-copy">
+<h1>Asynchronous Memory Copy<a class="headerlink" href="#asynchronous-memory-copy" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/async_memcpy.html">[中文]</a></p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>ESP32-P4 has a DMA engine which can help to offload internal memory copy operations from the CPU in an asynchronous way.</p>
+<p>The async memcpy API wraps all DMA configurations and operations. The signature of <a class="reference internal" href="#_CPPv416esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv" title="esp_async_memcpy"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy()</span></code></a> is almost the same as the standard libc <code class="docutils literal notranslate"><span class="pre">memcpy</span></code> function.</p>
+<p>The DMA allows multiple memory copy requests to be queued up before the first one is completed, which allows overlap of computation and memory copy. Moreover, it is still possible to know the exact time when a memory copy request is completed by registering an event callback.</p>
+</section>
+<section id="configure-and-install-driver">
+<h2>Configure and Install Driver<a class="headerlink" href="#configure-and-install-driver" title="Permalink to this heading"></a></h2>
+<p>There are several ways to install the async memcpy driver, depending on the underlying DMA engine:</p>
+<p><ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy_install_gdma_ahb()</span></code> is used to install the async memcpy driver based on the AHB GDMA engine.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy_install_gdma_axi()</span></code> is used to install the async memcpy driver based on the AXI GDMA engine.</p></li>
+<li><p><a class="reference internal" href="#_CPPv424esp_async_memcpy_installPK21async_memcpy_config_tP21async_memcpy_handle_t" title="esp_async_memcpy_install"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy_install()</span></code></a> is a generic API to install the async memcpy driver with a default DMA engine. If the SoC has the CP DMA engine, the default DMA engine is CP DMA. Otherwise, the default DMA engine is AHB GDMA.</p></li>
+</ul>
+</p>
+<p>Driver configuration is described in <a class="reference internal" href="#_CPPv421async_memcpy_config_t" title="async_memcpy_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_memcpy_config_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">backlog</span></code>: This is used to configure the maximum number of memory copy transactions that can be queued up before the first one is completed. If this field is set to zero, then the default value 4 will be applied.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">dma_burst_size</span></code>: Set the burst size in a DMA burst transfer.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">flags</span></code>: This is used to enable some special driver features.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">async_memcpy_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ASYNC_MEMCPY_DEFAULT_CONFIG</span><span class="p">();</span>
+<span class="c1">// update the maximum data stream supported by underlying DMA engine</span>
+<span class="n">config</span><span class="p">.</span><span class="n">backlog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">8</span><span class="p">;</span>
+<span class="n">async_memcpy_handle_t</span><span class="w"> </span><span class="n">driver</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_async_memcpy_install</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">driver</span><span class="p">));</span><span class="w"> </span><span class="c1">// install driver with default DMA engine</span>
+</pre></div>
+</div>
+</section>
+<section id="send-memory-copy-request">
+<h2>Send Memory Copy Request<a class="headerlink" href="#send-memory-copy-request" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="#_CPPv416esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv" title="esp_async_memcpy"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy()</span></code></a> is the API to send memory copy request to DMA engine. It must be called after driver is installed successfully. This API is thread safe, so it can be called from different tasks.</p>
+<p>Different from the libc version of <code class="docutils literal notranslate"><span class="pre">memcpy</span></code>, you can optionally pass a callback to <a class="reference internal" href="#_CPPv416esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv" title="esp_async_memcpy"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy()</span></code></a>, so that you can be notified when the memory copy is finished. Note that the callback is executed in the ISR context, please make sure you will not call any blocking functions in the callback.</p>
+<p>The prototype of the callback function is <a class="reference internal" href="#_CPPv421async_memcpy_isr_cb_t" title="async_memcpy_isr_cb_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_memcpy_isr_cb_t</span></code></a>. The callback function should only return true if it wakes up a high priority task by RTOS APIs like <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xSemaphoreGiveFromISR()</span></code>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Callback implementation, running in ISR context</span>
+<span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">my_async_memcpy_cb</span><span class="p">(</span><span class="n">async_memcpy_handle_t</span><span class="w"> </span><span class="n">mcp_hdl</span><span class="p">,</span><span class="w"> </span><span class="n">async_memcpy_event_t</span><span class="w"> </span><span class="o">*</span><span class="n">event</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb_args</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">sem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SemaphoreHandle_t</span><span class="p">)</span><span class="n">cb_args</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">high_task_wakeup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdFALSE</span><span class="p">;</span>
+<span class="w">    </span><span class="n">xSemaphoreGiveFromISR</span><span class="p">(</span><span class="n">semphr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">high_task_wakeup</span><span class="p">);</span><span class="w"> </span><span class="c1">// high_task_wakeup set to pdTRUE if some high priority task unblocked</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">high_task_wakeup</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Create a semaphore used to report the completion of async memcpy</span>
+<span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">semphr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">xSemaphoreCreateBinary</span><span class="p">();</span>
+
+<span class="c1">// Called from user's context</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_async_memcpy</span><span class="p">(</span><span class="n">driver_handle</span><span class="p">,</span><span class="w"> </span><span class="n">to</span><span class="p">,</span><span class="w"> </span><span class="n">from</span><span class="p">,</span><span class="w"> </span><span class="n">copy_len</span><span class="p">,</span><span class="w"> </span><span class="n">my_async_memcpy_cb</span><span class="p">,</span><span class="w"> </span><span class="n">my_semaphore</span><span class="p">));</span>
+<span class="c1">// Do something else here</span>
+<span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">my_semaphore</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span><span class="w"> </span><span class="c1">// Wait until the buffer copy is done</span>
+</pre></div>
+</div>
+</section>
+<section id="uninstall-driver">
+<h2>Uninstall Driver<a class="headerlink" href="#uninstall-driver" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="#_CPPv426esp_async_memcpy_uninstall21async_memcpy_handle_t" title="esp_async_memcpy_uninstall"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy_uninstall()</span></code></a> is used to uninstall asynchronous memcpy driver. It is not necessary to uninstall the driver after each memcpy operation. If you know your application will not use this driver anymore, then this API can recycle the memory and other hardware resources for you.</p>
+</section>
+<section id="etm-event">
+<h2>ETM Event<a class="headerlink" href="#etm-event" title="Permalink to this heading"></a></h2>
+<p>Async memory copy is able to generate an event when one async memcpy operation is done. This event can be used to interact with the <a class="reference internal" href="etm.html"><span class="doc">ETM</span></a> module. You can call <a class="reference internal" href="#_CPPv430esp_async_memcpy_new_etm_event21async_memcpy_handle_t24async_memcpy_etm_event_tP22esp_etm_event_handle_t" title="esp_async_memcpy_new_etm_event"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_memcpy_new_etm_event()</span></code></a> to get the ETM event handle.</p>
+<p>For how to connect the event to an ETM channel, please refer to the <a class="reference internal" href="etm.html"><span class="doc">ETM</span></a> documentation.</p>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_dma/include/esp_async_memcpy.h">components/esp_driver_dma/include/esp_async_memcpy.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_async_memcpy.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_dma</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_dma</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_dma
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_dma
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424esp_async_memcpy_installPK21async_memcpy_config_tP21async_memcpy_handle_t">
+<span id="_CPPv324esp_async_memcpy_installPK21async_memcpy_config_tP21async_memcpy_handle_t"></span><span id="_CPPv224esp_async_memcpy_installPK21async_memcpy_config_tP21async_memcpy_handle_t"></span><span id="esp_async_memcpy_install__async_memcpy_config_tCP.async_memcpy_handle_tP"></span><span class="target" id="esp__async__memcpy_8h_1a58987140c75a2be90311dbb50596f69b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_memcpy_install</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421async_memcpy_config_t" title="async_memcpy_config_t"><span class="n"><span class="pre">async_memcpy_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv421async_memcpy_handle_t" title="async_memcpy_handle_t"><span class="n"><span class="pre">async_memcpy_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mcp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424esp_async_memcpy_installPK21async_memcpy_config_tP21async_memcpy_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Install async memcpy driver with the default DMA backend. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On chip with CPDMA support, CPDMA is the default choice. On chip with AHB-GDMA support, AHB-GDMA is the default choice.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> Configuration of async memcpy </p></li>
+<li><p><strong>mcp</strong> -- <strong>[out]</strong> Returned driver handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Install async memcpy driver successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Install async memcpy driver failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Install async memcpy driver failed because out of memory</p></li>
+<li><p>ESP_FAIL: Install async memcpy driver failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426esp_async_memcpy_uninstall21async_memcpy_handle_t">
+<span id="_CPPv326esp_async_memcpy_uninstall21async_memcpy_handle_t"></span><span id="_CPPv226esp_async_memcpy_uninstall21async_memcpy_handle_t"></span><span id="esp_async_memcpy_uninstall__async_memcpy_handle_t"></span><span class="target" id="esp__async__memcpy_8h_1a89685e2df7c864f410d75d180d67a3f5"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_memcpy_uninstall</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421async_memcpy_handle_t" title="async_memcpy_handle_t"><span class="n"><span class="pre">async_memcpy_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mcp</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426esp_async_memcpy_uninstall21async_memcpy_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Uninstall async memcpy driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>mcp</strong> -- <strong>[in]</strong> Handle of async memcpy driver that returned from <code class="docutils literal notranslate"><span class="pre">esp_async_memcpy_install</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Uninstall async memcpy driver successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Uninstall async memcpy driver failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Uninstall async memcpy driver failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv">
+<span id="_CPPv316esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv"></span><span id="_CPPv216esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv"></span><span id="esp_async_memcpy__async_memcpy_handle_t.voidP.voidP.s.async_memcpy_isr_cb_t.voidP"></span><span class="target" id="esp__async__memcpy_8h_1ad927ffcd238950548417a57c1c350cf2"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_memcpy</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421async_memcpy_handle_t" title="async_memcpy_handle_t"><span class="n"><span class="pre">async_memcpy_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mcp</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dst</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span>, <a class="reference internal" href="#_CPPv421async_memcpy_isr_cb_t" title="async_memcpy_isr_cb_t"><span class="n"><span class="pre">async_memcpy_isr_cb_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cb_isr</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cb_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416esp_async_memcpy21async_memcpy_handle_tPvPv6size_t21async_memcpy_isr_cb_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Send an asynchronous memory copy request. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The callback function is invoked in interrupt context, never do blocking jobs in the callback.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mcp</strong> -- <strong>[in]</strong> Handle of async memcpy driver that returned from <code class="docutils literal notranslate"><span class="pre">esp_async_memcpy_install</span></code></p></li>
+<li><p><strong>dst</strong> -- <strong>[in]</strong> Destination address (copy to) </p></li>
+<li><p><strong>src</strong> -- <strong>[in]</strong> Source address (copy from) </p></li>
+<li><p><strong>n</strong> -- <strong>[in]</strong> Number of bytes to copy </p></li>
+<li><p><strong>cb_isr</strong> -- <strong>[in]</strong> Callback function, which got invoked in interrupt context. Set to NULL can bypass the callback. </p></li>
+<li><p><strong>cb_args</strong> -- <strong>[in]</strong> User defined argument to be passed to the callback function </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Send memory copy request successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Send memory copy request failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Send memory copy request failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430esp_async_memcpy_new_etm_event21async_memcpy_handle_t24async_memcpy_etm_event_tP22esp_etm_event_handle_t">
+<span id="_CPPv330esp_async_memcpy_new_etm_event21async_memcpy_handle_t24async_memcpy_etm_event_tP22esp_etm_event_handle_t"></span><span id="_CPPv230esp_async_memcpy_new_etm_event21async_memcpy_handle_t24async_memcpy_etm_event_tP22esp_etm_event_handle_t"></span><span id="esp_async_memcpy_new_etm_event__async_memcpy_handle_t.async_memcpy_etm_event_t.esp_etm_event_handle_tP"></span><span class="target" id="esp__async__memcpy_8h_1a61abe78d275c3013fe36b5e8c2dc2126"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_memcpy_new_etm_event</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421async_memcpy_handle_t" title="async_memcpy_handle_t"><span class="n"><span class="pre">async_memcpy_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">mcp</span></span>, <a class="reference internal" href="#_CPPv424async_memcpy_etm_event_t" title="async_memcpy_etm_event_t"><span class="n"><span class="pre">async_memcpy_etm_event_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">event_type</span></span>, <a class="reference internal" href="etm.html#_CPPv422esp_etm_event_handle_t" title="esp_etm_event_handle_t"><span class="n"><span class="pre">esp_etm_event_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_event</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430esp_async_memcpy_new_etm_event21async_memcpy_handle_t24async_memcpy_etm_event_tP22esp_etm_event_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the ETM event handle for async memcpy done signal. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The created ETM event object can be deleted later by calling <code class="docutils literal notranslate"><span class="pre">esp_etm_del_event</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>mcp</strong> -- <strong>[in]</strong> Handle of async memcpy driver that returned from <code class="docutils literal notranslate"><span class="pre">esp_async_memcpy_install</span></code></p></li>
+<li><p><strong>event_type</strong> -- <strong>[in]</strong> ETM event type </p></li>
+<li><p><strong>out_event</strong> -- <strong>[out]</strong> Returned ETM event handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Get ETM event successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Get ETM event failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Get ETM event failed because the DMA hardware doesn't support ETM submodule</p></li>
+<li><p>ESP_FAIL: Get ETM event failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420async_memcpy_event_t">
+<span id="_CPPv320async_memcpy_event_t"></span><span id="_CPPv220async_memcpy_event_t"></span><span id="async_memcpy_event_t"></span><span class="target" id="structasync__memcpy__event__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_memcpy_event_t</span></span></span><a class="headerlink" href="#_CPPv420async_memcpy_event_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async memory copy event data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20async_memcpy_event_t4dataE">
+<span id="_CPPv3N20async_memcpy_event_t4dataE"></span><span id="_CPPv2N20async_memcpy_event_t4dataE"></span><span id="async_memcpy_event_t::data__voidP"></span><span class="target" id="structasync__memcpy__event__t_1a51a3ce0d8c75e6923ee489a3c14c900d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#_CPPv4N20async_memcpy_event_t4dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event data </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv421async_memcpy_config_t">
+<span id="_CPPv321async_memcpy_config_t"></span><span id="_CPPv221async_memcpy_config_t"></span><span id="async_memcpy_config_t"></span><span class="target" id="structasync__memcpy__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_memcpy_config_t</span></span></span><a class="headerlink" href="#_CPPv421async_memcpy_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of async memcpy configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21async_memcpy_config_t7backlogE">
+<span id="_CPPv3N21async_memcpy_config_t7backlogE"></span><span id="_CPPv2N21async_memcpy_config_t7backlogE"></span><span id="async_memcpy_config_t::backlog__uint32_t"></span><span class="target" id="structasync__memcpy__config__t_1ab7ee602f1267ed4b191d9c07aa09bfd0"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">backlog</span></span></span><a class="headerlink" href="#_CPPv4N21async_memcpy_config_t7backlogE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of transactions that can be prepared in the background </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21async_memcpy_config_t6weightE">
+<span id="_CPPv3N21async_memcpy_config_t6weightE"></span><span id="_CPPv2N21async_memcpy_config_t6weightE"></span><span id="async_memcpy_config_t::weight__uint32_t"></span><span class="target" id="structasync__memcpy__config__t_1a433855d96db153d987ba7495fa04ff57"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">weight</span></span></span><a class="headerlink" href="#_CPPv4N21async_memcpy_config_t6weightE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Weight of async memcpy dma channel, higher weight means higher average bandwidth </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21async_memcpy_config_t14dma_burst_sizeE">
+<span id="_CPPv3N21async_memcpy_config_t14dma_burst_sizeE"></span><span id="_CPPv2N21async_memcpy_config_t14dma_burst_sizeE"></span><span id="async_memcpy_config_t::dma_burst_size__s"></span><span class="target" id="structasync__memcpy__config__t_1a69d81e3ab9b8f9957fb36c4eaff205d6"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dma_burst_size</span></span></span><a class="headerlink" href="#_CPPv4N21async_memcpy_config_t14dma_burst_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DMA transfer burst size, in bytes </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21async_memcpy_config_t5flagsE">
+<span id="_CPPv3N21async_memcpy_config_t5flagsE"></span><span id="_CPPv2N21async_memcpy_config_t5flagsE"></span><span id="async_memcpy_config_t::flags__uint32_t"></span><span class="target" id="structasync__memcpy__config__t_1af5d2664f6dce0040f7d3fc197af81a63"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N21async_memcpy_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra flags to control async memcpy feature </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ASYNC_MEMCPY_DEFAULT_CONFIG">
+<span class="target" id="esp__async__memcpy_8h_1a1b11bc0099e030bd58e7f67322c46713"></span><span class="sig-name descname"><span class="n"><span class="pre">ASYNC_MEMCPY_DEFAULT_CONFIG</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.ASYNC_MEMCPY_DEFAULT_CONFIG" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default configuration for async memcpy. </p>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421async_memcpy_handle_t">
+<span id="_CPPv321async_memcpy_handle_t"></span><span id="_CPPv221async_memcpy_handle_t"></span><span id="async_memcpy_handle_t"></span><span class="target" id="esp__async__memcpy_8h_1ad0a0e30c1d0da022f3458ee01593f50d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">async_memcpy_context_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">async_memcpy_handle_t</span></span></span><a class="headerlink" href="#_CPPv421async_memcpy_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async memory copy driver handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421async_memcpy_isr_cb_t">
+<span id="_CPPv321async_memcpy_isr_cb_t"></span><span id="_CPPv221async_memcpy_isr_cb_t"></span><span id="async_memcpy_isr_cb_t"></span><span class="target" id="esp__async__memcpy_8h_1a6c62c74dd6b1811c0dd57967dd79dfdc"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">async_memcpy_isr_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421async_memcpy_handle_t" title="async_memcpy_handle_t"><span class="n"><span class="pre">async_memcpy_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">mcp_hdl</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420async_memcpy_event_t" title="async_memcpy_event_t"><span class="n"><span class="pre">async_memcpy_event_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cb_args</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv421async_memcpy_isr_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of async memcpy interrupt callback function. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>User can call OS primitives (semaphore, mutex, etc) in the callback function. Keep in mind, if any OS primitive wakes high priority task up, the callback should return true. </p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param mcp_hdl<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle of async memcpy </p>
+</dd>
+<dt class="field-even">Param event<span class="colon">:</span></dt>
+<dd class="field-even"><p>Event object, which contains related data, reserved for future </p>
+</dd>
+<dt class="field-odd">Param cb_args<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User defined arguments, passed from esp_async_memcpy function </p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task is woken up by the callback function</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv424async_memcpy_etm_event_t">
+<span id="_CPPv324async_memcpy_etm_event_t"></span><span id="_CPPv224async_memcpy_etm_event_t"></span><span class="target" id="esp__async__memcpy_8h_1a04e7f05217987c83dfb11783cb7e6380"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_memcpy_etm_event_t</span></span></span><a class="headerlink" href="#_CPPv424async_memcpy_etm_event_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async memory copy specific events that supported by the ETM module. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24async_memcpy_etm_event_t32ASYNC_MEMCPY_ETM_EVENT_COPY_DONEE">
+<span id="_CPPv3N24async_memcpy_etm_event_t32ASYNC_MEMCPY_ETM_EVENT_COPY_DONEE"></span><span id="_CPPv2N24async_memcpy_etm_event_t32ASYNC_MEMCPY_ETM_EVENT_COPY_DONEE"></span><span class="target" id="esp__async__memcpy_8h_1a04e7f05217987c83dfb11783cb7e6380a58a7ec3fe618ca52cbb6aa0f818e8288"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ASYNC_MEMCPY_ETM_EVENT_COPY_DONE</span></span></span><a class="headerlink" href="#_CPPv4N24async_memcpy_etm_event_t32ASYNC_MEMCPY_ETM_EVENT_COPY_DONEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>memory copy finished </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Asynchronous Memory Copy (api-reference/peripherals/async_memcpy)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Asynchronous Memory Copy (api-reference/peripherals/async_memcpy)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="async_color_convert.html" class="btn btn-neutral float-left" title="Asynchronous Color Conversion" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="bitscrambler.html" class="btn btn-neutral float-right" title="BitScrambler Driver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pixel-Processing Accelerator (PPA) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/ppa.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/ppa';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Remote Control Transceiver (RMT)" href="rmt.html" />
+    <link rel="prev" title="Pulse Counter (PCNT)" href="pcnt.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Pixel-Processing Accelerator (PPA)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Pixel-Processing Accelerator (PPA)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/ppa.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="pixel-processing-accelerator-ppa">
+<h1>Pixel-Processing Accelerator (PPA)<a class="headerlink" href="#pixel-processing-accelerator-ppa" title="Permalink to this heading"></a></h1>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>ESP32-P4 includes a pixel-processing accelerator (PPA) module, to realize hardware-level acceleration of image algorithms, such as image rotation, scaling, mirroring, and blending.</p>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading"></a></h2>
+<p>The terms used in relation to the PPA driver are given in the table and the diagram below.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25.0%" />
+<col style="width: 75.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Picture (pic)</p></td>
+<td><p>A complete image stored in the system memory.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Block</p></td>
+<td><p>A portion cropped from a picture at a certain size, with the maximum size equivalent to the entire picture.</p></td>
+</tr>
+<tr class="row-even"><td><p>Pixel</p></td>
+<td><p>The unit to be used in the PPA context.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PPA Operation</p></td>
+<td><p>Types of image algorithm accelerations, includes scale-rotate-mirror (SRM), blend, and fill.</p></td>
+</tr>
+<tr class="row-even"><td><p>PPA Client</p></td>
+<td><p>Who wants to do the PPA operations. Typically, every PPA client is hold by a specific task.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PPA Transaction</p></td>
+<td><p>One request from a PPA client to do a PPA operation is one PPA transaction.</p></td>
+</tr>
+</tbody>
+</table>
+<figure class="align-center" id="id3">
+<img alt="PPA picture/block terminology" src="../../_images/pic_blk_concept.png" />
+<figcaption>
+<p><span class="caption-text">PPA picture/block terminology</span><a class="headerlink" href="#id3" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="functional-overview">
+<h2>Functional Overview<a class="headerlink" href="#functional-overview" title="Permalink to this heading"></a></h2>
+<p>The following sections detail the design of the PPA driver:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ppa-client-registration"><span class="std std-ref">Register PPA Client</span></a> - Covers how to register a PPA client to perform any PPA operations.</p></li>
+<li><p><a class="reference internal" href="#ppa-register-callback"><span class="std std-ref">Register PPA Event Callbacks</span></a> - Covers how to hook user specific code to PPA driver event callback function.</p></li>
+<li><p><a class="reference internal" href="#ppa-perform-operation"><span class="std std-ref">Perform PPA Operations</span></a> - Covers how to perform a PPA operation.</p></li>
+<li><p><a class="reference internal" href="#ppa-buffer-alignment"><span class="std std-ref">Buffer Alignment</span></a> - Covers the buffer alignment requirements for PPA input and output buffers.</p></li>
+<li><p><a class="reference internal" href="#ppa-thread-safety"><span class="std std-ref">Thread Safety</span></a> - Covers the usage of the PPA operation APIs in thread safety aspect.</p></li>
+<li><p><a class="reference internal" href="#ppa-performance-overview"><span class="std std-ref">Performance Overview</span></a> - Covers the performance of PPA operations.</p></li>
+</ul>
+<section id="register-ppa-client">
+<span id="ppa-client-registration"></span><h3>Register PPA Client<a class="headerlink" href="#register-ppa-client" title="Permalink to this heading"></a></h3>
+<p>Requests to perform PPA operations are made by PPA clients. Therefore, PPA clients need to be registered first before doing any PPA operations. Call <a class="reference internal" href="#_CPPv419ppa_register_clientPK19ppa_client_config_tP19ppa_client_handle_t" title="ppa_register_client"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ppa_register_client()</span></code></a> function to register a new client. <a class="reference internal" href="#_CPPv419ppa_client_config_t" title="ppa_client_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ppa_client_config_t</span></code></a> structure is used to specify the properties of the client.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N19ppa_client_config_t9oper_typeE" title="ppa_client_config_t::oper_type"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_client_config_t::oper_type</span></code></a> - Each PPA operation type corresponds to one PPA client type, a registered PPA client can only request one specific type of PPA operations.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N19ppa_client_config_t21max_pending_trans_numE" title="ppa_client_config_t::max_pending_trans_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_client_config_t::max_pending_trans_num</span></code></a> - Decides the maximum number of pending PPA transactions the client can hold.</p></li>
+</ul>
+<p>It is recommended that every task to register its own PPA clients. For example, an application contains two tasks: Task A requires both the PPA SRM and the PPA fill functionalities, so one PPA SRM client and one PPA fill client should be registered in Task A; While Task B also requires the PPA SRM functionality, then another PPA SRM client should be registered in Task B.</p>
+<p>If the task no longer needs to do PPA operations, the corresponding PPA clients can be deregistered with <a class="reference internal" href="#_CPPv421ppa_unregister_client19ppa_client_handle_t" title="ppa_unregister_client"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ppa_unregister_client()</span></code></a> function.</p>
+</section>
+<section id="register-ppa-event-callbacks">
+<span id="ppa-register-callback"></span><h3>Register PPA Event Callbacks<a class="headerlink" href="#register-ppa-event-callbacks" title="Permalink to this heading"></a></h3>
+<p>When an event occurs (e.g., a PPA transaction is completed), the CPU is notified of this event via an interrupt. If some specific functions need to be called when a particular event occurs, a callback can be registered for that event by calling <a class="reference internal" href="#_CPPv435ppa_client_register_event_callbacks19ppa_client_handle_tPK21ppa_event_callbacks_t" title="ppa_client_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ppa_client_register_event_callbacks()</span></code></a>. This can be specifically useful when <code class="docutils literal notranslate"><span class="pre">PPA_TRANS_MODE_NON_BLOCKING</span></code> mode is selected to perform the PPA operations. It is worth noticing that the event callbacks are bound to PPA clients, but the user context is provided per transaction in the call to the PPA operation APIs. This allows the maximum flexibility in utilizing the event callbacks.</p>
+<p>The registered callback functions are called in the interrupt context, therefore, the callback functions should follow common ISR (Interrupt Service Routine) rules.</p>
+</section>
+<section id="perform-ppa-operations">
+<span id="ppa-perform-operation"></span><h3>Perform PPA Operations<a class="headerlink" href="#perform-ppa-operations" title="Permalink to this heading"></a></h3>
+<p>Once the PPA client is registered, a PPA operation can be requested with the returned <a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ppa_client_handle_t</span></code></a>.</p>
+<p>PPA operations includes:</p>
+<section id="scale-rotate-mirror-srm">
+<h4>Scale, Rotate, Mirror (SRM)<a class="headerlink" href="#scale-rotate-mirror-srm" title="Permalink to this heading"></a></h4>
+<p>Call <a class="reference internal" href="#_CPPv426ppa_do_scale_rotate_mirror19ppa_client_handle_tPK21ppa_srm_oper_config_t" title="ppa_do_scale_rotate_mirror"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ppa_do_scale_rotate_mirror()</span></code></a> to apply one or more of the scaling, rotation, mirroring operations to the target block inside a picture.</p>
+<p>Some notes to avoid confusion in configuring <a class="reference internal" href="#_CPPv421ppa_srm_oper_config_t" title="ppa_srm_oper_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ppa_srm_oper_config_t</span></code></a>:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N23ppa_in_pic_blk_config_t6bufferE" title="ppa_in_pic_blk_config_t::buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_in_pic_blk_config_t::buffer</span></code></a> and <a class="reference internal" href="#_CPPv4N24ppa_out_pic_blk_config_t6bufferE" title="ppa_out_pic_blk_config_t::buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_out_pic_blk_config_t::buffer</span></code></a> have to be the pointers to different picture buffers for a SRM operation.</p></li>
+<li><p>The precision of <a class="reference internal" href="#_CPPv4N21ppa_srm_oper_config_t7scale_xE" title="ppa_srm_oper_config_t::scale_x"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_srm_oper_config_t::scale_x</span></code></a> and <a class="reference internal" href="#_CPPv4N21ppa_srm_oper_config_t7scale_yE" title="ppa_srm_oper_config_t::scale_y"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_srm_oper_config_t::scale_y</span></code></a> will be truncated to a step size of 1/16.</p></li>
+<li><p>Output block's width/height is totally determined by the input block's width/height, scaling factor, and rotation angle, so output block's width/height does not need to be configured. However, please make sure the output block can fit at the offset location in the output picture.</p></li>
+<li><p>If the color mode of the input or output picture is <code class="docutils literal notranslate"><span class="pre">PPA_SRM_COLOR_MODE_YUV420</span></code>, then its <code class="docutils literal notranslate"><span class="pre">pic_w</span></code>, <code class="docutils literal notranslate"><span class="pre">pic_h</span></code>, <code class="docutils literal notranslate"><span class="pre">block_w</span></code>, <code class="docutils literal notranslate"><span class="pre">block_h</span></code>, <code class="docutils literal notranslate"><span class="pre">block_offset_x</span></code>, <code class="docutils literal notranslate"><span class="pre">block_offset_y</span></code> fields must be even.</p></li>
+</ul>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The PPA SRM internally uses bilinear scaling algorithm to process. Therefore, it may cause chromatic aberration and loss of contrast at the edges in a scaled picture.</p>
+</div>
+</section>
+<section id="blend">
+<h4>Blend<a class="headerlink" href="#blend" title="Permalink to this heading"></a></h4>
+<p>Call <a class="reference internal" href="#_CPPv412ppa_do_blend19ppa_client_handle_tPK23ppa_blend_oper_config_t" title="ppa_do_blend"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ppa_do_blend()</span></code></a> to blend the two target blocks of two so-called foreground (FG) and background (BG) pictures.</p>
+<p>Blend follows the normal Alpha Blending formula:</p>
+<p><span class="math notranslate nohighlight">\(A_{out} = A_b + A_f - A_b \times A_f\)</span></p>
+<p><span class="math notranslate nohighlight">\(C_{out} = (C_b \times A_b \times (1 - A_f) + C_f \times A_f) / (A_b + A_f - A_b \times A_f)\)</span></p>
+<p>where <span class="math notranslate nohighlight">\(A_b\)</span> is the Alpha channel of the background layer, <span class="math notranslate nohighlight">\(A_f\)</span> is the Alpha channel of the foreground layer, <span class="math notranslate nohighlight">\(C_b\)</span> corresponds to the R, G, B components of the background layer, and <span class="math notranslate nohighlight">\(C_f\)</span> corresponds to the R, G, B components of the foreground layer.</p>
+<p>Note that this formula is not symmetric to FG and BG. When <span class="math notranslate nohighlight">\(A_f = 1\)</span>, it calculates <span class="math notranslate nohighlight">\(C_{out} = C_f\)</span>, <span class="math notranslate nohighlight">\(A_{out} = 1\)</span>, which means if the color mode of the FG picture is <code class="docutils literal notranslate"><span class="pre">PPA_BLEND_COLOR_MODE_RGB565</span></code> or <code class="docutils literal notranslate"><span class="pre">PPA_BLEND_COLOR_MODE_RGB888</span></code>, since a Alpha value of 255 will be filled by the PPA hardware (i.e. <span class="math notranslate nohighlight">\(A_f = 1\)</span>), the blended result will be identical to the FG block.</p>
+<p>If <a class="reference internal" href="#_CPPv4N23ppa_blend_oper_config_t8bg_ck_enE" title="ppa_blend_oper_config_t::bg_ck_en"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_blend_oper_config_t::bg_ck_en</span></code></a> or <a class="reference internal" href="#_CPPv4N23ppa_blend_oper_config_t8fg_ck_enE" title="ppa_blend_oper_config_t::fg_ck_en"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_blend_oper_config_t::fg_ck_en</span></code></a> is set to <code class="docutils literal notranslate"><span class="pre">true</span></code>, the pixels that fall into the color-key (also known as Chroma-key) range do not follow the Alpha Blending process. Please check <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>Pixel-Processing Accelerator (PPA)</strong> &gt; <strong>Functional Description</strong> &gt; <strong>Layer Blending (BLEND)</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#ppa">PDF</a>] for the detailed rules.</p>
+<p>Similarly, some notes to avoid confusion in configuring <a class="reference internal" href="#_CPPv423ppa_blend_oper_config_t" title="ppa_blend_oper_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ppa_blend_oper_config_t</span></code></a>:</p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N24ppa_out_pic_blk_config_t6bufferE" title="ppa_out_pic_blk_config_t::buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_out_pic_blk_config_t::buffer</span></code></a> can be the same pointer to one of the input's <a class="reference internal" href="#_CPPv4N23ppa_in_pic_blk_config_t6bufferE" title="ppa_in_pic_blk_config_t::buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ppa_in_pic_blk_config_t::buffer</span></code></a> for a blend operation.</p></li>
+<li><p>The blocks' width/height of FG and BG should be identical, and are the width/height values for the output block.</p></li>
+<li><p>If the color mode of the input picture is <code class="docutils literal notranslate"><span class="pre">PPA_BLEND_COLOR_MODE_A4</span></code>, then its <code class="docutils literal notranslate"><span class="pre">block_w</span></code> and <code class="docutils literal notranslate"><span class="pre">block_offset_x</span></code> fields must be even.</p></li>
+</ul>
+</p>
+</section>
+<section id="fill">
+<h4>Fill<a class="headerlink" href="#fill" title="Permalink to this heading"></a></h4>
+<p>Call <a class="reference internal" href="#_CPPv411ppa_do_fill19ppa_client_handle_tPK22ppa_fill_oper_config_t" title="ppa_do_fill"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ppa_do_fill()</span></code></a> to fill a target block inside a picture.</p>
+<p><a class="reference internal" href="#_CPPv416ppa_trans_mode_t" title="ppa_trans_mode_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ppa_trans_mode_t</span></code></a> is a field configurable to all the PPA operation APIs. It decides whether you want the call to the PPA operation API to block until the transaction finishes or to return immediately after the transaction is pushed to the internal queue.</p>
+</section>
+</section>
+<section id="buffer-alignment">
+<span id="ppa-buffer-alignment"></span><h3>Buffer Alignment<a class="headerlink" href="#buffer-alignment" title="Permalink to this heading"></a></h3>
+<p>The PPA requires certain buffer alignment rules to ensure memory access correctness:</p>
+<ul>
+<li><p>Cache line alignment (output buffer only):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">out.buffer</span></code> address and <code class="docutils literal notranslate"><span class="pre">out.buffer_size</span></code> must be aligned to the cache line size, if the buffer is located in a memory region that is cacheable.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Flash encryption alignment (when flash encryption is enabled and the buffers are located in external memory):</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The byte width of the block must be aligned to 16 bytes.</p></li>
+<li><p>The starting address of each row of the block must be aligned to 16 bytes.</p></li>
+</ul>
+<p>Additionally, when accessing encrypted external memory, the PPA's DMA data burst length must be greater than or equal to 16 bytes. If a smaller burst length is configured, the driver will automatically increase it to meet this requirement.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>SRM engine processes the picture by macro blocks, where the alignment of the macro blocks is uncontrollable, thus if the buffer is in external memory, SRM operation is unable to work with flash encrypted.</p>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="thread-safety">
+<span id="ppa-thread-safety"></span><h3>Thread Safety<a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>The PPA driver has guaranteed the thread safety of calling the PPA operation APIs in all following situations:</p>
+<p><ul class="simple">
+<li><p>Among clients of different types in one task</p></li>
+<li><p>Among clients of same type in different tasks</p></li>
+<li><p>Among clients of different types in different tasks</p></li>
+</ul>
+</p>
+</section>
+<section id="performance-overview">
+<span id="ppa-performance-overview"></span><h3>Performance Overview<a class="headerlink" href="#performance-overview" title="Permalink to this heading"></a></h3>
+<p>The PPA operations are acted on the target block of an input picture. Therefore, the time it takes to complete a PPA transaction is proportional to the amount of the data in the block. The size of the entire picture has no influence on the performance. More importantly, the PPA performance highly relies on the PSRAM bandwidth if the pictures are located in the PSRAM section. When there are quite a few peripherals reading and writing to the PSRAM at the same time, the performance of PPA operation will be greatly reduced.</p>
+</section>
+<section id="application-examples">
+<h3>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/ppa/ppa_rgb_lcd">peripherals/ppa/ppa_rgb_lcd</a> - PPA with RGB LCD display example. The image used in this example will be first scaled up, rotated at counter-clockwise direction and rotated back, mirrored and mirror back, and scaled down. Then the image will be blended with a whole red image with less transparency. Next the <cite>ESP32</cite> word will be color-keyed out. Lastly a frame will be filled around the <cite>ESP32</cite>.</p></li>
+</ul>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_ppa/include/driver/ppa.h">components/esp_driver_ppa/include/driver/ppa.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/ppa.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_ppa</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_ppa</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_ppa
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_ppa
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419ppa_register_clientPK19ppa_client_config_tP19ppa_client_handle_t">
+<span id="_CPPv319ppa_register_clientPK19ppa_client_config_tP19ppa_client_handle_t"></span><span id="_CPPv219ppa_register_clientPK19ppa_client_config_tP19ppa_client_handle_t"></span><span id="ppa_register_client__ppa_client_config_tCP.ppa_client_handle_tP"></span><span class="target" id="ppa_8h_1af24e55ca73fe844d5363eed4750ebb89"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_register_client</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv419ppa_client_config_t" title="ppa_client_config_t"><span class="n"><span class="pre">ppa_client_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_client</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419ppa_register_clientPK19ppa_client_config_tP19ppa_client_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register a PPA client to do a specific PPA operation. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> Pointer to a collection of configurations for the client </p></li>
+<li><p><strong>ret_client</strong> -- <strong>[out]</strong> Returned client handle</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Register the PPA client successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Register the PPA client failed because of invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Register the PPA client failed because out of memory</p></li>
+<li><p>ESP_FAIL: Register the PPA client failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421ppa_unregister_client19ppa_client_handle_t">
+<span id="_CPPv321ppa_unregister_client19ppa_client_handle_t"></span><span id="_CPPv221ppa_unregister_client19ppa_client_handle_t"></span><span id="ppa_unregister_client__ppa_client_handle_t"></span><span class="target" id="ppa_8h_1a6066dd6367618384447869a5a140f34e"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_unregister_client</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ppa_client</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421ppa_unregister_client19ppa_client_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unregister a PPA client. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This will also free the resources occupied by the client</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ppa_client</strong> -- <strong>[in]</strong> PPA client handle, allocated by <code class="docutils literal notranslate"><span class="pre">ppa_register_client</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Unregister the PPA client successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Unregister the PPA client failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Unregister the PPA client failed because there are unfinished transactions </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv435ppa_client_register_event_callbacks19ppa_client_handle_tPK21ppa_event_callbacks_t">
+<span id="_CPPv335ppa_client_register_event_callbacks19ppa_client_handle_tPK21ppa_event_callbacks_t"></span><span id="_CPPv235ppa_client_register_event_callbacks19ppa_client_handle_tPK21ppa_event_callbacks_t"></span><span id="ppa_client_register_event_callbacks__ppa_client_handle_t.ppa_event_callbacks_tCP"></span><span class="target" id="ppa_8h_1add38cf750a427ac2b613cc6e15c53990"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_client_register_event_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ppa_client</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421ppa_event_callbacks_t" title="ppa_event_callbacks_t"><span class="n"><span class="pre">ppa_event_callbacks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cbs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv435ppa_client_register_event_callbacks19ppa_client_handle_tPK21ppa_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event callbacks for a PPA client. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Any user private data that wants to be passed directly to callback's user_data is provided per PPA transaction. Please check the <code class="docutils literal notranslate"><span class="pre">user_data</span></code> field in <code class="docutils literal notranslate"><span class="pre">ppa_xxx_oper_config_t</span></code> structure.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppa_client</strong> -- <strong>[in]</strong> PPA client handle </p></li>
+<li><p><strong>cbs</strong> -- <strong>[in]</strong> Structure with all PPA callbacks</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Register event callbacks for the PPA client successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Register event callbacks for the PPA client failed because of invalid argument </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426ppa_do_scale_rotate_mirror19ppa_client_handle_tPK21ppa_srm_oper_config_t">
+<span id="_CPPv326ppa_do_scale_rotate_mirror19ppa_client_handle_tPK21ppa_srm_oper_config_t"></span><span id="_CPPv226ppa_do_scale_rotate_mirror19ppa_client_handle_tPK21ppa_srm_oper_config_t"></span><span id="ppa_do_scale_rotate_mirror__ppa_client_handle_t.ppa_srm_oper_config_tCP"></span><span class="target" id="ppa_8h_1a5c2c1fb87ceed43f6ce93e758d4a69a9"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_do_scale_rotate_mirror</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ppa_client</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv421ppa_srm_oper_config_t" title="ppa_srm_oper_config_t"><span class="n"><span class="pre">ppa_srm_oper_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426ppa_do_scale_rotate_mirror19ppa_client_handle_tPK21ppa_srm_oper_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Perform a scaling-rotating-mirroring (SRM) operation to a picture. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppa_client</strong> -- <strong>[in]</strong> PPA client handle that has been registered to do SRM operations </p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Pointer to a collection of configurations for the SRM operation transaction, <a class="reference internal" href="#structppa__srm__oper__config__t"><span class="std std-ref">ppa_srm_oper_config_t</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Perform a SRM operation successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Perform a SRM operation failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Perform a SRM operation failed because the client's pending transactions has reached its maximum capacity </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412ppa_do_blend19ppa_client_handle_tPK23ppa_blend_oper_config_t">
+<span id="_CPPv312ppa_do_blend19ppa_client_handle_tPK23ppa_blend_oper_config_t"></span><span id="_CPPv212ppa_do_blend19ppa_client_handle_tPK23ppa_blend_oper_config_t"></span><span id="ppa_do_blend__ppa_client_handle_t.ppa_blend_oper_config_tCP"></span><span class="target" id="ppa_8h_1ac137739ba358fd376c01e6648a6f3fb8"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_do_blend</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ppa_client</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv423ppa_blend_oper_config_t" title="ppa_blend_oper_config_t"><span class="n"><span class="pre">ppa_blend_oper_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412ppa_do_blend19ppa_client_handle_tPK23ppa_blend_oper_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Perform a blending operation to a picture. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppa_client</strong> -- <strong>[in]</strong> PPA client handle that has been registered to do blend operations </p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Pointer to a collection of configurations for the blend operation transaction, <a class="reference internal" href="#structppa__blend__oper__config__t"><span class="std std-ref">ppa_blend_oper_config_t</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Perform a blend operation successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Perform a blend operation failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Perform a blend operation failed because the client's pending transactions has reached its maximum capacity </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv411ppa_do_fill19ppa_client_handle_tPK22ppa_fill_oper_config_t">
+<span id="_CPPv311ppa_do_fill19ppa_client_handle_tPK22ppa_fill_oper_config_t"></span><span id="_CPPv211ppa_do_fill19ppa_client_handle_tPK22ppa_fill_oper_config_t"></span><span id="ppa_do_fill__ppa_client_handle_t.ppa_fill_oper_config_tCP"></span><span class="target" id="ppa_8h_1a12f3cfec2872e65ef94098148d1d9602"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_do_fill</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">ppa_client</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422ppa_fill_oper_config_t" title="ppa_fill_oper_config_t"><span class="n"><span class="pre">ppa_fill_oper_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv411ppa_do_fill19ppa_client_handle_tPK22ppa_fill_oper_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Perform a filling operation to a picture. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ppa_client</strong> -- <strong>[in]</strong> PPA client handle that has been registered to do fill operations </p></li>
+<li><p><strong>config</strong> -- <strong>[in]</strong> Pointer to a collection of configurations for the fill operation transaction, <a class="reference internal" href="#structppa__fill__oper__config__t"><span class="std std-ref">ppa_fill_oper_config_t</span></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Perform a fill operation successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Perform a fill operation failed because of invalid argument</p></li>
+<li><p>ESP_FAIL: Perform a fill operation failed because the client's pending transactions has reached its maximum capacity </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424ppa_set_rgb2gray_formula7uint8_t7uint8_t7uint8_t">
+<span id="_CPPv324ppa_set_rgb2gray_formula7uint8_t7uint8_t7uint8_t"></span><span id="_CPPv224ppa_set_rgb2gray_formula7uint8_t7uint8_t7uint8_t"></span><span id="ppa_set_rgb2gray_formula__uint8_t.uint8_t.uint8_t"></span><span class="target" id="ppa_8h_1ace99246de9cd7a0d4d0201227bc54393"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_set_rgb2gray_formula</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">r_weight</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">g_weight</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">b_weight</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424ppa_set_rgb2gray_formula7uint8_t7uint8_t7uint8_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configure the RGB888 to GRAY8 color conversion coefficients for ppa_do_scale_rotate_mirror and ppa_do_fill. </p>
+<p>The gray value is calculated as: gray = (r_weight * R + g_weight * G + b_weight * B) &gt;&gt; 8 Note: (r_weight + g_weight + b_weight) should equal to 256.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>r_weight</strong> -- Coefficient for R component, range: [0, 255] </p></li>
+<li><p><strong>g_weight</strong> -- Coefficient for G component, range: [0, 255] </p></li>
+<li><p><strong>b_weight</strong> -- Coefficient for B component, range: [0, 255] </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Set the RGB888 to GRAY color conversion formula successfully</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Set the RGB888 to GRAY color conversion formula failed because the PPA peripheral does not support this feature</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Set the RGB888 to GRAY color conversion formula failed because of invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Set the RGB888 to GRAY color conversion formula failed because the PPA peripheral not initialized </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv419ppa_client_config_t">
+<span id="_CPPv319ppa_client_config_t"></span><span id="_CPPv219ppa_client_config_t"></span><span id="ppa_client_config_t"></span><span class="target" id="structppa__client__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_client_config_t</span></span></span><a class="headerlink" href="#_CPPv419ppa_client_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A collection of configuration items that used for registering a PPA client. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19ppa_client_config_t9oper_typeE">
+<span id="_CPPv3N19ppa_client_config_t9oper_typeE"></span><span id="_CPPv2N19ppa_client_config_t9oper_typeE"></span><span id="ppa_client_config_t::oper_type__ppa_operation_t"></span><span class="target" id="structppa__client__config__t_1aa6b75f338d31e475dbbf3f4b682a8a7d"></span><a class="reference internal" href="#_CPPv415ppa_operation_t" title="ppa_operation_t"><span class="n"><span class="pre">ppa_operation_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">oper_type</span></span></span><a class="headerlink" href="#_CPPv4N19ppa_client_config_t9oper_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The desired PPA operation for the client </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19ppa_client_config_t21max_pending_trans_numE">
+<span id="_CPPv3N19ppa_client_config_t21max_pending_trans_numE"></span><span id="_CPPv2N19ppa_client_config_t21max_pending_trans_numE"></span><span id="ppa_client_config_t::max_pending_trans_num__uint32_t"></span><span class="target" id="structppa__client__config__t_1a2e549d5c139c08bf48b35156f83a0454"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_pending_trans_num</span></span></span><a class="headerlink" href="#_CPPv4N19ppa_client_config_t21max_pending_trans_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The maximum number of pending transactions for the client. By default, it will be 1, which is sufficient if all transactions are performed with <code class="docutils literal notranslate"><span class="pre">PPA_TRANS_MODE_BLOCKING</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19ppa_client_config_t17data_burst_lengthE">
+<span id="_CPPv3N19ppa_client_config_t17data_burst_lengthE"></span><span id="_CPPv2N19ppa_client_config_t17data_burst_lengthE"></span><span id="ppa_client_config_t::data_burst_length__ppa_data_burst_length_t"></span><span class="target" id="structppa__client__config__t_1a451fa4d793db33e72ca6c08329a94dde"></span><a class="reference internal" href="#_CPPv423ppa_data_burst_length_t" title="ppa_data_burst_length_t"><span class="n"><span class="pre">ppa_data_burst_length_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_burst_length</span></span></span><a class="headerlink" href="#_CPPv4N19ppa_client_config_t17data_burst_lengthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The desired data burst length for all the transactions of the client. Use a small burst length will decrease PPA performance, but can save burst bandwidth for other peripheral usages. By default, it will be at the maximum burst length, <code class="docutils literal notranslate"><span class="pre">PPA_DATA_BURST_LENGTH_128</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19ppa_client_config_t8allow_pdE">
+<span id="_CPPv3N19ppa_client_config_t8allow_pdE"></span><span id="_CPPv2N19ppa_client_config_t8allow_pdE"></span><span id="ppa_client_config_t::allow_pd__uint32_t"></span><span class="target" id="structppa__client__config__t_1afbb08430b33b56b74c2949431ba6decd"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allow_pd</span></span></span><a class="headerlink" href="#_CPPv4N19ppa_client_config_t8allow_pdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set, driver allows the power domain to be powered off when system enters sleep mode. This can save power, but at the expense of more RAM being consumed to save register context. All clients must have the same value for this flag. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19ppa_client_config_t5flagsE">
+<span id="_CPPv3N19ppa_client_config_t5flagsE"></span><span id="_CPPv2N19ppa_client_config_t5flagsE"></span><span id="ppa_client_config_t::flags__ppa_client_config_t"></span><span class="target" id="structppa__client__config__t_1a194178ddf41bea5e0105e2b0ba3bdff4"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv419ppa_client_config_t" title="ppa_client_config_t"><span class="n"><span class="pre">ppa_client_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N19ppa_client_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv416ppa_event_data_t">
+<span id="_CPPv316ppa_event_data_t"></span><span id="_CPPv216ppa_event_data_t"></span><span id="ppa_event_data_t"></span><span class="target" id="structppa__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_event_data_t</span></span></span><a class="headerlink" href="#_CPPv416ppa_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of PPA event data. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv421ppa_event_callbacks_t">
+<span id="_CPPv321ppa_event_callbacks_t"></span><span id="_CPPv221ppa_event_callbacks_t"></span><span id="ppa_event_callbacks_t"></span><span class="target" id="structppa__event__callbacks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_event_callbacks_t</span></span></span><a class="headerlink" href="#_CPPv421ppa_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Group of supported PPA callbacks. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_event_callbacks_t13on_trans_doneE">
+<span id="_CPPv3N21ppa_event_callbacks_t13on_trans_doneE"></span><span id="_CPPv2N21ppa_event_callbacks_t13on_trans_doneE"></span><span id="ppa_event_callbacks_t::on_trans_done__ppa_event_callback_t"></span><span class="target" id="structppa__event__callbacks__t_1a8d4246ee5c498cb44fec894781338375"></span><a class="reference internal" href="#_CPPv420ppa_event_callback_t" title="ppa_event_callback_t"><span class="n"><span class="pre">ppa_event_callback_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_trans_done</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_event_callbacks_t13on_trans_doneE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invoked when a PPA transaction finishes </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423ppa_in_pic_blk_config_t">
+<span id="_CPPv323ppa_in_pic_blk_config_t"></span><span id="_CPPv223ppa_in_pic_blk_config_t"></span><span id="ppa_in_pic_blk_config_t"></span><span class="target" id="structppa__in__pic__blk__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_in_pic_blk_config_t</span></span></span><a class="headerlink" href="#_CPPv423ppa_in_pic_blk_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A collection of configuration items for an input picture and the target block inside the picture. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t6bufferE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t6bufferE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t6bufferE"></span><span id="ppa_in_pic_blk_config_t::buffer__voidCP"></span><span class="target" id="structppa__in__pic__blk__config__t_1a9f378fe784d970aad2ecd28ef4b693c9"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">buffer</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t6bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the input picture buffer </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t5pic_wE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t5pic_wE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t5pic_wE"></span><span id="ppa_in_pic_blk_config_t::pic_w__uint32_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1a12252dc8a4afaa580c855128877d33c9"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pic_w</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t5pic_wE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Input picture width (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t5pic_hE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t5pic_hE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t5pic_hE"></span><span id="ppa_in_pic_blk_config_t::pic_h__uint32_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1accb0e36371b8b5a1b69543a7322c60aa"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pic_h</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t5pic_hE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Input picture height (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t7block_wE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t7block_wE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t7block_wE"></span><span id="ppa_in_pic_blk_config_t::block_w__uint32_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1aa98472a2aedf538f016eb7d5c625c14b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block_w</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t7block_wE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Target block width (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t7block_hE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t7block_hE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t7block_hE"></span><span id="ppa_in_pic_blk_config_t::block_h__uint32_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1a337223b4604246586120b0fc3ccb2eb9"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block_h</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t7block_hE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Target block height (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t14block_offset_xE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t14block_offset_xE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t14block_offset_xE"></span><span id="ppa_in_pic_blk_config_t::block_offset_x__uint32_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1a60f18c1779e6d7ce28efcb3ad8e2dfff"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block_offset_x</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t14block_offset_xE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Target block offset in x direction in the picture (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t14block_offset_yE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t14block_offset_yE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t14block_offset_yE"></span><span id="ppa_in_pic_blk_config_t::block_offset_y__uint32_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1a1068cfa84e1e7570e294cb3afd77530f"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block_offset_y</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t14block_offset_yE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Target block offset in y direction in the picture (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t6srm_cmE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t6srm_cmE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t6srm_cmE"></span><span id="ppa_in_pic_blk_config_t::srm_cm__ppa_srm_color_mode_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1ad0dc0bb287fa4d2b20d89bd813731d57"></span><a class="reference internal" href="#_CPPv420ppa_srm_color_mode_t" title="ppa_srm_color_mode_t"><span class="n"><span class="pre">ppa_srm_color_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">srm_cm</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t6srm_cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color mode of the picture in a PPA SRM operation. Supported color mode in <code class="docutils literal notranslate"><span class="pre">ppa_srm_color_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t8blend_cmE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t8blend_cmE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t8blend_cmE"></span><span id="ppa_in_pic_blk_config_t::blend_cm__ppa_blend_color_mode_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1ad8d120a437cbdb358ac21cf58387d438"></span><a class="reference internal" href="#_CPPv422ppa_blend_color_mode_t" title="ppa_blend_color_mode_t"><span class="n"><span class="pre">ppa_blend_color_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">blend_cm</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t8blend_cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color mode of the picture in a PPA blend operation. Supported color mode in <code class="docutils literal notranslate"><span class="pre">ppa_blend_color_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t7fill_cmE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t7fill_cmE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t7fill_cmE"></span><span id="ppa_in_pic_blk_config_t::fill_cm__ppa_fill_color_mode_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1a8f7406f56f216f313ca43a2e59f20360"></span><a class="reference internal" href="#_CPPv421ppa_fill_color_mode_t" title="ppa_fill_color_mode_t"><span class="n"><span class="pre">ppa_fill_color_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_cm</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t7fill_cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color mode of the picture in a PPA fill operation. Supported color mode in <code class="docutils literal notranslate"><span class="pre">ppa_fill_color_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t2cmE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t2cmE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t2cmE"></span><span id="ppa_in_pic_blk_config_t::cm__esp_color_fourcc_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1ae14476c186225099a9edc956f77b72ae"></span><span class="n"><span class="pre">esp_color_fourcc_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cm</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t2cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Four Character Code of the color mode </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t9yuv_rangeE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t9yuv_rangeE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t9yuv_rangeE"></span><span id="ppa_in_pic_blk_config_t::yuv_range__ppa_color_range_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1ab28355b1f946ce3d37d684352125f02d"></span><a class="reference internal" href="#_CPPv417ppa_color_range_t" title="ppa_color_range_t"><span class="n"><span class="pre">ppa_color_range_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yuv_range</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t9yuv_rangeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When the color mode is any YUV color space, this field is to describe its color range </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_in_pic_blk_config_t7yuv_stdE">
+<span id="_CPPv3N23ppa_in_pic_blk_config_t7yuv_stdE"></span><span id="_CPPv2N23ppa_in_pic_blk_config_t7yuv_stdE"></span><span id="ppa_in_pic_blk_config_t::yuv_std__ppa_color_conv_std_rgb_yuv_t"></span><span class="target" id="structppa__in__pic__blk__config__t_1a26bee9947d07fd068a7fefe43d842905"></span><a class="reference internal" href="#_CPPv428ppa_color_conv_std_rgb_yuv_t" title="ppa_color_conv_std_rgb_yuv_t"><span class="n"><span class="pre">ppa_color_conv_std_rgb_yuv_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yuv_std</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_in_pic_blk_config_t7yuv_stdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When the color mode is any YUV color space, this field is to describe its YUV&lt;-&gt;RGB conversion standard </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424ppa_out_pic_blk_config_t">
+<span id="_CPPv324ppa_out_pic_blk_config_t"></span><span id="_CPPv224ppa_out_pic_blk_config_t"></span><span id="ppa_out_pic_blk_config_t"></span><span class="target" id="structppa__out__pic__blk__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_out_pic_blk_config_t</span></span></span><a class="headerlink" href="#_CPPv424ppa_out_pic_blk_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A collection of configuration items for an output picture and the target block inside the picture. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t6bufferE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t6bufferE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t6bufferE"></span><span id="ppa_out_pic_blk_config_t::buffer__voidP"></span><span class="target" id="structppa__out__pic__blk__config__t_1a7d080ded52950d98f517338da9eecd02"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">buffer</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t6bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the output picture buffer (requires alignment: internal memory needs align to L1 cache line size, external memory needs align to L1 and L2 cache line size) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t11buffer_sizeE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t11buffer_sizeE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t11buffer_sizeE"></span><span id="ppa_out_pic_blk_config_t::buffer_size__uint32_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a46a4380c7e85e57212dcad6ac1017318"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">buffer_size</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t11buffer_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size of the output picture buffer (requires alignment: internal memory needs align to L1 cache line size, external memory needs align to L1 and L2 cache line size) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t5pic_wE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t5pic_wE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t5pic_wE"></span><span id="ppa_out_pic_blk_config_t::pic_w__uint32_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a0fddf8b4cd4352654c2f6e632d6b9428"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pic_w</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t5pic_wE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Output picture width (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t5pic_hE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t5pic_hE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t5pic_hE"></span><span id="ppa_out_pic_blk_config_t::pic_h__uint32_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a12e2e1dce9252814ed8b4829fa12fb40"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pic_h</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t5pic_hE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Output picture height (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t14block_offset_xE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t14block_offset_xE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t14block_offset_xE"></span><span id="ppa_out_pic_blk_config_t::block_offset_x__uint32_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a218d92cee1658ee0134d5cb0cd2588a8"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block_offset_x</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t14block_offset_xE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Target block offset in x direction in the picture (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t14block_offset_yE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t14block_offset_yE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t14block_offset_yE"></span><span id="ppa_out_pic_blk_config_t::block_offset_y__uint32_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1adc88057ce98a1eb730bdf47331ac8aad"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">block_offset_y</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t14block_offset_yE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Target block offset in y direction in the picture (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t6srm_cmE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t6srm_cmE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t6srm_cmE"></span><span id="ppa_out_pic_blk_config_t::srm_cm__ppa_srm_color_mode_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a2b43c040c077b581d7ca751d9ca5a79b"></span><a class="reference internal" href="#_CPPv420ppa_srm_color_mode_t" title="ppa_srm_color_mode_t"><span class="n"><span class="pre">ppa_srm_color_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">srm_cm</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t6srm_cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color mode of the picture in a PPA SRM operation. Supported color mode in <code class="docutils literal notranslate"><span class="pre">ppa_srm_color_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t8blend_cmE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t8blend_cmE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t8blend_cmE"></span><span id="ppa_out_pic_blk_config_t::blend_cm__ppa_blend_color_mode_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1aada564e7d8382ce648c65b03c2644e42"></span><a class="reference internal" href="#_CPPv422ppa_blend_color_mode_t" title="ppa_blend_color_mode_t"><span class="n"><span class="pre">ppa_blend_color_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">blend_cm</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t8blend_cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color mode of the picture in a PPA blend operation. Supported color mode in <code class="docutils literal notranslate"><span class="pre">ppa_blend_color_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t7fill_cmE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t7fill_cmE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t7fill_cmE"></span><span id="ppa_out_pic_blk_config_t::fill_cm__ppa_fill_color_mode_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1aa7d1080c65ad262f26d57b326b0287f5"></span><a class="reference internal" href="#_CPPv421ppa_fill_color_mode_t" title="ppa_fill_color_mode_t"><span class="n"><span class="pre">ppa_fill_color_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_cm</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t7fill_cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Color mode of the picture in a PPA fill operation. Supported color mode in <code class="docutils literal notranslate"><span class="pre">ppa_fill_color_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t2cmE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t2cmE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t2cmE"></span><span id="ppa_out_pic_blk_config_t::cm__esp_color_fourcc_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1abec4a96e0d51495c6d7d6ce6f3606397"></span><span class="n"><span class="pre">esp_color_fourcc_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cm</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t2cmE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Four Character Code of the color mode </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t9yuv_rangeE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t9yuv_rangeE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t9yuv_rangeE"></span><span id="ppa_out_pic_blk_config_t::yuv_range__ppa_color_range_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a40e43c227a923d87b3fb39b1a168ee79"></span><a class="reference internal" href="#_CPPv417ppa_color_range_t" title="ppa_color_range_t"><span class="n"><span class="pre">ppa_color_range_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yuv_range</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t9yuv_rangeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When the color mode is any YUV color space, this field is to describe its color range </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_out_pic_blk_config_t7yuv_stdE">
+<span id="_CPPv3N24ppa_out_pic_blk_config_t7yuv_stdE"></span><span id="_CPPv2N24ppa_out_pic_blk_config_t7yuv_stdE"></span><span id="ppa_out_pic_blk_config_t::yuv_std__ppa_color_conv_std_rgb_yuv_t"></span><span class="target" id="structppa__out__pic__blk__config__t_1a26320fc705ee88a5d5dd9f91a0ffd859"></span><a class="reference internal" href="#_CPPv428ppa_color_conv_std_rgb_yuv_t" title="ppa_color_conv_std_rgb_yuv_t"><span class="n"><span class="pre">ppa_color_conv_std_rgb_yuv_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">yuv_std</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_out_pic_blk_config_t7yuv_stdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When the color mode is any YUV color space, this field is to describe its YUV&lt;-&gt;RGB conversion standard </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv421ppa_srm_oper_config_t">
+<span id="_CPPv321ppa_srm_oper_config_t"></span><span id="_CPPv221ppa_srm_oper_config_t"></span><span id="ppa_srm_oper_config_t"></span><span class="target" id="structppa__srm__oper__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_srm_oper_config_t</span></span></span><a class="headerlink" href="#_CPPv421ppa_srm_oper_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A collection of configuration items to do a PPA SRM operation transaction. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t2inE">
+<span id="_CPPv3N21ppa_srm_oper_config_t2inE"></span><span id="_CPPv2N21ppa_srm_oper_config_t2inE"></span><span id="ppa_srm_oper_config_t::in__ppa_in_pic_blk_config_t"></span><span class="target" id="structppa__srm__oper__config__t_1a096ca0a0d2c2d86798fc145cea3ab090"></span><a class="reference internal" href="#_CPPv423ppa_in_pic_blk_config_t" title="ppa_in_pic_blk_config_t"><span class="n"><span class="pre">ppa_in_pic_blk_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">in</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t2inE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of the input picture and the target block </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t3outE">
+<span id="_CPPv3N21ppa_srm_oper_config_t3outE"></span><span id="_CPPv2N21ppa_srm_oper_config_t3outE"></span><span id="ppa_srm_oper_config_t::out__ppa_out_pic_blk_config_t"></span><span class="target" id="structppa__srm__oper__config__t_1a0505b6bb23a2a07085ef51d1f8ed7945"></span><a class="reference internal" href="#_CPPv424ppa_out_pic_blk_config_t" title="ppa_out_pic_blk_config_t"><span class="n"><span class="pre">ppa_out_pic_blk_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">out</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t3outE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of the output picture and the target block </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t14rotation_angleE">
+<span id="_CPPv3N21ppa_srm_oper_config_t14rotation_angleE"></span><span id="_CPPv2N21ppa_srm_oper_config_t14rotation_angleE"></span><span id="ppa_srm_oper_config_t::rotation_angle__ppa_srm_rotation_angle_t"></span><span class="target" id="structppa__srm__oper__config__t_1a4b1dea88fc46dbfd3341d423d7b376da"></span><a class="reference internal" href="#_CPPv424ppa_srm_rotation_angle_t" title="ppa_srm_rotation_angle_t"><span class="n"><span class="pre">ppa_srm_rotation_angle_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rotation_angle</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t14rotation_angleE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Rotation (counter-clockwise) to the target block, select from <code class="docutils literal notranslate"><span class="pre">ppa_srm_rotation_angle_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t7scale_xE">
+<span id="_CPPv3N21ppa_srm_oper_config_t7scale_xE"></span><span id="_CPPv2N21ppa_srm_oper_config_t7scale_xE"></span><span id="ppa_srm_oper_config_t::scale_x__float"></span><span class="target" id="structppa__srm__oper__config__t_1a5e2dc73d4ca3c691553c0335863dfac2"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_x</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t7scale_xE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scaling factor to the target block in the x direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t7scale_yE">
+<span id="_CPPv3N21ppa_srm_oper_config_t7scale_yE"></span><span id="_CPPv2N21ppa_srm_oper_config_t7scale_yE"></span><span id="ppa_srm_oper_config_t::scale_y__float"></span><span class="target" id="structppa__srm__oper__config__t_1a59dda47900b11deb635a78216f2df392"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scale_y</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t7scale_yE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scaling factor to the target block in the y direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t8mirror_xE">
+<span id="_CPPv3N21ppa_srm_oper_config_t8mirror_xE"></span><span id="_CPPv2N21ppa_srm_oper_config_t8mirror_xE"></span><span id="ppa_srm_oper_config_t::mirror_x__b"></span><span class="target" id="structppa__srm__oper__config__t_1aaff5f02a6ddc99da1ff905fd6f66cb4f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mirror_x</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t8mirror_xE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to mirror the target block in the x direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t8mirror_yE">
+<span id="_CPPv3N21ppa_srm_oper_config_t8mirror_yE"></span><span id="_CPPv2N21ppa_srm_oper_config_t8mirror_yE"></span><span id="ppa_srm_oper_config_t::mirror_y__b"></span><span class="target" id="structppa__srm__oper__config__t_1afdb79a556fe032ea5cd19a9b977dad80"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mirror_y</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t8mirror_yE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to mirror the target block in the y direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t8rgb_swapE">
+<span id="_CPPv3N21ppa_srm_oper_config_t8rgb_swapE"></span><span id="_CPPv2N21ppa_srm_oper_config_t8rgb_swapE"></span><span id="ppa_srm_oper_config_t::rgb_swap__b"></span><span class="target" id="structppa__srm__oper__config__t_1a99e8a645f9ab6b7708553fb9f5ae40fb"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rgb_swap</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t8rgb_swapE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to swap the input data in RGB (e.g. ARGB becomes BGRA, RGB becomes BGR) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t9byte_swapE">
+<span id="_CPPv3N21ppa_srm_oper_config_t9byte_swapE"></span><span id="_CPPv2N21ppa_srm_oper_config_t9byte_swapE"></span><span id="ppa_srm_oper_config_t::byte_swap__b"></span><span class="target" id="structppa__srm__oper__config__t_1ad392fbe9198e33c8d61696f66aaf127c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">byte_swap</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t9byte_swapE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to swap the input data in byte. Only available feature if input picture color mode is ARGB8888 or RGB565 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t17alpha_update_modeE">
+<span id="_CPPv3N21ppa_srm_oper_config_t17alpha_update_modeE"></span><span id="_CPPv2N21ppa_srm_oper_config_t17alpha_update_modeE"></span><span id="ppa_srm_oper_config_t::alpha_update_mode__ppa_alpha_update_mode_t"></span><span class="target" id="structppa__srm__oper__config__t_1aa3109227a5d9f490310731c3237d16ba"></span><a class="reference internal" href="#_CPPv423ppa_alpha_update_mode_t" title="ppa_alpha_update_mode_t"><span class="n"><span class="pre">ppa_alpha_update_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alpha_update_mode</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t17alpha_update_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Select whether the alpha channel of the input picture needs update </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t13alpha_fix_valE">
+<span id="_CPPv3N21ppa_srm_oper_config_t13alpha_fix_valE"></span><span id="_CPPv2N21ppa_srm_oper_config_t13alpha_fix_valE"></span><span id="ppa_srm_oper_config_t::alpha_fix_val__uint32_t"></span><span class="target" id="structppa__srm__oper__config__t_1a08d55a439e9f0c54692dca6302e31c1c"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alpha_fix_val</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t13alpha_fix_valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range: [0, 255] When PPA_ALPHA_FIX_VALUE mode is selected, alpha_fix_val is the new alpha value to replace the input alpha value (output_alpha = alpha_fix_val) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t17alpha_scale_ratioE">
+<span id="_CPPv3N21ppa_srm_oper_config_t17alpha_scale_ratioE"></span><span id="_CPPv2N21ppa_srm_oper_config_t17alpha_scale_ratioE"></span><span id="ppa_srm_oper_config_t::alpha_scale_ratio__float"></span><span class="target" id="structppa__srm__oper__config__t_1a6e22ef9eaf4af1bcdaf7c4716c6791e0"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">alpha_scale_ratio</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t17alpha_scale_ratioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range: (0, 1) When PPA_ALPHA_SCALE mode is selected, alpha_scale_ratio is the multiplier to the input alpha value (output_alpha = alpha_scale_ratio * input_alpha) Ratio resolution is 1/256 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t4modeE">
+<span id="_CPPv3N21ppa_srm_oper_config_t4modeE"></span><span id="_CPPv2N21ppa_srm_oper_config_t4modeE"></span><span id="ppa_srm_oper_config_t::mode__ppa_trans_mode_t"></span><span class="target" id="structppa__srm__oper__config__t_1a2d37b04def3c706c52d62b985eff3864"></span><a class="reference internal" href="#_CPPv416ppa_trans_mode_t" title="ppa_trans_mode_t"><span class="n"><span class="pre">ppa_trans_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mode</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t4modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determines whether to block inside the operation functions, see <code class="docutils literal notranslate"><span class="pre">ppa_trans_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_srm_oper_config_t9user_dataE">
+<span id="_CPPv3N21ppa_srm_oper_config_t9user_dataE"></span><span id="_CPPv2N21ppa_srm_oper_config_t9user_dataE"></span><span id="ppa_srm_oper_config_t::user_data__voidP"></span><span class="target" id="structppa__srm__oper__config__t_1ae62b8f1a12890bf2c62675ec877a8647"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">user_data</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_srm_oper_config_t9user_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>User registered data to be passed into <code class="docutils literal notranslate"><span class="pre">done_cb</span></code> callback function </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423ppa_blend_oper_config_t">
+<span id="_CPPv323ppa_blend_oper_config_t"></span><span id="_CPPv223ppa_blend_oper_config_t"></span><span id="ppa_blend_oper_config_t"></span><span class="target" id="structppa__blend__oper__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_blend_oper_config_t</span></span></span><a class="headerlink" href="#_CPPv423ppa_blend_oper_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A collection of configuration items to do a PPA blend operation transaction. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t5in_bgE">
+<span id="_CPPv3N23ppa_blend_oper_config_t5in_bgE"></span><span id="_CPPv2N23ppa_blend_oper_config_t5in_bgE"></span><span id="ppa_blend_oper_config_t::in_bg__ppa_in_pic_blk_config_t"></span><span class="target" id="structppa__blend__oper__config__t_1a67d1494a2d776cc92417bb5847caace8"></span><a class="reference internal" href="#_CPPv423ppa_in_pic_blk_config_t" title="ppa_in_pic_blk_config_t"><span class="n"><span class="pre">ppa_in_pic_blk_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">in_bg</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t5in_bgE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of the input background picture and the target block </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t5in_fgE">
+<span id="_CPPv3N23ppa_blend_oper_config_t5in_fgE"></span><span id="_CPPv2N23ppa_blend_oper_config_t5in_fgE"></span><span id="ppa_blend_oper_config_t::in_fg__ppa_in_pic_blk_config_t"></span><span class="target" id="structppa__blend__oper__config__t_1af9a850132929d4558c1502c70cbf32f9"></span><a class="reference internal" href="#_CPPv423ppa_in_pic_blk_config_t" title="ppa_in_pic_blk_config_t"><span class="n"><span class="pre">ppa_in_pic_blk_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">in_fg</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t5in_fgE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of the input foreground picture and the target block </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t3outE">
+<span id="_CPPv3N23ppa_blend_oper_config_t3outE"></span><span id="_CPPv2N23ppa_blend_oper_config_t3outE"></span><span id="ppa_blend_oper_config_t::out__ppa_out_pic_blk_config_t"></span><span class="target" id="structppa__blend__oper__config__t_1ac5398c34d8edad5f365f455df54fae16"></span><a class="reference internal" href="#_CPPv424ppa_out_pic_blk_config_t" title="ppa_out_pic_blk_config_t"><span class="n"><span class="pre">ppa_out_pic_blk_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">out</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t3outE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of the output picture and the target block </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t11bg_rgb_swapE">
+<span id="_CPPv3N23ppa_blend_oper_config_t11bg_rgb_swapE"></span><span id="_CPPv2N23ppa_blend_oper_config_t11bg_rgb_swapE"></span><span id="ppa_blend_oper_config_t::bg_rgb_swap__b"></span><span class="target" id="structppa__blend__oper__config__t_1a85decde492886919156ec25742ba28d7"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_rgb_swap</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t11bg_rgb_swapE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to swap the background input data in RGB (e.g. ARGB becomes BGRA, RGB becomes BGR) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t12bg_byte_swapE">
+<span id="_CPPv3N23ppa_blend_oper_config_t12bg_byte_swapE"></span><span id="_CPPv2N23ppa_blend_oper_config_t12bg_byte_swapE"></span><span id="ppa_blend_oper_config_t::bg_byte_swap__b"></span><span class="target" id="structppa__blend__oper__config__t_1a4aa0c958b72d053eb58b8935704ca195"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_byte_swap</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t12bg_byte_swapE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to swap the background input data in byte. Only available feature if input BG picture color mode is ARGB8888 or RGB565 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t20bg_alpha_update_modeE">
+<span id="_CPPv3N23ppa_blend_oper_config_t20bg_alpha_update_modeE"></span><span id="_CPPv2N23ppa_blend_oper_config_t20bg_alpha_update_modeE"></span><span id="ppa_blend_oper_config_t::bg_alpha_update_mode__ppa_alpha_update_mode_t"></span><span class="target" id="structppa__blend__oper__config__t_1ab9eb6226ad15fa872eaf9bc721d96f5d"></span><a class="reference internal" href="#_CPPv423ppa_alpha_update_mode_t" title="ppa_alpha_update_mode_t"><span class="n"><span class="pre">ppa_alpha_update_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_alpha_update_mode</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t20bg_alpha_update_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Select whether the alpha channel of the input background picture needs update </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t16bg_alpha_fix_valE">
+<span id="_CPPv3N23ppa_blend_oper_config_t16bg_alpha_fix_valE"></span><span id="_CPPv2N23ppa_blend_oper_config_t16bg_alpha_fix_valE"></span><span id="ppa_blend_oper_config_t::bg_alpha_fix_val__uint32_t"></span><span class="target" id="structppa__blend__oper__config__t_1adf280836247e39bffd44cf88c957a106"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_alpha_fix_val</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t16bg_alpha_fix_valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range: [0, 255] When PPA_ALPHA_FIX_VALUE mode is selected, alpha_fix_val is the new alpha value to replace the input alpha value (output_alpha = alpha_fix_val) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t20bg_alpha_scale_ratioE">
+<span id="_CPPv3N23ppa_blend_oper_config_t20bg_alpha_scale_ratioE"></span><span id="_CPPv2N23ppa_blend_oper_config_t20bg_alpha_scale_ratioE"></span><span id="ppa_blend_oper_config_t::bg_alpha_scale_ratio__float"></span><span class="target" id="structppa__blend__oper__config__t_1a393b341bc56576db505d28fa00460a72"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_alpha_scale_ratio</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t20bg_alpha_scale_ratioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range: (0, 1) When PPA_ALPHA_SCALE mode is selected, alpha_scale_ratio is the multiplier to the input alpha value (output_alpha = alpha_scale_ratio * input_alpha) Ratio resolution is 1/256 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t11fg_rgb_swapE">
+<span id="_CPPv3N23ppa_blend_oper_config_t11fg_rgb_swapE"></span><span id="_CPPv2N23ppa_blend_oper_config_t11fg_rgb_swapE"></span><span id="ppa_blend_oper_config_t::fg_rgb_swap__b"></span><span class="target" id="structppa__blend__oper__config__t_1a197e7d67c0de398d52890bc632734b58"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_rgb_swap</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t11fg_rgb_swapE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to swap the foreground input data in RGB (e.g. ARGB becomes BGRA, RGB becomes BGR) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t12fg_byte_swapE">
+<span id="_CPPv3N23ppa_blend_oper_config_t12fg_byte_swapE"></span><span id="_CPPv2N23ppa_blend_oper_config_t12fg_byte_swapE"></span><span id="ppa_blend_oper_config_t::fg_byte_swap__b"></span><span class="target" id="structppa__blend__oper__config__t_1ad6227f10f5dc73bb131a178c57f0c612"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_byte_swap</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t12fg_byte_swapE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to swap the foreground input data in byte. Only available feature if input FG picture color mode is ARGB8888 or RGB565 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t20fg_alpha_update_modeE">
+<span id="_CPPv3N23ppa_blend_oper_config_t20fg_alpha_update_modeE"></span><span id="_CPPv2N23ppa_blend_oper_config_t20fg_alpha_update_modeE"></span><span id="ppa_blend_oper_config_t::fg_alpha_update_mode__ppa_alpha_update_mode_t"></span><span class="target" id="structppa__blend__oper__config__t_1afca8cb554c24af12b1768253341818c9"></span><a class="reference internal" href="#_CPPv423ppa_alpha_update_mode_t" title="ppa_alpha_update_mode_t"><span class="n"><span class="pre">ppa_alpha_update_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_alpha_update_mode</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t20fg_alpha_update_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Select whether the alpha channel of the input foreground picture needs update </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t16fg_alpha_fix_valE">
+<span id="_CPPv3N23ppa_blend_oper_config_t16fg_alpha_fix_valE"></span><span id="_CPPv2N23ppa_blend_oper_config_t16fg_alpha_fix_valE"></span><span id="ppa_blend_oper_config_t::fg_alpha_fix_val__uint32_t"></span><span class="target" id="structppa__blend__oper__config__t_1a2fefd6c2b4a7969ae6c9f60f17d0e93e"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_alpha_fix_val</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t16fg_alpha_fix_valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range: [0, 255] When PPA_ALPHA_FIX_VALUE mode is selected, alpha_fix_val is the new alpha value to replace the input alpha value (output_alpha = alpha_fix_val) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t20fg_alpha_scale_ratioE">
+<span id="_CPPv3N23ppa_blend_oper_config_t20fg_alpha_scale_ratioE"></span><span id="_CPPv2N23ppa_blend_oper_config_t20fg_alpha_scale_ratioE"></span><span id="ppa_blend_oper_config_t::fg_alpha_scale_ratio__float"></span><span class="target" id="structppa__blend__oper__config__t_1a61a26040577c51038be2f9b2c06a87e7"></span><span class="kt"><span class="pre">float</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_alpha_scale_ratio</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t20fg_alpha_scale_ratioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Range: (0, 1) When PPA_ALPHA_SCALE mode is selected, alpha_scale_ratio is the multiplier to the input alpha value (output_alpha = alpha_scale_ratio * input_alpha) Ratio resolution is 1/256 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t14fg_fix_rgb_valE">
+<span id="_CPPv3N23ppa_blend_oper_config_t14fg_fix_rgb_valE"></span><span id="_CPPv2N23ppa_blend_oper_config_t14fg_fix_rgb_valE"></span><span id="ppa_blend_oper_config_t::fg_fix_rgb_val__color_pixel_rgb888_data_t"></span><span class="target" id="structppa__blend__oper__config__t_1a2321ad851f727eb4ce16d6ca0ca52744"></span><span class="n"><span class="pre">color_pixel_rgb888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_fix_rgb_val</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t14fg_fix_rgb_valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When in_fg.blend_cm is PPA_BLEND_COLOR_MODE_A8/4, this field can be used to set a fixed color for the foreground, in RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t8bg_ck_enE">
+<span id="_CPPv3N23ppa_blend_oper_config_t8bg_ck_enE"></span><span id="_CPPv2N23ppa_blend_oper_config_t8bg_ck_enE"></span><span id="ppa_blend_oper_config_t::bg_ck_en__b"></span><span class="target" id="structppa__blend__oper__config__t_1ae582f7588db54ddc3e41e210c244d825"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_ck_en</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t8bg_ck_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to enable color keying for background If not enabled, all background pixels are considered as out of the color-keying range </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t19bg_ck_rgb_low_thresE">
+<span id="_CPPv3N23ppa_blend_oper_config_t19bg_ck_rgb_low_thresE"></span><span id="_CPPv2N23ppa_blend_oper_config_t19bg_ck_rgb_low_thresE"></span><span id="ppa_blend_oper_config_t::bg_ck_rgb_low_thres__color_pixel_rgb888_data_t"></span><span class="target" id="structppa__blend__oper__config__t_1ae5e56b26805cd0798a5c417737a78035"></span><span class="n"><span class="pre">color_pixel_rgb888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_ck_rgb_low_thres</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t19bg_ck_rgb_low_thresE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The lower threshold of the color-keying range for the background, in RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t20bg_ck_rgb_high_thresE">
+<span id="_CPPv3N23ppa_blend_oper_config_t20bg_ck_rgb_high_thresE"></span><span id="_CPPv2N23ppa_blend_oper_config_t20bg_ck_rgb_high_thresE"></span><span id="ppa_blend_oper_config_t::bg_ck_rgb_high_thres__color_pixel_rgb888_data_t"></span><span class="target" id="structppa__blend__oper__config__t_1a107245deedb20fc3cd26cd0e992ea3cd"></span><span class="n"><span class="pre">color_pixel_rgb888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bg_ck_rgb_high_thres</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t20bg_ck_rgb_high_thresE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The higher threshold of the color-keying range for the background, in RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t8fg_ck_enE">
+<span id="_CPPv3N23ppa_blend_oper_config_t8fg_ck_enE"></span><span id="_CPPv2N23ppa_blend_oper_config_t8fg_ck_enE"></span><span id="ppa_blend_oper_config_t::fg_ck_en__b"></span><span class="target" id="structppa__blend__oper__config__t_1a6c9189c517bbd14f6c041484aca12f3c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_ck_en</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t8fg_ck_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to enable color keying for foreground If not enabled, all foreground pixels are considered as out of the color-keying range </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t19fg_ck_rgb_low_thresE">
+<span id="_CPPv3N23ppa_blend_oper_config_t19fg_ck_rgb_low_thresE"></span><span id="_CPPv2N23ppa_blend_oper_config_t19fg_ck_rgb_low_thresE"></span><span id="ppa_blend_oper_config_t::fg_ck_rgb_low_thres__color_pixel_rgb888_data_t"></span><span class="target" id="structppa__blend__oper__config__t_1a5f6c1006e588f06948d9c277f88f06ee"></span><span class="n"><span class="pre">color_pixel_rgb888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_ck_rgb_low_thres</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t19fg_ck_rgb_low_thresE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The lower threshold of the color-keying range for the foreground, in RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t20fg_ck_rgb_high_thresE">
+<span id="_CPPv3N23ppa_blend_oper_config_t20fg_ck_rgb_high_thresE"></span><span id="_CPPv2N23ppa_blend_oper_config_t20fg_ck_rgb_high_thresE"></span><span id="ppa_blend_oper_config_t::fg_ck_rgb_high_thres__color_pixel_rgb888_data_t"></span><span class="target" id="structppa__blend__oper__config__t_1a13634147ac8d0f7fedd415ecdb13bdb8"></span><span class="n"><span class="pre">color_pixel_rgb888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fg_ck_rgb_high_thres</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t20fg_ck_rgb_high_thresE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The higher threshold of the color-keying range for the foreground, in RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t18ck_rgb_default_valE">
+<span id="_CPPv3N23ppa_blend_oper_config_t18ck_rgb_default_valE"></span><span id="_CPPv2N23ppa_blend_oper_config_t18ck_rgb_default_valE"></span><span id="ppa_blend_oper_config_t::ck_rgb_default_val__color_pixel_rgb888_data_t"></span><span class="target" id="structppa__blend__oper__config__t_1acc290e470ab0886254896c23c3a8a2e9"></span><span class="n"><span class="pre">color_pixel_rgb888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ck_rgb_default_val</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t18ck_rgb_default_valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The color to overwrite when a pixel, where its background element and foreground element are both within their color-keying ranges, in RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t16ck_reverse_bg2fgE">
+<span id="_CPPv3N23ppa_blend_oper_config_t16ck_reverse_bg2fgE"></span><span id="_CPPv2N23ppa_blend_oper_config_t16ck_reverse_bg2fgE"></span><span id="ppa_blend_oper_config_t::ck_reverse_bg2fg__b"></span><span class="target" id="structppa__blend__oper__config__t_1af65f8d347b270d0e8ae7b6e2b2e627e9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ck_reverse_bg2fg</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t16ck_reverse_bg2fgE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If this bit is set, in color-keying, for the pixel, where its background element is in the color range, but its foreground element is not in the color range, it will output the foreground element instead of the background element </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t4modeE">
+<span id="_CPPv3N23ppa_blend_oper_config_t4modeE"></span><span id="_CPPv2N23ppa_blend_oper_config_t4modeE"></span><span id="ppa_blend_oper_config_t::mode__ppa_trans_mode_t"></span><span class="target" id="structppa__blend__oper__config__t_1ace51387bfe83203939aab366bfbbbd16"></span><a class="reference internal" href="#_CPPv416ppa_trans_mode_t" title="ppa_trans_mode_t"><span class="n"><span class="pre">ppa_trans_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mode</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t4modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determines whether to block inside the operation functions, see <code class="docutils literal notranslate"><span class="pre">ppa_trans_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_blend_oper_config_t9user_dataE">
+<span id="_CPPv3N23ppa_blend_oper_config_t9user_dataE"></span><span id="_CPPv2N23ppa_blend_oper_config_t9user_dataE"></span><span id="ppa_blend_oper_config_t::user_data__voidP"></span><span class="target" id="structppa__blend__oper__config__t_1a5dd4f475230e31347f8a852ab76c7f2a"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">user_data</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_blend_oper_config_t9user_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>User registered data to be passed into <code class="docutils literal notranslate"><span class="pre">done_cb</span></code> callback function </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422ppa_fill_oper_config_t">
+<span id="_CPPv322ppa_fill_oper_config_t"></span><span id="_CPPv222ppa_fill_oper_config_t"></span><span id="ppa_fill_oper_config_t"></span><span class="target" id="structppa__fill__oper__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_fill_oper_config_t</span></span></span><a class="headerlink" href="#_CPPv422ppa_fill_oper_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A collection of configuration items to do a PPA fill operation transaction. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t3outE">
+<span id="_CPPv3N22ppa_fill_oper_config_t3outE"></span><span id="_CPPv2N22ppa_fill_oper_config_t3outE"></span><span id="ppa_fill_oper_config_t::out__ppa_out_pic_blk_config_t"></span><span class="target" id="structppa__fill__oper__config__t_1ae45e8721adddb529ee4c32d74a2a4c8f"></span><a class="reference internal" href="#_CPPv424ppa_out_pic_blk_config_t" title="ppa_out_pic_blk_config_t"><span class="n"><span class="pre">ppa_out_pic_blk_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">out</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t3outE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of the output picture and the target block </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t12fill_block_wE">
+<span id="_CPPv3N22ppa_fill_oper_config_t12fill_block_wE"></span><span id="_CPPv2N22ppa_fill_oper_config_t12fill_block_wE"></span><span id="ppa_fill_oper_config_t::fill_block_w__uint32_t"></span><span class="target" id="structppa__fill__oper__config__t_1a563c9f46caf4a288a9f26b8056556ca6"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_block_w</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t12fill_block_wE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The width of the block to be filled (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t12fill_block_hE">
+<span id="_CPPv3N22ppa_fill_oper_config_t12fill_block_hE"></span><span id="_CPPv2N22ppa_fill_oper_config_t12fill_block_hE"></span><span id="ppa_fill_oper_config_t::fill_block_h__uint32_t"></span><span class="target" id="structppa__fill__oper__config__t_1ab61104ffbc34177ba0036475ac084e05"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_block_h</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t12fill_block_hE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The height of the block to be filled (unit: pixel) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t15fill_argb_colorE">
+<span id="_CPPv3N22ppa_fill_oper_config_t15fill_argb_colorE"></span><span id="_CPPv2N22ppa_fill_oper_config_t15fill_argb_colorE"></span><span id="ppa_fill_oper_config_t::fill_argb_color__color_pixel_argb8888_data_t"></span><span class="target" id="structppa__fill__oper__config__t_1ae0b9fe575c46573ef2d5ee48c3d6bf2b"></span><span class="n"><span class="pre">color_pixel_argb8888_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_argb_color</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t15fill_argb_colorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>For any ARGB/RGB format color to be filled, use this field to fill A (if applicable)/R/G/B components </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t16fill_gray8_colorE">
+<span id="_CPPv3N22ppa_fill_oper_config_t16fill_gray8_colorE"></span><span id="_CPPv2N22ppa_fill_oper_config_t16fill_gray8_colorE"></span><span id="ppa_fill_oper_config_t::fill_gray8_color__color_pixel_gray8_data_t"></span><span class="target" id="structppa__fill__oper__config__t_1aefddc72d7dcaa1f221f5fed81509a299"></span><span class="n"><span class="pre">color_pixel_gray8_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_gray8_color</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t16fill_gray8_colorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>For GRAY8 format color to be filled </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t14fill_yuv_colorE">
+<span id="_CPPv3N22ppa_fill_oper_config_t14fill_yuv_colorE"></span><span id="_CPPv2N22ppa_fill_oper_config_t14fill_yuv_colorE"></span><span id="ppa_fill_oper_config_t::fill_yuv_color__color_macroblock_yuv_data_t"></span><span class="target" id="structppa__fill__oper__config__t_1a16204267af3c3db6c012229afc679c25"></span><span class="n"><span class="pre">color_macroblock_yuv_data_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_yuv_color</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t14fill_yuv_colorE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>For any YUV format color to be filled, use this field to fill Y/U/V components </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t14fill_color_valE">
+<span id="_CPPv3N22ppa_fill_oper_config_t14fill_color_valE"></span><span id="_CPPv2N22ppa_fill_oper_config_t14fill_color_valE"></span><span id="ppa_fill_oper_config_t::fill_color_val__uint32_t"></span><span class="target" id="structppa__fill__oper__config__t_1a785e93aa31a4c383b807a134973e20ea"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill_color_val</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t14fill_color_valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The color to be filled, in a raw 32-bit value. The interpretation of the value depends on the selected <code class="docutils literal notranslate"><span class="pre">fill_cm</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t4modeE">
+<span id="_CPPv3N22ppa_fill_oper_config_t4modeE"></span><span id="_CPPv2N22ppa_fill_oper_config_t4modeE"></span><span id="ppa_fill_oper_config_t::mode__ppa_trans_mode_t"></span><span class="target" id="structppa__fill__oper__config__t_1a1e75b9f3cd43fb57010f9fb2259cd0f9"></span><a class="reference internal" href="#_CPPv416ppa_trans_mode_t" title="ppa_trans_mode_t"><span class="n"><span class="pre">ppa_trans_mode_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mode</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t4modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Determines whether to block inside the operation functions, see <code class="docutils literal notranslate"><span class="pre">ppa_trans_mode_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_fill_oper_config_t9user_dataE">
+<span id="_CPPv3N22ppa_fill_oper_config_t9user_dataE"></span><span id="_CPPv2N22ppa_fill_oper_config_t9user_dataE"></span><span id="ppa_fill_oper_config_t::user_data__voidP"></span><span class="target" id="structppa__fill__oper__config__t_1a4a155c38177a50964bcf9e40a8e809f7"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">user_data</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_fill_oper_config_t9user_dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>User registered data to be passed into <code class="docutils literal notranslate"><span class="pre">done_cb</span></code> callback function </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv419ppa_client_handle_t">
+<span id="_CPPv319ppa_client_handle_t"></span><span id="_CPPv219ppa_client_handle_t"></span><span id="ppa_client_handle_t"></span><span class="target" id="ppa_8h_1ab1d52027b4c1a44ba690ef7e87811e6d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">ppa_client_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ppa_client_handle_t</span></span></span><a class="headerlink" href="#_CPPv419ppa_client_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of PPA client handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv420ppa_event_callback_t">
+<span id="_CPPv320ppa_event_callback_t"></span><span id="_CPPv220ppa_event_callback_t"></span><span id="ppa_event_callback_t"></span><span class="target" id="ppa_8h_1a404ff3ab04e8ec5cbbef1fcd1485fd01"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ppa_event_callback_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv419ppa_client_handle_t" title="ppa_client_handle_t"><span class="n"><span class="pre">ppa_client_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">ppa_client</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv416ppa_event_data_t" title="ppa_event_data_t"><span class="n"><span class="pre">ppa_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event_data</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_data</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv420ppa_event_callback_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of PPA event callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param ppa_client<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> PPA client handle </p>
+</dd>
+<dt class="field-even">Param event_data<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> PPA event data </p>
+</dd>
+<dt class="field-odd">Param user_data<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User registered data from calling <code class="docutils literal notranslate"><span class="pre">ppa_do_xxx</span></code> to perform an operation</p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a task switch is needed after the callback function returns, this is usually due to the callback wakes up some high priority task. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv415ppa_operation_t">
+<span id="_CPPv315ppa_operation_t"></span><span id="_CPPv215ppa_operation_t"></span><span class="target" id="ppa_8h_1aeba52d92758a98bdfff86df69a72f8f8"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_operation_t</span></span></span><a class="headerlink" href="#_CPPv415ppa_operation_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of all PPA available operations. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15ppa_operation_t17PPA_OPERATION_SRME">
+<span id="_CPPv3N15ppa_operation_t17PPA_OPERATION_SRME"></span><span id="_CPPv2N15ppa_operation_t17PPA_OPERATION_SRME"></span><span class="target" id="ppa_8h_1aeba52d92758a98bdfff86df69a72f8f8a0d2293293f8a68b4989f3e64dae0d605"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_OPERATION_SRM</span></span></span><a class="headerlink" href="#_CPPv4N15ppa_operation_t17PPA_OPERATION_SRME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Do scale-rotate-mirror operation </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15ppa_operation_t19PPA_OPERATION_BLENDE">
+<span id="_CPPv3N15ppa_operation_t19PPA_OPERATION_BLENDE"></span><span id="_CPPv2N15ppa_operation_t19PPA_OPERATION_BLENDE"></span><span class="target" id="ppa_8h_1aeba52d92758a98bdfff86df69a72f8f8a105d1c6d2cfaea32486c7f0dea5d3029"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_OPERATION_BLEND</span></span></span><a class="headerlink" href="#_CPPv4N15ppa_operation_t19PPA_OPERATION_BLENDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Do blend operation </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15ppa_operation_t18PPA_OPERATION_FILLE">
+<span id="_CPPv3N15ppa_operation_t18PPA_OPERATION_FILLE"></span><span id="_CPPv2N15ppa_operation_t18PPA_OPERATION_FILLE"></span><span class="target" id="ppa_8h_1aeba52d92758a98bdfff86df69a72f8f8acbfdc732217729de06d3d2df5f5ea18e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_OPERATION_FILL</span></span></span><a class="headerlink" href="#_CPPv4N15ppa_operation_t18PPA_OPERATION_FILLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Do fill operation, use one constant pixel to fill a target window </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N15ppa_operation_t21PPA_OPERATION_INVALIDE">
+<span id="_CPPv3N15ppa_operation_t21PPA_OPERATION_INVALIDE"></span><span id="_CPPv2N15ppa_operation_t21PPA_OPERATION_INVALIDE"></span><span class="target" id="ppa_8h_1aeba52d92758a98bdfff86df69a72f8f8a4750c816ce0bcf9efe1f9a46308a5a00"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_OPERATION_INVALID</span></span></span><a class="headerlink" href="#_CPPv4N15ppa_operation_t21PPA_OPERATION_INVALIDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invalid PPA operations, indicates the quantity of available PPA operations </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv416ppa_trans_mode_t">
+<span id="_CPPv316ppa_trans_mode_t"></span><span id="_CPPv216ppa_trans_mode_t"></span><span class="target" id="ppa_8h_1a6a96a733c02715831c1f8e1fd0ca6588"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_trans_mode_t</span></span></span><a class="headerlink" href="#_CPPv416ppa_trans_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Modes to perform the PPA operations. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N16ppa_trans_mode_t23PPA_TRANS_MODE_BLOCKINGE">
+<span id="_CPPv3N16ppa_trans_mode_t23PPA_TRANS_MODE_BLOCKINGE"></span><span id="_CPPv2N16ppa_trans_mode_t23PPA_TRANS_MODE_BLOCKINGE"></span><span class="target" id="ppa_8h_1a6a96a733c02715831c1f8e1fd0ca6588a887a3de04cc95c69a6603170e2eda49c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_TRANS_MODE_BLOCKING</span></span></span><a class="headerlink" href="#_CPPv4N16ppa_trans_mode_t23PPA_TRANS_MODE_BLOCKINGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">ppa_do_xxx</span></code> function will block until the PPA operation is finished </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N16ppa_trans_mode_t27PPA_TRANS_MODE_NON_BLOCKINGE">
+<span id="_CPPv3N16ppa_trans_mode_t27PPA_TRANS_MODE_NON_BLOCKINGE"></span><span id="_CPPv2N16ppa_trans_mode_t27PPA_TRANS_MODE_NON_BLOCKINGE"></span><span class="target" id="ppa_8h_1a6a96a733c02715831c1f8e1fd0ca6588ab9386512ae9958ddfe2a398396e76420"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_TRANS_MODE_NON_BLOCKING</span></span></span><a class="headerlink" href="#_CPPv4N16ppa_trans_mode_t27PPA_TRANS_MODE_NON_BLOCKINGE" title="Permalink to this definition"></a><br /></dt>
+<dd><p><code class="docutils literal notranslate"><span class="pre">ppa_do_xxx</span></code> function will return immediately after the PPA operation is pushed to the internal queue </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id1">
+<h3>Header File<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hal_ppa/include/hal/ppa_types.h">components/esp_hal_ppa/include/hal/ppa_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"hal/ppa_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_hal_ppa</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_hal_ppa</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_hal_ppa
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_hal_ppa
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h3>Enumerations<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv417ppa_engine_type_t">
+<span id="_CPPv317ppa_engine_type_t"></span><span id="_CPPv217ppa_engine_type_t"></span><span class="target" id="ppa__types_8h_1a7d024793f90b8a5a1f2c48898da4cb02"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_engine_type_t</span></span></span><a class="headerlink" href="#_CPPv417ppa_engine_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of engines in PPA modules. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17ppa_engine_type_t19PPA_ENGINE_TYPE_SRME">
+<span id="_CPPv3N17ppa_engine_type_t19PPA_ENGINE_TYPE_SRME"></span><span id="_CPPv2N17ppa_engine_type_t19PPA_ENGINE_TYPE_SRME"></span><span class="target" id="ppa__types_8h_1a7d024793f90b8a5a1f2c48898da4cb02acc380263dbdcaef51d49cc9574bf1849"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_ENGINE_TYPE_SRM</span></span></span><a class="headerlink" href="#_CPPv4N17ppa_engine_type_t19PPA_ENGINE_TYPE_SRME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA Scaling-Rotating-Mirroring (SRM) engine, used to perform scale, rotate, mirror </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17ppa_engine_type_t21PPA_ENGINE_TYPE_BLENDE">
+<span id="_CPPv3N17ppa_engine_type_t21PPA_ENGINE_TYPE_BLENDE"></span><span id="_CPPv2N17ppa_engine_type_t21PPA_ENGINE_TYPE_BLENDE"></span><span class="target" id="ppa__types_8h_1a7d024793f90b8a5a1f2c48898da4cb02aa511c3439b36ee39b37b647ffcd6b1ed"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_ENGINE_TYPE_BLEND</span></span></span><a class="headerlink" href="#_CPPv4N17ppa_engine_type_t21PPA_ENGINE_TYPE_BLENDE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA Blending engine, used to perform blend or fill </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv424ppa_srm_rotation_angle_t">
+<span id="_CPPv324ppa_srm_rotation_angle_t"></span><span id="_CPPv224ppa_srm_rotation_angle_t"></span><span class="target" id="ppa__types_8h_1a2ac2af101ef47ff71b8aaebea504af51"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_srm_rotation_angle_t</span></span></span><a class="headerlink" href="#_CPPv424ppa_srm_rotation_angle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA Scaling-Rotating-Mirroring available rotation angle (in the counterclockwise direction) </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_srm_rotation_angle_t24PPA_SRM_ROTATION_ANGLE_0E">
+<span id="_CPPv3N24ppa_srm_rotation_angle_t24PPA_SRM_ROTATION_ANGLE_0E"></span><span id="_CPPv2N24ppa_srm_rotation_angle_t24PPA_SRM_ROTATION_ANGLE_0E"></span><span class="target" id="ppa__types_8h_1a2ac2af101ef47ff71b8aaebea504af51a367aa3a92791af7db681518434b4c61e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_ROTATION_ANGLE_0</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_srm_rotation_angle_t24PPA_SRM_ROTATION_ANGLE_0E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Picture does no rotation </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_srm_rotation_angle_t25PPA_SRM_ROTATION_ANGLE_90E">
+<span id="_CPPv3N24ppa_srm_rotation_angle_t25PPA_SRM_ROTATION_ANGLE_90E"></span><span id="_CPPv2N24ppa_srm_rotation_angle_t25PPA_SRM_ROTATION_ANGLE_90E"></span><span class="target" id="ppa__types_8h_1a2ac2af101ef47ff71b8aaebea504af51a84d6dab1e238dd9e3244688f0787ed21"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_ROTATION_ANGLE_90</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_srm_rotation_angle_t25PPA_SRM_ROTATION_ANGLE_90E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Picture rotates 90 degrees CCW </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_180E">
+<span id="_CPPv3N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_180E"></span><span id="_CPPv2N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_180E"></span><span class="target" id="ppa__types_8h_1a2ac2af101ef47ff71b8aaebea504af51a935334e2f45437d226e2aa28f6810801"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_ROTATION_ANGLE_180</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_180E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Picture rotates 180 degrees CCW </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_270E">
+<span id="_CPPv3N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_270E"></span><span id="_CPPv2N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_270E"></span><span class="target" id="ppa__types_8h_1a2ac2af101ef47ff71b8aaebea504af51a074f2757f6fe1d8b10eebede2f3f37e3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_ROTATION_ANGLE_270</span></span></span><a class="headerlink" href="#_CPPv4N24ppa_srm_rotation_angle_t26PPA_SRM_ROTATION_ANGLE_270E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Picture rotates 270 degrees CCW </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv420ppa_srm_color_mode_t">
+<span id="_CPPv320ppa_srm_color_mode_t"></span><span id="_CPPv220ppa_srm_color_mode_t"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_srm_color_mode_t</span></span></span><a class="headerlink" href="#_CPPv420ppa_srm_color_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA Scaling-Rotating-Mirroring available color mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t27PPA_SRM_COLOR_MODE_ARGB8888E">
+<span id="_CPPv3N20ppa_srm_color_mode_t27PPA_SRM_COLOR_MODE_ARGB8888E"></span><span id="_CPPv2N20ppa_srm_color_mode_t27PPA_SRM_COLOR_MODE_ARGB8888E"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1a2d029d08d508b666794994c61dd00643"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_ARGB8888</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t27PPA_SRM_COLOR_MODE_ARGB8888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: ARGB8888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB888E">
+<span id="_CPPv3N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB888E"></span><span id="_CPPv2N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB888E"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1a444d0dff134428bce53a8e35f9c51865"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_RGB888</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: RGB888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB565E">
+<span id="_CPPv3N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB565E"></span><span id="_CPPv2N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB565E"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1a7896a18684e2ed0f8bb36df3c307f288"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_RGB565</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_RGB565E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: RGB565 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV420E">
+<span id="_CPPv3N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV420E"></span><span id="_CPPv2N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV420E"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1aa9c703cc04c3e0ea44e39843a5b0b8b3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: YUV420 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV444E">
+<span id="_CPPv3N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV444E"></span><span id="_CPPv2N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV444E"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1a226ab2fba2231f6b61b8615f8e25db2b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_YUV444</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t25PPA_SRM_COLOR_MODE_YUV444E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: YUV444 (limited range only and can only be the input color mode) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_UYVYE">
+<span id="_CPPv3N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_UYVYE"></span><span id="_CPPv2N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_UYVYE"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1a441f0bd7b0e78967ebb145c2e1362024"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_YUV422_UYVY</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_UYVYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: YUV422 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_VYUYE">
+<span id="_CPPv3N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_VYUYE"></span><span id="_CPPv2N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_VYUYE"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1a1ba5636c91d26ea0070595e5e6dfba3a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_YUV422_VYUY</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_VYUYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: YUV422, only available on input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YUYVE">
+<span id="_CPPv3N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YUYVE"></span><span id="_CPPv2N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YUYVE"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1ae861bf237db5553c4444e6530aacc6ed"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_YUV422_YUYV</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YUYVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: YUV422, only available on input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YVYUE">
+<span id="_CPPv3N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YVYUE"></span><span id="_CPPv2N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YVYUE"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1affe8a513dcfc59e4cd57a87a6e120889"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_YUV422_YVYU</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t30PPA_SRM_COLOR_MODE_YUV422_YVYUE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: YUV422, only available on input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N20ppa_srm_color_mode_t24PPA_SRM_COLOR_MODE_GRAY8E">
+<span id="_CPPv3N20ppa_srm_color_mode_t24PPA_SRM_COLOR_MODE_GRAY8E"></span><span id="_CPPv2N20ppa_srm_color_mode_t24PPA_SRM_COLOR_MODE_GRAY8E"></span><span class="target" id="ppa__types_8h_1afb0c5e8b9005f20a55044933277072f1afebfe598f37b6e997f6671391b2bd74f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_SRM_COLOR_MODE_GRAY8</span></span></span><a class="headerlink" href="#_CPPv4N20ppa_srm_color_mode_t24PPA_SRM_COLOR_MODE_GRAY8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA SRM color mode: GRAY8 </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv422ppa_blend_color_mode_t">
+<span id="_CPPv322ppa_blend_color_mode_t"></span><span id="_CPPv222ppa_blend_color_mode_t"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_blend_color_mode_t</span></span></span><a class="headerlink" href="#_CPPv422ppa_blend_color_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA blend available color mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t29PPA_BLEND_COLOR_MODE_ARGB8888E">
+<span id="_CPPv3N22ppa_blend_color_mode_t29PPA_BLEND_COLOR_MODE_ARGB8888E"></span><span id="_CPPv2N22ppa_blend_color_mode_t29PPA_BLEND_COLOR_MODE_ARGB8888E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348ab2694b90d8d952453ee824947b0253a0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_ARGB8888</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t29PPA_BLEND_COLOR_MODE_ARGB8888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: ARGB8888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB888E">
+<span id="_CPPv3N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB888E"></span><span id="_CPPv2N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB888E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348aa3d077a5129af11b754faa84d4571cbe"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_RGB888</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: RGB888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB565E">
+<span id="_CPPv3N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB565E"></span><span id="_CPPv2N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB565E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348a0572172e2cb47dd6ebb783c923a1ad9f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_RGB565</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_RGB565E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: RGB565 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A8E">
+<span id="_CPPv3N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A8E"></span><span id="_CPPv2N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A8E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348a6b096ed43c0c8c01e3a51ee1952b8c8f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_A8</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: A8, only available on blend foreground input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A4E">
+<span id="_CPPv3N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A4E"></span><span id="_CPPv2N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A4E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348ab7bcb3c245fc49ddc207a51ec95aff09"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_A4</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t23PPA_BLEND_COLOR_MODE_A4E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: A4, only available on blend foreground input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_YUV420E">
+<span id="_CPPv3N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_YUV420E"></span><span id="_CPPv2N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_YUV420E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348aeec383100917f87fd6e1befdae9d9013"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t27PPA_BLEND_COLOR_MODE_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: YUV420, only available on blend background input or on output </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_UYVYE">
+<span id="_CPPv3N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_UYVYE"></span><span id="_CPPv2N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_UYVYE"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348a09e1f76329982f13f1564f9e4aa8f799"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_YUV422_UYVY</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_UYVYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: YUV422, only available on blend background input or on output </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_VYUYE">
+<span id="_CPPv3N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_VYUYE"></span><span id="_CPPv2N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_VYUYE"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348a7c0f6f13c11a121bff8335ebd11325cf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_YUV422_VYUY</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_VYUYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: YUV422, only available on blend background input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YUYVE">
+<span id="_CPPv3N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YUYVE"></span><span id="_CPPv2N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YUYVE"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348ae9ced4a33675675f70cd20537b091c41"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_YUV422_YUYV</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YUYVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: YUV422, only available on blend background input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YVYUE">
+<span id="_CPPv3N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YVYUE"></span><span id="_CPPv2N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YVYUE"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348a5469b75299a8f9fa66ef3ecbec232d13"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_YUV422_YVYU</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t32PPA_BLEND_COLOR_MODE_YUV422_YVYUE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: YUV422, only available on blend background input </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N22ppa_blend_color_mode_t26PPA_BLEND_COLOR_MODE_GRAY8E">
+<span id="_CPPv3N22ppa_blend_color_mode_t26PPA_BLEND_COLOR_MODE_GRAY8E"></span><span id="_CPPv2N22ppa_blend_color_mode_t26PPA_BLEND_COLOR_MODE_GRAY8E"></span><span class="target" id="ppa__types_8h_1ad61068cf667de41e15699924ea38f348ac48a116760f19e7bdabf813809a5698d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_BLEND_COLOR_MODE_GRAY8</span></span></span><a class="headerlink" href="#_CPPv4N22ppa_blend_color_mode_t26PPA_BLEND_COLOR_MODE_GRAY8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA blend color mode: GRAY8, only available on blend background input or on output </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv421ppa_fill_color_mode_t">
+<span id="_CPPv321ppa_fill_color_mode_t"></span><span id="_CPPv221ppa_fill_color_mode_t"></span><span class="target" id="ppa__types_8h_1ac9e48369a125323039e12f03cc5417cb"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_fill_color_mode_t</span></span></span><a class="headerlink" href="#_CPPv421ppa_fill_color_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA fill available color mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_fill_color_mode_t28PPA_FILL_COLOR_MODE_ARGB8888E">
+<span id="_CPPv3N21ppa_fill_color_mode_t28PPA_FILL_COLOR_MODE_ARGB8888E"></span><span id="_CPPv2N21ppa_fill_color_mode_t28PPA_FILL_COLOR_MODE_ARGB8888E"></span><span class="target" id="ppa__types_8h_1ac9e48369a125323039e12f03cc5417cbad141a4e4f2891089b76052ca0ee4ba99"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_FILL_COLOR_MODE_ARGB8888</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_fill_color_mode_t28PPA_FILL_COLOR_MODE_ARGB8888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA fill color mode: ARGB8888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB888E">
+<span id="_CPPv3N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB888E"></span><span id="_CPPv2N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB888E"></span><span class="target" id="ppa__types_8h_1ac9e48369a125323039e12f03cc5417cba2f6666f2dd19b94eff80ed96889e1e66"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_FILL_COLOR_MODE_RGB888</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA fill color mode: RGB888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB565E">
+<span id="_CPPv3N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB565E"></span><span id="_CPPv2N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB565E"></span><span class="target" id="ppa__types_8h_1ac9e48369a125323039e12f03cc5417cbad8be273f272ba9da9626d3d6803d2850"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_FILL_COLOR_MODE_RGB565</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_fill_color_mode_t26PPA_FILL_COLOR_MODE_RGB565E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA fill color mode: RGB565 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_fill_color_mode_t31PPA_FILL_COLOR_MODE_YUV422_UYVYE">
+<span id="_CPPv3N21ppa_fill_color_mode_t31PPA_FILL_COLOR_MODE_YUV422_UYVYE"></span><span id="_CPPv2N21ppa_fill_color_mode_t31PPA_FILL_COLOR_MODE_YUV422_UYVYE"></span><span class="target" id="ppa__types_8h_1ac9e48369a125323039e12f03cc5417cba35782b8f88745d2fde0f8e257d54cd42"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_FILL_COLOR_MODE_YUV422_UYVY</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_fill_color_mode_t31PPA_FILL_COLOR_MODE_YUV422_UYVYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA fill color mode: YUV422 (w/ UYVY pack order) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21ppa_fill_color_mode_t25PPA_FILL_COLOR_MODE_GRAY8E">
+<span id="_CPPv3N21ppa_fill_color_mode_t25PPA_FILL_COLOR_MODE_GRAY8E"></span><span id="_CPPv2N21ppa_fill_color_mode_t25PPA_FILL_COLOR_MODE_GRAY8E"></span><span class="target" id="ppa__types_8h_1ac9e48369a125323039e12f03cc5417cba48e4a873f982e47e0c057b1ffc7ad6c7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_FILL_COLOR_MODE_GRAY8</span></span></span><a class="headerlink" href="#_CPPv4N21ppa_fill_color_mode_t25PPA_FILL_COLOR_MODE_GRAY8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>PPA fill color mode: GRAY8 </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423ppa_alpha_update_mode_t">
+<span id="_CPPv323ppa_alpha_update_mode_t"></span><span id="_CPPv223ppa_alpha_update_mode_t"></span><span class="target" id="ppa__types_8h_1a834b3680d655f1de7c02b63863d0e465"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_alpha_update_mode_t</span></span></span><a class="headerlink" href="#_CPPv423ppa_alpha_update_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA alpha compositing update mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_alpha_update_mode_t19PPA_ALPHA_NO_CHANGEE">
+<span id="_CPPv3N23ppa_alpha_update_mode_t19PPA_ALPHA_NO_CHANGEE"></span><span id="_CPPv2N23ppa_alpha_update_mode_t19PPA_ALPHA_NO_CHANGEE"></span><span class="target" id="ppa__types_8h_1a834b3680d655f1de7c02b63863d0e465a6d12323bc0c1f94b88a3097c3cdea563"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_ALPHA_NO_CHANGE</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_alpha_update_mode_t19PPA_ALPHA_NO_CHANGEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Do not replace alpha value (A' = A). If input format does not contain alpha info, alpha value 255 will be used. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_alpha_update_mode_t19PPA_ALPHA_FIX_VALUEE">
+<span id="_CPPv3N23ppa_alpha_update_mode_t19PPA_ALPHA_FIX_VALUEE"></span><span id="_CPPv2N23ppa_alpha_update_mode_t19PPA_ALPHA_FIX_VALUEE"></span><span class="target" id="ppa__types_8h_1a834b3680d655f1de7c02b63863d0e465a08fd8e9f09a70d433e25c44e52f24031"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_ALPHA_FIX_VALUE</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_alpha_update_mode_t19PPA_ALPHA_FIX_VALUEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Replace the alpha value in received pixel with a new, fixed alpha value (A' = val) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_alpha_update_mode_t15PPA_ALPHA_SCALEE">
+<span id="_CPPv3N23ppa_alpha_update_mode_t15PPA_ALPHA_SCALEE"></span><span id="_CPPv2N23ppa_alpha_update_mode_t15PPA_ALPHA_SCALEE"></span><span class="target" id="ppa__types_8h_1a834b3680d655f1de7c02b63863d0e465ace02cb6e0dedf00ea1aa92fa9eefd73c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_ALPHA_SCALE</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_alpha_update_mode_t15PPA_ALPHA_SCALEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Scale the alpha value in received pixel to be a new alpha value (A' = (A * val) &gt;&gt; 8). If input format does not contain alpha info, A' = (255 * val) &gt;&gt; 8. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_alpha_update_mode_t16PPA_ALPHA_INVERTE">
+<span id="_CPPv3N23ppa_alpha_update_mode_t16PPA_ALPHA_INVERTE"></span><span id="_CPPv2N23ppa_alpha_update_mode_t16PPA_ALPHA_INVERTE"></span><span class="target" id="ppa__types_8h_1a834b3680d655f1de7c02b63863d0e465a09a58de7d0e2366515e81685eb7d7a17"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_ALPHA_INVERT</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_alpha_update_mode_t16PPA_ALPHA_INVERTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Invert the alpha value in received pixel (A' = 255 - A). If input format does not contain alpha info, A' = 0, i.e. a layer with 0% opacity. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv428ppa_color_conv_std_rgb_yuv_t">
+<span id="_CPPv328ppa_color_conv_std_rgb_yuv_t"></span><span id="_CPPv228ppa_color_conv_std_rgb_yuv_t"></span><span class="target" id="ppa__types_8h_1ab834591c5b4a87ca22ceba2d23771377"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_color_conv_std_rgb_yuv_t</span></span></span><a class="headerlink" href="#_CPPv428ppa_color_conv_std_rgb_yuv_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA supported color conversion standard between RGB and YUV (determines the YUV&lt;-&gt;RGB conversion equation) </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT601E">
+<span id="_CPPv3N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT601E"></span><span id="_CPPv2N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT601E"></span><span class="target" id="ppa__types_8h_1ab834591c5b4a87ca22ceba2d23771377a38698f68a765c25515f352d77675ea86"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_COLOR_CONV_STD_RGB_YUV_BT601</span></span></span><a class="headerlink" href="#_CPPv4N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT601E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>YUV&lt;-&gt;RGB conversion standard: BT.601 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT709E">
+<span id="_CPPv3N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT709E"></span><span id="_CPPv2N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT709E"></span><span class="target" id="ppa__types_8h_1ab834591c5b4a87ca22ceba2d23771377a5f02eb43c3d0ac797a3e0b1776bf597c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_COLOR_CONV_STD_RGB_YUV_BT709</span></span></span><a class="headerlink" href="#_CPPv4N28ppa_color_conv_std_rgb_yuv_t32PPA_COLOR_CONV_STD_RGB_YUV_BT709E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>YUV&lt;-&gt;RGB conversion standard: BT.709 </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv417ppa_color_range_t">
+<span id="_CPPv317ppa_color_range_t"></span><span id="_CPPv217ppa_color_range_t"></span><span class="target" id="ppa__types_8h_1ad522e81236997402f4bd0a5d1389bd86"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_color_range_t</span></span></span><a class="headerlink" href="#_CPPv417ppa_color_range_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA supported color range (determines the YUV&lt;-&gt;RGB conversion equation) </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17ppa_color_range_t21PPA_COLOR_RANGE_LIMITE">
+<span id="_CPPv3N17ppa_color_range_t21PPA_COLOR_RANGE_LIMITE"></span><span id="_CPPv2N17ppa_color_range_t21PPA_COLOR_RANGE_LIMITE"></span><span class="target" id="ppa__types_8h_1ad522e81236997402f4bd0a5d1389bd86a5f146b7589f01c49a4cd38c368589e4b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_COLOR_RANGE_LIMIT</span></span></span><a class="headerlink" href="#_CPPv4N17ppa_color_range_t21PPA_COLOR_RANGE_LIMITE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Limited color range, 16 is the darkest black and 235 is the brightest white </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17ppa_color_range_t20PPA_COLOR_RANGE_FULLE">
+<span id="_CPPv3N17ppa_color_range_t20PPA_COLOR_RANGE_FULLE"></span><span id="_CPPv2N17ppa_color_range_t20PPA_COLOR_RANGE_FULLE"></span><span class="target" id="ppa__types_8h_1ad522e81236997402f4bd0a5d1389bd86a0708a05aba4b288a83a3a855a92c5dc4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_COLOR_RANGE_FULL</span></span></span><a class="headerlink" href="#_CPPv4N17ppa_color_range_t20PPA_COLOR_RANGE_FULLE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Full color range, 0 is the darkest black and 255 is the brightest white </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423ppa_data_burst_length_t">
+<span id="_CPPv323ppa_data_burst_length_t"></span><span id="_CPPv223ppa_data_burst_length_t"></span><span class="target" id="ppa__types_8h_1aa96d6c33ff34de153afc3da5785a702f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ppa_data_burst_length_t</span></span></span><a class="headerlink" href="#_CPPv423ppa_data_burst_length_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration of PPA supported data burst length. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_data_burst_length_t23PPA_DATA_BURST_LENGTH_8E">
+<span id="_CPPv3N23ppa_data_burst_length_t23PPA_DATA_BURST_LENGTH_8E"></span><span id="_CPPv2N23ppa_data_burst_length_t23PPA_DATA_BURST_LENGTH_8E"></span><span class="target" id="ppa__types_8h_1aa96d6c33ff34de153afc3da5785a702fa6831d7788e6437734fb7d1533c606888"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_DATA_BURST_LENGTH_8</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_data_burst_length_t23PPA_DATA_BURST_LENGTH_8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data burst length: 8 bytes </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_16E">
+<span id="_CPPv3N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_16E"></span><span id="_CPPv2N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_16E"></span><span class="target" id="ppa__types_8h_1aa96d6c33ff34de153afc3da5785a702faa5c23cc20afdde8d62dbeb3597f0da8d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_DATA_BURST_LENGTH_16</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_16E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data burst length: 16 bytes </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_32E">
+<span id="_CPPv3N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_32E"></span><span id="_CPPv2N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_32E"></span><span class="target" id="ppa__types_8h_1aa96d6c33ff34de153afc3da5785a702fa58e5f7296649cee23e372d7abd0c99ca"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_DATA_BURST_LENGTH_32</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_32E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data burst length: 32 bytes </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_64E">
+<span id="_CPPv3N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_64E"></span><span id="_CPPv2N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_64E"></span><span class="target" id="ppa__types_8h_1aa96d6c33ff34de153afc3da5785a702fa9124eab943d2e81ac29488e64d3cf08d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_DATA_BURST_LENGTH_64</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_data_burst_length_t24PPA_DATA_BURST_LENGTH_64E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data burst length: 64 bytes </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ppa_data_burst_length_t25PPA_DATA_BURST_LENGTH_128E">
+<span id="_CPPv3N23ppa_data_burst_length_t25PPA_DATA_BURST_LENGTH_128E"></span><span id="_CPPv2N23ppa_data_burst_length_t25PPA_DATA_BURST_LENGTH_128E"></span><span class="target" id="ppa__types_8h_1aa96d6c33ff34de153afc3da5785a702fab88f4d8a9a8dda2d48de1941338343c7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">PPA_DATA_BURST_LENGTH_128</span></span></span><a class="headerlink" href="#_CPPv4N23ppa_data_burst_length_t25PPA_DATA_BURST_LENGTH_128E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Data burst length: 128 bytes </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Pixel-Processing Accelerator (PPA) (api-reference/peripherals/ppa)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Pixel-Processing Accelerator (PPA) (api-reference/peripherals/ppa)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="pcnt.html" class="btn btn-neutral float-left" title="Pulse Counter (PCNT)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="rmt.html" class="btn btn-neutral float-right" title="Remote Control Transceiver (RMT)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

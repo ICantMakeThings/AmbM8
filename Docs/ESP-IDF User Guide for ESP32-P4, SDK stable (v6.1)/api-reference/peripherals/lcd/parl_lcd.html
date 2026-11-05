@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Parallel IO simulation of SPI or I80 Interfaced LCD - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/lcd/parl_lcd.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/lcd/parl_lcd';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Low Dropout Voltage Regulator (LDO)" href="../ldo_regulator.html" />
+    <link rel="prev" title="MIPI DSI Interfaced LCD" href="dsi_lcd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="../adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../key_manager.html">Key Manager</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">LCD</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="index.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#lcd-control-panel-operations">LCD Control Panel Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#lcd-data-panel-operations">LCD Data Panel Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#advanced-frame-buffer-debugging">Advanced Frame Buffer Debugging</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#steps-to-add-manufacturer-specific-initialization">Steps to Add Manufacturer Specific Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="index.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Peripherals API</a></li>
+          <li class="breadcrumb-item"><a href="index.html">LCD</a></li>
+      <li class="breadcrumb-item active">Parallel IO simulation of SPI or I80 Interfaced LCD</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/lcd/parl_lcd.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="parallel-io-simulation-of-spi-or-i80-interfaced-lcd">
+<h1>Parallel IO simulation of SPI or I80 Interfaced LCD<a class="headerlink" href="#parallel-io-simulation-of-spi-or-i80-interfaced-lcd" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/lcd/parl_lcd.html">[中文]</a></p>
+<p>Parallel IO is not a bus-type peripheral. The driver directly creates a Parallel IO device for the LCD. Currently the driver supports SPI (1 bit data width) and I80 (8 bit data width) modes.</p>
+<ol class="arabic">
+<li><p>Create Parallel IO device by <a class="reference internal" href="#_CPPv425esp_lcd_new_panel_io_parlPK30esp_lcd_panel_io_parl_config_tP25esp_lcd_panel_io_handle_t" title="esp_lcd_new_panel_io_parl"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_lcd_new_panel_io_parl()</span></code></a>. You need to set up the following parameters for a Parallel IO device:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t7clk_srcE" title="esp_lcd_panel_io_parl_config_t::clk_src"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::clk_src</span></code></a> sets the clock source of the Parallel IO device. Note, the default clock source may be different between ESP targets.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t12clk_gpio_numE" title="esp_lcd_panel_io_parl_config_t::clk_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::clk_gpio_num</span></code></a> sets the GPIO number of the pixel clock (also referred as <code class="docutils literal notranslate"><span class="pre">WR</span></code> or <code class="docutils literal notranslate"><span class="pre">SCLK</span></code> in some LCD spec)</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t11dc_gpio_numE" title="esp_lcd_panel_io_parl_config_t::dc_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::dc_gpio_num</span></code></a> sets the GPIO number of the data or command select pin (also referred as <code class="docutils literal notranslate"><span class="pre">RS</span></code> in some LCD spec)</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t11cs_gpio_numE" title="esp_lcd_panel_io_parl_config_t::cs_gpio_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::cs_gpio_num</span></code></a> sets the GPIO number of the chip select pin. (Note that the Parallel IO LCD driver only supports a single LCD device).</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t10data_widthE" title="esp_lcd_panel_io_parl_config_t::data_width"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::data_width</span></code></a> sets the bit width of the data bus (only support <code class="docutils literal notranslate"><span class="pre">1</span></code> or <code class="docutils literal notranslate"><span class="pre">8</span></code>)</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14data_gpio_numsE" title="esp_lcd_panel_io_parl_config_t::data_gpio_nums"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::data_gpio_nums</span></code></a> is the array of the GPIO number of the data bus. The number of GPIOs should be equal to the <a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t10data_widthE" title="esp_lcd_panel_io_parl_config_t::data_width"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::data_width</span></code></a> value.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t18max_transfer_bytesE" title="esp_lcd_panel_io_parl_config_t::max_transfer_bytes"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::max_transfer_bytes</span></code></a> sets the maximum number of bytes that can be transferred in one transaction.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14dma_burst_sizeE" title="esp_lcd_panel_io_parl_config_t::dma_burst_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::dma_burst_size</span></code></a> sets the number of bytes transferred by dma burst.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t7pclk_hzE" title="esp_lcd_panel_io_parl_config_t::pclk_hz"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::pclk_hz</span></code></a> sets the pixel clock frequency in Hz. Higher pixel clock frequency results in higher refresh rate, but may cause display abnormalities if the DMA bandwidth is not sufficient or the LCD controller chip does not support high pixel clock frequency.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t9dc_levelsE" title="esp_lcd_panel_io_parl_config_t::dc_levels"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::dc_levels</span></code></a> sets the effective level for DC data selection and command selection.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t12lcd_cmd_bitsE" title="esp_lcd_panel_io_parl_config_t::lcd_cmd_bits"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::lcd_cmd_bits</span></code></a> and <a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14lcd_param_bitsE" title="esp_lcd_panel_io_parl_config_t::lcd_param_bits"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::lcd_param_bits</span></code></a> set the bit width of the command and parameter that recognized by the LCD controller chip. This is chip specific, you should refer to your LCD spec in advance.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t17trans_queue_depthE" title="esp_lcd_panel_io_parl_config_t::trans_queue_depth"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_io_parl_config_t::trans_queue_depth</span></code></a> sets the maximum number of transactions that can be queued in the Parallel IO device. A bigger value means more transactions can be queued up, but it also consumes more memory.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_io_handle_t</span><span class="w"> </span><span class="n">io_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_panel_io_parl_config_t</span><span class="w"> </span><span class="n">io_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PARLIO_CLK_SRC_DEFAULT</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dc_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_DC</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_PCLK</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_gpio_nums</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">EXAMPLE_PIN_NUM_DATA0</span><span class="p">,</span><span class="w"> </span><span class="c1">// set DATA0 to drive SPI interfaced LCD or set DATA0~7 to drive I80 interfaced LCD</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="c1">// set 1 to drive SPI interfaced LCD or set 8 to drive I80 interfaced LCD</span>
+<span class="w">    </span><span class="p">.</span><span class="n">max_transfer_bytes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_H_RES</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="kt">uint16_t</span><span class="p">),</span><span class="w"> </span><span class="c1">// transfer 100 lines of pixels (assume pixel is RGB565) at most in one transaction</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_burst_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_DMA_BURST_SIZE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cs_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_CS</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pclk_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PIXEL_CLOCK_HZ</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">trans_queue_depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dc_levels</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="p">.</span><span class="n">dc_cmd_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">        </span><span class="p">.</span><span class="n">dc_data_level</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="p">.</span><span class="n">lcd_cmd_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_CMD_BITS</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">lcd_param_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_LCD_PARAM_BITS</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_panel_io_parl</span><span class="p">(</span><span class="o">&amp;</span><span class="n">io_config</span><span class="p">,</span><span class="w"> </span><span class="n">io_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>Install the LCD controller driver. The LCD controller driver is responsible for sending the commands and parameters to the LCD controller chip. In this step, you need to specify the Parallel IO device handle that allocated in the last step, and some panel specific configurations:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::reset_gpio_num</span></code> sets the LCD's hardware reset GPIO number. If the LCD does not have a hardware reset pin, set this to <code class="docutils literal notranslate"><span class="pre">-1</span></code>.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::rgb_ele_order</span></code> sets the RGB element order of each color data.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::bits_per_pixel</span></code> sets the bit width of the pixel color data. The LCD driver uses this value to calculate the number of bytes to send to the LCD controller chip.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_lcd_panel_dev_config_t::data_endian</span></code> specifies the data endian to be transmitted to the screen. No need to specify for color data within one byte, like RGB232. For drivers that do not support specifying data endian, this field would be ignored.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_lcd_panel_handle_t</span><span class="w"> </span><span class="n">panel_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">esp_lcd_panel_dev_config_t</span><span class="w"> </span><span class="n">panel_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">reset_gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_PIN_NUM_RST</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rgb_ele_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LCD_RGB_ELEMENT_ORDER_BGR</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">bits_per_pixel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="c1">// Create LCD panel handle for ST7789, with the Parallel IO device handle</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_lcd_new_panel_st7789</span><span class="p">(</span><span class="n">io_handle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">panel_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ol>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_lcd/include/esp_lcd_io_parl.h">components/esp_lcd/include/esp_lcd_io_parl.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_lcd_io_parl.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_lcd</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_lcd</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_lcd
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_lcd
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425esp_lcd_new_panel_io_parlPK30esp_lcd_panel_io_parl_config_tP25esp_lcd_panel_io_handle_t">
+<span id="_CPPv325esp_lcd_new_panel_io_parlPK30esp_lcd_panel_io_parl_config_tP25esp_lcd_panel_io_handle_t"></span><span id="_CPPv225esp_lcd_new_panel_io_parlPK30esp_lcd_panel_io_parl_config_tP25esp_lcd_panel_io_handle_t"></span><span id="esp_lcd_new_panel_io_parl__esp_lcd_panel_io_parl_config_tCP.esp_lcd_panel_io_handle_tP"></span><span class="target" id="esp__lcd__io__parl_8h_1af10be3e4bb395c6503874a41ae2d9940"></span><a class="reference internal" href="../../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_new_panel_io_parl</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_panel_io_parl_config_t" title="esp_lcd_panel_io_parl_config_t"><span class="n"><span class="pre">esp_lcd_panel_io_parl_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">io_config</span></span>, <a class="reference internal" href="index.html#_CPPv425esp_lcd_panel_io_handle_t" title="esp_lcd_panel_io_handle_t"><span class="n"><span class="pre">esp_lcd_panel_io_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_io</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425esp_lcd_new_panel_io_parlPK30esp_lcd_panel_io_parl_config_tP25esp_lcd_panel_io_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create LCD panel IO, for parlio interface. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>io_config</strong> -- <strong>[in]</strong> IO configuration, for parlio interface </p></li>
+<li><p><strong>ret_io</strong> -- <strong>[out]</strong> Returned panel IO handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_ERR_INVALID_ARG if parameter is invalid</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED if some configuration can't be satisfied, e.g. pixel clock out of the range</p></li>
+<li><p>ESP_ERR_NO_MEM if out of memory</p></li>
+<li><p>ESP_OK on success </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432esp_lcd_parlio_alloc_draw_buffer25esp_lcd_panel_io_handle_t6size_t8uint32_t">
+<span id="_CPPv332esp_lcd_parlio_alloc_draw_buffer25esp_lcd_panel_io_handle_t6size_t8uint32_t"></span><span id="_CPPv232esp_lcd_parlio_alloc_draw_buffer25esp_lcd_panel_io_handle_t6size_t8uint32_t"></span><span id="esp_lcd_parlio_alloc_draw_buffer__esp_lcd_panel_io_handle_t.s.uint32_t"></span><span class="target" id="esp__lcd__io__parl_8h_1a5a3c4764ae5427c016e67c6f9c7555f3"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_parlio_alloc_draw_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="index.html#_CPPv425esp_lcd_panel_io_handle_t" title="esp_lcd_panel_io_handle_t"><span class="n"><span class="pre">esp_lcd_panel_io_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">io</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">caps</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432esp_lcd_parlio_alloc_draw_buffer25esp_lcd_panel_io_handle_t6size_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate a draw buffer that can be used by parlio interface LCD panel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function differs from the normal 'heap_caps_*' functions in that it can also automatically handle the alignment required by DMA burst, cache line size, etc.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>io</strong> -- <strong>[in]</strong> Panel IO handle, created by <code class="docutils literal notranslate"><span class="pre">esp_lcd_new_panel_io_parl()</span></code></p></li>
+<li><p><strong>size</strong> -- <strong>[in]</strong> Size of memory to be allocated </p></li>
+<li><p><strong>caps</strong> -- <strong>[in]</strong> Bitwise OR of MALLOC_CAP_* flags indicating the type of memory desired for the allocation </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to a new buffer of size 'size' with capabilities 'caps', or NULL if allocation failed </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430esp_lcd_panel_io_parl_config_t">
+<span id="_CPPv330esp_lcd_panel_io_parl_config_t"></span><span id="_CPPv230esp_lcd_panel_io_parl_config_t"></span><span id="esp_lcd_panel_io_parl_config_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_lcd_panel_io_parl_config_t</span></span></span><a class="headerlink" href="#_CPPv430esp_lcd_panel_io_parl_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Parallel Panel IO configuration structure, for intel 8080 interface(8 data-lines) or SPI interface(1 data-lines) </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t11dc_gpio_numE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t11dc_gpio_numE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t11dc_gpio_numE"></span><span id="esp_lcd_panel_io_parl_config_t::dc_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a60745105fa8db4ae28a01d5140873802"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dc_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t11dc_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for D/C line </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t12clk_gpio_numE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t12clk_gpio_numE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t12clk_gpio_numE"></span><span id="esp_lcd_panel_io_parl_config_t::clk_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a5923c742467859c5f981ec45a2a3c8ad"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t12clk_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for CLK line </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t11cs_gpio_numE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t11cs_gpio_numE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t11cs_gpio_numE"></span><span id="esp_lcd_panel_io_parl_config_t::cs_gpio_num__gpio_num_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a2d87a4d42b0137cef0064707c9d1e2ef"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cs_gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t11cs_gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIO used for CS line </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t14data_gpio_numsE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t14data_gpio_numsE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t14data_gpio_numsE"></span><span id="esp_lcd_panel_io_parl_config_t::data_gpio_nums__gpio_num_tA"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a147d88949f88d47a45c30397b91f6383"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_gpio_nums</span></span></span><span class="p"><span class="pre">[</span></span><span class="n"><span class="pre">ESP_PARLIO_LCD_WIDTH_MAX</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14data_gpio_numsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>GPIOs used for data lines </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t10data_widthE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t10data_widthE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t10data_widthE"></span><span id="esp_lcd_panel_io_parl_config_t::data_width__s"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a708c3c473d970ced845ff5c9cb5a4bc6"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">data_width</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t10data_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of data lines, 1(SPI) or 8(I80) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t7pclk_hzE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t7pclk_hzE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t7pclk_hzE"></span><span id="esp_lcd_panel_io_parl_config_t::pclk_hz__uint32_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1af56d4a4253055ff046518327dea278bc"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pclk_hz</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t7pclk_hzE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Frequency of pixel clock </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t7clk_srcE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t7clk_srcE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t7clk_srcE"></span><span id="esp_lcd_panel_io_parl_config_t::clk_src__parlio_clock_source_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1af9db9149700b2e8cc086215801e55717"></span><a class="reference internal" href="../parlio/index.html#_CPPv421parlio_clock_source_t" title="parlio_clock_source_t"><span class="n"><span class="pre">parlio_clock_source_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_src</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t7clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clock source for the Parlio peripheral </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t18max_transfer_bytesE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t18max_transfer_bytesE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t18max_transfer_bytesE"></span><span id="esp_lcd_panel_io_parl_config_t::max_transfer_bytes__s"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a267326018230c3d8bd1c521e4adf796d"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_transfer_bytes</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t18max_transfer_bytesE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum transfer size, this determines the length of internal DMA link </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t14dma_burst_sizeE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t14dma_burst_sizeE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t14dma_burst_sizeE"></span><span id="esp_lcd_panel_io_parl_config_t::dma_burst_size__s"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1ad5d318b8f7d43ecbb10130456f6fbdbd"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dma_burst_size</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14dma_burst_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DMA burst size, in bytes </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t17trans_queue_depthE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t17trans_queue_depthE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t17trans_queue_depthE"></span><span id="esp_lcd_panel_io_parl_config_t::trans_queue_depth__s"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a85d8e406bc94160c8d749d2a28c9af9e"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">trans_queue_depth</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t17trans_queue_depthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transaction queue size, larger queue, higher throughput </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t12lcd_cmd_bitsE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t12lcd_cmd_bitsE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t12lcd_cmd_bitsE"></span><span id="esp_lcd_panel_io_parl_config_t::lcd_cmd_bits__i"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a07baa493f32abdfc26b36d98bb66f0ed"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lcd_cmd_bits</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t12lcd_cmd_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bit-width of LCD command </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t14lcd_param_bitsE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t14lcd_param_bitsE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t14lcd_param_bitsE"></span><span id="esp_lcd_panel_io_parl_config_t::lcd_param_bits__i"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1af3ed9196868d82d20dc54b7daa1d4eac"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lcd_param_bits</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14lcd_param_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bit-width of LCD parameter </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t12dc_cmd_levelE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t12dc_cmd_levelE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t12dc_cmd_levelE"></span><span id="esp_lcd_panel_io_parl_config_t::dc_cmd_level__unsigned-i"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1ac4c6b546499140681ca566fd3b6bb2a7"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dc_cmd_level</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t12dc_cmd_levelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Level of DC line in CMD phase </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t13dc_data_levelE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t13dc_data_levelE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t13dc_data_levelE"></span><span id="esp_lcd_panel_io_parl_config_t::dc_data_level__unsigned-i"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a6128a6a9eead04532e816a00c7f7d506"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dc_data_level</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t13dc_data_levelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Level of DC line in DATA phase </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t9dc_levelsE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t9dc_levelsE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t9dc_levelsE"></span><span id="esp_lcd_panel_io_parl_config_t::dc_levels__esp_lcd_panel_io_parl_config_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a11827647fee0f678c070f80ad4bdbd2f"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_panel_io_parl_config_t" title="esp_lcd_panel_io_parl_config_t"><span class="n"><span class="pre">esp_lcd_panel_io_parl_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dc_levels</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t9dc_levelsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Each LCD device might have its own D/C control logic </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t14cs_active_highE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t14cs_active_highE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t14cs_active_highE"></span><span id="esp_lcd_panel_io_parl_config_t::cs_active_high__unsigned-i"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a944ed9626619e569905bc38b27a41696"></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cs_active_high</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t14cs_active_highE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set, a high level of CS line will select the device, otherwise, CS line is low level active </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30esp_lcd_panel_io_parl_config_t5flagsE">
+<span id="_CPPv3N30esp_lcd_panel_io_parl_config_t5flagsE"></span><span id="_CPPv2N30esp_lcd_panel_io_parl_config_t5flagsE"></span><span id="esp_lcd_panel_io_parl_config_t::flags__esp_lcd_panel_io_parl_config_t"></span><span class="target" id="structesp__lcd__panel__io__parl__config__t_1a7a8ed26daecddcfb6cf5e4f9ef055ddc"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430esp_lcd_panel_io_parl_config_t" title="esp_lcd_panel_io_parl_config_t"><span class="n"><span class="pre">esp_lcd_panel_io_parl_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N30esp_lcd_panel_io_parl_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Panel IO config flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_PARLIO_LCD_WIDTH_MAX">
+<span class="target" id="esp__lcd__io__parl_8h_1a937d89b34ac0e1278f76be00f45ef980"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_PARLIO_LCD_WIDTH_MAX</span></span></span><a class="headerlink" href="#c.ESP_PARLIO_LCD_WIDTH_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum data width of parlio lcd interface </p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Parallel IO simulation of SPI or I80 Interfaced LCD (api-reference/peripherals/lcd/parl_lcd)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Parallel IO simulation of SPI or I80 Interfaced LCD (api-reference/peripherals/lcd/parl_lcd)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dsi_lcd.html" class="btn btn-neutral float-left" title="MIPI DSI Interfaced LCD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../ldo_regulator.html" class="btn btn-neutral float-right" title="Low Dropout Voltage Regulator (LDO)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

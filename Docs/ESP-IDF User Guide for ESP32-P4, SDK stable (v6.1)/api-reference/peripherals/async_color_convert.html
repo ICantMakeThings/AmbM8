@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Asynchronous Color Conversion - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/async_color_convert.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/async_color_convert';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Asynchronous Memory Copy" href="async_memcpy.html" />
+    <link rel="prev" title="Asynchronous CRC Calculation" href="async_crc.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Asynchronous Color Conversion</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenario-1-start-with-one-blocking-conversion">Scenario 1: Start with One Blocking Conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenario-2-use-the-asynchronous-api-with-a-callback">Scenario 2: Use the Asynchronous API with a Callback</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operational-notes">Operational Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-example">Application Example</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Asynchronous Color Conversion</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/async_color_convert.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="asynchronous-color-conversion">
+<h1>Asynchronous Color Conversion<a class="headerlink" href="#asynchronous-color-conversion" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/async_color_convert.html">[中文]</a></p>
+<p>This document introduces the Async Color Convert driver in ESP-IDF. The table of contents is as follows:</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id1">Overview</a></p></li>
+<li><p><a class="reference internal" href="#quick-start" id="id2">Quick Start</a></p></li>
+<li><p><a class="reference internal" href="#scenario-1-start-with-one-blocking-conversion" id="id3">Scenario 1: Start with One Blocking Conversion</a></p>
+<ul>
+<li><p><a class="reference internal" href="#understanding-async-color-convert-request-t" id="id4">Understanding <code class="docutils literal notranslate"><span class="pre">async_color_convert_request_t</span></code></a></p></li>
+<li><p><a class="reference internal" href="#supported-conversions" id="id5">Supported Conversions</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scenario-2-use-the-asynchronous-api-with-a-callback" id="id6">Scenario 2: Use the Asynchronous API with a Callback</a></p></li>
+<li><p><a class="reference internal" href="#operational-notes" id="id7">Operational Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#driver-configuration" id="id8">Driver Configuration</a></p></li>
+<li><p><a class="reference internal" href="#dma-burst-size" id="id9">DMA Burst Size</a></p></li>
+<li><p><a class="reference internal" href="#thread-safety-and-isr-rules" id="id10">Thread Safety and ISR Rules</a></p></li>
+<li><p><a class="reference internal" href="#uninstalling-the-driver" id="id11">Uninstalling the Driver</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#application-example" id="id12">Application Example</a></p></li>
+<li><p><a class="reference internal" href="#api-reference" id="id13">API Reference</a></p>
+<ul>
+<li><p><a class="reference internal" href="#async-color-convert-driver-functions" id="id14">Async Color Convert Driver Functions</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id1" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>ESP32-P4 provides a DMA2D engine that can offload 2D copy and color conversion work from the CPU.</p>
+<p>This driver is useful when your application needs to:</p>
+<ul class="simple">
+<li><p>convert an image from one pixel format to another</p></li>
+<li><p>copy only a window of a larger image</p></li>
+<li><p>queue multiple conversions without doing the work on the CPU</p></li>
+<li><p>move between RGB and UYVY formats while selecting the RGB/YUV conversion standard</p></li>
+</ul>
+<p>The Async Color Convert driver wraps DMA2D request preparation, queueing, and completion handling into a small API that supports both:</p>
+<ul class="simple">
+<li><p>asynchronous submission with an ISR callback</p></li>
+<li><p>a simpler blocking API built on top of the same request path</p></li>
+</ul>
+</section>
+<section id="quick-start">
+<h2><a class="toc-backref" href="#id2" role="doc-backlink">Quick Start</a><a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p>If you are new to this driver, start with the simplest workflow:</p>
+<ol class="arabic simple">
+<li><p>Install the driver</p></li>
+<li><p>Prepare one <a class="reference internal" href="#_CPPv429async_color_convert_request_t" title="async_color_convert_request_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_color_convert_request_t</span></code></a></p></li>
+<li><p>Submit the conversion through either the blocking or non-blocking API</p></li>
+<li><p>Consume the converted output buffer after the conversion completes</p></li>
+<li><p>Either submit another request or uninstall the driver when finished</p></li>
+</ol>
+<p>The typical usage flow is:</p>
+<pre  class="mermaid">
+        flowchart TD
+    install[&quot;Install driver&lt;br/&gt;esp_async_color_convert_install_dma2d&quot;] --&gt; request[&quot;Prepare request&lt;br/&gt;async_color_convert_request_t&quot;]
+    request --&gt; blocking[&quot;Blocking path&lt;br/&gt;esp_color_convert_blocking&quot;]
+    request --&gt; nonBlocking[&quot;Non-blocking path&lt;br/&gt;esp_async_color_convert&quot;]
+    nonBlocking --&gt; callback[&quot;Wait for callback or task notification&quot;]
+    blocking --&gt; result[&quot;Use converted buffer&quot;]
+    callback --&gt; result
+    result --&gt; request
+    result --&gt; uninstall[&quot;Optional cleanup&lt;br/&gt;esp_async_color_convert_uninstall&quot;]
+    </pre></section>
+<section id="scenario-1-start-with-one-blocking-conversion">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Scenario 1: Start with One Blocking Conversion</a><a class="headerlink" href="#scenario-1-start-with-one-blocking-conversion" title="Permalink to this heading"></a></h2>
+<p>The easiest way to learn the API is to convert one image and wait until the conversion is complete.</p>
+<p>The following flow mirrors the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/dma/async_color_convert">peripherals/dma/async_color_convert</a> example. It converts one embedded UYVY422 image into BGR24 and then lets the application consume the converted output:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">async_color_convert_handle_t</span><span class="w"> </span><span class="n">conv_hdl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span><span class="w"> </span><span class="c1">// Driver handle returned by the install API</span>
+<span class="n">async_color_convert_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">backlog</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">          </span><span class="c1">// One in-flight request is enough for this simple blocking example</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_burst_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">  </span><span class="c1">// Start with the default burst size used by the example</span>
+<span class="p">};</span>
+<span class="c1">// Create one Async Color Convert driver instance backed by DMA2D.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_async_color_convert_install_dma2d</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">conv_hdl</span><span class="p">));</span>
+
+<span class="n">async_color_convert_request_t</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">sample_96x64_uyvy_yuv_start</span><span class="p">,</span><span class="w"> </span><span class="c1">// Source image can be in flash or RAM, as long as DMA can access it</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="w">                          </span><span class="c1">// Source image row stride, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">                          </span><span class="c1">// Source image height, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                                </span><span class="c1">// Start from the left edge of the source image</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dst_bgr</span><span class="p">,</span><span class="w">                    </span><span class="c1">// Destination buffer in DMA-capable RAM</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="w">                         </span><span class="c1">// Destination image row stride, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">                         </span><span class="c1">// Destination image height, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                               </span><span class="c1">// Write the converted output from the top-left corner</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">copy_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">96</span><span class="p">,</span><span class="w">                         </span><span class="c1">// Convert the full image width, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">copy_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">64</span><span class="p">,</span><span class="w">                        </span><span class="c1">// Convert the full image height, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_color_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ESP_COLOR_FOURCC_UYVY</span><span class="p">,</span><span class="w">   </span><span class="c1">// Source pixels are UYVY422</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_color_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ESP_COLOR_FOURCC_BGR24</span><span class="p">,</span><span class="w">  </span><span class="c1">// Destination pixels are BGR24 (used as RGB888 in this driver)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">color_conv_std</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">COLOR_CONV_STD_RGB_YUV_BT601</span><span class="p">,</span><span class="w"> </span><span class="c1">// RGB/YUV standard used for this conversion pair</span>
+<span class="p">};</span>
+
+<span class="c1">// Wait until DMA2D finishes the conversion. -1 means wait forever.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_color_convert_blocking</span><span class="p">(</span><span class="n">conv_hdl</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">));</span>
+
+<span class="c1">// Release the driver after all conversions are done.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_async_color_convert_uninstall</span><span class="p">(</span><span class="n">conv_hdl</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This flow introduces the most important ideas:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv437esp_async_color_convert_install_dma2dPK28async_color_convert_config_tP28async_color_convert_handle_t" title="esp_async_color_convert_install_dma2d"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_color_convert_install_dma2d()</span></code></a> creates the driver instance</p></li>
+<li><p><a class="reference internal" href="#_CPPv429async_color_convert_request_t" title="async_color_convert_request_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_color_convert_request_t</span></code></a> describes the source image, destination image, and conversion window</p></li>
+<li><p><a class="reference internal" href="#_CPPv426esp_color_convert_blocking28async_color_convert_handle_tPK29async_color_convert_request_t7int32_t" title="esp_color_convert_blocking"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_color_convert_blocking()</span></code></a> waits until the hardware finishes the conversion</p></li>
+<li><p><a class="reference internal" href="#_CPPv433esp_async_color_convert_uninstall28async_color_convert_handle_t" title="esp_async_color_convert_uninstall"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_color_convert_uninstall()</span></code></a> releases the driver resources</p></li>
+</ul>
+<p>For the blocking API, <code class="docutils literal notranslate"><span class="pre">timeout_ms</span> <span class="pre">=</span> <span class="pre">-1</span></code> means wait forever. Other timeout values are currently unsupported and return <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>.</p>
+<section id="understanding-async-color-convert-request-t">
+<h3><a class="toc-backref" href="#id4" role="doc-backlink">Understanding <code class="docutils literal notranslate"><span class="pre">async_color_convert_request_t</span></code></a><a class="headerlink" href="#understanding-async-color-convert-request-t" title="Permalink to this heading"></a></h3>
+<p>Most application issues come from building the request incorrectly, so it is worth understanding the structure carefully.</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>In <a class="reference internal" href="#_CPPv429async_color_convert_request_t" title="async_color_convert_request_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_color_convert_request_t</span></code></a>, all geometry fields are measured in <strong>pixels</strong>, not bytes. This includes <code class="docutils literal notranslate"><span class="pre">src_stride</span></code>, <code class="docutils literal notranslate"><span class="pre">src_height</span></code>, <code class="docutils literal notranslate"><span class="pre">src_x</span></code>, <code class="docutils literal notranslate"><span class="pre">src_y</span></code>, <code class="docutils literal notranslate"><span class="pre">dst_stride</span></code>, <code class="docutils literal notranslate"><span class="pre">dst_height</span></code>, <code class="docutils literal notranslate"><span class="pre">dst_x</span></code>, <code class="docutils literal notranslate"><span class="pre">dst_y</span></code>, <code class="docutils literal notranslate"><span class="pre">copy_width</span></code>, and <code class="docutils literal notranslate"><span class="pre">copy_height</span></code>.</p>
+<p><code class="docutils literal notranslate"><span class="pre">src_stride</span></code> and <code class="docutils literal notranslate"><span class="pre">dst_stride</span></code> are row strides, not conversion widths. They describe how many pixels each full image row spans in memory, so they can be larger than <code class="docutils literal notranslate"><span class="pre">copy_width</span></code> when converting a window inside a larger image.</p>
+</div>
+<p>The structure describes two things at the same time:</p>
+<ul class="simple">
+<li><p>the full source and destination images in memory</p></li>
+<li><p>the rectangular window that should be converted</p></li>
+</ul>
+<p>The key fields are:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10src_bufferE" title="async_color_convert_request_t::src_buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_buffer</span></code></a></dt><dd><p>Base address of the source image</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10src_strideE" title="async_color_convert_request_t::src_stride"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_stride</span></code></a></dt><dd><p>Source image row stride in pixels</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10src_heightE" title="async_color_convert_request_t::src_height"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_height</span></code></a></dt><dd><p>Source image height in pixels</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t5src_xE" title="async_color_convert_request_t::src_x"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_x</span></code></a> and <a class="reference internal" href="#_CPPv4N29async_color_convert_request_t5src_yE" title="async_color_convert_request_t::src_y"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_y</span></code></a></dt><dd><p>Top-left corner of the source window</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10dst_bufferE" title="async_color_convert_request_t::dst_buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_buffer</span></code></a></dt><dd><p>Base address of the destination image</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10dst_strideE" title="async_color_convert_request_t::dst_stride"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_stride</span></code></a></dt><dd><p>Destination image row stride in pixels</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10dst_heightE" title="async_color_convert_request_t::dst_height"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_height</span></code></a></dt><dd><p>Destination image height in pixels</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t5dst_xE" title="async_color_convert_request_t::dst_x"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_x</span></code></a> and <a class="reference internal" href="#_CPPv4N29async_color_convert_request_t5dst_yE" title="async_color_convert_request_t::dst_y"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_y</span></code></a></dt><dd><p>Top-left corner of where the converted window should be written</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t10copy_widthE" title="async_color_convert_request_t::copy_width"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::copy_width</span></code></a> and <a class="reference internal" href="#_CPPv4N29async_color_convert_request_t11copy_heightE" title="async_color_convert_request_t::copy_height"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::copy_height</span></code></a></dt><dd><p>Size of the rectangle to convert</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t16src_color_formatE" title="async_color_convert_request_t::src_color_format"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_color_format</span></code></a> and <a class="reference internal" href="#_CPPv4N29async_color_convert_request_t16dst_color_formatE" title="async_color_convert_request_t::dst_color_format"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_color_format</span></code></a></dt><dd><p>Source and destination pixel formats</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N29async_color_convert_request_t14color_conv_stdE" title="async_color_convert_request_t::color_conv_std"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::color_conv_std</span></code></a></dt><dd><p>RGB/YUV conversion standard, used for RGB &lt;-&gt; YUV conversions</p>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Both the source window and destination window must stay within the bounds of their corresponding images.</p>
+</section>
+<section id="supported-conversions">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Supported Conversions</a><a class="headerlink" href="#supported-conversions" title="Permalink to this heading"></a></h3>
+<p>The following format pairs are currently supported by this driver:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Source format</p></th>
+<th class="head"><p>Destination format</p></th>
+<th class="head"><p>Conversion standard</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB16</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB16</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB16</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB16</span></code></p></td>
+<td><p>N/A</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p>BT.601</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p>BT.709</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p>BT.601</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_RGB24</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p>BT.709</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p>BT.601</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_UYVY</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ESP_COLOR_FOURCC_BGR24</span></code></p></td>
+<td><p>BT.709</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Always set <a class="reference internal" href="#_CPPv4N29async_color_convert_request_t16src_color_formatE" title="async_color_convert_request_t::src_color_format"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::src_color_format</span></code></a> and
+<a class="reference internal" href="#_CPPv4N29async_color_convert_request_t16dst_color_formatE" title="async_color_convert_request_t::dst_color_format"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::dst_color_format</span></code></a>.
+Set <a class="reference internal" href="#_CPPv4N29async_color_convert_request_t14color_conv_stdE" title="async_color_convert_request_t::color_conv_std"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_request_t::color_conv_std</span></code></a> when converting between RGB and YUV.</p>
+</div>
+</section>
+</section>
+<section id="scenario-2-use-the-asynchronous-api-with-a-callback">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Scenario 2: Use the Asynchronous API with a Callback</a><a class="headerlink" href="#scenario-2-use-the-asynchronous-api-with-a-callback" title="Permalink to this heading"></a></h2>
+<p>Once the blocking flow is clear, the next step is to queue a request and let the driver notify you from interrupt context when it is finished.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="nf">color_conv_done_cb</span><span class="p">(</span><span class="n">async_color_convert_handle_t</span><span class="w"> </span><span class="n">conv_hdl</span><span class="p">,</span>
+<span class="w">                               </span><span class="n">async_color_convert_event_data_t</span><span class="w"> </span><span class="o">*</span><span class="n">edata</span><span class="p">,</span>
+<span class="w">                               </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">cb_args</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">high_task_wakeup</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">pdFALSE</span><span class="p">;</span><span class="w"> </span><span class="c1">// Required by FreeRTOS when an ISR wakes a task</span>
+<span class="w">    </span><span class="n">SemaphoreHandle_t</span><span class="w"> </span><span class="n">sem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">SemaphoreHandle_t</span><span class="p">)</span><span class="n">cb_args</span><span class="p">;</span><span class="w"> </span><span class="c1">// User context passed at submit time</span>
+<span class="w">    </span><span class="c1">// Notify a waiting task that the conversion has finished.</span>
+<span class="w">    </span><span class="n">xSemaphoreGiveFromISR</span><span class="p">(</span><span class="n">sem</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">high_task_wakeup</span><span class="p">);</span>
+<span class="w">    </span><span class="c1">// Return true when the unblocked task should run immediately after the ISR.</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">high_task_wakeup</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">async_color_convert_request_t</span><span class="w"> </span><span class="n">req</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_buf</span><span class="p">,</span><span class="w">   </span><span class="c1">// Source image base address</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_width</span><span class="p">,</span><span class="w"> </span><span class="c1">// Source image row stride, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">src_height</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dst_buf</span><span class="p">,</span><span class="w">   </span><span class="c1">// Destination image base address</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_stride</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dst_width</span><span class="p">,</span><span class="w"> </span><span class="c1">// Destination image row stride, in pixels</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dst_height</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">copy_width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy_width</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">copy_height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">copy_height</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_color_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ESP_COLOR_FOURCC_RGB16</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dst_color_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ESP_COLOR_FOURCC_BGR24</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Queue one asynchronous request. The callback runs later in ISR context.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_async_color_convert</span><span class="p">(</span><span class="n">conv_hdl</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">req</span><span class="p">,</span><span class="w"> </span><span class="n">color_conv_done_cb</span><span class="p">,</span><span class="w"> </span><span class="n">sem</span><span class="p">));</span>
+<span class="c1">// Wait in task context until the callback gives the semaphore.</span>
+<span class="n">xSemaphoreTake</span><span class="p">(</span><span class="n">sem</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The callback runs in ISR context, so keep it short and only use ISR-safe APIs such as <code class="docutils literal notranslate"><span class="pre">xSemaphoreGiveFromISR</span></code> or <code class="docutils literal notranslate"><span class="pre">xQueueSendFromISR</span></code>.</p>
+</section>
+<section id="operational-notes">
+<h2><a class="toc-backref" href="#id7" role="doc-backlink">Operational Notes</a><a class="headerlink" href="#operational-notes" title="Permalink to this heading"></a></h2>
+<section id="driver-configuration">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">Driver Configuration</a><a class="headerlink" href="#driver-configuration" title="Permalink to this heading"></a></h3>
+<p>The driver configuration fields are:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N28async_color_convert_config_t7backlogE" title="async_color_convert_config_t::backlog"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_config_t::backlog</span></code></a></dt><dd><p>Maximum number of in-flight or pending requests. <code class="docutils literal notranslate"><span class="pre">0</span></code> uses a driver default.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N28async_color_convert_config_t14dma_burst_sizeE" title="async_color_convert_config_t::dma_burst_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_config_t::dma_burst_size</span></code></a></dt><dd><p>DMA burst size in bytes. <code class="docutils literal notranslate"><span class="pre">0</span></code> uses a driver default.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N28async_color_convert_config_t13intr_priorityE" title="async_color_convert_config_t::intr_priority"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">async_color_convert_config_t::intr_priority</span></code></a></dt><dd><p>DMA2D interrupt priority. <code class="docutils literal notranslate"><span class="pre">0</span></code> uses the default low/medium priority.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="dma-burst-size">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">DMA Burst Size</a><a class="headerlink" href="#dma-burst-size" title="Permalink to this heading"></a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">dma_burst_size</span></code> affects DMA transfer efficiency:</p>
+<ul class="simple">
+<li><p>Larger burst sizes may improve throughput</p></li>
+<li><p>Larger burst sizes can also increase bus occupancy, so they are not always best for every workload</p></li>
+<li><p>Common starting values are 16, 32, and 64 bytes</p></li>
+</ul>
+<p>The best value depends on the chip's DMA controller capabilities and how much memory bandwidth is shared with other active components in the system.</p>
+</section>
+<section id="thread-safety-and-isr-rules">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Thread Safety and ISR Rules</a><a class="headerlink" href="#thread-safety-and-isr-rules" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>The driver is thread-safe. Requests from different tasks are serialized through the internal queue.</p></li>
+<li><p><a class="reference internal" href="#_CPPv423esp_async_color_convert28async_color_convert_handle_tPK29async_color_convert_request_t28async_color_convert_isr_cb_tPv" title="esp_async_color_convert"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_color_convert()</span></code></a> can be called from tasks to enqueue requests.</p></li>
+<li><p>The callback type <a class="reference internal" href="#_CPPv428async_color_convert_isr_cb_t" title="async_color_convert_isr_cb_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">async_color_convert_isr_cb_t</span></code></a> runs in ISR context.</p></li>
+<li><p>Do not call blocking APIs from the callback.</p></li>
+<li><p><a class="reference internal" href="#_CPPv426esp_color_convert_blocking28async_color_convert_handle_tPK29async_color_convert_request_t7int32_t" title="esp_color_convert_blocking"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_color_convert_blocking()</span></code></a> must not be called from ISR context.</p></li>
+</ul>
+</section>
+<section id="uninstalling-the-driver">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Uninstalling the Driver</a><a class="headerlink" href="#uninstalling-the-driver" title="Permalink to this heading"></a></h3>
+<p>When the driver is no longer needed:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Uninstall only after all queued conversions have completed.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_async_color_convert_uninstall</span><span class="p">(</span><span class="n">conv_hdl</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If requests are still pending, <a class="reference internal" href="#_CPPv433esp_async_color_convert_uninstall28async_color_convert_handle_t" title="esp_async_color_convert_uninstall"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_async_color_convert_uninstall()</span></code></a> returns <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_STATE" title="ESP_ERR_INVALID_STATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code></a>.</p>
+</section>
+</section>
+<section id="application-example">
+<h2><a class="toc-backref" href="#id12" role="doc-backlink">Application Example</a><a class="headerlink" href="#application-example" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/dma/async_color_convert">peripherals/dma/async_color_convert</a> shows a beginner-friendly blocking conversion flow:</p>
+<ul>
+<li><p>an embedded <code class="docutils literal notranslate"><span class="pre">.yuv</span></code> image is read directly from mapped flash</p></li>
+<li><p>DMA2D converts the image from UYVY422 to BGR24</p></li>
+<li><p>the converted output is base64-encoded and printed to the console</p></li>
+<li><p>pytest reconstructs the image as a PNG artifact and compares it against a golden reference image</p></li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="#id13" role="doc-backlink">API Reference</a><a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="async-color-convert-driver-functions">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Async Color Convert Driver Functions</a><a class="headerlink" href="#async-color-convert-driver-functions" title="Permalink to this heading"></a></h3>
+<section id="header-file">
+<h4>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_dma/include/esp_async_color_convert.h">components/esp_driver_dma/include/esp_async_color_convert.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_async_color_convert.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_dma</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_dma</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_dma
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_dma
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h4>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437esp_async_color_convert_install_dma2dPK28async_color_convert_config_tP28async_color_convert_handle_t">
+<span id="_CPPv337esp_async_color_convert_install_dma2dPK28async_color_convert_config_tP28async_color_convert_handle_t"></span><span id="_CPPv237esp_async_color_convert_install_dma2dPK28async_color_convert_config_tP28async_color_convert_handle_t"></span><span id="esp_async_color_convert_install_dma2d__async_color_convert_config_tCP.async_color_convert_handle_tP"></span><span class="target" id="esp__async__color__convert_8h_1aba213bdf93c71e96d36c6aac451048b0"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_color_convert_install_dma2d</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv428async_color_convert_config_t" title="async_color_convert_config_t"><span class="n"><span class="pre">async_color_convert_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv428async_color_convert_handle_t" title="async_color_convert_handle_t"><span class="n"><span class="pre">async_color_convert_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_hdl</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437esp_async_color_convert_install_dma2dPK28async_color_convert_config_tP28async_color_convert_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Install async color conversion driver with the DMA2D backend. </p>
+<p>This API allocates internal resources and creates a conversion context.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> Driver configuration </p></li>
+<li><p><strong>ret_hdl</strong> -- <strong>[out]</strong> Returned driver handle</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Driver installed successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_NO_MEM: Out of memory</p></li>
+<li><p>ESP_ERR_NOT_FOUND: Required DMA2D resource is unavailable</p></li>
+<li><p>others: Error from lower-level DMA2D driver </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv433esp_async_color_convert_uninstall28async_color_convert_handle_t">
+<span id="_CPPv333esp_async_color_convert_uninstall28async_color_convert_handle_t"></span><span id="_CPPv233esp_async_color_convert_uninstall28async_color_convert_handle_t"></span><span id="esp_async_color_convert_uninstall__async_color_convert_handle_t"></span><span class="target" id="esp__async__color__convert_8h_1a0782f047e0f0e4bc1a6250e4f809e628"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_color_convert_uninstall</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv428async_color_convert_handle_t" title="async_color_convert_handle_t"><span class="n"><span class="pre">async_color_convert_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">conv_hdl</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433esp_async_color_convert_uninstall28async_color_convert_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Uninstall async color conversion driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>conv_hdl</strong> -- <strong>[in]</strong> Driver handle returned by :cpp:func:<code class="docutils literal notranslate"><span class="pre">esp_async_color_convert_install_dma2d</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Driver uninstalled successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: There are pending requests in the queue </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_async_color_convert28async_color_convert_handle_tPK29async_color_convert_request_t28async_color_convert_isr_cb_tPv">
+<span id="_CPPv323esp_async_color_convert28async_color_convert_handle_tPK29async_color_convert_request_t28async_color_convert_isr_cb_tPv"></span><span id="_CPPv223esp_async_color_convert28async_color_convert_handle_tPK29async_color_convert_request_t28async_color_convert_isr_cb_tPv"></span><span id="esp_async_color_convert__async_color_convert_handle_t.async_color_convert_request_tCP.async_color_convert_isr_cb_t.voidP"></span><span class="target" id="esp__async__color__convert_8h_1a2c59de865bfb42255c0ce307bc94d341"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_async_color_convert</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv428async_color_convert_handle_t" title="async_color_convert_handle_t"><span class="n"><span class="pre">async_color_convert_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">conv_hdl</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv429async_color_convert_request_t" title="async_color_convert_request_t"><span class="n"><span class="pre">async_color_convert_request_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">request</span></span>, <a class="reference internal" href="#_CPPv428async_color_convert_isr_cb_t" title="async_color_convert_isr_cb_t"><span class="n"><span class="pre">async_color_convert_isr_cb_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cb_isr</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cb_args</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_async_color_convert28async_color_convert_handle_tPK29async_color_convert_request_t28async_color_convert_isr_cb_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Submit an asynchronous 2D color conversion request. </p>
+<p>The request is enqueued and completed later in DMA2D interrupt context. The callback can be NULL if no completion notification is needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conv_hdl</strong> -- <strong>[in]</strong> Driver handle returned by :cpp:func:<code class="docutils literal notranslate"><span class="pre">esp_async_color_convert_install_dma2d</span></code></p></li>
+<li><p><strong>request</strong> -- <strong>[in]</strong> Color conversion request </p></li>
+<li><p><strong>cb_isr</strong> -- <strong>[in]</strong> ISR callback invoked on conversion completion, can be NULL </p></li>
+<li><p><strong>cb_args</strong> -- <strong>[in]</strong> User context passed to <code class="docutils literal notranslate"><span class="pre">cb_isr</span></code></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Request accepted</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument or invalid request fields</p></li>
+<li><p>ESP_ERR_INVALID_STATE: No free internal transaction slot (queue full)</p></li>
+<li><p>others: Error from lower-level DMA2D driver </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426esp_color_convert_blocking28async_color_convert_handle_tPK29async_color_convert_request_t7int32_t">
+<span id="_CPPv326esp_color_convert_blocking28async_color_convert_handle_tPK29async_color_convert_request_t7int32_t"></span><span id="_CPPv226esp_color_convert_blocking28async_color_convert_handle_tPK29async_color_convert_request_t7int32_t"></span><span id="esp_color_convert_blocking__async_color_convert_handle_t.async_color_convert_request_tCP.int32_t"></span><span class="target" id="esp__async__color__convert_8h_1ad1c52e550b89a6963d8e52f92e215a0a"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_color_convert_blocking</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv428async_color_convert_handle_t" title="async_color_convert_handle_t"><span class="n"><span class="pre">async_color_convert_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">conv_hdl</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv429async_color_convert_request_t" title="async_color_convert_request_t"><span class="n"><span class="pre">async_color_convert_request_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">request</span></span>, <span class="n"><span class="pre">int32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout_ms</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426esp_color_convert_blocking28async_color_convert_handle_tPK29async_color_convert_request_t7int32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Blocking 2D color conversion API built on async request path. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API must not be called from ISR context.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conv_hdl</strong> -- <strong>[in]</strong> Driver handle returned by :cpp:func:<code class="docutils literal notranslate"><span class="pre">esp_async_color_convert_install_dma2d</span></code></p></li>
+<li><p><strong>request</strong> -- <strong>[in]</strong> Color conversion request </p></li>
+<li><p><strong>timeout_ms</strong> -- <strong>[in]</strong> Timeout in milliseconds. Currently only <code class="docutils literal notranslate"><span class="pre">-1</span></code> is supported, which waits forever.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Conversion completed successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument, unsupported timeout, or invalid request fields</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Called from ISR context, or queue unavailable</p></li>
+<li><p>others: Error from lower-level DMA2D driver </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h4>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h4>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv432async_color_convert_event_data_t">
+<span id="_CPPv332async_color_convert_event_data_t"></span><span id="_CPPv232async_color_convert_event_data_t"></span><span id="async_color_convert_event_data_t"></span><span class="target" id="structasync__color__convert__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_color_convert_event_data_t</span></span></span><a class="headerlink" href="#_CPPv432async_color_convert_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async color conversion event data. </p>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv428async_color_convert_config_t">
+<span id="_CPPv328async_color_convert_config_t"></span><span id="_CPPv228async_color_convert_config_t"></span><span id="async_color_convert_config_t"></span><span class="target" id="structasync__color__convert__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_color_convert_config_t</span></span></span><a class="headerlink" href="#_CPPv428async_color_convert_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async color conversion driver configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28async_color_convert_config_t7backlogE">
+<span id="_CPPv3N28async_color_convert_config_t7backlogE"></span><span id="_CPPv2N28async_color_convert_config_t7backlogE"></span><span id="async_color_convert_config_t::backlog__uint32_t"></span><span class="target" id="structasync__color__convert__config__t_1ac82504451b9986652ace6191b37d5b73"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">backlog</span></span></span><a class="headerlink" href="#_CPPv4N28async_color_convert_config_t7backlogE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of in-flight/pending requests. 0 means driver default. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28async_color_convert_config_t14dma_burst_sizeE">
+<span id="_CPPv3N28async_color_convert_config_t14dma_burst_sizeE"></span><span id="_CPPv2N28async_color_convert_config_t14dma_burst_sizeE"></span><span id="async_color_convert_config_t::dma_burst_size__s"></span><span class="target" id="structasync__color__convert__config__t_1a898b97a6bc2a8b66661d19d799f4763c"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dma_burst_size</span></span></span><a class="headerlink" href="#_CPPv4N28async_color_convert_config_t14dma_burst_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DMA burst length in bytes. 0 means driver default. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28async_color_convert_config_t13intr_priorityE">
+<span id="_CPPv3N28async_color_convert_config_t13intr_priorityE"></span><span id="_CPPv2N28async_color_convert_config_t13intr_priorityE"></span><span id="async_color_convert_config_t::intr_priority__uint32_t"></span><span class="target" id="structasync__color__convert__config__t_1ac485eb366f82da60e0856828438368b4"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">intr_priority</span></span></span><a class="headerlink" href="#_CPPv4N28async_color_convert_config_t13intr_priorityE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Interrupt priority. 0 means default low/medium priority. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv429async_color_convert_request_t">
+<span id="_CPPv329async_color_convert_request_t"></span><span id="_CPPv229async_color_convert_request_t"></span><span id="async_color_convert_request_t"></span><span class="target" id="structasync__color__convert__request__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">async_color_convert_request_t</span></span></span><a class="headerlink" href="#_CPPv429async_color_convert_request_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async color conversion request. </p>
+<p>Coordinates and size are in pixels.</p>
+<p>The source and destination windows are:<ul class="simple">
+<li><p>source: [src_x, src_x + copy_width) x [src_y, src_y + copy_height)</p></li>
+<li><p>destination: [dst_x, dst_x + copy_width) x [dst_y, dst_y + copy_height)</p></li>
+</ul>
+</p>
+<p>Both windows must be fully inside their corresponding image bounds.</p>
+<p>Conversion rule is inferred from source and destination formats:<ul class="simple">
+<li><p>If source and destination are the same format, it performs 2D copy only. </p></li>
+</ul>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10src_bufferE">
+<span id="_CPPv3N29async_color_convert_request_t10src_bufferE"></span><span id="_CPPv2N29async_color_convert_request_t10src_bufferE"></span><span id="async_color_convert_request_t::src_buffer__voidCP"></span><span class="target" id="structasync__color__convert__request__t_1a17d346709f52abb6b23b6fa2b4ceb2bd"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">src_buffer</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10src_bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source picture base address </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10src_strideE">
+<span id="_CPPv3N29async_color_convert_request_t10src_strideE"></span><span id="_CPPv2N29async_color_convert_request_t10src_strideE"></span><span id="async_color_convert_request_t::src_stride__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1aec19a5e690045131b559346460ff98c4"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_stride</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10src_strideE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source picture row stride in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10src_heightE">
+<span id="_CPPv3N29async_color_convert_request_t10src_heightE"></span><span id="_CPPv2N29async_color_convert_request_t10src_heightE"></span><span id="async_color_convert_request_t::src_height__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a83c3d2f66629a5e63ea1daad231b1603"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_height</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10src_heightE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source picture height in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t5src_xE">
+<span id="_CPPv3N29async_color_convert_request_t5src_xE"></span><span id="_CPPv2N29async_color_convert_request_t5src_xE"></span><span id="async_color_convert_request_t::src_x__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1aee71b8e637bab7a4658f2ff45f4281dc"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_x</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t5src_xE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source window x offset in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t5src_yE">
+<span id="_CPPv3N29async_color_convert_request_t5src_yE"></span><span id="_CPPv2N29async_color_convert_request_t5src_yE"></span><span id="async_color_convert_request_t::src_y__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a92a98c15bda6a65667bd050c4c2652be"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_y</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t5src_yE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source window y offset in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10dst_bufferE">
+<span id="_CPPv3N29async_color_convert_request_t10dst_bufferE"></span><span id="_CPPv2N29async_color_convert_request_t10dst_bufferE"></span><span id="async_color_convert_request_t::dst_buffer__voidP"></span><span class="target" id="structasync__color__convert__request__t_1acc71c03ba5c0cf08b917a185e717b9ac"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">dst_buffer</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10dst_bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination picture base address </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10dst_strideE">
+<span id="_CPPv3N29async_color_convert_request_t10dst_strideE"></span><span id="_CPPv2N29async_color_convert_request_t10dst_strideE"></span><span id="async_color_convert_request_t::dst_stride__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a762b3d9156280001b1031ba777730b98"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_stride</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10dst_strideE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination picture row stride in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10dst_heightE">
+<span id="_CPPv3N29async_color_convert_request_t10dst_heightE"></span><span id="_CPPv2N29async_color_convert_request_t10dst_heightE"></span><span id="async_color_convert_request_t::dst_height__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a11f47cdd8edc6285808d52f08ca39034"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_height</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10dst_heightE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination picture height in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t5dst_xE">
+<span id="_CPPv3N29async_color_convert_request_t5dst_xE"></span><span id="_CPPv2N29async_color_convert_request_t5dst_xE"></span><span id="async_color_convert_request_t::dst_x__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a2a9a58622a34bd2ad2956492952b3cd1"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_x</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t5dst_xE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination window x offset in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t5dst_yE">
+<span id="_CPPv3N29async_color_convert_request_t5dst_yE"></span><span id="_CPPv2N29async_color_convert_request_t5dst_yE"></span><span id="async_color_convert_request_t::dst_y__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a45b2daea58cd020bac38574f1a094f5b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_y</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t5dst_yE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination window y offset in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t10copy_widthE">
+<span id="_CPPv3N29async_color_convert_request_t10copy_widthE"></span><span id="_CPPv2N29async_color_convert_request_t10copy_widthE"></span><span id="async_color_convert_request_t::copy_width__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1ac0f3642ad02efc01ed42f8b80250dd40"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">copy_width</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t10copy_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Conversion window width in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t11copy_heightE">
+<span id="_CPPv3N29async_color_convert_request_t11copy_heightE"></span><span id="_CPPv2N29async_color_convert_request_t11copy_heightE"></span><span id="async_color_convert_request_t::copy_height__uint32_t"></span><span class="target" id="structasync__color__convert__request__t_1a73b61080c0a2d0ce93b0b28784ce0056"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">copy_height</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t11copy_heightE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Conversion window height in pixels </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t16src_color_formatE">
+<span id="_CPPv3N29async_color_convert_request_t16src_color_formatE"></span><span id="_CPPv2N29async_color_convert_request_t16src_color_formatE"></span><span id="async_color_convert_request_t::src_color_format__esp_color_fourcc_t"></span><span class="target" id="structasync__color__convert__request__t_1a2b346c84d0482b07d035e2aec2ec1b5f"></span><span class="n"><span class="pre">esp_color_fourcc_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_color_format</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t16src_color_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source pixel format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t16dst_color_formatE">
+<span id="_CPPv3N29async_color_convert_request_t16dst_color_formatE"></span><span id="_CPPv2N29async_color_convert_request_t16dst_color_formatE"></span><span id="async_color_convert_request_t::dst_color_format__esp_color_fourcc_t"></span><span class="target" id="structasync__color__convert__request__t_1a13064ece8ac42ad1b5f0798cef96db16"></span><span class="n"><span class="pre">esp_color_fourcc_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dst_color_format</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t16dst_color_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Destination pixel format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N29async_color_convert_request_t14color_conv_stdE">
+<span id="_CPPv3N29async_color_convert_request_t14color_conv_stdE"></span><span id="_CPPv2N29async_color_convert_request_t14color_conv_stdE"></span><span id="async_color_convert_request_t::color_conv_std__color_conv_std_rgb_yuv_t"></span><span class="target" id="structasync__color__convert__request__t_1a8d6f12593a740572fc593ed958f6cc08"></span><span class="n"><span class="pre">color_conv_std_rgb_yuv_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">color_conv_std</span></span></span><a class="headerlink" href="#_CPPv4N29async_color_convert_request_t14color_conv_stdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>RGB/YUV conversion standard for RGB888&lt;-&gt;UYVY422 </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h4>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h4>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv428async_color_convert_handle_t">
+<span id="_CPPv328async_color_convert_handle_t"></span><span id="_CPPv228async_color_convert_handle_t"></span><span id="async_color_convert_handle_t"></span><span class="target" id="esp__async__color__convert_8h_1a537aa5be80c8ff9f73333ab519440942"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">async_color_convert_context_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">async_color_convert_handle_t</span></span></span><a class="headerlink" href="#_CPPv428async_color_convert_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Opaque handle of async color conversion driver instance. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv428async_color_convert_isr_cb_t">
+<span id="_CPPv328async_color_convert_isr_cb_t"></span><span id="_CPPv228async_color_convert_isr_cb_t"></span><span id="async_color_convert_isr_cb_t"></span><span class="target" id="esp__async__color__convert_8h_1a45455aec1bce430483328898f6fc6aea"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">async_color_convert_isr_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv428async_color_convert_handle_t" title="async_color_convert_handle_t"><span class="n"><span class="pre">async_color_convert_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">conv_hdl</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv432async_color_convert_event_data_t" title="async_color_convert_event_data_t"><span class="n"><span class="pre">async_color_convert_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">cb_args</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv428async_color_convert_isr_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Async color conversion callback type. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This callback runs in ISR context.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Param conv_hdl<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> Driver handle that produced this event </p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> Event data for the completed request </p>
+</dd>
+<dt class="field-odd">Param cb_args<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User context passed to :cpp:func:<code class="docutils literal notranslate"><span class="pre">esp_async_color_convert</span></code></p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>true: a higher-priority task was woken and a yield is requested</p></li>
+<li><p>false: no yield request </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Asynchronous Color Conversion (api-reference/peripherals/async_color_convert)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Asynchronous Color Conversion (api-reference/peripherals/async_color_convert)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="async_crc.html" class="btn btn-neutral float-left" title="Asynchronous CRC Calculation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="async_memcpy.html" class="btn btn-neutral float-right" title="Asynchronous Memory Copy" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

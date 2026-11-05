@@ -1,0 +1,80 @@
+Chip is ESP32-P4 (revision v0.0)
+Features: High-Performance MCU
+Crystal is 40MHz
+USB High-Speed is for audio interface, 192khz 4 channels in + 2 384khz channels out
+and recording to SD
+
+--- SD ---
+GPIO 42 - D3
+GPIO 44 - DI (CMD)
+GPIO 43 - CLK
+GPIO 39 - DO
+GPIO 40 - D1 
+GPIO 41 - D2
+
+
+--- PCM5100A+HT97226 ---
+GPIO 9 - SD
+GPIO 6 - MC (possibly not needed)
+GPIO 4 - BCK
+GPIO 5 - DIN
+GPIO 11 - WS 
+
+--- ESP32-C3 (for wireless config) ---
+Chip is ESP32-C3 (QFN32) (revision v0.4)
+Features: WiFi, BLE, Embedded Flash 4MB (XMC)
+Crystal is 40MHz
+USB on C3 will be used as configuration via wire, or BLE.
+
+GPIO 45 - UART4_TX (RX-ON-C3: GPIO20)
+GPIO 46 - UART4_RX (TX-ON-C3: GPIO21)
+
+--- PCM1865DBTR (Software-Controlled in Slave PLL Mode with 3.3v IOVDD) ---
+GPIO 12 - DOUT
+GPIO 14 - LRCK
+GPIO 13 - BCK 
+GPIO 22 - SDA
+GPIO 23 - SCL
+GPIO 15 - MC (Likely not needed as the PCM18xx is in slave mode, generating its own MC in PLL)
+HAL ADDRESS: 0x94
+
+--- I2C (0.96" OLED: SSD1315) ---
+GPIO 22 - SDA
+GPIO 23 - SCL
+HAL ADDRESS: 0x78
+
+--- SPI 1.54 Inch 200x200 Epaper Module ---
+GPIO 16 - SDA 
+GPIO 17 - SCL
+GPIO 18 - CS
+GPIO 19 - RES
+GPIO 20 - BUSY
+GPIO 21 - D/C
+
+--- Buttons (F/W Pullup needed!) ---
+GPIO 29 - Side key 3 (Bottom - Left 1) REC/STOP CH
+GPIO 30 - Side key 4 (Bottom - Left 2) Switch USB modes
+
+GPIO 38 - Side key 1 (Top - Left 1) PLAY/PAUSE
+GPIO 37 - Side key 2 (Top - Left 2) (Hold 0.6s to toggle Live Monitor)
+
+GPIO 10 - Side key 5 (Top - Right 1) SKIP
+GPIO 3 - Side key 6 (Top - Right 2) Previous
+
+GPIO 2 - Encoder Press | PressSelect
+GPIO 53 - Encoder A    | Vol -
+GPIO 54 - Encoder B    | Vol +
+
+GPIO 48 - Front key 3 (Left) hold - back
+GPIO 52 - Front key 1 (Right) hold - ok/enter
+GPIO 49 - Front key 4 (Up)
+GPIO 50 - Front key 2 (Down)
+
+--- Auditors ---
+
+GPIO 47 - WS2818B (one led, near controls)
+GPIO 31 - WS2818B (2 leds, bottom of device for status)
+GPIO 51 - WS2818B (one led, on devboard, probibly not going to be used, maybe a debugging status led)
+GPIO 42 - Passive Buzzer (DONT USE)
+GPIO 41 - Vibrator (DONT USE)
+

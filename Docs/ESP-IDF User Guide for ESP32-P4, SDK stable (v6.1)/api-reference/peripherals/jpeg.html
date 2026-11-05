@@ -1,0 +1,1727 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JPEG Encoder and Decoder - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/jpeg.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/jpeg';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Key Manager" href="key_manager.html" />
+    <link rel="prev" title="Image Signal Processor (ISP)" href="isp.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">JPEG Encoder and Decoder</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#maintainers-notes">Maintainers' Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">JPEG Encoder and Decoder</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/jpeg.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="jpeg-encoder-and-decoder">
+<h1>JPEG Encoder and Decoder<a class="headerlink" href="#jpeg-encoder-and-decoder" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/jpeg.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>JPEG is a commonly used method of lossy compression for digital images, particularly for those images produced by digital photography. The compression level varies with changes in image size and compression quality. JPEG typically achieves 10:1 compression with little perceptible loss in image quality.</p>
+<p>JPEG codec on ESP32-P4 is an image codec, which is based on the JPEG baseline standard, for compressing and decompressing images to reduce the bandwidth required to transmit images or the space required to store images, making it possible to process large-resolution images. But please note, at one time, the codec engine can only work as either encoder or decoder.</p>
+<p>For more hardware features of JPEG codec, please refer to the <a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#jpegcodec">JPEG codec</a> section in ESP32-P4 Technical Reference Manual, for more details.</p>
+</section>
+<section id="functional-overview">
+<h2>Functional Overview<a class="headerlink" href="#functional-overview" title="Permalink to this heading"></a></h2>
+<p>This document covers the following sections:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#jpeg-resource-allocation"><span class="std std-ref">Resource Allocation</span></a> - covers how to allocate JPEG resources with properly set of configurations. It also covers how to recycle the resources when they finished working.</p></li>
+<li><p><a class="reference internal" href="#jpeg-finite-state-machine"><span class="std std-ref">Finite State Machine</span></a> - covers JPEG workflow. Introduce how jpeg driver uses internal resources and its software process.</p></li>
+<li><p><a class="reference internal" href="#jpeg-decoder-engine"><span class="std std-ref">JPEG Decoder Engine</span></a> - covers behavior of JPEG decoder engine. Introduce how to use decoder engine functions to decode an image (from jpg format to raw format).</p></li>
+<li><p><a class="reference internal" href="#jpeg-encoder-engine"><span class="std std-ref">JPEG Encoder Engine</span></a> - covers behavior of JPEG encoder engine. Introduce how to use encoder engine functions to encode an image (from raw format to jpg format).</p></li>
+<li><p><a class="reference internal" href="#jpeg-performance-overview"><span class="std std-ref">Performance Overview</span></a> - covers encoder and decoder performance.</p></li>
+<li><p><a class="reference internal" href="#jpeg-pixel-storage-layout"><span class="std std-ref">Pixel Storage Layout for Different Color Formats</span></a> - covers color space order overview required in this JPEG decoder and encoder.</p></li>
+<li><p><a class="reference internal" href="#jpeg-thread-safety"><span class="std std-ref">Thread Safety</span></a> - lists which APIs are guaranteed to be thread safe by the driver.</p></li>
+<li><p><a class="reference internal" href="#jpeg-power-management"><span class="std std-ref">Power Management</span></a> - describes how JPEG driver would be affected by power consumption.</p></li>
+<li><p><a class="reference internal" href="#jpeg-flash-encryption"><span class="std std-ref">Usage Under Encryption</span></a> - describes how to use the JPEG codec correctly when flash/PSRAM encryption is enabled.</p></li>
+<li><p><a class="reference internal" href="#jpeg-kconfig-options"><span class="std std-ref">Kconfig Options</span></a> - lists the supported Kconfig options that can bring different effects to the driver.</p></li>
+</ul>
+<section id="resource-allocation">
+<span id="jpeg-resource-allocation"></span><h3>Resource Allocation<a class="headerlink" href="#resource-allocation" title="Permalink to this heading"></a></h3>
+<section id="install-jpeg-decoder-engine">
+<h4>Install JPEG decoder engine<a class="headerlink" href="#install-jpeg-decoder-engine" title="Permalink to this heading"></a></h4>
+<p>JPEG decoder engine requires the configuration that specified by <a class="reference internal" href="#_CPPv424jpeg_decode_engine_cfg_t" title="jpeg_decode_engine_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">jpeg_decode_engine_cfg_t</span></code></a>.</p>
+<p>If the configurations in <a class="reference internal" href="#_CPPv424jpeg_decode_engine_cfg_t" title="jpeg_decode_engine_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">jpeg_decode_engine_cfg_t</span></code></a> is specified, users can call <a class="reference internal" href="#_CPPv423jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t" title="jpeg_new_decoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_new_decoder_engine()</span></code></a> to allocate and initialize a JPEG decoder engine. This function will return an JPEG decoder handle if it runs correctly. You can take following code as reference.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">jpeg_decoder_handle_t</span><span class="w"> </span><span class="n">decoder_engine</span><span class="p">;</span>
+
+<span class="n">jpeg_decode_engine_cfg_t</span><span class="w"> </span><span class="n">decode_eng_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">intr_priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timeout_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_new_decoder_engine</span><span class="p">(</span><span class="o">&amp;</span><span class="n">decode_eng_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">decoder_engine</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="uninstall-jpeg-decoder-engine">
+<h4>Uninstall JPEG decoder engine<a class="headerlink" href="#uninstall-jpeg-decoder-engine" title="Permalink to this heading"></a></h4>
+<p>If a previously installed JPEG engine is no longer needed, it's recommended to recycle the resource by calling <a class="reference internal" href="#_CPPv423jpeg_del_decoder_engine21jpeg_decoder_handle_t" title="jpeg_del_decoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_del_decoder_engine()</span></code></a>, so that the underlying hardware is released.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_del_decoder_engine</span><span class="p">(</span><span class="n">decoder_engine</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="install-jpeg-encoder-engine">
+<h4>Install JPEG encoder engine<a class="headerlink" href="#install-jpeg-encoder-engine" title="Permalink to this heading"></a></h4>
+<p>The JPEG encoder engine requires the configuration specified by <a class="reference internal" href="#_CPPv424jpeg_encode_engine_cfg_t" title="jpeg_encode_engine_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">jpeg_encode_engine_cfg_t</span></code></a>.</p>
+<p>If the configurations in <a class="reference internal" href="#_CPPv424jpeg_encode_engine_cfg_t" title="jpeg_encode_engine_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">jpeg_encode_engine_cfg_t</span></code></a> is specified, users can call <a class="reference internal" href="#_CPPv423jpeg_new_encoder_enginePK24jpeg_encode_engine_cfg_tP21jpeg_encoder_handle_t" title="jpeg_new_encoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_new_encoder_engine()</span></code></a> to allocate and initialize a JPEG encoder engine. This function will return an JPEG encoder handle if it runs correctly. You can take following code as reference.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">jpeg_encoder_handle_t</span><span class="w"> </span><span class="n">encoder_engine</span><span class="p">;</span>
+
+<span class="n">jpeg_encode_engine_cfg_t</span><span class="w"> </span><span class="n">encode_eng_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">intr_priority</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">timeout_ms</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">40</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_new_encoder_engine</span><span class="p">(</span><span class="o">&amp;</span><span class="n">encode_eng_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">encoder_engine</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="uninstall-jpeg-encoder-engine">
+<h4>Uninstall JPEG encoder engine<a class="headerlink" href="#uninstall-jpeg-encoder-engine" title="Permalink to this heading"></a></h4>
+<p>If a previously installed JPEG engine is no longer needed, it's recommended to recycle the resource by calling <a class="reference internal" href="#_CPPv423jpeg_del_encoder_engine21jpeg_encoder_handle_t" title="jpeg_del_encoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_del_encoder_engine()</span></code></a>, so that the underlying hardware is released.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_del_encoder_engine</span><span class="p">(</span><span class="n">encoder_engine</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="finite-state-machine">
+<span id="jpeg-finite-state-machine"></span><h3>Finite State Machine<a class="headerlink" href="#finite-state-machine" title="Permalink to this heading"></a></h3>
+<p>The JPEG driver usage of hardware resources and its process workflow are shown in the following graph:</p>
+<figure class="align-center" id="id18">
+<img alt="JPEG finite state machine" src="../../_images/jpeg_workflow.png" />
+<figcaption>
+<p><span class="caption-text">JPEG finite state machine</span><a class="headerlink" href="#id18" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="jpeg-decoder-engine">
+<span id="id1"></span><h3>JPEG Decoder Engine<a class="headerlink" href="#jpeg-decoder-engine" title="Permalink to this heading"></a></h3>
+<p>After installing the JPEG decoder driver by <a class="reference internal" href="#_CPPv423jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t" title="jpeg_new_decoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_new_decoder_engine()</span></code></a>, ESP32-P4 is ready to decode JPEG pictures by <a class="reference internal" href="#_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_decoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_process()</span></code></a>. <a class="reference internal" href="#_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_decoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_process()</span></code></a> is flexible for decoding different types of pictures by a configurable parameter called <a class="reference internal" href="#_CPPv417jpeg_decode_cfg_t" title="jpeg_decode_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">jpeg_decode_cfg_t</span></code></a>.</p>
+<p>Moreover, our JPEG decoder API provides a helper function which helps you get the basic information of your given image. Calling <a class="reference internal" href="#_CPPv421jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t" title="jpeg_decoder_get_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_get_info()</span></code></a> would return the picture information structure called <a class="reference internal" href="#_CPPv421jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t" title="jpeg_decoder_get_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_get_info()</span></code></a>. If you already know the picture basic information, this functions is unnecessary to be called.</p>
+<p>The format conversions supported by this driver are listed in the table below:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Format of the already compressed image</p></th>
+<th class="head"><p>Format after decompressing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>YUV444</p></td>
+<td><p>RGB565/RGB888</p></td>
+</tr>
+<tr class="row-odd"><td><p>YUV422</p></td>
+<td><p>RGB565/RGB888</p></td>
+</tr>
+<tr class="row-even"><td><p>YUV420</p></td>
+<td><p>RGB565/RGB888</p></td>
+</tr>
+<tr class="row-odd"><td><p>GRAY</p></td>
+<td><p>GRAY</p></td>
+</tr>
+</tbody>
+</table>
+<p>Overall, You can take following code as reference, the code is going to decode a 1080*1920 picture.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">jpeg_decode_cfg_t</span><span class="w"> </span><span class="n">decode_cfg_rgb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">output_format</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JPEG_DECODE_OUT_FORMAT_RGB888</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rgb_order</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JPEG_DEC_RGB_ELEMENT_ORDER_BGR</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="kt">size_t</span><span class="w"> </span><span class="n">rx_buffer_size</span><span class="p">;</span>
+
+<span class="n">jpeg_decode_memory_alloc_cfg_t</span><span class="w"> </span><span class="n">rx_mem_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">buffer_direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JPEG_DEC_ALLOC_OUTPUT_BUFFER</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">bit_stream</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">embedded_jpeg_start</span><span class="p">;</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">out_buf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">jpeg_alloc_decoder_mem</span><span class="p">(</span><span class="mi">1920</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1088</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rx_mem_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rx_buffer_size</span><span class="p">);</span>
+
+<span class="n">jpeg_decode_picture_info_t</span><span class="w"> </span><span class="n">header_info</span><span class="p">;</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_decoder_get_info</span><span class="p">(</span><span class="n">bit_stream</span><span class="p">,</span><span class="w"> </span><span class="n">bit_stream_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">header_info</span><span class="p">));</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">out_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_decoder_process</span><span class="p">(</span><span class="n">decoder_engine</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">decode_cfg_rgb</span><span class="p">,</span><span class="w"> </span><span class="n">bit_stream</span><span class="p">,</span><span class="w"> </span><span class="n">bit_stream_size</span><span class="p">,</span><span class="w"> </span><span class="n">out_buf</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">out_size</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>There are some tips that can help you use this driver more accurately:</p>
+<ol class="arabic simple">
+<li><p>In above code, you should make sure the output buffer <cite>out_buf</cite> follows the driver's alignment requirements. We provide a helper function <a class="reference internal" href="#_CPPv422jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t" title="jpeg_alloc_decoder_mem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_alloc_decoder_mem()</span></code></a> to help you allocate a buffer with aligned size and address.</p></li>
+<li><p>The content of <cite>bit_stream</cite> should not be changed until <a class="reference internal" href="#_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_decoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_process()</span></code></a> returns. This input buffer can come directly from flash-mapped embedded data or any other memory region that stays readable for the full call.</p></li>
+<li><p>If the source JPEG uses YUV420 or YUV422 sampling, the decoded output dimensions can be padded up to 16-pixel boundaries. For example, if the visible image size is 1080*1920, the decoder may require an output buffer sized for 1088*1920 pixels. This comes from the JPEG block layout, so please provide enough output buffer memory for the padded image, not only for the visible width and height.</p></li>
+</ol>
+</section>
+<section id="jpeg-encoder-engine">
+<span id="id2"></span><h3>JPEG Encoder Engine<a class="headerlink" href="#jpeg-encoder-engine" title="Permalink to this heading"></a></h3>
+<p>After installing the JPEG encoder driver by <a class="reference internal" href="#_CPPv423jpeg_new_encoder_enginePK24jpeg_encode_engine_cfg_tP21jpeg_encoder_handle_t" title="jpeg_new_encoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_new_encoder_engine()</span></code></a>, ESP32-P4 is ready to encode JPEG pictures by <a class="reference internal" href="#_CPPv420jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_encoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_encoder_process()</span></code></a>. <a class="reference internal" href="#_CPPv420jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_encoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_encoder_process()</span></code></a> is flexible for decoding different types of pictures by a configurable parameter called <a class="reference internal" href="#_CPPv417jpeg_encode_cfg_t" title="jpeg_encode_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">jpeg_encode_cfg_t</span></code></a>.</p>
+<p>The format conversions supported by this driver are listed in the table below:</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 50.0%" />
+<col style="width: 50.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Format of Original Image</p></th>
+<th class="head"><p>Down sampling method</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>RGB565/RGB888</p></td>
+<td><p>YUV444/YUV422/YUV420</p></td>
+</tr>
+<tr class="row-odd"><td><p>GRAY</p></td>
+<td><p>GRAY</p></td>
+</tr>
+</tbody>
+</table>
+<p>Below is the example of code that encodes a 1280x720 picture from an embedded raw buffer:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">size_t</span><span class="w"> </span><span class="n">raw_size_720p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_WIDTH</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">EXAMPLE_HEIGHT</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">3</span><span class="p">;</span><span class="w"> </span><span class="cm">/* 1280x720 bgr24 frame */</span>
+<span class="n">jpeg_encode_cfg_t</span><span class="w"> </span><span class="n">enc_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JPEG_ENCODE_IN_FORMAT_RGB888</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">sub_sample</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JPEG_DOWN_SAMPLING_YUV422</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">image_quality</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">80</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">width</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1280</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">height</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">720</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">pixel_reverse</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">false</span><span class="p">,</span><span class="w"> </span><span class="c1">// Whether to reverse the pixel order of the input image, or pixel order detail please refer to technical reference manual</span>
+<span class="p">};</span>
+
+<span class="n">jpeg_encode_memory_alloc_cfg_t</span><span class="w"> </span><span class="n">rx_mem_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">buffer_direction</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">JPEG_ENC_ALLOC_OUTPUT_BUFFER</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">jpg_buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">jpg_buf_720p</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="o">*</span><span class="p">)</span><span class="n">jpeg_alloc_encoder_mem</span><span class="p">(</span><span class="n">raw_size_720p</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">rx_mem_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">jpg_buffer_size</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">jpg_buf_720p</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="nb">NULL</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_LOGE</span><span class="p">(</span><span class="n">TAG</span><span class="p">,</span><span class="w"> </span><span class="s">"alloc jpg_buf_720p error"</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* The current JPEG encoder input path expects BGR24-style raw bytes for</span>
+<span class="cm"> * JPEG_ENCODE_IN_FORMAT_RGB888. The embedded asset can be read directly</span>
+<span class="cm"> * from flash as long as it remains valid until this call returns. */</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">jpeg_encoder_process</span><span class="p">(</span><span class="n">jpeg_handle</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">enc_config</span><span class="p">,</span><span class="w"> </span><span class="n">embedded_bgr24_start</span><span class="p">,</span><span class="w"> </span><span class="n">raw_size_720p</span><span class="p">,</span><span class="w"> </span><span class="n">jpg_buf_720p</span><span class="p">,</span><span class="w"> </span><span class="n">jpg_buffer_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">jpg_size_720p</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>There are some tips that can help you use this driver more accurately:</p>
+<ol class="arabic simple">
+<li><p>In the above code, the output buffer <cite>jpg_buf_720p</cite> should be allocated by calling <a class="reference internal" href="#_CPPv422jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t" title="jpeg_alloc_encoder_mem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_alloc_encoder_mem()</span></code></a>, because the JPEG bitstream buffer must satisfy the driver's alignment requirements.</p></li>
+<li><p>The content pointed to by <cite>embedded_bgr24_start</cite> should not be changed until <a class="reference internal" href="#_CPPv420jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_encoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_encoder_process()</span></code></a> returns. This input buffer can come from flash-mapped embedded data or another memory region that stays readable for the full call.</p></li>
+<li><p>For <a class="reference internal" href="#_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB888E" title="JPEG_ENCODE_IN_FORMAT_RGB888"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">JPEG_ENCODE_IN_FORMAT_RGB888</span></code></a>, the current driver expects the raw input bytes in a BGR24-style layout. Supplying RGB24 raw data would swap the red and blue channels in the encoded JPEG.</p></li>
+<li><p>The compression ratio depends on the chosen <cite>image_quality</cite> and the content of the image itself. Generally, a higher <cite>image_quality</cite> value obviously results in better image quality but a smaller compression ratio. As for the image content, it is hard to give any specific guidelines, so this question is out of the scope of this document. Generally, the baseline JPEG compression ratio can vary from 40:1 to 10:1. Please take the actual situation into account.</p></li>
+</ol>
+</section>
+<section id="performance-overview">
+<span id="jpeg-performance-overview"></span><h3>Performance Overview<a class="headerlink" href="#performance-overview" title="Permalink to this heading"></a></h3>
+<p>This section provides some measurements of the decoder and encoder performance. The data presented in the tables below gives the average values of decoding or encoding a randomly chosen picture fragments for 50 times. All tests were performed at a CPU frequency of 360MHz and a SPI RAM clock frequency of 200MHz. Only JPEG related code is run in this test, no other modules are involved (e.g. USB Camera, etc.).</p>
+<p>Both decoder and encoder are not cause too much CPU involvement. Only header parse causes CPU source. Calculations related to JPEG compression, such as DCT, quantization, huffman encoding/decoding, etc., are done entirely in hardware.</p>
+<section id="jpeg-decoder-performance">
+<h4>JPEG decoder performance<a class="headerlink" href="#jpeg-decoder-performance" title="Permalink to this heading"></a></h4>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JPEG Height</p></th>
+<th class="head"><p>JPEG Width</p></th>
+<th class="head"><p>Pixel Format in <a class="footnote-reference brackets" href="#id5" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></th>
+<th class="head"><p>Pixel Format out <a class="footnote-reference brackets" href="#id6" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a></p></th>
+<th class="head"><p>Performance (fps)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1080</p></td>
+<td><p>1920</p></td>
+<td><p>YUV422</p></td>
+<td><p>RGB888/RGB565</p></td>
+<td><p>48</p></td>
+</tr>
+<tr class="row-odd"><td><p>720</p></td>
+<td><p>1280</p></td>
+<td><p>YUV422</p></td>
+<td><p>RGB888/RGB565</p></td>
+<td><p>109</p></td>
+</tr>
+<tr class="row-even"><td><p>480</p></td>
+<td><p>800</p></td>
+<td><p>YUV422</p></td>
+<td><p>RGB888/RGB565</p></td>
+<td><p>253</p></td>
+</tr>
+<tr class="row-odd"><td><p>480</p></td>
+<td><p>640</p></td>
+<td><p>YUV422</p></td>
+<td><p>RGB888/RGB565</p></td>
+<td><p>307</p></td>
+</tr>
+<tr class="row-even"><td><p>480</p></td>
+<td><p>320</p></td>
+<td><p>YUV422</p></td>
+<td><p>RGB888/RGB565</p></td>
+<td><p>571</p></td>
+</tr>
+<tr class="row-odd"><td><p>720</p></td>
+<td><p>1280</p></td>
+<td><p>GRAY</p></td>
+<td><p>GRAY</p></td>
+<td><p>161</p></td>
+</tr>
+</tbody>
+</table>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id5" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">1</a><span class="fn-bracket">]</span></span>
+<p>Format of the already compressed image</p>
+</aside>
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">2</a><span class="fn-bracket">]</span></span>
+<p>Format after decompressing</p>
+</aside>
+</aside>
+</section>
+<section id="jpeg-encoder-performance">
+<h4>JPEG encoder performance<a class="headerlink" href="#jpeg-encoder-performance" title="Permalink to this heading"></a></h4>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+<col style="width: 20.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>JPEG Height</p></th>
+<th class="head"><p>JPEG Width</p></th>
+<th class="head"><p>Pixel Format in <a class="footnote-reference brackets" href="#id9" id="id7" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a></p></th>
+<th class="head"><p>Pixel Format out <a class="footnote-reference brackets" href="#id10" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a></p></th>
+<th class="head"><p>Performance (fps)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1080</p></td>
+<td><p>1920</p></td>
+<td><p>RGB888</p></td>
+<td><p>YUV422</p></td>
+<td><p>26</p></td>
+</tr>
+<tr class="row-odd"><td><p>1080</p></td>
+<td><p>1920</p></td>
+<td><p>RGB565</p></td>
+<td><p>YUV422</p></td>
+<td><p>36</p></td>
+</tr>
+<tr class="row-even"><td><p>1080</p></td>
+<td><p>1920</p></td>
+<td><p>RGB565</p></td>
+<td><p>YUV420</p></td>
+<td><p>40</p></td>
+</tr>
+<tr class="row-odd"><td><p>1080</p></td>
+<td><p>1920</p></td>
+<td><p>RGB565</p></td>
+<td><p>YUV444</p></td>
+<td><p>24</p></td>
+</tr>
+<tr class="row-even"><td><p>1080</p></td>
+<td><p>1920</p></td>
+<td><p>RGB888</p></td>
+<td><p>YUV422</p></td>
+<td><p>26</p></td>
+</tr>
+<tr class="row-odd"><td><p>720</p></td>
+<td><p>1280</p></td>
+<td><p>RGB565</p></td>
+<td><p>YUV420</p></td>
+<td><p>88</p></td>
+</tr>
+<tr class="row-even"><td><p>720</p></td>
+<td><p>1280</p></td>
+<td><p>RGB565</p></td>
+<td><p>YUV444</p></td>
+<td><p>55</p></td>
+</tr>
+<tr class="row-odd"><td><p>720</p></td>
+<td><p>1280</p></td>
+<td><p>RGB565</p></td>
+<td><p>YUV422</p></td>
+<td><p>81</p></td>
+</tr>
+<tr class="row-even"><td><p>480</p></td>
+<td><p>800</p></td>
+<td><p>RGB888</p></td>
+<td><p>YUV420</p></td>
+<td><p>142</p></td>
+</tr>
+<tr class="row-odd"><td><p>640</p></td>
+<td><p>800</p></td>
+<td><p>RGB888</p></td>
+<td><p>YUV420</p></td>
+<td><p>174</p></td>
+</tr>
+<tr class="row-even"><td><p>480</p></td>
+<td><p>320</p></td>
+<td><p>RGB888</p></td>
+<td><p>YUV420</p></td>
+<td><p>315</p></td>
+</tr>
+<tr class="row-odd"><td><p>720</p></td>
+<td><p>1280</p></td>
+<td><p>GRAY</p></td>
+<td><p>GRAY</p></td>
+<td><p>163</p></td>
+</tr>
+</tbody>
+</table>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id9" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id7">3</a><span class="fn-bracket">]</span></span>
+<p>Format of Original Image</p>
+</aside>
+<aside class="footnote brackets" id="id10" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">4</a><span class="fn-bracket">]</span></span>
+<p>Down sampling method</p>
+</aside>
+</aside>
+</section>
+</section>
+<section id="pixel-storage-layout-for-different-color-formats">
+<span id="jpeg-pixel-storage-layout"></span><h3>Pixel Storage Layout for Different Color Formats<a class="headerlink" href="#pixel-storage-layout-for-different-color-formats" title="Permalink to this heading"></a></h3>
+<p>The encoder and decoder described in this guide use the same uncompressed raw image formats (RGB, YUV). Therefore, the encoder and decoder are not discussed separately in this section. The pixel layout of the following formats applies to the input direction of the encoder and the output direction of the decoder (if supported). The specific pixel layout is shown in the following figure:</p>
+<section id="rgb888">
+<h4>RGB888<a class="headerlink" href="#rgb888" title="Permalink to this heading"></a></h4>
+<p>In the following picture, each small block means one bit.</p>
+<figure class="align-center" id="id19">
+<img alt="RGB888 pixel order" src="../../_images/rgb888.png" />
+<figcaption>
+<p><span class="caption-text">RGB888 pixel order</span><a class="headerlink" href="#id19" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For RGB888, the order can be changed via <a class="reference internal" href="#_CPPv4N17jpeg_decode_cfg_t9rgb_orderE" title="jpeg_decode_cfg_t::rgb_order"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">jpeg_decode_cfg_t::rgb_order</span></code></a> sets the pixel to <cite>RGB</cite> order.</p>
+<figure class="align-center" id="id20">
+<img alt="RGB888 pixel big endian order" src="../../_images/rgb888_bigendian.png" />
+<figcaption>
+<p><span class="caption-text">RGB888 pixel big endian order</span><a class="headerlink" href="#id20" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="rgb565">
+<h4>RGB565<a class="headerlink" href="#rgb565" title="Permalink to this heading"></a></h4>
+<p>In the following picture, each small block means one bit.</p>
+<figure class="align-center" id="id21">
+<img alt="RGB565 pixel order" src="../../_images/rgb565.png" />
+<figcaption>
+<p><span class="caption-text">RGB565 pixel order</span><a class="headerlink" href="#id21" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>For RGB565, the order can be changed via <a class="reference internal" href="#_CPPv4N17jpeg_decode_cfg_t9rgb_orderE" title="jpeg_decode_cfg_t::rgb_order"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">jpeg_decode_cfg_t::rgb_order</span></code></a> sets the pixel to <cite>RGB</cite> order.</p>
+<figure class="align-center" id="id22">
+<img alt="RGB565 pixel big endian order" src="../../_images/rgb565_bigendian.png" />
+<figcaption>
+<p><span class="caption-text">RGB565 pixel big endian order</span><a class="headerlink" href="#id22" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="yuv444">
+<h4>YUV444<a class="headerlink" href="#yuv444" title="Permalink to this heading"></a></h4>
+<p>In the following picture, each small block means one byte.</p>
+<figure class="align-center" id="id23">
+<img alt="YUV444 pixel order" src="../../_images/yuv444.png" />
+<figcaption>
+<p><span class="caption-text">YUV444 pixel order</span><a class="headerlink" href="#id23" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="yuv422">
+<h4>YUV422<a class="headerlink" href="#yuv422" title="Permalink to this heading"></a></h4>
+<p>In the following picture, each small block means one byte.</p>
+<figure class="align-center" id="id24">
+<img alt="YUV422 pixel order" src="../../_images/yuv422.png" />
+<figcaption>
+<p><span class="caption-text">YUV422 pixel order</span><a class="headerlink" href="#id24" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="yuv420">
+<h4>YUV420<a class="headerlink" href="#yuv420" title="Permalink to this heading"></a></h4>
+<p>In the following picture, each small block means one byte.</p>
+<figure class="align-center" id="id25">
+<img alt="YUV420 pixel order" src="../../_images/yuv420.png" />
+<figcaption>
+<p><span class="caption-text">YUV420 pixel order</span><a class="headerlink" href="#id25" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+</section>
+<section id="thread-safety">
+<span id="jpeg-thread-safety"></span><h3>Thread Safety<a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>The factory function <a class="reference internal" href="#_CPPv423jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t" title="jpeg_new_decoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_new_decoder_engine()</span></code></a>, <a class="reference internal" href="#_CPPv421jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t" title="jpeg_decoder_get_info"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_get_info()</span></code></a>, <a class="reference internal" href="#_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_decoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_process()</span></code></a>, and <a class="reference internal" href="#_CPPv423jpeg_del_decoder_engine21jpeg_decoder_handle_t" title="jpeg_del_decoder_engine"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_del_decoder_engine()</span></code></a> are guaranteed to be thread safe by the driver, which means, user can call them from different RTOS tasks without protection by extra locks.</p>
+</section>
+<section id="power-management">
+<span id="jpeg-power-management"></span><h3>Power Management<a class="headerlink" href="#power-management" title="Permalink to this heading"></a></h3>
+<p>When power management is enabled (i.e., <a class="reference internal" href="../kconfig-reference.html#config-pm-enable"><span class="std std-ref">CONFIG_PM_ENABLE</span></a> is set), the system needs to adjust or stop the source clock of JPEG to enter Light-sleep, thus potentially changing the JPEG decoder or encoder process. This might lead to unexpected behavior in hardware calculation. To prevent such issues, entering Light-sleep is disabled for the time when JPEG encoder or decoder is working.</p>
+<p>Whenever the user is decoding or encoding via JPEG (i.e., calling <a class="reference internal" href="#_CPPv420jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_encoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_encoder_process()</span></code></a> or <a class="reference internal" href="#_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="jpeg_decoder_process"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_decoder_process()</span></code></a>), the driver guarantees that the power management lock is acquired by setting it to <a class="reference internal" href="../system/power_management.html#_CPPv4N18esp_pm_lock_type_t19ESP_PM_CPU_FREQ_MAXE" title="esp_pm_lock_type_t::ESP_PM_CPU_FREQ_MAX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">esp_pm_lock_type_t::ESP_PM_CPU_FREQ_MAX</span></code></a>. Once the encoding or decoding is finished, the driver releases the lock and the system can enter Light-sleep.</p>
+</section>
+<section id="usage-under-encryption">
+<span id="jpeg-flash-encryption"></span><h3>Usage Under Encryption<a class="headerlink" href="#usage-under-encryption" title="Permalink to this heading"></a></h3>
+<p>The JPEG codec moves data via the 2D-DMA, and the JPEG codec <strong>cannot process encrypted data</strong>. Therefore, when PSRAM encryption is enabled, the JPEG input/output buffers must reside in an unencrypted memory region, otherwise encoding/decoding fails.</p>
+<p>To support the encrypted scenario, the driver does the following:</p>
+<ul class="simple">
+<li><p>When <code class="docutils literal notranslate"><span class="pre">CONFIG_SPIRAM_ENC_EXEMPT</span></code> is enabled, <a class="reference internal" href="#_CPPv422jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t" title="jpeg_alloc_decoder_mem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_alloc_decoder_mem()</span></code></a> and <a class="reference internal" href="#_CPPv422jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t" title="jpeg_alloc_encoder_mem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_alloc_encoder_mem()</span></code></a> allocate buffers from the unencrypted PSRAM region (<code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_SPIRAM_NO_ENC</span></code>) automatically.</p></li>
+<li><p>The allocated buffers satisfy both the cache line alignment and the byte alignment required by the 2D-DMA.</p></li>
+</ul>
+<p>Please note the following when using it:</p>
+<ol class="arabic simple">
+<li><p>It is recommended to always allocate buffers via <a class="reference internal" href="#_CPPv422jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t" title="jpeg_alloc_encoder_mem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_alloc_encoder_mem()</span></code></a> / <a class="reference internal" href="#_CPPv422jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t" title="jpeg_alloc_decoder_mem"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">jpeg_alloc_decoder_mem()</span></code></a> to ensure correct alignment and memory region.</p></li>
+<li><p>The size of the unencrypted region is determined by <code class="docutils literal notranslate"><span class="pre">CONFIG_SPIRAM_ENC_EXEMPT_SIZE</span></code>. Since the JPEG buffer size depends on the image resolution and cannot be predicted automatically, configure it according to the largest image you actually process. If the region is insufficient, the allocation fails and an error log is printed, suggesting to enlarge <code class="docutils literal notranslate"><span class="pre">CONFIG_SPIRAM_ENC_EXEMPT_SIZE</span></code>. Also note that this value must not be greater than or equal to the actual PSRAM size, otherwise the unencrypted region is disabled.</p></li>
+</ol>
+</section>
+<section id="kconfig-options">
+<span id="jpeg-kconfig-options"></span><h3>Kconfig Options<a class="headerlink" href="#kconfig-options" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-jpeg-enable-debug-log"><span class="std std-ref">CONFIG_JPEG_ENABLE_DEBUG_LOG</span></a> is used to enable the debug log at the cost of increased firmware binary size.</p></li>
+</ul>
+</section>
+</section>
+<section id="maintainers-notes">
+<h2>Maintainers' Notes<a class="headerlink" href="#maintainers-notes" title="Permalink to this heading"></a></h2>
+<p>The JPEG driver usage of hardware resources and its dependency status are shown in the following graph:</p>
+<figure class="align-center" id="id26">
+<img alt="JPEG driver files structure" src="../../_images/jpeg_drv_file_structure.png" />
+<figcaption>
+<p><span class="caption-text">JPEG driver file structure</span><a class="headerlink" href="#id26" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="application-examples">
+<h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/jpeg/jpeg_decode">peripherals/jpeg/jpeg_decode</a> demonstrates how to use the JPEG hardware decoder to parse one embedded JPEG, decode it into RGB888, stream the raw output as base64 over UART, and validate the result with pytest.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/jpeg/jpeg_encode">peripherals/jpeg/jpeg_encode</a> demonstrates how to use the JPEG hardware encoder to encode an embedded 720p raw picture, stream the JPEG as base64 over UART, and validate the result with pytest.</p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_jpeg/include/driver/jpeg_decode.h">components/esp_driver_jpeg/include/driver/jpeg_decode.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/jpeg_decode.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_jpeg</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_jpeg</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_jpeg
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_jpeg
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t">
+<span id="_CPPv323jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t"></span><span id="_CPPv223jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t"></span><span id="jpeg_new_decoder_engine__jpeg_decode_engine_cfg_tCP.jpeg_decoder_handle_tP"></span><span class="target" id="jpeg__decode_8h_1a091ebffed459b1276a1c94dfa209d0cc"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_new_decoder_engine</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424jpeg_decode_engine_cfg_t" title="jpeg_decode_engine_cfg_t"><span class="n"><span class="pre">jpeg_decode_engine_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dec_eng_cfg</span></span>, <a class="reference internal" href="#_CPPv421jpeg_decoder_handle_t" title="jpeg_decoder_handle_t"><span class="n"><span class="pre">jpeg_decoder_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_decoder</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423jpeg_new_decoder_enginePK24jpeg_decode_engine_cfg_tP21jpeg_decoder_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Acquire a JPEG decode engine with the specified configuration. </p>
+<p>This function acquires a JPEG decode engine with the specified configuration. The configuration parameters are provided through the <code class="docutils literal notranslate"><span class="pre">dec_eng_cfg</span></code> structure, and the resulting JPEG decoder handle is returned through the <code class="docutils literal notranslate"><span class="pre">ret_decoder</span></code> pointer.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>dec_eng_cfg</strong> -- <strong>[in]</strong> Pointer to the JPEG decode engine configuration. </p></li>
+<li><p><strong>ret_decoder</strong> -- <strong>[out]</strong> Pointer to a variable that will receive the JPEG decoder handle. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: JPEG decoder initialized successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: JPEG decoder initialization failed because of invalid argument.</p></li>
+<li><p>ESP_ERR_NO_MEM: Create JPEG decoder failed because of out of memory. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t">
+<span id="_CPPv321jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t"></span><span id="_CPPv221jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t"></span><span id="jpeg_decoder_get_info__uint8_tCP.uint32_t.jpeg_decode_picture_info_tP"></span><span class="target" id="jpeg__decode_8h_1af43788ffc69cb76a1bc9560833fb0680"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decoder_get_info</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">bit_stream</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">stream_size</span></span>, <a class="reference internal" href="#_CPPv426jpeg_decode_picture_info_t" title="jpeg_decode_picture_info_t"><span class="n"><span class="pre">jpeg_decode_picture_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">picture_info</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421jpeg_decoder_get_infoPK7uint8_t8uint32_tP26jpeg_decode_picture_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Helper function for getting information about a JPEG image. </p>
+<p>This function analyzes the provided JPEG image data and retrieves information about the image, such as its width, height. The image data is specified by the <code class="docutils literal notranslate"><span class="pre">bit_stream</span></code> pointer and the <code class="docutils literal notranslate"><span class="pre">stream_size</span></code> parameter. The resulting image information is returned through the <code class="docutils literal notranslate"><span class="pre">picture_info</span></code> structure.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function doesn't depend on any jpeg hardware, it helps user to know jpeg information from jpeg header. For example, user can get picture width and height via this function and malloc a reasonable size buffer for jpeg engine process.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>bit_stream</strong> -- <strong>[in]</strong> Pointer to the buffer containing the JPEG image data. </p></li>
+<li><p><strong>stream_size</strong> -- <strong>[in]</strong> Size of the JPEG image data in bytes. Note that parse beginning partial of picture also works, but the beginning partial should be enough given. </p></li>
+<li><p><strong>picture_info</strong> -- <strong>[out]</strong> Pointer to the structure that will receive the image information. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: JPEG decoder get jpg image header successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: JPEG decoder get header info failed because of invalid argument. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t">
+<span id="_CPPv320jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t"></span><span id="_CPPv220jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t"></span><span id="jpeg_decoder_process__jpeg_decoder_handle_t.jpeg_decode_cfg_tCP.uint8_tCP.uint32_t.uint8_tP.uint32_t.uint32_tP"></span><span class="target" id="jpeg__decode_8h_1a4ad7683da76f6de2a25fbbd91aeec5cd"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decoder_process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421jpeg_decoder_handle_t" title="jpeg_decoder_handle_t"><span class="n"><span class="pre">jpeg_decoder_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">decoder_engine</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv417jpeg_decode_cfg_t" title="jpeg_decode_cfg_t"><span class="n"><span class="pre">jpeg_decode_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">decode_cfg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">bit_stream</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">stream_size</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">decode_outbuf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outbuf_size</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420jpeg_decoder_process21jpeg_decoder_handle_tPK17jpeg_decode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process a JPEG image with the specified decoder instance. </p>
+<p>This function processes the provided JPEG image data using the specified JPEG decoder instance. The input JPEG image data is specified by the <code class="docutils literal notranslate"><span class="pre">bit_stream</span></code> pointer and the <code class="docutils literal notranslate"><span class="pre">stream_size</span></code> parameter. The resulting decoded image data is written to the <code class="docutils literal notranslate"><span class="pre">decode_outbuf</span></code> buffer, and the length of the output image data is returned through the <code class="docutils literal notranslate"><span class="pre">out_size</span></code> pointer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>1.Please make sure that the content of <code class="docutils literal notranslate"><span class="pre">bit_stream</span></code> pointer cannot be modified until this function returns. 2.For JPEGs encoded with YUV420 or YUV422 sampling, the decoded output dimensions can be padded to 16-pixel boundaries by the JPEG block layout. Make sure <code class="docutils literal notranslate"><span class="pre">decode_outbuf</span></code> is large enough for that padded output size, not only for the visible width and height.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>decoder_engine</strong> -- <strong>[in]</strong> Handle of the JPEG decoder instance to use for processing. </p></li>
+<li><p><strong>decode_cfg</strong> -- <strong>[in]</strong> Config structure of decoder. </p></li>
+<li><p><strong>bit_stream</strong> -- <strong>[in]</strong> Pointer to the buffer containing the input JPEG image data. </p></li>
+<li><p><strong>stream_size</strong> -- <strong>[in]</strong> Size of the input JPEG image data in bytes. </p></li>
+<li><p><strong>decode_outbuf</strong> -- <strong>[in]</strong> Pointer to the buffer that will receive the decoded image data. </p></li>
+<li><p><strong>outbuf_size</strong> -- <strong>[in]</strong> The size of <code class="docutils literal notranslate"><span class="pre">decode_outbuf</span></code></p></li>
+<li><p><strong>out_size</strong> -- <strong>[out]</strong> Pointer to a variable that will receive the length of the output image data. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: JPEG decoder process successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: JPEG decoder process failed because of invalid argument. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_del_decoder_engine21jpeg_decoder_handle_t">
+<span id="_CPPv323jpeg_del_decoder_engine21jpeg_decoder_handle_t"></span><span id="_CPPv223jpeg_del_decoder_engine21jpeg_decoder_handle_t"></span><span id="jpeg_del_decoder_engine__jpeg_decoder_handle_t"></span><span class="target" id="jpeg__decode_8h_1a05b036f5b3167fa0884543b4298d7a3a"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_del_decoder_engine</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421jpeg_decoder_handle_t" title="jpeg_decoder_handle_t"><span class="n"><span class="pre">jpeg_decoder_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">decoder_engine</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423jpeg_del_decoder_engine21jpeg_decoder_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release resources used by a JPEG decoder instance. </p>
+<p>This function releases the resources used by the specified JPEG decoder instance. The decoder instance is specified by the <code class="docutils literal notranslate"><span class="pre">decoder_engine</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>decoder_engine</strong> -- Handle of the JPEG decoder instance to release resources for. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Delete JPEG decoder successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Delete JPEG decoder failed because of invalid argument. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t">
+<span id="_CPPv322jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t"></span><span id="_CPPv222jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t"></span><span id="jpeg_alloc_decoder_mem__s.jpeg_decode_memory_alloc_cfg_tCP.sP"></span><span class="target" id="jpeg__decode_8h_1a35c94301c281829c763d4a4005fb8c27"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_alloc_decoder_mem</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430jpeg_decode_memory_alloc_cfg_t" title="jpeg_decode_memory_alloc_cfg_t"><span class="n"><span class="pre">jpeg_decode_memory_alloc_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mem_cfg</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">allocated_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422jpeg_alloc_decoder_mem6size_tPK30jpeg_decode_memory_alloc_cfg_tP6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A helper function to allocate memory space for JPEG decoder. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> -- <strong>[in]</strong> The size of memory to allocate. </p></li>
+<li><p><strong>mem_cfg</strong> -- <strong>[in]</strong> Memory configuration for memory allocation </p></li>
+<li><p><strong>allocated_size</strong> -- <strong>[out]</strong> Actual allocated buffer size. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to the allocated memory space, or NULL if allocation fails. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv417jpeg_decode_cfg_t">
+<span id="_CPPv317jpeg_decode_cfg_t"></span><span id="_CPPv217jpeg_decode_cfg_t"></span><span id="jpeg_decode_cfg_t"></span><span class="target" id="structjpeg__decode__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decode_cfg_t</span></span></span><a class="headerlink" href="#_CPPv417jpeg_decode_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration parameters for a JPEG decoder image process. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_decode_cfg_t13output_formatE">
+<span id="_CPPv3N17jpeg_decode_cfg_t13output_formatE"></span><span id="_CPPv2N17jpeg_decode_cfg_t13output_formatE"></span><span id="jpeg_decode_cfg_t::output_format__jpeg_dec_output_format_t"></span><span class="target" id="structjpeg__decode__cfg__t_1a82b033929134424768f0c92a03f027a8"></span><a class="reference internal" href="#_CPPv424jpeg_dec_output_format_t" title="jpeg_dec_output_format_t"><span class="n"><span class="pre">jpeg_dec_output_format_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">output_format</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_decode_cfg_t13output_formatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG decoder output format </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_decode_cfg_t9rgb_orderE">
+<span id="_CPPv3N17jpeg_decode_cfg_t9rgb_orderE"></span><span id="_CPPv2N17jpeg_decode_cfg_t9rgb_orderE"></span><span id="jpeg_decode_cfg_t::rgb_order__jpeg_dec_rgb_element_order_t"></span><span class="target" id="structjpeg__decode__cfg__t_1a43ecf14b1dbec0a0ffb1c4e6d964bffc"></span><a class="reference internal" href="#_CPPv428jpeg_dec_rgb_element_order_t" title="jpeg_dec_rgb_element_order_t"><span class="n"><span class="pre">jpeg_dec_rgb_element_order_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rgb_order</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_decode_cfg_t9rgb_orderE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG decoder output order </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_decode_cfg_t8conv_stdE">
+<span id="_CPPv3N17jpeg_decode_cfg_t8conv_stdE"></span><span id="_CPPv2N17jpeg_decode_cfg_t8conv_stdE"></span><span id="jpeg_decode_cfg_t::conv_std__jpeg_yuv_rgb_conv_std_t"></span><span class="target" id="structjpeg__decode__cfg__t_1a0f88c53840af3a0162e69e09e4db4c52"></span><a class="reference internal" href="#_CPPv423jpeg_yuv_rgb_conv_std_t" title="jpeg_yuv_rgb_conv_std_t"><span class="n"><span class="pre">jpeg_yuv_rgb_conv_std_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">conv_std</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_decode_cfg_t8conv_stdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG decoder yuv-&gt;rgb standard </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424jpeg_decode_engine_cfg_t">
+<span id="_CPPv324jpeg_decode_engine_cfg_t"></span><span id="_CPPv224jpeg_decode_engine_cfg_t"></span><span id="jpeg_decode_engine_cfg_t"></span><span class="target" id="structjpeg__decode__engine__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decode_engine_cfg_t</span></span></span><a class="headerlink" href="#_CPPv424jpeg_decode_engine_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration parameters for the JPEG decoder engine. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_decode_engine_cfg_t13intr_priorityE">
+<span id="_CPPv3N24jpeg_decode_engine_cfg_t13intr_priorityE"></span><span id="_CPPv2N24jpeg_decode_engine_cfg_t13intr_priorityE"></span><span id="jpeg_decode_engine_cfg_t::intr_priority__i"></span><span class="target" id="structjpeg__decode__engine__cfg__t_1a535b285024f46a9c8047421c315462bf"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">intr_priority</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_decode_engine_cfg_t13intr_priorityE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG interrupt priority, if set to 0, driver will select the default priority (1,2,3). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_decode_engine_cfg_t10timeout_msE">
+<span id="_CPPv3N24jpeg_decode_engine_cfg_t10timeout_msE"></span><span id="_CPPv2N24jpeg_decode_engine_cfg_t10timeout_msE"></span><span id="jpeg_decode_engine_cfg_t::timeout_ms__i"></span><span class="target" id="structjpeg__decode__engine__cfg__t_1ac7a9631e198371977189729b8a0cb4b8"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timeout_ms</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_decode_engine_cfg_t10timeout_msE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG timeout threshold for handling a picture, should larger than valid decode time in ms. For example, for 30fps decode, this value must larger than 34. -1 means wait forever </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_decode_engine_cfg_t8allow_pdE">
+<span id="_CPPv3N24jpeg_decode_engine_cfg_t8allow_pdE"></span><span id="_CPPv2N24jpeg_decode_engine_cfg_t8allow_pdE"></span><span id="jpeg_decode_engine_cfg_t::allow_pd__uint32_t"></span><span class="target" id="structjpeg__decode__engine__cfg__t_1a25be69fca3bdea969176f7cf12cc96af"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allow_pd</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_decode_engine_cfg_t8allow_pdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set, the driver will backup/restore the JPEG registers before/after entering/exist sleep mode. By this approach, the system can power off JPEG's power domain. This can save power, but at the expense of more RAM being consumed </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_decode_engine_cfg_t5flagsE">
+<span id="_CPPv3N24jpeg_decode_engine_cfg_t5flagsE"></span><span id="_CPPv2N24jpeg_decode_engine_cfg_t5flagsE"></span><span id="jpeg_decode_engine_cfg_t::flags__jpeg_decode_engine_cfg_t"></span><span class="target" id="structjpeg__decode__engine__cfg__t_1a4ef14b2ecad9f556ef02f1bc9b641c01"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424jpeg_decode_engine_cfg_t" title="jpeg_decode_engine_cfg_t"><span class="n"><span class="pre">jpeg_decode_engine_cfg_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_decode_engine_cfg_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG engine configuration flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426jpeg_decode_picture_info_t">
+<span id="_CPPv326jpeg_decode_picture_info_t"></span><span id="_CPPv226jpeg_decode_picture_info_t"></span><span id="jpeg_decode_picture_info_t"></span><span class="target" id="structjpeg__decode__picture__info__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decode_picture_info_t</span></span></span><a class="headerlink" href="#_CPPv426jpeg_decode_picture_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Structure for jpeg decode header. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26jpeg_decode_picture_info_t5widthE">
+<span id="_CPPv3N26jpeg_decode_picture_info_t5widthE"></span><span id="_CPPv2N26jpeg_decode_picture_info_t5widthE"></span><span id="jpeg_decode_picture_info_t::width__uint32_t"></span><span class="target" id="structjpeg__decode__picture__info__t_1a9928bfb79b14f8ec064cb2cc5ba411bf"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><a class="headerlink" href="#_CPPv4N26jpeg_decode_picture_info_t5widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of pixels in the horizontal direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26jpeg_decode_picture_info_t6heightE">
+<span id="_CPPv3N26jpeg_decode_picture_info_t6heightE"></span><span id="_CPPv2N26jpeg_decode_picture_info_t6heightE"></span><span id="jpeg_decode_picture_info_t::height__uint32_t"></span><span class="target" id="structjpeg__decode__picture__info__t_1a98aeb856c626d13d3853d7f914f10262"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><a class="headerlink" href="#_CPPv4N26jpeg_decode_picture_info_t6heightE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of pixels in the vertical direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26jpeg_decode_picture_info_t13sample_methodE">
+<span id="_CPPv3N26jpeg_decode_picture_info_t13sample_methodE"></span><span id="_CPPv2N26jpeg_decode_picture_info_t13sample_methodE"></span><span id="jpeg_decode_picture_info_t::sample_method__jpeg_down_sampling_type_t"></span><span class="target" id="structjpeg__decode__picture__info__t_1a5104c302ea23e7e09312e8f65b17ab2a"></span><a class="reference internal" href="#_CPPv425jpeg_down_sampling_type_t" title="jpeg_down_sampling_type_t"><span class="n"><span class="pre">jpeg_down_sampling_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sample_method</span></span></span><a class="headerlink" href="#_CPPv4N26jpeg_decode_picture_info_t13sample_methodE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>compressed JPEG picture sampling method </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430jpeg_decode_memory_alloc_cfg_t">
+<span id="_CPPv330jpeg_decode_memory_alloc_cfg_t"></span><span id="_CPPv230jpeg_decode_memory_alloc_cfg_t"></span><span id="jpeg_decode_memory_alloc_cfg_t"></span><span class="target" id="structjpeg__decode__memory__alloc__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decode_memory_alloc_cfg_t</span></span></span><a class="headerlink" href="#_CPPv430jpeg_decode_memory_alloc_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG decoder memory allocation config. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30jpeg_decode_memory_alloc_cfg_t16buffer_directionE">
+<span id="_CPPv3N30jpeg_decode_memory_alloc_cfg_t16buffer_directionE"></span><span id="_CPPv2N30jpeg_decode_memory_alloc_cfg_t16buffer_directionE"></span><span id="jpeg_decode_memory_alloc_cfg_t::buffer_direction__jpeg_dec_buffer_alloc_direction_t"></span><span class="target" id="structjpeg__decode__memory__alloc__cfg__t_1a2a7493b66f7a9b0f26ffe2e4769e9086"></span><a class="reference internal" href="#_CPPv433jpeg_dec_buffer_alloc_direction_t" title="jpeg_dec_buffer_alloc_direction_t"><span class="n"><span class="pre">jpeg_dec_buffer_alloc_direction_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">buffer_direction</span></span></span><a class="headerlink" href="#_CPPv4N30jpeg_decode_memory_alloc_cfg_t16buffer_directionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Buffer direction for jpeg decoder memory allocation </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id11">
+<h3>Header File<a class="headerlink" href="#id11" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_jpeg/include/driver/jpeg_encode.h">components/esp_driver_jpeg/include/driver/jpeg_encode.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/jpeg_encode.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_jpeg</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_jpeg</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_jpeg
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_jpeg
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id12">
+<h3>Functions<a class="headerlink" href="#id12" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_new_encoder_enginePK24jpeg_encode_engine_cfg_tP21jpeg_encoder_handle_t">
+<span id="_CPPv323jpeg_new_encoder_enginePK24jpeg_encode_engine_cfg_tP21jpeg_encoder_handle_t"></span><span id="_CPPv223jpeg_new_encoder_enginePK24jpeg_encode_engine_cfg_tP21jpeg_encoder_handle_t"></span><span id="jpeg_new_encoder_engine__jpeg_encode_engine_cfg_tCP.jpeg_encoder_handle_tP"></span><span class="target" id="jpeg__encode_8h_1af4b3011fa98dcde79b239cd4c532177d"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_new_encoder_engine</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424jpeg_encode_engine_cfg_t" title="jpeg_encode_engine_cfg_t"><span class="n"><span class="pre">jpeg_encode_engine_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">enc_eng_cfg</span></span>, <a class="reference internal" href="#_CPPv421jpeg_encoder_handle_t" title="jpeg_encoder_handle_t"><span class="n"><span class="pre">jpeg_encoder_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_encoder</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423jpeg_new_encoder_enginePK24jpeg_encode_engine_cfg_tP21jpeg_encoder_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocate JPEG encoder. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>enc_eng_cfg</strong> -- <strong>[in]</strong> config for jpeg encoder </p></li>
+<li><p><strong>ret_encoder</strong> -- <strong>[out]</strong> handle for jpeg encoder </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: JPEG encoder initialized successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: JPEG encoder initialization failed because of invalid argument.</p></li>
+<li><p>ESP_ERR_NO_MEM: Create JPEG encoder failed because of out of memory. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t">
+<span id="_CPPv320jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t"></span><span id="_CPPv220jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t"></span><span id="jpeg_encoder_process__jpeg_encoder_handle_t.jpeg_encode_cfg_tCP.uint8_tCP.uint32_t.uint8_tP.uint32_t.uint32_tP"></span><span class="target" id="jpeg__encode_8h_1a8f9fa5820cfe8500ed995c1cb4cc8856"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_encoder_process</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421jpeg_encoder_handle_t" title="jpeg_encoder_handle_t"><span class="n"><span class="pre">jpeg_encoder_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">encoder_engine</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv417jpeg_encode_cfg_t" title="jpeg_encode_cfg_t"><span class="n"><span class="pre">jpeg_encode_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">encode_cfg</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">encode_inbuf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">inbuf_size</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">encode_outbuf</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">outbuf_size</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420jpeg_encoder_process21jpeg_encoder_handle_tPK17jpeg_encode_cfg_tPK7uint8_t8uint32_tP7uint8_t8uint32_tP8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Process encoding of JPEG data using the specified encoder engine. </p>
+<p>This function processes the encoding of JPEG data using the provided encoder engine and configuration. It takes an input buffer containing the raw image data, performs encoding based on the configuration settings, and outputs the compressed bitstream.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>encoder_engine</strong> -- <strong>[in]</strong> Handle to the JPEG encoder engine to be used for encoding. </p></li>
+<li><p><strong>encode_cfg</strong> -- <strong>[in]</strong> Pointer to the configuration structure for the JPEG encoding process. </p></li>
+<li><p><strong>encode_inbuf</strong> -- <strong>[in]</strong> Pointer to the input buffer containing the raw image data. </p></li>
+<li><p><strong>inbuf_size</strong> -- <strong>[in]</strong> Size of the input buffer in bytes. </p></li>
+<li><p><strong>encode_outbuf</strong> -- <strong>[in]</strong> Pointer to the output buffer where the compressed bitstream will be stored. </p></li>
+<li><p><strong>outbuf_size</strong> -- <strong>[in]</strong> The size of output buffer. </p></li>
+<li><p><strong>out_size</strong> -- <strong>[out]</strong> Pointer to a variable where the size of the output bitstream will be stored.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: JPEG encoder process successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: JPEG encoder process failed because of invalid argument.</p></li>
+<li><p>ESP_ERR_TIMEOUT: JPEG encoder process timeout. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_del_encoder_engine21jpeg_encoder_handle_t">
+<span id="_CPPv323jpeg_del_encoder_engine21jpeg_encoder_handle_t"></span><span id="_CPPv223jpeg_del_encoder_engine21jpeg_encoder_handle_t"></span><span id="jpeg_del_encoder_engine__jpeg_encoder_handle_t"></span><span class="target" id="jpeg__encode_8h_1a6eb4e14096afef009f2d622b063a3e90"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_del_encoder_engine</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv421jpeg_encoder_handle_t" title="jpeg_encoder_handle_t"><span class="n"><span class="pre">jpeg_encoder_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">encoder_engine</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423jpeg_del_encoder_engine21jpeg_encoder_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release resources used by a JPEG encoder instance. </p>
+<p>This function releases the resources used by the specified JPEG encoder instance. The encoder instance is specified by the <code class="docutils literal notranslate"><span class="pre">encoder_engine</span></code> parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>encoder_engine</strong> -- <strong>[in]</strong> Handle of the JPEG encoder instance to release resources for. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Delete JPEG encoder successfully.</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Delete JPEG encoder failed because of invalid argument. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t">
+<span id="_CPPv322jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t"></span><span id="_CPPv222jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t"></span><span id="jpeg_alloc_encoder_mem__s.jpeg_encode_memory_alloc_cfg_tCP.sP"></span><span class="target" id="jpeg__encode_8h_1a2d44cfaf6efaf4d3ff333dd068fe61df"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_alloc_encoder_mem</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430jpeg_encode_memory_alloc_cfg_t" title="jpeg_encode_memory_alloc_cfg_t"><span class="n"><span class="pre">jpeg_encode_memory_alloc_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mem_cfg</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">allocated_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422jpeg_alloc_encoder_mem6size_tPK30jpeg_encode_memory_alloc_cfg_tP6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>A helper function to allocate memory space for JPEG encoder. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>size</strong> -- <strong>[in]</strong> The size of memory to allocate. </p></li>
+<li><p><strong>mem_cfg</strong> -- <strong>[in]</strong> Memory configuration for memory allocation </p></li>
+<li><p><strong>allocated_size</strong> -- <strong>[out]</strong> Actual allocated buffer size. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to the allocated memory space, or NULL if allocation fails. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id13">
+<h3>Structures<a class="headerlink" href="#id13" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv417jpeg_encode_cfg_t">
+<span id="_CPPv317jpeg_encode_cfg_t"></span><span id="_CPPv217jpeg_encode_cfg_t"></span><span id="jpeg_encode_cfg_t"></span><span class="target" id="structjpeg__encode__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_encode_cfg_t</span></span></span><a class="headerlink" href="#_CPPv417jpeg_encode_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder configure structure. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_encode_cfg_t6heightE">
+<span id="_CPPv3N17jpeg_encode_cfg_t6heightE"></span><span id="_CPPv2N17jpeg_encode_cfg_t6heightE"></span><span id="jpeg_encode_cfg_t::height__uint32_t"></span><span class="target" id="structjpeg__encode__cfg__t_1ad41322ea98635df05867f956194ba1ee"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">height</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_encode_cfg_t6heightE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of pixels in the horizontal direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_encode_cfg_t5widthE">
+<span id="_CPPv3N17jpeg_encode_cfg_t5widthE"></span><span id="_CPPv2N17jpeg_encode_cfg_t5widthE"></span><span id="jpeg_encode_cfg_t::width__uint32_t"></span><span class="target" id="structjpeg__encode__cfg__t_1ae61501f8bb64a0faebd7554bd59ce348"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">width</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_encode_cfg_t5widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of pixels in the vertical direction </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_encode_cfg_t8src_typeE">
+<span id="_CPPv3N17jpeg_encode_cfg_t8src_typeE"></span><span id="_CPPv2N17jpeg_encode_cfg_t8src_typeE"></span><span id="jpeg_encode_cfg_t::src_type__jpeg_enc_input_format_t"></span><span class="target" id="structjpeg__encode__cfg__t_1a69dbeda34a2022603c7d75608ee4c9a6"></span><a class="reference internal" href="#_CPPv423jpeg_enc_input_format_t" title="jpeg_enc_input_format_t"><span class="n"><span class="pre">jpeg_enc_input_format_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_type</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_encode_cfg_t8src_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source type of raw image to be encoded, see <code class="docutils literal notranslate"><span class="pre">jpeg_enc_src_type_t</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_encode_cfg_t10sub_sampleE">
+<span id="_CPPv3N17jpeg_encode_cfg_t10sub_sampleE"></span><span id="_CPPv2N17jpeg_encode_cfg_t10sub_sampleE"></span><span id="jpeg_encode_cfg_t::sub_sample__jpeg_down_sampling_type_t"></span><span class="target" id="structjpeg__encode__cfg__t_1ab6c45cd45a17d3cde587915a730a12f3"></span><a class="reference internal" href="#_CPPv425jpeg_down_sampling_type_t" title="jpeg_down_sampling_type_t"><span class="n"><span class="pre">jpeg_down_sampling_type_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sub_sample</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_encode_cfg_t10sub_sampleE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG subsampling method </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_encode_cfg_t13image_qualityE">
+<span id="_CPPv3N17jpeg_encode_cfg_t13image_qualityE"></span><span id="_CPPv2N17jpeg_encode_cfg_t13image_qualityE"></span><span id="jpeg_encode_cfg_t::image_quality__uint32_t"></span><span class="target" id="structjpeg__encode__cfg__t_1a6838de62adce3719b620b4264faaa4eb"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">image_quality</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_encode_cfg_t13image_qualityE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG compressing quality, value from 1-100, higher value means higher quality </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_encode_cfg_t13pixel_reverseE">
+<span id="_CPPv3N17jpeg_encode_cfg_t13pixel_reverseE"></span><span id="_CPPv2N17jpeg_encode_cfg_t13pixel_reverseE"></span><span id="jpeg_encode_cfg_t::pixel_reverse__b"></span><span class="target" id="structjpeg__encode__cfg__t_1a187b5ed891c5f0af854a652f125eae8a"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">pixel_reverse</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_encode_cfg_t13pixel_reverseE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to reverse the input pixel order, for detailed pixel order please refer to TRM </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424jpeg_encode_engine_cfg_t">
+<span id="_CPPv324jpeg_encode_engine_cfg_t"></span><span id="_CPPv224jpeg_encode_engine_cfg_t"></span><span id="jpeg_encode_engine_cfg_t"></span><span class="target" id="structjpeg__encode__engine__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_encode_engine_cfg_t</span></span></span><a class="headerlink" href="#_CPPv424jpeg_encode_engine_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration parameters for the JPEG encode engine. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_encode_engine_cfg_t13intr_priorityE">
+<span id="_CPPv3N24jpeg_encode_engine_cfg_t13intr_priorityE"></span><span id="_CPPv2N24jpeg_encode_engine_cfg_t13intr_priorityE"></span><span id="jpeg_encode_engine_cfg_t::intr_priority__i"></span><span class="target" id="structjpeg__encode__engine__cfg__t_1a06df831a60f64d4a01dc2e2c306f26ef"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">intr_priority</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_encode_engine_cfg_t13intr_priorityE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG interrupt priority, if set to 0, driver will select the default priority (1,2,3). </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_encode_engine_cfg_t10timeout_msE">
+<span id="_CPPv3N24jpeg_encode_engine_cfg_t10timeout_msE"></span><span id="_CPPv2N24jpeg_encode_engine_cfg_t10timeout_msE"></span><span id="jpeg_encode_engine_cfg_t::timeout_ms__i"></span><span class="target" id="structjpeg__encode__engine__cfg__t_1a462f199b362f8fb4c597065004f071bc"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">timeout_ms</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_encode_engine_cfg_t10timeout_msE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG timeout threshold for handling a picture, should larger than valid encode time in ms. For example, for 30fps encode, this value must larger than 34. -1 means wait forever </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_encode_engine_cfg_t8allow_pdE">
+<span id="_CPPv3N24jpeg_encode_engine_cfg_t8allow_pdE"></span><span id="_CPPv2N24jpeg_encode_engine_cfg_t8allow_pdE"></span><span id="jpeg_encode_engine_cfg_t::allow_pd__uint32_t"></span><span class="target" id="structjpeg__encode__engine__cfg__t_1aa86586cef0f8331e04bdc30a6c8c7b9a"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allow_pd</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_encode_engine_cfg_t8allow_pdE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If set, the driver will backup/restore the JPEG registers before/after entering/exist sleep mode. By this approach, the system can power off JPEG's power domain. This can save power, but at the expense of more RAM being consumed </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_encode_engine_cfg_t5flagsE">
+<span id="_CPPv3N24jpeg_encode_engine_cfg_t5flagsE"></span><span id="_CPPv2N24jpeg_encode_engine_cfg_t5flagsE"></span><span id="jpeg_encode_engine_cfg_t::flags__jpeg_encode_engine_cfg_t"></span><span class="target" id="structjpeg__encode__engine__cfg__t_1ab0b5d613b46a5e1ccf6519dee30d3b43"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424jpeg_encode_engine_cfg_t" title="jpeg_encode_engine_cfg_t"><span class="n"><span class="pre">jpeg_encode_engine_cfg_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_encode_engine_cfg_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG engine configuration flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430jpeg_encode_memory_alloc_cfg_t">
+<span id="_CPPv330jpeg_encode_memory_alloc_cfg_t"></span><span id="_CPPv230jpeg_encode_memory_alloc_cfg_t"></span><span id="jpeg_encode_memory_alloc_cfg_t"></span><span class="target" id="structjpeg__encode__memory__alloc__cfg__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_encode_memory_alloc_cfg_t</span></span></span><a class="headerlink" href="#_CPPv430jpeg_encode_memory_alloc_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder memory allocation config. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30jpeg_encode_memory_alloc_cfg_t16buffer_directionE">
+<span id="_CPPv3N30jpeg_encode_memory_alloc_cfg_t16buffer_directionE"></span><span id="_CPPv2N30jpeg_encode_memory_alloc_cfg_t16buffer_directionE"></span><span id="jpeg_encode_memory_alloc_cfg_t::buffer_direction__jpeg_enc_buffer_alloc_direction_t"></span><span class="target" id="structjpeg__encode__memory__alloc__cfg__t_1a5253ea0e634add17d61df64eca179300"></span><a class="reference internal" href="#_CPPv433jpeg_enc_buffer_alloc_direction_t" title="jpeg_enc_buffer_alloc_direction_t"><span class="n"><span class="pre">jpeg_enc_buffer_alloc_direction_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">buffer_direction</span></span></span><a class="headerlink" href="#_CPPv4N30jpeg_encode_memory_alloc_cfg_t16buffer_directionE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Buffer direction for jpeg encoder memory allocation </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id14">
+<h3>Header File<a class="headerlink" href="#id14" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_jpeg/include/driver/jpeg_types.h">components/esp_driver_jpeg/include/driver/jpeg_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/jpeg_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_jpeg</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_jpeg</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_jpeg
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_jpeg
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421jpeg_decoder_handle_t">
+<span id="_CPPv321jpeg_decoder_handle_t"></span><span id="_CPPv221jpeg_decoder_handle_t"></span><span id="jpeg_decoder_handle_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a904422176f926c518b6d12b10d6c26d3"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">jpeg_decoder_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_decoder_handle_t</span></span></span><a class="headerlink" href="#_CPPv421jpeg_decoder_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of jpeg decoder handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421jpeg_encoder_handle_t">
+<span id="_CPPv321jpeg_encoder_handle_t"></span><span id="_CPPv221jpeg_encoder_handle_t"></span><span id="jpeg_encoder_handle_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a5d97d7ad30596aab0892ca515c066e33"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">jpeg_encoder_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_encoder_handle_t</span></span></span><a class="headerlink" href="#_CPPv421jpeg_encoder_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of jpeg encoder handle. </p>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv424jpeg_dec_output_format_t">
+<span id="_CPPv324jpeg_dec_output_format_t"></span><span id="_CPPv224jpeg_dec_output_format_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_dec_output_format_t</span></span></span><a class="headerlink" href="#_CPPv424jpeg_dec_output_format_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for jpeg output format. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB888E">
+<span id="_CPPv3N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB888E"></span><span id="_CPPv2N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB888E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9a301da115bdedc292bfc037398dd36d8e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DECODE_OUT_FORMAT_RGB888</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>output RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB565E">
+<span id="_CPPv3N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB565E"></span><span id="_CPPv2N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB565E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9a7ec20e250c220d517a57b3ad15e09adf"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DECODE_OUT_FORMAT_RGB565</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_RGB565E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>output RGB565 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_dec_output_format_t27JPEG_DECODE_OUT_FORMAT_GRAYE">
+<span id="_CPPv3N24jpeg_dec_output_format_t27JPEG_DECODE_OUT_FORMAT_GRAYE"></span><span id="_CPPv2N24jpeg_dec_output_format_t27JPEG_DECODE_OUT_FORMAT_GRAYE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9a5fe52cf503542fb604dfa42183d0a130"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DECODE_OUT_FORMAT_GRAY</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_dec_output_format_t27JPEG_DECODE_OUT_FORMAT_GRAYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>output the gray picture </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV444E">
+<span id="_CPPv3N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV444E"></span><span id="_CPPv2N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV444E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9acb78b255c557278123ba344de0703b3f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DECODE_OUT_FORMAT_YUV444</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV444E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>output yuv444 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV422E">
+<span id="_CPPv3N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV422E"></span><span id="_CPPv2N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV422E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9a0c4bdc261806a2c996d3b688a1e0f8b7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DECODE_OUT_FORMAT_YUV422</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV422E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>output yuv422 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV420E">
+<span id="_CPPv3N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV420E"></span><span id="_CPPv2N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV420E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1add221ed0b153796f938cb43725f461a9acf6b83ec5ac38350f0fe7d13c323ce02"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DECODE_OUT_FORMAT_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N24jpeg_dec_output_format_t29JPEG_DECODE_OUT_FORMAT_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>output yuv420 format </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_yuv_rgb_conv_std_t">
+<span id="_CPPv323jpeg_yuv_rgb_conv_std_t"></span><span id="_CPPv223jpeg_yuv_rgb_conv_std_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a7f9ff1d95561e44616640c6bab934117"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_yuv_rgb_conv_std_t</span></span></span><a class="headerlink" href="#_CPPv423jpeg_yuv_rgb_conv_std_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for YUV and RGB conversion standard. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT601E">
+<span id="_CPPv3N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT601E"></span><span id="_CPPv2N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT601E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a7f9ff1d95561e44616640c6bab934117a943469d2e5accf2bb29cc5218c8b0fa9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_YUV_RGB_CONV_STD_BT601</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT601E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>BT601 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT709E">
+<span id="_CPPv3N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT709E"></span><span id="_CPPv2N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT709E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a7f9ff1d95561e44616640c6bab934117a1dc7b6b525ff88302c9a0ce8f3e8d3b9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_YUV_RGB_CONV_STD_BT709</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_yuv_rgb_conv_std_t27JPEG_YUV_RGB_CONV_STD_BT709E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>BT709 </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv428jpeg_dec_rgb_element_order_t">
+<span id="_CPPv328jpeg_dec_rgb_element_order_t"></span><span id="_CPPv228jpeg_dec_rgb_element_order_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a9c51b65c77e59347483a453a9a8b600f"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_dec_rgb_element_order_t</span></span></span><a class="headerlink" href="#_CPPv428jpeg_dec_rgb_element_order_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for jpeg big/small endian output. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_BGRE">
+<span id="_CPPv3N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_BGRE"></span><span id="_CPPv2N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_BGRE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a9c51b65c77e59347483a453a9a8b600fa6ae86ccb00a9bb545d75c7f90c0534d3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DEC_RGB_ELEMENT_ORDER_BGR</span></span></span><a class="headerlink" href="#_CPPv4N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_BGRE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Output the color component in small endian </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_RGBE">
+<span id="_CPPv3N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_RGBE"></span><span id="_CPPv2N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_RGBE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a9c51b65c77e59347483a453a9a8b600fa7832eaa2e3f44f8b26c78b73b40a9d1e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DEC_RGB_ELEMENT_ORDER_RGB</span></span></span><a class="headerlink" href="#_CPPv4N28jpeg_dec_rgb_element_order_t30JPEG_DEC_RGB_ELEMENT_ORDER_RGBE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Output the color component in big endian </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv433jpeg_dec_buffer_alloc_direction_t">
+<span id="_CPPv333jpeg_dec_buffer_alloc_direction_t"></span><span id="_CPPv233jpeg_dec_buffer_alloc_direction_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a2b4095b98b49037a8c4dbe526618fa1b"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_dec_buffer_alloc_direction_t</span></span></span><a class="headerlink" href="#_CPPv433jpeg_dec_buffer_alloc_direction_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for jpeg decoder alloc buffer direction. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N33jpeg_dec_buffer_alloc_direction_t27JPEG_DEC_ALLOC_INPUT_BUFFERE">
+<span id="_CPPv3N33jpeg_dec_buffer_alloc_direction_t27JPEG_DEC_ALLOC_INPUT_BUFFERE"></span><span id="_CPPv2N33jpeg_dec_buffer_alloc_direction_t27JPEG_DEC_ALLOC_INPUT_BUFFERE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a2b4095b98b49037a8c4dbe526618fa1bac53d6a264113c8c80adbd840215ccefd"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DEC_ALLOC_INPUT_BUFFER</span></span></span><a class="headerlink" href="#_CPPv4N33jpeg_dec_buffer_alloc_direction_t27JPEG_DEC_ALLOC_INPUT_BUFFERE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alloc the picture input buffer, (compressed format in decoder) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N33jpeg_dec_buffer_alloc_direction_t28JPEG_DEC_ALLOC_OUTPUT_BUFFERE">
+<span id="_CPPv3N33jpeg_dec_buffer_alloc_direction_t28JPEG_DEC_ALLOC_OUTPUT_BUFFERE"></span><span id="_CPPv2N33jpeg_dec_buffer_alloc_direction_t28JPEG_DEC_ALLOC_OUTPUT_BUFFERE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a2b4095b98b49037a8c4dbe526618fa1ba3ec77befc650f61eac3ebf5d0c86f958"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DEC_ALLOC_OUTPUT_BUFFER</span></span></span><a class="headerlink" href="#_CPPv4N33jpeg_dec_buffer_alloc_direction_t28JPEG_DEC_ALLOC_OUTPUT_BUFFERE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alloc the picture output buffer, (decompressed format in decoder) </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_enc_input_format_t">
+<span id="_CPPv323jpeg_enc_input_format_t"></span><span id="_CPPv223jpeg_enc_input_format_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_enc_input_format_t</span></span></span><a class="headerlink" href="#_CPPv423jpeg_enc_input_format_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for jpeg input format. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB888E">
+<span id="_CPPv3N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB888E"></span><span id="_CPPv2N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB888E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102aaf6c20c28a44af2325dce8d480169ee3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENCODE_IN_FORMAT_RGB888</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>input RGB888 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB565E">
+<span id="_CPPv3N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB565E"></span><span id="_CPPv2N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB565E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102a40164267015d52b1962228c3e769ea36"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENCODE_IN_FORMAT_RGB565</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_RGB565E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>input RGB565 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_enc_input_format_t26JPEG_ENCODE_IN_FORMAT_GRAYE">
+<span id="_CPPv3N23jpeg_enc_input_format_t26JPEG_ENCODE_IN_FORMAT_GRAYE"></span><span id="_CPPv2N23jpeg_enc_input_format_t26JPEG_ENCODE_IN_FORMAT_GRAYE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102aa0ff5a2ee36dd7c2f49b127ab8b3c8fe"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENCODE_IN_FORMAT_GRAY</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_enc_input_format_t26JPEG_ENCODE_IN_FORMAT_GRAYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>input GRAY format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV422E">
+<span id="_CPPv3N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV422E"></span><span id="_CPPv2N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV422E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102a3638d86c2454f4075963fee7dfd37ccb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENCODE_IN_FORMAT_YUV422</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV422E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>input YUV422 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV444E">
+<span id="_CPPv3N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV444E"></span><span id="_CPPv2N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV444E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102aaf3648bb93028272efbf7e99ff96fa5d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENCODE_IN_FORMAT_YUV444</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV444E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>input YUV444 format </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV420E">
+<span id="_CPPv3N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV420E"></span><span id="_CPPv2N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV420E"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1aea01f9b0d79d8c53e75df5d9bd12e102a11e825b9ec906e05f282dbb4e619f748"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENCODE_IN_FORMAT_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_enc_input_format_t28JPEG_ENCODE_IN_FORMAT_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>input YUV420 format </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv433jpeg_enc_buffer_alloc_direction_t">
+<span id="_CPPv333jpeg_enc_buffer_alloc_direction_t"></span><span id="_CPPv233jpeg_enc_buffer_alloc_direction_t"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a1d4eaad5217fd6074a0df3e999bdc796"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_enc_buffer_alloc_direction_t</span></span></span><a class="headerlink" href="#_CPPv433jpeg_enc_buffer_alloc_direction_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for jpeg encoder alloc buffer direction. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N33jpeg_enc_buffer_alloc_direction_t27JPEG_ENC_ALLOC_INPUT_BUFFERE">
+<span id="_CPPv3N33jpeg_enc_buffer_alloc_direction_t27JPEG_ENC_ALLOC_INPUT_BUFFERE"></span><span id="_CPPv2N33jpeg_enc_buffer_alloc_direction_t27JPEG_ENC_ALLOC_INPUT_BUFFERE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a1d4eaad5217fd6074a0df3e999bdc796aea4899e9c3003516c94b61bf80025670"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_ALLOC_INPUT_BUFFER</span></span></span><a class="headerlink" href="#_CPPv4N33jpeg_enc_buffer_alloc_direction_t27JPEG_ENC_ALLOC_INPUT_BUFFERE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alloc the picture input buffer, (decompressed format in encoder) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N33jpeg_enc_buffer_alloc_direction_t28JPEG_ENC_ALLOC_OUTPUT_BUFFERE">
+<span id="_CPPv3N33jpeg_enc_buffer_alloc_direction_t28JPEG_ENC_ALLOC_OUTPUT_BUFFERE"></span><span id="_CPPv2N33jpeg_enc_buffer_alloc_direction_t28JPEG_ENC_ALLOC_OUTPUT_BUFFERE"></span><span class="target" id="esp__driver__jpeg_2include_2driver_2jpeg__types_8h_1a1d4eaad5217fd6074a0df3e999bdc796a907e2aaff702fba505fd898a3a52a671"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_ALLOC_OUTPUT_BUFFER</span></span></span><a class="headerlink" href="#_CPPv4N33jpeg_enc_buffer_alloc_direction_t28JPEG_ENC_ALLOC_OUTPUT_BUFFERE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Alloc the picture output buffer, (compressed format in encoder) </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="id15">
+<h3>Header File<a class="headerlink" href="#id15" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hal_jpeg/include/hal/jpeg_types.h">components/esp_hal_jpeg/include/hal/jpeg_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"hal/jpeg_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_hal_jpeg</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_hal_jpeg</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_hal_jpeg
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_hal_jpeg
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="unions">
+<h3>Unions<a class="headerlink" href="#unions" title="Permalink to this heading"></a></h3>
+<dl class="cpp union">
+<dt class="sig sig-object cpp" id="_CPPv425jpeg_huffman_table_info_t">
+<span id="_CPPv325jpeg_huffman_table_info_t"></span><span id="_CPPv225jpeg_huffman_table_info_t"></span><span class="target" id="unionjpeg__huffman__table__info__t"></span><span class="k"><span class="pre">union</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_huffman_table_info_t</span></span></span><a class="headerlink" href="#_CPPv425jpeg_huffman_table_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;jpeg_types.h&gt;</em></div>
+<p>Structure for huffman information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_huffman_table_info_t2idE">
+<span id="_CPPv3N25jpeg_huffman_table_info_t2idE"></span><span id="_CPPv2N25jpeg_huffman_table_info_t2idE"></span><span id="jpeg_huffman_table_info_t::id__uint8_t"></span><span class="target" id="unionjpeg__huffman__table__info__t_1a6525a1ec16750b964794ec258b340af5"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">id</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_huffman_table_info_t2idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Huffman table id. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_huffman_table_info_t4typeE">
+<span id="_CPPv3N25jpeg_huffman_table_info_t4typeE"></span><span id="_CPPv2N25jpeg_huffman_table_info_t4typeE"></span><span id="jpeg_huffman_table_info_t::type__uint8_t"></span><span class="target" id="unionjpeg__huffman__table__info__t_1a45fe2f34722c3dd1fd081467dff82514"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">type</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_huffman_table_info_t4typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Huffman table type. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp">
+<span class="target" id="unionjpeg__huffman__table__info__t_1a756e3fcf6d264d4f7bc2c55b0fb22419"></span><span class="sig-name descname"><span class="pre">struct</span> <span class="pre">jpeg_huffman_table_info_t</span></span></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_huffman_table_info_t4infoE">
+<span id="_CPPv3N25jpeg_huffman_table_info_t4infoE"></span><span id="_CPPv2N25jpeg_huffman_table_info_t4infoE"></span><span id="jpeg_huffman_table_info_t::info__uint8_t"></span><span class="target" id="unionjpeg__huffman__table__info__t_1a0bef79ceff8db8f1c44cac2180d616b8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">info</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_huffman_table_info_t4infoE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of huffman table. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id16">
+<h3>Structures<a class="headerlink" href="#id16" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423jpeg_component_factor_t">
+<span id="_CPPv323jpeg_component_factor_t"></span><span id="_CPPv223jpeg_component_factor_t"></span><span id="jpeg_component_factor_t"></span><span class="target" id="structjpeg__component__factor__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_component_factor_t</span></span></span><a class="headerlink" href="#_CPPv423jpeg_component_factor_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Structure for recording factor of component. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_component_factor_t10horizontalE">
+<span id="_CPPv3N23jpeg_component_factor_t10horizontalE"></span><span id="_CPPv2N23jpeg_component_factor_t10horizontalE"></span><span id="jpeg_component_factor_t::horizontal__uint32_t"></span><span class="target" id="structjpeg__component__factor__t_1a1f29504345f4af2e0b1491dd0109ba73"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">horizontal</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_component_factor_t10horizontalE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>horizontal factor </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23jpeg_component_factor_t8verticalE">
+<span id="_CPPv3N23jpeg_component_factor_t8verticalE"></span><span id="_CPPv2N23jpeg_component_factor_t8verticalE"></span><span id="jpeg_component_factor_t::vertical__uint32_t"></span><span class="target" id="structjpeg__component__factor__t_1a3c108ae9d84a0d0045b69af931f24780"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vertical</span></span></span><a class="headerlink" href="#_CPPv4N23jpeg_component_factor_t8verticalE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>vertical factor </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.JPEG_HUFFMAN_BITS_LEN_TABLE_LEN">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1af4f737eb0ea05004158a3f7a6a26f0ff"></span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_HUFFMAN_BITS_LEN_TABLE_LEN</span></span></span><a class="headerlink" href="#c.JPEG_HUFFMAN_BITS_LEN_TABLE_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.JPEG_HUFFMAN_AC_VALUE_TABLE_LEN">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a6be97afd3ae782db056c2c23ba709511"></span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_HUFFMAN_AC_VALUE_TABLE_LEN</span></span></span><a class="headerlink" href="#c.JPEG_HUFFMAN_AC_VALUE_TABLE_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.JPEG_HUFFMAN_DC_VALUE_TABLE_LEN">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a21b5a2e6a6116b3b755928c4aa999063"></span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_HUFFMAN_DC_VALUE_TABLE_LEN</span></span></span><a class="headerlink" href="#c.JPEG_HUFFMAN_DC_VALUE_TABLE_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.JPEG_QUANTIZATION_TABLE_LEN">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a938f9852bc899f1c299d02325c812cb4"></span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_QUANTIZATION_TABLE_LEN</span></span></span><a class="headerlink" href="#c.JPEG_QUANTIZATION_TABLE_LEN" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.JPEG_COMPONENT_NUMBER_MAX">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1ad1d8c2740eb119d3754d077a01aa02c2"></span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_COMPONENT_NUMBER_MAX</span></span></span><a class="headerlink" href="#c.JPEG_COMPONENT_NUMBER_MAX" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.DHT_TC_NUM">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a95cc7a7f1fbc4de3198086f9ba24c7a0"></span><span class="sig-name descname"><span class="n"><span class="pre">DHT_TC_NUM</span></span></span><a class="headerlink" href="#c.DHT_TC_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.DHT_TH_NUM">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a75a4cdcff8c874b02e54875ec241e879"></span><span class="sig-name descname"><span class="n"><span class="pre">DHT_TH_NUM</span></span></span><a class="headerlink" href="#c.DHT_TH_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.JPEG_DOWN_SAMPLING_NUM">
+<span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7e49b62384606edca3a73553a250bb8b"></span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DOWN_SAMPLING_NUM</span></span></span><a class="headerlink" href="#c.JPEG_DOWN_SAMPLING_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="id17">
+<h3>Enumerations<a class="headerlink" href="#id17" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv417jpeg_codec_mode_t">
+<span id="_CPPv317jpeg_codec_mode_t"></span><span id="_CPPv217jpeg_codec_mode_t"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7ee150b224bde970777120b93a856abd"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_codec_mode_t</span></span></span><a class="headerlink" href="#_CPPv417jpeg_codec_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enum for JPEG codec working mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_codec_mode_t18JPEG_CODEC_ENCODERE">
+<span id="_CPPv3N17jpeg_codec_mode_t18JPEG_CODEC_ENCODERE"></span><span id="_CPPv2N17jpeg_codec_mode_t18JPEG_CODEC_ENCODERE"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7ee150b224bde970777120b93a856abda34da657af54b6177e740735e63061dd7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_CODEC_ENCODER</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_codec_mode_t18JPEG_CODEC_ENCODERE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Encode mode. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N17jpeg_codec_mode_t18JPEG_CODEC_DECODERE">
+<span id="_CPPv3N17jpeg_codec_mode_t18JPEG_CODEC_DECODERE"></span><span id="_CPPv2N17jpeg_codec_mode_t18JPEG_CODEC_DECODERE"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7ee150b224bde970777120b93a856abda3f57ff2ebfe8673dec97108d88a13f4f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_CODEC_DECODER</span></span></span><a class="headerlink" href="#_CPPv4N17jpeg_codec_mode_t18JPEG_CODEC_DECODERE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Decode mode. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv418jpeg_sample_mode_t">
+<span id="_CPPv318jpeg_sample_mode_t"></span><span id="_CPPv218jpeg_sample_mode_t"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a2d71cf1fcdde446da8f642b4579f32d1"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_sample_mode_t</span></span></span><a class="headerlink" href="#_CPPv418jpeg_sample_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enum for JPEG sampling mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV444E">
+<span id="_CPPv3N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV444E"></span><span id="_CPPv2N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV444E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a2d71cf1fcdde446da8f642b4579f32d1a55ade85ce6f369afc364c4f9530ed030"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_SAMPLE_MODE_YUV444</span></span></span><a class="headerlink" href="#_CPPv4N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV444E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sample in YUV444 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV422E">
+<span id="_CPPv3N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV422E"></span><span id="_CPPv2N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV422E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a2d71cf1fcdde446da8f642b4579f32d1a7c470f33ec29c78f50e8451e34354352"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_SAMPLE_MODE_YUV422</span></span></span><a class="headerlink" href="#_CPPv4N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV422E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sample in YUV422 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV420E">
+<span id="_CPPv3N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV420E"></span><span id="_CPPv2N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV420E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a2d71cf1fcdde446da8f642b4579f32d1ad087e1681f0581d5b0c52cdb3d7f7e60"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_SAMPLE_MODE_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N18jpeg_sample_mode_t23JPEG_SAMPLE_MODE_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sample in YUV420 </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv425jpeg_down_sampling_type_t">
+<span id="_CPPv325jpeg_down_sampling_type_t"></span><span id="_CPPv225jpeg_down_sampling_type_t"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1af6d468ec77616a6ecd3a6310bf15cee4"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_down_sampling_type_t</span></span></span><a class="headerlink" href="#_CPPv425jpeg_down_sampling_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enumeration for jpeg decoder sample methods. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV444E">
+<span id="_CPPv3N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV444E"></span><span id="_CPPv2N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV444E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1af6d468ec77616a6ecd3a6310bf15cee4a31599ec41faef766358bfbf30431a347"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DOWN_SAMPLING_YUV444</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV444E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sample by YUV444 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV422E">
+<span id="_CPPv3N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV422E"></span><span id="_CPPv2N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV422E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1af6d468ec77616a6ecd3a6310bf15cee4a7e84cdeacad0edea6b74293e5df567e9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DOWN_SAMPLING_YUV422</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV422E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sample by YUV422 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV420E">
+<span id="_CPPv3N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV420E"></span><span id="_CPPv2N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV420E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1af6d468ec77616a6ecd3a6310bf15cee4ad05976fdbe5b234083efc0646a529e3d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DOWN_SAMPLING_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_down_sampling_type_t25JPEG_DOWN_SAMPLING_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sample by YUV420 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N25jpeg_down_sampling_type_t23JPEG_DOWN_SAMPLING_GRAYE">
+<span id="_CPPv3N25jpeg_down_sampling_type_t23JPEG_DOWN_SAMPLING_GRAYE"></span><span id="_CPPv2N25jpeg_down_sampling_type_t23JPEG_DOWN_SAMPLING_GRAYE"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1af6d468ec77616a6ecd3a6310bf15cee4a06e025f3757f4618c0feef3d350869e3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_DOWN_SAMPLING_GRAY</span></span></span><a class="headerlink" href="#_CPPv4N25jpeg_down_sampling_type_t23JPEG_DOWN_SAMPLING_GRAYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sample the gray picture </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv419jpeg_enc_src_type_t">
+<span id="_CPPv319jpeg_enc_src_type_t"></span><span id="_CPPv219jpeg_enc_src_type_t"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">jpeg_enc_src_type_t</span></span></span><a class="headerlink" href="#_CPPv419jpeg_enc_src_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source formats. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB888E">
+<span id="_CPPv3N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB888E"></span><span id="_CPPv2N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB888E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01a3f20d207b816e60459c301dcdda6108f"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_SRC_RGB888</span></span></span><a class="headerlink" href="#_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB888E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source RGB888 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV422E">
+<span id="_CPPv3N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV422E"></span><span id="_CPPv2N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV422E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01ad3439ade0c17e5003c7e3cc495b6f61c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_SRC_YUV422</span></span></span><a class="headerlink" href="#_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV422E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source YUV422 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB565E">
+<span id="_CPPv3N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB565E"></span><span id="_CPPv2N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB565E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01a71b27162fcf548ec7b30a0bb0c054521"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_SRC_RGB565</span></span></span><a class="headerlink" href="#_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_RGB565E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source RGB565 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV444E">
+<span id="_CPPv3N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV444E"></span><span id="_CPPv2N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV444E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01a000a8ecb7553c10c34fcb25b9191cf35"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_SRC_YUV444</span></span></span><a class="headerlink" href="#_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV444E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source YUV444 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV420E">
+<span id="_CPPv3N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV420E"></span><span id="_CPPv2N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV420E"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01a63b30f01b5b39c65cb8dfe89a979a923"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_SRC_YUV420</span></span></span><a class="headerlink" href="#_CPPv4N19jpeg_enc_src_type_t19JPEG_ENC_SRC_YUV420E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source YUV420 </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N19jpeg_enc_src_type_t17JPEG_ENC_SRC_GRAYE">
+<span id="_CPPv3N19jpeg_enc_src_type_t17JPEG_ENC_SRC_GRAYE"></span><span id="_CPPv2N19jpeg_enc_src_type_t17JPEG_ENC_SRC_GRAYE"></span><span class="target" id="esp__hal__jpeg_2include_2hal_2jpeg__types_8h_1a7787d71b3e9ce3c7be522e5a994a2c01ade21750a0b0e707af632aaad688e8894"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">JPEG_ENC_SRC_GRAY</span></span></span><a class="headerlink" href="#_CPPv4N19jpeg_enc_src_type_t17JPEG_ENC_SRC_GRAYE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>JPEG encoder source GRAY </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=JPEG Encoder and Decoder (api-reference/peripherals/jpeg)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=JPEG Encoder and Decoder (api-reference/peripherals/jpeg)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="isp.html" class="btn btn-neutral float-left" title="Image Signal Processor (ISP)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="key_manager.html" class="btn btn-neutral float-right" title="Key Manager" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

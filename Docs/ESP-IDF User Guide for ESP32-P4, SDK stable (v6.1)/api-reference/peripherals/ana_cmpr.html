@@ -1,0 +1,1989 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analog Comparator - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/ana_cmpr.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script type="module">import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11.12.1/dist/mermaid.esm.min.mjs";
+
+
+
+const initStyles = () => {
+    const defaultStyle = document.createElement('style');
+    defaultStyle.textContent = "pre.mermaid {\n    /* Same as .mermaid-container > pre */\n    display: block;\n    width: 100%;\n}\n\npre.mermaid > svg {\n    /* Same as .mermaid-container > pre > svg */\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}";
+    document.head.appendChild(defaultStyle);
+
+    const fullscreenStyle = document.createElement('style');
+    fullscreenStyle.textContent = ".mermaid-container {\n    position: relative;\n    display: flex;\n    flex-direction: row;\n    width: 100%;\n}\n\n.mermaid-container > pre {\n    display: block;\n    width: 100%;\n}\n\n.mermaid-container > pre > svg {\n    height: 500px;\n    width: 100%;\n    max-width: 100% !important;\n}\n\n.mermaid-fullscreen-btn {\n    position: absolute;\n    width: 28px;\n    height: 28px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.3);\n    border-radius: 4px;\n    cursor: pointer;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    transition: all 0.2s;\n    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);\n    font-size: 14px;\n    line-height: 1;\n    padding: 0;\n    color: #333;\n}\n\n.mermaid-fullscreen-btn:hover {\n    opacity: 100% !important;\n    background: rgba(255, 255, 255, 1);\n    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-btn.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.3);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-btn.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 3px 10px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal {\n    display: none;\n    position: fixed !important;\n    top: 0 !important;\n    left: 0 !important;\n    width: 95vw;\n    height: 100vh;\n    background: rgba(255, 255, 255, 0.98);\n    z-index: 9999;\n    padding: 20px;\n    overflow: auto;\n}\n\n.mermaid-fullscreen-modal.dark-theme {\n    background: rgba(0, 0, 0, 0.98);\n}\n\n.mermaid-fullscreen-modal.active {\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen {\n    position: relative;\n    width: 95vw;\n    height: 90vh;\n    max-width: 95vw;\n    max-height: 90vh;\n    background: white;\n    border-radius: 8px;\n    padding: 20px;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);\n    overflow: auto;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen.dark-theme {\n    background: #1a1a1a;\n    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);\n}\n\n.mermaid-container-fullscreen pre.mermaid {\n    width: 100%;\n    height: 100%;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n}\n\n.mermaid-container-fullscreen .mermaid svg {\n    height: 100% !important;\n    width: 100% !important;\n    cursor: grab;\n}\n\n.mermaid-fullscreen-close {\n    position: fixed !important;\n    top: 20px !important;\n    right: 20px !important;\n    width: 40px;\n    height: 40px;\n    background: rgba(255, 255, 255, 0.95);\n    border: 1px solid rgba(0, 0, 0, 0.2);\n    border-radius: 50%;\n    cursor: pointer;\n    z-index: 10000;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);\n    transition: all 0.2s;\n    font-size: 24px;\n    line-height: 1;\n    color: #333;\n}\n\n.mermaid-fullscreen-close:hover {\n    background: white;\n    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);\n    transform: scale(1.1);\n}\n\n.mermaid-fullscreen-close.dark-theme {\n    background: rgba(50, 50, 50, 0.95);\n    border: 1px solid rgba(255, 255, 255, 0.2);\n    color: #e0e0e0;\n}\n\n.mermaid-fullscreen-close.dark-theme:hover {\n    background: rgba(60, 60, 60, 1);\n    box-shadow: 0 6px 16px rgba(255, 255, 255, 0.2);\n}\n\n.mermaid-fullscreen-modal .mermaid-fullscreen-btn {\n    display: none !important;\n}";
+    document.head.appendChild(fullscreenStyle);
+}
+
+// Detect if page has dark background
+const isDarkTheme = () => {
+    // We use a set of heuristics:
+    // 1. Check for common dark mode classes or attributes
+    // 2. Check computed background color brightness
+    if (document.documentElement.classList.contains('dark') ||
+        document.documentElement.getAttribute('data-theme') === 'dark' ||
+        document.body.classList.contains('dark') ||
+        document.body.getAttribute('data-theme') === 'dark') {
+        // console.log("Dark theme detected via class/attribute");
+        return true;
+    }
+    if (document.documentElement.classList.contains('light') ||
+        document.documentElement.getAttribute('data-theme') === 'light' ||
+        document.body.classList.contains('light') ||
+        document.body.getAttribute('data-theme') === 'light') {
+        // console.log("Light theme detected via class/attribute");
+        return false;
+    }
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        // console.log("Dark theme detected via prefers-color-scheme");
+        return true;
+    }
+    const bgColor = window.getComputedStyle(document.body).backgroundColor;
+    const match = bgColor.match(/rgb\((\d+),\s*(\d+),\s*(\d+)/);
+    if (match) {
+        const r = parseInt(match[1]);
+        const g = parseInt(match[2]);
+        const b = parseInt(match[3]);
+        const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+        // console.log("Background color brightness:", brightness);
+        return brightness < 128;
+    }
+    // console.log("No dark or light theme detected, defaulting to light theme");
+    return false;
+};
+
+let darkTheme = isDarkTheme();
+let modal = null;
+let modalContent = null;
+let previousScrollOffset = [window.scrollX, window.scrollY];
+let _lazyObserver = null;
+let _renderQueue = Promise.resolve();
+let closeModal = () => {};
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal?.classList.contains('active')) {
+        closeModal();
+    }
+});
+
+// Apply d3 zoom to each SVG. Idempotent: an SVG already wrapped is skipped,
+// so this is safe to call both for the initial batch and for diagrams that
+// render lazily once they become visible.
+const addZoomToSvgs = (svgs) => {
+    svgs.each(function() {
+        if (this.getAttribute('data-zoom-applied') === 'true') return;
+        var svg = d3.select(this);
+        svg.html("<g class='wrapper'>" + svg.html() + "</g>");
+        var inner = svg.select("g");
+        var zoom = d3.zoom().on("zoom", function(event) {
+            inner.attr("transform", event.transform);
+        });
+        svg.call(zoom);
+        this.setAttribute('data-zoom-applied', 'true');
+    });
+};
+
+const runMermaid = async (rerun) => {
+    console.log("Running mermaid diagrams, rerun =", rerun);
+    // clear all existing mermaid charts
+    let all_mermaids = document.querySelectorAll(".mermaid");
+
+    if (rerun) {
+        // Disconnect any previous lazy rendering observer
+        if (_lazyObserver) {
+            _lazyObserver.disconnect();
+            _lazyObserver = null;
+        }
+
+        all_mermaids.forEach((el) => {
+            el.removeAttribute('data-mermaid-deferred');
+            el.removeAttribute('data-mermaid-render-failed');
+            if(!el.hasAttribute("data-original-code")) {
+                // store original code
+                // console.log(`Storing original code for first run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+            if(el.getAttribute("data-processed") === "true") {
+                // remove and restore original
+                el.removeAttribute("data-processed");
+                // console.log(`Restoring original code for re-run: `, el.getAttribute('data-original-code'));
+                el.innerHTML = el.getAttribute('data-original-code');
+            } else {
+                // store original code
+                // console.log(`Storing original code for re-run: `, el.innerHTML);
+                el.setAttribute('data-original-code', el.innerHTML);
+            }
+        });
+
+        // Separate visible and hidden elements. Mermaid's layout engine measures
+        // text dimensions via the DOM, which fails for elements hidden by a parent
+        // (e.g., Reveal.js non-active slides, sphinx-design unopened tabs),
+        // producing broken SVGs. Render visible elements now, defer hidden ones.
+        const visible = [];
+        const hidden = [];
+        all_mermaids.forEach((el) => {
+            // offsetParent is null for display:none ancestors.
+            // getClientRects().length > 0 catches position:fixed elements
+            // (which also have null offsetParent but are still visible).
+            if (el.offsetParent !== null || el.getClientRects().length > 0) {
+                visible.push(el);
+            } else {
+                hidden.push(el);
+                el.setAttribute('data-mermaid-deferred', 'true');
+            }
+        });
+
+        if (visible.length > 0) {
+            try {
+                await mermaid.run({ nodes: visible });
+            } catch (e) {
+                console.error("Mermaid rendering failed:", e);
+            }
+        }
+
+        // Lazily render hidden elements when they become visible.
+        // Uses a promise chain (_renderQueue) to serialize rendering,
+        // since IntersectionObserver may report multiple entries at once
+        // and mermaid.run() is not safe to call concurrently.
+        if (hidden.length > 0) {
+            if (typeof IntersectionObserver === 'undefined') {
+                console.warn("IntersectionObserver not available; hidden mermaid diagrams will not render.");
+            } else {
+                _renderQueue = Promise.resolve();
+                _lazyObserver = new IntersectionObserver((entries) => {
+                    for (const entry of entries) {
+                        if (entry.isIntersecting && entry.target.getAttribute("data-processed") !== "true") {
+                            _lazyObserver.unobserve(entry.target);
+                            const el = entry.target;
+                            _renderQueue = _renderQueue.then(async () => {
+                                try {
+                                    await mermaid.run({ nodes: [el] });
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    // Apply zoom to the now-rendered diagram, matching
+                                    // the decoration visible diagrams receive.
+                                    if (false) {
+                                        addZoomToSvgs(d3.selectAll("").select(function() {
+                                            return this.querySelector("svg");
+                                        }));
+                                    }
+                                } catch (e) {
+                                    console.error("Mermaid deferred rendering failed:", e);
+                                    el.removeAttribute('data-mermaid-deferred');
+                                    el.setAttribute('data-mermaid-render-failed', 'true');
+                                }
+                            });
+                        }
+                    }
+                });
+                hidden.forEach((el) => _lazyObserver.observe(el));
+            }
+        }
+    }
+
+    all_mermaids = document.querySelectorAll(".mermaid");
+    // Exclude deferred (hidden) and render-failed elements from completion checks
+    const mermaids_active = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])");
+    const mermaids_processed = document.querySelectorAll(".mermaid:not([data-mermaid-deferred]):not([data-mermaid-render-failed])[data-processed='true']");
+
+    if (false) {
+        const mermaids_to_add_zoom = 0 === -1 ? mermaids_active.length : 0;
+        if(mermaids_to_add_zoom > 0) {
+            var svgs = d3.selectAll("").select(function() {
+                return this.querySelector("svg");
+            });
+            // Wait until every active (visible) diagram has rendered. Deferred
+            // diagrams are excluded, so a fixed d3_node_count that counts a
+            // hidden diagram no longer loops forever waiting for its SVG.
+            if(mermaids_active.length !== mermaids_processed.length) {
+                setTimeout(() => runMermaid(false), 200);
+                return;
+            }
+            addZoomToSvgs(svgs);
+        }
+    } else if(mermaids_active.length !== mermaids_processed.length) {
+        // Wait for mermaid to process all diagrams
+        setTimeout(() => runMermaid(false), 200);
+        return;
+    }
+
+    // Stop here if not adding fullscreen capability
+    if (!true) return;
+
+    if (modal !== null ) {
+        // Destroy existing modal
+        modal.remove();
+        modal = null;
+        modalContent = null;
+    }
+
+    modal = document.createElement('div');
+    modal.className = 'mermaid-fullscreen-modal' + (darkTheme ? ' dark-theme' : '');
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-modal', 'true');
+    modal.setAttribute('aria-label', 'Fullscreen diagram viewer');
+    modal.innerHTML = `
+        <button class="mermaid-fullscreen-close${darkTheme ? ' dark-theme' : ''}" aria-label="Close fullscreen">✕</button>
+        <div class="mermaid-container-fullscreen${darkTheme ? ' dark-theme' : ''}"></div>
+    `;
+    document.body.appendChild(modal);
+
+    modalContent = modal.querySelector('.mermaid-container-fullscreen');
+    const closeBtn = modal.querySelector('.mermaid-fullscreen-close');
+
+    closeModal = () => {
+        modal.classList.remove('active');
+        modalContent.innerHTML = '';
+        document.body.style.overflow = ''
+        window.scrollTo({left: previousScrollOffset[0], top: previousScrollOffset[1], behavior: 'instant'});
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.querySelectorAll('.mermaid').forEach((mermaidDiv) => {
+        if (mermaidDiv.parentNode.classList.contains('mermaid-container') ||
+            mermaidDiv.closest('.mermaid-fullscreen-modal')) {
+            // Already processed, adjust button class if needed
+            const existingBtn = mermaidDiv.parentNode.querySelector('.mermaid-fullscreen-btn');
+            if (existingBtn) {
+                existingBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+            }
+            return;
+        }
+
+        const container = document.createElement('div');
+        container.className = 'mermaid-container';
+        mermaidDiv.parentNode.insertBefore(container, mermaidDiv);
+        container.appendChild(mermaidDiv);
+
+        const fullscreenBtn = document.createElement('button');
+        fullscreenBtn.className = 'mermaid-fullscreen-btn' + (darkTheme ? ' dark-theme' : '');
+        fullscreenBtn.setAttribute('aria-label', 'View diagram in fullscreen');
+        fullscreenBtn.textContent = "\u26f6";
+        fullscreenBtn.style.opacity = "50%";
+
+        // Calculate dynamic position based on diagram's margin and padding
+        const diagramStyle = window.getComputedStyle(mermaidDiv);
+        const marginTop = parseFloat(diagramStyle.marginTop) || 0;
+        const marginRight = parseFloat(diagramStyle.marginRight) || 0;
+        const paddingTop = parseFloat(diagramStyle.paddingTop) || 0;
+        const paddingRight = parseFloat(diagramStyle.paddingRight) || 0;
+        fullscreenBtn.style.top = `${marginTop + paddingTop + 4}px`;
+        fullscreenBtn.style.right = `${marginRight + paddingRight + 4}px`;
+
+        fullscreenBtn.addEventListener('click', () => {
+            previousScrollOffset = [window.scrollX, window.scrollY];
+            const clone = mermaidDiv.cloneNode(true);
+            modalContent.innerHTML = '';
+            modalContent.appendChild(clone);
+
+            const svg = clone.querySelector('svg');
+            if (svg) {
+                svg.removeAttribute('width');
+                svg.removeAttribute('height');
+                svg.style.width = '100%';
+                svg.style.height = 'auto';
+                svg.style.maxWidth = '100%';
+                svg.style.display = 'block';
+
+                if (false) {
+                    setTimeout(() => {
+                        const g = svg.querySelector('g');
+                        if (g) {
+                            var svgD3 = d3.select(svg);
+                            svgD3.html("<g class='wrapper'>" + svgD3.html() + "</g>");
+                            var inner = svgD3.select("g");
+                            var zoom = d3.zoom().on("zoom", function(event) {
+                                inner.attr("transform", event.transform);
+                            });
+                            svgD3.call(zoom);
+                        }
+                    }, 100);
+                }
+            }
+
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+        container.appendChild(fullscreenBtn);
+    });
+};
+
+
+
+const load = async () => {
+    initStyles();
+
+
+    await runMermaid(true);
+
+    const reRunIfThemeChanges = async () => {
+        const newDarkTheme = isDarkTheme();
+        if (newDarkTheme !== darkTheme) {
+            darkTheme = newDarkTheme;
+            console.log("Theme change detected, re-running mermaid with", darkTheme ? "dark" : "default", "theme");
+            await mermaid.initialize(
+                {...{"startOnLoad": false},
+                ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+                }
+            );
+            await runMermaid(true);
+        }
+    };
+
+    // Update theme classes when theme changes
+    const themeObserver = new MutationObserver(reRunIfThemeChanges);
+    themeObserver.observe(document.documentElement, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+    themeObserver.observe(document.body, {
+        attributes: true,
+        attributeFilter: ['class', 'style', 'data-theme']
+    });
+};
+
+
+
+
+
+console.log("Initializing mermaid with", darkTheme ? "dark" : "default", "theme");
+mermaid.initialize(
+    {...{"startOnLoad": false},
+    ...{ darkMode: darkTheme, theme: darkTheme ? "dark" : "default" },
+    }
+);
+
+window.addEventListener("load", load);
+window.runMermaid = runMermaid;</script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/ana_cmpr';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Asynchronous CRC Calculation" href="async_crc.html" />
+    <link rel="prev" title="Analog to Digital Converter (ADC) Calibration Driver" href="adc/adc_calibration.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Analog Comparator</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#quick-start">Quick Start</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenario-1-detect-when-a-signal-crosses-a-fixed-threshold">Scenario 1: Detect When a Signal Crosses a Fixed Threshold</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#scenario-2-compare-a-signal-against-an-external-reference">Scenario 2: Compare a Signal Against an External Reference</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#working-with-multiple-source-channels">Working with Multiple Source Channels</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#runtime-observation-and-timing-helpers">Runtime Observation and Timing Helpers</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#practical-configuration-notes">Practical Configuration Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#operational-notes">Operational Notes</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#examples">Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Analog Comparator</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/ana_cmpr.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analog-comparator">
+<h1>Analog Comparator<a class="headerlink" href="#analog-comparator" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/ana_cmpr.html">[中文]</a></p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#overview" id="id3">Overview</a></p></li>
+<li><p><a class="reference internal" href="#quick-start" id="id4">Quick Start</a></p>
+<ul>
+<li><p><a class="reference internal" href="#lifecycle-and-valid-api-states" id="id5">Lifecycle and Valid API States</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scenario-1-detect-when-a-signal-crosses-a-fixed-threshold" id="id6">Scenario 1: Detect When a Signal Crosses a Fixed Threshold</a></p>
+<ul>
+<li><p><a class="reference internal" href="#example-internal-reference-with-callback" id="id7">Example: Internal Reference with Callback</a></p></li>
+<li><p><a class="reference internal" href="#how-to-read-the-configuration" id="id8">How to Read the Configuration</a></p></li>
+<li><p><a class="reference internal" href="#debounce-and-signal-stability" id="id9">Debounce and Signal Stability</a></p></li>
+<li><p><a class="reference internal" href="#callback-behavior" id="id10">Callback Behavior</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#scenario-2-compare-a-signal-against-an-external-reference" id="id11">Scenario 2: Compare a Signal Against an External Reference</a></p>
+<ul>
+<li><p><a class="reference internal" href="#example-external-reference-input" id="id12">Example: External Reference Input</a></p></li>
+<li><p><a class="reference internal" href="#what-changes-compared-with-scenario-1" id="id13">What Changes Compared with Scenario 1</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#working-with-multiple-source-channels" id="id14">Working with Multiple Source Channels</a></p></li>
+<li><p><a class="reference internal" href="#runtime-observation-and-timing-helpers" id="id15">Runtime Observation and Timing Helpers</a></p></li>
+<li><p><a class="reference internal" href="#practical-configuration-notes" id="id16">Practical Configuration Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#choosing-the-clock-source" id="id17">Choosing the Clock Source</a></p></li>
+<li><p><a class="reference internal" href="#choosing-the-internal-reference-level" id="id18">Choosing the Internal Reference Level</a></p></li>
+<li><p><a class="reference internal" href="#tuning-debounce" id="id19">Tuning Debounce</a></p></li>
+<li><p><a class="reference internal" href="#tuning-scan-timing" id="id20">Tuning Scan Timing</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#operational-notes" id="id21">Operational Notes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#enable-and-disable-lifecycle" id="id22">Enable and Disable Lifecycle</a></p></li>
+<li><p><a class="reference internal" href="#power-management" id="id23">Power Management</a></p></li>
+<li><p><a class="reference internal" href="#iram-safe" id="id24">IRAM Safe</a></p></li>
+<li><p><a class="reference internal" href="#thread-safety" id="id25">Thread Safety</a></p></li>
+<li><p><a class="reference internal" href="#kconfig-options" id="id26">Kconfig Options</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#examples" id="id27">Examples</a></p></li>
+<li><p><a class="reference internal" href="#api-reference" id="id28">API Reference</a></p>
+<ul>
+<li><p><a class="reference internal" href="#driver-apis" id="id29">Driver APIs</a></p></li>
+<li><p><a class="reference internal" href="#driver-types" id="id30">Driver Types</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="overview">
+<h2><a class="toc-backref" href="#id3" role="doc-backlink">Overview</a><a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>An analog comparator tells you whether a source signal is above or below a reference signal. The reference can come from either an internal generator or an external input.</p>
+<p>This makes the analog comparator useful for tasks such as:</p>
+<ul class="simple">
+<li><p>Detecting whether a waveform crosses a fixed threshold</p></li>
+<li><p>Turning a sine wave into a digital square wave around a chosen reference level</p></li>
+<li><p>Comparing one analog signal against another analog signal</p></li>
+<li><p>Generating interrupts or ETM events when the comparison result changes</p></li>
+<li><p>Building simple hardware signal-processing pipelines without continuous CPU involvement</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The analog comparator peripheral is not a continuous-time comparator in the same sense as a discrete analog comparator IC or an op-amp based analog front end. It is driven by a source clock, so comparison results are sampled in hardware time. In practice, clock source, scan timing, debounce, and ETM configuration all affect what you observe on real signals.</p>
+</div>
+</section>
+<section id="quick-start">
+<h2><a class="toc-backref" href="#id4" role="doc-backlink">Quick Start</a><a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p>If you are new to this peripheral, start with the simplest workflow:</p>
+<ol class="arabic simple">
+<li><p>Create a comparator unit</p></li>
+<li><p>Select the source signal and reference source</p></li>
+<li><p>Configure the internal reference or external reference input</p></li>
+<li><p>Optionally configure debounce</p></li>
+<li><p>Register a callback or create ETM connections</p></li>
+<li><p>Enable the comparator</p></li>
+</ol>
+<p>The following example uses an internal reference and an interrupt callback to detect when a source signal crosses 50% VDD:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ana_cmpr_handle_t</span><span class="w"> </span><span class="n">cmpr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">ana_cmpr_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                            </span><span class="c1">// Pick a comparator unit that is available on your target</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CLK_SRC_DEFAULT</span><span class="p">,</span><span class="w">  </span><span class="c1">// Most applications can use the default clock source</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ref_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_REF_SRC_INTERNAL</span><span class="p">,</span><span class="w"> </span><span class="c1">// Use the internal reference for a simple fixed threshold</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cross_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_ANY</span><span class="p">,</span><span class="w">     </span><span class="c1">// Trigger on both positive and negative crossings</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_chan0_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                  </span><span class="c1">// Replace with the analog comparator source GPIO wired on your board</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_new_unit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cmpr</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_internal_ref_config_t</span><span class="w"> </span><span class="n">ref_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ref_volt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_REF_VOLT_50_PCT_VDD</span><span class="p">,</span><span class="w"> </span><span class="c1">// Set the internal reference voltage to 50% of VDD, i.e., compare whether the source signal is above or below half of the supply voltage</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_set_internal_reference</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ref_cfg</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_debounce_config_t</span><span class="w"> </span><span class="n">dbc_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">wait_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="c1">// Set a debounce time of 10 microseconds to suppress duplicate interrupts from noisy signals around the threshold</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_set_debounce</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dbc_cfg</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_event_callbacks_t</span><span class="w"> </span><span class="n">cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_cross</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_ana_cmpr_on_cross_callback</span><span class="p">,</span><span class="w"> </span><span class="c1">// Register a callback to be called when a crossing event occurs; this callback should be defined elsewhere in your code</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_register_event_callbacks</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cbs</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_enable</span><span class="p">(</span><span class="n">cmpr</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>This flow introduces the most important ideas:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv417ana_cmpr_new_unitPK17ana_cmpr_config_tP17ana_cmpr_handle_t" title="ana_cmpr_new_unit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_new_unit()</span></code></a> creates a comparator instance and selects the source GPIO and reference source.</p></li>
+<li><p><a class="reference internal" href="#_CPPv431ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t" title="ana_cmpr_set_internal_reference"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_internal_reference()</span></code></a> chooses the threshold when using the internal reference.</p></li>
+<li><p><a class="reference internal" href="#_CPPv421ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t" title="ana_cmpr_set_debounce"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_debounce()</span></code></a> can suppress duplicate crossing interrupts caused by noisy or slow-moving signals.</p></li>
+<li><p><a class="reference internal" href="#_CPPv433ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv" title="ana_cmpr_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_register_event_callbacks()</span></code></a> lets your code react when the comparison result changes.</p></li>
+<li><p><a class="reference internal" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="ana_cmpr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_enable()</span></code></a> starts the hardware after configuration is complete.</p></li>
+</ul>
+<p>The rest of this document expands this flow into typical usage scenarios.</p>
+<section id="lifecycle-and-valid-api-states">
+<h3><a class="toc-backref" href="#id5" role="doc-backlink">Lifecycle and Valid API States</a><a class="headerlink" href="#lifecycle-and-valid-api-states" title="Permalink to this heading"></a></h3>
+<p>The following diagram shows the analog comparator lifecycle and the states in which each API is intended to be used:</p>
+<pre  class="mermaid">
+        flowchart TD
+    NC([Not created]) --&gt;|ana_cmpr_new_unit| INIT[Init / Disabled]
+    INIT --&gt;|ana_cmpr_enable| EN[Enabled]
+    EN --&gt;|ana_cmpr_disable| INIT
+    INIT --&gt;|ana_cmpr_del_unit| NC
+
+    subgraph INIT_APIS [Init-state APIs]
+        SCAN[ana_cmpr_set_scan_config]
+        ADD[ana_cmpr_add_src_chan&lt;br/&gt;ana_cmpr_remove_src_chan]
+        CB[ana_cmpr_register_event_callbacks]
+    end
+
+    subgraph BOTH_APIS [APIs usable in both states]
+        IR[ana_cmpr_set_internal_reference]
+        DBC[ana_cmpr_set_debounce]
+    end
+
+    subgraph EN_APIS [Enabled-only API]
+        TRIG[ana_cmpr_trigger_scan]
+    end
+
+    INIT -. can call .-&gt; SCAN
+    INIT -. can call .-&gt; ADD
+    INIT -. can call .-&gt; CB
+    INIT -. can call .-&gt; IR
+    INIT -. can call .-&gt; DBC
+    EN -. can call .-&gt; IR
+    EN -. can call .-&gt; DBC
+    EN -. can call .-&gt; TRIG
+
+    classDef stateNeutral fill:#f8fafc,stroke:#64748b,stroke-width:1.5px,color:#111827;
+    classDef stateInit fill:#eff6ff,stroke:#2563eb,stroke-width:1.5px,color:#111827;
+    classDef stateEnabled fill:#fdf2f8,stroke:#db2777,stroke-width:1.5px,color:#111827;
+    classDef initApi fill:#eff6ff,stroke:#60a5fa,color:#111827;
+    classDef bothApi fill:#ecfdf5,stroke:#10b981,color:#111827;
+    classDef enabledApi fill:#fdf2f8,stroke:#f472b6,color:#111827;
+
+    class NC stateNeutral;
+    class INIT stateInit;
+    class EN stateEnabled;
+    class SCAN,ADD,CB initApi;
+    class IR,DBC bothApi;
+    class TRIG enabledApi;
+    </pre><p>The main constraints to remember are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv433ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv" title="ana_cmpr_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_register_event_callbacks()</span></code></a>, <a class="reference internal" href="#_CPPv421ana_cmpr_add_src_chan17ana_cmpr_handle_tiPK26ana_cmpr_src_chan_config_t" title="ana_cmpr_add_src_chan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_add_src_chan()</span></code></a>, <a class="reference internal" href="#_CPPv424ana_cmpr_remove_src_chan17ana_cmpr_handle_ti" title="ana_cmpr_remove_src_chan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_remove_src_chan()</span></code></a>, and <a class="reference internal" href="#_CPPv424ana_cmpr_set_scan_config17ana_cmpr_handle_tPK22ana_cmpr_scan_config_t" title="ana_cmpr_set_scan_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_scan_config()</span></code></a> are intended to be used while the comparator is still in init state.</p></li>
+<li><p><a class="reference internal" href="#_CPPv421ana_cmpr_trigger_scan17ana_cmpr_handle_t" title="ana_cmpr_trigger_scan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_trigger_scan()</span></code></a> only works after <a class="reference internal" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="ana_cmpr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_enable()</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv417ana_cmpr_del_unit17ana_cmpr_handle_t" title="ana_cmpr_del_unit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_del_unit()</span></code></a> requires the comparator to be disabled first.</p></li>
+</ul>
+</section>
+</section>
+<section id="scenario-1-detect-when-a-signal-crosses-a-fixed-threshold">
+<h2><a class="toc-backref" href="#id6" role="doc-backlink">Scenario 1: Detect When a Signal Crosses a Fixed Threshold</a><a class="headerlink" href="#scenario-1-detect-when-a-signal-crosses-a-fixed-threshold" title="Permalink to this heading"></a></h2>
+<p>Use this setup when you have one analog input and you only care whether it is above or below a threshold.</p>
+<p>Typical examples:</p>
+<ul class="simple">
+<li><p>Detect whether a sensor output rises above a limit</p></li>
+<li><p>Convert a sine wave into a digital waveform around a fixed threshold</p></li>
+<li><p>Trigger software when a signal changes polarity around mid-supply</p></li>
+</ul>
+<p>The easiest way to build this is to compare the source signal against the internal reference.</p>
+<section id="example-internal-reference-with-callback">
+<h3><a class="toc-backref" href="#id7" role="doc-backlink">Example: Internal Reference with Callback</a><a class="headerlink" href="#example-internal-reference-with-callback" title="Permalink to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">IRAM_ATTR</span><span class="w"> </span><span class="nf">example_ana_cmpr_on_cross_callback</span><span class="p">(</span><span class="n">ana_cmpr_handle_t</span><span class="w"> </span><span class="n">cmpr</span><span class="p">,</span>
+<span class="w">                                                         </span><span class="k">const</span><span class="w"> </span><span class="n">ana_cmpr_cross_event_data_t</span><span class="w"> </span><span class="o">*</span><span class="n">edata</span><span class="p">,</span>
+<span class="w">                                                         </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_ctx</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">cross_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_POS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">gpio_set_level</span><span class="p">(</span><span class="n">EXAMPLE_MONITOR_GPIO_NUM</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">cross_type</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_NEG</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">gpio_set_level</span><span class="p">(</span><span class="n">EXAMPLE_MONITOR_GPIO_NUM</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="nb">false</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="n">ana_cmpr_handle_t</span><span class="w"> </span><span class="n">cmpr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">ana_cmpr_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                            </span><span class="c1">// Use a valid unit index for the selected target</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CLK_SRC_DEFAULT</span><span class="p">,</span><span class="w">  </span><span class="c1">// Start with default unless you need specific timing</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ref_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_REF_SRC_INTERNAL</span><span class="p">,</span><span class="w"> </span><span class="c1">// Compare source against internal threshold</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cross_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_ANY</span><span class="p">,</span><span class="w">     </span><span class="c1">// Report both positive and negative crossings</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_chan0_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                  </span><span class="c1">// Replace with the source channel GPIO connected on your board</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_new_unit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cmpr</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_internal_ref_config_t</span><span class="w"> </span><span class="n">ref_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ref_volt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_REF_VOLT_50_PCT_VDD</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_set_internal_reference</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ref_cfg</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_debounce_config_t</span><span class="w"> </span><span class="n">dbc_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">wait_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_set_debounce</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dbc_cfg</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_event_callbacks_t</span><span class="w"> </span><span class="n">cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_cross</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_ana_cmpr_on_cross_callback</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_register_event_callbacks</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cbs</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_enable</span><span class="p">(</span><span class="n">cmpr</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="how-to-read-the-configuration">
+<h3><a class="toc-backref" href="#id8" role="doc-backlink">How to Read the Configuration</a><a class="headerlink" href="#how-to-read-the-configuration" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="#_CPPv417ana_cmpr_config_t" title="ana_cmpr_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ana_cmpr_config_t</span></code></a> structure describes the basic shape of the comparator instance:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t4unitE" title="ana_cmpr_config_t::unit"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::unit</span></code></a> selects which comparator unit to use.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t7clk_srcE" title="ana_cmpr_config_t::clk_src"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::clk_src</span></code></a> selects the comparator source clock. For most applications, <a class="reference internal" href="clk_tree.html#_CPPv4N29soc_periph_ana_cmpr_clk_src_t24ANA_CMPR_CLK_SRC_DEFAULTE" title="ANA_CMPR_CLK_SRC_DEFAULT"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">ANA_CMPR_CLK_SRC_DEFAULT</span></code></a> is the right starting point.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t7ref_srcE" title="ana_cmpr_config_t::ref_src"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::ref_src</span></code></a> selects whether the reference comes from the internal threshold generator or an external analog input.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t10cross_typeE" title="ana_cmpr_config_t::cross_type"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::cross_type</span></code></a> selects which crossings should trigger the interrupt callback: positive, negative, or both.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t14src_chan0_gpioE" title="ana_cmpr_config_t::src_chan0_gpio"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::src_chan0_gpio</span></code></a> selects the source GPIO on targets whose analog comparator pads are configurable.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t14resample_limitE" title="ana_cmpr_config_t::resample_limit"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::resample_limit</span></code></a> sets the unit-wide number of consecutive consistent samples required before a channel state update is accepted.</p></li>
+</ul>
+<p>When using the internal reference, <a class="reference internal" href="#_CPPv431ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t" title="ana_cmpr_set_internal_reference"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_internal_reference()</span></code></a> sets the threshold with <a class="reference internal" href="#_CPPv4N30ana_cmpr_internal_ref_config_t8ref_voltE" title="ana_cmpr_internal_ref_config_t::ref_volt"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_internal_ref_config_t::ref_volt</span></code></a>. The available values are fixed percentages of VDD. For example, <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">ANA_CMPR_REF_VOLT_50_PCT_VDD</span></code> means the comparator reports whether the source signal is above or below half of the supply voltage.</p>
+</section>
+<section id="debounce-and-signal-stability">
+<h3><a class="toc-backref" href="#id9" role="doc-backlink">Debounce and Signal Stability</a><a class="headerlink" href="#debounce-and-signal-stability" title="Permalink to this heading"></a></h3>
+<p>Real analog signals are often noisy near the threshold. Without debounce, a signal that slowly moves across the threshold or jitters around it may trigger several crossing interrupts in a short time.</p>
+<p>Use <a class="reference internal" href="#_CPPv421ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t" title="ana_cmpr_set_debounce"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_debounce()</span></code></a> to suppress these duplicate crossings:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N26ana_cmpr_debounce_config_t7wait_usE" title="ana_cmpr_debounce_config_t::wait_us"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_debounce_config_t::wait_us</span></code></a> is the time window during which new crossing interrupts are temporarily ignored after one crossing has already been reported.</p></li>
+</ul>
+<p>As a rule of thumb:</p>
+<ul class="simple">
+<li><p>Increase <code class="docutils literal notranslate"><span class="pre">wait_us</span></code> if your signal is noisy and you see too many interrupts.</p></li>
+<li><p>Decrease <code class="docutils literal notranslate"><span class="pre">wait_us</span></code> if your signal changes quickly and you start missing real crossings.</p></li>
+</ul>
+</section>
+<section id="callback-behavior">
+<h3><a class="toc-backref" href="#id10" role="doc-backlink">Callback Behavior</a><a class="headerlink" href="#callback-behavior" title="Permalink to this heading"></a></h3>
+<p>Register callbacks with <a class="reference internal" href="#_CPPv433ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv" title="ana_cmpr_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_register_event_callbacks()</span></code></a> before enabling the unit.</p>
+<p>The comparator currently provides one callback group member:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N26ana_cmpr_event_callbacks_t8on_crossE" title="ana_cmpr_event_callbacks_t::on_cross"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_event_callbacks_t::on_cross</span></code></a></p></li>
+</ul>
+<p>The callback receives <a class="reference internal" href="#_CPPv427ana_cmpr_cross_event_data_t" title="ana_cmpr_cross_event_data_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ana_cmpr_cross_event_data_t</span></code></a>, which tells you:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N27ana_cmpr_cross_event_data_t10cross_typeE" title="ana_cmpr_cross_event_data_t::cross_type"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_cross_event_data_t::cross_type</span></code></a> - whether the source crossed upward or downward</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N27ana_cmpr_cross_event_data_t11src_chan_idE" title="ana_cmpr_cross_event_data_t::src_chan_id"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_cross_event_data_t::src_chan_id</span></code></a> - which source channel triggered the event on targets that support multiple source channels</p></li>
+</ul>
+<p>On targets that do not support independent positive and negative interrupt reporting, <a class="reference internal" href="#_CPPv4N27ana_cmpr_cross_event_data_t10cross_typeE" title="ana_cmpr_cross_event_data_t::cross_type"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_cross_event_data_t::cross_type</span></code></a> can always be reported as <code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">ANA_CMPR_CROSS_ANY</span></code>.</p>
+<p>The callback runs in interrupt context, so keep it short and non-blocking.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <a class="reference internal" href="../kconfig-reference.html#config-ana-cmpr-isr-cache-safe"><span class="std std-ref">CONFIG_ANA_CMPR_ISR_CACHE_SAFE</span></a> is enabled, place the callback and any accessed data in internal RAM.</p>
+</div>
+</section>
+</section>
+<section id="scenario-2-compare-a-signal-against-an-external-reference">
+<h2><a class="toc-backref" href="#id11" role="doc-backlink">Scenario 2: Compare a Signal Against an External Reference</a><a class="headerlink" href="#scenario-2-compare-a-signal-against-an-external-reference" title="Permalink to this heading"></a></h2>
+<p>Use this setup when the reference level is not a fixed percentage of VDD.</p>
+<p>Typical examples:</p>
+<ul class="simple">
+<li><p>Compare a sensor signal against a voltage divider output</p></li>
+<li><p>Compare a waveform against another waveform</p></li>
+<li><p>Generate a digital result from a source/reference pair that both come from analog front-end circuitry</p></li>
+</ul>
+<p>In this case, the comparator source is still your input signal, but the reference comes from another analog input.</p>
+<section id="example-external-reference-input">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Example: External Reference Input</a><a class="headerlink" href="#example-external-reference-input" title="Permalink to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ana_cmpr_handle_t</span><span class="w"> </span><span class="n">cmpr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">ana_cmpr_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                             </span><span class="c1">// Use a valid unit index for the selected target</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CLK_SRC_DEFAULT</span><span class="p">,</span><span class="w">   </span><span class="c1">// Default clock is usually enough</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ref_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_REF_SRC_EXTERNAL</span><span class="p">,</span><span class="w">  </span><span class="c1">// Select external reference mode</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cross_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_ANY</span><span class="p">,</span><span class="w">      </span><span class="c1">// Report both crossing directions</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_chan0_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                   </span><span class="c1">// Source signal GPIO from your board design</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ext_ref_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">                     </span><span class="c1">// Reference signal GPIO from your board design</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_new_unit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cmpr</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_debounce_config_t</span><span class="w"> </span><span class="n">dbc_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">wait_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_set_debounce</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">dbc_cfg</span><span class="p">));</span>
+
+<span class="n">ana_cmpr_event_callbacks_t</span><span class="w"> </span><span class="n">cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_cross</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">example_ana_cmpr_on_cross_callback</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_register_event_callbacks</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">cbs</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_enable</span><span class="p">(</span><span class="n">cmpr</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="what-changes-compared-with-scenario-1">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">What Changes Compared with Scenario 1</a><a class="headerlink" href="#what-changes-compared-with-scenario-1" title="Permalink to this heading"></a></h3>
+<p>The main difference is <a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t7ref_srcE" title="ana_cmpr_config_t::ref_src"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::ref_src</span></code></a>:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">ANA_CMPR_REF_SRC_INTERNAL</span></code> means the reference is generated inside the comparator block.</p></li>
+<li><p><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">ANA_CMPR_REF_SRC_EXTERNAL</span></code> means the reference comes from a dedicated analog input.</p></li>
+</ul>
+<p>When using an external reference:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t12ext_ref_gpioE" title="ana_cmpr_config_t::ext_ref_gpio"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::ext_ref_gpio</span></code></a> becomes meaningful on targets with configurable analog comparator pads.</p></li>
+<li><p><a class="reference internal" href="#_CPPv431ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t" title="ana_cmpr_set_internal_reference"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_internal_reference()</span></code></a> is not used.</p></li>
+</ul>
+<p>You can query the actual GPIOs in use with <a class="reference internal" href="#_CPPv425ana_cmpr_get_channel_gpio17ana_cmpr_handle_t23ana_cmpr_channel_type_tiP10gpio_num_t" title="ana_cmpr_get_channel_gpio"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_get_channel_gpio()</span></code></a>:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">gpio_num_t</span><span class="w"> </span><span class="n">src_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="n">gpio_num_t</span><span class="w"> </span><span class="n">ext_ref_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">-1</span><span class="p">;</span>
+<span class="c1">// Read back actual channel mapping after initialization.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_get_channel_gpio</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="n">ANA_CMPR_SOURCE_CHAN</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">src_gpio</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_get_channel_gpio</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="n">ANA_CMPR_EXT_REF_CHAN</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">ext_ref_gpio</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="working-with-multiple-source-channels">
+<h2><a class="toc-backref" href="#id14" role="doc-backlink">Working with Multiple Source Channels</a><a class="headerlink" href="#working-with-multiple-source-channels" title="Permalink to this heading"></a></h2>
+<p>Some targets support more than one source channel per comparator unit. If your application needs to sample several analog inputs against the same reference, you can configure extra source channels while the comparator is in init state.</p>
+<p>The relevant APIs are:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv421ana_cmpr_add_src_chan17ana_cmpr_handle_tiPK26ana_cmpr_src_chan_config_t" title="ana_cmpr_add_src_chan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_add_src_chan()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv424ana_cmpr_remove_src_chan17ana_cmpr_handle_ti" title="ana_cmpr_remove_src_chan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_remove_src_chan()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv432ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t" title="ana_cmpr_set_src_chan_cross_type"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_src_chan_cross_type()</span></code></a></p></li>
+</ul>
+<p>Example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ana_cmpr_src_chan_config_t</span><span class="w"> </span><span class="n">src_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">gpio_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EXAMPLE_SRC_CHAN1_GPIO</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cross_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_ANY</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_add_src_chan</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">src_cfg</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>When using multiple source channels:</p>
+<ul class="simple">
+<li><p>Add or remove channels only before <a class="reference internal" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="ana_cmpr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_enable()</span></code></a>.</p></li>
+<li><p>If you remove every configured source channel, <a class="reference internal" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="ana_cmpr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_enable()</span></code></a> fails with <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv432ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t" title="ana_cmpr_set_src_chan_cross_type"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_src_chan_cross_type()</span></code></a> is only runtime-configurable on ESP32-H2.</p></li>
+</ul>
+</section>
+<section id="runtime-observation-and-timing-helpers">
+<h2><a class="toc-backref" href="#id15" role="doc-backlink">Runtime Observation and Timing Helpers</a><a class="headerlink" href="#runtime-observation-and-timing-helpers" title="Permalink to this heading"></a></h2>
+<p>The following APIs are general runtime helpers and are not tied to multi-source configuration:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv421ana_cmpr_trigger_scan17ana_cmpr_handle_t" title="ana_cmpr_trigger_scan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_trigger_scan()</span></code></a> forces one software-triggered scan sequence (on targets that support software-triggered scan).</p></li>
+<li><p><a class="reference internal" href="#_CPPv425ana_cmpr_get_output_level17ana_cmpr_handle_tiPb" title="ana_cmpr_get_output_level"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_get_output_level()</span></code></a> reads the latest sampled comparator output of a source channel (on targets that support output-level reporting).</p></li>
+<li><p><a class="reference internal" href="#_CPPv432ana_cmpr_get_clock_resolution_hz17ana_cmpr_handle_tP8uint32_t" title="ana_cmpr_get_clock_resolution_hz"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_get_clock_resolution_hz()</span></code></a> returns PAD_COMP_CLK resolution in Hz.</p></li>
+<li><p><a class="reference internal" href="#_CPPv431ana_cmpr_get_capture_timestamps17ana_cmpr_handle_tiP8uint32_tP8uint32_t" title="ana_cmpr_get_capture_timestamps"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_get_capture_timestamps()</span></code></a> reads current/previous crossing timestamps (on capture-capable targets).</p></li>
+</ul>
+<p>Use <a class="reference internal" href="#_CPPv425ana_cmpr_get_output_level17ana_cmpr_handle_tiPb" title="ana_cmpr_get_output_level"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_get_output_level()</span></code></a> when you need current digital comparison state from software. Use <a class="reference internal" href="#_CPPv432ana_cmpr_get_clock_resolution_hz17ana_cmpr_handle_tP8uint32_t" title="ana_cmpr_get_clock_resolution_hz"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_get_clock_resolution_hz()</span></code></a> when converting PAD_COMP_CLK ticks (for example, capture timestamps) to time units. Use <a class="reference internal" href="#_CPPv421ana_cmpr_trigger_scan17ana_cmpr_handle_t" title="ana_cmpr_trigger_scan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_trigger_scan()</span></code></a> when you want deterministic software-controlled refresh timing; it requires <a class="reference internal" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="ana_cmpr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_enable()</span></code></a> and returns <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code> in init state.</p>
+<p>To get meaningful capture timestamps, enable the capture timer when creating the unit:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ana_cmpr_config_t</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">unit</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                            </span><span class="c1">// Use a valid unit index for your target</span>
+<span class="w">    </span><span class="p">.</span><span class="n">clk_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CLK_SRC_DEFAULT</span><span class="p">,</span><span class="w">  </span><span class="c1">// PAD_COMP_CLK source</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ref_src</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_REF_SRC_INTERNAL</span><span class="p">,</span><span class="w"> </span><span class="c1">// Reference mode used by your capture scenario</span>
+<span class="w">    </span><span class="p">.</span><span class="n">cross_type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ANA_CMPR_CROSS_ANY</span><span class="p">,</span><span class="w">     </span><span class="c1">// Keep both crossing directions by default</span>
+<span class="w">    </span><span class="p">.</span><span class="n">src_chan0_gpio</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">                  </span><span class="c1">// Must match your board's source signal wiring</span>
+<span class="w">    </span><span class="p">.</span><span class="n">en_capture_timer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">true</span><span class="p">,</span><span class="w">             </span><span class="c1">// Required for capture timestamp APIs</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>Then convert ticks to time with:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">resolution_hz</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">current_ticks</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_get_clock_resolution_hz</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">resolution_hz</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">ana_cmpr_get_capture_timestamps</span><span class="p">(</span><span class="n">cmpr</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">current_ticks</span><span class="p">,</span><span class="w"> </span><span class="nb">NULL</span><span class="p">));</span>
+<span class="kt">uint32_t</span><span class="w"> </span><span class="n">time_us</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="kt">uint32_t</span><span class="p">)(((</span><span class="kt">uint64_t</span><span class="p">)</span><span class="n">current_ticks</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000000U</span><span class="p">)</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="n">resolution_hz</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="practical-configuration-notes">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Practical Configuration Notes</a><a class="headerlink" href="#practical-configuration-notes" title="Permalink to this heading"></a></h2>
+<section id="choosing-the-clock-source">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Choosing the Clock Source</a><a class="headerlink" href="#choosing-the-clock-source" title="Permalink to this heading"></a></h3>
+<p>The comparator clock affects sampling behavior. In most applications, use <a class="reference internal" href="clk_tree.html#_CPPv4N29soc_periph_ana_cmpr_clk_src_t24ANA_CMPR_CLK_SRC_DEFAULTE" title="ANA_CMPR_CLK_SRC_DEFAULT"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">ANA_CMPR_CLK_SRC_DEFAULT</span></code></a> unless you have a specific clocking requirement.</p>
+<p>Note that the analog comparator clock source can be shared with other GPIO-extension style peripherals on some targets. If different peripherals request incompatible clock sources, initialization can fail.</p>
+</section>
+<section id="choosing-the-internal-reference-level">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Choosing the Internal Reference Level</a><a class="headerlink" href="#choosing-the-internal-reference-level" title="Permalink to this heading"></a></h3>
+<p>The internal reference is defined as a percentage of VDD, not as an arbitrary voltage in volts.</p>
+<p>This is convenient when:</p>
+<ul class="simple">
+<li><p>the input signal naturally swings with the supply range</p></li>
+<li><p>you want a simple mid-supply or supply-relative threshold</p></li>
+</ul>
+<p>This is less suitable when:</p>
+<ul class="simple">
+<li><p>you need a precise threshold independent of VDD variation</p></li>
+<li><p>the threshold must change continuously instead of in coarse steps</p></li>
+</ul>
+</section>
+<section id="tuning-debounce">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Tuning Debounce</a><a class="headerlink" href="#tuning-debounce" title="Permalink to this heading"></a></h3>
+<p>Debounce is one of the first parameters to tune on real hardware.</p>
+<ul class="simple">
+<li><p>Too little debounce: duplicate interrupts or unstable event behavior near the threshold</p></li>
+<li><p>Too much debounce: missed crossings on fast-changing signals</p></li>
+</ul>
+<p>There is no single good value for every application. Start small and adjust based on observed signal behavior.</p>
+</section>
+<section id="tuning-scan-timing">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Tuning Scan Timing</a><a class="headerlink" href="#tuning-scan-timing" title="Permalink to this heading"></a></h3>
+<p>On scan-capable targets, scan timing and resampling should be chosen together:</p>
+<ul class="simple">
+<li><p>Reduce <code class="docutils literal notranslate"><span class="pre">poll_period_us</span></code> when you need quicker updates</p></li>
+<li><p>Increase <a class="reference internal" href="#_CPPv4N17ana_cmpr_config_t14resample_limitE" title="ana_cmpr_config_t::resample_limit"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">ana_cmpr_config_t::resample_limit</span></code></a> when you need better noise rejection</p></li>
+<li><p>Avoid choosing a scan rate that is much slower than the effective input dynamics you want to detect</p></li>
+</ul>
+</section>
+</section>
+<section id="operational-notes">
+<h2><a class="toc-backref" href="#id21" role="doc-backlink">Operational Notes</a><a class="headerlink" href="#operational-notes" title="Permalink to this heading"></a></h2>
+<section id="enable-and-disable-lifecycle">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">Enable and Disable Lifecycle</a><a class="headerlink" href="#enable-and-disable-lifecycle" title="Permalink to this heading"></a></h3>
+<p>The comparator follows a simple lifecycle:</p>
+<ol class="arabic simple">
+<li><p>Create and configure it</p></li>
+<li><p>Enable it</p></li>
+<li><p>Run your application</p></li>
+<li><p>Disable it before deleting it</p></li>
+</ol>
+<p>Use <a class="reference internal" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="ana_cmpr_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_enable()</span></code></a> and <a class="reference internal" href="#_CPPv416ana_cmpr_disable17ana_cmpr_handle_t" title="ana_cmpr_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_disable()</span></code></a> as a pair.</p>
+<p>While enabled, only a limited set of runtime control functions are intended to be adjusted. Configuration functions such as source channel management and scan configuration must be done before enabling the unit.</p>
+</section>
+<section id="power-management">
+<h3><a class="toc-backref" href="#id23" role="doc-backlink">Power Management</a><a class="headerlink" href="#power-management" title="Permalink to this heading"></a></h3>
+<p>When <a class="reference internal" href="../kconfig-reference.html#config-pm-enable"><span class="std std-ref">CONFIG_PM_ENABLE</span></a> is enabled, sleep and clock changes can affect the comparator. The driver uses a power management lock internally when needed, so enabling the comparator can prevent light sleep while the unit is active.</p>
+<p>If power consumption matters, structure your application so the comparator is only enabled when needed.</p>
+</section>
+<section id="iram-safe">
+<h3><a class="toc-backref" href="#id24" role="doc-backlink">IRAM Safe</a><a class="headerlink" href="#iram-safe" title="Permalink to this heading"></a></h3>
+<p>If you need comparator interrupts to keep working while the cache is disabled, enable <a class="reference internal" href="../kconfig-reference.html#config-ana-cmpr-isr-cache-safe"><span class="std std-ref">CONFIG_ANA_CMPR_ISR_CACHE_SAFE</span></a>.</p>
+<p>If you also need the runtime control functions to remain callable in that situation, enable <a class="reference internal" href="../kconfig-reference.html#config-ana-cmpr-ctrl-func-in-iram"><span class="std std-ref">CONFIG_ANA_CMPR_CTRL_FUNC_IN_IRAM</span></a>.</p>
+<p>The following control APIs can be placed in IRAM:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv431ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t" title="ana_cmpr_set_internal_reference"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_internal_reference()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv421ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t" title="ana_cmpr_set_debounce"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_debounce()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv432ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t" title="ana_cmpr_set_src_chan_cross_type"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_set_src_chan_cross_type()</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv421ana_cmpr_trigger_scan17ana_cmpr_handle_t" title="ana_cmpr_trigger_scan"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_trigger_scan()</span></code></a></p></li>
+</ul>
+</section>
+<section id="thread-safety">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">Thread Safety</a><a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>The driver is designed to be thread-safe for concurrent API calls on the same <a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ana_cmpr_handle_t</span></code></a>, by combining:</p>
+<ul class="simple">
+<li><p>A per-handle FSM (INIT/ENABLE/WAIT) with atomic state transitions to serialize incompatible operations</p></li>
+<li><p>Short critical sections to keep shared software state and hardware registers updated atomically</p></li>
+<li><p>Slot lifecycle protection for create/delete windows</p></li>
+</ul>
+<p>The main lifecycle contract still applies: call <a class="reference internal" href="#_CPPv416ana_cmpr_disable17ana_cmpr_handle_t" title="ana_cmpr_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_disable()</span></code></a> before <a class="reference internal" href="#_CPPv417ana_cmpr_del_unit17ana_cmpr_handle_t" title="ana_cmpr_del_unit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ana_cmpr_del_unit()</span></code></a>, and make sure no active dependent objects (for example ETM handles) remain when deleting the unit.</p>
+</section>
+<section id="kconfig-options">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">Kconfig Options</a><a class="headerlink" href="#kconfig-options" title="Permalink to this heading"></a></h3>
+<p>The most relevant Kconfig options are:</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><a class="reference internal" href="../kconfig-reference.html#config-ana-cmpr-isr-cache-safe"><span class="std std-ref">CONFIG_ANA_CMPR_ISR_CACHE_SAFE</span></a></dt><dd><p>Keeps the default ISR path available when cache is disabled. Enable this if comparator interrupts must work in cache-off windows.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="../kconfig-reference.html#config-ana-cmpr-ctrl-func-in-iram"><span class="std std-ref">CONFIG_ANA_CMPR_CTRL_FUNC_IN_IRAM</span></a></dt><dd><p>Places ISR-callable runtime control APIs in IRAM, so they remain callable when cache is disabled.</p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="../kconfig-reference.html#config-ana-cmpr-enable-debug-log"><span class="std std-ref">CONFIG_ANA_CMPR_ENABLE_DEBUG_LOG</span></a></dt><dd><p>Enables driver debug logs for troubleshooting and bring-up. This increases binary size and log verbosity.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+</section>
+<section id="examples">
+<h2><a class="toc-backref" href="#id27" role="doc-backlink">Examples</a><a class="headerlink" href="#examples" title="Permalink to this heading"></a></h2>
+<p><ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/analog_comparator/auto_scan">peripherals/analog_comparator/auto_scan</a> shows auto-scan based threshold detection. After enabling the comparator, hardware scans continuously and updates output in real time, while monitor GPIO is driven via interrupt or ETM depending on target capabilities.</p></li>
+</ul>
+</p>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="#id28" role="doc-backlink">API Reference</a><a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="driver-apis">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">Driver APIs</a><a class="headerlink" href="#driver-apis" title="Permalink to this heading"></a></h3>
+<section id="header-file">
+<h4>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_ana_cmpr/include/driver/ana_cmpr.h">components/esp_driver_ana_cmpr/include/driver/ana_cmpr.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/ana_cmpr.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_ana_cmpr</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_ana_cmpr</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_ana_cmpr
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_ana_cmpr
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h4>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h4>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417ana_cmpr_new_unitPK17ana_cmpr_config_tP17ana_cmpr_handle_t">
+<span id="_CPPv317ana_cmpr_new_unitPK17ana_cmpr_config_tP17ana_cmpr_handle_t"></span><span id="_CPPv217ana_cmpr_new_unitPK17ana_cmpr_config_tP17ana_cmpr_handle_t"></span><span id="ana_cmpr_new_unit__ana_cmpr_config_tCP.ana_cmpr_handle_tP"></span><span class="target" id="ana__cmpr_8h_1ad1b6997e981c335f7b780d973c87c9be"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_new_unit</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv417ana_cmpr_config_t" title="ana_cmpr_config_t"><span class="n"><span class="pre">ana_cmpr_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_cmpr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417ana_cmpr_new_unitPK17ana_cmpr_config_tP17ana_cmpr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Allocating a new analog comparator unit handle. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> The config of the analog comparator unit </p></li>
+<li><p><strong>ret_cmpr</strong> -- <strong>[out]</strong> The returned analog comparator unit handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Allocate analog comparator unit handle success</p></li>
+<li><p>ESP_ERR_NO_MEM No memory for the analog comparator structure</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or wrong unit number</p></li>
+<li><p>ESP_ERR_INVALID_STATE The unit has been allocated or the clock source has been occupied </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417ana_cmpr_del_unit17ana_cmpr_handle_t">
+<span id="_CPPv317ana_cmpr_del_unit17ana_cmpr_handle_t"></span><span id="_CPPv217ana_cmpr_del_unit17ana_cmpr_handle_t"></span><span id="ana_cmpr_del_unit__ana_cmpr_handle_t"></span><span class="target" id="ana__cmpr_8h_1a936b908874fbcb3b2326c3835d4ccb9e"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_del_unit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417ana_cmpr_del_unit17ana_cmpr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete the analog comparator unit handle. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Caller must ensure no active users remain before deleting the unit handle, including any ETM event/task handles created from this unit (delete them first via <code class="docutils literal notranslate"><span class="pre">esp_etm_del_event()</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_etm_del_task()</span></code>).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Delete analog comparator unit handle success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or wrong unit number</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator is not disabled yet </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t">
+<span id="_CPPv331ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t"></span><span id="_CPPv231ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t"></span><span id="ana_cmpr_set_internal_reference__ana_cmpr_handle_t.ana_cmpr_internal_ref_config_tCP"></span><span class="target" id="ana__cmpr_8h_1a812d4015dc178aec14430a9e9afe637f"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_set_internal_reference</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv430ana_cmpr_internal_ref_config_t" title="ana_cmpr_internal_ref_config_t"><span class="n"><span class="pre">ana_cmpr_internal_ref_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ref_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431ana_cmpr_set_internal_reference17ana_cmpr_handle_tPK30ana_cmpr_internal_ref_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set internal reference configuration. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function only need to be called when <code class="docutils literal notranslate"><a class="reference internal" href="#structana__cmpr__config__t_1acea1ffb814ac899ddc11d37dfde0f302"><span class="std std-ref"><span class="pre">ana_cmpr_config_t::ref_src</span></span></a></code> is set to <code class="docutils literal notranslate"><span class="pre">ANA_CMPR_REF_SRC_INTERNAL</span></code>. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is allowed to run within ISR context including interrupt callbacks </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function will be placed into IRAM if <code class="docutils literal notranslate"><span class="pre">CONFIG_ANA_CMPR_CTRL_FUNC_IN_IRAM</span></code> is on, so that it's allowed to be executed when Cache is disabled</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>ref_cfg</strong> -- <strong>[in]</strong> Internal reference configuration </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Set internal reference configuration success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters</p></li>
+<li><p>ESP_ERR_NOT_ALLOWED Set the reference voltage for external reference channel is not allowed </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t">
+<span id="_CPPv321ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t"></span><span id="_CPPv221ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t"></span><span id="ana_cmpr_set_debounce__ana_cmpr_handle_t.ana_cmpr_debounce_config_tCP"></span><span class="target" id="ana__cmpr_8h_1af306e2529854e1c6892bb78a5d601244"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_set_debounce</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426ana_cmpr_debounce_config_t" title="ana_cmpr_debounce_config_t"><span class="n"><span class="pre">ana_cmpr_debounce_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">dbc_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421ana_cmpr_set_debounce17ana_cmpr_handle_tPK26ana_cmpr_debounce_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set debounce configuration to the analog comparator. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is allowed to run within ISR context including interrupt callbacks </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function will be placed into IRAM if <code class="docutils literal notranslate"><span class="pre">CONFIG_ANA_CMPR_CTRL_FUNC_IN_IRAM</span></code> is on, so that it's allowed to be executed when Cache is disabled</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>dbc_cfg</strong> -- <strong>[in]</strong> Debounce configuration </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Set debounce configuration success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431ana_cmpr_get_capture_timestamps17ana_cmpr_handle_tiP8uint32_tP8uint32_t">
+<span id="_CPPv331ana_cmpr_get_capture_timestamps17ana_cmpr_handle_tiP8uint32_tP8uint32_t"></span><span id="_CPPv231ana_cmpr_get_capture_timestamps17ana_cmpr_handle_tiP8uint32_tP8uint32_t"></span><span id="ana_cmpr_get_capture_timestamps__ana_cmpr_handle_t.i.uint32_tP.uint32_tP"></span><span class="target" id="ana__cmpr_8h_1ac23e4c0f86d8ac17b39a63103fc29d1c"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_get_capture_timestamps</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_chan_id</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">current</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">previous</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431ana_cmpr_get_capture_timestamps17ana_cmpr_handle_tiP8uint32_tP8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get capture timestamps of a source channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Returned timestamp values are measured in PAD_COMP_CLK cycles </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Convert ticks to time by first querying comparator clock resolution with <code class="docutils literal notranslate"><span class="pre">ana_cmpr_get_clock_resolution_hz()</span></code>. For example, <code class="docutils literal notranslate"><span class="pre">time_us</span> <span class="pre">=</span> <span class="pre">ticks</span> <span class="pre">*</span> <span class="pre">1000000</span> <span class="pre">/</span> <span class="pre">resolution_hz</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>src_chan_id</strong> -- <strong>[in]</strong> The source channel index </p></li>
+<li><p><strong>current</strong> -- <strong>[out]</strong> Timestamp of the latest cross event, in PAD_COMP_CLK cycles. Can be NULL if not needed. </p></li>
+<li><p><strong>previous</strong> -- <strong>[out]</strong> Timestamp of the previous cross event, in PAD_COMP_CLK cycles. Can be NULL if not needed. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Get capture timestamps success</p></li>
+<li><p>ESP_ERR_INVALID_ARG Both output pointers are NULL, or invalid channel id</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED Hardware doesn't support capture timer </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432ana_cmpr_get_clock_resolution_hz17ana_cmpr_handle_tP8uint32_t">
+<span id="_CPPv332ana_cmpr_get_clock_resolution_hz17ana_cmpr_handle_tP8uint32_t"></span><span id="_CPPv232ana_cmpr_get_clock_resolution_hz17ana_cmpr_handle_tP8uint32_t"></span><span id="ana_cmpr_get_clock_resolution_hz__ana_cmpr_handle_t.uint32_tP"></span><span class="target" id="ana__cmpr_8h_1a78a1d70ddea3d18c741f384690ce1e3e"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_get_clock_resolution_hz</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">resolution_hz</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432ana_cmpr_get_clock_resolution_hz17ana_cmpr_handle_tP8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get clock resolution of the analog comparator unit. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Returned value is in Hz and corresponds to the PAD_COMP_CLK domain. This clock is shared by features like debounce filtering and capture timestamps.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>resolution_hz</strong> -- <strong>[out]</strong> Comparator clock resolution in Hz </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Get comparator clock resolution success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421ana_cmpr_add_src_chan17ana_cmpr_handle_tiPK26ana_cmpr_src_chan_config_t">
+<span id="_CPPv321ana_cmpr_add_src_chan17ana_cmpr_handle_tiPK26ana_cmpr_src_chan_config_t"></span><span id="_CPPv221ana_cmpr_add_src_chan17ana_cmpr_handle_tiPK26ana_cmpr_src_chan_config_t"></span><span id="ana_cmpr_add_src_chan__ana_cmpr_handle_t.i.ana_cmpr_src_chan_config_tCP"></span><span class="target" id="ana__cmpr_8h_1a9e9c9e4bb6873d3b62346a9ea67f3239"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_add_src_chan</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_chan_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426ana_cmpr_src_chan_config_t" title="ana_cmpr_src_chan_config_t"><span class="n"><span class="pre">ana_cmpr_src_chan_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">src_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421ana_cmpr_add_src_chan17ana_cmpr_handle_tiPK26ana_cmpr_src_chan_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Add or update a source channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function can only be called when the comparator unit is in init (disabled) state</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>src_chan_id</strong> -- <strong>[in]</strong> The source channel index </p></li>
+<li><p><strong>src_cfg</strong> -- <strong>[in]</strong> Source channel configuration </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Add/update source channel success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or invalid channel/GPIO configuration</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator is not in init state</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED Source channel index is not supported by the current target </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424ana_cmpr_remove_src_chan17ana_cmpr_handle_ti">
+<span id="_CPPv324ana_cmpr_remove_src_chan17ana_cmpr_handle_ti"></span><span id="_CPPv224ana_cmpr_remove_src_chan17ana_cmpr_handle_ti"></span><span id="ana_cmpr_remove_src_chan__ana_cmpr_handle_t.i"></span><span class="target" id="ana__cmpr_8h_1a22b03822e5a8293ddd48d51873d08639"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_remove_src_chan</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_chan_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424ana_cmpr_remove_src_chan17ana_cmpr_handle_ti" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Remove a source channel from scan and interrupt routing. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function can only be called when the comparator unit is in init (disabled) state </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API is idempotent: removing an already-removed channel still returns ESP_OK</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>src_chan_id</strong> -- <strong>[in]</strong> The source channel index </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Remove source channel success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or invalid channel id</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator is not in init state</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED Source channel index is not supported by the current target </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t">
+<span id="_CPPv332ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t"></span><span id="_CPPv232ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t"></span><span id="ana_cmpr_set_src_chan_cross_type__ana_cmpr_handle_t.i.ana_cmpr_cross_type_t"></span><span class="target" id="ana__cmpr_8h_1a2a07e18bf2664f2ed4771652cf130f53"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_set_src_chan_cross_type</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_chan_id</span></span>, <span class="n"><span class="pre">ana_cmpr_cross_type_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cross_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432ana_cmpr_set_src_chan_cross_type17ana_cmpr_handle_ti21ana_cmpr_cross_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set cross type for the given source channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On targets with edge-type interrupt support, interrupt source selection is fixed when adding source channels, so runtime cross-type switching is not supported.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>src_chan_id</strong> -- <strong>[in]</strong> The source channel index </p></li>
+<li><p><strong>cross_type</strong> -- <strong>[in]</strong> The source signal cross type that can trigger the interrupt </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Set cross type configuration success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or invalid channel/cross type</p></li>
+<li><p>ESP_ERR_INVALID_STATE The target source channel isn't configured</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED Runtime cross-type switching isn't supported by the current target </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424ana_cmpr_set_scan_config17ana_cmpr_handle_tPK22ana_cmpr_scan_config_t">
+<span id="_CPPv324ana_cmpr_set_scan_config17ana_cmpr_handle_tPK22ana_cmpr_scan_config_t"></span><span id="_CPPv224ana_cmpr_set_scan_config17ana_cmpr_handle_tPK22ana_cmpr_scan_config_t"></span><span id="ana_cmpr_set_scan_config__ana_cmpr_handle_t.ana_cmpr_scan_config_tCP"></span><span class="target" id="ana__cmpr_8h_1a0083c4a7684b4ecf00ee5a48bd4226dc"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_set_scan_config</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422ana_cmpr_scan_config_t" title="ana_cmpr_scan_config_t"><span class="n"><span class="pre">ana_cmpr_scan_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">scan_cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424ana_cmpr_set_scan_config17ana_cmpr_handle_tPK22ana_cmpr_scan_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set scan configuration. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function can only be called when the comparator unit is in init (disabled) state</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>scan_cfg</strong> -- <strong>[in]</strong> Scan configuration </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Set scan configuration success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator is not in init state</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED Scan configuration is not supported by current target </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421ana_cmpr_trigger_scan17ana_cmpr_handle_t">
+<span id="_CPPv321ana_cmpr_trigger_scan17ana_cmpr_handle_t"></span><span id="_CPPv221ana_cmpr_trigger_scan17ana_cmpr_handle_t"></span><span id="ana_cmpr_trigger_scan__ana_cmpr_handle_t"></span><span class="target" id="ana__cmpr_8h_1aee36fdd60bc01d31614d66964a741072"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_trigger_scan</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421ana_cmpr_trigger_scan17ana_cmpr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Trigger one analog comparator scan sequence. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Trigger scan success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters</p></li>
+<li><p>ESP_ERR_INVALID_STATE Invalid unit state for triggering scan</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED The hardware doesn't support software triggered scan </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425ana_cmpr_get_output_level17ana_cmpr_handle_tiPb">
+<span id="_CPPv325ana_cmpr_get_output_level17ana_cmpr_handle_tiPb"></span><span id="_CPPv225ana_cmpr_get_output_level17ana_cmpr_handle_tiPb"></span><span id="ana_cmpr_get_output_level__ana_cmpr_handle_t.i.bP"></span><span class="target" id="ana__cmpr_8h_1a0a095a3bfadf1ac25be9ca024548ffee"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_get_output_level</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">src_chan_id</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_level</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425ana_cmpr_get_output_level17ana_cmpr_handle_tiPb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the output level of a source channel. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The output level indicates whether the source voltage is higher than the reference voltage </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is allowed to run within ISR context including interrupt callbacks</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>src_chan_id</strong> -- <strong>[in]</strong> The source channel index </p></li>
+<li><p><strong>out_level</strong> -- <strong>[out]</strong> The output level of the source channel<ul>
+<li><p>true: source voltage &gt; reference voltage</p></li>
+<li><p>false: source voltage &lt; reference voltage </p></li>
+</ul>
+</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Get output level success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or invalid channel id</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED Hardware can't report the output level of the source channel or the source channel index is not supported by the current target </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv433ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv">
+<span id="_CPPv333ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv"></span><span id="_CPPv233ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv"></span><span id="ana_cmpr_register_event_callbacks__ana_cmpr_handle_t.ana_cmpr_event_callbacks_tCP.voidP"></span><span class="target" id="ana__cmpr_8h_1a8e81cabacac78a76aded04598c516211"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_register_event_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426ana_cmpr_event_callbacks_t" title="ana_cmpr_event_callbacks_t"><span class="n"><span class="pre">ana_cmpr_event_callbacks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cbs</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">user_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433ana_cmpr_register_event_callbacks17ana_cmpr_handle_tPK26ana_cmpr_event_callbacks_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register analog comparator interrupt event callbacks. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function can only be called before enabling the unit</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>cbs</strong> -- <strong>[in]</strong> Group of callback functions </p></li>
+<li><p><strong>user_data</strong> -- <strong>[in]</strong> The user data that will be passed to callback functions directly </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Register callbacks success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator has been enabled </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv415ana_cmpr_enable17ana_cmpr_handle_t">
+<span id="_CPPv315ana_cmpr_enable17ana_cmpr_handle_t"></span><span id="_CPPv215ana_cmpr_enable17ana_cmpr_handle_t"></span><span id="ana_cmpr_enable__ana_cmpr_handle_t"></span><span class="target" id="ana__cmpr_8h_1a7310a00a71d5fda53db94fd90cbc0b70"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv415ana_cmpr_enable17ana_cmpr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable the analog comparator unit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Enable analog comparator unit success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator has been enabled </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416ana_cmpr_disable17ana_cmpr_handle_t">
+<span id="_CPPv316ana_cmpr_disable17ana_cmpr_handle_t"></span><span id="_CPPv216ana_cmpr_disable17ana_cmpr_handle_t"></span><span id="ana_cmpr_disable__ana_cmpr_handle_t"></span><span class="target" id="ana__cmpr_8h_1a37abb88cbd1b1fa79faedbb05fee80c4"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416ana_cmpr_disable17ana_cmpr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable the analog comparator unit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Disable analog comparator unit success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters</p></li>
+<li><p>ESP_ERR_INVALID_STATE The analog comparator has disabled already </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425ana_cmpr_get_channel_gpio17ana_cmpr_handle_t23ana_cmpr_channel_type_tiP10gpio_num_t">
+<span id="_CPPv325ana_cmpr_get_channel_gpio17ana_cmpr_handle_t23ana_cmpr_channel_type_tiP10gpio_num_t"></span><span id="_CPPv225ana_cmpr_get_channel_gpio17ana_cmpr_handle_t23ana_cmpr_channel_type_tiP10gpio_num_t"></span><span id="ana_cmpr_get_channel_gpio__ana_cmpr_handle_t.ana_cmpr_channel_type_t.i.gpio_num_tP"></span><span class="target" id="ana__cmpr_8h_1aee9c7919010affabc2850f86a6f10f2a"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_get_channel_gpio</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <a class="reference internal" href="#_CPPv423ana_cmpr_channel_type_t" title="ana_cmpr_channel_type_t"><span class="n"><span class="pre">ana_cmpr_channel_type_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan_type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">chan_id</span></span>, <span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">gpio_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425ana_cmpr_get_channel_gpio17ana_cmpr_handle_t23ana_cmpr_channel_type_tiP10gpio_num_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the GPIO number of a configured analog comparator channel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>chan_type</strong> -- <strong>[in]</strong> The channel type of analog comparator, either source channel or external reference channel </p></li>
+<li><p><strong>chan_id</strong> -- <strong>[in]</strong> The source channel index when <code class="docutils literal notranslate"><span class="pre">chan_type</span></code> is <code class="docutils literal notranslate"><span class="pre">ANA_CMPR_SOURCE_CHAN</span></code>. Must be 0 when <code class="docutils literal notranslate"><span class="pre">chan_type</span></code> is <code class="docutils literal notranslate"><span class="pre">ANA_CMPR_EXT_REF_CHAN</span></code></p></li>
+<li><p><strong>gpio_num</strong> -- <strong>[out]</strong> The output GPIO number of this channel </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Get GPIO success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or wrong channel type/channel id</p></li>
+<li><p>ESP_ERR_INVALID_STATE The target channel is not configured</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED The source channel index is not supported by the current target</p></li>
+<li><p>ESP_ERR_NOT_FOUND The requested channel doesn't have a GPIO mapping, e.g. the reference source is internal </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423ana_cmpr_set_cross_type17ana_cmpr_handle_t21ana_cmpr_cross_type_t">
+<span id="_CPPv323ana_cmpr_set_cross_type17ana_cmpr_handle_t21ana_cmpr_cross_type_t"></span><span id="_CPPv223ana_cmpr_set_cross_type17ana_cmpr_handle_t21ana_cmpr_cross_type_t"></span><span id="ana_cmpr_set_cross_type__ana_cmpr_handle_t.ana_cmpr_cross_type_t"></span><span class="target" id="ana__cmpr_8h_1acd07c91643ee144ed40ac48039a75779"></span><span class="k"><span class="pre">static</span></span><span class="w"> </span><span class="k"><span class="pre">inline</span></span><span class="w"> </span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_set_cross_type</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">cmpr</span></span>, <span class="n"><span class="pre">ana_cmpr_cross_type_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">cross_type</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423ana_cmpr_set_cross_type17ana_cmpr_handle_t21ana_cmpr_cross_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Set the cross type for the source channel 0 that can trigger the event. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The initial cross type is configured in <code class="docutils literal notranslate"><span class="pre">ana_cmpr_new_unit</span></code>, this function can update the cross type </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function is allowed to run within ISR context including interrupt callbacks </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This is a legacy API that only applies to source channel 0</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>cmpr</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>cross_type</strong> -- <strong>[in]</strong> The source signal cross type that can trigger the interrupt </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Set cross type configuration success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417ana_cmpr_get_gpio15ana_cmpr_unit_t23ana_cmpr_channel_type_tPi">
+<span id="_CPPv317ana_cmpr_get_gpio15ana_cmpr_unit_t23ana_cmpr_channel_type_tPi"></span><span id="_CPPv217ana_cmpr_get_gpio15ana_cmpr_unit_t23ana_cmpr_channel_type_tPi"></span><span id="ana_cmpr_get_gpio__ana_cmpr_unit_t.ana_cmpr_channel_type_t.iP"></span><span class="target" id="ana__cmpr_8h_1adc96a0802f29e4a37e0b8e9761366522"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_get_gpio</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv415ana_cmpr_unit_t" title="ana_cmpr_unit_t"><span class="n"><span class="pre">ana_cmpr_unit_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">unit</span></span>, <a class="reference internal" href="#_CPPv423ana_cmpr_channel_type_t" title="ana_cmpr_channel_type_t"><span class="n"><span class="pre">ana_cmpr_channel_type_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan_type</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">gpio_num</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417ana_cmpr_get_gpio15ana_cmpr_unit_t23ana_cmpr_channel_type_tPi" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the fixed GPIO number of the analog comparator unit. </p>
+<p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Please use <code class="docutils literal notranslate"><span class="pre">ana_cmpr_get_channel_gpio()</span></code> instead to query the GPIO of the configured comparator instance</p>
+</dd></dl>
+
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>unit</strong> -- <strong>[in]</strong> The handle of analog comparator unit </p></li>
+<li><p><strong>chan_type</strong> -- <strong>[in]</strong> The channel type of analog comparator, like source channel or reference channel </p></li>
+<li><p><strong>gpio_num</strong> -- <strong>[out]</strong> The output GPIO number of this channel </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK Get GPIO success</p></li>
+<li><p>ESP_ERR_INVALID_ARG NULL pointer of the parameters or wrong unit number or wrong channel type </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h4>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h4>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv417ana_cmpr_config_t">
+<span id="_CPPv317ana_cmpr_config_t"></span><span id="_CPPv217ana_cmpr_config_t"></span><span id="ana_cmpr_config_t"></span><span class="target" id="structana__cmpr__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_config_t</span></span></span><a class="headerlink" href="#_CPPv417ana_cmpr_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator unit configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t4unitE">
+<span id="_CPPv3N17ana_cmpr_config_t4unitE"></span><span id="_CPPv2N17ana_cmpr_config_t4unitE"></span><span id="ana_cmpr_config_t::unit__i"></span><span class="target" id="structana__cmpr__config__t_1aae5824c0a75af00890260a21d339f625"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unit</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t4unitE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator unit ID, index from 0 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t7clk_srcE">
+<span id="_CPPv3N17ana_cmpr_config_t7clk_srcE"></span><span id="_CPPv2N17ana_cmpr_config_t7clk_srcE"></span><span id="ana_cmpr_config_t::clk_src__ana_cmpr_clk_src_t"></span><span class="target" id="structana__cmpr__config__t_1a067a2228da290b35a0c66a38a88e67fd"></span><span class="n"><span class="pre">ana_cmpr_clk_src_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">clk_src</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t7clk_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The clock source of the analog comparator, which decide the resolution of the comparator </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t7ref_srcE">
+<span id="_CPPv3N17ana_cmpr_config_t7ref_srcE"></span><span id="_CPPv2N17ana_cmpr_config_t7ref_srcE"></span><span id="ana_cmpr_config_t::ref_src__ana_cmpr_ref_source_t"></span><span class="target" id="structana__cmpr__config__t_1acea1ffb814ac899ddc11d37dfde0f302"></span><span class="n"><span class="pre">ana_cmpr_ref_source_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ref_src</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t7ref_srcE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reference signal source of the comparator, select using ANA_CMPR_REF_SRC_INTERNAL or ANA_CMPR_REF_SRC_EXTERNAL. For internal reference, the reference voltage should be set to <code class="docutils literal notranslate"><span class="pre">internal_ref_volt</span></code>, for external reference, the reference signal should be connect to <code class="docutils literal notranslate"><span class="pre">ANA_CMPRx_EXT_REF_GPIO</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t13intr_priorityE">
+<span id="_CPPv3N17ana_cmpr_config_t13intr_priorityE"></span><span id="_CPPv2N17ana_cmpr_config_t13intr_priorityE"></span><span id="ana_cmpr_config_t::intr_priority__i"></span><span class="target" id="structana__cmpr__config__t_1a2b19a7cf99d98131ab3a21fe752fdd49"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">intr_priority</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t13intr_priorityE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The interrupt priority, range 1~3. If set to 0, the driver will automatically select a relative low priority (1,2,3) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t10cross_typeE">
+<span id="_CPPv3N17ana_cmpr_config_t10cross_typeE"></span><span id="_CPPv2N17ana_cmpr_config_t10cross_typeE"></span><span id="ana_cmpr_config_t::cross_type__ana_cmpr_cross_type_t"></span><span class="target" id="structana__cmpr__config__t_1accb100bce40b108aadbe26b4df397325"></span><span class="n"><span class="pre">ana_cmpr_cross_type_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cross_type</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t10cross_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The crossing type of source channel 0, that can trigger interrupt </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t14src_chan0_gpioE">
+<span id="_CPPv3N17ana_cmpr_config_t14src_chan0_gpioE"></span><span id="_CPPv2N17ana_cmpr_config_t14src_chan0_gpioE"></span><span id="ana_cmpr_config_t::src_chan0_gpio__gpio_num_t"></span><span class="target" id="structana__cmpr__config__t_1afea4a085606324c5af0275a5f832f496"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_chan0_gpio</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t14src_chan0_gpioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The GPIO number of source channel 0 signal </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t12ext_ref_gpioE">
+<span id="_CPPv3N17ana_cmpr_config_t12ext_ref_gpioE"></span><span id="_CPPv2N17ana_cmpr_config_t12ext_ref_gpioE"></span><span id="ana_cmpr_config_t::ext_ref_gpio__gpio_num_t"></span><span class="target" id="structana__cmpr__config__t_1a34ca8bb0d28a24a162fc1097f531858f"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ext_ref_gpio</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t12ext_ref_gpioE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The GPIO number of external reference signal, only valid when <code class="docutils literal notranslate"><span class="pre">ref_src</span></code> is set to <code class="docutils literal notranslate"><span class="pre">ANA_CMPR_REF_SRC_EXTERNAL</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t14resample_limitE">
+<span id="_CPPv3N17ana_cmpr_config_t14resample_limitE"></span><span id="_CPPv2N17ana_cmpr_config_t14resample_limitE"></span><span id="ana_cmpr_config_t::resample_limit__uint8_t"></span><span class="target" id="structana__cmpr__config__t_1a2e74a2611f271f0dab0a9cd22f6324fe"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">resample_limit</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t14resample_limitE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unit-wide consecutive sample count required to update channel status </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N17ana_cmpr_config_t16en_capture_timerE">
+<span id="_CPPv3N17ana_cmpr_config_t16en_capture_timerE"></span><span id="_CPPv2N17ana_cmpr_config_t16en_capture_timerE"></span><span id="ana_cmpr_config_t::en_capture_timer__b"></span><span class="target" id="structana__cmpr__config__t_1a3f038474e7ba47155d9c64e26f7ce66f"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">en_capture_timer</span></span></span><a class="headerlink" href="#_CPPv4N17ana_cmpr_config_t16en_capture_timerE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable channel capture timer at unit creation. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430ana_cmpr_internal_ref_config_t">
+<span id="_CPPv330ana_cmpr_internal_ref_config_t"></span><span id="_CPPv230ana_cmpr_internal_ref_config_t"></span><span id="ana_cmpr_internal_ref_config_t"></span><span class="target" id="structana__cmpr__internal__ref__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_internal_ref_config_t</span></span></span><a class="headerlink" href="#_CPPv430ana_cmpr_internal_ref_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator internal reference configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30ana_cmpr_internal_ref_config_t8ref_voltE">
+<span id="_CPPv3N30ana_cmpr_internal_ref_config_t8ref_voltE"></span><span id="_CPPv2N30ana_cmpr_internal_ref_config_t8ref_voltE"></span><span id="ana_cmpr_internal_ref_config_t::ref_volt__ana_cmpr_ref_voltage_t"></span><span class="target" id="structana__cmpr__internal__ref__config__t_1a7bd0bcb833a7d9ff67ccaf5f8bbcd1da"></span><span class="n"><span class="pre">ana_cmpr_ref_voltage_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ref_volt</span></span></span><a class="headerlink" href="#_CPPv4N30ana_cmpr_internal_ref_config_t8ref_voltE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The internal reference voltage. It can be specified to a certain fixed percentage of the VDD power supply, currently supports 0%~70% VDD with a step 10% </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30ana_cmpr_internal_ref_config_t13ref_hys_levelE">
+<span id="_CPPv3N30ana_cmpr_internal_ref_config_t13ref_hys_levelE"></span><span id="_CPPv2N30ana_cmpr_internal_ref_config_t13ref_hys_levelE"></span><span id="ana_cmpr_internal_ref_config_t::ref_hys_level__ana_cmpr_ref_hys_t"></span><span class="target" id="structana__cmpr__internal__ref__config__t_1ae9a10608f6ea683fa5a754ade9aa00e0"></span><span class="n"><span class="pre">ana_cmpr_ref_hys_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ref_hys_level</span></span></span><a class="headerlink" href="#_CPPv4N30ana_cmpr_internal_ref_config_t13ref_hys_levelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Internal reference hysteresis level </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426ana_cmpr_debounce_config_t">
+<span id="_CPPv326ana_cmpr_debounce_config_t"></span><span id="_CPPv226ana_cmpr_debounce_config_t"></span><span id="ana_cmpr_debounce_config_t"></span><span class="target" id="structana__cmpr__debounce__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_debounce_config_t</span></span></span><a class="headerlink" href="#_CPPv426ana_cmpr_debounce_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator debounce filter configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26ana_cmpr_debounce_config_t7wait_usE">
+<span id="_CPPv3N26ana_cmpr_debounce_config_t7wait_usE"></span><span id="_CPPv2N26ana_cmpr_debounce_config_t7wait_usE"></span><span id="ana_cmpr_debounce_config_t::wait_us__uint32_t"></span><span class="target" id="structana__cmpr__debounce__config__t_1a109f1f707fc63d12137105e2ae5905df"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">wait_us</span></span></span><a class="headerlink" href="#_CPPv4N26ana_cmpr_debounce_config_t7wait_usE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The wait time to prevent frequent interrupts caused by signal noise or bouncing. During the specified wait_us period, no new interrupts will be triggered. Set the value according to the signal characteristics. A rapid signal requires a small wait time, otherwise the next cross event may be missed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426ana_cmpr_src_chan_config_t">
+<span id="_CPPv326ana_cmpr_src_chan_config_t"></span><span id="_CPPv226ana_cmpr_src_chan_config_t"></span><span id="ana_cmpr_src_chan_config_t"></span><span class="target" id="structana__cmpr__src__chan__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_src_chan_config_t</span></span></span><a class="headerlink" href="#_CPPv426ana_cmpr_src_chan_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator source channel configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26ana_cmpr_src_chan_config_t8gpio_numE">
+<span id="_CPPv3N26ana_cmpr_src_chan_config_t8gpio_numE"></span><span id="_CPPv2N26ana_cmpr_src_chan_config_t8gpio_numE"></span><span id="ana_cmpr_src_chan_config_t::gpio_num__gpio_num_t"></span><span class="target" id="structana__cmpr__src__chan__config__t_1a88a24ad3c78dccc418638128fe1605ad"></span><span class="n"><span class="pre">gpio_num_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">gpio_num</span></span></span><a class="headerlink" href="#_CPPv4N26ana_cmpr_src_chan_config_t8gpio_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Source input GPIO </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26ana_cmpr_src_chan_config_t10cross_typeE">
+<span id="_CPPv3N26ana_cmpr_src_chan_config_t10cross_typeE"></span><span id="_CPPv2N26ana_cmpr_src_chan_config_t10cross_typeE"></span><span id="ana_cmpr_src_chan_config_t::cross_type__ana_cmpr_cross_type_t"></span><span class="target" id="structana__cmpr__src__chan__config__t_1ab3b9375c6acf74bf5ecb62003ff24d72"></span><span class="n"><span class="pre">ana_cmpr_cross_type_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cross_type</span></span></span><a class="headerlink" href="#_CPPv4N26ana_cmpr_src_chan_config_t10cross_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Crossing type that can trigger events for this source channel </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422ana_cmpr_scan_config_t">
+<span id="_CPPv322ana_cmpr_scan_config_t"></span><span id="_CPPv222ana_cmpr_scan_config_t"></span><span id="ana_cmpr_scan_config_t"></span><span class="target" id="structana__cmpr__scan__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_scan_config_t</span></span></span><a class="headerlink" href="#_CPPv422ana_cmpr_scan_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator scan configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ana_cmpr_scan_config_t9scan_modeE">
+<span id="_CPPv3N22ana_cmpr_scan_config_t9scan_modeE"></span><span id="_CPPv2N22ana_cmpr_scan_config_t9scan_modeE"></span><span id="ana_cmpr_scan_config_t::scan_mode__ana_cmpr_scan_mode_t"></span><span class="target" id="structana__cmpr__scan__config__t_1a32fb1d0526f5d07a57983d34c0bdec85"></span><span class="n"><span class="pre">ana_cmpr_scan_mode_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">scan_mode</span></span></span><a class="headerlink" href="#_CPPv4N22ana_cmpr_scan_config_t9scan_modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Channel scan mode </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22ana_cmpr_scan_config_t14poll_period_usE">
+<span id="_CPPv3N22ana_cmpr_scan_config_t14poll_period_usE"></span><span id="_CPPv2N22ana_cmpr_scan_config_t14poll_period_usE"></span><span id="ana_cmpr_scan_config_t::poll_period_us__uint32_t"></span><span class="target" id="structana__cmpr__scan__config__t_1ab5d5158aae33654ba6cdf98113ad83ce"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">poll_period_us</span></span></span><a class="headerlink" href="#_CPPv4N22ana_cmpr_scan_config_t14poll_period_usE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Channel switching wait time in microseconds </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+</section>
+<section id="driver-types">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">Driver Types</a><a class="headerlink" href="#driver-types" title="Permalink to this heading"></a></h3>
+<section id="id1">
+<h4>Header File<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h4>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_ana_cmpr/include/driver/ana_cmpr_types.h">components/esp_driver_ana_cmpr/include/driver/ana_cmpr_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/ana_cmpr_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_ana_cmpr</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_ana_cmpr</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_ana_cmpr
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_ana_cmpr
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id2">
+<h4>Structures<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h4>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv427ana_cmpr_cross_event_data_t">
+<span id="_CPPv327ana_cmpr_cross_event_data_t"></span><span id="_CPPv227ana_cmpr_cross_event_data_t"></span><span id="ana_cmpr_cross_event_data_t"></span><span class="target" id="structana__cmpr__cross__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_cross_event_data_t</span></span></span><a class="headerlink" href="#_CPPv427ana_cmpr_cross_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator cross event data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27ana_cmpr_cross_event_data_t10cross_typeE">
+<span id="_CPPv3N27ana_cmpr_cross_event_data_t10cross_typeE"></span><span id="_CPPv2N27ana_cmpr_cross_event_data_t10cross_typeE"></span><span id="ana_cmpr_cross_event_data_t::cross_type__ana_cmpr_cross_type_t"></span><span class="target" id="structana__cmpr__cross__event__data__t_1a898d3949fae85f5cdef397b4f39041e7"></span><span class="n"><span class="pre">ana_cmpr_cross_type_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cross_type</span></span></span><a class="headerlink" href="#_CPPv4N27ana_cmpr_cross_event_data_t10cross_typeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The cross type of the target signal to the reference signal. Will either be ANA_CMPR_CROSS_POS or ANA_CMPR_CROSS_NEG Always be ANA_CMPR_CROSS_ANY if target does not support independent interrupt (like ESP32H2) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27ana_cmpr_cross_event_data_t11src_chan_idE">
+<span id="_CPPv3N27ana_cmpr_cross_event_data_t11src_chan_idE"></span><span id="_CPPv2N27ana_cmpr_cross_event_data_t11src_chan_idE"></span><span id="ana_cmpr_cross_event_data_t::src_chan_id__i"></span><span class="target" id="structana__cmpr__cross__event__data__t_1af03a877872a5ad0d0bc07e4882e41102"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">src_chan_id</span></span></span><a class="headerlink" href="#_CPPv4N27ana_cmpr_cross_event_data_t11src_chan_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The source channel index that triggers the interrupt, valid when the target supports multiple source channels </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426ana_cmpr_event_callbacks_t">
+<span id="_CPPv326ana_cmpr_event_callbacks_t"></span><span id="_CPPv226ana_cmpr_event_callbacks_t"></span><span id="ana_cmpr_event_callbacks_t"></span><span class="target" id="structana__cmpr__event__callbacks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_event_callbacks_t</span></span></span><a class="headerlink" href="#_CPPv426ana_cmpr_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Group of Analog Comparator callbacks. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The callbacks are all running under ISR environment </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When CONFIG_ANA_CMPR_ISR_CACHE_SAFE is enabled, the callback itself and functions called by it should be placed in IRAM. The variables used in the function should be in the SRAM as well. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26ana_cmpr_event_callbacks_t8on_crossE">
+<span id="_CPPv3N26ana_cmpr_event_callbacks_t8on_crossE"></span><span id="_CPPv2N26ana_cmpr_event_callbacks_t8on_crossE"></span><span id="ana_cmpr_event_callbacks_t::on_cross__ana_cmpr_cross_cb_t"></span><span class="target" id="structana__cmpr__event__callbacks__t_1a4756a5199b0fd51cb67171211fdf9558"></span><a class="reference internal" href="#_CPPv419ana_cmpr_cross_cb_t" title="ana_cmpr_cross_cb_t"><span class="n"><span class="pre">ana_cmpr_cross_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_cross</span></span></span><a class="headerlink" href="#_CPPv4N26ana_cmpr_event_callbacks_t8on_crossE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The callback function on cross interrupt </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h4>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h4>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ANA_CMPR_UNIT_0">
+<span class="target" id="ana__cmpr__types_8h_1a238d66814e7443e82a00d4aa260e6cd4"></span><span class="sig-name descname"><span class="n"><span class="pre">ANA_CMPR_UNIT_0</span></span></span><a class="headerlink" href="#c.ANA_CMPR_UNIT_0" title="Permalink to this definition"></a><br /></dt>
+<dd><p><dl>
+<dt class="sig sig-object cpp">
+<em><span class="pre">Deprecated:</span></em></dt>
+<dd><p>Analog comparator unit 0 </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h4>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h4>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv415ana_cmpr_unit_t">
+<span id="_CPPv315ana_cmpr_unit_t"></span><span id="_CPPv215ana_cmpr_unit_t"></span><span id="ana_cmpr_unit_t"></span><span class="target" id="ana__cmpr__types_8h_1a51255d516e04ed7cef56dd4ec6dddc57"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_unit_t</span></span></span><a class="headerlink" href="#_CPPv415ana_cmpr_unit_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator unit. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv417ana_cmpr_handle_t">
+<span id="_CPPv317ana_cmpr_handle_t"></span><span id="_CPPv217ana_cmpr_handle_t"></span><span id="ana_cmpr_handle_t"></span><span class="target" id="ana__cmpr__types_8h_1aa9bb94eb96684908f3f3814ecd468a7b"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">ana_cmpr_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></span><a class="headerlink" href="#_CPPv417ana_cmpr_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator unit handle. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv419ana_cmpr_cross_cb_t">
+<span id="_CPPv319ana_cmpr_cross_cb_t"></span><span id="_CPPv219ana_cmpr_cross_cb_t"></span><span id="ana_cmpr_cross_cb_t"></span><span class="target" id="ana__cmpr__types_8h_1a1e23d3ec10251b826703130203d0a634"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_cross_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv417ana_cmpr_handle_t" title="ana_cmpr_handle_t"><span class="n"><span class="pre">ana_cmpr_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">cmpr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv427ana_cmpr_cross_event_data_t" title="ana_cmpr_cross_event_data_t"><span class="n"><span class="pre">ana_cmpr_cross_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv419ana_cmpr_cross_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Prototype of Analog comparator event callback. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param cmpr<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> Analog Comparator handle, created from <code class="docutils literal notranslate"><span class="pre">ana_cmpr_new_unit()</span></code></p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>[in]</strong> Point to Analog Comparator event data. The lifecycle of this pointer memory is inside this function, user should copy it into static memory if used outside this function. (Currently not use) </p>
+</dd>
+<dt class="field-odd">Param user_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>[in]</strong> User registered context, passed from <code class="docutils literal notranslate"><span class="pre">ana_cmpr_register_event_callbacks()</span></code></p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this callback function </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h4>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h4>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423ana_cmpr_channel_type_t">
+<span id="_CPPv323ana_cmpr_channel_type_t"></span><span id="_CPPv223ana_cmpr_channel_type_t"></span><span class="target" id="ana__cmpr__types_8h_1a737c91eaf5f43e0a3cf3b4fec8a8e5ae"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ana_cmpr_channel_type_t</span></span></span><a class="headerlink" href="#_CPPv423ana_cmpr_channel_type_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog comparator channel type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ana_cmpr_channel_type_t20ANA_CMPR_SOURCE_CHANE">
+<span id="_CPPv3N23ana_cmpr_channel_type_t20ANA_CMPR_SOURCE_CHANE"></span><span id="_CPPv2N23ana_cmpr_channel_type_t20ANA_CMPR_SOURCE_CHANE"></span><span class="target" id="ana__cmpr__types_8h_1a737c91eaf5f43e0a3cf3b4fec8a8e5aeaced09093a7176b97392c87fe4697271d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ANA_CMPR_SOURCE_CHAN</span></span></span><a class="headerlink" href="#_CPPv4N23ana_cmpr_channel_type_t20ANA_CMPR_SOURCE_CHANE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog Comparator source channel, which is used to input the signal that to be compared </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23ana_cmpr_channel_type_t21ANA_CMPR_EXT_REF_CHANE">
+<span id="_CPPv3N23ana_cmpr_channel_type_t21ANA_CMPR_EXT_REF_CHANE"></span><span id="_CPPv2N23ana_cmpr_channel_type_t21ANA_CMPR_EXT_REF_CHANE"></span><span class="target" id="ana__cmpr__types_8h_1a737c91eaf5f43e0a3cf3b4fec8a8e5aea9e4606dcfdb46dd7e6c9e213a38506f0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ANA_CMPR_EXT_REF_CHAN</span></span></span><a class="headerlink" href="#_CPPv4N23ana_cmpr_channel_type_t21ANA_CMPR_EXT_REF_CHANE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Analog Comparator external reference channel, which is used as the reference signal </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Analog Comparator (api-reference/peripherals/ana_cmpr)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Analog Comparator (api-reference/peripherals/ana_cmpr)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="adc/adc_calibration.html" class="btn btn-neutral float-left" title="Analog to Digital Converter (ADC) Calibration Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="async_crc.html" class="btn btn-neutral float-right" title="Asynchronous CRC Calculation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

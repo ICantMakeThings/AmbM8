@@ -1,0 +1,25 @@
+CONFIG_IDF_TARGET="esp32p4"
+
+# Use the High-Speed USB OTG controller (HUSB port) -> 480M
+CONFIG_TINYUSB_RHPORT_HS=y
+
+# Keep the console on UART so logs still work while USB is a UAC device
+CONFIG_ESP_CONSOLE_UART_DEFAULT=y
+
+CONFIG_ESP32P4_REV_MIN_100=y
+
+# 1 ms tick for smooth UAC2 mic streaming (100 Hz caused bursty 10 ms chunks)
+CONFIG_FREERTOS_HZ=1000
+CONFIG_UAC_MIC_INTERVAL_MS=1
+CONFIG_UAC_MIC_TASK_CORE=0
+
+# TinyUSB's task must re-arm each ISO IN packet inside every 125 us microframe.
+# If it is late past the next microframe the device sends a zero-length packet
+# and the host permanently loses those 12 capture samples; recordings then play
+# fast (pitch up). Keep the USB task above every other audio task.
+CONFIG_UAC_TINYUSB_TASK_PRIORITY=9
+# The speaker task used to run at 7, above TinyUSB: it wakes ~8000x/s (one OUT
+# packet per microframe) and preempted the deadline-critical USB task. The
+# playback path is self-correcting (feedback + ASRC), so it sits below TinyUSB.
+CONFIG_UAC_SPK_TASK_PRIORITY=6
+CONFIG_UAC_MIC_TASK_PRIORITY=7

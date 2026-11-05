@@ -1,0 +1,1246 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>UART DMA (UHCI) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/uhci.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/uhci';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Provisioning API" href="../provisioning/index.html" />
+    <link rel="prev" title="Universal Asynchronous Receiver/Transmitter (UART)" href="uart.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a><ul class="current">
+<li class="toctree-l4 current"><a class="reference internal" href="uart.html#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#overview-of-rs485-specific-communication-0ptions">Overview of RS485 Specific Communication 0ptions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="uart.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+          <li class="breadcrumb-item"><a href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+      <li class="breadcrumb-item active">UART DMA (UHCI)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/uhci.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="uart-dma-uhci">
+<h1>UART DMA (UHCI)<a class="headerlink" href="#uart-dma-uhci" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/uhci.html">[中文]</a></p>
+<p>This document describes the functionality of the UART DMA(UHCI) driver in ESP-IDF. The table of contents is as follows:</p>
+<nav class="contents local" id="contents">
+<ul class="simple">
+<li><p><a class="reference internal" href="#introduction" id="id9">Introduction</a></p></li>
+<li><p><a class="reference internal" href="#quick-start" id="id10">Quick Start</a></p>
+<ul>
+<li><p><a class="reference internal" href="#creating-and-enabling-the-uhci-controller" id="id11">Creating and Enabling the UHCI controller</a></p></li>
+<li><p><a class="reference internal" href="#register-event-callbacks" id="id12">Register Event Callbacks</a></p></li>
+<li><p><a class="reference internal" href="#initiating-uhci-transmission" id="id13">Initiating UHCI Transmission</a></p></li>
+<li><p><a class="reference internal" href="#initiating-uhci-reception" id="id14">Initiating UHCI Reception</a></p></li>
+<li><p><a class="reference internal" href="#uninstall-uhci-controller" id="id15">Uninstall UHCI controller</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#advanced-features" id="id16">Advanced Features</a></p>
+<ul>
+<li><p><a class="reference internal" href="#power-management" id="id17">Power Management</a></p></li>
+<li><p><a class="reference internal" href="#cache-safe" id="id18">Cache Safe</a></p></li>
+<li><p><a class="reference internal" href="#resource-consumption" id="id19">Resource Consumption</a></p></li>
+<li><p><a class="reference internal" href="#performance" id="id20">Performance</a></p></li>
+<li><p><a class="reference internal" href="#thread-safety" id="id21">Thread Safety</a></p></li>
+<li><p><a class="reference internal" href="#other-kconfig-options" id="id22">Other Kconfig Options</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#application-examples" id="id23">Application Examples</a></p></li>
+<li><p><a class="reference internal" href="#api-reference" id="id24">API Reference</a></p>
+<ul>
+<li><p><a class="reference internal" href="#header-file" id="id25">Header File</a></p></li>
+<li><p><a class="reference internal" href="#functions" id="id26">Functions</a></p></li>
+<li><p><a class="reference internal" href="#structures" id="id27">Structures</a></p></li>
+<li><p><a class="reference internal" href="#id2" id="id28">Header File</a></p></li>
+<li><p><a class="reference internal" href="#id3" id="id29">Structures</a></p></li>
+<li><p><a class="reference internal" href="#type-definitions" id="id30">Type Definitions</a></p></li>
+<li><p><a class="reference internal" href="#id4" id="id31">Header File</a></p></li>
+<li><p><a class="reference internal" href="#id5" id="id32">Structures</a></p></li>
+</ul>
+</li>
+</ul>
+</nav>
+<section id="introduction">
+<h2><a class="toc-backref" href="#id9" role="doc-backlink">Introduction</a><a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>This document shows how to use UART and DMA together for transmitting or receiving large data volumes using high baud rates. 5 HP UART controllers on ESP32-P4 share one group of DMA TX/RX channels via host controller interface (HCI). This document assumes that UART DMA is controlled by UHCI entity.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The UART DMA shares the HCI hardware with Bluetooth, so please don't use BT HCI together with UART DMA, even if they use different UART ports.</p>
+</div>
+</section>
+<section id="quick-start">
+<h2><a class="toc-backref" href="#id10" role="doc-backlink">Quick Start</a><a class="headerlink" href="#quick-start" title="Permalink to this heading"></a></h2>
+<p>This section will quickly guide you on how to use the UHCI driver. Through a simple example including transmitting and receiving, it demonstrates how to create and start a UHCI, initiate a transmit and receive transactions, and register event callback functions. The general usage process is as follows:</p>
+<section id="creating-and-enabling-the-uhci-controller">
+<h3><a class="toc-backref" href="#id11" role="doc-backlink">Creating and Enabling the UHCI controller</a><a class="headerlink" href="#creating-and-enabling-the-uhci-controller" title="Permalink to this heading"></a></h3>
+<p>UHCI controller requires the configuration specified by <a class="reference internal" href="#_CPPv424uhci_controller_config_t" title="uhci_controller_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_controller_config_t</span></code></a>.</p>
+<p>If the configurations in <a class="reference internal" href="#_CPPv424uhci_controller_config_t" title="uhci_controller_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_controller_config_t</span></code></a> is specified, users can call <a class="reference internal" href="#_CPPv419uhci_new_controllerPK24uhci_controller_config_tP24uhci_controller_handle_t" title="uhci_new_controller"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code></a> to allocate and initialize a uhci controller. This function will return a uhci controller handle if it runs correctly. Besides, UHCI must work with the installed UART driver. As a reference, see the code below.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#define EX_UART_NUM 1       </span><span class="c1">// Define UART port number</span>
+
+<span class="c1">// For uart port configuration, please refer to UART programming guide.</span>
+<span class="c1">// Please double-check as the baud rate might be limited by serial port chips.</span>
+<span class="n">uart_config_t</span><span class="w"> </span><span class="n">uart_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">baud_rate</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1000</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">data_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_DATA_8_BITS</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">parity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_PARITY_DISABLE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">stop_bits</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_STOP_BITS_1</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">flow_ctrl</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_HW_FLOWCTRL_DISABLE</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">source_clk</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UART_SCLK_DEFAULT</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">//UART parameter config</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uart_param_config</span><span class="p">(</span><span class="n">EX_UART_NUM</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uart_config</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uart_set_pin</span><span class="p">(</span><span class="n">EX_UART_NUM</span><span class="p">,</span><span class="w"> </span><span class="n">UART_TX_IO</span><span class="p">,</span><span class="w"> </span><span class="n">UART_RX_IO</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">));</span>
+
+<span class="n">uhci_controller_config_t</span><span class="w"> </span><span class="n">uhci_cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">uart_port</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">EX_UART_NUM</span><span class="p">,</span><span class="w">                 </span><span class="c1">// Connect uart port to UHCI hardware.</span>
+<span class="w">    </span><span class="p">.</span><span class="n">tx_trans_queue_depth</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span><span class="w">               </span><span class="c1">// Queue depth of transaction queue.</span>
+<span class="w">    </span><span class="p">.</span><span class="n">max_receive_internal_mem</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">    </span><span class="c1">// Expected max uhci_receive() buffer size; also sizes the RX DMA descriptor chain. For large transfers, configure it so that at least two descriptors are available for ping-pong operation.</span>
+<span class="w">    </span><span class="p">.</span><span class="n">max_transmit_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">1024</span><span class="p">,</span><span class="w">           </span><span class="c1">// Maximum transfer size in one transaction, in bytes (including all buffers).</span>
+<span class="w">    </span><span class="p">.</span><span class="n">max_transmit_buffer_count</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">           </span><span class="c1">// Maximum number of buffers in one transmit transaction. 0 or 1 means only single-buffer transmit is used.</span>
+<span class="w">    </span><span class="p">.</span><span class="n">dma_burst_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">32</span><span class="p">,</span><span class="w">                     </span><span class="c1">// Burst size.</span>
+<span class="w">    </span><span class="p">.</span><span class="n">rx_eof_flags</span><span class="p">.</span><span class="n">idle_eof</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">               </span><span class="c1">// When to trigger a end of frame event, you can choose `idle_eof`, `rx_brk_eof`, `length_eof`, for more information, please refer to API reference.</span>
+<span class="p">};</span>
+
+<span class="n">uhci_controller_handle_t</span><span class="w"> </span><span class="n">uhci_ctrl</span><span class="p">;</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_new_controller</span><span class="p">(</span><span class="o">&amp;</span><span class="n">uhci_cfg</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uhci_ctrl</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="register-event-callbacks">
+<h3><a class="toc-backref" href="#id12" role="doc-backlink">Register Event Callbacks</a><a class="headerlink" href="#register-event-callbacks" title="Permalink to this heading"></a></h3>
+<p>When an event occurs on the UHCI controller (e.g., transmission or receiving is completed), the CPU is notified of this event via an interrupt. If there is a function that needs to be called when a particular events occur, you can register a callback for that event with the ISR for UHCI (Interrupt Service Routine) by calling <a class="reference internal" href="#_CPPv429uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv" title="uhci_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_register_event_callbacks()</span></code></a> for both TX and RX respectively. Since the registered callback functions are called in the interrupt context, the user should ensure that the callback function is non-blocking, e.g., by making sure that only FreeRTOS APIs with the <code class="docutils literal notranslate"><span class="pre">FromISR</span></code> suffix are called from within the function. The callback function has a boolean return value used to indicate whether a higher priority task has been unblocked by the callback.</p>
+<p>The UHCI event callbacks are listed in the <a class="reference internal" href="#_CPPv422uhci_event_callbacks_t" title="uhci_event_callbacks_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_event_callbacks_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t16on_tx_trans_doneE" title="uhci_event_callbacks_t::on_tx_trans_done"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_tx_trans_done</span></code></a> sets a callback function for the &quot;trans-done&quot; event. The function prototype is declared in <a class="reference internal" href="#_CPPv423uhci_tx_done_callback_t" title="uhci_tx_done_callback_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_tx_done_callback_t</span></code></a>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE" title="uhci_event_callbacks_t::on_rx_trans_event"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_rx_trans_event</span></code></a> sets a callback function for &quot;receive&quot; event. The function prototype is declared in <a class="reference internal" href="#_CPPv424uhci_rx_event_callback_t" title="uhci_rx_event_callback_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_rx_event_callback_t</span></code></a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The &quot;rx-trans-event&quot; is not equivalent to &quot;receive-finished&quot;. This callback can also be called at a &quot;partial-received&quot; time, for many times during one receive transaction, which can be notified by <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_rx_event_data_t::flags::totally_received</span></code>.</p>
+</div>
+<p>Users can save their own context in <a class="reference internal" href="#_CPPv429uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv" title="uhci_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_register_event_callbacks()</span></code></a> as well, via the parameter <code class="docutils literal notranslate"><span class="pre">user_data</span></code>. The user data is directly passed to each callback function.</p>
+<p>In the callback function, users can fetch the event-specific data that is filled by the driver in the <code class="docutils literal notranslate"><span class="pre">edata</span></code>. Note that the <code class="docutils literal notranslate"><span class="pre">edata</span></code> pointer is <strong>only</strong> valid during the callback, please do not try to save this pointer and use that outside of the callback function.</p>
+<p>The TX event data is defined in <a class="reference internal" href="#_CPPv425uhci_tx_done_event_data_t" title="uhci_tx_done_event_data_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_tx_done_event_data_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N25uhci_tx_done_event_data_t6bufferE" title="uhci_tx_done_event_data_t::buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_tx_done_event_data_t::buffer</span></code></a> indicates the buffer has been sent out.</p></li>
+</ul>
+<p>The RX event data is defined in <a class="reference internal" href="#_CPPv420uhci_rx_event_data_t" title="uhci_rx_event_data_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_rx_event_data_t</span></code></a>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N20uhci_rx_event_data_t4dataE" title="uhci_rx_event_data_t::data"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_rx_event_data_t::data</span></code></a> points to the received data. The data is stored in the buffer specified by the <code class="docutils literal notranslate"><span class="pre">buffer</span></code> parameter of <a class="reference internal" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_receive()</span></code></a>, so users should not free this receive buffer before the callback returns. Data pointed to by <code class="docutils literal notranslate"><span class="pre">edata-&gt;data</span></code> is typically only guaranteed to be readable during the callback. If application code needs to use the received data after callback returns, copy it to a external buffer first.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N20uhci_rx_event_data_t9recv_sizeE" title="uhci_rx_event_data_t::recv_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_rx_event_data_t::recv_size</span></code></a> indicates the number of received data. This value is not larger than the <code class="docutils literal notranslate"><span class="pre">buffer_size</span></code> parameter of <a class="reference internal" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_receive()</span></code></a> function.</p></li>
+<li><p><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_rx_event_data_t::flags::totally_received</span></code> indicates whether the current received buffer is the last one in the transaction.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Forwarding <code class="docutils literal notranslate"><span class="pre">edata-&gt;data</span></code> pointer to another task without copying is an advanced zero-copy usage. To keep it safe, user code must understand the chunking and overwrite behavior of the underlying circular DMA buffer, and guarantee the consumer can process data before it gets overwritten.</p>
+</div>
+</section>
+<section id="initiating-uhci-transmission">
+<h3><a class="toc-backref" href="#id13" role="doc-backlink">Initiating UHCI Transmission</a><a class="headerlink" href="#initiating-uhci-transmission" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv413uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_transmit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_transmit()</span></code></a> is a non-blocking function, which means this function will immediately return after you call it. The related callback can be obtained via <a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t16on_tx_trans_doneE" title="uhci_event_callbacks_t::on_tx_trans_done"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_tx_trans_done</span></code></a> to indicate that the transaction is done. The function <a class="reference internal" href="#_CPPv433uhci_wait_all_tx_transaction_done24uhci_controller_handle_ti" title="uhci_wait_all_tx_transaction_done"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_wait_all_tx_transaction_done()</span></code></a> can be used to block the thread until all transactions are finished.</p>
+<p>Data can be transmitted via UHCI as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">data_wr</span><span class="p">[</span><span class="n">DATA_LENGTH</span><span class="p">];</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">DATA_LENGTH</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">data_wr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">i</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_transmit</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="n">data_wr</span><span class="p">,</span><span class="w"> </span><span class="n">DATA_LENGTH</span><span class="p">));</span>
+<span class="c1">// Wait all transaction finishes</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_wait_all_tx_transaction_done</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>If the data to be sent is scattered across several separate buffers, you can send them as a single transaction without copying them into one contiguous buffer first, by using <a class="reference internal" href="#_CPPv426uhci_multi_buffer_transmit24uhci_controller_handle_tPK27uhci_transmit_buffer_info_t6size_t" title="uhci_multi_buffer_transmit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_multi_buffer_transmit()</span></code></a>. The buffer segments are described by an array of <a class="reference internal" href="#_CPPv427uhci_transmit_buffer_info_t" title="uhci_transmit_buffer_info_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">uhci_transmit_buffer_info_t</span></code></a> and are transmitted in the given order as one continuous UART stream (internally, the segments are assembled into one DMA link list and only the last segment is marked as the end of the transaction). To use this feature, <a class="reference internal" href="#_CPPv4N24uhci_controller_config_t25max_transmit_buffer_countE" title="uhci_controller_config_t::max_transmit_buffer_count"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_controller_config_t::max_transmit_buffer_count</span></code></a> must be set to the maximum number of segments you intend to send in one call when creating the controller.</p>
+<p>The following constraints apply:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">array_size</span></code> must not exceed <a class="reference internal" href="#_CPPv4N24uhci_controller_config_t25max_transmit_buffer_countE" title="uhci_controller_config_t::max_transmit_buffer_count"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_controller_config_t::max_transmit_buffer_count</span></code></a>.</p></li>
+<li><p>The total size of all segments must not exceed <a class="reference internal" href="#_CPPv4N24uhci_controller_config_t17max_transmit_sizeE" title="uhci_controller_config_t::max_transmit_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_controller_config_t::max_transmit_size</span></code></a>.</p></li>
+<li><p>Every buffer segment must remain valid until the transmission is complete, same as <a class="reference internal" href="#_CPPv413uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_transmit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_transmit()</span></code></a>.</p></li>
+</ul>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">header</span><span class="p">[</span><span class="mi">8</span><span class="p">];</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">payload</span><span class="p">[</span><span class="n">DATA_LENGTH</span><span class="p">];</span>
+<span class="c1">// ... fill header and payload ...</span>
+<span class="n">uhci_transmit_buffer_info_t</span><span class="w"> </span><span class="n">buffer_info</span><span class="p">[]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">write_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">header</span><span class="p">,</span><span class="w">  </span><span class="p">.</span><span class="n">buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">header</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="w">    </span><span class="p">{</span><span class="w"> </span><span class="p">.</span><span class="n">write_buffer</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">payload</span><span class="p">,</span><span class="w"> </span><span class="p">.</span><span class="n">buffer_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">payload</span><span class="p">)</span><span class="w"> </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_multi_buffer_transmit</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="n">buffer_info</span><span class="p">,</span><span class="w"> </span><span class="mi">2</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_wait_all_tx_transaction_done</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="mi">-1</span><span class="p">));</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When a transaction is submitted through <a class="reference internal" href="#_CPPv426uhci_multi_buffer_transmit24uhci_controller_handle_tPK27uhci_transmit_buffer_info_t6size_t" title="uhci_multi_buffer_transmit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_multi_buffer_transmit()</span></code></a> with more than one segment, <a class="reference internal" href="#_CPPv4N25uhci_tx_done_event_data_t6bufferE" title="uhci_tx_done_event_data_t::buffer"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_tx_done_event_data_t::buffer</span></code></a> in the &quot;trans-done&quot; callback only points to the first segment and should be treated as an identifying handle for the transaction, not as the start of a <code class="docutils literal notranslate"><span class="pre">sent_size</span></code>-byte contiguous region. <a class="reference internal" href="#_CPPv4N25uhci_tx_done_event_data_t9sent_sizeE" title="uhci_tx_done_event_data_t::sent_size"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_tx_done_event_data_t::sent_size</span></code></a> is the sum of the sizes of all segments.</p>
+</div>
+</section>
+<section id="initiating-uhci-reception">
+<h3><a class="toc-backref" href="#id14" role="doc-backlink">Initiating UHCI Reception</a><a class="headerlink" href="#initiating-uhci-reception" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_receive()</span></code></a> is a non-blocking function, which means this function will immediately return after it is called. The related callback can be obtained via <a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE" title="uhci_event_callbacks_t::on_rx_trans_event"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_rx_trans_event</span></code></a> to indicate the receive event. It can be useful to determine if a transaction has been finished.</p>
+<p>Data can be received via UHCI as follows:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// global variable: handle of queue.</span>
+<span class="n">QueueHandle_t</span><span class="w"> </span><span class="n">uhci_queue</span><span class="p">;</span>
+
+<span class="n">IRAM_ATTR</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="n">s_uhci_rx_event_cbs</span><span class="p">(</span><span class="n">uhci_controller_handle_t</span><span class="w"> </span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">uhci_rx_event_data_t</span><span class="w"> </span><span class="o">*</span><span class="n">edata</span><span class="p">,</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">user_ctx</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="c1">// parameter `user_ctx` is parsed by the third parameter of function `uhci_register_event_callbacks`</span>
+<span class="w">    </span><span class="n">uhci_context_t</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">uhci_context_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">user_ctx</span><span class="p">;</span>
+<span class="w">    </span><span class="n">BaseType_t</span><span class="w"> </span><span class="n">xTaskWoken</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="n">uhci_event_t</span><span class="w"> </span><span class="n">evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">flags</span><span class="p">.</span><span class="n">totally_received</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UHCI_EVT_EOF</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">recv_size</span><span class="p">;</span>
+<span class="w">        </span><span class="n">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">p_receive_data</span><span class="p">,</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">recv_size</span><span class="p">);</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">evt</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">UHCI_EVT_PARTIAL_DATA</span><span class="p">;</span>
+<span class="w">        </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">recv_size</span><span class="p">;</span>
+<span class="w">        </span><span class="n">memcpy</span><span class="p">(</span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">p_receive_data</span><span class="p">,</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">,</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">recv_size</span><span class="p">);</span>
+<span class="w">        </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">p_receive_data</span><span class="w"> </span><span class="o">+=</span><span class="w"> </span><span class="n">edata</span><span class="o">-&gt;</span><span class="n">recv_size</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="n">xQueueSendFromISR</span><span class="p">(</span><span class="n">uhci_queue</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">evt</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">xTaskWoken</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">xTaskWoken</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// In task</span>
+<span class="n">uhci_event_callbacks_t</span><span class="w"> </span><span class="n">uhci_cbs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">on_rx_trans_event</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">s_uhci_rx_event_cbs</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Register callback and start reception.</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_register_event_callbacks</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">uhci_cbs</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="p">));</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_receive</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">,</span><span class="w"> </span><span class="n">pdata</span><span class="p">,</span><span class="w"> </span><span class="mi">100</span><span class="p">));</span>
+
+<span class="n">uhci_event_t</span><span class="w"> </span><span class="n">evt</span><span class="p">;</span>
+<span class="k">while</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// A queue in task for receiving event triggered by UHCI.</span>
+<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">xQueueReceive</span><span class="p">(</span><span class="n">uhci_queue</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">evt</span><span class="p">,</span><span class="w"> </span><span class="n">portMAX_DELAY</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">pdTRUE</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">evt</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">UHCI_EVT_EOF</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">printf</span><span class="p">(</span><span class="s">"Received size: %d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="n">ctx</span><span class="o">-&gt;</span><span class="n">receive_size</span><span class="p">);</span>
+<span class="w">            </span><span class="k">break</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>In the API <a class="reference internal" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_receive()</span></code></a> interface, the parameter <code class="docutils literal notranslate"><span class="pre">read_buffer</span></code> is a buffer that must be provided by the user, and parameter <code class="docutils literal notranslate"><span class="pre">buffer_size</span></code> represents the size of the buffer supplied by the user. <code class="docutils literal notranslate"><span class="pre">buffer_size</span></code> should generally not exceed <a class="reference internal" href="#_CPPv4N24uhci_controller_config_t24max_receive_internal_memE" title="uhci_controller_config_t::max_receive_internal_mem"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_controller_config_t::max_receive_internal_mem</span></code></a>.</p>
+<p>When a node is filled, but the reception has not yet completed, the event <a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE" title="uhci_event_callbacks_t::on_rx_trans_event"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_rx_trans_event</span></code></a> will be triggered, accompanied by <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_rx_event_data_t::flags::totally_received</span></code> set to 0. When all the data has been fully received, the <a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE" title="uhci_event_callbacks_t::on_rx_trans_event"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_rx_trans_event</span></code></a> event will be triggered again with <code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_rx_event_data_t::flags::totally_received</span></code> set to 1.</p>
+<p>This mechanism allows the user to achieve continuous and fast reception using a relatively small buffer, without needing to allocate a buffer the same size as the total data being received.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The parameter <code class="docutils literal notranslate"><span class="pre">read_buffer</span></code> of <a class="reference internal" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_receive()</span></code></a> cannot be freed until receive finishes.</p>
+</div>
+</section>
+<section id="uninstall-uhci-controller">
+<h3><a class="toc-backref" href="#id15" role="doc-backlink">Uninstall UHCI controller</a><a class="headerlink" href="#uninstall-uhci-controller" title="Permalink to this heading"></a></h3>
+<p>If a previously installed UHCI controller is no longer needed, it's recommended to recycle the resource by calling <a class="reference internal" href="#_CPPv419uhci_del_controller24uhci_controller_handle_t" title="uhci_del_controller"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_del_controller()</span></code></a>, so that the underlying hardware is released.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">uhci_del_controller</span><span class="p">(</span><span class="n">uhci_ctrl</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="advanced-features">
+<h2><a class="toc-backref" href="#id16" role="doc-backlink">Advanced Features</a><a class="headerlink" href="#advanced-features" title="Permalink to this heading"></a></h2>
+<p>As the basic usage has been covered, it's time to explore more advanced features of the UHCI driver.</p>
+<section id="power-management">
+<h3><a class="toc-backref" href="#id17" role="doc-backlink">Power Management</a><a class="headerlink" href="#power-management" title="Permalink to this heading"></a></h3>
+<p>When power management is enabled, i.e., <a class="reference internal" href="../kconfig-reference.html#config-pm-enable"><span class="std std-ref">CONFIG_PM_ENABLE</span></a> is on, the system may adjust or disable the clock source before going to sleep. As a result, the FIFO inside the UHCI can't work as expected.</p>
+<p>The driver can prevent the above issue by creating a power management lock. The lock type is set based on different clock sources. The driver will acquire the lock in <a class="reference internal" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_receive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_receive()</span></code></a> or <a class="reference internal" href="#_CPPv413uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t" title="uhci_transmit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_transmit()</span></code></a>, and release it in the transaction-done interrupt. That means, any UHCI transactions between these two functions are guaranteed to work correctly and stably.</p>
+</section>
+<section id="cache-safe">
+<h3><a class="toc-backref" href="#id18" role="doc-backlink">Cache Safe</a><a class="headerlink" href="#cache-safe" title="Permalink to this heading"></a></h3>
+<p>By default, the interrupt on which UHCI relies is deferred when the Cache is disabled for reasons such as writing or erasing the main flash. Thus, the transaction-done interrupt fails to be handled in time, which is unacceptable in a real-time application. What is worse, when the UHCI transaction relies on <strong>ping-pong</strong> interrupt to successively encode or copy the UHCI buffer, a delayed interrupt can lead to an unpredictable result.</p>
+<p>There is a Kconfig option <a class="reference internal" href="../kconfig-reference.html#config-uhci-isr-cache-safe"><span class="std std-ref">CONFIG_UHCI_ISR_CACHE_SAFE</span></a> that has the following features:</p>
+<ol class="arabic simple">
+<li><p>Enable the interrupt being serviced even when the cache is disabled</p></li>
+<li><p>Place all functions used by the ISR into IRAM <a class="footnote-reference brackets" href="#id6" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a></p></li>
+<li><p>Place the driver object into DRAM in case it is mapped to PSRAM by accident</p></li>
+</ol>
+<p>This Kconfig option allows the interrupt handler to run while the cache is disabled but comes at the cost of increased IRAM consumption.</p>
+</section>
+<section id="resource-consumption">
+<h3><a class="toc-backref" href="#id19" role="doc-backlink">Resource Consumption</a><a class="headerlink" href="#resource-consumption" title="Permalink to this heading"></a></h3>
+<p>Use the <a class="reference internal" href="../../api-guides/tools/idf-size.html"><span class="doc">IDF Size</span></a> tool to check the code and data consumption of the UHCI driver. The following are the test results under 2 different conditions (using ESP32-C3 as an example):</p>
+<p><strong>Note that the following data are not exact values and are for reference only; they may differ on different chip models.</strong></p>
+<p>Resource consumption when <a class="reference internal" href="../kconfig-reference.html#config-uhci-isr-cache-safe"><span class="std std-ref">CONFIG_UHCI_ISR_CACHE_SAFE</span></a> is enabled:</p>
+<table class="docutils align-default" id="id7">
+<caption><span class="caption-text">Resource Consumption</span><a class="headerlink" href="#id7" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+<col style="width: 11.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Component Layer</p></th>
+<th class="head"><p>Total Size</p></th>
+<th class="head"><p>DIRAM</p></th>
+<th class="head"><p>.bss</p></th>
+<th class="head"><p>.data</p></th>
+<th class="head"><p>.text</p></th>
+<th class="head"><p>Flash Code</p></th>
+<th class="head"><p>Flash Data</p></th>
+<th class="head"><p>.rodata</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>UHCI</p></td>
+<td><p>5733</p></td>
+<td><p>680</p></td>
+<td><p>8</p></td>
+<td><p>34</p></td>
+<td><p>638</p></td>
+<td><p>4878</p></td>
+<td><p>175</p></td>
+<td><p>175</p></td>
+</tr>
+</tbody>
+</table>
+<p>Resource consumption when <a class="reference internal" href="../kconfig-reference.html#config-uhci-isr-cache-safe"><span class="std std-ref">CONFIG_UHCI_ISR_CACHE_SAFE</span></a> is disabled:</p>
+<table class="docutils align-default" id="id8">
+<caption><span class="caption-text">Resource Consumption</span><a class="headerlink" href="#id8" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+<col style="width: 10.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Component Layer</p></th>
+<th class="head"><p>Total Size</p></th>
+<th class="head"><p>DIRAM</p></th>
+<th class="head"><p>.bss</p></th>
+<th class="head"><p>.data</p></th>
+<th class="head"><p>.text</p></th>
+<th class="head"><p>Flash Code</p></th>
+<th class="head"><p>.text</p></th>
+<th class="head"><p>Flash Data</p></th>
+<th class="head"><p>.rodata</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>UHCI</p></td>
+<td><p>5479</p></td>
+<td><p>42</p></td>
+<td><p>8</p></td>
+<td><p>34</p></td>
+<td><p>0</p></td>
+<td><p>5262</p></td>
+<td><p>5262</p></td>
+<td><p>175</p></td>
+<td><p>175</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="performance">
+<h3><a class="toc-backref" href="#id20" role="doc-backlink">Performance</a><a class="headerlink" href="#performance" title="Permalink to this heading"></a></h3>
+<p>To improve the real-time response capability of interrupt handling, the UHCI driver provides the <a class="reference internal" href="../kconfig-reference.html#config-uhci-isr-handler-in-iram"><span class="std std-ref">CONFIG_UHCI_ISR_HANDLER_IN_IRAM</span></a> option. Enabling this option will place the interrupt handler in internal RAM, reducing the latency caused by cache misses when loading instructions from Flash.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>However, user callback functions and context data called by the interrupt handler may still be located in Flash, and cache miss issues will still exist. Users need to place callback functions and data in internal RAM, for example, using <code class="xref c c-macro docutils literal notranslate"><span class="pre">IRAM_ATTR</span></code> and <code class="xref c c-macro docutils literal notranslate"><span class="pre">DRAM_ATTR</span></code>.</p>
+</div>
+</section>
+<section id="thread-safety">
+<h3><a class="toc-backref" href="#id21" role="doc-backlink">Thread Safety</a><a class="headerlink" href="#thread-safety" title="Permalink to this heading"></a></h3>
+<p>The factory function <a class="reference internal" href="#_CPPv419uhci_new_controllerPK24uhci_controller_config_tP24uhci_controller_handle_t" title="uhci_new_controller"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code></a>, <a class="reference internal" href="#_CPPv429uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv" title="uhci_register_event_callbacks"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_register_event_callbacks()</span></code></a> and <a class="reference internal" href="#_CPPv419uhci_del_controller24uhci_controller_handle_t" title="uhci_del_controller"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">uhci_del_controller()</span></code></a> are guaranteed to be thread safe by the driver, which means, user can call them from different RTOS tasks without protection by extra locks.</p>
+</section>
+<section id="other-kconfig-options">
+<h3><a class="toc-backref" href="#id22" role="doc-backlink">Other Kconfig Options</a><a class="headerlink" href="#other-kconfig-options" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-uhci-enable-debug-log"><span class="std std-ref">CONFIG_UHCI_ENABLE_DEBUG_LOG</span></a> is allowed for the forced enabling of all debug logs for the UHCI driver, regardless of the global log level setting. Enabling this option can help developers obtain more detailed log information during the debugging process, making it easier to locate and resolve issues, but it will increase the size of the firmware binary.</p></li>
+</ul>
+</section>
+</section>
+<section id="application-examples">
+<h2><a class="toc-backref" href="#id23" role="doc-backlink">Application Examples</a><a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/uart/uart_dma_ota">peripherals/uart/uart_dma_ota</a> demonstrates how to use the uart dma for fast OTA the chip firmware with 1M baud rate speed.</p></li>
+</ul>
+</section>
+<section id="api-reference">
+<h2><a class="toc-backref" href="#id24" role="doc-backlink">API Reference</a><a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3><a class="toc-backref" href="#id25" role="doc-backlink">Header File</a><a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_uart/include/driver/uhci.h">components/esp_driver_uart/include/driver/uhci.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/uhci.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_uart</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_uart</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_uart
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_uart
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3><a class="toc-backref" href="#id26" role="doc-backlink">Functions</a><a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419uhci_new_controllerPK24uhci_controller_config_tP24uhci_controller_handle_t">
+<span id="_CPPv319uhci_new_controllerPK24uhci_controller_config_tP24uhci_controller_handle_t"></span><span id="_CPPv219uhci_new_controllerPK24uhci_controller_config_tP24uhci_controller_handle_t"></span><span id="uhci_new_controller__uhci_controller_config_tCP.uhci_controller_handle_tP"></span><span class="target" id="uhci_8h_1a518bdd8c3bfcd32d509eb6c39e9ad514"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_new_controller</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424uhci_controller_config_t" title="uhci_controller_config_t"><span class="n"><span class="pre">uhci_controller_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_uhci_ctrl</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419uhci_new_controllerPK24uhci_controller_config_tP24uhci_controller_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create and initialize a new UHCI controller. </p>
+<p>This function initializes a new UHCI controller instance based on the provided configuration. It allocates and configures resources required for the UHCI controller, such as DMA and communication settings. The created controller handle is returned through the output parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> Pointer to a <code class="docutils literal notranslate"><a class="reference internal" href="#structuhci__controller__config__t"><span class="std std-ref"><span class="pre">uhci_controller_config_t</span></span></a></code> structure containing the configuration parameters for the UHCI controller. </p></li>
+<li><p><strong>ret_uhci_ctrl</strong> -- <strong>[out]</strong> Pointer to a variable where the handle to the newly created UHCI controller will be stored. This handle is used in subsequent operations involving the controller.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_OK</span></code>: Controller successfully created and initialized.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>: One or more arguments are invalid (e.g., null pointers or invalid config).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_NO_MEM</span></code>: Memory allocation for the controller failed.</p></li>
+<li><p>Other error codes: Indicate failure in the underlying hardware or driver initialization. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t">
+<span id="_CPPv312uhci_receive24uhci_controller_handle_tP7uint8_t6size_t"></span><span id="_CPPv212uhci_receive24uhci_controller_handle_tP7uint8_t6size_t"></span><span id="uhci_receive__uhci_controller_handle_t.uint8_tP.s"></span><span class="target" id="uhci_8h_1ab838730adbc97055faca063b7e54b448"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_receive</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">uhci_ctrl</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">read_buffer</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">buffer_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412uhci_receive24uhci_controller_handle_tP7uint8_t6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Receive data from the UHCI controller. </p>
+<p>This function retrieves data from the UHCI controller into the provided buffer. It is typically used for receiving data that was transmitted via UART and processed by the UHCI DMA controller.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function is non-blocking, it just mounts the user buffer to the DMA. The return from the function doesn't mean a finished receive. You need to register corresponding callback function to get notification.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uhci_ctrl</strong> -- <strong>[in]</strong> Handle to the UHCI controller, which was previously created using <code class="docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code>. </p></li>
+<li><p><strong>read_buffer</strong> -- <strong>[out]</strong> Pointer to the buffer where the received data will be stored. The buffer must be pre-allocated by the caller. </p></li>
+<li><p><strong>buffer_size</strong> -- <strong>[in]</strong> The size of read buffer. Should generally not exceed <code class="docutils literal notranslate"><a class="reference internal" href="#structuhci__controller__config__t_1a5ef298c16437e7d8f5f15413ebbe1678"><span class="std std-ref"><span class="pre">uhci_controller_config_t.max_receive_internal_mem</span></span></a></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_OK</span></code>: The driver is ready for data reception.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code>: The controller is not in enable state.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>: Invalid arguments (e.g., invalid controller handle, null buffer, invalid buffer size). </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv413uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t">
+<span id="_CPPv313uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t"></span><span id="_CPPv213uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t"></span><span id="uhci_transmit__uhci_controller_handle_t.uint8_tP.s"></span><span class="target" id="uhci_8h_1ab0000de6f8ff539494938e83870d2fdc"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_transmit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">uhci_ctrl</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">write_buffer</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">write_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv413uhci_transmit24uhci_controller_handle_tP7uint8_t6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transmit data using the UHCI controller. </p>
+<p>This function sends data from the provided buffer through the UHCI controller. It uses the DMA capabilities of UHCI to efficiently handle data transmission via UART.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The function is an non-blocking api, which means this function will return immediately. You can get corresponding event from callbacks.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uhci_ctrl</strong> -- <strong>[in]</strong> Handle to the UHCI controller, which was previously created using <code class="docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code>. </p></li>
+<li><p><strong>write_buffer</strong> -- <strong>[in]</strong> Pointer to the buffer containing the data to be transmitted. The buffer must remain valid until the transmission is complete. </p></li>
+<li><p><strong>write_size</strong> -- <strong>[in]</strong> The number of bytes to transmit from the buffer. Must not exceed <code class="docutils literal notranslate"><a class="reference internal" href="#structuhci__controller__config__t_1a3bc85b94ed9580a44b0e45b9d3a21c2d"><span class="std std-ref"><span class="pre">uhci_controller_config_t.max_transmit_size</span></span></a></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_OK</span></code>: Data successfully queued for transmission.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>: Invalid arguments (e.g., null buffer, invalid handle, zero <code class="docutils literal notranslate"><span class="pre">write_size</span></code>, or <code class="docutils literal notranslate"><span class="pre">write_size</span></code> exceeds <code class="docutils literal notranslate"><span class="pre">max_transmit_size</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code>: No free transaction descriptor available. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426uhci_multi_buffer_transmit24uhci_controller_handle_tPK27uhci_transmit_buffer_info_t6size_t">
+<span id="_CPPv326uhci_multi_buffer_transmit24uhci_controller_handle_tPK27uhci_transmit_buffer_info_t6size_t"></span><span id="_CPPv226uhci_multi_buffer_transmit24uhci_controller_handle_tPK27uhci_transmit_buffer_info_t6size_t"></span><span id="uhci_multi_buffer_transmit__uhci_controller_handle_t.uhci_transmit_buffer_info_tCP.s"></span><span class="target" id="uhci_8h_1addf0ad18cced163aca108885f13f7e38"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_multi_buffer_transmit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">uhci_ctrl</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv427uhci_transmit_buffer_info_t" title="uhci_transmit_buffer_info_t"><span class="n"><span class="pre">uhci_transmit_buffer_info_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">buffer_info_array</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">array_size</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426uhci_multi_buffer_transmit24uhci_controller_handle_tPK27uhci_transmit_buffer_info_t6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transmit several discontinuous buffers as a single UHCI transaction. </p>
+<p>Unlike <code class="docutils literal notranslate"><span class="pre">uhci_transmit()</span></code>, this accepts an array of buffer segments instead of a single contiguous buffer. For <code class="docutils literal notranslate"><span class="pre">array_size</span> <span class="pre">&gt;</span> <span class="pre">1</span></code>, the buffers are assembled into one DMA link list in the given order (only the last segment is marked EOF).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>All buffer segments must remain valid until the transmission is complete (same contract as <code class="docutils literal notranslate"><span class="pre">uhci_transmit()</span></code>).</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uhci_ctrl</strong> -- <strong>[in]</strong> Handle to the UHCI controller, which was previously created using <code class="docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code>. </p></li>
+<li><p><strong>buffer_info_array</strong> -- <strong>[in]</strong> Array of buffer segments to transmit, in order. The combined size of all buffers must not exceed <code class="docutils literal notranslate"><a class="reference internal" href="#structuhci__controller__config__t_1a3bc85b94ed9580a44b0e45b9d3a21c2d"><span class="std std-ref"><span class="pre">uhci_controller_config_t.max_transmit_size</span></span></a></code>. </p></li>
+<li><p><strong>array_size</strong> -- <strong>[in]</strong> Number of entries in <code class="docutils literal notranslate"><span class="pre">buffer_info_array</span></code>. Must not exceed <code class="docutils literal notranslate"><span class="pre">max_transmit_buffer_count</span></code>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_OK</span></code>: Data successfully queued for transmission.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>: Invalid arguments, <code class="docutils literal notranslate"><span class="pre">array_size</span></code> exceeds <code class="docutils literal notranslate"><span class="pre">max_transmit_buffer_count</span></code>, or the combined size of all buffers exceeds <code class="docutils literal notranslate"><span class="pre">max_transmit_size</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code>: No free transaction descriptor available. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419uhci_del_controller24uhci_controller_handle_t">
+<span id="_CPPv319uhci_del_controller24uhci_controller_handle_t"></span><span id="_CPPv219uhci_del_controller24uhci_controller_handle_t"></span><span id="uhci_del_controller__uhci_controller_handle_t"></span><span class="target" id="uhci_8h_1a61daf9d9ad85ba8e487a6ee569b2dc13"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_del_controller</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">uhci_ctrl</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419uhci_del_controller24uhci_controller_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Uninstall the UHCI (UART Host Controller Interface) driver and release resources. </p>
+<p>This function deinitializes the UHCI controller and frees any resources allocated during its initialization. It ensures proper cleanup and prevents resource leaks when the UHCI controller is no longer needed.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>uhci_ctrl</strong> -- <strong>[in]</strong> Handle to the UHCI controller, which was previously created using <code class="docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code>. Passing an invalid or uninitialized handle may result in undefined behavior.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_OK</span></code>: The UHCI driver was successfully uninstalled, and resources were released.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>: The provided <code class="docutils literal notranslate"><span class="pre">uhci_ctrl</span></code> handle is invalid or null. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv">
+<span id="_CPPv329uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv"></span><span id="_CPPv229uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv"></span><span id="uhci_register_event_callbacks__uhci_controller_handle_t.uhci_event_callbacks_tCP.voidP"></span><span class="target" id="uhci_8h_1afa4bf4fa6e8204496bb98ef48f634c7b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_register_event_callbacks</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">uhci_ctrl</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv422uhci_event_callbacks_t" title="uhci_event_callbacks_t"><span class="n"><span class="pre">uhci_event_callbacks_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cbs</span></span>, <span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">user_data</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429uhci_register_event_callbacks24uhci_controller_handle_tPK22uhci_event_callbacks_tPv" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register event callback functions for a UHCI controller. </p>
+<p>This function allows the user to register callback functions to handle specific UHCI events, such as transmission or reception completion. The callbacks provide a mechanism to handle asynchronous events generated by the UHCI controller.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uhci_ctrl</strong> -- <strong>[in]</strong> Handle to the UHCI controller, which was previously created using <code class="docutils literal notranslate"><span class="pre">uhci_new_controller()</span></code>. </p></li>
+<li><p><strong>cbs</strong> -- <strong>[in]</strong> Pointer to a <code class="docutils literal notranslate"><a class="reference internal" href="#structuhci__event__callbacks__t"><span class="std std-ref"><span class="pre">uhci_event_callbacks_t</span></span></a></code> structure that defines the callback functions to be registered. This structure includes pointers to the callback functions for handling UHCI events. </p></li>
+<li><p><strong>user_data</strong> -- <strong>[in]</strong> Pointer to user-defined data that will be passed to the callback functions when they are invoked. This can be used to provide context or state information specific to the application.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_OK</span></code>: Event callbacks were successfully registered.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>: Invalid arguments (e.g., null <code class="docutils literal notranslate"><span class="pre">uhci_ctrl</span></code> handle or <code class="docutils literal notranslate"><span class="pre">cbs</span></code> pointer). </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv433uhci_wait_all_tx_transaction_done24uhci_controller_handle_ti">
+<span id="_CPPv333uhci_wait_all_tx_transaction_done24uhci_controller_handle_ti"></span><span id="_CPPv233uhci_wait_all_tx_transaction_done24uhci_controller_handle_ti"></span><span id="uhci_wait_all_tx_transaction_done__uhci_controller_handle_t.i"></span><span class="target" id="uhci_8h_1afe995551a662de3ebdc692d69e8f9b3e"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_wait_all_tx_transaction_done</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">uhci_ctrl</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout_ms</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433uhci_wait_all_tx_transaction_done24uhci_controller_handle_ti" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Wait for all pending TX transactions done. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>uhci_ctrl</strong> -- <strong>[in]</strong> UHCI controller that created by <code class="docutils literal notranslate"><span class="pre">uhci_new_controller</span></code></p></li>
+<li><p><strong>timeout_ms</strong> -- <strong>[in]</strong> Timeout in milliseconds, <code class="docutils literal notranslate"><span class="pre">-1</span></code> means to wait forever </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: All pending TX transactions is finished and recycled</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Wait for all pending TX transactions done failed because of invalid argument</p></li>
+<li><p>ESP_ERR_TIMEOUT: Wait for all pending TX transactions done timeout</p></li>
+<li><p>ESP_FAIL: Wait for all pending TX transactions done failed because of other error </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3><a class="toc-backref" href="#id27" role="doc-backlink">Structures</a><a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424uhci_controller_config_t">
+<span id="_CPPv324uhci_controller_config_t"></span><span id="_CPPv224uhci_controller_config_t"></span><span id="uhci_controller_config_t"></span><span class="target" id="structuhci__controller__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_controller_config_t</span></span></span><a class="headerlink" href="#_CPPv424uhci_controller_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI controller specific configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t9uart_portE">
+<span id="_CPPv3N24uhci_controller_config_t9uart_portE"></span><span id="_CPPv2N24uhci_controller_config_t9uart_portE"></span><span id="uhci_controller_config_t::uart_port__uart_port_t"></span><span class="target" id="structuhci__controller__config__t_1afb0b8b16233c3c43a424048f274c4d33"></span><a class="reference internal" href="uart.html#_CPPv411uart_port_t" title="uart_port_t"><span class="n"><span class="pre">uart_port_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uart_port</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t9uart_portE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UART port that connect to UHCI controller </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t20tx_trans_queue_depthE">
+<span id="_CPPv3N24uhci_controller_config_t20tx_trans_queue_depthE"></span><span id="_CPPv2N24uhci_controller_config_t20tx_trans_queue_depthE"></span><span id="uhci_controller_config_t::tx_trans_queue_depth__s"></span><span class="target" id="structuhci__controller__config__t_1a8f14a1bb90481c4cde0e08bca2decf4c"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">tx_trans_queue_depth</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t20tx_trans_queue_depthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Depth of internal transfer queue, increase this value can support more transfers pending in the background </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t17max_transmit_sizeE">
+<span id="_CPPv3N24uhci_controller_config_t17max_transmit_sizeE"></span><span id="_CPPv2N24uhci_controller_config_t17max_transmit_sizeE"></span><span id="uhci_controller_config_t::max_transmit_size__s"></span><span class="target" id="structuhci__controller__config__t_1a3bc85b94ed9580a44b0e45b9d3a21c2d"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_transmit_size</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t17max_transmit_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum transfer size in one transaction, in bytes. Note that this is the total size of all buffers combined </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t25max_transmit_buffer_countE">
+<span id="_CPPv3N24uhci_controller_config_t25max_transmit_buffer_countE"></span><span id="_CPPv2N24uhci_controller_config_t25max_transmit_buffer_countE"></span><span id="uhci_controller_config_t::max_transmit_buffer_count__s"></span><span class="target" id="structuhci__controller__config__t_1a426ad77866d8b7bc8a84943ad32929a5"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_transmit_buffer_count</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t25max_transmit_buffer_countE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of buffers that can be transmitted together in one transaction, via <code class="docutils literal notranslate"><span class="pre">uhci_multi_buffer_transmit()</span></code>. Set to 0 or 1 if only single-buffer transmit (<code class="docutils literal notranslate"><span class="pre">uhci_transmit()</span></code>) is needed. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t24max_receive_internal_memE">
+<span id="_CPPv3N24uhci_controller_config_t24max_receive_internal_memE"></span><span id="_CPPv2N24uhci_controller_config_t24max_receive_internal_memE"></span><span id="uhci_controller_config_t::max_receive_internal_mem__s"></span><span class="target" id="structuhci__controller__config__t_1a5ef298c16437e7d8f5f15413ebbe1678"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_receive_internal_mem</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t24max_receive_internal_memE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Expected maximum buffer size for uhci_receive(). This value determines the number of descriptors in the receive DMA chain. Each DMA descriptor can reference a buffer of up to X bytes (depending on the chip). For large transfers, at least two descriptors are recommended for ping-pong operation. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t14dma_burst_sizeE">
+<span id="_CPPv3N24uhci_controller_config_t14dma_burst_sizeE"></span><span id="_CPPv2N24uhci_controller_config_t14dma_burst_sizeE"></span><span id="uhci_controller_config_t::dma_burst_size__s"></span><span class="target" id="structuhci__controller__config__t_1a25a8f4d51a76d63a2218dc93bdf7b191"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dma_burst_size</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t14dma_burst_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DMA burst size, in bytes. Set to 0 to disable data burst. Otherwise, use a power of 2. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t18max_packet_receiveE">
+<span id="_CPPv3N24uhci_controller_config_t18max_packet_receiveE"></span><span id="_CPPv2N24uhci_controller_config_t18max_packet_receiveE"></span><span id="uhci_controller_config_t::max_packet_receive__s"></span><span class="target" id="structuhci__controller__config__t_1ae71ba3e9455da99a1da585ba49b4a44d"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_packet_receive</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t18max_packet_receiveE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Max receive size, auto stop receiving after reach this value, only valid when <code class="docutils literal notranslate"><span class="pre">length_eof</span></code> set true </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t10rx_brk_eofE">
+<span id="_CPPv3N24uhci_controller_config_t10rx_brk_eofE"></span><span id="_CPPv2N24uhci_controller_config_t10rx_brk_eofE"></span><span id="uhci_controller_config_t::rx_brk_eof__uint16_t"></span><span class="target" id="structuhci__controller__config__t_1a6b0466facf7e00f1a9b0b601cbe0e42b"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rx_brk_eof</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t10rx_brk_eofE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI will end payload receive process when NULL frame is received by UART. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t8idle_eofE">
+<span id="_CPPv3N24uhci_controller_config_t8idle_eofE"></span><span id="_CPPv2N24uhci_controller_config_t8idle_eofE"></span><span id="uhci_controller_config_t::idle_eof__uint16_t"></span><span class="target" id="structuhci__controller__config__t_1adb42169dc58c8690fd322a36a6a80760"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">idle_eof</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t8idle_eofE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI will end payload receive process when UART has been in idle state. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t10length_eofE">
+<span id="_CPPv3N24uhci_controller_config_t10length_eofE"></span><span id="_CPPv2N24uhci_controller_config_t10length_eofE"></span><span id="uhci_controller_config_t::length_eof__uint16_t"></span><span class="target" id="structuhci__controller__config__t_1aa8237b3e3ad40dd20f39262ec16ef07b"></span><span class="n"><span class="pre">uint16_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">length_eof</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t10length_eofE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI will end payload receive process when the receiving byte count has reached the specific value. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24uhci_controller_config_t12rx_eof_flagsE">
+<span id="_CPPv3N24uhci_controller_config_t12rx_eof_flagsE"></span><span id="_CPPv2N24uhci_controller_config_t12rx_eof_flagsE"></span><span id="uhci_controller_config_t::rx_eof_flags__uhci_controller_config_t"></span><span class="target" id="structuhci__controller__config__t_1a9673b542a6625401c8a54712acf67aaf"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424uhci_controller_config_t" title="uhci_controller_config_t"><span class="n"><span class="pre">uhci_controller_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rx_eof_flags</span></span></span><a class="headerlink" href="#_CPPv4N24uhci_controller_config_t12rx_eof_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI eof flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv422uhci_event_callbacks_t">
+<span id="_CPPv322uhci_event_callbacks_t"></span><span id="_CPPv222uhci_event_callbacks_t"></span><span id="uhci_event_callbacks_t"></span><span class="target" id="structuhci__event__callbacks__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_event_callbacks_t</span></span></span><a class="headerlink" href="#_CPPv422uhci_event_callbacks_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Structure for defining callback functions for UHCI events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE">
+<span id="_CPPv3N22uhci_event_callbacks_t17on_rx_trans_eventE"></span><span id="_CPPv2N22uhci_event_callbacks_t17on_rx_trans_eventE"></span><span id="uhci_event_callbacks_t::on_rx_trans_event__uhci_rx_event_callback_t"></span><span class="target" id="structuhci__event__callbacks__t_1a2e28af4826dc9330d74b46720df54f43"></span><a class="reference internal" href="#_CPPv424uhci_rx_event_callback_t" title="uhci_rx_event_callback_t"><span class="n"><span class="pre">uhci_rx_event_callback_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_rx_trans_event</span></span></span><a class="headerlink" href="#_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for handling the completion of a reception. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N22uhci_event_callbacks_t16on_tx_trans_doneE">
+<span id="_CPPv3N22uhci_event_callbacks_t16on_tx_trans_doneE"></span><span id="_CPPv2N22uhci_event_callbacks_t16on_tx_trans_doneE"></span><span id="uhci_event_callbacks_t::on_tx_trans_done__uhci_tx_done_callback_t"></span><span class="target" id="structuhci__event__callbacks__t_1aba06f806a4c1dc02f90ac9f1ebbc3cf5"></span><a class="reference internal" href="#_CPPv423uhci_tx_done_callback_t" title="uhci_tx_done_callback_t"><span class="n"><span class="pre">uhci_tx_done_callback_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">on_tx_trans_done</span></span></span><a class="headerlink" href="#_CPPv4N22uhci_event_callbacks_t16on_tx_trans_doneE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback function for handling the completion of a transmission. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv427uhci_transmit_buffer_info_t">
+<span id="_CPPv327uhci_transmit_buffer_info_t"></span><span id="_CPPv227uhci_transmit_buffer_info_t"></span><span id="uhci_transmit_buffer_info_t"></span><span class="target" id="structuhci__transmit__buffer__info__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_transmit_buffer_info_t</span></span></span><a class="headerlink" href="#_CPPv427uhci_transmit_buffer_info_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>One buffer segment used by <code class="docutils literal notranslate"><span class="pre">uhci_multi_buffer_transmit()</span></code></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27uhci_transmit_buffer_info_t12write_bufferE">
+<span id="_CPPv3N27uhci_transmit_buffer_info_t12write_bufferE"></span><span id="_CPPv2N27uhci_transmit_buffer_info_t12write_bufferE"></span><span id="uhci_transmit_buffer_info_t::write_buffer__uint8_tCP"></span><span class="target" id="structuhci__transmit__buffer__info__t_1a9d567b9ef0192a4dbee460c70644120e"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">write_buffer</span></span></span><a class="headerlink" href="#_CPPv4N27uhci_transmit_buffer_info_t12write_bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to this buffer segment. Must remain valid until the transmission is complete. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N27uhci_transmit_buffer_info_t11buffer_sizeE">
+<span id="_CPPv3N27uhci_transmit_buffer_info_t11buffer_sizeE"></span><span id="_CPPv2N27uhci_transmit_buffer_info_t11buffer_sizeE"></span><span id="uhci_transmit_buffer_info_t::buffer_size__s"></span><span class="target" id="structuhci__transmit__buffer__info__t_1acaf5b9486df7553b20d3d90d8f4c6ae3"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">buffer_size</span></span></span><a class="headerlink" href="#_CPPv4N27uhci_transmit_buffer_info_t11buffer_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size of this buffer segment, in bytes </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="id2">
+<h3><a class="toc-backref" href="#id28" role="doc-backlink">Header File</a><a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_uart/include/driver/uhci_types.h">components/esp_driver_uart/include/driver/uhci_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/uhci_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_uart</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_uart</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_uart
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_uart
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id3">
+<h3><a class="toc-backref" href="#id29" role="doc-backlink">Structures</a><a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv425uhci_tx_done_event_data_t">
+<span id="_CPPv325uhci_tx_done_event_data_t"></span><span id="_CPPv225uhci_tx_done_event_data_t"></span><span id="uhci_tx_done_event_data_t"></span><span class="target" id="structuhci__tx__done__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_tx_done_event_data_t</span></span></span><a class="headerlink" href="#_CPPv425uhci_tx_done_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI TX Done Event Data. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25uhci_tx_done_event_data_t6bufferE">
+<span id="_CPPv3N25uhci_tx_done_event_data_t6bufferE"></span><span id="_CPPv2N25uhci_tx_done_event_data_t6bufferE"></span><span id="uhci_tx_done_event_data_t::buffer__uint8_tP"></span><span class="target" id="structuhci__tx__done__event__data__t_1a851c4cea38ba50b0592d09556bf42085"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">buffer</span></span></span><a class="headerlink" href="#_CPPv4N25uhci_tx_done_event_data_t6bufferE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the which data buffer has been finished the transaction. When the transaction was submitted with more than one discontinuous buffer segment (via <code class="docutils literal notranslate"><span class="pre">uhci_multi_buffer_transmit()</span></code>), this only points to the first segment and should be treated as an identifying handle for the transaction, not as the start of a <code class="docutils literal notranslate"><span class="pre">sent_size</span></code>-byte contiguous region. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25uhci_tx_done_event_data_t9sent_sizeE">
+<span id="_CPPv3N25uhci_tx_done_event_data_t9sent_sizeE"></span><span id="_CPPv2N25uhci_tx_done_event_data_t9sent_sizeE"></span><span id="uhci_tx_done_event_data_t::sent_size__s"></span><span class="target" id="structuhci__tx__done__event__data__t_1a5af04cdbc9eac641a96b1026e3ae57fd"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sent_size</span></span></span><a class="headerlink" href="#_CPPv4N25uhci_tx_done_event_data_t9sent_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Size has been sent out </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420uhci_rx_event_data_t">
+<span id="_CPPv320uhci_rx_event_data_t"></span><span id="_CPPv220uhci_rx_event_data_t"></span><span id="uhci_rx_event_data_t"></span><span class="target" id="structuhci__rx__event__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_rx_event_data_t</span></span></span><a class="headerlink" href="#_CPPv420uhci_rx_event_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI RX Done Event Data Structure. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When an abnormal EOF occurs, <code class="docutils literal notranslate"><span class="pre">data</span></code> will be NULL and <code class="docutils literal notranslate"><span class="pre">recv_size</span></code> will be 0. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20uhci_rx_event_data_t4dataE">
+<span id="_CPPv3N20uhci_rx_event_data_t4dataE"></span><span id="_CPPv2N20uhci_rx_event_data_t4dataE"></span><span id="uhci_rx_event_data_t::data__uint8_tCP"></span><span class="target" id="structuhci__rx__event__data__t_1a3f7ced034d6f72dbbef671d6b9647099"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#_CPPv4N20uhci_rx_event_data_t4dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Pointer to the received data buffer. Data pointed to by this pointer is typically only guaranteed to be readable during the callback. If you need to use it after callback returns, copy it to external buffer first or refer to advanced zero-copy usage. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20uhci_rx_event_data_t9recv_sizeE">
+<span id="_CPPv3N20uhci_rx_event_data_t9recv_sizeE"></span><span id="_CPPv2N20uhci_rx_event_data_t9recv_sizeE"></span><span id="uhci_rx_event_data_t::recv_size__s"></span><span class="target" id="structuhci__rx__event__data__t_1ac46ef46282e35c1cca8a96552a745678"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recv_size</span></span></span><a class="headerlink" href="#_CPPv4N20uhci_rx_event_data_t9recv_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of bytes received </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20uhci_rx_event_data_t16totally_receivedE">
+<span id="_CPPv3N20uhci_rx_event_data_t16totally_receivedE"></span><span id="_CPPv2N20uhci_rx_event_data_t16totally_receivedE"></span><span id="uhci_rx_event_data_t::totally_received__uint32_t"></span><span class="target" id="structuhci__rx__event__data__t_1a39e7ae6e9c21cea4b976f0ba01d3093b"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">totally_received</span></span></span><a class="headerlink" href="#_CPPv4N20uhci_rx_event_data_t16totally_receivedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When callback is invoked, while this bit is not set, means the current event gives partial of whole data, the transaction has not been finished. If set, means the current event gives whole data, the transaction finished. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20uhci_rx_event_data_t5flagsE">
+<span id="_CPPv3N20uhci_rx_event_data_t5flagsE"></span><span id="_CPPv2N20uhci_rx_event_data_t5flagsE"></span><span id="uhci_rx_event_data_t::flags__uhci_rx_event_data_t"></span><span class="target" id="structuhci__rx__event__data__t_1a4b9117d5748cb185a9574ae98eeee06a"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420uhci_rx_event_data_t" title="uhci_rx_event_data_t"><span class="n"><span class="pre">uhci_rx_event_data_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N20uhci_rx_event_data_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI RX event flags </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3><a class="toc-backref" href="#id30" role="doc-backlink">Type Definitions</a><a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv424uhci_controller_handle_t">
+<span id="_CPPv324uhci_controller_handle_t"></span><span id="_CPPv224uhci_controller_handle_t"></span><span id="uhci_controller_handle_t"></span><span class="target" id="esp__driver__uart_2include_2driver_2uhci__types_8h_1af46346c2a29efa73a5359c1cc1e99090"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">uhci_controller_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></span><a class="headerlink" href="#_CPPv424uhci_controller_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI Controller Handle Type. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv423uhci_tx_done_callback_t">
+<span id="_CPPv323uhci_tx_done_callback_t"></span><span id="_CPPv223uhci_tx_done_callback_t"></span><span id="uhci_tx_done_callback_t"></span><span class="target" id="esp__driver__uart_2include_2driver_2uhci__types_8h_1afbdb2c6088ac247188f2136e3e6d9ac0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">uhci_tx_done_callback_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">uhci_ctrl</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv425uhci_tx_done_event_data_t" title="uhci_tx_done_event_data_t"><span class="n"><span class="pre">uhci_tx_done_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv423uhci_tx_done_callback_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI TX Done Callback Function Type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param uhci_ctrl<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle to the UHCI controller that initiated the transmission. </p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to a structure containing event data related to the completed transmission. This structure provides details such as the number of bytes transmitted and any status information relevant to the operation. </p>
+</dd>
+<dt class="field-odd">Param user_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User-defined context passed during the callback registration. It can be used to maintain application-specific state or data.</p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this callback function </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv424uhci_rx_event_callback_t">
+<span id="_CPPv324uhci_rx_event_callback_t"></span><span id="_CPPv224uhci_rx_event_callback_t"></span><span id="uhci_rx_event_callback_t"></span><span class="target" id="esp__driver__uart_2include_2driver_2uhci__types_8h_1a04afba9b0ffa9cddcfc506ba9d2aaf1b"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">uhci_rx_event_callback_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv424uhci_controller_handle_t" title="uhci_controller_handle_t"><span class="n"><span class="pre">uhci_controller_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">uhci_ctrl</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420uhci_rx_event_data_t" title="uhci_rx_event_data_t"><span class="n"><span class="pre">uhci_rx_event_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">edata</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">user_ctx</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv424uhci_rx_event_callback_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI RX Done Callback Function Type. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Param uhci_ctrl<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Handle to the UHCI controller that initiated the transmission. </p>
+</dd>
+<dt class="field-even">Param edata<span class="colon">:</span></dt>
+<dd class="field-even"><p>Pointer to a structure containing event data related to receive event. This structure provides details such as the number of bytes received and any status information relevant to the operation. The <code class="docutils literal notranslate"><span class="pre">edata</span></code> pointer is only valid during the callback. So do not save this pointer and use it outside the callback. </p>
+</dd>
+<dt class="field-odd">Param user_ctx<span class="colon">:</span></dt>
+<dd class="field-odd"><p>User-defined context passed during the callback registration. It can be used to maintain application-specific state or data.</p>
+</dd>
+<dt class="field-even">Return<span class="colon">:</span></dt>
+<dd class="field-even"><p>Whether a high priority task has been waken up by this callback function </p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id4">
+<h3><a class="toc-backref" href="#id31" role="doc-backlink">Header File</a><a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hal_uart/include/hal/uhci_types.h">components/esp_hal_uart/include/hal/uhci_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"hal/uhci_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_hal_uart</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_hal_uart</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_hal_uart
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_hal_uart
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id5">
+<h3><a class="toc-backref" href="#id32" role="doc-backlink">Structures</a><a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv416uhci_seper_chr_t">
+<span id="_CPPv316uhci_seper_chr_t"></span><span id="_CPPv216uhci_seper_chr_t"></span><span id="uhci_seper_chr_t"></span><span class="target" id="structuhci__seper__chr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_seper_chr_t</span></span></span><a class="headerlink" href="#_CPPv416uhci_seper_chr_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI escape sequence. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16uhci_seper_chr_t9seper_chrE">
+<span id="_CPPv3N16uhci_seper_chr_t9seper_chrE"></span><span id="_CPPv2N16uhci_seper_chr_t9seper_chrE"></span><span id="uhci_seper_chr_t::seper_chr__uint8_t"></span><span class="target" id="structuhci__seper__chr__t_1afa6f07d0a1c12e208740d33c6554b17a"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">seper_chr</span></span></span><a class="headerlink" href="#_CPPv4N16uhci_seper_chr_t9seper_chrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>escape sequence character </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16uhci_seper_chr_t8sub_chr1E">
+<span id="_CPPv3N16uhci_seper_chr_t8sub_chr1E"></span><span id="_CPPv2N16uhci_seper_chr_t8sub_chr1E"></span><span id="uhci_seper_chr_t::sub_chr1__uint8_t"></span><span class="target" id="structuhci__seper__chr__t_1aa04947f6821e7eb82f67cf07c7793bf0"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sub_chr1</span></span></span><a class="headerlink" href="#_CPPv4N16uhci_seper_chr_t8sub_chr1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>escape sequence sub-character 1 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16uhci_seper_chr_t8sub_chr2E">
+<span id="_CPPv3N16uhci_seper_chr_t8sub_chr2E"></span><span id="_CPPv2N16uhci_seper_chr_t8sub_chr2E"></span><span id="uhci_seper_chr_t::sub_chr2__uint8_t"></span><span class="target" id="structuhci__seper__chr__t_1a25135dcc921ac33be1fa5a3442e07b22"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sub_chr2</span></span></span><a class="headerlink" href="#_CPPv4N16uhci_seper_chr_t8sub_chr2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>escape sequence sub-character 2 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16uhci_seper_chr_t10sub_chr_enE">
+<span id="_CPPv3N16uhci_seper_chr_t10sub_chr_enE"></span><span id="_CPPv2N16uhci_seper_chr_t10sub_chr_enE"></span><span id="uhci_seper_chr_t::sub_chr_en__b"></span><span class="target" id="structuhci__seper__chr__t_1ac5b69a229edc87d161c6ebd3d9ee75e8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">sub_chr_en</span></span></span><a class="headerlink" href="#_CPPv4N16uhci_seper_chr_t10sub_chr_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>enable use of sub-character of escape sequence </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426uhci_swflow_ctrl_sub_chr_t">
+<span id="_CPPv326uhci_swflow_ctrl_sub_chr_t"></span><span id="_CPPv226uhci_swflow_ctrl_sub_chr_t"></span><span id="uhci_swflow_ctrl_sub_chr_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">uhci_swflow_ctrl_sub_chr_t</span></span></span><a class="headerlink" href="#_CPPv426uhci_swflow_ctrl_sub_chr_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>UHCI software flow control. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t7xon_chrE">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t7xon_chrE"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t7xon_chrE"></span><span id="uhci_swflow_ctrl_sub_chr_t::xon_chr__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1acf8a7ebe240d3332415566b6de9d056b"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xon_chr</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t7xon_chrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>character for XON </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t8xon_sub1E">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t8xon_sub1E"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t8xon_sub1E"></span><span id="uhci_swflow_ctrl_sub_chr_t::xon_sub1__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1ac5f54fdc926a81b14db2e8afc45cdcb8"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xon_sub1</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t8xon_sub1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sub-character 1 for XON </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t8xon_sub2E">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t8xon_sub2E"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t8xon_sub2E"></span><span id="uhci_swflow_ctrl_sub_chr_t::xon_sub2__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1a591822781a51ffff724671dc1cb92518"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xon_sub2</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t8xon_sub2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sub-character 2 for XON </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t8xoff_chrE">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t8xoff_chrE"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t8xoff_chrE"></span><span id="uhci_swflow_ctrl_sub_chr_t::xoff_chr__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1af5bd9b035470686cf164acca317208c4"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xoff_chr</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t8xoff_chrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>character 2 for XOFF </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t9xoff_sub1E">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t9xoff_sub1E"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t9xoff_sub1E"></span><span id="uhci_swflow_ctrl_sub_chr_t::xoff_sub1__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1ac5ea3b7170fa41fdb09fdc61a4be2433"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xoff_sub1</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t9xoff_sub1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sub-character 1 for XOFF </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t9xoff_sub2E">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t9xoff_sub2E"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t9xoff_sub2E"></span><span id="uhci_swflow_ctrl_sub_chr_t::xoff_sub2__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1aa72eabba8c075ebd7c63a3e9a91c8685"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">xoff_sub2</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t9xoff_sub2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sub-character 2 for XOFF </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26uhci_swflow_ctrl_sub_chr_t7flow_enE">
+<span id="_CPPv3N26uhci_swflow_ctrl_sub_chr_t7flow_enE"></span><span id="_CPPv2N26uhci_swflow_ctrl_sub_chr_t7flow_enE"></span><span id="uhci_swflow_ctrl_sub_chr_t::flow_en__uint8_t"></span><span class="target" id="structuhci__swflow__ctrl__sub__chr__t_1a9e5c0e65b5ad92b32cce038557bc9302"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flow_en</span></span></span><a class="headerlink" href="#_CPPv4N26uhci_swflow_ctrl_sub_chr_t7flow_enE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>enable use of software flow control </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id6" role="doc-footnote">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>The callback function, e.g., <a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t16on_tx_trans_doneE" title="uhci_event_callbacks_t::on_tx_trans_done"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_tx_trans_done</span></code></a>, <a class="reference internal" href="#_CPPv4N22uhci_event_callbacks_t17on_rx_trans_eventE" title="uhci_event_callbacks_t::on_rx_trans_event"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">uhci_event_callbacks_t::on_rx_trans_event</span></code></a> and the functions invoked by itself should also reside in IRAM, users need to take care of this by themselves.</p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=UART DMA (UHCI) (api-reference/peripherals/uhci)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=UART DMA (UHCI) (api-reference/peripherals/uhci)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="uart.html" class="btn btn-neutral float-left" title="Universal Asynchronous Receiver/Transmitter (UART)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../provisioning/index.html" class="btn btn-neutral float-right" title="Provisioning API" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

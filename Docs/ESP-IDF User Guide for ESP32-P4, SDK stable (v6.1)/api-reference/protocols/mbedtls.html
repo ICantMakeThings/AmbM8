@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mbed TLS - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/protocols/mbedtls.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/protocols/mbedtls';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Error Codes Reference" href="../error-codes.html" />
+    <link rel="prev" title="mDNS Service" href="mdns.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Application Protocols</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="asio.html">ASIO Port</a></li>
+<li class="toctree-l3"><a class="reference internal" href="modbus.html">ESP-Modbus</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mqtt.html">ESP-MQTT</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_tls.html">ESP-TLS</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_http_client.html">ESP HTTP Client</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_local_ctrl.html">ESP Local Control</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_crt_bundle.html">ESP x509 Certificate Bundle</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_http_server.html">HTTP Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="esp_https_server.html">HTTPS Server</a></li>
+<li class="toctree-l3"><a class="reference internal" href="icmp_echo.html">ICMP Echo</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mdns.html">mDNS Service</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Mbed TLS</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mbed-tls-documentation">Mbed TLS Documentation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#mbed-tls-support-in-esp-idf">Mbed TLS Support in ESP-IDF</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#psa-its-custom-storage-backend">PSA ITS Custom Storage Backend</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#important-config-options">Important Config Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#performance-and-memory-tweaks">Performance and Memory Tweaks</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#ip-network-layer">IP Network Layer</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Application Protocols</a></li>
+      <li class="breadcrumb-item active">Mbed TLS</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/protocols/mbedtls.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="mbed-tls">
+<h1>Mbed TLS<a class="headerlink" href="#mbed-tls" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/protocols/mbedtls.html">[中文]</a></p>
+<p><a class="reference external" href="https://github.com/Mbed-TLS/mbedtls">Mbed TLS</a> is a C library that implements cryptographic primitives, X.509 certificate manipulation and the SSL/TLS and DTLS protocols. Its small code footprint makes it suitable for embedded systems.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ESP-IDF uses a <a class="reference external" href="https://github.com/espressif/mbedtls">fork</a> of Mbed TLS which includes a few patches (related to hardware routines of certain modules like <code class="docutils literal notranslate"><span class="pre">bignum</span> <span class="pre">(MPI)</span></code> and <code class="docutils literal notranslate"><span class="pre">ECC</span></code>) over vanilla Mbed TLS.</p>
+</div>
+<p>Mbed TLS supports TLS 1.2, TLS 1.3 and DTLS 1.2 communication by providing the following:</p>
+<ul class="simple">
+<li><p>TCP/IP communication functions: listen, connect, accept, read/write.</p></li>
+<li><p>SSL/TLS communication functions: init, handshake, read/write.</p></li>
+<li><p>X.509 functions: CRT, CRL and key handling</p></li>
+<li><p>Random number generation</p></li>
+<li><p>Hashing</p></li>
+<li><p>Encryption/decryption</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mbed TLS v3.x.x series supports only TLS 1.2 and TLS 1.3 protocols. Support for SSL 3.0, TLS 1.0/1.1 and DTLS 1.0 has been removed (deprecated). TLS 1.3 is fully supported starting Mbed TLS v3.6.0 release, before this release some features were still in experimental state. Please refer to <a class="reference external" href="https://github.com/espressif/mbedtls/blob/a2b3207/ChangeLog">Mbed TLS ChangeLog </a> for more details.</p>
+</div>
+<section id="mbed-tls-documentation">
+<h2>Mbed TLS Documentation<a class="headerlink" href="#mbed-tls-documentation" title="Permalink to this heading"></a></h2>
+<p>For Mbed TLS documentation please refer to the following (upstream) pointers:</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://mbed-tls.readthedocs.io/projects/api/en/v3.6.5/">API Reference</a></p></li>
+<li><p><a class="reference external" href="https://mbed-tls.readthedocs.io/en/latest/kb/">Knowledge Base</a></p></li>
+</ul>
+</section>
+<section id="mbed-tls-support-in-esp-idf">
+<h2>Mbed TLS Support in ESP-IDF<a class="headerlink" href="#mbed-tls-support-in-esp-idf" title="Permalink to this heading"></a></h2>
+<p>Please find the information about the Mbed TLS versions presented in different branches of ESP-IDF <a class="reference external" href="https://github.com/espressif/mbedtls/wiki#mbed-tls-support-in-esp-idf">here</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please refer the <a class="reference internal" href="../../migration-guides/release-5.x/5.0/protocols.html#migration-guide-mbedtls"><span class="std std-ref">Mbed TLS</span></a> to migrate from Mbed TLS version 2.x to version 3.0 or greater.</p>
+</div>
+<section id="configuration-presets">
+<h3>Configuration Presets<a class="headerlink" href="#configuration-presets" title="Permalink to this heading"></a></h3>
+<p>ESP-IDF provides a preset-based configuration system for Mbed TLS to simplify setup and provide optimized starting points for different use cases. This system works alongside the existing manual configuration system and provides baseline configurations that can be further customized through menuconfig or additional configuration files.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 33.3%" />
+<col style="width: 46.7%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Preset</p></th>
+<th class="head"><p>Use Case</p></th>
+<th class="head"><p>Key Features</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><strong>Default</strong></p></td>
+<td><p>General purpose applications</p></td>
+<td><ul class="simple">
+<li><p>TLS 1.2 &amp; 1.3 support</p></li>
+<li><p>Certificate bundle enabled</p></li>
+<li><p>Hardware acceleration</p></li>
+<li><p>Full cipher suite support</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p><strong>Minimal</strong></p></td>
+<td><p>Resource-constrained applications</p></td>
+<td><ul class="simple">
+<li><p>TLS 1.2 client only</p></li>
+<li><p>RSA &amp; PSK key exchange</p></li>
+<li><p>AES-128 CBC/CTR modes</p></li>
+<li><p>Basic X.509 parsing</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p><strong>Bluetooth (BT)</strong></p></td>
+<td><p>Bluetooth applications</p></td>
+<td><ul class="simple">
+<li><p>Optimized for Bluetooth LE security</p></li>
+<li><p>ECC P-256 curve support</p></li>
+<li><p>Minimal TLS overhead</p></li>
+<li><p>Bluetooth-specific algorithms</p></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="using-configuration-presets">
+<h3>Using Configuration Presets<a class="headerlink" href="#using-configuration-presets" title="Permalink to this heading"></a></h3>
+<p>Presets serve as <strong>starting points</strong> for your mbedTLS configuration. You can use them as-is or customize them further using standard ESP-IDF configuration methods.</p>
+<p>To use a preset configuration, add the following line to your project's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file <strong>before</strong> the <code class="docutils literal notranslate"><span class="pre">project()</span></code> call:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Include the default preset (recommended for most applications)</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">sdkconfig_defaults</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">IDF_PATH</span><span class="o">}</span><span class="s">/components/mbedtls/config/mbedtls_preset_default.conf</span><span class="p">)</span>
+
+<span class="c"># Or for resource-constrained applications</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">sdkconfig_defaults</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">IDF_PATH</span><span class="o">}</span><span class="s">/components/mbedtls/config/mbedtls_preset_minimal.conf</span><span class="p">)</span>
+
+<span class="c"># Or for Bluetooth applications</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">sdkconfig_defaults</span><span class="w"> </span><span class="o">$ENV{</span><span class="nv">IDF_PATH</span><span class="o">}</span><span class="s">/components/mbedtls/config/mbedtls_preset_bt.conf</span><span class="p">)</span>
+
+<span class="c"># Standard ESP-IDF project setup</span>
+<span class="nb">include</span><span class="p">(</span><span class="o">$ENV{</span><span class="nv">IDF_PATH</span><span class="o">}</span><span class="s">/tools/cmake/project.cmake</span><span class="p">)</span>
+<span class="nb">project</span><span class="p">(</span><span class="s">my_project</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The preset configurations are located in <code class="docutils literal notranslate"><span class="pre">components/mbedtls/config/</span></code> and can be customized or used as a starting point for your own configurations.</p>
+</div>
+</section>
+<section id="customizing-preset-configurations">
+<h3>Customizing Preset Configurations<a class="headerlink" href="#customizing-preset-configurations" title="Permalink to this heading"></a></h3>
+<p>After applying a preset, you can further customize the configuration using any of these methods:</p>
+<p><strong>Method 1: Using menuconfig (Recommended)</strong></p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># After applying a preset in CMakeLists.txt</span>
+idf.py<span class="w"> </span>menuconfig
+</pre></div>
+</div>
+<p>Navigate to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">Config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">mbedTLS</span></code> to modify any settings. Your changes will override the preset defaults.</p>
+<p><strong>Method 2: Additional Configuration Files</strong></p>
+<p>You can combine a preset with your own custom configuration by creating an additional configuration file:</p>
+<div class="highlight-cmake notranslate"><div class="highlight"><pre><span></span><span class="c"># Use the minimal preset as a base, then add custom settings</span>
+<span class="nb">list</span><span class="p">(</span><span class="s">APPEND</span><span class="w"> </span><span class="s">SDKCONFIG_DEFAULTS</span>
+<span class="w">    </span><span class="o">$ENV{</span><span class="nv">IDF_PATH</span><span class="o">}</span><span class="s">/components/mbedtls/config/mbedtls_preset_minimal.conf</span>
+<span class="w">    </span><span class="o">${</span><span class="nv">CMAKE_CURRENT_SOURCE_DIR</span><span class="o">}</span><span class="s">/my_custom_mbedtls.conf</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="migration-from-manual-configuration">
+<h3>Migration from Manual Configuration<a class="headerlink" href="#migration-from-manual-configuration" title="Permalink to this heading"></a></h3>
+<p>The preset system complements manual configuration. If you have an existing manually configured mbedTLS setup:</p>
+<p><strong>Option 1: Keep Your Existing Configuration</strong></p>
+<p>Your current manual configuration will continue to work without any changes.</p>
+<p><strong>Option 2: Migrate to Preset + Customization</strong></p>
+<ol class="arabic simple">
+<li><p><strong>Choose a base preset</strong> that's closest to your current configuration.</p></li>
+<li><p><strong>Apply the preset</strong> in your <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p></li>
+<li><p><strong>Use menuconfig</strong> to adjust settings to match your requirements.</p></li>
+<li><p><strong>Test thoroughly</strong> to ensure functionality is maintained.</p></li>
+</ol>
+</section>
+<section id="configuration-categories">
+<h3>Configuration Categories<a class="headerlink" href="#configuration-categories" title="Permalink to this heading"></a></h3>
+<p>The new mbedTLS configuration system is organized into logical categories for easier navigation:</p>
+<dl class="simple">
+<dt><strong>Core Configuration</strong></dt><dd><p>Basic mbedTLS settings including memory allocation, threading, and debug options.</p>
+</dd>
+<dt><strong>TLS Protocol Configuration</strong></dt><dd><p>TLS/DTLS protocol versions, modes (client/server), and protocol-specific features.</p>
+</dd>
+<dt><strong>Symmetric Ciphers</strong></dt><dd><p>Block ciphers (AES, ARIA, etc.), cipher modes (CBC, GCM, etc.), and symmetric cryptography.</p>
+</dd>
+<dt><strong>Asymmetric Ciphers</strong></dt><dd><p>RSA, ECC, and other public key cryptography algorithms.</p>
+</dd>
+<dt><strong>Hash Functions</strong></dt><dd><p>Message digest algorithms (SHA-256, SHA-512, etc.) and HMAC.</p>
+</dd>
+<dt><strong>Hardware Acceleration</strong></dt><dd><p>ESP32-specific hardware acceleration for cryptographic operations.</p>
+</dd>
+<dt><strong>Certificate Support</strong></dt><dd><p>X.509 certificate parsing, validation, and certificate bundle management.</p>
+</dd>
+</dl>
+</section>
+</section>
+<section id="psa-its-custom-storage-backend">
+<h2>PSA ITS Custom Storage Backend<a class="headerlink" href="#psa-its-custom-storage-backend" title="Permalink to this heading"></a></h2>
+<p>ESP-IDF's PSA Internal Trusted Storage (ITS) implementation uses NVS as its default backend for storing persistent PSA Crypto keys. The custom storage backend feature allows routing a reserved range of PSA key IDs to a user-provided storage implementation, while all other keys continue using NVS.</p>
+<p>This is useful when:</p>
+<ul class="simple">
+<li><p>Certain keys need to be stored on a different filesystem (FATFS, SPIFFS, littlefs)</p></li>
+<li><p>Keys require hardware-protected encryption (e.g., via TEE secure storage)</p></li>
+<li><p>Different storage partitions are needed for different key categories</p></li>
+</ul>
+<section id="enabling-the-custom-backend">
+<h3>Enabling the Custom Backend<a class="headerlink" href="#enabling-the-custom-backend" title="Permalink to this heading"></a></h3>
+<p>Enable the feature via <code class="docutils literal notranslate"><span class="pre">menuconfig</span></code> under <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">Config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">mbedTLS</span></code>:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-psa-its-custom-storage-backend"><span class="std std-ref">CONFIG_MBEDTLS_PSA_ITS_CUSTOM_STORAGE_BACKEND</span></a>: Enable the custom storage backend</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-psa-its-custom-backend-uid-min"><span class="std std-ref">CONFIG_MBEDTLS_PSA_ITS_CUSTOM_BACKEND_UID_MIN</span></a>: Start of the custom key ID range (default <code class="docutils literal notranslate"><span class="pre">0x30000000</span></code>)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-psa-its-custom-backend-uid-max"><span class="std std-ref">CONFIG_MBEDTLS_PSA_ITS_CUSTOM_BACKEND_UID_MAX</span></a>: End of the custom key ID range (default <code class="docutils literal notranslate"><span class="pre">0x3FFFFFFF</span></code>)</p></li>
+</ul>
+<p>PSA key IDs within the configured range are routed to the registered backend. All other key IDs (and internal PSA data such as the random seed) continue using the default NVS backend.</p>
+</section>
+<section id="implementing-a-custom-backend">
+<h3>Implementing a Custom Backend<a class="headerlink" href="#implementing-a-custom-backend" title="Permalink to this heading"></a></h3>
+<p>Implement the <code class="docutils literal notranslate"><span class="pre">esp_psa_its_custom_ops_t</span></code> callback structure and register it before using PSA Crypto with keys in the custom range:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_psa_its.h"</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">psa_status_t</span><span class="w"> </span><span class="nf">my_set</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">psa_storage_uid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data_length</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">p_data</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="n">psa_storage_create_flags_t</span><span class="w"> </span><span class="n">create_flags</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Store the blob identified by uid */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">psa_status_t</span><span class="w"> </span><span class="nf">my_get</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">psa_storage_uid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span>
+<span class="w">                           </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data_offset</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">data_length</span><span class="p">,</span>
+<span class="w">                           </span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">p_data</span><span class="p">,</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_data_length</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Retrieve the blob identified by uid */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">psa_status_t</span><span class="w"> </span><span class="nf">my_get_info</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">psa_storage_uid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">,</span>
+<span class="w">                                </span><span class="k">struct</span><span class="w"> </span><span class="nc">psa_storage_info_t</span><span class="w"> </span><span class="o">*</span><span class="n">p_info</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Return size and flags for the blob identified by uid */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">psa_status_t</span><span class="w"> </span><span class="nf">my_remove</span><span class="p">(</span><span class="kt">void</span><span class="w"> </span><span class="o">*</span><span class="n">ctx</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">psa_storage_uid_t</span><span class="w"> </span><span class="n">uid</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="cm">/* Delete the blob identified by uid */</span>
+<span class="p">}</span>
+
+<span class="k">static</span><span class="w"> </span><span class="n">esp_psa_its_custom_ops_t</span><span class="w"> </span><span class="n">my_ops</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">set</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">my_set</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">get</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="n">my_get</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">get_info</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_get_info</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">remove</span><span class="w">   </span><span class="o">=</span><span class="w"> </span><span class="n">my_remove</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">ctx</span><span class="w">      </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">,</span><span class="w">  </span><span class="cm">/* optional user context */</span>
+<span class="p">};</span>
+
+<span class="cm">/* Register before using PSA keys in the custom range */</span>
+<span class="n">esp_psa_its_register_custom_backend</span><span class="p">(</span><span class="o">&amp;</span><span class="n">my_ops</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The callback signatures mirror the PSA ITS API. Each callback receives the raw <code class="docutils literal notranslate"><span class="pre">psa_storage_uid_t</span></code> (not a string), allowing the implementation to make routing decisions based on the numeric key ID. The <code class="docutils literal notranslate"><span class="pre">ctx</span></code> pointer is passed as the first argument to every callback.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Only persistent keys flow through the ITS layer. PSA requires <code class="docutils literal notranslate"><span class="pre">psa_set_key_id()</span></code> for persistent keys, so the application always controls which key IDs it assigns and thus which range they fall into.</p>
+<p>The backend implementation is responsible for enforcing <code class="docutils literal notranslate"><span class="pre">psa_storage_create_flags_t</span></code> semantics if needed.</p>
+</div>
+</section>
+<section id="working-with-the-psa-key-blob-format">
+<h3>Working with the PSA Key Blob Format<a class="headerlink" href="#working-with-the-psa-key-blob-format" title="Permalink to this heading"></a></h3>
+<p>The byte stream that flows through <code class="docutils literal notranslate"><span class="pre">psa_its_set()</span></code> / <code class="docutils literal notranslate"><span class="pre">psa_its_get()</span></code> is the PSA persistent key blob format documented in the Mbed TLS <a class="reference external" href="https://github.com/Mbed-TLS/TF-PSA-Crypto/blob/development/docs/architecture/mbed-crypto-storage-specification.md">storage specification</a>. Backends that store the blob verbatim do not need to look inside it. Backends that strip the header on write (to save space) or synthesise the blob on read (for example, to expose a pre-provisioned hardware key) need to construct or parse it themselves.</p>
+<p>ESP-IDF provides two helpers in <code class="docutils literal notranslate"><span class="pre">esp_psa_key_file.h</span></code> for this:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_psa_key_file_pack()</span></code> — assemble a key blob from a <code class="docutils literal notranslate"><span class="pre">psa_key_attributes_t</span></code> structure and raw key material bytes.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_psa_key_file_unpack()</span></code> — parse a key blob back into attributes and a pointer into the key material section.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_psa_key_file_size()</span></code> — return the total blob size for a given material length.</p></li>
+</ul>
+<p>These helpers implement the documented byte layout directly and do not depend on any internal Mbed TLS function. For example, a backend that stores only the inner key bytes can rebuild the blob on read:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_psa_key_file.h"</span>
+
+<span class="n">psa_key_attributes_t</span><span class="w"> </span><span class="n">attr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PSA_KEY_ATTRIBUTES_INIT</span><span class="p">;</span>
+<span class="n">psa_set_key_lifetime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_KEY_LIFETIME_PERSISTENT</span><span class="p">);</span>
+<span class="n">psa_set_key_type</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_KEY_TYPE_AES</span><span class="p">);</span>
+<span class="n">psa_set_key_bits</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">key_data_len</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="mi">8</span><span class="p">);</span>
+<span class="n">psa_set_key_usage_flags</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_KEY_USAGE_ENCRYPT</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">PSA_KEY_USAGE_DECRYPT</span><span class="p">);</span>
+<span class="n">psa_set_key_algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_ALG_CBC_NO_PADDING</span><span class="p">);</span>
+
+<span class="kt">size_t</span><span class="w"> </span><span class="n">blob_size</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_psa_key_file_size</span><span class="p">(</span><span class="n">key_data_len</span><span class="p">);</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="n">blob</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">calloc</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="w"> </span><span class="n">blob_size</span><span class="p">);</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">written</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">esp_psa_key_file_pack</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attr</span><span class="p">,</span><span class="w"> </span><span class="n">key_data</span><span class="p">,</span><span class="w"> </span><span class="n">key_data_len</span><span class="p">,</span><span class="w"> </span><span class="n">blob</span><span class="p">,</span><span class="w"> </span><span class="n">blob_size</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">written</span><span class="p">);</span>
+<span class="cm">/* blob now holds the full PSA persistent key file; copy the requested</span>
+<span class="cm"> * window into p_data per psa_its_get()'s offset/length arguments. */</span>
+</pre></div>
+</div>
+<p>For a complete working example using a custom NVS namespace as the custom backend, refer to <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/security/psa_its_custom_backend">security/psa_its_custom_backend</a>.</p>
+</section>
+</section>
+<section id="application-examples">
+<h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<p>Examples in ESP-IDF use <a class="reference internal" href="esp_tls.html"><span class="doc">ESP-TLS</span></a> which provides a simplified API interface for accessing the commonly used TLS functionality.</p>
+<p>Refer to the examples <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/https_server/simple">protocols/https_server/simple</a> (simple HTTPS server) and <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/https_request">protocols/https_request</a> (make HTTPS requests) for more information.</p>
+<p>If you plan to use the Mbed TLS API directly, refer to the example <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/https_mbedtls">protocols/https_mbedtls</a>. This example demonstrates how to establish an HTTPS connection using Mbed TLS by setting up a secure socket with a certificate bundle for verification.</p>
+<p>The example <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/smtp_client">protocols/smtp_client</a> sends email (including attachments) over SMTP with STARTTLS using the Mbed TLS APIs.</p>
+</section>
+<section id="important-config-options">
+<h2>Important Config Options<a class="headerlink" href="#important-config-options" title="Permalink to this heading"></a></h2>
+<p>The Mbed TLS configuration system supports preset configurations. Following is a brief list of important config options accessible at <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">Config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">mbedTLS</span></code>. The full list of config options can be found <a class="reference internal" href="../kconfig-reference.html#config-mbedtls-mem-alloc-mode"><span class="std std-ref">here</span></a>.</p>
+<p><strong>Core Configuration:</strong></p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-hardware-sha"><span class="std std-ref">CONFIG_MBEDTLS_HARDWARE_SHA</span></a>: Support for hardware SHA acceleration</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-hardware-aes"><span class="std std-ref">CONFIG_MBEDTLS_HARDWARE_AES</span></a>: Support for hardware AES acceleration</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-hardware-mpi"><span class="std std-ref">CONFIG_MBEDTLS_HARDWARE_MPI</span></a>: Support for hardware MPI (bignum) acceleration</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-hardware-ecc"><span class="std std-ref">CONFIG_MBEDTLS_HARDWARE_ECC</span></a>: Support for hardware ECC acceleration</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-mem-alloc-mode"><span class="std std-ref">CONFIG_MBEDTLS_MEM_ALLOC_MODE</span></a>: Memory allocation strategy (Internal/External/Custom)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-asymmetric-content-len"><span class="std std-ref">CONFIG_MBEDTLS_ASYMMETRIC_CONTENT_LEN</span></a>: Asymmetric in/out fragment length for memory optimization</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-dynamic-buffer"><span class="std std-ref">CONFIG_MBEDTLS_DYNAMIC_BUFFER</span></a>: Enable dynamic TX/RX buffer allocation</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-debug"><span class="std std-ref">CONFIG_MBEDTLS_DEBUG</span></a>: Enable mbedTLS debugging (useful for debugging)</p></li>
+</ul>
+</p>
+<p><strong>TLS Protocol Configuration:</strong></p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-tls-enabled"><span class="std std-ref">CONFIG_MBEDTLS_TLS_ENABLED</span></a>: Enable TLS protocol support</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-proto-tls1-2"><span class="std std-ref">CONFIG_MBEDTLS_SSL_PROTO_TLS1_2</span></a>: Support for TLS 1.2 (recommended)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-proto-tls1-3"><span class="std std-ref">CONFIG_MBEDTLS_SSL_PROTO_TLS1_3</span></a>: Support for TLS 1.3 (latest standard)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-proto-dtls"><span class="std std-ref">CONFIG_MBEDTLS_SSL_PROTO_DTLS</span></a>: Support for DTLS (UDP-based TLS)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-client-ssl-session-tickets"><span class="std std-ref">CONFIG_MBEDTLS_CLIENT_SSL_SESSION_TICKETS</span></a>: Support for TLS Session Resumption (client session tickets)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-server-ssl-session-tickets"><span class="std std-ref">CONFIG_MBEDTLS_SERVER_SSL_SESSION_TICKETS</span></a>: Support for TLS Session Resumption Server session tickets</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-alpn"><span class="std std-ref">CONFIG_MBEDTLS_SSL_ALPN</span></a>: Support for Application Layer Protocol Negotiation</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-server-name-indication"><span class="std std-ref">CONFIG_MBEDTLS_SSL_SERVER_NAME_INDICATION</span></a>: Support for Server Name Indication (SNI)</p></li>
+</ul>
+</p>
+<p><strong>Certificate Support:</strong></p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-certificate-bundle"><span class="std std-ref">CONFIG_MBEDTLS_CERTIFICATE_BUNDLE</span></a>: Support for trusted root certificate bundle (more about this: <a class="reference internal" href="esp_crt_bundle.html"><span class="doc">ESP x509 Certificate Bundle</span></a>)</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-x509-use-c"><span class="std std-ref">CONFIG_MBEDTLS_X509_USE_C</span></a>: Enable X.509 certificate support</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-pem-parse-c"><span class="std std-ref">CONFIG_MBEDTLS_PEM_PARSE_C</span></a>: Read &amp; Parse PEM formatted certificates</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-pem-write-c"><span class="std std-ref">CONFIG_MBEDTLS_PEM_WRITE_C</span></a>: Write PEM formatted certificates</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-x509-crt-parse-c"><span class="std std-ref">CONFIG_MBEDTLS_X509_CRT_PARSE_C</span></a>: Parse X.509 certificates</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-x509-crl-parse-c"><span class="std std-ref">CONFIG_MBEDTLS_X509_CRL_PARSE_C</span></a>: Parse X.509 certificate revocation lists</p></li>
+</ul>
+</p>
+<p><strong>Cryptographic Algorithms:</strong></p>
+<p><ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-aes-c"><span class="std std-ref">CONFIG_MBEDTLS_AES_C</span></a>: AES block cipher support</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-rsa-c"><span class="std std-ref">CONFIG_MBEDTLS_RSA_C</span></a>: RSA public key cryptosystem</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ecp-c"><span class="std std-ref">CONFIG_MBEDTLS_ECP_C</span></a>: Elliptic Curve Cryptography support</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ecdsa-c"><span class="std std-ref">CONFIG_MBEDTLS_ECDSA_C</span></a>: Elliptic Curve Digital Signature Algorithm</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ecdh-c"><span class="std std-ref">CONFIG_MBEDTLS_ECDH_C</span></a>: Elliptic Curve Diffie-Hellman key exchange</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-sha256-c"><span class="std std-ref">CONFIG_MBEDTLS_SHA256_C</span></a>: SHA-256 hash function</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-sha512-c"><span class="std std-ref">CONFIG_MBEDTLS_SHA512_C</span></a>: SHA-512 hash function</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-gcm-c"><span class="std std-ref">CONFIG_MBEDTLS_GCM_C</span></a>: Galois/Counter Mode for authenticated encryption</p></li>
+</ul>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The new configuration structure provides better organization with categories like &quot;Core Configuration&quot;, &quot;TLS Protocol Configuration&quot;, &quot;Symmetric Ciphers&quot;, &quot;Asymmetric Ciphers&quot;, &quot;Hash Functions&quot;, and &quot;Hardware Acceleration&quot; for easier navigation and configuration management.</p>
+</div>
+<section id="debugging-mbedtls">
+<h3>Debugging mbedTLS<a class="headerlink" href="#debugging-mbedtls" title="Permalink to this heading"></a></h3>
+<p>To enable debugging, add these configurations:</p>
+<div class="highlight-kconfig notranslate"><div class="highlight"><pre><span></span>CONFIG_MBEDTLS_DEBUG=y
+CONFIG_MBEDTLS_DEBUG_LEVEL=3
+CONFIG_LOG_DEFAULT_LEVEL_DEBUG=y
+</pre></div>
+</div>
+</section>
+<section id="performance-optimization">
+<h3>Performance Optimization<a class="headerlink" href="#performance-optimization" title="Permalink to this heading"></a></h3>
+<p>For optimal performance, <strong>enable hardware acceleration</strong> when available:</p>
+<div class="highlight-kconfig notranslate"><div class="highlight"><pre><span></span>CONFIG_MBEDTLS_HARDWARE_AES=y
+CONFIG_MBEDTLS_HARDWARE_SHA=y
+CONFIG_MBEDTLS_HARDWARE_MPI=y
+CONFIG_MBEDTLS_HARDWARE_ECC=y
+</pre></div>
+</div>
+</section>
+</section>
+<section id="performance-and-memory-tweaks">
+<h2>Performance and Memory Tweaks<a class="headerlink" href="#performance-and-memory-tweaks" title="Permalink to this heading"></a></h2>
+<section id="reducing-heap-usage">
+<span id="reducing-ram-usage-mbedtls"></span><h3>Reducing Heap Usage<a class="headerlink" href="#reducing-heap-usage" title="Permalink to this heading"></a></h3>
+<p>The following table shows typical memory usage with different configs when the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/protocols/https_request">protocols/https_request</a> example (with Server Validation enabled) is run with Mbed TLS as the SSL/TLS library.</p>
+<table class="docutils align-center">
+<colgroup>
+<col style="width: 21.7%" />
+<col style="width: 52.2%" />
+<col style="width: 26.1%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mbed TLS Test</p></th>
+<th class="head"><p>Related Configs</p></th>
+<th class="head"><p>Heap Usage (approx.)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Default</p></td>
+<td><p>NA</p></td>
+<td><p>42196 B</p></td>
+</tr>
+<tr class="row-odd"><td><p>Enable SSL Dynamic Buffer Length</p></td>
+<td><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-variable-buffer-length"><span class="std std-ref">CONFIG_MBEDTLS_SSL_VARIABLE_BUFFER_LENGTH</span></a></p></td>
+<td><p>42120 B</p></td>
+</tr>
+<tr class="row-even"><td><p>Disable Keep Peer Certificate</p></td>
+<td><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-ssl-keep-peer-certificate"><span class="std std-ref">CONFIG_MBEDTLS_SSL_KEEP_PEER_CERTIFICATE</span></a></p></td>
+<td><p>38533 B</p></td>
+</tr>
+<tr class="row-odd"><td><p>Enable Dynamic TX/RX Buffer</p></td>
+<td><p><a class="reference internal" href="../kconfig-reference.html#config-mbedtls-dynamic-buffer"><span class="std std-ref">CONFIG_MBEDTLS_DYNAMIC_BUFFER</span></a>
+<a class="reference internal" href="../kconfig-reference.html#config-mbedtls-dynamic-free-config-data"><span class="std std-ref">CONFIG_MBEDTLS_DYNAMIC_FREE_CONFIG_DATA</span></a>
+<a class="reference internal" href="../kconfig-reference.html#config-mbedtls-dynamic-free-ca-cert"><span class="std std-ref">CONFIG_MBEDTLS_DYNAMIC_FREE_CA_CERT</span></a></p></td>
+<td><p>22013 B</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These values are subject to change with changes in configuration options and versions of Mbed TLS.</p>
+</div>
+</section>
+<section id="reducing-binary-size">
+<h3>Reducing Binary Size<a class="headerlink" href="#reducing-binary-size" title="Permalink to this heading"></a></h3>
+<p>Under <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">Config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">mbedTLS</span></code>, several Mbed TLS features are enabled by default. These can be disabled if not needed to save code size. More information is available in the <a class="reference internal" href="../../api-guides/performance/size.html#minimizing-binary-mbedtls"><span class="std std-ref">Minimizing Binary Size</span></a> documentation.</p>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Mbed TLS (api-reference/protocols/mbedtls)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Mbed TLS (api-reference/protocols/mbedtls)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="mdns.html" class="btn btn-neutral float-left" title="mDNS Service" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../error-codes.html" class="btn btn-neutral float-right" title="Error Codes Reference" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

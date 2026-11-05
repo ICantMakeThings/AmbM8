@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>System - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/migration-guides/release-6.x/6.0/system.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'migration-guides/release-6.x/6.0/system';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Toolchain" href="toolchain.html" />
+    <link rel="prev" title="Storage" href="storage.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">Migration Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../index.html#esp-idf-5-x-migration-guide">ESP-IDF 5.x Migration Guide</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../../index.html#esp-idf-6-x-migration-guide">ESP-IDF 6.x Migration Guide</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="index.html">Migration from 5.5 to 6.0</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="networking.html">Networking</a></li>
+<li class="toctree-l4"><a class="reference internal" href="peripherals.html">Peripherals</a></li>
+<li class="toctree-l4"><a class="reference internal" href="provisioning.html">Provisioning</a></li>
+<li class="toctree-l4"><a class="reference internal" href="protocols.html">Protocols</a></li>
+<li class="toctree-l4"><a class="reference internal" href="security.html">Security</a></li>
+<li class="toctree-l4"><a class="reference internal" href="tools.html">Tools</a></li>
+<li class="toctree-l4"><a class="reference internal" href="storage.html">Storage</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">System</a></li>
+<li class="toctree-l4"><a class="reference internal" href="toolchain.html">Toolchain</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../6.1/index.html">Migration from 6.0 to 6.1</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">Migration Guides</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Migration from 5.5 to 6.0</a></li>
+      <li class="breadcrumb-item active">System</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/migration-guides/release-6.x/6.0/system.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="system">
+<h1>System<a class="headerlink" href="#system" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32p4/migration-guides/release-6.x/6.0/system.html">[中文]</a></p>
+<section id="default-libc-changed-from-newlib-to-picolibc">
+<h2>Default LibC changed from Newlib to PicolibC<a class="headerlink" href="#default-libc-changed-from-newlib-to-picolibc" title="Permalink to this heading"></a></h2>
+<p>Since ESP-IDF v6.0, the default LibC used in builds has switched to the PicolibC implementation.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>PicolibC is a Newlib fork with a rewritten stdio implementation whose goal is to consume less memory.</p>
+</div>
+<p>In most cases, no application behavior changes are expected, except for reduced binary size and less stack consumption on I/O operations.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p><strong>Breaking change:</strong> It is not possible to redefine stdin, stdout, and stderr for specific tasks as was possible with Newlib. These streams are global and shared between all tasks. This is POSIX-standardized behavior.</p>
+</div>
+<p><a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-libc-picolibc-newlib-compatibility"><span class="std std-ref">CONFIG_LIBC_PICOLIBC_NEWLIB_COMPATIBILITY</span></a>, which is enabled by default, provides limited compatibility with Newlib by providing thread-local copies of <code class="docutils literal notranslate"><span class="pre">global</span> <span class="pre">stdin</span></code>, <code class="docutils literal notranslate"><span class="pre">stdout</span></code>, <code class="docutils literal notranslate"><span class="pre">stderr</span></code>, and the <code class="docutils literal notranslate"><span class="pre">getreent()</span></code> implementation. If a library built with Newlib headers operates with &quot;internal&quot; fields of &quot;struct reent&quot;, there may be task stack corruption. Note that manipulating <code class="docutils literal notranslate"><span class="pre">struct</span> <span class="pre">reent</span></code> fields is expected only by the Newlib library itself.</p>
+<p>If you are not linking against external libraries built against Newlib headers, you may disable <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-libc-picolibc-newlib-compatibility"><span class="std std-ref">CONFIG_LIBC_PICOLIBC_NEWLIB_COMPATIBILITY</span></a> to save a small amount of memory.</p>
+<p>Newlib is still maintained in ESP-IDF toolchains. To switch to using it, select Newlib in menuconfig via the option LIBC_NEWLIB in <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-libc"><span class="std std-ref">CONFIG_LIBC</span></a>.</p>
+<section id="comparison-of-newlib-vs-picolibc">
+<h3>Comparison of Newlib vs Picolibc<a class="headerlink" href="#comparison-of-newlib-vs-picolibc" title="Permalink to this heading"></a></h3>
+<p>There are a small example that shows the motivation of switching to Picolibc:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">FILE</span><span class="w"> </span><span class="o">*</span><span class="n">f</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">fopen</span><span class="p">(</span><span class="s">"/dev/console"</span><span class="p">,</span><span class="w"> </span><span class="s">"w"</span><span class="p">);</span>
+<span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="mi">10</span><span class="p">;</span><span class="w"> </span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">"hello world %s</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="s">"🤖"</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">"%.1000f</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mf">3.141592653589793</span><span class="p">);</span>
+<span class="w">    </span><span class="n">fprintf</span><span class="p">(</span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="s">"%1000d</span><span class="se">\n</span><span class="s">"</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>The test code was compiled with both Newlib and Picolibc, and the results were compared on ESP32-C3:</p>
+<table class="docutils align-default" id="id5">
+<caption><span class="caption-text">Comparison of Newlib vs Picolibc</span><a class="headerlink" href="#id5" title="Permalink to this table"></a></caption>
+<colgroup>
+<col style="width: 33.3%" />
+<col style="width: 22.2%" />
+<col style="width: 22.2%" />
+<col style="width: 22.2%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Metric</p></th>
+<th class="head"><p>Newlib</p></th>
+<th class="head"><p>Picolibc</p></th>
+<th class="head"><p>Difference</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Binary size (bytes)</p></td>
+<td><p>280,128</p></td>
+<td><p>224,656</p></td>
+<td><p>19.80%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Stack usage (bytes)</p></td>
+<td><p>1,748</p></td>
+<td><p>802</p></td>
+<td><p>54.12%</p></td>
+</tr>
+<tr class="row-even"><td><p>Heap usage (bytes)</p></td>
+<td><p>1,652</p></td>
+<td><p>376</p></td>
+<td><p>77.24%</p></td>
+</tr>
+<tr class="row-odd"><td><p>Performance (CPU cycles)</p></td>
+<td><p>278,232,026</p></td>
+<td><p>279,823,800</p></td>
+<td><p>0.59%</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Even when <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-libc-newlib-nano-format"><span class="std std-ref">CONFIG_LIBC_NEWLIB_NANO_FORMAT</span></a> is enabled, which disables float formatting, applications with Picolibc are still smaller by 6% (224,592 vs 239,888 bytes).</p>
+</div>
+</section>
+</section>
+<section id="xtensa">
+<h2>Xtensa<a class="headerlink" href="#xtensa" title="Permalink to this heading"></a></h2>
+<p>The Xtensa special register header files have been updated to use a new naming convention. The old <code class="docutils literal notranslate"><span class="pre">specreg.h</span></code> header files are now deprecated and will be removed in a future release.</p>
+<p>The register names have been updated to use the <code class="docutils literal notranslate"><span class="pre">XT_REG_</span></code> prefix. Please use the new <code class="docutils literal notranslate"><span class="pre">xt_specreg.h</span></code> file instead.</p>
+</section>
+<section id="power-management">
+<h2>Power Management<a class="headerlink" href="#power-management" title="Permalink to this heading"></a></h2>
+<p>In previous versions of ESP-IDF, the API <a class="reference internal" href="../../../api-reference/system/sleep_modes.html#_CPPv426esp_sleep_get_wakeup_causev" title="esp_sleep_get_wakeup_cause"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_sleep_get_wakeup_cause()</span></code></a> was used to retrieve the wakeup reason after the chip exited sleep. However, this function only returns one wakeup source, even if multiple sources were triggered simultaneously, which may cause users to miss other active wakeup events.</p>
+<p>Since ESP-IDF v6.0, a new API <a class="reference internal" href="../../../api-reference/system/sleep_modes.html#_CPPv427esp_sleep_get_wakeup_causesv" title="esp_sleep_get_wakeup_causes"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_sleep_get_wakeup_causes()</span></code></a> has been introduced. This function returns a bitmap representing all wakeup sources that caused the chip to exit sleep. Each bit corresponds to a value in the <a class="reference internal" href="../../../api-reference/system/sleep_modes.html#_CPPv424esp_sleep_wakeup_cause_t" title="esp_sleep_wakeup_cause_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_sleep_wakeup_cause_t</span></code></a> enum (e.g., ESP_SLEEP_WAKEUP_TIMER, ESP_SLEEP_WAKEUP_EXT1, etc.). Users can check each wakeup source using bitwise operations.</p>
+<p>The original <a class="reference internal" href="../../../api-reference/system/sleep_modes.html#_CPPv426esp_sleep_get_wakeup_causev" title="esp_sleep_get_wakeup_cause"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_sleep_get_wakeup_cause()</span></code></a> function has been marked as deprecated, and it is recommended to migrate to the new interface. This legacy API may be removed in future versions. Migration can be performed as shown in the example below:</p>
+<p>Old Version:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_sleep_wakeup_cause_t</span><span class="w"> </span><span class="n">cause</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_sleep_get_wakeup_cause</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">cause</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_SLEEP_WAKEUP_EXT1</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">handle_ext1_wakeup</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Update to:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="kt">uint32_t</span><span class="w"> </span><span class="n">causes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_sleep_get_wakeup_causes</span><span class="p">();</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">causes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT</span><span class="p">(</span><span class="n">ESP_SLEEP_WAKEUP_EXT1</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">handle_ext1_wakeup</span><span class="p">();</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">causes</span><span class="w"> </span><span class="o">&amp;</span><span class="w"> </span><span class="n">BIT</span><span class="p">(</span><span class="n">ESP_SLEEP_WAKEUP_TIMER</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">handle_timer_wakeup</span><span class="p">();</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<section id="gpio-wakeup-api-changes">
+<span id="id1"></span><h3>GPIO Wakeup API Changes<a class="headerlink" href="#gpio-wakeup-api-changes" title="Permalink to this heading"></a></h3>
+<p>The following APIs and types have been removed and replaced with new ones that support both Deep Sleep and Light Sleep (when peripheral power domain is powered down):</p>
+<p><strong>Removed APIs:</strong></p>
+<ul class="simple">
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">esp_deep_sleep_enable_gpio_wakeup()</span></code> - Use <code class="xref py py-func docutils literal notranslate"><span class="pre">esp_sleep_enable_gpio_wakeup_on_hp_periph_powerdown()</span></code> instead</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_deep_sleep_wakeup_enable()</span></code> - Use <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_wakeup_enable_on_hp_periph_powerdown_sleep()</span></code> instead</p></li>
+<li><p><code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_deep_sleep_wakeup_disable()</span></code> - Use <code class="xref py py-func docutils literal notranslate"><span class="pre">gpio_wakeup_disable_on_hp_periph_powerdown_sleep()</span></code> instead</p></li>
+</ul>
+<p><strong>Removed Types:</strong></p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_deepsleep_gpio_wake_up_mode_t</span></code> - Use <a class="reference internal" href="../../../api-reference/system/sleep_modes.html#_CPPv429esp_sleep_gpio_wake_up_mode_t" title="esp_sleep_gpio_wake_up_mode_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_sleep_gpio_wake_up_mode_t</span></code></a> instead</p></li>
+</ul>
+<p><strong>Removed Macros:</strong></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">GPIO_IS_DEEP_SLEEP_WAKEUP_VALID_GPIO()</span></code> - Use <code class="docutils literal notranslate"><span class="pre">GPIO_IS_HP_PERIPH_PD_WAKEUP_VALID_IO()</span></code> instead</p></li>
+</ul>
+<p><strong>Migration Example:</strong></p>
+<p>Old code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_sleep.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/gpio.h"</span>
+
+<span class="c1">// Enable GPIO wakeup for deep sleep</span>
+<span class="n">esp_deep_sleep_enable_gpio_wakeup</span><span class="p">(</span><span class="n">BIT</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">),</span><span class="w"> </span><span class="n">ESP_GPIO_WAKEUP_GPIO_LOW</span><span class="p">);</span>
+
+<span class="c1">// Or using GPIO driver API</span>
+<span class="n">gpio_deep_sleep_wakeup_enable</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_INTR_LOW_LEVEL</span><span class="p">);</span>
+
+<span class="c1">// Check if GPIO is valid for deep sleep wakeup</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GPIO_IS_DEEP_SLEEP_WAKEUP_VALID_GPIO</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>New code:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_sleep.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/gpio.h"</span>
+
+<span class="c1">// Enable GPIO wakeup for deep sleep or light sleep (when peripheral power domain is powered down)</span>
+<span class="n">esp_sleep_enable_gpio_wakeup_on_hp_periph_powerdown</span><span class="p">(</span><span class="n">BIT</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">),</span><span class="w"> </span><span class="n">ESP_GPIO_WAKEUP_GPIO_LOW</span><span class="p">);</span>
+
+<span class="c1">// Or using GPIO driver API</span>
+<span class="n">gpio_wakeup_enable_on_hp_periph_powerdown_sleep</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">,</span><span class="w"> </span><span class="n">GPIO_INTR_LOW_LEVEL</span><span class="p">);</span>
+
+<span class="c1">// Check if GPIO is valid for wakeup on peripheral powerdown sleep</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">GPIO_IS_HP_PERIPH_PD_WAKEUP_VALID_IO</span><span class="p">(</span><span class="n">GPIO_NUM_0</span><span class="p">))</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>Note:</strong> The new APIs work for both Deep Sleep and Light Sleep modes when the peripheral power domain is powered down (<code class="docutils literal notranslate"><span class="pre">PM_POWER_DOWN_PERIPHERAL_IN_LIGHT_SLEEP</span></code> enabled in menuconfig).</p>
+</section>
+</section>
+<section id="bootloader">
+<h2>Bootloader<a class="headerlink" href="#bootloader" title="Permalink to this heading"></a></h2>
+<p>Removed option for compiling bootloader with no optimization level (-O0, <cite>CONFIG_BOOTLOADER_COMPILER_OPTIMIZATION_NONE</cite>). On most targets it was no longer possible to compile the bootloader with -O0, as IRAM sections would overflow. For debugging purposes, it is recommended to use the -Og (<a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-bootloader-compiler-optimization-debug"><span class="std std-ref">CONFIG_BOOTLOADER_COMPILER_OPTIMIZATION_DEBUG</span></a>) optimization level instead. This provides a good balance between optimization and debuggability.</p>
+</section>
+<section id="time">
+<h2>Time<a class="headerlink" href="#time" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>The deprecated <code class="docutils literal notranslate"><span class="pre">ESP32-P4/rtc.h</span></code> header file has been removed. Please include the replacement <code class="docutils literal notranslate"><span class="pre">esp_rtc_time.h</span></code> instead.</p></li>
+<li><p>The deprecated <code class="docutils literal notranslate"><span class="pre">RTC_CLK_SRC_INT_RC32K</span></code> menuconfig option has been removed. Internal RC32K clock is unstable at extreme temperatures, please don't use this clock as the RTC slow clock source.</p></li>
+</ul>
+</section>
+<section id="hw-support">
+<h2>HW-Support<a class="headerlink" href="#hw-support" title="Permalink to this heading"></a></h2>
+<p>The deprecated <code class="docutils literal notranslate"><span class="pre">soc_memory_types.h</span></code> header file has been removed. Please include the replacement <code class="docutils literal notranslate"><span class="pre">esp_memory_utils.h</span></code> instead.</p>
+<p>The deprecated <code class="docutils literal notranslate"><span class="pre">intr_types.h</span></code> header file has been removed. Please include the replacement <code class="docutils literal notranslate"><span class="pre">esp_intr_types.h</span></code> instead.</p>
+<p>The deprecated <code class="docutils literal notranslate"><span class="pre">esp_private/interrupt_deprecated.h</span></code> header file, previously accessible through <code class="docutils literal notranslate"><span class="pre">riscv/interrupt.h</span></code> header, has been removed. The deprecated functions are no longer available; please use the non-deprecated versions instead.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">esp_fault.h</span></code> header file has been moved from the <code class="docutils literal notranslate"><span class="pre">esp_hw_support</span></code> component to the <code class="docutils literal notranslate"><span class="pre">esp_common</span></code> component. If your application encounters build errors after this change, add <code class="docutils literal notranslate"><span class="pre">esp_common</span></code> to your component's <code class="docutils literal notranslate"><span class="pre">REQUIRES</span></code> or <code class="docutils literal notranslate"><span class="pre">PRIV_REQUIRES</span></code> list in <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+</section>
+<section id="rom-headers">
+<h2>ROM Headers<a class="headerlink" href="#rom-headers" title="Permalink to this heading"></a></h2>
+<p>The deprecated <code class="docutils literal notranslate"><span class="pre">STATUS</span></code> type has been removed from <code class="docutils literal notranslate"><span class="pre">ets_sys.h</span></code> ROM header files. Please use <code class="docutils literal notranslate"><span class="pre">ETS_STATUS</span></code> instead.</p>
+</section>
+<section id="app-trace">
+<h2>App Trace<a class="headerlink" href="#app-trace" title="Permalink to this heading"></a></h2>
+<section id="configuration-changes">
+<h3>Configuration Changes<a class="headerlink" href="#configuration-changes" title="Permalink to this heading"></a></h3>
+<p>The application tracing configuration menu has been moved. Previously located at <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code>, it is now under <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code>.</p>
+<p>Previously, application tracing was automatically enabled when a destination was configured. Now you must explicitly enable application tracing by selecting the trace transport before configuring any destination.</p>
+<p>To enable application tracing, go to <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">transport</span></code> and select <code class="docutils literal notranslate"><span class="pre">ESP-IDF</span> <span class="pre">apptrace</span></code> in menuconfig. After that, configuration can be done at <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code>.</p>
+<p>If apptrace will be used without a library (for example when SEGGER SystemView is disabled) in standalone mode, the following configurations need to be set in your sdkconfig file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_ESP_TRACE_ENABLE=y
+CONFIG_ESP_TRACE_LIB_NONE=y
+CONFIG_ESP_TRACE_TRANSPORT_APPTRACE=y
+</pre></div>
+</div>
+<p>These can also be configured through menuconfig as described above.</p>
+<p>Removed extra data buffering option. <code class="docutils literal notranslate"><span class="pre">CONFIG_APPTRACE_PENDING_DATA_SIZE_MAX</span></code> is no longer supported.</p>
+<p>Removed deprecated <code class="docutils literal notranslate"><span class="pre">ESP_APPTRACE_DEST_TRAX</span></code> enum value. Use <code class="docutils literal notranslate"><span class="pre">ESP_APPTRACE_DEST_JTAG</span></code> instead.</p>
+</section>
+<section id="component-dependency-changes">
+<h3>Component Dependency Changes<a class="headerlink" href="#component-dependency-changes" title="Permalink to this heading"></a></h3>
+<p>Applications now require the <code class="docutils literal notranslate"><span class="pre">esp_trace</span></code> component instead of <code class="docutils literal notranslate"><span class="pre">app_trace</span></code>. Update your component's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code> file to reflect this change.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">app_trace</span></code> component is now a sub-component of <code class="docutils literal notranslate"><span class="pre">esp_trace</span></code> and will be included automatically when needed.</p>
+</section>
+<section id="initialization-flow-changes">
+<h3>Initialization Flow Changes<a class="headerlink" href="#initialization-flow-changes" title="Permalink to this heading"></a></h3>
+<p>For runtime configuration override, a new callback system is available. See the <a class="reference internal" href="../../../api-guides/app_trace.html"><span class="doc">Application Tracing documentation</span></a> for details on <code class="docutils literal notranslate"><span class="pre">esp_apptrace_get_user_params()</span></code> and <code class="docutils literal notranslate"><span class="pre">esp_trace_get_user_params()</span></code>.</p>
+</section>
+<section id="api-changes">
+<h3>API Changes<a class="headerlink" href="#api-changes" title="Permalink to this heading"></a></h3>
+<p>The destination parameter has been removed from all apptrace APIs.</p>
+<p>Default destination is now configured in menuconfig under <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Application</span> <span class="pre">Level</span> <span class="pre">Tracing</span></code> and can be altered at runtime by providing callback with custom tracing configuration.</p>
+<p>The UART destination configuration has been simplified:</p>
+<ul class="simple">
+<li><p>Removed: Individual UART selection via <code class="docutils literal notranslate"><span class="pre">CONFIG_APPTRACE_DEST_UARTx=y</span></code></p></li>
+<li><p>Added: Single UART port selection via <code class="docutils literal notranslate"><span class="pre">CONFIG_APPTRACE_DEST_UART_NUM</span></code></p></li>
+</ul>
+<p>To migrate, update your sdkconfig:</p>
+<p>Old configuration:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_APPTRACE_DEST_UART0=y
+# or
+CONFIG_APPTRACE_DEST_UART1=y
+</pre></div>
+</div>
+<p>New configuration:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>CONFIG_APPTRACE_DEST_UART=y
+CONFIG_APPTRACE_DEST_UART_NUM=0  # or 1, 2 depending on target
+</pre></div>
+</div>
+</section>
+<section id="segger-systemview">
+<h3>SEGGER SystemView<a class="headerlink" href="#segger-systemview" title="Permalink to this heading"></a></h3>
+<p>The SystemView component has been moved to a separate repository. <a class="reference external" href="https://components.espressif.com/components/espressif/esp_sysview">esp_sysview</a>  is now a managed component.</p>
+</section>
+<section id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this heading"></a></h3>
+<p>The SystemView configuration has been moved to a new location in the menuconfig. It becomes visible only when the project adds the <code class="docutils literal notranslate"><span class="pre">esp_sysview</span></code> component dependency in <code class="docutils literal notranslate"><span class="pre">idf_component.yml</span></code> and the external library is selected in menuconfig.</p>
+<p>Add the dependency in your component manifest:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">espressif/esp_sysview</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^1</span>
+</pre></div>
+</div>
+<p>Then, in menuconfig, select: <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">Trace</span> <span class="pre">Configuration</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Trace</span> <span class="pre">library</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">External</span> <span class="pre">library</span> <span class="pre">from</span> <span class="pre">component</span> <span class="pre">registry</span></code>.</p>
+<p>After that, the SystemView configuration can be shown by selecting <code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">SEGGER</span> <span class="pre">SystemView</span> <span class="pre">Configuration</span></code>.</p>
+<p>The SystemView no longer has its own separate destination configuration. It shares the configuration with the application tracing transport (JTAG or UART).</p>
+</section>
+</section>
+<section id="freertos">
+<h2>FreeRTOS<a class="headerlink" href="#freertos" title="Permalink to this heading"></a></h2>
+<section id="removed-functions">
+<h3>Removed Functions<a class="headerlink" href="#removed-functions" title="Permalink to this heading"></a></h3>
+<p>The following deprecated FreeRTOS functions have been removed in ESP-IDF v6.0:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetAffinity()</span></code> – Use <a class="reference internal" href="../../../api-reference/system/freertos_additions.html#_CPPv414xTaskGetCoreID12TaskHandle_t" title="xTaskGetCoreID"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetCoreID()</span></code></a> instead.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetIdleTaskHandleForCPU()</span></code> – Use <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetIdleTaskHandleForCore()</span></code> instead.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetCurrentTaskHandleForCPU()</span></code> – Use <a class="reference internal" href="../../../api-reference/system/freertos_additions.html#_CPPv432xTaskGetCurrentTaskHandleForCore10BaseType_t" title="xTaskGetCurrentTaskHandleForCore"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetCurrentTaskHandleForCore()</span></code></a> instead.</p></li>
+</ul>
+<p>The following compatibility functions have been removed in ESP-IDF v6.0. These functions were maintained for backward compatibility with previous ESP-IDF versions as they were changed to either macros or separate functions in FreeRTOS. This compatibility has been removed.</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xQueueGenericReceive()</span></code> - Use <a class="reference internal" href="../../../api-reference/system/freertos_idf.html#_CPPv413xQueueReceive13QueueHandle_tPCv10TickType_t" title="xQueueReceive"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xQueueReceive()</span></code></a>, <a class="reference internal" href="../../../api-reference/system/freertos_idf.html#_CPPv410xQueuePeek13QueueHandle_tPCv10TickType_t" title="xQueuePeek"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xQueuePeek()</span></code></a>, or <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xQueueSemaphoreTake()</span></code> instead, depending on your use case.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">vTaskDelayUntil()</span></code> - Use <a class="reference internal" href="../../../api-reference/system/freertos_idf.html#_CPPv415xTaskDelayUntilPC10TickType_tK10TickType_t" title="xTaskDelayUntil"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskDelayUntil()</span></code></a> instead.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ulTaskNotifyTake()</span></code> - Use the macro <code class="docutils literal notranslate"><span class="pre">ulTaskNotifyTake</span></code> instead.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskNotifyWait()</span></code> - Use the macro <code class="docutils literal notranslate"><span class="pre">xTaskNotifyWait</span></code> instead.</p></li>
+</ul>
+</section>
+<section id="deprecated-functions">
+<h3>Deprecated Functions<a class="headerlink" href="#deprecated-functions" title="Permalink to this heading"></a></h3>
+<p>The function <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pxTaskGetStackStart()</span></code> has been deprecated. Use <a class="reference internal" href="../../../api-reference/system/freertos_additions.html#_CPPv418xTaskGetStackStart12TaskHandle_t" title="xTaskGetStackStart"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">xTaskGetStackStart()</span></code></a> instead for improved type safety.</p>
+</section>
+<section id="api-added">
+<h3>API Added<a class="headerlink" href="#api-added" title="Permalink to this heading"></a></h3>
+<p>Task snapshot APIs have been made public to support external frameworks like ESP Insights. These APIs are now provided through <code class="docutils literal notranslate"><span class="pre">freertos/freertos_debug.h</span></code> instead of the deprecated <code class="docutils literal notranslate"><span class="pre">freertos/task_snapshot.h</span></code>.</p>
+<p>For safe use while the scheduler is running, use <code class="docutils literal notranslate"><span class="pre">vTaskSuspendAll()</span></code> before calling snapshot functions, and <code class="docutils literal notranslate"><span class="pre">xTaskResumeAll()</span></code> afterward.</p>
+</section>
+<section id="memory-placement">
+<h3>Memory Placement<a class="headerlink" href="#memory-placement" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>To reduce IRAM usage, the default placement for most FreeRTOS functions has been changed from IRAM to flash. Consequently, the <code class="docutils literal notranslate"><span class="pre">CONFIG_FREERTOS_PLACE_FUNCTIONS_INTO_FLASH</span></code> option has been removed. This change saves a significant amount of IRAM but may have a slight performance impact. For performance-critical applications, you can restore the previous behavior by enabling the new <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-freertos-in-iram"><span class="std std-ref">CONFIG_FREERTOS_IN_IRAM</span></a> option.</p></li>
+<li><p>Before enabling <code class="docutils literal notranslate"><span class="pre">CONFIG_FREERTOS_IN_IRAM</span></code>, it is recommended to run performance tests to measure the actual impact on your specific use case. The performance difference between flash and IRAM configurations depends on factors such as flash cache efficiency, API usage patterns, and system load.</p></li>
+<li><p>A baseline performance test is provided in <code class="docutils literal notranslate"><span class="pre">components/freertos/test_apps/freertos/performance/test_freertos_api_performance.c</span></code>. This test measures the execution time of commonly used FreeRTOS APIs and can help you evaluate the effect of memory placement for your target hardware and application requirements.</p></li>
+<li><p>Task snapshot functions are automatically placed in IRAM when <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_PANIC_HANDLER_IRAM</span></code> is enabled, ensuring they remain accessible during panic handling.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">vTaskGetSnapshot</span></code> is kept in IRAM unless <code class="docutils literal notranslate"><span class="pre">CONFIG_FREERTOS_PLACE_ISR_FUNCTIONS_INTO_FLASH</span></code> is enabled, as it is used by the Task Watchdog interrupt handler.</p></li>
+</ul>
+</section>
+<section id="removed-configuration-options">
+<h3>Removed Configuration Options<a class="headerlink" href="#removed-configuration-options" title="Permalink to this heading"></a></h3>
+<p>The following hidden (and always true) configuration options have been removed:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_FREERTOS_ENABLE_TASK_SNAPSHOT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_FREERTOS_PLACE_SNAPSHOT_FUNS_INTO_FLASH</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="ring-buffer">
+<h2>Ring Buffer<a class="headerlink" href="#ring-buffer" title="Permalink to this heading"></a></h2>
+<section id="id2">
+<h3>Memory Placement<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p>To reduce IRAM usage, the default placement for <cite>esp_ringbuf</cite> functions has been changed from IRAM to Flash. Consequently, the <code class="docutils literal notranslate"><span class="pre">CONFIG_RINGBUF_PLACE_FUNCTIONS_INTO_FLASH</span></code> option has been removed. This change saves a significant amount of IRAM but may have a slight performance impact. For performance-critical applications, the previous behavior can be restored by enabling the new <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-ringbuf-in-iram"><span class="std std-ref">CONFIG_RINGBUF_IN_IRAM</span></a> option.</p>
+</section>
+</section>
+<section id="log">
+<h2>Log<a class="headerlink" href="#log" title="Permalink to this heading"></a></h2>
+<section id="id3">
+<h3>Removed Functions<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<p>The following deprecated Log functions have been removed in ESP-IDF v6.0:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_log_buffer_hex()</span></code> - Use <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ESP_LOG_BUFFER_HEX()</span></code> instead.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_log_buffer_char()</span></code> - Use <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ESP_LOG_BUFFER_CHAR()</span></code> instead.</p></li>
+</ul>
+</section>
+<section id="removed-headers">
+<h3>Removed Headers<a class="headerlink" href="#removed-headers" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">esp_log_internal.h</span></code> - Use <code class="docutils literal notranslate"><span class="pre">esp_log_buffer.h</span></code> instead.</p></li>
+</ul>
+</section>
+</section>
+<section id="esp-event">
+<h2>ESP-Event<a class="headerlink" href="#esp-event" title="Permalink to this heading"></a></h2>
+<p>Unnecessary FreeRTOS headers have been removed from <code class="docutils literal notranslate"><span class="pre">esp_event.h</span></code>. Code that previously depended on these implicit includes must now include the headers explicitly: <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;freertos/queue.h&quot;</span></code> and <code class="docutils literal notranslate"><span class="pre">#include</span> <span class="pre">&quot;freertos/semphr.h&quot;</span></code> to your files.</p>
+</section>
+<section id="core-dump">
+<h2>Core Dump<a class="headerlink" href="#core-dump" title="Permalink to this heading"></a></h2>
+<p>Binary data format has been dropped. <cite>CONFIG_ESP_COREDUMP_DATA_FORMAT_BIN</cite> is no longer supported. ELF is now the default data format.</p>
+<p>CRC data integrity check has been dropped. <cite>ESP_COREDUMP_CHECKSUM_CRC32</cite> is no longer supported. SHA256 is now the default checksum algorithm.</p>
+<p>The function <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_core_dump_partition_and_size_get()</span></code> now returns <cite>ESP_ERR_NOT_FOUND</cite> for blank (erased) partitions instead of <cite>ESP_ERR_INVALID_SIZE</cite>.</p>
+</section>
+<section id="ota-updates">
+<h2>OTA Updates<a class="headerlink" href="#ota-updates" title="Permalink to this heading"></a></h2>
+<p>The partial download functionality in ESP HTTPS OTA has been moved under a configuration option in order to reduce the memory footprint if partial download is not used.</p>
+<p>To use partial download features in your OTA applications, you need to enable the component-level configuration <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-esp-https-ota-enable-partial-download"><span class="std std-ref">CONFIG_ESP_HTTPS_OTA_ENABLE_PARTIAL_DOWNLOAD</span></a> in menuconfig (<code class="docutils literal notranslate"><span class="pre">Component</span> <span class="pre">config</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">ESP</span> <span class="pre">HTTPS</span> <span class="pre">OTA</span></code> &gt; <code class="docutils literal notranslate"><span class="pre">Enable</span> <span class="pre">partial</span> <span class="pre">HTTP</span> <span class="pre">download</span> <span class="pre">for</span> <span class="pre">OTA</span></code>).</p>
+<section id="removed-deprecated-apis">
+<h3>Removed Deprecated APIs<a class="headerlink" href="#removed-deprecated-apis" title="Permalink to this heading"></a></h3>
+<p>The following deprecated functions have been removed from the <code class="docutils literal notranslate"><span class="pre">app_update</span></code> component:</p>
+<ul class="simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_ota_get_app_description()</span></code> – Use <a class="reference internal" href="../../../api-reference/system/misc_system_api.html#_CPPv423esp_app_get_descriptionv" title="esp_app_get_description"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_app_get_description()</span></code></a> instead.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_ota_get_app_elf_sha256()</span></code> – Use <a class="reference internal" href="../../../api-reference/system/misc_system_api.html#_CPPv422esp_app_get_elf_sha256Pc6size_t" title="esp_app_get_elf_sha256"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_app_get_elf_sha256()</span></code></a> instead.</p></li>
+</ul>
+<p>These functions have moved to the <code class="docutils literal notranslate"><span class="pre">esp_app_format</span></code> component. Update your include from <code class="docutils literal notranslate"><span class="pre">esp_ota_ops.h</span></code> to <code class="docutils literal notranslate"><span class="pre">esp_app_desc.h</span></code> and add <code class="docutils literal notranslate"><span class="pre">esp_app_format</span></code> to your component dependencies if needed.</p>
+</section>
+</section>
+<section id="gcov">
+<h2>Gcov<a class="headerlink" href="#gcov" title="Permalink to this heading"></a></h2>
+<p>The gcov component has been moved to a separate repository. <a class="reference external" href="https://components.espressif.com/components/espressif/esp_gcov">esp_gcov</a>  is now a managed component.</p>
+<section id="component-dependency">
+<h3>Component Dependency<a class="headerlink" href="#component-dependency" title="Permalink to this heading"></a></h3>
+<p>Projects using gcov functionality must now add the esp_gcov component as a dependency in their <code class="docutils literal notranslate"><span class="pre">idf_component.yml</span></code> manifest file:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">espressif/esp_gcov</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">^1</span>
+</pre></div>
+</div>
+</section>
+<section id="id4">
+<h3>Configuration Changes<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<p>The gcov configuration options have moved from the Application Level Tracing menu to a dedicated <code class="docutils literal notranslate"><span class="pre">GNU</span> <span class="pre">Code</span> <span class="pre">Coverage</span></code> menu section.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">CONFIG_APPTRACE_GCOV_ENABLE</span></code> option has been renamed to <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_GCOV_ENABLE</span></code>.</p>
+</section>
+<section id="header-file-changes">
+<h3>Header File Changes<a class="headerlink" href="#header-file-changes" title="Permalink to this heading"></a></h3>
+<p>For the gcov functionality, include the <code class="docutils literal notranslate"><span class="pre">esp_gcov.h</span></code> header file instead of <code class="docutils literal notranslate"><span class="pre">esp_app_trace.h</span></code>.</p>
+</section>
+</section>
+<section id="system-console-stdio">
+<h2>System Console (STDIO)<a class="headerlink" href="#system-console-stdio" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">esp_vfs_cdcacm.h</span></code> has been moved to the new component <code class="docutils literal notranslate"><span class="pre">esp_usb_cdc_romconsole</span></code>, you will now have to add an explicit <code class="docutils literal notranslate"><span class="pre">REQUIRES</span></code> for <code class="docutils literal notranslate"><span class="pre">esp_usb_cdc_rom_console</span></code> if using any functions from this header.</p>
+</section>
+<section id="libc">
+<h2>LibC<a class="headerlink" href="#libc" title="Permalink to this heading"></a></h2>
+<p><a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-compiler-assert-ndebug-evaluate"><span class="std std-ref">CONFIG_COMPILER_ASSERT_NDEBUG_EVALUATE</span></a> default value is changed to <cite>n</cite>. This means asserts will no longer evaluate the expression inside the assert when <code class="docutils literal notranslate"><span class="pre">NDEBUG</span></code> is set. This reverts the default behavior to be in line with the C standard.</p>
+</section>
+<section id="ulp">
+<h2>ULP<a class="headerlink" href="#ulp" title="Permalink to this heading"></a></h2>
+<p>The LP-Core will now wake up the main CPU when it encounters an exception during deep sleep. This feature is enabled by default but can be disabled via the <a class="reference internal" href="../../../api-reference/kconfig-reference.html#config-ulp-trap-wakeup"><span class="std std-ref">CONFIG_ULP_TRAP_WAKEUP</span></a> Kconfig option is this behavior is not desired.</p>
+</section>
+<section id="heap">
+<h2>Heap<a class="headerlink" href="#heap" title="Permalink to this heading"></a></h2>
+<p>In previous versions of ESP-IDF, the capability <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_EXEC</span></code> would be available regardless of the memory protection configuration state. This implied that a call to e.g., <a class="reference internal" href="../../../api-reference/system/mem_alloc.html#_CPPv416heap_caps_malloc6size_t8uint32_t" title="heap_caps_malloc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">heap_caps_malloc()</span></code></a> with <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_EXEC</span></code> would return NULL when <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_SYSTEM_MEMPROT_FEATURE</span></code> or <code class="docutils literal notranslate"><span class="pre">CONFIG_ESP_SYSTEM_PMP_IDRAM_SPLIT</span></code> are enabled.</p>
+<p>Since ESP-IDF v6.0, the definition of <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_EXEC</span></code> is conditional, meaning that if CONFIG_ESP_SYSTEM_MEMPROT is enabled, <code class="docutils literal notranslate"><span class="pre">MALLOC_CAP_EXEC</span></code> will not be defined. Therefore, using it will generate a compile time error.</p>
+</section>
+<section id="esp-common">
+<h2><code class="docutils literal notranslate"><span class="pre">esp_common</span></code><a class="headerlink" href="#esp-common" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">EXT_RAM_ATTR</span></code> was deprecated since v5.0, Now it has been removed. Please use the macro <code class="docutils literal notranslate"><span class="pre">EXT_RAM_BSS_ATTR</span></code> to put <code class="docutils literal notranslate"><span class="pre">.bss</span></code> on PSRAM.</p></li>
+<li><p>RTC related memory attributes (<code class="docutils literal notranslate"><span class="pre">RTC_x_ATTR</span></code>) have been removed on those chips without RTC memory.</p></li>
+</ul>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=System (migration-guides/release-6.x/6.0/system)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=System (migration-guides/release-6.x/6.0/system)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="storage.html" class="btn btn-neutral float-left" title="Storage" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="toolchain.html" class="btn btn-neutral float-right" title="Toolchain" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

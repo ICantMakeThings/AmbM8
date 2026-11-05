@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Device Firmware Upgrade via USB - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-guides/dfu.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-guides/dfu';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Error Handling" href="error-handling.html" />
+    <link rel="prev" title="Current Consumption Measurement of Modules" href="current-consumption-measurement-modules.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="app_trace.html">Application Level Tracing Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="startup.html">Application Startup Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="bootloader.html">Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="build-system-v2.html">Build System v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="c.html">C Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="cplusplus.html">C++ Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="code-quality/index.html">Code Quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="core_dump.html">Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="current-consumption-measurement-modules.html">Current Consumption Measurement of Modules</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">Device Firmware Upgrade via USB</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#usb-connection">USB Connection</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#building-the-dfu-image">Building the DFU Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#flashing-the-dfu-image">Flashing the DFU Image</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#udev-rule-linux-only">Udev Rule (Linux Only)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#usb-drivers-windows-only">USB Drivers (Windows Only)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#usb-drivers-windows-only-manual-driver-assignment">USB Drivers (Windows Only) - manual driver assignment</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#common-errors-and-known-issues">Common Errors and Known Issues</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#secure-download-mode">Secure Download Mode</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="error-handling.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="external-ram.html">Support for External RAM</a></li>
+<li class="toctree-l2"><a class="reference internal" href="fatal-errors.html">Fatal Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="file-system-considerations.html">File System Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="hardware-abstraction.html">Hardware Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="kconfig/index.html">Project Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="linker-script-generation.html">Linker Script Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="low-power-mode/index.html">Low Power Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lwip.html">lwIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="memory-types.html">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="openthread.html">OpenThread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="performance/index.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reproducible-builds.html">Reproducible Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="stdio.html">Standard I/O and Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="thread-local-storage.html">Thread Local Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tools/index.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="unit-tests.html">Unit Testing in ESP32-P4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="host-apps.html">Running ESP-IDF Applications on Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usb-serial-jtag-console.html">USB Serial/JTAG Controller Console</a></li>
+<li class="toctree-l2"><a class="reference internal" href="wifi-expansion.html">Wi-Fi Expansion</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">API Guides</a></li>
+      <li class="breadcrumb-item active">Device Firmware Upgrade via USB</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-guides/dfu.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="device-firmware-upgrade-via-usb">
+<h1>Device Firmware Upgrade via USB<a class="headerlink" href="#device-firmware-upgrade-via-usb" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../zh_CN/v6.1/esp32p4/api-guides/dfu.html">[中文]</a></p>
+<p>Typically, the firmware of ESP32-P4 is flashed via the chip's serial port or USB_SERIAL_JTAG (see <a class="reference internal" href="../get-started/establish-serial-connection.html"><span class="doc">Establish Serial Connection with ESP32-P4</span></a> for more details). ESP32-P4 also contains a USB OTG peripheral making it possible to connect ESP32-P4 to the host directly via USB Device Firmware Upgrade.</p>
+<p>Device Firmware Upgrade (DFU) is a mechanism for upgrading the firmware of ESP32-P4 directly via the Universal Serial Bus (USB). However, enabling Secure Boot or flash encryption disables the USB-OTG USB stack in the ROM, disallowing updates via the serial emulation or DFU on that port.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../get-started/index.html#get-started-get-prerequisites"><span class="std std-ref">Software</span></a> of the Getting Started Guide introduces the software requirements of DFU.</p></li>
+<li><p>Section <a class="reference internal" href="#api-guide-dfu-build"><span class="std std-ref">Building the DFU Image</span></a> describes how to build firmware for DFU with ESP-IDF.</p></li>
+<li><p>Section <a class="reference internal" href="#api-guide-dfu-flash"><span class="std std-ref">Flashing the DFU Image</span></a> deals with flashing the firmware.</p></li>
+</ul>
+<section id="usb-connection">
+<h2>USB Connection<a class="headerlink" href="#usb-connection" title="Permalink to this heading"></a></h2>
+<p>ESP32-P4 routes the USB D+ and D- signals to their dedicated pins. For USB device functionality, these pins must be connected to the USB bus (e.g., via a Micro-B port, USB-C port, or directly to standard-A plug).</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Some cables are wired up with non-standard colors and some drivers are able to work with swapped D+ and D- connections. Please try to swap the cables connecting to D+ and D- if your device is not detected.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ESP32-P4 chip needs to be in bootloader mode before it can be detected as a DFU device and flash. Please refer to <a class="reference external" href="https://docs.espressif.com/projects/esptool/en/latest/esp32p4/advanced-topics/boot-mode-selection.html#select-bootloader-mode">Boot Mode Selection</a> for more information about how to enter bootloader mode.</p>
+</div>
+</section>
+<section id="building-the-dfu-image">
+<span id="api-guide-dfu-build"></span><h2>Building the DFU Image<a class="headerlink" href="#building-the-dfu-image" title="Permalink to this heading"></a></h2>
+<p>The command below will create a DFU image named <code class="docutils literal notranslate"><span class="pre">dfu.bin</span></code> that is placed in the project's <code class="docutils literal notranslate"><span class="pre">build</span></code> directory:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span><span class="o">.</span><span class="n">py</span> <span class="n">dfu</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Do not forget to set the target chip by <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">set-target</span></code> before running <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">dfu</span></code>. Otherwise, you might create an image for a different chip or receive an error message like <code class="docutils literal notranslate"><span class="pre">unknown</span> <span class="pre">target</span> <span class="pre">'dfu'</span></code>.</p>
+</div>
+</section>
+<section id="flashing-the-dfu-image">
+<span id="api-guide-dfu-flash"></span><h2>Flashing the DFU Image<a class="headerlink" href="#flashing-the-dfu-image" title="Permalink to this heading"></a></h2>
+<p>The command below will download the DFU image into ESP32-P4:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span><span class="o">.</span><span class="n">py</span> <span class="n">dfu</span><span class="o">-</span><span class="n">flash</span>
+</pre></div>
+</div>
+<p>The command relies on <a class="reference external" href="http://dfu-util.sourceforge.net/">dfu-util</a>. Please see <a class="reference internal" href="../get-started/index.html#get-started-get-prerequisites"><span class="std std-ref">Software</span></a> for installing <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code>. <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code> needs additional setup for <a class="reference internal" href="#api-guide-dfu-flash-win"><span class="std std-ref">USB Drivers (Windows Only)</span></a> or setting up an <a class="reference internal" href="#api-guide-dfu-flash-udev"><span class="std std-ref">Udev Rule (Linux Only)</span></a>. macOS users should be able to use <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code> without further setup.</p>
+<p>If there are more boards with the same chip connected then <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">dfu-list</span></code> can be used to list the available devices, for example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Found</span> <span class="n">Runtime</span><span class="p">:</span> <span class="p">[</span><span class="mi">303</span><span class="n">a</span><span class="p">:</span><span class="mi">0002</span><span class="p">]</span> <span class="n">ver</span><span class="o">=</span><span class="mi">0723</span><span class="p">,</span> <span class="n">devnum</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">intf</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"1-10"</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"UNKNOWN"</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="s2">"0"</span>
+<span class="n">Found</span> <span class="n">Runtime</span><span class="p">:</span> <span class="p">[</span><span class="mi">303</span><span class="n">a</span><span class="p">:</span><span class="mi">0002</span><span class="p">]</span> <span class="n">ver</span><span class="o">=</span><span class="mi">0723</span><span class="p">,</span> <span class="n">devnum</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">cfg</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">intf</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="s2">"1-2"</span><span class="p">,</span> <span class="n">alt</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">"UNKNOWN"</span><span class="p">,</span> <span class="n">serial</span><span class="o">=</span><span class="s2">"0"</span>
+</pre></div>
+</div>
+<p>Consequently, the desired device can be selected for flashing by the <code class="docutils literal notranslate"><span class="pre">--path</span></code> argument. For example, the devices listed above can be flashed individually by the following commands:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">idf</span><span class="o">.</span><span class="n">py</span> <span class="n">dfu</span><span class="o">-</span><span class="n">flash</span> <span class="o">--</span><span class="n">path</span> <span class="mi">1</span><span class="o">-</span><span class="mi">10</span>
+<span class="n">idf</span><span class="o">.</span><span class="n">py</span> <span class="n">dfu</span><span class="o">-</span><span class="n">flash</span> <span class="o">--</span><span class="n">path</span> <span class="mi">1</span><span class="o">-</span><span class="mi">2</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The vendor and product identificators are set based on the selected chip target by the <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">set-target</span></code> command and they are not selectable during the <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">dfu-flash</span></code> call.</p>
+</div>
+<p>See <a class="reference internal" href="#api-guide-dfu-flash-errors"><span class="std std-ref">Common Errors and Known Issues</span></a> and their solutions.</p>
+</section>
+<section id="udev-rule-linux-only">
+<span id="api-guide-dfu-flash-udev"></span><h2>Udev Rule (Linux Only)<a class="headerlink" href="#udev-rule-linux-only" title="Permalink to this heading"></a></h2>
+<p>Udev is a device manager for the Linux kernel. It allows running <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code> (and <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">dfu-flash</span></code>) without <code class="docutils literal notranslate"><span class="pre">sudo</span></code> for gaining access to the chip.</p>
+<p>Create file <code class="docutils literal notranslate"><span class="pre">/etc/udev/rules.d/40-dfuse.rules</span></code> with the following content:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">SUBSYSTEMS</span><span class="o">==</span><span class="s2">"usb"</span><span class="p">,</span> <span class="n">ATTRS</span><span class="p">{</span><span class="n">idVendor</span><span class="p">}</span><span class="o">==</span><span class="s2">"303a"</span><span class="p">,</span> <span class="n">ATTRS</span><span class="p">{</span><span class="n">idProduct</span><span class="p">}</span><span class="o">==</span><span class="s2">"00??"</span><span class="p">,</span> <span class="n">GROUP</span><span class="o">=</span><span class="s2">"plugdev"</span><span class="p">,</span> <span class="n">MODE</span><span class="o">=</span><span class="s2">"0666"</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Please check the output of the command <code class="docutils literal notranslate"><span class="pre">groups</span></code>. You need to be a member of the <cite>GROUP</cite> specified above. You may use some other existing groups for this purpose (e.g., <cite>uucp</cite> on some systems instead of <cite>plugdev</cite>) or create a new group for this purpose.</p>
+</div>
+<p>Restart your computer so the previous setting could take into affect or run <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">udevadm</span> <span class="pre">trigger</span></code> to force manually udev to trigger your new rule.</p>
+</section>
+<section id="usb-drivers-windows-only">
+<span id="api-guide-dfu-flash-win"></span><h2>USB Drivers (Windows Only)<a class="headerlink" href="#usb-drivers-windows-only" title="Permalink to this heading"></a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">dfu-util</span></code> uses <cite>libusb</cite> to access the device. On Windows, the <cite>WinUSB</cite> driver is the recommended driver which has to be installed for the device to work properly. For more details please see the <a class="reference external" href="https://github.com/libusb/libusb/wiki/Windows#How_to_use_libusb_on_Windows">libusb wiki</a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If the feature is not working please proceed with the manual driver assignment. Otherwise, the following section can be skipped.</p>
+</div>
+<section id="usb-drivers-windows-only-manual-driver-assignment">
+<h3>USB Drivers (Windows Only) - manual driver assignment<a class="headerlink" href="#usb-drivers-windows-only-manual-driver-assignment" title="Permalink to this heading"></a></h3>
+<p>Manual driver assignment can be performed with the <a class="reference external" href="https://zadig.akeo.ie/">Zadig tool</a>. Please make sure that the device is in download mode before running the tool and that the ESP32-P4 device is detected before the driver installation.</p>
+<p>The Zadig tool might detect several USB interfaces of ESP32-P4. Please install the <cite>WinUSB</cite> driver <strong>only</strong> for the interface where there is no driver installed (probably it is Interface 2) and do not re-install the driver for the other interface.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The manual installation of the driver in Device Manager of Windows is not recommended because the flashing might not work properly.</p>
+</div>
+</section>
+</section>
+<section id="common-errors-and-known-issues">
+<span id="api-guide-dfu-flash-errors"></span><h2>Common Errors and Known Issues<a class="headerlink" href="#common-errors-and-known-issues" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">dfu-util:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> might indicate that the tool has not been installed or is not available from the terminal. An easy way of checking the tool is running <code class="docutils literal notranslate"><span class="pre">dfu-util</span> <span class="pre">--version</span></code>. Please see <a class="reference internal" href="../get-started/index.html#get-started-get-prerequisites"><span class="std std-ref">Software</span></a> for installing <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code>.</p></li>
+<li><p>The reason for <code class="docutils literal notranslate"><span class="pre">No</span> <span class="pre">DFU</span> <span class="pre">capable</span> <span class="pre">USB</span> <span class="pre">device</span> <span class="pre">available</span></code> could be that the USB driver was not properly installed on Windows (see <a class="reference internal" href="#api-guide-dfu-flash-win"><span class="std std-ref">USB Drivers (Windows Only)</span></a>), udev rule was not setup on Linux (see <a class="reference internal" href="#api-guide-dfu-flash-udev"><span class="std std-ref">Udev Rule (Linux Only)</span></a>) or the device is not in bootloader mode.</p></li>
+<li><p>Flashing with <code class="docutils literal notranslate"><span class="pre">dfu-util</span></code> on Windows or macOS may fail on the first attempt with error <code class="docutils literal notranslate"><span class="pre">Lost</span> <span class="pre">device</span> <span class="pre">after</span> <span class="pre">RESET?</span></code>. <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">dfu-flash</span></code> retries once automatically. If flashing still fails, run <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">dfu-flash</span></code> again manually.</p></li>
+</ul>
+</section>
+<section id="secure-download-mode">
+<h2>Secure Download Mode<a class="headerlink" href="#secure-download-mode" title="Permalink to this heading"></a></h2>
+<p>When Secure Download Mode is enabled, DFU is no longer possible. Please see <a class="reference internal" href="../security/flash-encryption.html"><span class="doc">Flash Encryption</span></a> guide for more details.</p>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Device Firmware Upgrade via USB (api-guides/dfu)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Device Firmware Upgrade via USB (api-guides/dfu)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="current-consumption-measurement-modules.html" class="btn btn-neutral float-left" title="Current Consumption Measurement of Modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="error-handling.html" class="btn btn-neutral float-right" title="Error Handling" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

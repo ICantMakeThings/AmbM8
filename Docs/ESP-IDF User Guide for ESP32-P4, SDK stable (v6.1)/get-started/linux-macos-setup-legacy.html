@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Standard Toolchain Setup for Linux and macOS (Legacy) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/get-started/linux-macos-setup-legacy.html" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'get-started/linux-macos-setup-legacy';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../about.html" />
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Start a Project on Windows from Command Line" href="windows-start-project.html" />
+    <link rel="prev" title="Installation of ESP-IDF and Tools on macOS" href="macos-setup.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Get Started</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="index.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#what-you-need">What You Need</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html#installation">Installation</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="windows-setup.html">Installation of ESP-IDF and Tools on Windows</a></li>
+<li class="toctree-l3"><a class="reference internal" href="linux-setup.html">Installation of ESP-IDF and Tools on Linux</a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="macos-setup.html">Installation of ESP-IDF and Tools on macOS</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="macos-setup.html#step-1-install-the-prerequisites">Step 1: Install the Prerequisites</a></li>
+<li class="toctree-l4"><a class="reference internal" href="macos-setup.html#step-2-install-the-eim">Step 2: Install the EIM</a></li>
+<li class="toctree-l4"><a class="reference internal" href="macos-setup.html#step-3-install-esp-idf-using-eim">Step 3: Install ESP-IDF Using EIM</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="macos-setup.html#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#build-your-first-project">Build Your First Project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#uninstall-esp-idf">Uninstall ESP-IDF</a></li>
+<li class="toctree-l2"><a class="reference internal" href="index.html#related-documents">Related Documents</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Get Started</a></li>
+          <li class="breadcrumb-item"><a href="macos-setup.html">Installation of ESP-IDF and Tools on macOS</a></li>
+      <li class="breadcrumb-item active">Standard Toolchain Setup for Linux and macOS (Legacy)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/get-started/linux-macos-setup-legacy.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="standard-toolchain-setup-for-linux-and-macos-legacy">
+<h1>Standard Toolchain Setup for Linux and macOS (Legacy)<a class="headerlink" href="#standard-toolchain-setup-for-linux-and-macos-legacy" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../zh_CN/v6.1/esp32p4/get-started/linux-macos-setup-legacy.html">[中文]</a></p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This document describes the legacy installation method of ESP-IDF on Linux and macOS, which was the default before v6.0.</p>
+</div>
+<section id="installation-step-by-step">
+<h2>Installation Step by Step<a class="headerlink" href="#installation-step-by-step" title="Permalink to this heading"></a></h2>
+<p>This is a detailed roadmap to walk you through the installation process.</p>
+<section id="setting-up-development-environment">
+<h3>Setting up Development Environment<a class="headerlink" href="#setting-up-development-environment" title="Permalink to this heading"></a></h3>
+<p>These are the steps for setting up the ESP-IDF for your ESP32-P4.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#get-started-prerequisites-legacy"><span class="std std-ref">Step 1. Install Prerequisites</span></a></p></li>
+<li><p><a class="reference internal" href="#get-started-get-esp-idf-legacy"><span class="std std-ref">Step 2. Get ESP-IDF</span></a></p></li>
+<li><p><a class="reference internal" href="#get-started-set-up-tools-legacy"><span class="std std-ref">Step 3. Set up the Tools</span></a></p></li>
+<li><p><a class="reference internal" href="#get-started-set-up-env-legacy"><span class="std std-ref">Step 4. Set up the Environment Variables</span></a></p></li>
+</ul>
+</section>
+</section>
+<section id="step-1-install-prerequisites">
+<span id="get-started-prerequisites-legacy"></span><h2>Step 1. Install Prerequisites<a class="headerlink" href="#step-1-install-prerequisites" title="Permalink to this heading"></a></h2>
+<p>In order to use ESP-IDF with the ESP32-P4, you need to install some software packages based on your Operating System. This setup guide helps you on getting everything installed on Linux and macOS based systems.</p>
+<section id="for-linux-users">
+<h3>For Linux Users<a class="headerlink" href="#for-linux-users" title="Permalink to this heading"></a></h3>
+<p>To compile using ESP-IDF, you need to get the following packages. The command to run depends on which distribution of Linux you are using:</p>
+<ul>
+<li><p>Ubuntu and Debian:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">git</span> <span class="n">wget</span> <span class="n">flex</span> <span class="n">bison</span> <span class="n">gperf</span> <span class="n">python3</span> <span class="n">python3</span><span class="o">-</span><span class="n">pip</span> <span class="n">python3</span><span class="o">-</span><span class="n">venv</span> <span class="n">cmake</span> <span class="n">ninja</span><span class="o">-</span><span class="n">build</span> <span class="n">ccache</span> <span class="n">libffi</span><span class="o">-</span><span class="n">dev</span> <span class="n">libssl</span><span class="o">-</span><span class="n">dev</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="n">libusb</span><span class="o">-</span><span class="mf">1.0</span><span class="o">-</span><span class="mi">0</span>
+</pre></div>
+</div>
+</li>
+<li><p>CentOS 7 &amp; 8:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">yum</span> <span class="o">-</span><span class="n">y</span> <span class="n">update</span> <span class="o">&amp;&amp;</span> <span class="n">sudo</span> <span class="n">yum</span> <span class="n">install</span> <span class="n">git</span> <span class="n">wget</span> <span class="n">flex</span> <span class="n">bison</span> <span class="n">gperf</span> <span class="n">python3</span> <span class="n">cmake</span> <span class="n">ninja</span><span class="o">-</span><span class="n">build</span> <span class="n">ccache</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="n">libusbx</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<p>CentOS 7 is still supported but CentOS version 8 is recommended for a better user experience.</p>
+<ul>
+<li><p>Arch:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">pacman</span> <span class="o">-</span><span class="n">S</span> <span class="o">--</span><span class="n">needed</span> <span class="n">gcc</span> <span class="n">git</span> <span class="n">make</span> <span class="n">flex</span> <span class="n">bison</span> <span class="n">gperf</span> <span class="n">python</span> <span class="n">cmake</span> <span class="n">ninja</span> <span class="n">ccache</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span> <span class="n">libusb</span> <span class="n">python</span><span class="o">-</span><span class="n">pip</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>CMake version 3.22 or newer is required for use with ESP-IDF. Run &quot;tools/idf_tools.py install cmake&quot; to install a suitable version if your OS versions does not have one.</p></li>
+<li><p>If you do not see your Linux distribution in the above list then please check its documentation to find out which command to use for package installation.</p></li>
+</ul>
+</div>
+</section>
+<section id="for-macos-users">
+<h3>For macOS Users<a class="headerlink" href="#for-macos-users" title="Permalink to this heading"></a></h3>
+<p>ESP-IDF uses the version of Python installed by default on macOS.</p>
+<ul>
+<li><p>Install CMake &amp; Ninja build:</p>
+<ul>
+<li><p>If you have <a class="reference external" href="https://brew.sh/">HomeBrew</a>, you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">ninja</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span>
+</pre></div>
+</div>
+</li>
+<li><p>If you have <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>, you can run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">cmake</span> <span class="n">ninja</span> <span class="n">dfu</span><span class="o">-</span><span class="n">util</span>
+</pre></div>
+</div>
+</li>
+<li><p>Otherwise, consult the <a class="reference external" href="https://cmake.org/">CMake</a> and <a class="reference external" href="https://ninja-build.org/">Ninja</a> home pages for macOS installation downloads.</p></li>
+</ul>
+</li>
+<li><p>It is strongly recommended to also install <a class="reference external" href="https://ccache.dev/">ccache</a> for faster builds. If you have <a class="reference external" href="https://brew.sh/">HomeBrew</a>, this can be done via <code class="docutils literal notranslate"><span class="pre">brew</span> <span class="pre">install</span> <span class="pre">ccache</span></code> or <code class="docutils literal notranslate"><span class="pre">sudo</span> <span class="pre">port</span> <span class="pre">install</span> <span class="pre">ccache</span></code> on <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If an error like this is shown during any step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">xcrun</span><span class="p">:</span> <span class="n">error</span><span class="p">:</span> <span class="n">invalid</span> <span class="n">active</span> <span class="n">developer</span> <span class="n">path</span> <span class="p">(</span><span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="p">),</span> <span class="n">missing</span> <span class="n">xcrun</span> <span class="n">at</span><span class="p">:</span> <span class="o">/</span><span class="n">Library</span><span class="o">/</span><span class="n">Developer</span><span class="o">/</span><span class="n">CommandLineTools</span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">xcrun</span>
+</pre></div>
+</div>
+<p>Then you need to install the XCode command line tools to continue. You can install these by running <code class="docutils literal notranslate"><span class="pre">xcode-select</span> <span class="pre">--install</span></code>.</p>
+</div>
+</section>
+<section id="apple-m1-users">
+<h3>Apple M1 Users<a class="headerlink" href="#apple-m1-users" title="Permalink to this heading"></a></h3>
+<p>If you use Apple M1 platform and see an error like this:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">WARNING</span><span class="p">:</span> <span class="n">directory</span> <span class="k">for</span> <span class="n">tool</span> <span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span> <span class="n">version</span> <span class="n">esp</span><span class="o">-</span><span class="mi">2021</span><span class="n">r2</span><span class="o">-</span><span class="n">patch3</span><span class="o">-</span><span class="mf">8.4.0</span> <span class="ow">is</span> <span class="n">present</span><span class="p">,</span> <span class="n">but</span> <span class="n">tool</span> <span class="n">was</span> <span class="ow">not</span> <span class="n">found</span>
+<span class="n">ERROR</span><span class="p">:</span> <span class="n">tool</span> <span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span> <span class="n">has</span> <span class="n">no</span> <span class="n">installed</span> <span class="n">versions</span><span class="o">.</span> <span class="n">Please</span> <span class="n">run</span> <span class="s1">'install.sh'</span> <span class="n">to</span> <span class="n">install</span> <span class="n">it</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>or:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zsh</span><span class="p">:</span> <span class="n">bad</span> <span class="n">CPU</span> <span class="nb">type</span> <span class="ow">in</span> <span class="n">executable</span><span class="p">:</span> <span class="o">~/.</span><span class="n">espressif</span><span class="o">/</span><span class="n">tools</span><span class="o">/</span><span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span><span class="o">/</span><span class="n">esp</span><span class="o">-</span><span class="mi">2021</span><span class="n">r2</span><span class="o">-</span><span class="n">patch3</span><span class="o">-</span><span class="mf">8.4.0</span><span class="o">/</span><span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">xtensa</span><span class="o">-</span><span class="n">esp32</span><span class="o">-</span><span class="n">elf</span><span class="o">-</span><span class="n">gcc</span>
+</pre></div>
+</div>
+<p>Then you need to install Apple Rosetta 2 by running</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/usr/sbin/softwareupdate<span class="w"> </span>--install-rosetta<span class="w"> </span>--agree-to-license
+</pre></div>
+</div>
+</section>
+<section id="installing-python-3">
+<h3>Installing Python 3<a class="headerlink" href="#installing-python-3" title="Permalink to this heading"></a></h3>
+<p>Ensure that you have Python 3.10 or newer installed, as this is the minimum version supported by ESP-IDF.</p>
+<p>Note that most of the recent versions of macOS include Python 3.9 (or older) by default, which is no longer supported. You will need to install Python 3.10 or later.</p>
+<p>To install supported Python 3 on macOS:</p>
+<ul>
+<li><p>With <a class="reference external" href="https://brew.sh/">HomeBrew</a>, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">brew</span> <span class="n">install</span> <span class="n">python3</span>
+</pre></div>
+</div>
+</li>
+<li><p>With <a class="reference external" href="https://www.macports.org/install.php">MacPorts</a>, run:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">port</span> <span class="n">install</span> <span class="n">python313</span>
+</pre></div>
+</div>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>During installation, the install script will check for supported Python versions on your system and select the oldest version that meets the minimum requirement.</p>
+</div>
+</section>
+</section>
+<section id="step-2-get-esp-idf">
+<span id="get-started-get-esp-idf-legacy"></span><h2>Step 2. Get ESP-IDF<a class="headerlink" href="#step-2-get-esp-idf" title="Permalink to this heading"></a></h2>
+<p>To build applications for the ESP32-P4, you need the software libraries provided by Espressif in <a class="reference external" href="https://github.com/espressif/esp-idf">ESP-IDF repository</a>.</p>
+<p>To get ESP-IDF, navigate to your installation directory and clone the repository with <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code>, following instructions below specific to your operating system.</p>
+<p>Open Terminal, and run the following commands:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>-p<span class="w"> </span>~/esp
+<span class="nb">cd</span><span class="w"> </span>~/esp
+git<span class="w"> </span>clone<span class="w"> </span>-b<span class="w"> </span>v6.1<span class="w"> </span>--single-branch<span class="w"> </span>--recursive<span class="w"> </span>https://github.com/espressif/esp-idf.git
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If your internet connection is slow, you can add the <code class="docutils literal notranslate"><span class="pre">--depth</span> <span class="pre">1</span></code> option to the <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">clone</span></code> command to download the latest commit only. However, this will make subsequent <code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">fetch</span></code> operations slower and download more data than necessary.</p>
+</div>
+<p>ESP-IDF is downloaded into <code class="docutils literal notranslate"><span class="pre">~/esp/esp-idf</span></code>.</p>
+<p>Consult <a class="reference internal" href="../versions.html"><span class="doc">ESP-IDF Versions</span></a> for information about which ESP-IDF version to use in a given situation.</p>
+</section>
+<section id="step-3-set-up-the-tools">
+<span id="get-started-set-up-tools-legacy"></span><h2>Step 3. Set up the Tools<a class="headerlink" href="#step-3-set-up-the-tools" title="Permalink to this heading"></a></h2>
+<p>Aside from the ESP-IDF, you also need to install the tools used by ESP-IDF, such as the compiler, debugger, Python packages, etc, for projects supporting ESP32-P4.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf
+./install.sh<span class="w"> </span>esp32p4
+</pre></div>
+</div>
+<p>or with Fish shell</p>
+<div class="highlight-fish notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> ~/esp/esp-idf
+./install.fish esp32p4
+</pre></div>
+</div>
+<p>The above commands install tools for ESP32-P4 only. If you intend to develop projects for more chip targets then you should list all of them and run for example:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf
+./install.sh<span class="w"> </span>esp32,esp32s2
+</pre></div>
+</div>
+<p>or with Fish shell</p>
+<div class="highlight-fish notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> ~/esp/esp-idf
+./install.fish esp32,esp32s2
+</pre></div>
+</div>
+<p>In order to install tools for all supported targets please run the following command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf
+./install.sh<span class="w"> </span>all
+</pre></div>
+</div>
+<p>or with Fish shell</p>
+<div class="highlight-fish notranslate"><div class="highlight"><pre><span></span><span class="k">cd</span> ~/esp/esp-idf
+./install.fish all
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For macOS users, if an error like this is shown during any step:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">urlopen</span> <span class="n">error</span> <span class="p">[</span><span class="n">SSL</span><span class="p">:</span> <span class="n">CERTIFICATE_VERIFY_FAILED</span><span class="p">]</span> <span class="n">certificate</span> <span class="n">verify</span> <span class="n">failed</span><span class="p">:</span> <span class="n">unable</span> <span class="n">to</span> <span class="n">get</span> <span class="n">local</span> <span class="n">issuer</span> <span class="n">certificate</span> <span class="p">(</span><span class="n">_ssl</span><span class="o">.</span><span class="n">c</span><span class="p">:</span><span class="n">xxx</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>You may run <code class="docutils literal notranslate"><span class="pre">Install</span> <span class="pre">Certificates.command</span></code> in the Python folder of your computer to install certificates. For details, see <a class="reference external" href="https://github.com/espressif/esp-idf/issues/4775">Download Error While Installing ESP-IDF Tools</a>.</p>
+</div>
+<section id="alternative-file-downloads">
+<h3>Alternative File Downloads<a class="headerlink" href="#alternative-file-downloads" title="Permalink to this heading"></a></h3>
+<p>The tools installer downloads a number of files attached to GitHub Releases. If accessing GitHub is slow then it is possible to set an environment variable to prefer Espressif's download server for GitHub asset downloads.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This setting only controls individual tools downloaded from GitHub releases, it does not change the URLs used to access any Git repositories.</p>
+</div>
+<p>To prefer the Espressif download server when installing tools, use the following sequence of commands when running <code class="docutils literal notranslate"><span class="pre">install.sh</span></code>:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf
+<span class="nb">export</span><span class="w"> </span><span class="nv">IDF_GITHUB_ASSETS</span><span class="o">=</span><span class="s2">"dl.espressif.com/github_assets"</span>
+./install.sh
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For users in China, we recommend using our download server located in China for faster download speed.
+Alternatively, you can set as well the environment variable <code class="docutils literal notranslate"><span class="pre">PIP_INDEX_URL</span></code> to the China mirror of PyPI.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>~/esp/esp-idf
+<span class="nb">export</span><span class="w"> </span><span class="nv">IDF_GITHUB_ASSETS</span><span class="o">=</span><span class="s2">"dl.espressif.cn/github_assets"</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">PIP_INDEX_URL</span><span class="o">=</span><span class="s2">"https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple"</span>
+./install.sh
+</pre></div>
+</div>
+</div>
+</section>
+<section id="customizing-the-tools-installation-path">
+<h3>Customizing the Tools Installation Path<a class="headerlink" href="#customizing-the-tools-installation-path" title="Permalink to this heading"></a></h3>
+<p>The scripts introduced in this step install compilation tools required by ESP-IDF inside the user home directory: <code class="docutils literal notranslate"><span class="pre">$HOME/.espressif</span></code> on Linux. If you wish to install the tools into a different directory, <strong>export the environment variable IDF_TOOLS_PATH before running the installation scripts</strong>. Make sure that your user account has sufficient permissions to read and write this path.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">IDF_TOOLS_PATH</span><span class="o">=</span><span class="s2">"</span><span class="nv">$HOME</span><span class="s2">/required_idf_tools_path"</span>
+./install.sh
+
+.<span class="w"> </span>./export.sh
+</pre></div>
+</div>
+<p>If changing the <code class="docutils literal notranslate"><span class="pre">IDF_TOOLS_PATH</span></code>, make sure it is exported in the environment before running any ESP-IDF tools or scripts.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Using <code class="docutils literal notranslate"><span class="pre">IDF_TOOLS_PATH</span></code> in variable assignment, e.g., <code class="docutils literal notranslate"><span class="pre">IDF_TOOLS_PATH=&quot;$HOME/required_idf_tools_path&quot;</span> <span class="pre">./install.sh</span></code>, without prior exporting, will not work in most shells because the variable assignment will not affect the current execution environment, even if it's exported/changed in the sourced script.</p>
+</div>
+</section>
+</section>
+<section id="step-4-set-up-the-environment-variables">
+<span id="get-started-set-up-env-legacy"></span><h2>Step 4. Set up the Environment Variables<a class="headerlink" href="#step-4-set-up-the-environment-variables" title="Permalink to this heading"></a></h2>
+<p>The installed tools are not yet added to the PATH environment variable. To make the tools usable from the command line, some environment variables must be set. ESP-IDF provides another script which does that.</p>
+<p>In the terminal where you are going to use ESP-IDF, run:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span><span class="nv">$HOME</span>/esp/esp-idf/export.sh
+</pre></div>
+</div>
+<p>or for fish (supported only since fish version 3.0.0):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>.<span class="w"> </span><span class="nv">$HOME</span>/esp/esp-idf/export.fish
+</pre></div>
+</div>
+<p>Note the space between the leading dot and the path!</p>
+<p>If you plan to use esp-idf frequently, you can create an alias for executing <code class="docutils literal notranslate"><span class="pre">export.sh</span></code>:</p>
+<ol class="arabic">
+<li><p>Copy and paste the following command to your shell's profile (<code class="docutils literal notranslate"><span class="pre">.profile</span></code>, <code class="docutils literal notranslate"><span class="pre">.bashrc</span></code>, <code class="docutils literal notranslate"><span class="pre">.zprofile</span></code>, etc.)</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">alias</span><span class="w"> </span><span class="nv">get_idf</span><span class="o">=</span><span class="s1">'. $HOME/esp/esp-idf/export.sh'</span>
+</pre></div>
+</div>
+</li>
+<li><p>Refresh the configuration by restarting the terminal session or by running <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">[path</span> <span class="pre">to</span> <span class="pre">profile]</span></code>, for example, <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">~/.bashrc</span></code>.</p></li>
+</ol>
+<p>Now you can run <code class="docutils literal notranslate"><span class="pre">get_idf</span></code> to set up or refresh the esp-idf environment in any terminal session.</p>
+<p>Technically, you can add <code class="docutils literal notranslate"><span class="pre">export.sh</span></code> to your shell's profile directly; however, it is not recommended. Doing so activates IDF virtual environment in every terminal session (including those where IDF is not needed), defeating the purpose of the virtual environment and likely affecting other software.</p>
+</section>
+<section id="updating-esp-idf-and-python-packages-in-the-esp-idf-environment">
+<span id="get-started-update-esp-idf-legacy"></span><h2>Updating ESP-IDF and Python Packages in the ESP-IDF Environment<a class="headerlink" href="#updating-esp-idf-and-python-packages-in-the-esp-idf-environment" title="Permalink to this heading"></a></h2>
+<p>It is recommended to update ESP-IDF from time to time, as newer versions fix bugs and/or provide new features. Please note that each ESP-IDF major and minor release version has an associated support period, and when one release branch is approaching end of life (EOL), all users are encouraged to upgrade their projects to more recent ESP-IDF releases, to find out more about support periods, see <a class="reference internal" href="../versions.html"><span class="doc">ESP-IDF Versions</span></a>.</p>
+<p>The simplest way to do the update is to delete the existing <code class="docutils literal notranslate"><span class="pre">esp-idf</span></code> folder and clone it again, as if performing the initial installation described in <a class="reference internal" href="#get-started-get-esp-idf-legacy"><span class="std std-ref">Step 2. Get ESP-IDF</span></a>.</p>
+<p>Another solution is to update only what has changed. For specific instructions, please visit <a class="reference internal" href="../versions.html#updating-master"><span class="std std-ref">Updating ESP-IDF</span></a> page.</p>
+<p>After updating ESP-IDF, execute the install script again (<code class="docutils literal notranslate"><span class="pre">./install.sh</span></code> in your <code class="docutils literal notranslate"><span class="pre">$IDF_PATH</span></code>), in case the new ESP-IDF version requires different versions of tools. See instructions at <a class="reference internal" href="#get-started-set-up-tools-legacy"><span class="std std-ref">Step 3. Set up the Tools</span></a>.</p>
+<p>Once all the new tools are installed, enter the ESP-IDF environment using the export script as described in <a class="reference internal" href="#get-started-set-up-env-legacy"><span class="std std-ref">Step 4. Set up the Environment Variables</span></a>.</p>
+<section id="updating-python-packages-in-the-esp-idf-environment-without-updating-esp-idf">
+<h3>Updating Python Packages in the ESP-IDF Environment Without Updating ESP-IDF<a class="headerlink" href="#updating-python-packages-in-the-esp-idf-environment-without-updating-esp-idf" title="Permalink to this heading"></a></h3>
+<p>Some features in ESP-IDF are not included directly in the ESP-IDF repository. Instead, they are provided by Python packages such as <code class="docutils literal notranslate"><span class="pre">esp-idf-monitor</span></code> or <code class="docutils literal notranslate"><span class="pre">esptool</span></code>, which are installed in the ESP-IDF environment by the install script. These packages can be updated independently of ESP-IDF. To update them, simply re-run the install script (<code class="docutils literal notranslate"><span class="pre">./install.sh</span></code> in your <code class="docutils literal notranslate"><span class="pre">$IDF_PATH</span></code>). If the ESP-IDF environment already exists, the script will update all Python packages in it to the latest versions compatible with the current ESP-IDF version — without updating the ESP-IDF itself.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If you are an advanced user and want more control over the update process, you can also check <a class="reference internal" href="../api-guides/tools/idf-tools.html#idf-tools-py"><span class="std std-ref">idf_tools.py Script</span></a> and its <code class="docutils literal notranslate"><span class="pre">install-python-env</span></code> command, which is used by the install script and handles the creation or update of the ESP-IDF environment.</p>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Standard Toolchain Setup for Linux and macOS (Legacy) (get-started/linux-macos-setup-legacy)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Standard Toolchain Setup for Linux and macOS (Legacy) (get-started/linux-macos-setup-legacy)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="macos-setup.html" class="btn btn-neutral float-left" title="Installation of ESP-IDF and Tools on macOS" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="windows-start-project.html" class="btn btn-neutral float-right" title="Start a Project on Windows from Command Line" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

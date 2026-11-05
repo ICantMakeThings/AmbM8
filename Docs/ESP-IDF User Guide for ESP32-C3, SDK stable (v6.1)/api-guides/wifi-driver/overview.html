@@ -1,0 +1,1146 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-guides/wifi-driver/overview.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-guides/wifi-driver/overview';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Espressif Wireshark User Guide" href="../wireshark-user-guide.html" />
+    <link rel="prev" title="Wi-Fi Driver" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-reference/index.html">API Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Guides</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../app_trace.html">Application Level Tracing Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../startup.html">Application Startup Flow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bt-architecture/index.html">Bluetooth<sup>®</sup> Architecture</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../ble/index.html">Bluetooth<sup>®</sup> Low Energy</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esp-ble-mesh/ble-mesh-index.html">ESP-BLE-MESH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bootloader.html">Bootloader</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build-system.html">Build System</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../build-system-v2.html">Build System v2</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../coexist.html">RF Coexistence</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../c.html">C Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../cplusplus.html">C++ Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../code-quality/index.html">Code Quality</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../core_dump.html">Core Dump</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../current-consumption-measurement-modules.html">Current Consumption Measurement of Modules</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../deep-sleep-stub.html">Deep-sleep Wake Stubs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-handling.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../esp-wifi-mesh.html">ESP-WIFI-MESH</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../fatal-errors.html">Fatal Errors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../file-system-considerations.html">File System Considerations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../hardware-abstraction.html">Hardware Abstraction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../jtag-debugging/index.html">JTAG Debugging</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig/index.html">Project Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../linker-script-generation.html">Linker Script Generation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../low-power-mode/index.html">Low Power Modes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../lwip.html">lwIP</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../memory-types.html">Memory Types</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../openthread.html">OpenThread</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../partition-tables.html">Partition Tables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../performance/index.html">Performance</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../reproducible-builds.html">Reproducible Builds</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../RF_calibration.html">RF Calibration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../stdio.html">Standard I/O and Console Output</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../thread-local-storage.html">Thread Local Storage</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tools/index.html">Tools</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../unit-tests.html">Unit Testing in ESP32-C3</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../host-apps.html">Running ESP-IDF Applications on Host</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../usb-serial-jtag-console.html">USB Serial/JTAG Controller Console</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Wi-Fi Driver</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Overview</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#esp32-c3-wi-fi-feature-list">ESP32-C3 Wi-Fi Feature List</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#how-to-write-a-wi-fi-application">How To Write a Wi-Fi Application</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#esp32-c3-wi-fi-api-error-code">ESP32-C3 Wi-Fi API Error Code</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#esp32-c3-wi-fi-api-parameter-initialization">ESP32-C3 Wi-Fi API Parameter Initialization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#esp32-c3-wi-fi-programming-model">ESP32-C3 Wi-Fi Programming Model</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#esp32-c3-wi-fi-event-description">ESP32-C3 Wi-Fi Event Description</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#esp32-c3-wi-fi-configuration">ESP32-C3 Wi-Fi Configuration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#wi-fi-menuconfig">Wi-Fi Menuconfig</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#troubleshooting">Troubleshooting</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="station-scenarios.html">Station Scenarios</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-modes.html">Wi-Fi Modes</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-mac-protocols.html">Wi-Fi MAC Protocols</a></li>
+<li class="toctree-l3"><a class="reference internal" href="security-and-roaming.html">Security and Roaming</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-performance-and-power-save.html">Wi-Fi Performance and Power Save</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wifi-vendor-features.html">Wi-Fi Vendor Features</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi-security.html">Wi-Fi Security</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../wifi-expansion.html">Wi-Fi Expansion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../phy.html">PHY</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Guides</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Wi-Fi Driver</a></li>
+      <li class="breadcrumb-item active">Overview</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-guides/wifi-driver/overview.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="overview">
+<h1>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32c3/api-guides/wifi-driver/overview.html">[中文]</a></p>
+<section id="esp32-c3-wi-fi-feature-list">
+<h2>ESP32-C3 Wi-Fi Feature List<a class="headerlink" href="#esp32-c3-wi-fi-feature-list" title="Permalink to this heading"></a></h2>
+<p>The following features are supported:</p>
+<ul class="simple">
+<li><p>4 virtual Wi-Fi interfaces, which are STA, AP, Sniffer and reserved</p></li>
+<li><p>Station-only mode, AP-only mode, station/AP-coexistence mode</p></li>
+<li><p>IEEE 802.11b, IEEE 802.11g, IEEE 802.11n, and APIs to configure the protocol mode</p></li>
+<li><p>WPA/WPA2/WPA3/WPA2-Enterprise/WPA3-Enterprise/WAPI/WPS and DPP</p></li>
+<li><p>AMSDU, AMPDU, HT40, QoS, and other key features</p></li>
+<li><p>Modem-sleep</p></li>
+<li><p>The Espressif-specific ESP-NOW protocol and Long Range mode, which supports up to <strong>1 km</strong> of data traffic</p></li>
+<li><p>Up to 20 MBit/s TCP throughput and 30 MBit/s UDP throughput over the air</p></li>
+<li><p>Sniffer</p></li>
+<li><p>Both fast scan and all-channel scan</p></li>
+<li><p>Multiple antennas</p></li>
+<li><p>Channel state information</p></li>
+</ul>
+</section>
+<section id="how-to-write-a-wi-fi-application">
+<h2>How To Write a Wi-Fi Application<a class="headerlink" href="#how-to-write-a-wi-fi-application" title="Permalink to this heading"></a></h2>
+<section id="preparation">
+<h3>Preparation<a class="headerlink" href="#preparation" title="Permalink to this heading"></a></h3>
+<p>Generally, the most effective way to begin your own Wi-Fi application is to select an example which is similar to your own application, and port the useful part into your project. It is not a MUST, but it is strongly recommended that you take some time to read this article first, especially if you want to program a robust Wi-Fi application.</p>
+<p>This article is supplementary to the Wi-Fi APIs/Examples. It describes the principles of using the Wi-Fi APIs, the limitations of the current Wi-Fi API implementation, and the most common pitfalls in using Wi-Fi. This article also reveals some design details of the Wi-Fi driver. We recommend you to select an <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi">example </a>.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/getting_started/station">wifi/getting_started/station</a> demonstrates how to use the station functionality to connect to an AP.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/getting_started/softAP">wifi/getting_started/softAP</a> demonstrates how to use the SoftAP functionality to configure ESP32-C3 as an AP.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/scan">wifi/scan</a> demonstrates how to scan for available APs, configure the scan settings, and display the scan results.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/fast_scan">wifi/fast_scan</a> demonstrates how to perform fast and all channel scans for nearby APs, set thresholds for signal strength and authentication modes, and connect to the best fitting AP based on signal strength and authentication mode.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/wps">wifi/wps</a> demonstrates how to use the WPS enrollee feature to simplify the process of connecting to a Wi-Fi router, with options for PIN or PBC modes.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/wps_softap_registrar">wifi/wps_softap_registrar</a> demonstrates how to use the WPS registrar feature on SoftAP mode, simplifying the process of connecting to a Wi-Fi SoftAP from a station.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/smart_config">wifi/smart_config</a> demonstrates how to use the smartconfig feature to connect to a target AP using the ESPTOUCH app.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/power_save">wifi/power_save</a> demonstrates how to use the power save mode in station mode.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/softap_sta">wifi/softap_sta</a> demonstrates how to configure ESP32-C3 to function as both an AP and a station simultaneously, effectively enabling it to act as a Wi-Fi NAT router.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/iperf">wifi/iperf</a> demonstrates how to implement the protocol used by the iPerf performance measurement tool, allowing for performance measurement between two chips or between a single chip and a computer running the iPerf tool, with specific instructions for testing station/soft-AP TCP/UDP RX/TX throughput.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/roaming/roaming_app">wifi/roaming/roaming_app</a> demonstrates how to use the Wi-Fi Roaming App functionality to efficiently roam between compatible APs.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/wifi/roaming/roaming_11kvr">wifi/roaming/roaming_11kvr</a> demonstrates how to implement roaming using 11k and 11v APIs.</p></li>
+</ul>
+</section>
+<section id="setting-wi-fi-compile-time-options">
+<h3>Setting Wi-Fi Compile-time Options<a class="headerlink" href="#setting-wi-fi-compile-time-options" title="Permalink to this heading"></a></h3>
+<p>Refer to <a class="reference internal" href="#wifi-menuconfig"><span class="std std-ref">Wi-Fi Menuconfig</span></a>.</p>
+</section>
+<section id="init-wi-fi">
+<h3>Init Wi-Fi<a class="headerlink" href="#init-wi-fi" title="Permalink to this heading"></a></h3>
+<p>Refer to <a class="reference internal" href="station-scenarios.html#wifi-station-general-scenario"><span class="std std-ref">ESP32-C3 Wi-Fi Station General Scenario</span></a> and <a class="reference internal" href="wifi-modes.html#wifi-ap-general-scenario"><span class="std std-ref">ESP32-C3 Wi-Fi AP General Scenario</span></a>.</p>
+</section>
+<section id="start-connect-wi-fi">
+<h3>Start/Connect Wi-Fi<a class="headerlink" href="#start-connect-wi-fi" title="Permalink to this heading"></a></h3>
+<p>Refer to <a class="reference internal" href="station-scenarios.html#wifi-station-general-scenario"><span class="std std-ref">ESP32-C3 Wi-Fi Station General Scenario</span></a> and <a class="reference internal" href="wifi-modes.html#wifi-ap-general-scenario"><span class="std std-ref">ESP32-C3 Wi-Fi AP General Scenario</span></a>.</p>
+</section>
+<section id="event-handling">
+<h3>Event-Handling<a class="headerlink" href="#event-handling" title="Permalink to this heading"></a></h3>
+<p>Generally, it is easy to write code in &quot;sunny-day&quot; scenarios, such as <a class="reference internal" href="#wifi-event-sta-start"><span class="std std-ref">WIFI_EVENT_STA_START</span></a> and <a class="reference internal" href="#wifi-event-sta-connected"><span class="std std-ref">WIFI_EVENT_STA_CONNECTED</span></a>. The hard part is to write routines in &quot;rainy-day&quot; scenarios, such as <a class="reference internal" href="#wifi-event-sta-disconnected"><span class="std std-ref">WIFI_EVENT_STA_DISCONNECTED</span></a>. Good handling of &quot;rainy-day&quot; scenarios is fundamental to robust Wi-Fi applications. Refer to <a class="reference internal" href="#wifi-event-description"><span class="std std-ref">ESP32-C3 Wi-Fi Event Description</span></a>, <a class="reference internal" href="station-scenarios.html#wifi-station-general-scenario"><span class="std std-ref">ESP32-C3 Wi-Fi Station General Scenario</span></a>, and <a class="reference internal" href="wifi-modes.html#wifi-ap-general-scenario"><span class="std std-ref">ESP32-C3 Wi-Fi AP General Scenario</span></a>. See also the <a class="reference internal" href="../../api-reference/system/esp_event.html"><span class="doc">overview of the Event Loop Library in ESP-IDF</span></a>.</p>
+</section>
+<section id="write-error-recovery-routines-correctly-at-all-times">
+<h3>Write Error-Recovery Routines Correctly at All Times<a class="headerlink" href="#write-error-recovery-routines-correctly-at-all-times" title="Permalink to this heading"></a></h3>
+<p>Just like the handling of &quot;rainy-day&quot; scenarios, a good error-recovery routine is also fundamental to robust Wi-Fi applications. Refer to <a class="reference internal" href="#wifi-api-error-code"><span class="std std-ref">ESP32-C3 Wi-Fi API Error Code</span></a>.</p>
+</section>
+</section>
+<section id="esp32-c3-wi-fi-api-error-code">
+<span id="wifi-api-error-code"></span><h2>ESP32-C3 Wi-Fi API Error Code<a class="headerlink" href="#esp32-c3-wi-fi-api-error-code" title="Permalink to this heading"></a></h2>
+<p>All of the ESP32-C3 Wi-Fi APIs have well-defined return values, namely, the error code. The error code can be categorized into:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>No errors, e.g., <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> means that the API returns successfully.</p></li>
+<li><p>Recoverable errors, such as <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_ERR_NO_MEM" title="ESP_ERR_NO_MEM"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_NO_MEM</span></code></a>.</p></li>
+<li><p>Non-recoverable, non-critical errors.</p></li>
+<li><p>Non-recoverable, critical errors.</p></li>
+</ul>
+</div></blockquote>
+<p>Whether the error is critical or not depends on the API and the application scenario, and it is defined by the API user.</p>
+<p><strong>The primary principle to write a robust application with Wi-Fi API is to always check the error code and write the error-handling code.</strong> Generally, the error-handling code can be used:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>For recoverable errors, in which case you can write a recoverable-error code. For example, when <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a> returns <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_ERR_NO_MEM" title="ESP_ERR_NO_MEM"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_NO_MEM</span></code></a>, the recoverable-error code vTaskDelay can be called in order to get a microseconds' delay for another try.</p></li>
+<li><p>For non-recoverable, yet non-critical errors, in which case printing the error code is a good method for error handling.</p></li>
+<li><p>For non-recoverable and also critical errors, in which case &quot;assert&quot; may be a good method for error handling. For example, if <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_set_mode11wifi_mode_t" title="esp_wifi_set_mode"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_mode()</span></code></a> returns <code class="docutils literal notranslate"><span class="pre">ESP_ERR_WIFI_NOT_INIT</span></code>, it means that the Wi-Fi driver is not initialized by <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv413esp_wifi_initPK18wifi_init_config_t" title="esp_wifi_init"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_init()</span></code></a> successfully. You can detect this kind of error very quickly in the application development phase.</p></li>
+</ul>
+</div></blockquote>
+<p>In <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_common/include/esp_err.h">esp_common/include/esp_err.h</a>, <code class="docutils literal notranslate"><span class="pre">ESP_ERROR_CHECK</span></code> checks the return values. It is a rather commonplace error-handling code and can be used as the default error-handling code in the application development phase. However, it is strongly recommended that API users write their own error-handling code.</p>
+</section>
+<section id="esp32-c3-wi-fi-api-parameter-initialization">
+<h2>ESP32-C3 Wi-Fi API Parameter Initialization<a class="headerlink" href="#esp32-c3-wi-fi-api-parameter-initialization" title="Permalink to this heading"></a></h2>
+<p>When initializing struct parameters for the API, one of two approaches should be followed:</p>
+<ul class="simple">
+<li><p>Explicitly set all fields of the parameter.</p></li>
+<li><p>Use get API to get current configuration first, then set application specific fields.</p></li>
+</ul>
+<p>Initializing or getting the entire structure is very important, because most of the time the value 0 indicates that the default value is used. More fields may be added to the struct in the future and initializing these to zero ensures the application will still work correctly after ESP-IDF is updated to a new release.</p>
+</section>
+<section id="esp32-c3-wi-fi-programming-model">
+<span id="wifi-programming-model"></span><h2>ESP32-C3 Wi-Fi Programming Model<a class="headerlink" href="#esp32-c3-wi-fi-programming-model" title="Permalink to this heading"></a></h2>
+<p>The ESP32-C3 Wi-Fi programming model is depicted as follows:</p>
+<figure class="align-center" id="id9">
+<div class="align-default"><img height="300" src="../../_images/blockdiag-28fbd081828b19928570427db02e84737dc3b4f1.png" width="740" /></div>
+<figcaption>
+<p><span class="caption-text">Wi-Fi Programming Model</span><a class="headerlink" href="#id9" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>The Wi-Fi driver can be considered a black box that knows nothing about high-layer code, such as the TCP/IP stack, application task, and event task. The application task (code) generally calls <a class="reference internal" href="../../api-reference/network/esp_wifi.html"><span class="doc">Wi-Fi driver APIs</span></a> to initialize Wi-Fi and handles Wi-Fi events when necessary. Wi-Fi driver receives API calls, handles them, and posts events to the application.</p>
+<p>Wi-Fi event handling is based on the <a class="reference internal" href="../../api-reference/system/esp_event.html"><span class="doc">esp_event library</span></a>. Events are sent by the Wi-Fi driver to the <a class="reference internal" href="../../api-reference/system/esp_event.html#esp-event-default-loops"><span class="std std-ref">default event loop</span></a>. Application may handle these events in callbacks registered using <a class="reference internal" href="../../api-reference/system/esp_event.html#_CPPv426esp_event_handler_register16esp_event_base_t7int32_t19esp_event_handler_tPv" title="esp_event_handler_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_event_handler_register()</span></code></a>. Wi-Fi events are also handled by <a class="reference internal" href="../../api-reference/network/esp_netif.html"><span class="doc">esp_netif component</span></a> to provide a set of default behaviors. For example, when Wi-Fi station connects to an AP, esp_netif will automatically start the DHCP client by default.</p>
+</section>
+<section id="esp32-c3-wi-fi-event-description">
+<span id="wifi-event-description"></span><h2>ESP32-C3 Wi-Fi Event Description<a class="headerlink" href="#esp32-c3-wi-fi-event-description" title="Permalink to this heading"></a></h2>
+<section id="wifi-event-wifi-ready">
+<h3>WIFI_EVENT_WIFI_READY<a class="headerlink" href="#wifi-event-wifi-ready" title="Permalink to this heading"></a></h3>
+<p>The Wi-Fi driver will never generate this event, which, as a result, can be ignored by the application event callback. This event may be removed in future releases.</p>
+</section>
+<section id="wifi-event-scan-done">
+<span id="id1"></span><h3>WIFI_EVENT_SCAN_DONE<a class="headerlink" href="#wifi-event-scan-done" title="Permalink to this heading"></a></h3>
+<p>The scan-done event is triggered by <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb" title="esp_wifi_scan_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_scan_start()</span></code></a> and will arise in the following scenarios:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The scan is completed, e.g., the target AP is found successfully, or all channels have been scanned.</p></li>
+<li><p>The scan is stopped by <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv418esp_wifi_scan_stopv" title="esp_wifi_scan_stop"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_scan_stop()</span></code></a>.</p></li>
+<li><p>The <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_scan_startPK18wifi_scan_config_tb" title="esp_wifi_scan_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_scan_start()</span></code></a> is called before the scan is completed. A new scan will override the current scan and a scan-done event will be generated.</p></li>
+</ul>
+</div></blockquote>
+<p>The scan-done event will not arise in the following scenarios:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>It is a blocked scan.</p></li>
+<li><p>The scan is caused by <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a>.</p></li>
+</ul>
+</div></blockquote>
+<p>Upon receiving this event, the event task does nothing. The application event callback needs to call <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv424esp_wifi_scan_get_ap_numP8uint16_t" title="esp_wifi_scan_get_ap_num"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_scan_get_ap_num()</span></code></a> and <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv428esp_wifi_scan_get_ap_recordsP8uint16_tP16wifi_ap_record_t" title="esp_wifi_scan_get_ap_records"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_scan_get_ap_records()</span></code></a> to fetch the scanned AP list and trigger the Wi-Fi driver to free the internal memory which is allocated during the scan <strong>(do not forget to do this!)</strong>.
+Refer to <a class="reference internal" href="station-scenarios.html#wifi-scan"><span class="std std-ref">ESP32-C3 Wi-Fi Scan</span></a> for a more detailed description.</p>
+</section>
+<section id="wifi-event-sta-start">
+<span id="id2"></span><h3>WIFI_EVENT_STA_START<a class="headerlink" href="#wifi-event-sta-start" title="Permalink to this heading"></a></h3>
+<p>If <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a> returns <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> and the current Wi-Fi mode is station or station/AP, then this event will arise. Upon receiving this event, the event task will initialize the LwIP network interface (netif). Generally, the application event callback needs to call <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a> to connect to the configured AP.</p>
+</section>
+<section id="wifi-event-sta-stop">
+<h3>WIFI_EVENT_STA_STOP<a class="headerlink" href="#wifi-event-sta-stop" title="Permalink to this heading"></a></h3>
+<p>If <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv413esp_wifi_stopv" title="esp_wifi_stop"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_stop()</span></code></a> returns <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> and the current Wi-Fi mode is station or station/AP, then this event will arise. Upon receiving this event, the event task will release the station's IP address, stop the DHCP client, remove TCP/UDP-related connections, and clear the LwIP station netif, etc. The application event callback generally does not need to do anything.</p>
+</section>
+<section id="wifi-event-sta-connected">
+<span id="id3"></span><h3>WIFI_EVENT_STA_CONNECTED<a class="headerlink" href="#wifi-event-sta-connected" title="Permalink to this heading"></a></h3>
+<p>If <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a> returns <a class="reference internal" href="../../api-reference/system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> and the station successfully connects to the target AP, the connection event will arise. Upon receiving this event, the event task starts the DHCP client and begins the DHCP process of getting the IP address. Then, the Wi-Fi driver is ready for sending and receiving data. This moment is good for beginning the application work, provided that the application does not depend on LwIP, namely the IP address. However, if the application is LwIP-based, then you need to wait until the <em>got ip</em> event comes in.</p>
+</section>
+<section id="wifi-event-sta-disconnected">
+<span id="id4"></span><h3>WIFI_EVENT_STA_DISCONNECTED<a class="headerlink" href="#wifi-event-sta-disconnected" title="Permalink to this heading"></a></h3>
+<p>This event can be generated in the following scenarios:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>When <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_disconnectv" title="esp_wifi_disconnect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_disconnect()</span></code></a> or <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv413esp_wifi_stopv" title="esp_wifi_stop"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_stop()</span></code></a> is called and the station is already connected to the AP.</p></li>
+<li><p>When <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a> is called, but the Wi-Fi driver fails to set up a connection with the AP due to certain reasons, e.g., the scan fails to find the target AP or the authentication times out. If there are more than one AP with the same SSID, the disconnected event will be raised after the station fails to connect all of the found APs.</p></li>
+<li><p>When the Wi-Fi connection is disrupted because of specific reasons, e.g., the station continuously loses N beacons, the AP kicks off the station, or the AP's authentication mode is changed.</p></li>
+</ul>
+</div></blockquote>
+<p>Upon receiving this event, the default behaviors of the event task are:</p>
+<ul class="simple">
+<li><p>Shutting down the station's LwIP netif.</p></li>
+<li><p>Notifying the LwIP task to clear the UDP/TCP connections which cause the wrong status to all sockets. For socket-based applications, the application callback can choose to close all sockets and re-create them, if necessary, upon receiving this event.</p></li>
+</ul>
+<p>The most common event handle code for this event in application is to call <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a> to reconnect the Wi-Fi. However, if the event is raised because <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_disconnectv" title="esp_wifi_disconnect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_disconnect()</span></code></a> is called, the application should not call <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a> to reconnect. It is the application's responsibility to distinguish whether the event is caused by <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_disconnectv" title="esp_wifi_disconnect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_disconnect()</span></code></a> or other reasons. Sometimes a better reconnection strategy is required. Refer to <a class="reference internal" href="station-scenarios.html#wifi-reconnect"><span class="std std-ref">Wi-Fi Reconnect</span></a> and <a class="reference internal" href="station-scenarios.html#scan-when-wifi-is-connecting"><span class="std std-ref">Scan When Wi-Fi Is Connecting</span></a>.</p>
+<p>Another thing that deserves attention is that the default behavior of LwIP is to abort all TCP socket connections on receiving the disconnect. In most cases, it is not a problem. However, for some special applications, this may not be what they want. Consider the following scenarios:</p>
+<ul class="simple">
+<li><p>The application creates a TCP connection to maintain the application-level keep-alive data that is sent out every 60 seconds.</p></li>
+<li><p>Due to certain reasons, the Wi-Fi connection is cut off, and the <a class="reference internal" href="#id4">WIFI_EVENT_STA_DISCONNECTED</a> is raised. According to the current implementation, all TCP connections will be removed and the keep-alive socket will be in a wrong status. However, since the application designer believes that the network layer should <strong>ignore</strong> this error at the Wi-Fi layer, the application does not close the socket.</p></li>
+<li><p>Five seconds later, the Wi-Fi connection is restored because <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a> is called in the application event callback function. <strong>Moreover, the station connects to the same AP and gets the same IPV4 address as before</strong>.</p></li>
+<li><p>Sixty seconds later, when the application sends out data with the keep-alive socket, the socket returns an error and the application closes the socket and re-creates it when necessary.</p></li>
+</ul>
+<p>In above scenarios, ideally, the application sockets and the network layer should not be affected, since the Wi-Fi connection only fails temporarily and recovers very quickly.</p>
+</section>
+<section id="ip-event-sta-got-ip">
+<span id="id5"></span><h3>IP_EVENT_STA_GOT_IP<a class="headerlink" href="#ip-event-sta-got-ip" title="Permalink to this heading"></a></h3>
+<p>This event arises when the DHCP client successfully gets the IPV4 address from the DHCP server, or when the IPV4 address is changed. The event means that everything is ready and the application can begin its tasks (e.g., creating sockets).</p>
+<p>The IPV4 may be changed because of the following reasons:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The DHCP client fails to renew/rebind the IPV4 address, and the station's IPV4 is reset to 0.</p></li>
+<li><p>The DHCP client rebinds to a different address.</p></li>
+<li><p>The static-configured IPV4 address is changed.</p></li>
+</ul>
+</div></blockquote>
+<p>Whether the IPV4 address is changed or not is indicated by the field <code class="docutils literal notranslate"><span class="pre">ip_change</span></code> of <code class="docutils literal notranslate"><span class="pre">ip_event_got_ip_t</span></code>.</p>
+<p>The socket is based on the IPV4 address, which means that, if the IPV4 changes, all sockets relating to this IPV4 will become abnormal. Upon receiving this event, the application needs to close all sockets and recreate the application when the IPV4 changes to a valid one.</p>
+</section>
+<section id="ip-event-got-ip6">
+<h3>IP_EVENT_GOT_IP6<a class="headerlink" href="#ip-event-got-ip6" title="Permalink to this heading"></a></h3>
+<p>This event arises when the IPV6 SLAAC support auto-configures an address for the ESP32-C3, or when this address changes. The event means that everything is ready and the application can begin its tasks, e.g., creating sockets.</p>
+</section>
+<section id="ip-event-sta-lost-ip">
+<h3>IP_EVENT_STA_LOST_IP<a class="headerlink" href="#ip-event-sta-lost-ip" title="Permalink to this heading"></a></h3>
+<p>This event arises when the IPV4 address becomes invalid.</p>
+<p>IP_EVENT_STA_LOST_IP does not arise immediately after the Wi-Fi disconnects. Instead, it starts an IPV4 address lost timer (configurable via <a class="reference internal" href="../../api-reference/kconfig-reference.html#config-esp-netif-lost-ip-timer-enable"><span class="std std-ref">CONFIG_ESP_NETIF_LOST_IP_TIMER_ENABLE</span></a> and <a class="reference internal" href="../../api-reference/kconfig-reference.html#config-esp-netif-ip-lost-timer-interval"><span class="std std-ref">CONFIG_ESP_NETIF_IP_LOST_TIMER_INTERVAL</span></a>). If the IPV4 address is got before the timer expires, IP_EVENT_STA_LOST_IP does not happen. Otherwise, the event arises when the IPV4 address lost timer expires.</p>
+<p>Generally, the application can ignore this event, because it is just a debug event to inform that the IPV4 address is lost.</p>
+</section>
+<section id="wifi-event-ap-start">
+<h3>WIFI_EVENT_AP_START<a class="headerlink" href="#wifi-event-ap-start" title="Permalink to this heading"></a></h3>
+<p>Similar to <a class="reference internal" href="#id2">WIFI_EVENT_STA_START</a>.</p>
+</section>
+<section id="wifi-event-ap-stop">
+<h3>WIFI_EVENT_AP_STOP<a class="headerlink" href="#wifi-event-ap-stop" title="Permalink to this heading"></a></h3>
+<p>Similar to <a class="reference internal" href="#wifi-event-sta-stop">WIFI_EVENT_STA_STOP</a>.</p>
+</section>
+<section id="wifi-event-ap-staconnected">
+<h3>WIFI_EVENT_AP_STACONNECTED<a class="headerlink" href="#wifi-event-ap-staconnected" title="Permalink to this heading"></a></h3>
+<p>Every time a station is connected to ESP32-C3 AP, the <a class="reference internal" href="#wifi-event-ap-staconnected">WIFI_EVENT_AP_STACONNECTED</a> will arise. Upon receiving this event, the event task will do nothing, and the application callback can also ignore it. However, you may want to do something, for example, to get the info of the connected STA.</p>
+</section>
+<section id="wifi-event-ap-stadisconnected">
+<h3>WIFI_EVENT_AP_STADISCONNECTED<a class="headerlink" href="#wifi-event-ap-stadisconnected" title="Permalink to this heading"></a></h3>
+<p>This event can happen in the following scenarios:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The application calls <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_disconnectv" title="esp_wifi_disconnect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_disconnect()</span></code></a>, or <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_deauth_sta8uint16_t" title="esp_wifi_deauth_sta"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_deauth_sta()</span></code></a>, to manually disconnect the station.</p></li>
+<li><p>The Wi-Fi driver kicks off the station, e.g., because the AP has not received any packets in the past five minutes. The time can be modified by <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t" title="esp_wifi_set_inactive_time"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_inactive_time()</span></code></a>.</p></li>
+<li><p>The station kicks off the AP.</p></li>
+</ul>
+</div></blockquote>
+<p>When this event happens, the event task will do nothing, but the application event callback needs to do something, e.g., close the socket which is related to this station.</p>
+</section>
+<section id="wifi-event-ap-probereqrecved">
+<h3>WIFI_EVENT_AP_PROBEREQRECVED<a class="headerlink" href="#wifi-event-ap-probereqrecved" title="Permalink to this heading"></a></h3>
+<p>This event is disabled by default. The application can enable it via API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv423esp_wifi_set_event_mask8uint32_t" title="esp_wifi_set_event_mask"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_event_mask()</span></code></a>.
+When this event is enabled, it will be raised each time the AP receives a probe request.</p>
+</section>
+<section id="wifi-event-sta-beacon-timeout">
+<span id="id6"></span><h3>WIFI_EVENT_STA_BEACON_TIMEOUT<a class="headerlink" href="#wifi-event-sta-beacon-timeout" title="Permalink to this heading"></a></h3>
+<p>If the station does not receive the beacon of the connected AP within the inactive time, the beacon timeout happens, the <a class="reference internal" href="#wifi-event-sta-beacon-timeout"><span class="std std-ref">WIFI_EVENT_STA_BEACON_TIMEOUT</span></a> will arise. The application can set inactive time via API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv426esp_wifi_set_inactive_time16wifi_interface_t8uint16_t" title="esp_wifi_set_inactive_time"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_inactive_time()</span></code></a>.</p>
+</section>
+<section id="wifi-event-connectionless-module-wake-interval-start">
+<span id="id7"></span><h3>WIFI_EVENT_CONNECTIONLESS_MODULE_WAKE_INTERVAL_START<a class="headerlink" href="#wifi-event-connectionless-module-wake-interval-start" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="#wifi-event-connectionless-module-wake-interval-start"><span class="std std-ref">WIFI_EVENT_CONNECTIONLESS_MODULE_WAKE_INTERVAL_START</span></a> will arise at the start of connectionless module <cite>Interval</cite>. See <a class="reference internal" href="wifi-performance-and-power-save.html#connectionless-module-power-save"><span class="std std-ref">connectionless module power save</span></a>.</p>
+</section>
+</section>
+<section id="esp32-c3-wi-fi-configuration">
+<span id="wifi-configuration"></span><h2>ESP32-C3 Wi-Fi Configuration<a class="headerlink" href="#esp32-c3-wi-fi-configuration" title="Permalink to this heading"></a></h2>
+<p>All configurations will be stored into flash when the Wi-Fi NVS is enabled; otherwise, refer to <a class="reference internal" href="#wifi-nvs-flash"><span class="std std-ref">Wi-Fi NVS Flash</span></a>.</p>
+<section id="wi-fi-mode">
+<h3>Wi-Fi Mode<a class="headerlink" href="#wi-fi-mode" title="Permalink to this heading"></a></h3>
+<p>Call <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv417esp_wifi_set_mode11wifi_mode_t" title="esp_wifi_set_mode"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_mode()</span></code></a> to set the Wi-Fi mode.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23.1%" />
+<col style="width: 76.9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WIFI_MODE_NULL</span></code></p></td>
+<td><p>NULL mode: in this mode, the internal data struct is not allocated to the station and the AP, while both the station and AP interfaces are not initialized for RX/TX Wi-Fi data. Generally, this mode is used for Sniffer, or when you only want to stop both the station and the AP without calling <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv415esp_wifi_deinitv" title="esp_wifi_deinit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_deinit()</span></code></a> to unload the whole Wi-Fi driver.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WIFI_MODE_STA</span></code></p></td>
+<td><p>Station mode: in this mode, <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a> will init the internal station data, while the station’s interface is ready for the RX and TX Wi-Fi data. After <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv416esp_wifi_connectv" title="esp_wifi_connect"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_connect()</span></code></a>, the station will connect to the target AP.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WIFI_MODE_AP</span></code></p></td>
+<td><p>AP mode: in this mode, <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a> will init the internal AP data, while the AP’s interface is ready for RX/TX Wi-Fi data. Then, the Wi-Fi driver starts broad-casting beacons, and the AP is ready to get connected to other stations.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">WIFI_MODE_APSTA</span></code></p></td>
+<td><p>Station/AP coexistence mode: in this mode, <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv414esp_wifi_startv" title="esp_wifi_start"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_start()</span></code></a> will simultaneously initialize both the station and the AP. This is done in station mode and AP mode. Please note that the channel of the external AP, which the ESP station is connected to, has higher priority over the ESP AP channel.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="station-basic-configuration">
+<span id="id8"></span><h3>Station Basic Configuration<a class="headerlink" href="#station-basic-configuration" title="Permalink to this heading"></a></h3>
+<p>API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t" title="esp_wifi_set_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_config()</span></code></a> can be used to configure the station. And the configuration will be stored in NVS. The table below describes the fields in detail.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23.1%" />
+<col style="width: 76.9%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ssid</p></td>
+<td><p>This is the SSID of the target AP, to which the station wants to connect.</p></td>
+</tr>
+<tr class="row-odd"><td><p>password</p></td>
+<td><p>Password of the target AP.</p></td>
+</tr>
+<tr class="row-even"><td><p>scan_method</p></td>
+<td><p>For <code class="docutils literal notranslate"><span class="pre">WIFI_FAST_SCAN</span></code> scan, the scan ends when the first matched AP is found. For <code class="docutils literal notranslate"><span class="pre">WIFI_ALL_CHANNEL_SCAN</span></code>, the scan finds all matched APs on all channels. The default scan is <code class="docutils literal notranslate"><span class="pre">WIFI_FAST_SCAN</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>bssid_set</p></td>
+<td><p>If bssid_set is 0, the station connects to the AP whose SSID is the same as the field “ssid”, while the field “bssid” is ignored. In all other cases, the station connects to the AP whose SSID is the same as the “ssid” field, while its BSSID is the same the “bssid” field .</p></td>
+</tr>
+<tr class="row-even"><td><p>bssid</p></td>
+<td><p>This is valid only when bssid_set is 1; see field “bssid_set”.</p></td>
+</tr>
+<tr class="row-odd"><td><p>channel</p></td>
+<td><p>If the channel is 0, the station scans the channel 1 ~ N to search for the target AP; otherwise, the station starts by scanning the channel whose value is the same as that of the “channel” field, and then scans the channel 1 ~ N but skip the specific channel to find the target AP. For example, if the channel is 3, the scan order will be 3, 1, 2, 4,..., N. If you do not know which channel the target AP is running on, set it to 0.</p></td>
+</tr>
+<tr class="row-even"><td><p>sort_method</p></td>
+<td><p>This field is only for <code class="docutils literal notranslate"><span class="pre">WIFI_ALL_CHANNEL_SCAN</span></code>.</p>
+<p>If the sort_method is <code class="docutils literal notranslate"><span class="pre">WIFI_CONNECT_AP_BY_SIGNAL</span></code>, all matched APs are sorted by signal, and the AP with the best signal will be connected firstly. For example, the station wants to connect an AP whose SSID is “apxx”. If the scan finds two APs whose SSID equals to “apxx”, and the first AP’s signal is -90 dBm while the second AP’s signal is -30 dBm, the station connects the second AP firstly, and it would not connect the first one unless it fails to connect the second one.</p>
+<p>If the sort_method is <code class="docutils literal notranslate"><span class="pre">WIFI_CONNECT_AP_BY_SECURITY</span></code>, all matched APs are sorted by security. For example, the station wants to connect an AP whose SSID is “apxx”. If the scan finds two APs whose SSID is “apxx”, and the security of the first found AP is open while the second one is WPA2, the station connects to the second AP firstly, and it would not connect the first one unless it fails to connect the second one.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>threshold</p></td>
+<td><p>The threshold is used to filter the found AP. If the RSSI or security mode is less than the configured threshold, the AP will be discarded.</p>
+<p>If the RSSI is set to 0, it means the default threshold is used, and the default RSSI threshold is -127 dBm. If the authmode threshold is set to 0, it means the default threshold is used, and the default authmode threshold is <code class="docutils literal notranslate"><span class="pre">WIFI_AUTH_OPEN</span></code>.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p>WEP and TKIP are deprecated in IEEE 802.11-2016 and should not be used. To make the station connect only to APs with WPA2 or higher security, set <code class="docutils literal notranslate"><span class="pre">wifi_config_t.sta.threshold.authmode</span></code> to <code class="docutils literal notranslate"><span class="pre">WIFI_AUTH_WPA2_PSK</span></code>. APs below this threshold, such as OPEN, WEP, and WPA-PSK, will be ignored during connection filtering.</p>
+</div>
+</section>
+<section id="ap-basic-configuration">
+<h3>AP Basic Configuration<a class="headerlink" href="#ap-basic-configuration" title="Permalink to this heading"></a></h3>
+<p>API <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv419esp_wifi_set_config16wifi_interface_tP13wifi_config_t" title="esp_wifi_set_config"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_config()</span></code></a> can be used to configure the AP. And the configuration will be stored in NVS. The table below describes the fields in detail.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21.4%" />
+<col style="width: 78.6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>ssid</p></td>
+<td><p>SSID of AP; if the ssid[0] is 0xFF and ssid[1] is 0xFF, the AP defaults the SSID to <code class="docutils literal notranslate"><span class="pre">ESP_aabbcc</span></code>, where “aabbcc” is the last three bytes of the AP MAC.</p></td>
+</tr>
+<tr class="row-odd"><td><p>password</p></td>
+<td><p>Password of AP; if the auth mode is <code class="docutils literal notranslate"><span class="pre">WIFI_AUTH_OPEN</span></code>, this field will be ignored.</p></td>
+</tr>
+<tr class="row-even"><td><p>ssid_len</p></td>
+<td><p>Length of SSID; if ssid_len is 0, check the SSID until there is a termination character. If ssid_len &gt; 32, change it to 32; otherwise, set the SSID length according to ssid_len.</p></td>
+</tr>
+<tr class="row-odd"><td><p>channel</p></td>
+<td><p>Channel of AP; set to 0 for auto selection (min channel: typically 1 for 2.4G). Other invalid values return <code class="docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code>. So, please make sure the channel is within the required range. For more details, refer to <a class="reference internal" href="#wi-fi-country-code">Wi-Fi Country Code</a>.</p></td>
+</tr>
+<tr class="row-even"><td><p>authmode</p></td>
+<td><p>Auth mode of ESP AP; currently, ESP AP does not support AUTH_WEP. If the authmode is an invalid value, AP defaults the value to <code class="docutils literal notranslate"><span class="pre">WIFI_AUTH_OPEN</span></code>.</p></td>
+</tr>
+<tr class="row-odd"><td><p>ssid_hidden</p></td>
+<td><p>If ssid_hidden is 1, AP does not broadcast the SSID; otherwise, it does broadcast the SSID.</p></td>
+</tr>
+<tr class="row-even"><td><p>max_connection</p></td>
+<td><p>The max number of stations allowed to connect in. ESP32-C3 supports up to 15 (<code class="docutils literal notranslate"><span class="pre">ESP_WIFI_MAX_CONN_NUM</span></code>) Wi-Fi connections. Please note that soft-AP and ESP-NOW share the same encryption hardware keys, so the max_connection parameter will be affected by the <a class="reference internal" href="../../api-reference/kconfig-reference.html#config-esp-wifi-espnow-max-encrypt-num"><span class="std std-ref">CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM</span></a>. The total number of encryption hardware keys is 17, if <a class="reference internal" href="../../api-reference/kconfig-reference.html#config-esp-wifi-espnow-max-encrypt-num"><span class="std std-ref">CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM</span></a> &lt;= 2, the max_connection can be set up to 15, otherwise the max_connection can be set up to (17 - <a class="reference internal" href="../../api-reference/kconfig-reference.html#config-esp-wifi-espnow-max-encrypt-num"><span class="std std-ref">CONFIG_ESP_WIFI_ESPNOW_MAX_ENCRYPT_NUM</span></a>).</p></td>
+</tr>
+<tr class="row-odd"><td><p>beacon_interval</p></td>
+<td><p>Beacon interval; the value is 100 ~ 60000 ms, with default value being 100 ms. If the value is out of range, AP defaults it to 100 ms.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wi-fi-protocol-mode">
+<h3>Wi-Fi Protocol Mode<a class="headerlink" href="#wi-fi-protocol-mode" title="Permalink to this heading"></a></h3>
+<p>Currently, the ESP-IDF supports the following protocol modes:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21.4%" />
+<col style="width: 78.6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Protocol Mode</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>802.11b</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_11B)</span></code> to set the station/AP to 802.11b-only mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>802.11bg</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_11B|WIFI_PROTOCOL_11G)</span></code> to set the station/AP to 802.11bg mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>802.11g</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_11B|WIFI_PROTOCOL_11G)</span></code> and esp_wifi_config_11b_rate(ifx, true) to set the station/AP to 802.11g mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>802.11bgn</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_11B|</span> <span class="pre">WIFI_PROTOCOL_11G|WIFI_PROTOCOL_11N)</span></code> to set the station/ AP to BGN mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>802.11gn</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_11B|WIFI_PROTOCOL_11G|WIFI_PROTOCOL_11N)</span></code> and esp_wifi_config_11b_rate(ifx, true) to set the station/AP to 802.11gn mode.</p></td>
+</tr>
+<tr class="row-odd"><td><p>802.11 BGNLR</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_11B|</span> <span class="pre">WIFI_PROTOCOL_11G|WIFI_PROTOCOL_11N|WIFI_PROTOCOL_LR)</span></code> to set the station/AP to BGN and the LR mode.</p></td>
+</tr>
+<tr class="row-even"><td><p>802.11 LR</p></td>
+<td><p>Call <code class="docutils literal notranslate"><span class="pre">esp_wifi_set_protocol(ifx,</span> <span class="pre">WIFI_PROTOCOL_LR)</span></code> to set the station/AP only to the LR mode.</p>
+<p><strong>This mode is an Espressif-patented mode which can achieve a one-kilometer line of sight range. Please make sure both the station and the AP are connected to an ESP device.</strong></p>
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wi-fi-bandwidth-mode">
+<h3>Wi-Fi Bandwidth Mode<a class="headerlink" href="#wi-fi-bandwidth-mode" title="Permalink to this heading"></a></h3>
+<p>ESP32-C3 currently supports 20 MHz and 40 MHz bandwidth modes, which are used in combination with protocol modes. Common combinations include:</p>
+<ul class="simple">
+<li><p><strong>HT20</strong>: 802.11n with 20 MHz bandwidth</p></li>
+<li><p><strong>HT40</strong>: 802.11n with 40 MHz bandwidth</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>The 40 MHz bandwidth mode is only supported in 802.11n mode.</p></li>
+</ul>
+</div>
+<p>Applications can use the <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv422esp_wifi_set_bandwidth16wifi_interface_t16wifi_bandwidth_t" title="esp_wifi_set_bandwidth"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_bandwidth()</span></code></a> API to set the bandwidth mode of the current interface.</p>
+<p>Example:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="c1">// Set STA interface protocol to 802.11bgn</span>
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">WIFI_PROTOCOL_11B</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">WIFI_PROTOCOL_11G</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">WIFI_PROTOCOL_11N</span><span class="p">;</span>
+<span class="n">esp_wifi_set_protocol</span><span class="p">(</span><span class="n">WIFI_IF_STA</span><span class="p">,</span><span class="w"> </span><span class="n">protocol</span><span class="p">);</span>
+
+<span class="c1">// Set STA interface bandwidth to 40 MHz</span>
+<span class="n">esp_wifi_set_bandwidth</span><span class="p">(</span><span class="n">WIFI_IF_STA</span><span class="p">,</span><span class="w"> </span><span class="n">WIFI_BW40</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+<section id="long-range-lr">
+<span id="wifi-country-code"></span><h3>Long Range (LR)<a class="headerlink" href="#long-range-lr" title="Permalink to this heading"></a></h3>
+<p>Long Range (LR) mode is an Espressif-patented Wi-Fi mode which can achieve a one-kilometer line of sight range. Compared to the traditional 802.11b mode, it has better reception sensitivity, stronger anti-interference ability, and longer transmission distance.</p>
+<section id="lr-compatibility">
+<h4>LR Compatibility<a class="headerlink" href="#lr-compatibility" title="Permalink to this heading"></a></h4>
+<p>Since LR is an Espressif-unique Wi-Fi mode operating on the 2.4 GHz band, only ESP32-series chips (excluding the ESP32-C2) support LR data transmission and reception. To ensure compatibility, the ESP32 devices should NOT use LR data rates when connected to non-LR-capable devices. This can be enforced by configuring the appropriate Wi-Fi mode:</p>
+<ul class="simple">
+<li><p>If the negotiated mode supports LR, ESP32 devices may transmit data at LR rates.</p></li>
+<li><p>Otherwise, they must default to traditional Wi-Fi data rates.</p></li>
+</ul>
+<p>The following table depicts the Wi-Fi mode negotiation on 2.4 GHz band:</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>APSTA</p></th>
+<th class="head"><p>BGN</p></th>
+<th class="head"><p>BG</p></th>
+<th class="head"><p>B</p></th>
+<th class="head"><p>BGNLR</p></th>
+<th class="head"><p>BGLR</p></th>
+<th class="head"><p>BLR</p></th>
+<th class="head"><p>LR</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>BGN</p></td>
+<td><p>BGN</p></td>
+<td><p>BG</p></td>
+<td><p>B</p></td>
+<td><p>BGN</p></td>
+<td><p>BG</p></td>
+<td><p>B</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>BG</p></td>
+<td><p>BG</p></td>
+<td><p>BG</p></td>
+<td><p>B</p></td>
+<td><p>BG</p></td>
+<td><p>BG</p></td>
+<td><p>B</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-even"><td><p>B</p></td>
+<td><p>B</p></td>
+<td><p>B</p></td>
+<td><p>B</p></td>
+<td><p>B</p></td>
+<td><p>B</p></td>
+<td><p>B</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>BGNLR</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>BGNLR</p></td>
+<td><p>BGLR</p></td>
+<td><p>BLR</p></td>
+<td><p>LR</p></td>
+</tr>
+<tr class="row-even"><td><p>BGLR</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>BGLR</p></td>
+<td><p>BGLR</p></td>
+<td><p>BLR</p></td>
+<td><p>LR</p></td>
+</tr>
+<tr class="row-odd"><td><p>BLR</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>BLR</p></td>
+<td><p>BLR</p></td>
+<td><p>BLR</p></td>
+<td><p>LR</p></td>
+</tr>
+<tr class="row-even"><td><p>LR</p></td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><ul class="simple">
+<li></li>
+</ul>
+</td>
+<td><p>LR</p></td>
+<td><p>LR</p></td>
+<td><p>LR</p></td>
+<td><p>LR</p></td>
+</tr>
+</tbody>
+</table>
+<p>In the above table, the row is the Wi-Fi mode of AP and the column is the Wi-Fi mode of station. The &quot;-&quot; indicates Wi-Fi mode of the AP and station are not compatible.</p>
+<p>According to the table, the following conclusions can be drawn:</p>
+<ul class="simple">
+<li><p>For LR-enabled AP of ESP32-C3, it is incompatible with traditional 802.11 mode, because the beacon is sent in LR mode.</p></li>
+<li><p>For LR-enabled station of ESP32-C3 whose mode is NOT LR-only mode, it is compatible with traditional 802.11 mode.</p></li>
+<li><p>If both station and AP are ESP32 series chips devices (except ESP32-C2) and both of them have enabled LR mode, the negotiated mode supports LR.</p></li>
+</ul>
+<p>If the negotiated Wi-Fi mode supports both traditional 802.11 mode and LR mode, it is the Wi-Fi driver's responsibility to automatically select the best data rate in different Wi-Fi modes and the application can ignore it.</p>
+</section>
+<section id="lr-impacts-to-traditional-wi-fi-device">
+<h4>LR Impacts to Traditional Wi-Fi Device<a class="headerlink" href="#lr-impacts-to-traditional-wi-fi-device" title="Permalink to this heading"></a></h4>
+<p>The data transmission in LR rate has no impacts on the traditional Wi-Fi device because:</p>
+<ul class="simple">
+<li><p>The CCA and backoff process in LR mode are consistent with 802.11 specification.</p></li>
+<li><p>The traditional Wi-Fi device can detect the LR signal via CCA and do backoff.</p></li>
+</ul>
+<p>In other words, the transmission impact in LR mode is similar to that in 802.11b mode.</p>
+</section>
+<section id="lr-transmission-distance">
+<h4>LR Transmission Distance<a class="headerlink" href="#lr-transmission-distance" title="Permalink to this heading"></a></h4>
+<p>The reception sensitivity gain of LR is about 4 dB larger than that of the traditional 802.11b mode. Theoretically, the transmission distance is about 2 to 2.5 times the distance of 11B.</p>
+</section>
+<section id="lr-throughput">
+<h4>LR Throughput<a class="headerlink" href="#lr-throughput" title="Permalink to this heading"></a></h4>
+<p>The LR rate has very limited throughput, because the raw PHY data rate LR is 1/2 Mbps and 1/4 Mbps.</p>
+</section>
+<section id="when-to-use-lr">
+<h4>When to Use LR<a class="headerlink" href="#when-to-use-lr" title="Permalink to this heading"></a></h4>
+<p>The general conditions for using LR are:</p>
+<ul class="simple">
+<li><p>Both the AP and station are Espressif devices.</p></li>
+<li><p>Long distance Wi-Fi connection and data transmission is required.</p></li>
+<li><p>Data throughput requirements are very small, such as remote device control.</p></li>
+</ul>
+</section>
+</section>
+<section id="wi-fi-country-code">
+<h3>Wi-Fi Country Code<a class="headerlink" href="#wi-fi-country-code" title="Permalink to this heading"></a></h3>
+<p>Call <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv420esp_wifi_set_countryPK14wifi_country_t" title="esp_wifi_set_country"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_set_country()</span></code></a> to set the country info. The table below describes the fields in detail. Please consult local 2.4 GHz RF operating regulations before configuring these fields.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 21.4%" />
+<col style="width: 78.6%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Field</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>cc[3]</p></td>
+<td><p>Country code string. This attribute identifies the country or noncountry entity in which the station/AP is operating. If it is a country, the first two octets of this string is the two-character country info as described in the document ISO/IEC3166-1. The third octet is one of the following:</p>
+<ul class="simple">
+<li><p>an ASCII space character, which means the regulations under which the station/AP is operating encompass all environments for the current frequency band in the country.</p></li>
+<li><p>an ASCII ‘O’ character, which means the regulations under which the station/AP is operating are for an outdoor environment only.</p></li>
+<li><p>an ASCII ‘I’ character, which means the regulations under which the station/AP is operating are for an indoor environment only.</p></li>
+<li><p>an ASCII ‘X’ character, which means the station/AP is operating under a noncountry entity. The first two octets of the noncountry entity is two ASCII ‘XX’ characters.</p></li>
+<li><p>the binary representation of the Operating Class table number currently in use. Refer to Annex E of IEEE Std 802.11-2020.</p></li>
+</ul>
+</td>
+</tr>
+<tr class="row-odd"><td><p>schan</p></td>
+<td><p>Start channel. It is the minimum channel number of the regulations under which the station/AP can operate.</p></td>
+</tr>
+<tr class="row-even"><td><p>nchan</p></td>
+<td><p>Total number of channels as per the regulations. For example, if the schan=1, nchan=13, then the station/AP can send data from channel 1 to 13.</p></td>
+</tr>
+<tr class="row-odd"><td><p>policy</p></td>
+<td><p>Country policy. This field controls which country info will be used if the configured country info is in conflict with the connected AP’s. For more details on related policies, see the following section.</p></td>
+</tr>
+</tbody>
+</table>
+<p>The default country info is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wifi_country_t</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="s2">"01"</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">schan</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">nchan</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span>
+  <span class="o">.</span><span class="n">policy</span> <span class="o">=</span> <span class="n">WIFI_COUNTRY_POLICY_AUTO</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>If the Wi-Fi Mode is station/AP coexist mode, they share the same configured country info. Sometimes, the country info of AP, to which the station is connected, is different from the country info of configured. For example, the configured station has country info:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wifi_country_t</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="s2">"JP"</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">schan</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">nchan</span> <span class="o">=</span> <span class="mi">14</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">policy</span> <span class="o">=</span> <span class="n">WIFI_COUNTRY_POLICY_AUTO</span><span class="p">,</span>
+<span class="p">};</span>
+</pre></div>
+</div>
+<p>but the connected AP has country info:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">wifi_country_t</span> <span class="n">config</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="o">.</span><span class="n">cc</span> <span class="o">=</span> <span class="s2">"CN"</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">schan</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="o">.</span><span class="n">nchan</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>
+<span class="p">;</span>
+</pre></div>
+</div>
+<p>then country info of connected AP's is used.</p>
+<p>The following table depicts which country info is used in different Wi-Fi modes and different country policies, and it also describes the impact on active scan.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 23.1%" />
+<col style="width: 23.1%" />
+<col style="width: 53.8%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Wi-Fi Mode</p></th>
+<th class="head"><p>Policy</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Station</p></td>
+<td><p>WIFI_COUNTRY_POLICY_AUTO</p></td>
+<td><p>If the connected AP has country IE in its beacon, the country info equals to the country info in beacon. Otherwise, use the default country info.</p>
+<p>For scan:</p>
+<blockquote>
+<div><p>Use active scan from 1 to 11 and use passive scan from 12 to 14.</p>
+</div></blockquote>
+<p>Always keep in mind that if an AP with hidden SSID and station is set to a passive scan channel, the passive scan will not find it. In other words, if the application hopes to find the AP with hidden SSID in every channel, the policy of country info should be configured to WIFI_COUNTRY_POLICY_MANUAL.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Station</p></td>
+<td><p>WIFI_COUNTRY_POLICY_MANUAL</p></td>
+<td><p>Always use the configured country info.</p>
+<p>For scan:</p>
+<blockquote>
+<div><p>Use active scan from schan to schan+nchan-1.</p>
+</div></blockquote>
+</td>
+</tr>
+<tr class="row-even"><td><p>AP</p></td>
+<td><p>WIFI_COUNTRY_POLICY_AUTO</p></td>
+<td><p>Always use the configured country info.</p></td>
+</tr>
+<tr class="row-odd"><td><p>AP</p></td>
+<td><p>WIFI_COUNTRY_POLICY_MANUAL</p></td>
+<td><p>Always use the configured country info.</p></td>
+</tr>
+<tr class="row-even"><td><p>Station/AP-coexistence</p></td>
+<td><p>WIFI_COUNTRY_POLICY_AUTO</p></td>
+<td><p>Station: Same as station mode with policy WIFI_COUNTRY_POLICY_AUTO.
+AP: If the station does not connect to any external AP, the AP uses the configured country info. If the station connects to an external AP, the AP has the same country info as the station.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Station/AP-coexistence</p></td>
+<td><p>WIFI_COUNTRY_POLICY_MANUAL</p></td>
+<td><p>Station: Same as station mode with policy WIFI_COUNTRY_POLICY_MANUAL.
+AP: Same as AP mode with policy WIFI_COUNTRY_POLICY_MANUAL.</p></td>
+</tr>
+</tbody>
+</table>
+<section id="home-channel">
+<h4>Home Channel<a class="headerlink" href="#home-channel" title="Permalink to this heading"></a></h4>
+<p>In AP mode, the home channel is defined as the AP channel. In station mode, home channel is defined as the channel of AP which the station is connected to. In station/AP-coexistence mode, the home channel of AP and station must be the same, and if they are different, the station's home channel is always in priority. For example, assume that the AP is on channel 6, and the station connects to an AP whose channel is 9. Since the station's home channel has higher priority, the AP needs to switch its channel from 6 to 9 to make sure that it has the same home channel as the station. While switching channel, the ESP32-C3 in AP mode will notify the connected stations about the channel migration using a Channel Switch Announcement (CSA). Station that supports channel switching will transit without disconnecting and reconnecting to the AP.</p>
+</section>
+</section>
+</section>
+<section id="wi-fi-menuconfig">
+<span id="wifi-menuconfig"></span><h2>Wi-Fi Menuconfig<a class="headerlink" href="#wi-fi-menuconfig" title="Permalink to this heading"></a></h2>
+<section id="wi-fi-buffer-configure">
+<span id="wifi-buffer-configure"></span><h3>Wi-Fi Buffer Configure<a class="headerlink" href="#wi-fi-buffer-configure" title="Permalink to this heading"></a></h3>
+<p>If you are going to modify the default number or type of buffer, it would be helpful to also have an overview of how the buffer is allocated/freed in the data path. The following diagram shows this process in the TX direction:</p>
+<figure class="align-center" id="id10">
+<div class="align-default"><img height="160" src="../../_images/blockdiag-6067df17313291e37e6390944b6f5ebba9c5cc9a.png" width="590" /></div>
+<figcaption>
+<p><span class="caption-text">TX Buffer Allocation</span><a class="headerlink" href="#id10" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Description:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The application allocates the data which needs to be sent out.</p></li>
+<li><p>The application calls TCPIP-/Socket-related APIs to send the user data. These APIs will allocate a PBUF used in LwIP, and make a copy of the user data.</p></li>
+<li><p>When LwIP calls a Wi-Fi API to send the PBUF, the Wi-Fi API will allocate a &quot;Dynamic Tx Buffer&quot; or &quot;Static Tx Buffer&quot;, make a copy of the LwIP PBUF, and finally send the data.</p></li>
+</ul>
+</div></blockquote>
+<p>The following diagram shows how buffer is allocated/freed in the RX direction:</p>
+<figure class="align-center" id="id11">
+<div class="align-default"><img height="160" src="../../_images/blockdiag-a2772a74704c22908b676e64845c9692331a1923.png" width="600" /></div>
+<figcaption>
+<p><span class="caption-text">RX Buffer Allocation</span><a class="headerlink" href="#id11" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+<p>Description:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The Wi-Fi hardware receives a packet over the air and puts the packet content to the &quot;Static Rx Buffer&quot;, which is also called &quot;RX DMA Buffer&quot;.</p></li>
+<li><p>The Wi-Fi driver allocates a &quot;Dynamic Rx Buffer&quot;, makes a copy of the &quot;Static Rx Buffer&quot;, and returns the &quot;Static Rx Buffer&quot; to hardware.</p></li>
+<li><p>The Wi-Fi driver delivers the packet to the upper-layer (LwIP), and allocates a PBUF for holding the &quot;Dynamic Rx Buffer&quot;.</p></li>
+<li><p>The application receives data from LwIP.</p></li>
+</ul>
+</div></blockquote>
+<p>The diagram shows the configuration of the Wi-Fi internal buffer.</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 15.4%" />
+<col style="width: 15.4%" />
+<col style="width: 15.4%" />
+<col style="width: 15.4%" />
+<col style="width: 38.5%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Buffer Type</p></th>
+<th class="head"><p>Alloc Type</p></th>
+<th class="head"><p>Default</p></th>
+<th class="head"><p>Configurable</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Static RX Buffer (Hardware RX Buffer)</p></td>
+<td><p>Static</p></td>
+<td><p>10 * 1600 Bytes</p></td>
+<td><p>Yes</p></td>
+<td><p>This is a kind of DMA memory. It is initialized in <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv413esp_wifi_initPK18wifi_init_config_t" title="esp_wifi_init"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_init()</span></code></a> and freed in <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv415esp_wifi_deinitv" title="esp_wifi_deinit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_deinit()</span></code></a>. The ‘Static Rx Buffer’ forms the hardware receiving list. Upon receiving a frame over the air, hardware writes the frame into the buffer and raises an interrupt to the CPU. Then, the Wi-Fi driver reads the content from the buffer and returns the buffer back to the list.</p>
+<p>If needs be, the application can reduce the memory statically allocated by Wi-Fi. It can reduce this value from 10 to 6 to save 6400 Bytes of memory. It is not recommended to reduce the configuration to a value less than 6 unless the AMPDU feature is disabled.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Dynamic RX Buffer</p></td>
+<td><p>Dynamic</p></td>
+<td><p>32</p></td>
+<td><p>Yes</p></td>
+<td><p>The buffer length is variable and it depends on the received frames’ length. When the Wi-Fi driver receives a frame from the ‘Hardware Rx Buffer’, the ‘Dynamic Rx Buffer’ needs to be allocated from the heap. The number of the Dynamic Rx Buffer, configured in the menuconfig, is used to limit the total un-freed Dynamic Rx Buffer number.</p></td>
+</tr>
+<tr class="row-even"><td><p>Dynamic TX Buffer</p></td>
+<td><p>Dynamic</p></td>
+<td><p>32</p></td>
+<td><p>Yes</p></td>
+<td><p>This is a kind of DMA memory. It is allocated to the heap. When the upper-layer (LwIP) sends packets to the Wi-Fi driver, it firstly allocates a ‘Dynamic TX Buffer’ and makes a copy of the upper-layer buffer.</p>
+<p>The Dynamic and Static TX Buffers are mutually exclusive.</p>
+</td>
+</tr>
+<tr class="row-odd"><td><p>Static TX Buffer</p></td>
+<td><p>Static</p></td>
+<td><p>16 * 1600Bytes</p></td>
+<td><p>Yes</p></td>
+<td><p>This is a kind of DMA memory. It is initialized in <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv413esp_wifi_initPK18wifi_init_config_t" title="esp_wifi_init"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_init()</span></code></a> and freed in <a class="reference internal" href="../../api-reference/network/esp_wifi.html#_CPPv415esp_wifi_deinitv" title="esp_wifi_deinit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_wifi_deinit()</span></code></a>. When the upper-layer (LwIP) sends packets to the Wi-Fi driver, it firstly allocates a ‘Static TX Buffer’ and makes a copy of the upper-layer buffer.</p>
+<p>The Dynamic and Static TX Buffer are mutually exclusive.</p>
+<p>The TX buffer must be a DMA buffer. For this reason, if PSRAM is enabled, the TX buffer must be static.</p>
+</td>
+</tr>
+<tr class="row-even"><td><p>Management Short Buffer</p></td>
+<td><p>Dynamic</p></td>
+<td><p>8</p></td>
+<td><p>NO</p></td>
+<td><p>Wi-Fi driver’s internal buffer.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Management Long Buffer</p></td>
+<td><p>Dynamic</p></td>
+<td><p>32</p></td>
+<td><p>NO</p></td>
+<td><p>Wi-Fi driver’s internal buffer.</p></td>
+</tr>
+<tr class="row-even"><td><p>Management Long Long Buffer</p></td>
+<td><p>Dynamic</p></td>
+<td><p>32</p></td>
+<td><p>NO</p></td>
+<td><p>Wi-Fi driver’s internal buffer.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="wi-fi-nvs-flash">
+<span id="wifi-nvs-flash"></span><h3>Wi-Fi NVS Flash<a class="headerlink" href="#wi-fi-nvs-flash" title="Permalink to this heading"></a></h3>
+<p>If the Wi-Fi NVS flash is enabled, all Wi-Fi configurations set via the Wi-Fi APIs will be stored into flash, and the Wi-Fi driver will start up with these configurations the next time it powers on/reboots. However, the application can choose to disable the Wi-Fi NVS flash if it does not need to store the configurations into persistent memory, or has its own persistent storage, or simply due to debugging reasons, etc.</p>
+</section>
+</section>
+<section id="troubleshooting">
+<h2>Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permalink to this heading"></a></h2>
+<p>Please refer to a separate document with <a class="reference internal" href="../wireshark-user-guide.html"><span class="doc">Espressif Wireshark User Guide</span></a>.</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Overview (api-guides/wifi-driver/overview)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Overview (api-guides/wifi-driver/overview)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Wi-Fi Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../wireshark-user-guide.html" class="btn btn-neutral float-right" title="Espressif Wireshark User Guide" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

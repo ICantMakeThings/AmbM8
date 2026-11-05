@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Voice Activity Detection (VAD) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/vad.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/vad';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Temperature Sensor" href="temp_sensor.html" />
+    <link rel="prev" title="Low Power Inter-IC Sound (LP I2S)" href="lp_i2s.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Voice Activity Detection (VAD)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hardware-state-machine">Hardware State Machine</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hp-driver-functional-overview">HP Driver Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#lp-driver-functional-overview">LP Driver Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Voice Activity Detection (VAD)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/vad.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="voice-activity-detection-vad">
+<h1>Voice Activity Detection (VAD)<a class="headerlink" href="#voice-activity-detection-vad" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/vad.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>Voice Activity Detection (VAD) module facilitates the hardware implementation of the first-stage algorithm for voice wake-up and other multimedia functions.</p>
+<p>Additionally, it provides hardware support for low-power voice wake-up solutions.</p>
+<p>For LP I2S documentation, see <a class="reference internal" href="lp_i2s.html"><span class="doc">Low Power Inter-IC Sound</span></a>.</p>
+</section>
+<section id="hardware-state-machine">
+<h2>Hardware State Machine<a class="headerlink" href="#hardware-state-machine" title="Permalink to this heading"></a></h2>
+<p>LP VAD driver provides a structure <a class="reference internal" href="#_CPPv415lp_vad_config_t" title="lp_vad_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">lp_vad_config_t</span></code></a> to configure the LP VAD module:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N15lp_vad_config_t14init_frame_numE" title="lp_vad_config_t::init_frame_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::init_frame_num</span></code></a>, number of init frames that are used for VAD to denoise, this helps the VAD to decrease the accidental trigger ratio. Note too big values may lead to voice activity miss.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N15lp_vad_config_t17min_energy_threshE" title="lp_vad_config_t::min_energy_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::min_energy_thresh</span></code></a>, minimum energy threshold, voice activities with energy higher than this value will be detected.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N15lp_vad_config_t23skip_band_energy_threshE" title="lp_vad_config_t::skip_band_energy_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::skip_band_energy_thresh</span></code></a>, skip band energy threshold or not, the passband energy check determines whether the proportion of passband energy within the total frequency domain meets the required threshold. Note in different environments, enabling the passband energy check may reduce false trigger rates but could also increase the rate of missed detections.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N15lp_vad_config_t21speak_activity_threshE" title="lp_vad_config_t::speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::speak_activity_thresh</span></code></a>, when in speak-activity-listening-state, if number of the detected speak activity is higher than this value, VAD runs into speak-activity-detected-state.</p></li>
+<li><dl class="simple">
+<dt><a class="reference internal" href="#_CPPv4N15lp_vad_config_t25non_speak_activity_threshE" title="lp_vad_config_t::non_speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::non_speak_activity_thresh</span></code></a>, when in speak-activity-detected-state, if the number of the detected speak activity is higher than this value, but lower than <a class="reference internal" href="#_CPPv4N15lp_vad_config_t25max_speak_activity_threshE" title="lp_vad_config_t::max_speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::max_speak_activity_thresh</span></code></a>,</dt><dd><ul>
+<li><p>if the number of the detected non-speak activity is higher than this value, VAD runs into speak-activity-listening-state</p></li>
+<li><p>if the number of the detected non-speak activity is lower than this value, VAD keeps in speak-activity-detected-state</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p><a class="reference internal" href="#_CPPv4N15lp_vad_config_t25min_speak_activity_threshE" title="lp_vad_config_t::min_speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::min_speak_activity_thresh</span></code></a>, when in speak-activity-detected-state, if the number of the detected speak activity is higher than this value, but lower than <a class="reference internal" href="#_CPPv4N15lp_vad_config_t25max_speak_activity_threshE" title="lp_vad_config_t::max_speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::max_speak_activity_thresh</span></code></a>, then the VAD state machine will depends on the value of <a class="reference internal" href="#_CPPv4N15lp_vad_config_t25non_speak_activity_threshE" title="lp_vad_config_t::non_speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::non_speak_activity_thresh</span></code></a></p></li>
+<li><p><a class="reference internal" href="#_CPPv4N15lp_vad_config_t25max_speak_activity_threshE" title="lp_vad_config_t::max_speak_activity_thresh"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">lp_vad_config_t::max_speak_activity_thresh</span></code></a>, when in speak-activity-detected-state, if the number of the detected speak activity is higher than this value, VAD runs into speak-activity-listening-state</p></li>
+</ul>
+<p>Above configurations can change the VAD state machine shown below:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>                                           ┌──────────────────────────────────┐
+                                           │                                  │
+                             ┌─────────────┤  speak-activity-listening-state  │ ◄───────────────┐
+                             │             │                                  │                 │
+                             │             └──────────────────────────────────┘                 │
+                             │                          ▲                                       │
+                             │                          │                                       │
+                             │                          │                                       │
+                             │                          │                                       │
+                             │                          │                                       │
+detected speak activity      │                          │  detected speak activity              │   detected speak activity
+        &gt;=                   │                          │          &gt;=                           │           &gt;=
+'speak_activity_thresh'      │                          │  'min_speak_activity_thresh'          │   'max_speak_activity_thresh'
+                             │                          │                                       │
+                             │                          │          &amp;&amp;                           │
+                             │                          │                                       │
+                             │                          │  detected non-speak activity          │
+                             │                          │           &lt;                           │
+                             │                          │  'non_speak_activity_thresh'          │
+                             │                          │                                       │
+                             │                          │                                       │
+                             │                          │                                       │
+                             │                          │                                       │
+                             │                          │                                       │
+                             │              ┌───────────┴─────────────────────┐                 │
+                             │              │                                 │                 │
+                             └───────────►  │ speak-activity-detected-state   ├─────────────────┘
+                                            │                                 │
+                                            └─┬───────────────────────────────┘
+                                              │
+                                              │                     ▲
+                                              │                     │
+                                              │                     │
+                                              │                     │  detected speak activity
+                                              │                     │          &gt;=
+                                              │                     │  'min_speak_activity_thresh'
+                                              │                     │
+                                              │                     │          &amp;&amp;
+                                              │                     │
+                                              │                     │  detected non-speak activity
+                                              │                     │           &lt;
+                                              └─────────────────────┘  'non_speak_activity_thresh'
+</pre></div>
+</div>
+</section>
+<section id="hp-driver-functional-overview">
+<h2>HP Driver Functional Overview<a class="headerlink" href="#hp-driver-functional-overview" title="Permalink to this heading"></a></h2>
+<p>The VAD HP driver is used for configure the LP VAD to be working under the control of the HP core. The HP core can also be woken up by the VAD when voice activity is detected.</p>
+<section id="resource-allocation">
+<h3>Resource Allocation<a class="headerlink" href="#resource-allocation" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv420lp_vad_init_config_t" title="lp_vad_init_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">lp_vad_init_config_t</span></code></a> is the configuration structure that is needed to create a LP I2S VAD unit handle. To create a LP I2S VAD unit handle, you will need to first create a LP I2S channel handle. see <a class="reference internal" href="lp_i2s.html"><span class="doc">Low Power Inter-IC Sound</span></a>.</p>
+<p>You can call <a class="reference internal" href="#_CPPv419lp_i2s_vad_new_unit8lp_vad_tPK20lp_vad_init_config_tP17vad_unit_handle_t" title="lp_i2s_vad_new_unit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_i2s_vad_new_unit()</span></code></a> to create the handle. If the VAD unit is no longer used, you should recycle the allocated resource by calling <a class="reference internal" href="#_CPPv419lp_i2s_vad_del_unit17vad_unit_handle_t" title="lp_i2s_vad_del_unit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_i2s_vad_del_unit()</span></code></a>.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">vad_unit_handle_t</span><span class="w"> </span><span class="n">vad_handle</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">NULL</span><span class="p">;</span>
+<span class="n">lp_vad_init_config_t</span><span class="w"> </span><span class="n">init_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="p">.</span><span class="n">lp_i2s_chan</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rx_handle</span><span class="p">,</span>
+<span class="p">.</span><span class="n">vad_config</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">init_frame_num</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_energy_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">speak_activity_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">non_speak_activity_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">30</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">min_speak_activity_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">    </span><span class="p">.</span><span class="n">max_speak_activity_thresh</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="p">};</span>
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">lp_i2s_vad_new_unit</span><span class="p">(</span><span class="n">vad_id</span><span class="p">,</span><span class="w"> </span><span class="n">init_config</span><span class="p">,</span><span class="w"> </span><span class="o">&amp;</span><span class="n">vad_handle</span><span class="p">));</span>
+
+<span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">lp_i2s_vad_del_unit</span><span class="p">(</span><span class="n">vad_handle</span><span class="p">));</span>
+</pre></div>
+</div>
+</section>
+<section id="enable-and-disable-the-vad">
+<h3>Enable and Disable the VAD<a class="headerlink" href="#enable-and-disable-the-vad" title="Permalink to this heading"></a></h3>
+<p>Before using a VAD unit to detect voice activity, you need to enable the VAD unit by calling <a class="reference internal" href="#_CPPv417lp_i2s_vad_enable17vad_unit_handle_t" title="lp_i2s_vad_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_i2s_vad_enable()</span></code></a>, this function switches the driver state from <strong>init</strong> to <strong>enable</strong>, and also enables the VAD hardware. Calling <a class="reference internal" href="#_CPPv418lp_i2s_vad_disable17vad_unit_handle_t" title="lp_i2s_vad_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_i2s_vad_disable()</span></code></a> does the opposite, that is, put the driver back to the <strong>init</strong> state, the hardware will stop as well.</p>
+</section>
+<section id="hp-core-wake-up">
+<h3>HP Core Wake-up<a class="headerlink" href="#hp-core-wake-up" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="../system/sleep_modes.html#_CPPv427esp_sleep_enable_vad_wakeupv" title="esp_sleep_enable_vad_wakeup"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_sleep_enable_vad_wakeup()</span></code></a> can help you to set the VAD to be working as the HP core wake-up source. To make VAD work during sleep, you should let the system maintain the RTC domain and XTAL power. See code example below:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">esp_sleep_enable_vad_wakeup</span><span class="p">());</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="lp-driver-functional-overview">
+<h2>LP Driver Functional Overview<a class="headerlink" href="#lp-driver-functional-overview" title="Permalink to this heading"></a></h2>
+<p>The VAD LP driver is mainly for LP core wake-up. The VAD can be configured under HP core control, then it can wakeup the LP core when voice activities are detected.</p>
+<section id="id1">
+<h3>Resource Allocation<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv420lp_core_lp_vad_cfg_t" title="lp_core_lp_vad_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">lp_core_lp_vad_cfg_t</span></code></a> and <a class="reference internal" href="#_CPPv419lp_core_lp_vad_init8lp_vad_tPK20lp_core_lp_vad_cfg_t" title="lp_core_lp_vad_init"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_core_lp_vad_init()</span></code></a> are used to initialize the VAD LP driver.</p>
+<p><a class="reference internal" href="#_CPPv421lp_core_lp_vad_deinit8lp_vad_t" title="lp_core_lp_vad_deinit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_core_lp_vad_deinit()</span></code></a> is used to recycle the allocated resources.</p>
+</section>
+<section id="id2">
+<h3>Enable and Disable the VAD<a class="headerlink" href="#id2" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv421lp_core_lp_vad_enable8lp_vad_t" title="lp_core_lp_vad_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_core_lp_vad_enable()</span></code></a> and <a class="reference internal" href="#_CPPv422lp_core_lp_vad_disable8lp_vad_t" title="lp_core_lp_vad_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lp_core_lp_vad_disable()</span></code></a> are used for enabling / disabling the hardware.</p>
+</section>
+<section id="lp-core-wake-up">
+<h3>LP Core Wake-up<a class="headerlink" href="#lp-core-wake-up" title="Permalink to this heading"></a></h3>
+<p>Set <a class="reference internal" href="../system/ulp-lp-core.html#c.ULP_LP_CORE_WAKEUP_SOURCE_LP_VAD" title="ULP_LP_CORE_WAKEUP_SOURCE_LP_VAD"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ULP_LP_CORE_WAKEUP_SOURCE_LP_VAD</span></code></a> in <a class="reference internal" href="../system/ulp-lp-core.html#_CPPv417ulp_lp_core_cfg_t" title="ulp_lp_core_cfg_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">ulp_lp_core_cfg_t</span></code></a> to enable the VAD to be working as the LP core wake-up source.</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="k">static</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="nf">load_and_start_lp_core_firmware</span><span class="p">(</span><span class="n">ulp_lp_core_cfg_t</span><span class="o">*</span><span class="w"> </span><span class="n">cfg</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">firmware_start</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="o">*</span><span class="w"> </span><span class="n">firmware_end</span><span class="p">)</span>
+<span class="p">{</span>
+<span class="w">    </span><span class="n">TEST_ASSERT</span><span class="p">(</span><span class="n">ulp_lp_core_load_binary</span><span class="p">(</span><span class="n">firmware_start</span><span class="p">,</span>
+<span class="w">                                        </span><span class="p">(</span><span class="n">firmware_end</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">firmware_start</span><span class="p">))</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">);</span>
+
+<span class="w">    </span><span class="n">TEST_ASSERT</span><span class="p">(</span><span class="n">ulp_lp_core_run</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="n">ulp_lp_core_cfg_t</span><span class="w"> </span><span class="n">cfg</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">wakeup_source</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ULP_LP_CORE_WAKEUP_SOURCE_LP_VAD</span><span class="p">,</span>
+<span class="p">};</span>
+<span class="n">load_and_start_lp_core_firmware</span><span class="p">(</span><span class="o">&amp;</span><span class="n">cfg</span><span class="p">,</span><span class="w"> </span><span class="n">lp_core_main_vad_bin_start</span><span class="p">,</span><span class="w"> </span><span class="n">lp_core_main_vad_bin_end</span><span class="p">);</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_i2s/include/driver/lp_i2s_vad.h">components/esp_driver_i2s/include/driver/lp_i2s_vad.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/lp_i2s_vad.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_i2s</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_i2s</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_i2s
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_i2s
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419lp_i2s_vad_new_unit8lp_vad_tPK20lp_vad_init_config_tP17vad_unit_handle_t">
+<span id="_CPPv319lp_i2s_vad_new_unit8lp_vad_tPK20lp_vad_init_config_tP17vad_unit_handle_t"></span><span id="_CPPv219lp_i2s_vad_new_unit8lp_vad_tPK20lp_vad_init_config_tP17vad_unit_handle_t"></span><span id="lp_i2s_vad_new_unit__lp_vad_t.lp_vad_init_config_tCP.vad_unit_handle_tP"></span><span class="target" id="lp__i2s__vad_8h_1a3626b32155ceafb758a23568b965fbf4"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_i2s_vad_new_unit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lp_vad_t" title="lp_vad_t"><span class="n"><span class="pre">lp_vad_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vad_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420lp_vad_init_config_t" title="lp_vad_init_config_t"><span class="n"><span class="pre">lp_vad_init_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">init_config</span></span>, <a class="reference internal" href="#_CPPv417vad_unit_handle_t" title="vad_unit_handle_t"><span class="n"><span class="pre">vad_unit_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">ret_unit</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lp_i2s_vad_new_unit8lp_vad_tPK20lp_vad_init_config_tP17vad_unit_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>New LP VAD unit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vad_id</strong> -- <strong>[in]</strong> VAD id </p></li>
+<li><p><strong>init_config</strong> -- <strong>[in]</strong> Initial configurations </p></li>
+<li><p><strong>ret_unit</strong> -- <strong>[out]</strong> Unit handle</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417lp_i2s_vad_enable17vad_unit_handle_t">
+<span id="_CPPv317lp_i2s_vad_enable17vad_unit_handle_t"></span><span id="_CPPv217lp_i2s_vad_enable17vad_unit_handle_t"></span><span id="lp_i2s_vad_enable__vad_unit_handle_t"></span><span class="target" id="lp__i2s__vad_8h_1a37a486b1daa2a8dda99a517db5d6c16f"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_i2s_vad_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417vad_unit_handle_t" title="vad_unit_handle_t"><span class="n"><span class="pre">vad_unit_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">unit</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417lp_i2s_vad_enable17vad_unit_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable LP VAD. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> -- <strong>[in]</strong> VAD handle</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418lp_i2s_vad_disable17vad_unit_handle_t">
+<span id="_CPPv318lp_i2s_vad_disable17vad_unit_handle_t"></span><span id="_CPPv218lp_i2s_vad_disable17vad_unit_handle_t"></span><span id="lp_i2s_vad_disable__vad_unit_handle_t"></span><span class="target" id="lp__i2s__vad_8h_1ab9f193ab5a201b1b3b627354396cc760"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_i2s_vad_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417vad_unit_handle_t" title="vad_unit_handle_t"><span class="n"><span class="pre">vad_unit_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">unit</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418lp_i2s_vad_disable17vad_unit_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable LP VAD. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> -- <strong>[in]</strong> VAD handle</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419lp_i2s_vad_del_unit17vad_unit_handle_t">
+<span id="_CPPv319lp_i2s_vad_del_unit17vad_unit_handle_t"></span><span id="_CPPv219lp_i2s_vad_del_unit17vad_unit_handle_t"></span><span id="lp_i2s_vad_del_unit__vad_unit_handle_t"></span><span class="target" id="lp__i2s__vad_8h_1a05e936c32f23acc970f425bd3ae12ab0"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_i2s_vad_del_unit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv417vad_unit_handle_t" title="vad_unit_handle_t"><span class="n"><span class="pre">vad_unit_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">unit</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lp_i2s_vad_del_unit17vad_unit_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delete LP VAD unit. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>unit</strong> -- <strong>[in]</strong> VAD handle</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv415lp_vad_config_t">
+<span id="_CPPv315lp_vad_config_t"></span><span id="_CPPv215lp_vad_config_t"></span><span id="lp_vad_config_t"></span><span class="target" id="structlp__vad__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_vad_config_t</span></span></span><a class="headerlink" href="#_CPPv415lp_vad_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LP VAD configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t14init_frame_numE">
+<span id="_CPPv3N15lp_vad_config_t14init_frame_numE"></span><span id="_CPPv2N15lp_vad_config_t14init_frame_numE"></span><span id="lp_vad_config_t::init_frame_num__i"></span><span class="target" id="structlp__vad__config__t_1a39e17cd5553ef94cb71484403903efb2"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">init_frame_num</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t14init_frame_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Number of init frames that are used for VAD to denoise, this helps the VAD to decrease the accidental trigger ratio. Note too big values may lead to voice activity miss </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t17min_energy_threshE">
+<span id="_CPPv3N15lp_vad_config_t17min_energy_threshE"></span><span id="_CPPv2N15lp_vad_config_t17min_energy_threshE"></span><span id="lp_vad_config_t::min_energy_thresh__i"></span><span class="target" id="structlp__vad__config__t_1a7f2a9322ca896f92471edddc739df9b3"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_energy_thresh</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t17min_energy_threshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum energy threshold, voice activities with energy higher than this value will be detected. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t23skip_band_energy_threshE">
+<span id="_CPPv3N15lp_vad_config_t23skip_band_energy_threshE"></span><span id="_CPPv2N15lp_vad_config_t23skip_band_energy_threshE"></span><span id="lp_vad_config_t::skip_band_energy_thresh__b"></span><span class="target" id="structlp__vad__config__t_1ad8abe9f6e65e8d8ada2dda10603ab24c"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">skip_band_energy_thresh</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t23skip_band_energy_threshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Skip band energy threshold or not, the passband energy check determines whether the proportion of passband energy within the total frequency domain meets the required threshold. Note in different environments, enabling the passband energy check may reduce false trigger rates but could also increase the rate of missed detections. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t21speak_activity_threshE">
+<span id="_CPPv3N15lp_vad_config_t21speak_activity_threshE"></span><span id="_CPPv2N15lp_vad_config_t21speak_activity_threshE"></span><span id="lp_vad_config_t::speak_activity_thresh__i"></span><span class="target" id="structlp__vad__config__t_1acef7daf6de9be10bc3d0a6045a3c33a9"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">speak_activity_thresh</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t21speak_activity_threshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When in speak-activity-listening-state, if number of the detected speak activity is higher than this value, VAD runs into speak-activity-detected-state </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t25non_speak_activity_threshE">
+<span id="_CPPv3N15lp_vad_config_t25non_speak_activity_threshE"></span><span id="_CPPv2N15lp_vad_config_t25non_speak_activity_threshE"></span><span id="lp_vad_config_t::non_speak_activity_thresh__i"></span><span class="target" id="structlp__vad__config__t_1a78628c17be6ad75c477f72ad1c64c76a"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">non_speak_activity_thresh</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t25non_speak_activity_threshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When in speak-activity-detected-state, if the number of the detected speak activity is higher than this value, but lower than <code class="docutils literal notranslate"><span class="pre">max_speak_activity_thresh</span></code>:<ul class="simple">
+<li><p>if the number of the detected non-speak activity is higher than this value, VAD runs into speak-activity-listening-state</p></li>
+<li><p>if the number of the detected non-speak activity is lower than this value, VAD keeps in speak-activity-detected-state </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t25min_speak_activity_threshE">
+<span id="_CPPv3N15lp_vad_config_t25min_speak_activity_threshE"></span><span id="_CPPv2N15lp_vad_config_t25min_speak_activity_threshE"></span><span id="lp_vad_config_t::min_speak_activity_thresh__i"></span><span class="target" id="structlp__vad__config__t_1a98ef6e7002fc4622534e0d2609c11795"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">min_speak_activity_thresh</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t25min_speak_activity_threshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When in speak-activity-detected-state, if the number of the detected speak activity is higher than this value, but lower than <code class="docutils literal notranslate"><span class="pre">max_speak_activity_thresh</span></code>, then the VAD state machine will depends on the value of <code class="docutils literal notranslate"><span class="pre">non_speak_activity_thresh</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N15lp_vad_config_t25max_speak_activity_threshE">
+<span id="_CPPv3N15lp_vad_config_t25max_speak_activity_threshE"></span><span id="_CPPv2N15lp_vad_config_t25max_speak_activity_threshE"></span><span id="lp_vad_config_t::max_speak_activity_thresh__i"></span><span class="target" id="structlp__vad__config__t_1ad8ceceb900694afaac96d66eb6d31b5e"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_speak_activity_thresh</span></span></span><a class="headerlink" href="#_CPPv4N15lp_vad_config_t25max_speak_activity_threshE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>When in speak-activity-detected-state, if the number of the detected speak activity is higher than this value, VAD runs into speak-activity-listening-state </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420lp_vad_init_config_t">
+<span id="_CPPv320lp_vad_init_config_t"></span><span id="_CPPv220lp_vad_init_config_t"></span><span id="lp_vad_init_config_t"></span><span class="target" id="structlp__vad__init__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_vad_init_config_t</span></span></span><a class="headerlink" href="#_CPPv420lp_vad_init_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LP VAD Init Configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20lp_vad_init_config_t11lp_i2s_chanE">
+<span id="_CPPv3N20lp_vad_init_config_t11lp_i2s_chanE"></span><span id="_CPPv2N20lp_vad_init_config_t11lp_i2s_chanE"></span><span id="lp_vad_init_config_t::lp_i2s_chan__lp_i2s_chan_handle_t"></span><span class="target" id="structlp__vad__init__config__t_1a1baf1e6c58038f1d9ab68501de228c28"></span><a class="reference internal" href="i2s.html#_CPPv420lp_i2s_chan_handle_t" title="lp_i2s_chan_handle_t"><span class="n"><span class="pre">lp_i2s_chan_handle_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_i2s_chan</span></span></span><a class="headerlink" href="#_CPPv4N20lp_vad_init_config_t11lp_i2s_chanE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LP I2S channel handle. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20lp_vad_init_config_t10vad_configE">
+<span id="_CPPv3N20lp_vad_init_config_t10vad_configE"></span><span id="_CPPv2N20lp_vad_init_config_t10vad_configE"></span><span id="lp_vad_init_config_t::vad_config__lp_vad_config_t"></span><span class="target" id="structlp__vad__init__config__t_1aecfe478a048a881f95b87de1cf2eb917"></span><a class="reference internal" href="#_CPPv415lp_vad_config_t" title="lp_vad_config_t"><span class="n"><span class="pre">lp_vad_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vad_config</span></span></span><a class="headerlink" href="#_CPPv4N20lp_vad_init_config_t10vad_configE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LP VAD config. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv48lp_vad_t">
+<span id="_CPPv38lp_vad_t"></span><span id="_CPPv28lp_vad_t"></span><span id="lp_vad_t"></span><span class="target" id="lp__i2s__vad_8h_1aa653bfaa4c953bc25e5b9927d0de9e64"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_vad_t</span></span></span><a class="headerlink" href="#_CPPv48lp_vad_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>State Machine ┌──────────────────────────────────┐ │ │ ┌─────────────┤ speak-activity-listening-state │ ◄───────────────┐ │ │ │ │ │ └──────────────────────────────────┘ │ │ ▲ │ │ │ │ │ │ │ │ │ │ │ │ │ detected speak activity │ │ detected speak activity │ detected speak activity &gt;= │ │ &gt;= │ &gt;= 'speak_activity_thresh' │ │ 'min_speak_activity_thresh' │ 'max_speak_activity_thresh' │ │ │ │ │ &amp;&amp; │ │ │ │ │ │ detected non-speak activity │ │ │ &lt; │ │ │ 'non_speak_activity_thresh' │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ ┌───────────┴─────────────────────┐ │ │ │ │ │ └───────────► │ speak-activity-detected-state ├─────────────────┘ │ │ └─┬───────────────────────────────┘ │ │ ▲ │ │ │ │ │ │ detected speak activity │ │ &gt;= │ │ 'min_speak_activity_thresh' │ │ │ │ &amp;&amp; │ │ │ │ detected non-speak activity │ │ &lt; └─────────────────────┘ 'non_speak_activity_thresh'. </p>
+<p>LP VAD peripheral </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv417vad_unit_handle_t">
+<span id="_CPPv317vad_unit_handle_t"></span><span id="_CPPv217vad_unit_handle_t"></span><span id="vad_unit_handle_t"></span><span class="target" id="lp__i2s__vad_8h_1a7f310f5898f3d378f970dd1c34794409"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">vad_unit_ctx_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">vad_unit_handle_t</span></span></span><a class="headerlink" href="#_CPPv417vad_unit_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of VAD unit handle. </p>
+</dd></dl>
+
+</section>
+<section id="id3">
+<h3>Header File<a class="headerlink" href="#id3" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/ulp/lp_core/shared/include/ulp_lp_core_lp_vad_shared.h">components/ulp/lp_core/shared/include/ulp_lp_core_lp_vad_shared.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"ulp_lp_core_lp_vad_shared.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">ulp</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">ulp</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES ulp
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES ulp
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="id4">
+<h3>Functions<a class="headerlink" href="#id4" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419lp_core_lp_vad_init8lp_vad_tPK20lp_core_lp_vad_cfg_t">
+<span id="_CPPv319lp_core_lp_vad_init8lp_vad_tPK20lp_core_lp_vad_cfg_t"></span><span id="_CPPv219lp_core_lp_vad_init8lp_vad_tPK20lp_core_lp_vad_cfg_t"></span><span id="lp_core_lp_vad_init__lp_vad_t.lp_core_lp_vad_cfg_tCP"></span><span class="target" id="ulp__lp__core__lp__vad__shared_8h_1a23f49175e6789a3b294da538902fbd9b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_core_lp_vad_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lp_vad_t" title="lp_vad_t"><span class="n"><span class="pre">lp_vad_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vad_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420lp_core_lp_vad_cfg_t" title="lp_core_lp_vad_cfg_t"><span class="n"><span class="pre">lp_core_lp_vad_cfg_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">init_config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419lp_core_lp_vad_init8lp_vad_tPK20lp_core_lp_vad_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>State Machine ┌──────────────────────────────────┐ │ │ ┌─────────────┤ speak-activity-listening-state │ ◄───────────────┐ │ │ │ │ │ └──────────────────────────────────┘ │ │ ▲ │ │ │ │ │ │ │ │ │ │ │ │ │ detected speak activity │ │ detected speak activity │ detected speak activity &gt;= │ │ &gt;= │ &gt;= 'speak_activity_thresh' │ │ 'min_speak_activity_thresh' │ 'max_speak_activity_thresh' │ │ │ │ │ &amp;&amp; │ │ │ │ │ │ detected non-speak activity │ │ │ &lt; │ │ │ 'non_speak_activity_thresh' │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ │ ┌───────────┴─────────────────────┐ │ │ │ │ │ └───────────► │ speak-activity-detected-state ├─────────────────┘ │ │ └─┬───────────────────────────────┘ │ │ ▲ │ │ │ │ │ │ detected speak activity │ │ &gt;= │ │ 'min_speak_activity_thresh' │ │ │ │ &amp;&amp; │ │ │ │ detected non-speak activity │ │ &lt; └─────────────────────┘ 'non_speak_activity_thresh'. </p>
+<p>LP VAD init</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>vad_id</strong> -- <strong>[in]</strong> VAD ID </p></li>
+<li><p><strong>init_config</strong> -- <strong>[in]</strong> Initial configurations</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421lp_core_lp_vad_enable8lp_vad_t">
+<span id="_CPPv321lp_core_lp_vad_enable8lp_vad_t"></span><span id="_CPPv221lp_core_lp_vad_enable8lp_vad_t"></span><span id="lp_core_lp_vad_enable__lp_vad_t"></span><span class="target" id="ulp__lp__core__lp__vad__shared_8h_1a616029f9ea69ed791a78ed40968262ef"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_core_lp_vad_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lp_vad_t" title="lp_vad_t"><span class="n"><span class="pre">lp_vad_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vad_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lp_core_lp_vad_enable8lp_vad_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable LP VAD. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vad_id</strong> -- <strong>[in]</strong> VAD ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv422lp_core_lp_vad_disable8lp_vad_t">
+<span id="_CPPv322lp_core_lp_vad_disable8lp_vad_t"></span><span id="_CPPv222lp_core_lp_vad_disable8lp_vad_t"></span><span id="lp_core_lp_vad_disable__lp_vad_t"></span><span class="target" id="ulp__lp__core__lp__vad__shared_8h_1a8731fd4acb47856cf496a6b3145fbafb"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_core_lp_vad_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lp_vad_t" title="lp_vad_t"><span class="n"><span class="pre">lp_vad_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vad_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv422lp_core_lp_vad_disable8lp_vad_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable LP VAD. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vad_id</strong> -- <strong>[in]</strong> VAD ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421lp_core_lp_vad_deinit8lp_vad_t">
+<span id="_CPPv321lp_core_lp_vad_deinit8lp_vad_t"></span><span id="_CPPv221lp_core_lp_vad_deinit8lp_vad_t"></span><span id="lp_core_lp_vad_deinit__lp_vad_t"></span><span class="target" id="ulp__lp__core__lp__vad__shared_8h_1a406c8d0cb8a04e911f6e0538f7fad7a3"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_core_lp_vad_deinit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv48lp_vad_t" title="lp_vad_t"><span class="n"><span class="pre">lp_vad_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">vad_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421lp_core_lp_vad_deinit8lp_vad_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deinit LP VAD. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>vad_id</strong> -- <strong>[in]</strong> VAD ID</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Invalid argument</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Driver state is invalid, you shouldn't call this API at this moment </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="id5">
+<h3>Type Definitions<a class="headerlink" href="#id5" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv420lp_core_lp_vad_cfg_t">
+<span id="_CPPv320lp_core_lp_vad_cfg_t"></span><span id="_CPPv220lp_core_lp_vad_cfg_t"></span><span id="lp_core_lp_vad_cfg_t"></span><span class="target" id="ulp__lp__core__lp__vad__shared_8h_1a8472fe2c8a16b14480c2dd1570041176"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420lp_vad_init_config_t" title="lp_vad_init_config_t"><span class="n"><span class="pre">lp_vad_init_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">lp_core_lp_vad_cfg_t</span></span></span><a class="headerlink" href="#_CPPv420lp_core_lp_vad_cfg_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LP VAD configurations. </p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Voice Activity Detection (VAD) (api-reference/peripherals/vad)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Voice Activity Detection (VAD) (api-reference/peripherals/vad)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lp_i2s.html" class="btn btn-neutral float-left" title="Low Power Inter-IC Sound (LP I2S)" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="temp_sensor.html" class="btn btn-neutral float-right" title="Temperature Sensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

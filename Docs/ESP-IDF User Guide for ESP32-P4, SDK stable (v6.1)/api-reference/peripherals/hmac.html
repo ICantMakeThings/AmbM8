@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hash-Based Message Authentication Code (HMAC) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/hmac.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/hmac';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="RSA Digital Signature Peripheral (RSA_DS)" href="ds.html" />
+    <link rel="prev" title="Dedicated GPIO" href="dedic_gpio.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Hash-Based Message Authentication Code (HMAC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#generalized-application-scheme">Generalized Application Scheme</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#hmac-on-esp32-p4">HMAC on ESP32-P4</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-outline">Application Outline</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ldo_regulator.html">Low Dropout Voltage Regulator (LDO)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Hash-Based Message Authentication Code (HMAC)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/hmac.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="hash-based-message-authentication-code-hmac">
+<h1>Hash-Based Message Authentication Code (HMAC)<a class="headerlink" href="#hash-based-message-authentication-code-hmac" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/hmac.html">[中文]</a></p>
+<p>Hash-based Message Authentication Code (HMAC) is a secure authentication technique that verifies the authenticity and integrity of a message with a pre-shared key. This module provides hardware acceleration for SHA256-HMAC generation using a key burned into an eFuse block.</p>
+<p>For more detailed information on the application workflow and the HMAC calculation process, see <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>HMAC Accelerator (HMAC)</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#hmac">PDF</a>].</p>
+<section id="generalized-application-scheme">
+<h2>Generalized Application Scheme<a class="headerlink" href="#generalized-application-scheme" title="Permalink to this heading"></a></h2>
+<p>Let there be two parties, A and B. They want to verify the authenticity and integrity of messages sent between each other. Before they can start sending messages, they need to exchange the secret key via a secure channel.</p>
+<p>To verify A's messages, B can do the following:</p>
+<ul class="simple">
+<li><p>A calculates the HMAC of the message it wants to send.</p></li>
+<li><p>A sends the message and the HMAC to B.</p></li>
+<li><p>B calculates the HMAC of the received message itself.</p></li>
+<li><p>B checks whether the received and calculated HMACs match.</p></li>
+</ul>
+<p>If they do match, the message is authentic.</p>
+<p>However, the HMAC itself is not bound to this use case. It can also be used for challenge-response protocols supporting HMAC or as a key input for further security modules (see below), etc.</p>
+</section>
+<section id="hmac-on-esp32-p4">
+<h2>HMAC on ESP32-P4<a class="headerlink" href="#hmac-on-esp32-p4" title="Permalink to this heading"></a></h2>
+<p>On ESP32-P4, the HMAC module works with a secret key burnt into the eFuses.</p>
+<p>On ESP32-P4, the HMAC module also supports storing a secret key in the Key Manager. Refer to <a class="reference internal" href="key_manager.html#key-manager"><span class="std std-ref">Key Manager</span></a> for more details.</p>
+<p>This key can be made completely inaccessible for any resources outside the cryptographic modules, thus avoiding key leakage.</p>
+<p>Furthermore, ESP32-P4 has three different application scenarios for its HMAC module:</p>
+<ol class="arabic simple">
+<li><p>HMAC is generated for software use</p></li>
+<li><p>HMAC is used as a key for the RSA Digital Signature Peripheral (RSA_DS)</p></li>
+<li><p>HMAC is used for enabling the soft-disabled JTAG interface</p></li>
+</ol>
+<p>The first mode is called <strong>Upstream</strong> mode, while the last two modes are called <strong>Downstream</strong> modes.</p>
+<section id="efuse-keys-for-hmac">
+<h3>eFuse Keys for HMAC<a class="headerlink" href="#efuse-keys-for-hmac" title="Permalink to this heading"></a></h3>
+<p>Six physical eFuse blocks can be used as keys for the HMAC module: block 4 ~ block 9. The enum <code class="xref cpp cpp-enum docutils literal notranslate"><span class="pre">hmac_key_id_t</span></code> in the API maps them to <code class="docutils literal notranslate"><span class="pre">HMAC_KEY0</span></code> ~ <code class="docutils literal notranslate"><span class="pre">HMAC_KEY5</span></code>.</p>
+<p>Each key has a corresponding eFuse parameter <strong>key purpose</strong> determining for which of the HMAC application scenarios (see below) the key may be used:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 17.6%" />
+<col style="width: 82.4%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Key Purpose</p></th>
+<th class="head"><p>Application Scenario</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>8</p></td>
+<td><p>HMAC generated for software use</p></td>
+</tr>
+<tr class="row-odd"><td><p>7</p></td>
+<td><p>HMAC used as a key for the RSA Digital Signature Peripheral (RSA_DS)</p></td>
+</tr>
+<tr class="row-even"><td><p>6</p></td>
+<td><p>HMAC used for enabling the soft-disabled JTAG interface</p></td>
+</tr>
+<tr class="row-odd"><td><p>5</p></td>
+<td><p>HMAC both as a key for the RSA_DS module and for enabling JTAG</p></td>
+</tr>
+</tbody>
+</table>
+<p>This is to prevent the usage of a key for a different function than originally intended.</p>
+<p>To calculate an HMAC, the software has to provide the ID of the key block containing the secret key as well as the <strong>key purpose</strong> (see <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>eFuse Controller (eFuse)</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#efuse">PDF</a>]).</p>
+<p>Before the HMAC key calculation, the HMAC module looks up the purpose of the provided key block. The calculation only proceeds if the purpose of the provided key block matches the purpose stored in the eFuses of the key block provided by the ID.</p>
+</section>
+<section id="hmac-generation-for-software">
+<h3>HMAC Generation for Software<a class="headerlink" href="#hmac-generation-for-software" title="Permalink to this heading"></a></h3>
+<p>Key purpose value: 8</p>
+<p>In this case, the HMAC is given out to the software, e.g., to authenticate a message.</p>
+<p>The API to calculate the HMAC is <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">psa_mac_compute()</span></code>, which takes an opaque PSA key referencing an eFuse key block that contains the secret and has its purpose set to Upstream mode.</p>
+</section>
+<section id="hmac-for-rsa-digital-signature">
+<span id="hmac-for-enabling-jtag"></span><h3>HMAC for RSA Digital Signature<a class="headerlink" href="#hmac-for-rsa-digital-signature" title="Permalink to this heading"></a></h3>
+<p>Key purpose values: 7, 5</p>
+<p>The HMAC can be used as a key derivation function to decrypt private key parameters which are used by the RSA Digital Signature module. A standard message is used by the hardware in that case. You only need to provide the eFuse key block and purpose on the HMAC side, additional parameters are required for the RSA Digital Signature component in that case.</p>
+<p>Neither the key nor the actual HMAC is ever exposed outside the HMAC module and RSA_DS component. The calculation of the HMAC and its handover to the RSA_DS component happen internally.</p>
+<p>For more details, see <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>RSA Digital Signature Peripheral (RSA_DS)</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#digsig">PDF</a>].</p>
+</section>
+<section id="id1">
+<h3>HMAC for Enabling JTAG<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<p>Key purpose values: 6, 5</p>
+<p>The third application is using the HMAC as a key to enable JTAG if it was soft-disabled before.</p>
+<p>Following is the procedure to re-enable the JTAG:</p>
+<p><strong>Stage 1: Setup</strong></p>
+<ol class="arabic simple">
+<li><p>Generate a 256-bit HMAC secret key to use for JTAG re-enable.</p></li>
+<li><p>Write the key to an eFuse block with key purpose HMAC_DOWN_ALL (5) or HMAC_DOWN_JTAG (6). This can be done using the <code class="docutils literal notranslate"><span class="pre">esp_efuse_write_key()</span></code> function in the firmware or using <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">efuse-burn-key</span></code> from the host.</p></li>
+<li><p>Configure the eFuse key block to be read-protected using the <code class="docutils literal notranslate"><span class="pre">esp_efuse_set_read_protect()</span></code>, so that software cannot read back the value.</p></li>
+<li><p>Burn the <code class="docutils literal notranslate"><span class="pre">soft</span> <span class="pre">JTAG</span> <span class="pre">disable</span></code> bit/bits on ESP32-P4. This will permanently disable JTAG unless the correct key value is provided by the software.</p></li>
+</ol>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The API <strong>esp_efuse_write_field_cnt(ESP_EFUSE_SOFT_DIS_JTAG, ESP_EFUSE_SOFT_DIS_JTAG[0]-&gt;bit_count)</strong> can be used to burn <code class="docutils literal notranslate"><span class="pre">soft</span> <span class="pre">JTAG</span> <span class="pre">disable</span></code> bits on ESP32-P4.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>If <code class="docutils literal notranslate"><span class="pre">DIS_PAD_JTAG</span></code> eFuse is set, then <code class="docutils literal notranslate"><span class="pre">SOFT_DIS_JTAG</span></code> functionality does not work because JTAG is permanently disabled.</p>
+</div>
+<p>JTAG enables</p>
+<ol class="arabic simple">
+<li><p>The key to re-enable JTAG is the output of the HMAC-SHA256 function using the secret key in eFuse and 32 <code class="docutils literal notranslate"><span class="pre">0x00</span></code> bytes as the message.</p></li>
+<li><p>Pass this key value when calling the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_hmac_jtag_enable()</span></code> function from the firmware.</p></li>
+<li><p>To re-disable JTAG in the firmware, reset the system or call <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_hmac_jtag_disable()</span></code>.</p></li>
+</ol>
+<p>For a complete workflow of soft-disabling and re-enabling JTAG, refer to <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/security/hmac_soft_jtag">security/hmac_soft_jtag</a>. This example demonstrates how to use HMAC to re-enable a soft-disabled JTAG interface, covering steps like generating an HMAC key, burning it to eFuse, and creating token data from the key.</p>
+<p>For more details, see <strong>ESP32-P4 Technical Reference Manual</strong> &gt; <strong>HMAC Accelerator (HMAC)</strong> [<a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-p4_technical_reference_manual_en.pdf#hmac">PDF</a>].</p>
+</section>
+</section>
+<section id="application-outline">
+<h2>Application Outline<a class="headerlink" href="#application-outline" title="Permalink to this heading"></a></h2>
+<p>The following code is an outline of how to set an eFuse key and then use it to calculate an HMAC for software usage.</p>
+<p>Using eFuses to store the HMAC key:</p>
+<p>We use <code class="docutils literal notranslate"><span class="pre">esp_efuse_write_key</span></code> to set physical key block 4 in the eFuse for the HMAC module together with its purpose. <code class="docutils literal notranslate"><span class="pre">ESP_EFUSE_KEY_PURPOSE_HMAC_UP</span></code> (8) means that this key can only be used for HMAC generation for software usage:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_efuse.h"</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">uint8_t</span><span class="w"> </span><span class="n">key_data</span><span class="p">[</span><span class="mi">32</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">...</span><span class="w"> </span><span class="p">};</span>
+
+<span class="n">esp_err_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">esp_efuse_write_key</span><span class="p">(</span><span class="n">EFUSE_BLK_KEY4</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">ESP_EFUSE_KEY_PURPOSE_HMAC_UP</span><span class="p">,</span>
+<span class="w">                    </span><span class="n">key_data</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">key_data</span><span class="p">));</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">ESP_OK</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// written key</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// writing key failed, maybe written already</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Now we can calculate an HMAC for software usage with the saved key through the PSA Crypto API.</p>
+<p>Using an eFuse-based HMAC key:</p>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"psa/crypto.h"</span>
+<span class="cp">#include</span><span class="w"> </span><span class="cpf">"psa_crypto_driver_esp_hmac_opaque.h"</span>
+
+<span class="kt">uint8_t</span><span class="w"> </span><span class="n">hmac</span><span class="p">[</span><span class="mi">32</span><span class="p">];</span>
+<span class="kt">size_t</span><span class="w"> </span><span class="n">hmac_length</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+
+<span class="k">const</span><span class="w"> </span><span class="kt">char</span><span class="w"> </span><span class="o">*</span><span class="n">message</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"Hello, HMAC!"</span><span class="p">;</span>
+<span class="k">const</span><span class="w"> </span><span class="kt">size_t</span><span class="w"> </span><span class="n">msg_len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">12</span><span class="p">;</span>
+
+<span class="c1">// Setup key attributes for ESP-HMAC opaque driver</span>
+<span class="n">psa_key_attributes_t</span><span class="w"> </span><span class="n">attributes</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PSA_KEY_ATTRIBUTES_INIT</span><span class="p">;</span>
+<span class="n">psa_set_key_usage_flags</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_KEY_USAGE_SIGN_MESSAGE</span><span class="p">);</span>
+<span class="n">psa_set_key_algorithm</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_ALG_HMAC</span><span class="p">(</span><span class="n">PSA_ALG_SHA_256</span><span class="p">));</span>
+<span class="n">psa_set_key_type</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_KEY_TYPE_HMAC</span><span class="p">);</span>
+<span class="n">psa_set_key_bits</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">,</span><span class="w"> </span><span class="mi">256</span><span class="p">);</span>
+<span class="n">psa_set_key_lifetime</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_KEY_LIFETIME_ESP_HMAC_VOLATILE</span><span class="p">);</span>
+
+<span class="c1">// Create opaque key reference for eFuse-based key</span>
+<span class="n">esp_hmac_opaque_key_t</span><span class="w"> </span><span class="n">opaque_key</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="p">.</span><span class="n">efuse_key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">HMAC_KEY4</span><span class="p">,</span>
+<span class="p">};</span>
+
+<span class="c1">// Import the opaque key</span>
+<span class="n">psa_key_id_t</span><span class="w"> </span><span class="n">key_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
+<span class="n">psa_status_t</span><span class="w"> </span><span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">psa_import_key</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">,</span><span class="w"> </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">opaque_key</span><span class="p">,</span>
+<span class="w">                                     </span><span class="k">sizeof</span><span class="p">(</span><span class="n">opaque_key</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">key_id</span><span class="p">);</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">PSA_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// Failed to import key</span>
+<span class="w">    </span><span class="n">psa_reset_key_attributes</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+<span class="w">    </span><span class="k">return</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="c1">// Compute HMAC</span>
+<span class="n">status</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">psa_mac_compute</span><span class="p">(</span><span class="n">key_id</span><span class="p">,</span><span class="w"> </span><span class="n">PSA_ALG_HMAC</span><span class="p">(</span><span class="n">PSA_ALG_SHA_256</span><span class="p">),</span>
+<span class="w">                         </span><span class="p">(</span><span class="kt">uint8_t</span><span class="w"> </span><span class="o">*</span><span class="p">)</span><span class="n">message</span><span class="p">,</span><span class="w"> </span><span class="n">msg_len</span><span class="p">,</span>
+<span class="w">                         </span><span class="n">hmac</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">hmac</span><span class="p">),</span><span class="w"> </span><span class="o">&amp;</span><span class="n">hmac_length</span><span class="p">);</span>
+
+<span class="c1">// Clean up</span>
+<span class="n">psa_destroy_key</span><span class="p">(</span><span class="n">key_id</span><span class="p">);</span>
+<span class="n">psa_reset_key_attributes</span><span class="p">(</span><span class="o">&amp;</span><span class="n">attributes</span><span class="p">);</span>
+
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">status</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">PSA_SUCCESS</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// HMAC written to hmac now</span>
+<span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// failure calculating HMAC</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ESP-HMAC opaque PSA driver is backed by the one-shot hardware HMAC peripheral, which computes the MAC over the whole message in a single operation and cannot save or restore intermediate state between calls. Multipart streaming is therefore not supported: supply the entire message in a single <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">psa_mac_compute()</span></code> call (as shown above) or in a single multipart update. A second non-empty update on the same operation returns <code class="docutils literal notranslate"><span class="pre">PSA_ERROR_BAD_STATE</span></code>; the operation fails closed and never produces a MAC computed over only part of the message.</p>
+</div>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/mbedtls/port/psa_driver/include/psa_crypto_driver_esp_hmac_opaque_contexts.h">components/mbedtls/port/psa_driver/include/psa_crypto_driver_esp_hmac_opaque_contexts.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"psa_crypto_driver_esp_hmac_opaque_contexts.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">mbedtls</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">mbedtls</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES mbedtls
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES mbedtls
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Hash-Based Message Authentication Code (HMAC) (api-reference/peripherals/hmac)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Hash-Based Message Authentication Code (HMAC) (api-reference/peripherals/hmac)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="dedic_gpio.html" class="btn btn-neutral float-left" title="Dedicated GPIO" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ds.html" class="btn btn-neutral float-right" title="RSA Digital Signature Peripheral (RSA_DS)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

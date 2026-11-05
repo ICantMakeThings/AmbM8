@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAT Filesystem Support - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/storage/fatfs.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/storage/fatfs';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Generating and Parsing FATFS on Host" href="fatfsgen.html" />
+    <link rel="prev" title="Storage API" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage API</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">FAT Filesystem Support</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mount-and-use-fatfs">Mount and Use FatFs</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#configuration-options">Configuration Options</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#differences-from-the-posix-standard">Differences from the POSIX Standard</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#format-a-fat-filesystem">Format a FAT Filesystem</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fatfs-partition-generator">FatFs Partition Generator</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#fatfs-partition-parser">FatFs Partition Parser</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#size-requirements-and-limits">Size Requirements and Limits</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimization">Optimization</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#advanced-operations">Advanced Operations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#glossary">Glossary</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#high-level-api-reference">High-level API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="fatfsgen.html">Generating and Parsing FATFS on Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mass_mfg.html">Manufacturing Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_flash.html">Non-Volatile Storage Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_bootloader.html">NVS Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_encryption.html">NVS Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_partition_gen.html">NVS Partition Generator Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_partition_parse.html">NVS Partition Parser Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/SDIO/MMC Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partition.html">Partitions API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="blockdev.html">Block Device Layer</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vfs.html">Virtual Filesystem Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wear-levelling.html">Wear Levelling API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="storage-security.html">Storage Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Storage API</a></li>
+      <li class="breadcrumb-item active">FAT Filesystem Support</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/storage/fatfs.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="fat-filesystem-support">
+<h1>FAT Filesystem Support<a class="headerlink" href="#fat-filesystem-support" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/storage/fatfs.html">[中文]</a></p>
+<p>ESP-IDF uses the <a class="reference external" href="http://elm-chan.org/fsw/ff/00index_e.html">FatFs</a> library to work with FAT filesystems through the FatFs component. After a FAT filesystem volume is mounted, the VFS layer exposes standard C library and POSIX file APIs.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>FatFs is an ambiguous term, as it refers to the filesystem itself, the upstream library, as well as the component in ESP-IDF. For clarity, this documentation uses the following terms:</p>
+<ul class="simple">
+<li><p><strong>FAT filesystem</strong>: the on-disk FAT format (FAT12/FAT16/FAT32), exFAT (see <a class="reference internal" href="#fatfs-optional-exfat-support"><span class="std std-ref">Optional exFAT Support</span></a>).</p></li>
+<li><p><strong>FatFs library</strong>: the upstream <a class="reference external" href="http://elm-chan.org/fsw/ff/00index_e.html">FatFs library</a> used by ESP-IDF.</p></li>
+<li><p><strong>FatFs component</strong>: the ESP-IDF integration layer around the FatFs library (mount helpers, wrappers, and related APIs) in <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/fatfs">fatfs</a>.</p></li>
+</ul>
+<p>Other terms relevant to this documentation are explained in the <a class="reference internal" href="#fatfs-glossary"><span class="std std-ref">Glossary</span></a> section.</p>
+</div>
+<section id="mount-and-use-fatfs">
+<span id="fatfs-mount-and-use"></span><h2>Mount and Use FatFs<a class="headerlink" href="#mount-and-use-fatfs" title="Permalink to this heading"></a></h2>
+<p>The FatFs component provides convenience wrappers for mounting filesystems through the VFS layer. Use these wrappers for most use cases instead of mounting the filesystem manually. For manual setup instructions, refer to <a class="reference internal" href="#fatfs-manual-mount"><span class="std std-ref">Manually mounting a FAT filesystem partition</span></a>.</p>
+<p>The general mounting workflow is:</p>
+<ol class="arabic">
+<li><p>Select a mount path (for example, <code class="docutils literal notranslate"><span class="pre">&quot;/spiflash&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;/sdcard&quot;</span></code>) and set <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_mount_config_t</span></code>.</p></li>
+<li><p>Mount the volume with a convenience helper from <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/fatfs/vfs/esp_vfs_fat.h">fatfs/vfs/esp_vfs_fat.h</a>:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv432esp_vfs_fat_spiflash_mount_rw_wlPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t" title="esp_vfs_fat_spiflash_mount_rw_wl"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_spiflash_mount_rw_wl()</span></code></a> for SPI flash partitions with wear leveling.</p></li>
+<li><p><a class="reference internal" href="#_CPPv429esp_vfs_fat_spiflash_mount_roPKcPKcPK26esp_vfs_fat_mount_config_t" title="esp_vfs_fat_spiflash_mount_ro"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_spiflash_mount_ro()</span></code></a> for read-only SPI flash partitions <strong>without</strong> wear leveling.</p></li>
+<li><p><a class="reference internal" href="#_CPPv423esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t" title="esp_vfs_fat_sdmmc_mount"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_sdmmc_mount()</span></code></a> or <a class="reference internal" href="#_CPPv423esp_vfs_fat_sdspi_mountPKcPK12sdmmc_host_tPK21sdspi_device_config_tPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t" title="esp_vfs_fat_sdspi_mount"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_sdspi_mount()</span></code></a> for SD cards.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Use standard file APIs (<code class="docutils literal notranslate"><span class="pre">stdio.h</span></code> or POSIX) on paths under the mount path.</p></li>
+<li><p>Close open files and call the matching unmount helper.</p></li>
+</ol>
+</section>
+<section id="configuration-options">
+<span id="fatfs-configuration-options"></span><h2>Configuration Options<a class="headerlink" href="#configuration-options" title="Permalink to this heading"></a></h2>
+<p>The following configuration options are available for the FatFs component:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_LONG_FILENAMES</span></code> - Selects how the FatFs library handles long filename (LFN) support. The available options are <a class="reference internal" href="../kconfig-reference.html#config-fatfs-lfn-none"><span class="std std-ref">CONFIG_FATFS_LFN_NONE</span></a> to disable LFN support and limit names to the <a class="reference external" href="https://en.wikipedia.org/wiki/8.3_filename">8.3 format</a> (SFN only), <a class="reference internal" href="../kconfig-reference.html#config-fatfs-lfn-heap"><span class="std std-ref">CONFIG_FATFS_LFN_HEAP</span></a> to enable LFN support with the LFN working buffer stored on the heap (default), and <a class="reference internal" href="../kconfig-reference.html#config-fatfs-lfn-stack"><span class="std std-ref">CONFIG_FATFS_LFN_STACK</span></a> to enable LFN support with the LFN working buffer stored on the stack. For details, see <a class="reference external" href="http://elm-chan.org/fsw/ff/doc/filename.html">FatFs filenames</a>.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-volume-count"><span class="std std-ref">CONFIG_FATFS_VOLUME_COUNT</span></a> - Sets the number of logical FatFs volumes. Increasing this value can increase baseline memory usage.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-extram"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_EXTRAM</span></a> - If enabled, the FatFs library prefers external RAM when allocating internal buffers. If external RAM allocation fails, it falls back to internal RAM. This can have a noticeable performance cost on hot I/O paths. Disable this option to prioritize performance; enable it to reduce internal RAM usage.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-aligned-work-buffers"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_ALIGNED_WORK_BUFFERS</span></a> - If enabled, the FatFs library tries to allocate heap work buffers in DMA-capable, cache-aligned memory first so SDMMC transfers avoid extra copies. This option is useful on targets that use PSRAM with SDMMC DMA (for example ESP32-P4). If this option and <a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-extram"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_EXTRAM</span></a> are both enabled, the FatFs library tries DMA-capable RAM first, then external RAM, then internal RAM.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-use-dyn-buffers"><span class="std std-ref">CONFIG_FATFS_USE_DYN_BUFFERS</span></a> - If enabled, the FatFs library allocates instance buffers separately and sizes them according to each mounted volume's logical sector size. This option is useful when multiple FatFs instances use different logical sector sizes, as it can reduce memory usage. If disabled, all instances use buffers sized for the largest configured logical sector size.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-per-file-cache"><span class="std std-ref">CONFIG_FATFS_PER_FILE_CACHE</span></a> - If enabled, each open file uses a separate cache buffer. This improves I/O performance but increases RAM usage when multiple files are open. If disabled, a single shared cache is used, which reduces RAM usage but can increase storage read/write operations.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-use-fastseek"><span class="std std-ref">CONFIG_FATFS_USE_FASTSEEK</span></a> - If enabled, POSIX <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">lseek()</span></code> runs faster. Fast seek does not work for files opened in write mode. To use fast seek, open the file in read-only mode, or close and reopen it in read-only mode.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-fast-seek-buffer-size"><span class="std std-ref">CONFIG_FATFS_FAST_SEEK_BUFFER_SIZE</span></a> - Sets the CLMT (Cluster Link Map Table) buffer size used by fast seek when <a class="reference internal" href="../kconfig-reference.html#config-fatfs-use-fastseek"><span class="std std-ref">CONFIG_FATFS_USE_FASTSEEK</span></a> is enabled. Larger buffers can improve seek behavior on larger files, but use more RAM.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-vfs-fstat-blksize"><span class="std std-ref">CONFIG_FATFS_VFS_FSTAT_BLKSIZE</span></a> - Sets the default stdio file buffer block size used through VFS. This option is mainly relevant for stdio-based I/O (for example <code class="docutils literal notranslate"><span class="pre">fread</span></code>/<code class="docutils literal notranslate"><span class="pre">fgets</span></code>) and is not the primary tuning knob for direct POSIX <code class="docutils literal notranslate"><span class="pre">read</span></code>/<code class="docutils literal notranslate"><span class="pre">write</span></code> paths. Larger values can improve buffered read throughput, but increase heap usage.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-immediate-fsync"><span class="std std-ref">CONFIG_FATFS_IMMEDIATE_FSYNC</span></a> - If enabled, the FatFs library calls <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_sync()</span></code> automatically after each call to <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">write()</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">pwrite()</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">link()</span></code>, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">truncate()</span></code>, and <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ftruncate()</span></code>. This option improves file consistency and size-reporting accuracy, but decreases performance because it triggers frequent disk operations.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-link-lock"><span class="std std-ref">CONFIG_FATFS_LINK_LOCK</span></a> - If enabled, this option guarantees API thread safety for the <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">link()</span></code> function. Disabling this option can help applications that perform frequent small file operations (for example, file logging). When disabled, the copy performed by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">link()</span></code> is non-atomic. In that case, using <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">link()</span></code> on a large file on the same volume from another task is not guaranteed to be thread-safe.</p></li>
+<li><p>Other relevant options include <a class="reference internal" href="../kconfig-reference.html#config-fatfs-fs-lock"><span class="std std-ref">CONFIG_FATFS_FS_LOCK</span></a>, <a class="reference internal" href="../kconfig-reference.html#config-fatfs-timeout-ms"><span class="std std-ref">CONFIG_FATFS_TIMEOUT_MS</span></a>, and <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_CHOOSE_CODEPAGE</span></code> (especially <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_CODEPAGE_DYNAMIC</span></code> for code-size impact). Additional options include <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_SECTOR_SIZE</span></code>, <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_MAX_LFN</span></code>, <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_API_ENCODING</span></code>, and <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_USE_STRFUNC_CHOICE</span></code>.</p></li>
+</ul>
+<p>These options control how the FatFs library calculates and reports free space:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-dont-trust-free-cluster-cnt"><span class="std std-ref">CONFIG_FATFS_DONT_TRUST_FREE_CLUSTER_CNT</span></a> - If set to 1, the FatFs library ignores the free cluster count. The default value is 0.</p></li>
+<li><p><a class="reference internal" href="../kconfig-reference.html#config-fatfs-dont-trust-last-alloc"><span class="std std-ref">CONFIG_FATFS_DONT_TRUST_LAST_ALLOC</span></a> - If set to 1, the FatFs library ignores the last allocation number. The default value is 0.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Setting these options to 1 can improve <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_getfree()</span></code> accuracy, but it reduces performance, for example by forcing a full FAT scan.</p>
+</div>
+</section>
+<section id="differences-from-the-posix-standard">
+<h2>Differences from the POSIX Standard<a class="headerlink" href="#differences-from-the-posix-standard" title="Permalink to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">link()</span></code>: FAT filesystems do not support hard links, therefore <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">link()</span></code> copies file contents instead, which applies only to files on FAT filesystem volumes.</p></li>
+<li><p><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">unlink()</span></code>: If <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_FS_LOCK</span></code> is enabled, removing an open file fails with <code class="docutils literal notranslate"><span class="pre">EBUSY</span></code>. Otherwise, behavior is undefined and can corrupt the filesystem.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">.</span></code> and <code class="docutils literal notranslate"><span class="pre">..</span></code> are not supported as references to the current and parent directory.</p></li>
+</ol>
+</section>
+<section id="format-a-fat-filesystem">
+<span id="fatfs-formatting"></span><h2>Format a FAT Filesystem<a class="headerlink" href="#format-a-fat-filesystem" title="Permalink to this heading"></a></h2>
+<p>Formatting creates a new FAT filesystem on the target volume and erases the existing directory structure and file data on that volume. Use it for first-time provisioning, or to recover from <code class="docutils literal notranslate"><span class="pre">FR_NO_FILESYSTEM</span></code>.</p>
+<p>For mount-time auto-formatting, set <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_mount_config_t.format_if_mount_failed</span></code> to <code class="docutils literal notranslate"><span class="pre">true</span></code> before calling a mount helper. This is useful when the volume is expected to be blank on first boot. When formatting is triggered this way, the mount configuration also controls the new filesystem layout:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">allocation_unit_size</span></code> sets the cluster size used by <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_mkfs()</span></code>. Larger values can improve throughput, but waste more space for many small files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">use_one_fat</span></code> creates one FAT instead of two. This saves some space, but reduces redundancy.</p></li>
+</ul>
+<p>For explicit formatting after initialization, use the helper that matches the storage type:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv433esp_vfs_fat_spiflash_format_rw_wlPKcPKc" title="esp_vfs_fat_spiflash_format_rw_wl"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_spiflash_format_rw_wl()</span></code></a> or <a class="reference internal" href="#_CPPv437esp_vfs_fat_spiflash_format_cfg_rw_wlPKcPKcP26esp_vfs_fat_mount_config_t" title="esp_vfs_fat_spiflash_format_cfg_rw_wl"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_spiflash_format_cfg_rw_wl()</span></code></a> for SPI flash partitions with wear leveling.</p></li>
+<li><p><a class="reference internal" href="#_CPPv425esp_vfs_fat_sdcard_formatPKcP12sdmmc_card_t" title="esp_vfs_fat_sdcard_format"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_sdcard_format()</span></code></a> or <a class="reference internal" href="#_CPPv429esp_vfs_fat_sdcard_format_cfgPKcP12sdmmc_card_tP26esp_vfs_fat_mount_config_t" title="esp_vfs_fat_sdcard_format_cfg"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_sdcard_format_cfg()</span></code></a> for SD cards.</p></li>
+</ul>
+<p>The SPI flash formatting helpers can be called whether the filesystem is currently mounted or not. The SD card formatting helpers require the card (but not the filesystem) to be mounted first.</p>
+<p>Read-only SPI flash partitions mounted with <a class="reference internal" href="#_CPPv429esp_vfs_fat_spiflash_mount_roPKcPKcPK26esp_vfs_fat_mount_config_t" title="esp_vfs_fat_spiflash_mount_ro"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_spiflash_mount_ro()</span></code></a> cannot be reformatted on the target. To populate a read-only partition, generate the image on the host with <a class="reference internal" href="#fatfs-partition-generator"><span class="std std-ref">FatFs Partition Generator</span></a>.</p>
+</section>
+<section id="fatfs-partition-generator">
+<span id="id1"></span><h2>FatFs Partition Generator<a class="headerlink" href="#fatfs-partition-generator" title="Permalink to this heading"></a></h2>
+<p>ESP-IDF provides a FatFs partition generator, <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/fatfs/wl_fatfsgen.py">wl_fatfsgen.py </a>, which is integrated into the build system.</p>
+<p>Use this tool to create filesystem images on a host and populate them from a specified host folder.</p>
+<p>The script is based on the partition generator (<a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/fatfs/fatfsgen.py">fatfsgen.py </a>). In addition to generating a FatFs partition, <code class="docutils literal notranslate"><span class="pre">wl_fatfsgen.py</span></code> initializes wear leveling, so it is typically used for writable SPI flash filesystems. Use <code class="docutils literal notranslate"><span class="pre">fatfsgen.py</span></code> instead for SD card images and read-only SPI flash images.</p>
+<p>This tool supports short and long file names, FAT12, and FAT16. Long file names are limited to 255 characters and can contain multiple periods (<code class="docutils literal notranslate"><span class="pre">.</span></code>) in the file name, but not in the path. They can also contain the following additional characters: <code class="docutils literal notranslate"><span class="pre">+</span></code>, <code class="docutils literal notranslate"><span class="pre">,</span></code>, <code class="docutils literal notranslate"><span class="pre">;</span></code>, <code class="docutils literal notranslate"><span class="pre">=</span></code>, <code class="docutils literal notranslate"><span class="pre">[</span></code> and <code class="docutils literal notranslate"><span class="pre">]</span></code>.</p>
+<p>An in-depth description of the FatFs partition generator and analyzer can be found at <a class="reference internal" href="fatfsgen.html"><span class="doc">Generating and parsing FAT partition on host</span></a>.</p>
+<section id="build-system-integration-with-fatfs-partition-generator">
+<h3>Build System Integration with FatFs Partition Generator<a class="headerlink" href="#build-system-integration-with-fatfs-partition-generator" title="Permalink to this heading"></a></h3>
+<p>Invoke the FatFs generator directly from the CMake build system by calling <code class="docutils literal notranslate"><span class="pre">fatfs_create_spiflash_image</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fatfs_create_spiflash_image(&lt;partition&gt; &lt;base_dir&gt; [optional arguments])
+</pre></div>
+</div>
+<p>To generate a <strong>read-only</strong> partition without wear leveling support, use <code class="docutils literal notranslate"><span class="pre">fatfs_create_rawflash_image</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fatfs_create_rawflash_image(&lt;partition&gt; &lt;base_dir&gt; [optional arguments])
+</pre></div>
+</div>
+<p>Call <code class="docutils literal notranslate"><span class="pre">fatfs_create_spiflash_image</span></code> or <code class="docutils literal notranslate"><span class="pre">fatfs_create_rawflash_image</span></code> from the project's <code class="docutils literal notranslate"><span class="pre">CMakeLists.txt</span></code>.</p>
+<p>The function arguments are:</p>
+<ol class="arabic simple">
+<li><p>partition - Name of the partition as defined in the partition table (e.g., <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/examples/storage/fatfs/fatfsgen/partitions_example.csv">storage/fatfs/fatfsgen/partitions_example.csv</a>).</p></li>
+<li><p>base_dir - Directory encoded into the FAT filesystem partition and optionally flashed to the target. Make sure the partition table defines an appropriate partition size.</p></li>
+<li><p>flag <code class="docutils literal notranslate"><span class="pre">FLASH_IN_PROJECT</span></code> - Optionally flash the image automatically with app binaries, partition tables, and other outputs when you run <code class="docutils literal notranslate"><span class="pre">idf.py</span> <span class="pre">flash</span> <span class="pre">-p</span> <span class="pre">&lt;PORT&gt;</span></code>. If <code class="docutils literal notranslate"><span class="pre">FLASH_IN_PROJECT</span></code> is not specified, the image is still generated, but you must flash it manually by using <code class="docutils literal notranslate"><span class="pre">esptool</span></code> or a custom build-system target.</p></li>
+<li><p>flag <code class="docutils literal notranslate"><span class="pre">PRESERVE_TIME</span></code> - Optionally preserve timestamps from the source folder in the target image. Without this flag, the tool sets every timestamp to the FatFs library default initial time (1 January 1980).</p></li>
+<li><p>flag <code class="docutils literal notranslate"><span class="pre">ONE_FAT</span></code> - Optionally generate a FAT filesystem volume with one FAT (File Allocation Table) instead of two. This increases free space in the FAT filesystem volume by <code class="docutils literal notranslate"><span class="pre">number</span> <span class="pre">of</span> <span class="pre">logical</span> <span class="pre">sectors</span> <span class="pre">used</span> <span class="pre">by</span> <span class="pre">one</span> <span class="pre">FAT</span> <span class="pre">*</span> <span class="pre">logical</span> <span class="pre">sector</span> <span class="pre">size</span></code>, but it also increases corruption risk.</p></li>
+</ol>
+<p>For example:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>fatfs_create_spiflash_image(my_fatfs_partition my_folder FLASH_IN_PROJECT)
+</pre></div>
+</div>
+<p>If you generate an image for an SD card, ESP-IDF does not currently provide a host-side flashing step to write that image directly to the card. Use other host tooling, such as <code class="docutils literal notranslate"><span class="pre">dd</span></code>, to deploy the image.</p>
+<p>For an example project, see <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/storage/fatfs/fatfsgen">storage/fatfs/fatfsgen</a>.</p>
+</section>
+</section>
+<section id="fatfs-partition-parser">
+<span id="fatfs-partition-analyzer"></span><h2>FatFs Partition Parser<a class="headerlink" href="#fatfs-partition-parser" title="Permalink to this heading"></a></h2>
+<p>The <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/fatfs/fatfsparse.py">fatfsparse.py </a> tool performs the reverse operation of <a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/fatfs/fatfsgen.py">fatfsgen.py </a>. It reconstructs a host folder structure from a FAT filesystem image.</p>
+<p>Usage</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>./fatfsparse.py [-h] [--wl-layer {detect,enabled,disabled}] [--verbose] fatfs_image.img
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">--verbose</span></code> option prints detailed information from the FAT filesystem image boot sector before the tool generates the folder structure.</p>
+</section>
+<section id="size-requirements-and-limits">
+<span id="fatfs-minimum-partition-size"></span><h2>Size Requirements and Limits<a class="headerlink" href="#size-requirements-and-limits" title="Permalink to this heading"></a></h2>
+<p>The FatFs component supports FAT12, FAT16, and FAT32 filesystem types, and can optionally support exFAT (see <a class="reference internal" href="#fatfs-optional-exfat-support"><span class="std std-ref">Optional exFAT Support</span></a>).</p>
+<p>The filesystem type depends on the number of clusters on the volume:</p>
+<div class="math notranslate nohighlight">
+\[cluster\_count = data\_logical\_sectors / logical\_sectors\_per\_cluster\]</div>
+<p>The minimum partition size therefore depends on the number of logical sectors required by FAT metadata and by at least one data cluster. For the terminology used below, see <a class="reference internal" href="#fatfs-glossary"><span class="std std-ref">Glossary</span></a>.</p>
+<section id="raw-fat-filesystem-size">
+<span id="fatfs-minimum-partition-size-raw"></span><h3>Raw FAT Filesystem Size<a class="headerlink" href="#raw-fat-filesystem-size" title="Permalink to this heading"></a></h3>
+<p>The required size of a raw FAT filesystem consists of the FAT filesystem metadata plus the data area:</p>
+<div class="math notranslate nohighlight">
+\[fatfs\_size = (reserved + fats + root\_dir + data) × logical\_sector\_size\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">reserved</span></code> is the number of reserved logical sectors</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fats</span></code> is the total number of logical sectors occupied by all FAT copies</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">root_dir</span></code> is the number of logical sectors occupied by the root directory on FAT12/FAT16</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> is the number of logical sectors in the data area</p></li>
+</ul>
+<p>The FAT area depends on the selected FAT type and the number of clusters:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 18.0%" />
+<col style="width: 25.0%" />
+<col style="width: 57.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>FAT Type</p></th>
+<th class="head"><p>Cluster Count</p></th>
+<th class="head"><p>FAT Sizing</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>FAT12</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&lt;=</span> <span class="pre">4085</span></code></p></td>
+<td><p>Each FAT entry uses 12 bits, so one FAT copy requires <code class="docutils literal notranslate"><span class="pre">ceil(((cluster_count</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">×</span> <span class="pre">3</span> <span class="pre">/</span> <span class="pre">2)</span> <span class="pre">/</span> <span class="pre">logical_sector_size)</span></code> logical sectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAT16</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">4085</span> <span class="pre">&lt;</span> <span class="pre">cluster_count</span> <span class="pre">&lt;</span> <span class="pre">65526</span></code></p></td>
+<td><p>Each FAT entry uses 16 bits, so one FAT copy requires <code class="docutils literal notranslate"><span class="pre">ceil(((cluster_count</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">×</span> <span class="pre">2)</span> <span class="pre">/</span> <span class="pre">logical_sector_size)</span></code> logical sectors.</p></td>
+</tr>
+<tr class="row-even"><td><p>FAT32</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&gt;=</span> <span class="pre">65526</span></code></p></td>
+<td><p>Each FAT entry uses 32 bits, so one FAT copy requires <code class="docutils literal notranslate"><span class="pre">ceil(((cluster_count</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">×</span> <span class="pre">4)</span> <span class="pre">/</span> <span class="pre">logical_sector_size)</span></code> logical sectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>exFAT</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">16</span> <span class="pre">..</span> <span class="pre">0x7FFFFFFD</span></code></p></td>
+<td><p>Each FAT entry uses 32 bits, so one FAT copy requires <code class="docutils literal notranslate"><span class="pre">ceil(((cluster_count</span> <span class="pre">+</span> <span class="pre">2)</span> <span class="pre">×</span> <span class="pre">4)</span> <span class="pre">/</span> <span class="pre">logical_sector_size)</span></code> logical sectors.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For FAT12 and FAT16, the root directory is outside the data area, so:</p>
+<div class="math notranslate nohighlight">
+\[root\_dir = ceil((root\_dir\_entries × 32) / logical\_sector\_size)\]</div>
+<p>For FAT32, the root directory is stored in the data area, so <code class="docutils literal notranslate"><span class="pre">root_dir</span> <span class="pre">=</span> <span class="pre">0</span></code> in the formula above.</p>
+<p>exFAT uses a different metadata layout. In addition to the FAT area, it requires an allocation bitmap and an up-case table, and its root directory is stored in the data area. As a result, the FAT12/FAT16 root-directory formula above does not apply to exFAT.</p>
+<p>When exFAT support is enabled, the minimum exFAT volume size is 4096 logical sectors and the maximum cluster count is <code class="docutils literal notranslate"><span class="pre">0x7FFFFFFD</span></code>.</p>
+<p>In practice:</p>
+<ul class="simple">
+<li><p>Increasing the partition size adds data logical sectors and therefore increases usable storage space.</p></li>
+<li><p>On small FAT12/FAT16 volumes, the root directory can occupy 1 logical sector. On larger ones, it can occupy 4 logical sectors.</p></li>
+<li><p>For FAT12, FAT16, and FAT32, the default layout uses two FATs. Compared with <code class="docutils literal notranslate"><span class="pre">use_one_fat</span> <span class="pre">=</span> <span class="pre">true</span></code>, this adds the logical sectors required by one extra FAT copy. exFAT uses a single FAT.</p></li>
+<li><p>For read-only partitions without wear leveling and with a 512-byte logical sector size, the practical minimum partition size is 2 KB. This minimum layout uses 4 logical sectors: 1 reserved sector, 1 FAT sector, 1 root-directory sector, and 1 data sector.</p></li>
+</ul>
+<p>This minimum raw layout is relevant for media such as SD cards and read-only raw flash partitions.</p>
+</section>
+<section id="fat-filesystem-with-wear-leveling">
+<span id="fatfs-minimum-partition-size-wl"></span><h3>FAT Filesystem with Wear Leveling<a class="headerlink" href="#fat-filesystem-with-wear-leveling" title="Permalink to this heading"></a></h3>
+<p>For a flash partition with wear leveling, the total size is the raw FAT filesystem size from <a class="reference internal" href="#fatfs-minimum-partition-size-raw"><span class="std std-ref">Raw FAT Filesystem Size</span></a> plus the wear-leveling metadata area:</p>
+<div class="math notranslate nohighlight">
+\[partition\_size = wl\_metadata\_flash\_sectors × flash\_sector\_size + fatfs\_size\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">wl_metadata_flash_sectors</span></code> is the number of flash sectors reserved for wear-leveling metadata</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">flash_sector_size</span></code> is the SPI flash erase-sector size. On almost all ESP boards it is 4096 bytes</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fatfs_size</span></code> is the raw FAT filesystem size, as defined in <a class="reference internal" href="#fatfs-minimum-partition-size-raw"><span class="std std-ref">Raw FAT Filesystem Size</span></a></p></li>
+</ul>
+<p>The minimum supported partition size depends on the WL configuration:</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 28.0%" />
+<col style="width: 18.0%" />
+<col style="width: 54.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Condition</p></th>
+<th class="head"><p>Minimum Size</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE</span> <span class="pre">=</span> <span class="pre">4096</span></code></p></td>
+<td><p>32 KB</p></td>
+<td><p>The minimum layout consists of 4 flash sectors reserved by the wear leveling layer plus the minimum raw FAT filesystem layout of 4 logical sectors. In this configuration, the logical sector size and the flash-sector size are both 4096 bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE</span> <span class="pre">=</span> <span class="pre">512</span></code> and WL Performance mode</p></td>
+<td><p>20 KB</p></td>
+<td><p>The raw FAT filesystem still needs the same minimum layout of 4 logical sectors, but the wear leveling layer keeps its metadata in 4096-byte flash sectors.</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE</span> <span class="pre">=</span> <span class="pre">512</span></code> and WL Safety mode</p></td>
+<td><p>28 KB</p></td>
+<td><p>Same raw FAT minimum as above, plus 2 additional flash sectors reserved by the wear leveling layer.</p></td>
+</tr>
+</tbody>
+</table>
+<p>For more details, see <a class="reference internal" href="../../api-guides/file-system-considerations.html"><span class="doc">File System Considerations</span></a>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The wear leveling layer protects the underlying flash by distributing write and erase cycles across the managed storage region. Its effectiveness therefore scales with the size of that region. Small partitions restrict wear distribution and can significantly reduce protection, so their use is strongly discouraged. For more information, refer to <a class="reference internal" href="wear-levelling.html"><span class="doc">wear leveling</span></a>.</p>
+</div>
+</section>
+</section>
+<section id="optimization">
+<h2>Optimization<a class="headerlink" href="#optimization" title="Permalink to this heading"></a></h2>
+<p>FatFs behavior can be tuned for different priorities by choosing the right configuration options and filesystem layout.</p>
+<p>The main variables that affect behavior are:</p>
+<ul class="simple">
+<li><p>Buffer placement and sizing (<a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-aligned-work-buffers"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_ALIGNED_WORK_BUFFERS</span></a>, <a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-extram"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_EXTRAM</span></a>, <a class="reference internal" href="../kconfig-reference.html#config-fatfs-use-dyn-buffers"><span class="std std-ref">CONFIG_FATFS_USE_DYN_BUFFERS</span></a>, <a class="reference internal" href="../kconfig-reference.html#config-fatfs-per-file-cache"><span class="std std-ref">CONFIG_FATFS_PER_FILE_CACHE</span></a>, and application I/O buffer sizes).</p></li>
+<li><p>Wear leveling logical sector size and mode (<code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE_*</span></code> and <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_MODE_*</span></code>).</p></li>
+<li><p>Sync strategy (<a class="reference internal" href="../kconfig-reference.html#config-fatfs-immediate-fsync"><span class="std std-ref">CONFIG_FATFS_IMMEDIATE_FSYNC</span></a>).</p></li>
+<li><p>Workload pattern (transaction sizes, sequential vs random access, read vs write ratio).</p></li>
+</ul>
+<section id="optimize-i-o-performance">
+<h3>Optimize I/O Performance<a class="headerlink" href="#optimize-i-o-performance" title="Permalink to this heading"></a></h3>
+<p>For throughput-oriented workloads:</p>
+<ul class="simple">
+<li><p>Keep <a class="reference internal" href="../kconfig-reference.html#config-fatfs-immediate-fsync"><span class="std std-ref">CONFIG_FATFS_IMMEDIATE_FSYNC</span></a> disabled unless your consistency requirements need it.</p></li>
+<li><p>If peak speed is the top priority, disable <a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-extram"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_EXTRAM</span></a> so buffers stay in internal RAM.</p></li>
+<li><p>Prefer larger read/write transaction sizes over many small operations.</p></li>
+<li><p>Align transaction sizes to the active sector size when possible (for example 512 B or 4096 B), and pad writes if needed to reduce partial-sector overhead.</p></li>
+<li><p>For SPI flash with wear leveling, prefer <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE_4096</span></code> when RAM budget allows, as it is generally more efficient.</p></li>
+<li><p>If using 512-byte WL sectors, use <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_MODE_PERF</span></code> when your application can accept the higher power-loss risk during flash-sector erase.</p></li>
+<li><p>Prefer POSIX <code class="docutils literal notranslate"><span class="pre">read</span></code>/<code class="docutils literal notranslate"><span class="pre">write</span></code> over <code class="docutils literal notranslate"><span class="pre">fread</span></code>/<code class="docutils literal notranslate"><span class="pre">fwrite</span></code> on hot paths when possible. For broader speed guidance, see <a class="reference internal" href="../../api-guides/performance/speed.html"><span class="doc">Maximizing Execution Speed</span></a>.</p></li>
+<li><p>On SDMMC DMA targets (for example ESP32-P4 with PSRAM), enable <a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-aligned-work-buffers"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_ALIGNED_WORK_BUFFERS</span></a> to reduce extra buffer copies.</p></li>
+<li><p>Enable <a class="reference internal" href="../kconfig-reference.html#config-fatfs-use-fastseek"><span class="std std-ref">CONFIG_FATFS_USE_FASTSEEK</span></a> for read-heavy workloads with long backward seeks.</p></li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>For a baseline of what to expect in a performance-optimized scenario, see <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/storage/perf_benchmark">storage/perf_benchmark</a>.</p>
+</div>
+</section>
+<section id="optimize-memory-usage">
+<h3>Optimize Memory Usage<a class="headerlink" href="#optimize-memory-usage" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Disable <a class="reference internal" href="../kconfig-reference.html#config-fatfs-per-file-cache"><span class="std std-ref">CONFIG_FATFS_PER_FILE_CACHE</span></a> to use a single shared cache when reducing RAM usage is the priority.</p></li>
+<li><p>Tune <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_mount_config_t.max_files</span></code> (see <a class="reference internal" href="#fatfs-mount-and-use"><span class="std std-ref">Mount and Use FatFs</span></a>) as low as practical; each simultaneously open file increases RAM usage.</p></li>
+<li><p>If <a class="reference internal" href="../kconfig-reference.html#config-fatfs-per-file-cache"><span class="std std-ref">CONFIG_FATFS_PER_FILE_CACHE</span></a> is enabled, prefer <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE_512</span></code> to reduce per-file cache size.</p></li>
+<li><p>If <a class="reference internal" href="../kconfig-reference.html#config-fatfs-per-file-cache"><span class="std std-ref">CONFIG_FATFS_PER_FILE_CACHE</span></a> is disabled, <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE_4096</span></code> may be a better tradeoff.</p></li>
+<li><p>Enable <a class="reference internal" href="../kconfig-reference.html#config-fatfs-alloc-prefer-extram"><span class="std std-ref">CONFIG_FATFS_ALLOC_PREFER_EXTRAM</span></a> on targets with external RAM support to reduce internal RAM pressure, but expect lower I/O performance.</p></li>
+<li><p>Consider <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_LONG_FILENAMES</span> <span class="pre">=</span> <span class="pre">CONFIG_FATFS_LFN_NONE</span></code> when SFN (8.3) filenames are acceptable.</p></li>
+<li><p>If long filenames are required, reduce <code class="docutils literal notranslate"><span class="pre">CONFIG_FATFS_MAX_LFN</span></code> to the smallest value that meets your needs.</p></li>
+<li><p>Enable <a class="reference internal" href="../kconfig-reference.html#config-fatfs-use-dyn-buffers"><span class="std std-ref">CONFIG_FATFS_USE_DYN_BUFFERS</span></a> so each mounted volume uses buffers sized to its actual sector size.</p></li>
+</ul>
+</section>
+<section id="optimize-storage-efficiency">
+<h3>Optimize Storage Efficiency<a class="headerlink" href="#optimize-storage-efficiency" title="Permalink to this heading"></a></h3>
+<p>For maximizing usable filesystem capacity:</p>
+<ul class="simple">
+<li><p>For generated read-only images, consider the <code class="docutils literal notranslate"><span class="pre">ONE_FAT</span></code> option in <code class="docutils literal notranslate"><span class="pre">fatfs_create_spiflash_image</span></code> (see <a class="reference internal" href="#fatfs-partition-generator"><span class="std std-ref">FatFs Partition Generator</span></a>) to use one FAT instead of two.</p></li>
+<li><p>Consider <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE_512</span></code> when minimizing overhead is a priority, as smaller sectors can improve usable storage efficiency in some layouts.</p></li>
+<li><p>Size partitions with margin. Very small partitions have proportionally higher metadata and wear leveling overhead.</p></li>
+<li><p>Keep long filenames short where possible; long names consume additional directory entries.</p></li>
+<li><p>For read-only data, consider raw FAT partitions without wear leveling where appropriate.</p></li>
+</ul>
+</section>
+</section>
+<section id="advanced-operations">
+<h2>Advanced Operations<a class="headerlink" href="#advanced-operations" title="Permalink to this heading"></a></h2>
+<p>Manual mounting may be required when you use storage media that ESP-IDF does not support directly or when you need access to low-level FatFs library functions.</p>
+<section id="optional-exfat-support">
+<span id="fatfs-optional-exfat-support"></span><h3>Optional exFAT Support<a class="headerlink" href="#optional-exfat-support" title="Permalink to this heading"></a></h3>
+<p>The upstream FatFs library includes optional exFAT support, but ESP-IDF does not enable it by default.</p>
+<p>If your project requires exFAT, you must modify the FatFs configuration in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/components/fatfs">fatfs</a> component manually and integrate the resulting configuration into your build and validation flow. ESP-IDF does not provide a dedicated menuconfig option or a standard high-level enablement path for exFAT.</p>
+<p>Before enabling exFAT, review any licensing or other intellectual-property considerations that may apply to your product, distribution model, and target markets.</p>
+</section>
+<section id="architecture-overview">
+<h3>Architecture Overview<a class="headerlink" href="#architecture-overview" title="Permalink to this heading"></a></h3>
+<p>The following diagram illustrates the layered architecture of FatFs and its relationship with other ESP-IDF components:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>+---------------------------------------------------------------+
+|              Newlib/Picolib (C Standard Library)              |
+|           fopen, fread, fwrite, fclose, fseek, etc.           |
++---------------------------------------------------------------+
+|                  VFS (Virtual File System)                    |
+|  POSIX API: open, read, write, close, lseek, stat, etc.       |
++---------------------------------------------------------------+
+|                       FatFs Library                           |
+|       f_mount, f_open, f_read, f_write, f_close, f_mkfs       |
++---------------------------------------------------------------+
+|                      Disk I/O Layer                           |
+|  ff_diskio_register, disk_read, disk_write, disk_ioctl, etc.  |
++-------------------------------+-------------------------------+
+|   Wear Leveling  (optional)   |                               |
+|  wl_mount, wl_read, wl_write  |        SD/MMC Driver          |
++-------------------------------+                               |
+|         esp_partition         |   sdmmc_read/write_sectors    |
+|    esp_partition_read/write   |                               |
++-------------------------------+-------------------------------+
+|           SPI Flash           |           SD Card             |
++-------------------------------+-------------------------------+
+</pre></div>
+</div>
+</section>
+<section id="manually-mount-a-fat-filesystem-partition">
+<span id="fatfs-manual-mount"></span><h3>Manually Mount a FAT Filesystem Partition<a class="headerlink" href="#manually-mount-a-fat-filesystem-partition" title="Permalink to this heading"></a></h3>
+<p>When mounting a FAT filesystem partition manually, follow the same general flow used by the convenience wrappers described in <a class="reference internal" href="#fatfs-mount-and-use"><span class="std std-ref">Mount and Use FatFs</span></a>: register the filesystem with the FatFs library, then mount it through the VFS.</p>
+<ol class="arabic">
+<li><p>Register the filesystem with the VFS by calling <a class="reference internal" href="#_CPPv420esp_vfs_fat_registerPK18esp_vfs_fat_conf_tPP5FATFS" title="esp_vfs_fat_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_register()</span></code></a>. This allocates the <code class="docutils literal notranslate"><span class="pre">FATFS</span></code> structure and sets up the interface between the VFS and the FatFs library. Specify:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The path prefix where the filesystem will be mounted (for example, <code class="docutils literal notranslate"><span class="pre">&quot;/sdcard&quot;</span></code> or <code class="docutils literal notranslate"><span class="pre">&quot;/spiflash&quot;</span></code>).</p></li>
+<li><p>The FatFs drive number.</p></li>
+<li><p>A variable that receives a pointer to the <code class="docutils literal notranslate"><span class="pre">FATFS</span></code> structure.</p></li>
+</ul>
+</div></blockquote>
+</li>
+<li><p>Register the disk I/O driver for the drive number used in Step 1 by calling <a class="reference internal" href="#_CPPv418ff_diskio_register4BYTEPK16ff_diskio_impl_t" title="ff_diskio_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ff_diskio_register()</span></code></a>.</p></li>
+<li><p>Mount the filesystem for the drive number passed to <a class="reference internal" href="#_CPPv420esp_vfs_fat_registerPK18esp_vfs_fat_conf_tPP5FATFS" title="esp_vfs_fat_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_register()</span></code></a> by calling <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_mount()</span></code>.</p>
+<p>If no filesystem is present on the target logical drive, <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_mount()</span></code> fails with <code class="docutils literal notranslate"><span class="pre">FR_NO_FILESYSTEM</span></code>. In that case, create a new FAT filesystem on the drive with <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_mkfs()</span></code>, and then call <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_mount()</span></code> again.</p>
+<p>For SD cards, create a partition table first with <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_fdisk()</span></code>. For details, see the <a class="reference external" href="http://elm-chan.org/fsw/ff/doc/mount.html">FatFs documentation</a>.</p>
+</li>
+</ol>
+<p>To unmount, follow these general steps:</p>
+<ol class="arabic simple">
+<li><p>Unmount the filesystem by calling <code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">f_mount()</span></code> with the same drive number and a NULL <code class="docutils literal notranslate"><span class="pre">FATFS*</span></code> argument.</p></li>
+<li><p>Unregister the disk I/O driver by calling <a class="reference internal" href="#_CPPv418ff_diskio_register4BYTEPK16ff_diskio_impl_t" title="ff_diskio_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ff_diskio_register()</span></code></a> with the same drive number and a NULL <code class="docutils literal notranslate"><span class="pre">ff_diskio_impl_t*</span></code> argument.</p></li>
+<li><p>Remove the VFS registration and free the <code class="docutils literal notranslate"><span class="pre">FATFS</span></code> structure allocated in Step 1 of the mounting procedure by calling <a class="reference internal" href="#_CPPv427esp_vfs_fat_unregister_pathPKc" title="esp_vfs_fat_unregister_path"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_vfs_fat_unregister_path()</span></code></a> with the mount path.</p></li>
+</ol>
+<p>When calling low-level functions provided by the FatFs library, use paths without the mount-point prefix. For example, use <code class="docutils literal notranslate"><span class="pre">&quot;/hello.txt&quot;</span></code>.</p>
+</section>
+<section id="fatfs-disk-i-o-layer">
+<span id="fatfs-diskio-layer"></span><h3>FatFs Disk I/O Layer<a class="headerlink" href="#fatfs-disk-i-o-layer" title="Permalink to this heading"></a></h3>
+<p>FatFs provides APIs to register disk I/O drivers at runtime. These APIs form the interface between medium-specific access functions and the FatFs library.</p>
+<p>The disk I/O layer uses <a class="reference internal" href="#_CPPv416ff_diskio_impl_t" title="ff_diskio_impl_t"><code class="xref cpp cpp-struct docutils literal notranslate"><span class="pre">ff_diskio_impl_t</span></code></a> to provide medium access functions. Pass this structure to <a class="reference internal" href="#_CPPv418ff_diskio_register4BYTEPK16ff_diskio_impl_t" title="ff_diskio_register"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ff_diskio_register()</span></code></a>.</p>
+<p>ESP-IDF provides convenience wrappers for the supported storage media. These include:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv431ff_diskio_register_wl_partitionh11wl_handle_t" title="ff_diskio_register_wl_partition"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ff_diskio_register_wl_partition()</span></code></a> for SPI flash partitions with wear leveling.</p></li>
+<li><p><a class="reference internal" href="#_CPPv432ff_diskio_register_raw_partitionhPK15esp_partition_t" title="ff_diskio_register_raw_partition"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ff_diskio_register_raw_partition()</span></code></a> for read-only SPI flash partitions <strong>without</strong> wear leveling.</p></li>
+<li><p><a class="reference internal" href="#_CPPv424ff_diskio_register_sdmmchP12sdmmc_card_t" title="ff_diskio_register_sdmmc"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">ff_diskio_register_sdmmc()</span></code></a> for both SDMMC and SPI connected SD cards.</p></li>
+</ul>
+</div></blockquote>
+<p>For API reference, see <a class="reference internal" href="#fatfs-diskio-api-reference"><span class="std std-ref">Disk I/O API Reference</span></a>.</p>
+</section>
+</section>
+<section id="glossary">
+<span id="fatfs-glossary"></span><h2>Glossary<a class="headerlink" href="#glossary" title="Permalink to this heading"></a></h2>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 20.0%" />
+<col style="width: 80.0%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>Term</p></th>
+<th class="head"><p>Description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>VFS</p></td>
+<td><p>Virtual File System, an abstraction layer provided by ESP-IDF that allows applications to access different underlying filesystems through unified POSIX and <code class="docutils literal notranslate"><span class="pre">stdio.h</span></code> interfaces.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Logical Sector</p></td>
+<td><p>The logical block size presented to FatFs and the disk I/O layer. For wear-leveled SPI flash, this is the WL sector size. For read-only raw SPI flash partitions, this is the flash-sector size. For SD cards, it is typically 512 bytes.</p></td>
+</tr>
+<tr class="row-even"><td><p>WL Sector</p></td>
+<td><p>The logical sector size exposed by the wear leveling layer to FatFs. Depending on <code class="docutils literal notranslate"><span class="pre">CONFIG_WL_SECTOR_SIZE</span></code>, it is either 512 bytes or 4096 bytes.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Flash Sector</p></td>
+<td><p>The underlying SPI flash erase unit used by the flash chip. On nearly all ESP boards, this is 4096 bytes. It can differ from the WL sector size presented to FatFs when wear leveling is configured for 512-byte sectors.</p></td>
+</tr>
+<tr class="row-even"><td><p>Cluster</p></td>
+<td><p>The minimum logical FAT allocation unit, consisting of one or more contiguous logical sectors.</p></td>
+</tr>
+<tr class="row-odd"><td><p>FAT</p></td>
+<td><p>File Allocation Table, which records the usage status of each cluster and the linkage relationships between file data blocks.</p></td>
+</tr>
+<tr class="row-even"><td><p>Wear Leveling</p></td>
+<td><p>A technique to extend the lifespan of flash memory by distributing write operations evenly across storage cells, preventing specific blocks from wearing out prematurely due to frequent erasing.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Drive Number</p></td>
+<td><p>A number (0-9) used by FatFs to identify different logical drives, each corresponding to an independent filesystem instance.</p></td>
+</tr>
+<tr class="row-even"><td><p>Mount</p></td>
+<td><p>The process of associating a filesystem with a specified path, enabling applications to access the filesystem contents through that path.</p></td>
+</tr>
+<tr class="row-odd"><td><p>SFN/LFN</p></td>
+<td><p>Short File Name (8.3 format) and Long File Name (up to 255 characters).</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="application-examples">
+<span id="fatfs-application-examples"></span><h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/storage/fatfs/getting_started">storage/fatfs/getting_started</a> demonstrates the minimal setup required to store persistent data on SPI flash with FatFs, including mounting the filesystem, opening a file, performing basic read and write operations, and unmounting the filesystem.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/storage/fatfs/fs_operations">storage/fatfs/fs_operations</a> demonstrates advanced FatFs operations, including reading and writing files, creating, moving, and deleting files and directories, and inspecting file details.</p></li>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/storage/fatfs/ext_flash">storage/fatfs/ext_flash</a> demonstrates how to operate an external SPI flash formatted with FatFs, including initializing the SPI bus, configuring the flash chip, registering it as a partition, and performing read and write operations.</p></li>
+</ul>
+</section>
+<section id="high-level-api-reference">
+<span id="fatfs-high-level-api-reference"></span><h2>High-level API Reference<a class="headerlink" href="#high-level-api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/fatfs/vfs/esp_vfs_fat.h">components/fatfs/vfs/esp_vfs_fat.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_vfs_fat.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">fatfs</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">fatfs</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES fatfs
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES fatfs
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420esp_vfs_fat_registerPK18esp_vfs_fat_conf_tPP5FATFS">
+<span id="_CPPv320esp_vfs_fat_registerPK18esp_vfs_fat_conf_tPP5FATFS"></span><span id="_CPPv220esp_vfs_fat_registerPK18esp_vfs_fat_conf_tPP5FATFS"></span><span id="esp_vfs_fat_register__esp_vfs_fat_conf_tCP.FATFSPP"></span><span class="target" id="esp__vfs__fat_8h_1a7b62d03fe5e789045bc2350020cb05c6"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_register</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv418esp_vfs_fat_conf_t" title="esp_vfs_fat_conf_t"><span class="n"><span class="pre">esp_vfs_fat_conf_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">conf</span></span>, <span class="n"><span class="pre">FATFS</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_fs</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420esp_vfs_fat_registerPK18esp_vfs_fat_conf_tPP5FATFS" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register FATFS with VFS component. </p>
+<p>This function registers given FAT drive in VFS, at the specified base path. Input arguments are held in <a class="reference internal" href="#structesp__vfs__fat__conf__t"><span class="std std-ref">esp_vfs_fat_conf_t</span></a> structure. If only one drive is used, fat_drive argument can be an empty string. Refer to FATFS library documentation on how to specify FAT drive. This function also allocates FATFS structure which should be used for f_mount call.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function doesn't mount the drive into FATFS, it just connects POSIX and C standard library IO function with FATFS. You need to mount desired drive into FATFS separately.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>conf</strong> -- pointer to <a class="reference internal" href="#structesp__vfs__fat__conf__t"><span class="std std-ref">esp_vfs_fat_conf_t</span></a> configuration structure </p></li>
+<li><p><strong>out_fs</strong> -- <strong>[out]</strong> pointer to FATFS structure which can be used for FATFS f_mount call is returned via this argument. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if a filesystem is already registered at this base path. If <code class="docutils literal notranslate"><span class="pre">out_fs</span></code> is not NULL, <code class="docutils literal notranslate"><span class="pre">*out_fs</span></code> is set to the existing FATFS object so callers can run f_mount (e.g. remount the same path).</p></li>
+<li><p>ESP_ERR_NO_MEM if not enough memory or too many VFSes already registered </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv427esp_vfs_fat_unregister_pathPKc">
+<span id="_CPPv327esp_vfs_fat_unregister_pathPKc"></span><span id="_CPPv227esp_vfs_fat_unregister_pathPKc"></span><span id="esp_vfs_fat_unregister_path__cCP"></span><span class="target" id="esp__vfs__fat_8h_1a85fb92efa1bf2fac6bd209d37778d8f5"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_unregister_path</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv427esp_vfs_fat_unregister_pathPKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Un-register FATFS from VFS. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>FATFS structure returned by esp_vfs_fat_register is destroyed after this call. Make sure to call f_mount function to unmount it before calling esp_vfs_fat_unregister_ctx. Difference between this function and the one above is that this one will release the correct drive, while the one above will release the last registered one</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>base_path</strong> -- path prefix where FATFS is registered. This is the same used when esp_vfs_fat_register was called </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if FATFS is not registered in VFS </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t">
+<span id="_CPPv323esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t"></span><span id="_CPPv223esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t"></span><span id="esp_vfs_fat_sdmmc_mount__cCP.sdmmc_host_tCP.voidCP.esp_vfs_fat_mount_config_tCP.sdmmc_card_tPP"></span><span class="target" id="esp__vfs__fat_8h_1a3765e848b78d99a925001ee41c7d3890"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_sdmmc_mount</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_host_t" title="sdmmc_host_t"><span class="n"><span class="pre">sdmmc_host_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">host_config</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">slot_config</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mount_config</span></span>, <a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_card_t" title="sdmmc_card_t"><span class="n"><span class="pre">sdmmc_card_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_card</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_vfs_fat_sdmmc_mountPKcPK12sdmmc_host_tPKvPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenience function to get FAT filesystem on SD card registered in VFS. </p>
+<p>This is an all-in-one function which does the following:<ul class="simple">
+<li><p>initializes SDMMC driver or SPI driver with configuration in host_config</p></li>
+<li><p>initializes SD card with configuration in slot_config</p></li>
+<li><p>mounts FAT partition on SD card using FATFS library, with configuration in mount_config</p></li>
+<li><p>registers FATFS library with VFS, with prefix given by base_prefix variable</p></li>
+</ul>
+</p>
+<p>This function is intended to make example code more compact. For real world applications, developers should implement the logic of probing SD card, locating and mounting partition, and registering FATFS in VFS, with proper error checking and handling of exceptional conditions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Use this API to mount a card through SDSPI is deprecated. Please call <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_sdspi_mount()</span></code> instead for that case.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where partition should be registered (e.g. &quot;/sdcard&quot;) </p></li>
+<li><p><strong>host_config</strong> -- Pointer to structure describing SDMMC host. When using SDMMC peripheral, this structure can be initialized using SDMMC_HOST_DEFAULT() macro. When using SPI peripheral, this structure can be initialized using SDSPI_HOST_DEFAULT() macro. </p></li>
+<li><p><strong>slot_config</strong> -- Pointer to structure with slot configuration. For SDMMC peripheral, pass a pointer to <a class="reference internal" href="../peripherals/sdmmc_host.html#structsdmmc__slot__config__t"><span class="std std-ref">sdmmc_slot_config_t</span></a> structure initialized using SDMMC_SLOT_CONFIG_DEFAULT. </p></li>
+<li><p><strong>mount_config</strong> -- pointer to structure with extra parameters for mounting FATFS </p></li>
+<li><p><strong>out_card</strong> -- <strong>[out]</strong> pointer to the card information structure will be returned via this argument </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG if any of the arguments is NULL</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_sdmmc_mount was already called</p></li>
+<li><p>ESP_ERR_NO_MEM if memory can not be allocated</p></li>
+<li><p>ESP_FAIL if partition can not be mounted</p></li>
+<li><p>other error codes from SDMMC or SPI drivers, SDMMC protocol, or FATFS drivers </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_vfs_fat_sdspi_mountPKcPK12sdmmc_host_tPK21sdspi_device_config_tPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t">
+<span id="_CPPv323esp_vfs_fat_sdspi_mountPKcPK12sdmmc_host_tPK21sdspi_device_config_tPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t"></span><span id="_CPPv223esp_vfs_fat_sdspi_mountPKcPK12sdmmc_host_tPK21sdspi_device_config_tPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t"></span><span id="esp_vfs_fat_sdspi_mount__cCP.sdmmc_host_tCP.sdspi_device_config_tCP.esp_vfs_fat_mount_config_tCP.sdmmc_card_tPP"></span><span class="target" id="esp__vfs__fat_8h_1a0a6d3081cffdb428e4320717fbf9cce7"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_sdspi_mount</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_host_t" title="sdmmc_host_t"><span class="n"><span class="pre">sdmmc_host_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">host_config_input</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="../peripherals/sdspi_host.html#_CPPv421sdspi_device_config_t" title="sdspi_device_config_t"><span class="n"><span class="pre">sdspi_device_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">slot_config</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mount_config</span></span>, <a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_card_t" title="sdmmc_card_t"><span class="n"><span class="pre">sdmmc_card_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_card</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_vfs_fat_sdspi_mountPKcPK12sdmmc_host_tPK21sdspi_device_config_tPK26esp_vfs_fat_mount_config_tPP12sdmmc_card_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenience function to get FAT filesystem on SD card registered in VFS. </p>
+<p>This is an all-in-one function which does the following:<ul class="simple">
+<li><p>initializes an SPI Master device based on the SPI Master driver with configuration in slot_config, and attach it to an initialized SPI bus.</p></li>
+<li><p>initializes SD card with configuration in host_config_input</p></li>
+<li><p>mounts FAT partition on SD card using FATFS library, with configuration in mount_config</p></li>
+<li><p>registers FATFS library with VFS, with prefix given by base_prefix variable</p></li>
+</ul>
+</p>
+<p>This function is intended to make example code more compact. For real world applications, developers should implement the logic of probing SD card, locating and mounting partition, and registering FATFS in VFS, with proper error checking and handling of exceptional conditions.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function try to attach the new SD SPI device to the bus specified in host_config. Make sure the SPI bus specified in <code class="docutils literal notranslate"><span class="pre">host_config-&gt;slot</span></code> have been initialized by <code class="docutils literal notranslate"><span class="pre">spi_bus_initialize()</span></code> before.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where partition should be registered (e.g. &quot;/sdcard&quot;) </p></li>
+<li><p><strong>host_config_input</strong> -- Pointer to structure describing SDMMC host. This structure can be initialized using SDSPI_HOST_DEFAULT() macro. </p></li>
+<li><p><strong>slot_config</strong> -- Pointer to structure with slot configuration. For SPI peripheral, pass a pointer to <a class="reference internal" href="../peripherals/sdspi_host.html#structsdspi__device__config__t"><span class="std std-ref">sdspi_device_config_t</span></a> structure initialized using SDSPI_DEVICE_CONFIG_DEFAULT(). </p></li>
+<li><p><strong>mount_config</strong> -- pointer to structure with extra parameters for mounting FATFS </p></li>
+<li><p><strong>out_card</strong> -- <strong>[out]</strong> Pointer to the card information structure will be returned via this argument. It is suggested to hold this handle and use it to unmount the card later if needed. Otherwise it's not suggested to use more than one card at the same time and unmount one of them in your application. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG if any of the arguments is NULL</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_sdmmc_mount was already called</p></li>
+<li><p>ESP_ERR_NO_MEM if memory can not be allocated</p></li>
+<li><p>ESP_FAIL if partition can not be mounted</p></li>
+<li><p>other error codes from SDMMC or SPI drivers, SDMMC protocol, or FATFS drivers </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426esp_vfs_fat_sdcard_unmountPKcP12sdmmc_card_t">
+<span id="_CPPv326esp_vfs_fat_sdcard_unmountPKcP12sdmmc_card_t"></span><span id="_CPPv226esp_vfs_fat_sdcard_unmountPKcP12sdmmc_card_t"></span><span id="esp_vfs_fat_sdcard_unmount__cCP.sdmmc_card_tP"></span><span class="target" id="esp__vfs__fat_8h_1adab08963089b828377730a7b6d2c6ef5"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_sdcard_unmount</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_card_t" title="sdmmc_card_t"><span class="n"><span class="pre">sdmmc_card_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">card</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426esp_vfs_fat_sdcard_unmountPKcP12sdmmc_card_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unmount an SD card from the FAT filesystem and release resources acquired using <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_sdmmc_mount()</span></code> or <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_sdspi_mount()</span></code></p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG if the card argument is unregistered</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_sdmmc_mount hasn't been called </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429esp_vfs_fat_sdcard_format_cfgPKcP12sdmmc_card_tP26esp_vfs_fat_mount_config_t">
+<span id="_CPPv329esp_vfs_fat_sdcard_format_cfgPKcP12sdmmc_card_tP26esp_vfs_fat_mount_config_t"></span><span id="_CPPv229esp_vfs_fat_sdcard_format_cfgPKcP12sdmmc_card_tP26esp_vfs_fat_mount_config_t"></span><span id="esp_vfs_fat_sdcard_format_cfg__cCP.sdmmc_card_tP.esp_vfs_fat_mount_config_tP"></span><span class="target" id="esp__vfs__fat_8h_1ac05d1e1821f0bddb3a12760561153fb8"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_sdcard_format_cfg</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_card_t" title="sdmmc_card_t"><span class="n"><span class="pre">sdmmc_card_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">card</span></span>, <a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429esp_vfs_fat_sdcard_format_cfgPKcP12sdmmc_card_tP26esp_vfs_fat_mount_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format FAT filesystem with given configuration. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API should be only called when the FAT is already mounted.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Path where partition should be registered (e.g. &quot;/sdcard&quot;) </p></li>
+<li><p><strong>card</strong> -- Pointer to the card handle, which should be initialised by calling <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_sdspi_mount</span></code> first </p></li>
+<li><p><strong>cfg</strong> -- Pointer to structure with extra parameters for formatting FATFS (only relevant fields are used). If NULL, the previous configuration will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK</p></li>
+<li><p>ESP_ERR_INVALID_STATE: FAT partition isn't mounted, call esp_vfs_fat_sdmmc_mount or esp_vfs_fat_sdspi_mount first</p></li>
+<li><p>ESP_ERR_NO_MEM: if memory can not be allocated</p></li>
+<li><p>ESP_FAIL: fail to format it, or fail to mount back </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425esp_vfs_fat_sdcard_formatPKcP12sdmmc_card_t">
+<span id="_CPPv325esp_vfs_fat_sdcard_formatPKcP12sdmmc_card_t"></span><span id="_CPPv225esp_vfs_fat_sdcard_formatPKcP12sdmmc_card_t"></span><span id="esp_vfs_fat_sdcard_format__cCP.sdmmc_card_tP"></span><span class="target" id="esp__vfs__fat_8h_1a3129049466cefb4591a77c74e979403c"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_sdcard_format</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_card_t" title="sdmmc_card_t"><span class="n"><span class="pre">sdmmc_card_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">card</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425esp_vfs_fat_sdcard_formatPKcP12sdmmc_card_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format FAT filesystem. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API should be only called when the FAT is already mounted.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Path where partition should be registered (e.g. &quot;/sdcard&quot;) </p></li>
+<li><p><strong>card</strong> -- Pointer to the card handle, which should be initialised by calling <code class="docutils literal notranslate"><span class="pre">esp_vfs_fat_sdspi_mount</span></code> first</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK</p></li>
+<li><p>ESP_ERR_INVALID_STATE: FAT partition isn't mounted, call esp_vfs_fat_sdmmc_mount or esp_vfs_fat_sdspi_mount first</p></li>
+<li><p>ESP_ERR_NO_MEM: if memory can not be allocated</p></li>
+<li><p>ESP_FAIL: fail to format it, or fail to mount back </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432esp_vfs_fat_spiflash_mount_rw_wlPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t">
+<span id="_CPPv332esp_vfs_fat_spiflash_mount_rw_wlPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t"></span><span id="_CPPv232esp_vfs_fat_spiflash_mount_rw_wlPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t"></span><span id="esp_vfs_fat_spiflash_mount_rw_wl__cCP.cCP.esp_vfs_fat_mount_config_tCP.wl_handle_tP"></span><span class="target" id="esp__vfs__fat_8h_1ab6358b26f08b4bcd63035e560b64b757"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_spiflash_mount_rw_wl</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">partition_label</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mount_config</span></span>, <a class="reference internal" href="wear-levelling.html#_CPPv411wl_handle_t" title="wl_handle_t"><span class="n"><span class="pre">wl_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">wl_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432esp_vfs_fat_spiflash_mount_rw_wlPKcPKcPK26esp_vfs_fat_mount_config_tP11wl_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenience function to initialize FAT filesystem in SPI flash and register it in VFS. </p>
+<p>This is an all-in-one function which does the following:</p>
+<p><ul class="simple">
+<li><p>finds the partition with defined partition_label. Partition label should be configured in the partition table.</p></li>
+<li><p>initializes flash wear levelling library on top of the given partition</p></li>
+<li><p>mounts FAT partition using FATFS library on top of flash wear levelling library</p></li>
+<li><p>registers FATFS library with VFS, with prefix given by base_prefix variable</p></li>
+</ul>
+</p>
+<p>This function is intended to make example code more compact.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where FATFS partition should be mounted (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>partition_label</strong> -- label of the partition which should be used </p></li>
+<li><p><strong>mount_config</strong> -- pointer to structure with extra parameters for mounting FATFS </p></li>
+<li><p><strong>wl_handle</strong> -- <strong>[out]</strong> wear levelling driver handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_NOT_FOUND if the partition table does not contain FATFS partition with given label</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount_rw_wl was already called</p></li>
+<li><p>ESP_ERR_NO_MEM if memory can not be allocated</p></li>
+<li><p>ESP_FAIL if partition can not be mounted</p></li>
+<li><p>other error codes from wear levelling library, SPI flash driver, or FATFS drivers </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434esp_vfs_fat_spiflash_unmount_rw_wlPKc11wl_handle_t">
+<span id="_CPPv334esp_vfs_fat_spiflash_unmount_rw_wlPKc11wl_handle_t"></span><span id="_CPPv234esp_vfs_fat_spiflash_unmount_rw_wlPKc11wl_handle_t"></span><span id="esp_vfs_fat_spiflash_unmount_rw_wl__cCP.wl_handle_t"></span><span class="target" id="esp__vfs__fat_8h_1aae941c70298ca9910b1608ffb2dfb6c1"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_spiflash_unmount_rw_wl</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <a class="reference internal" href="wear-levelling.html#_CPPv411wl_handle_t" title="wl_handle_t"><span class="n"><span class="pre">wl_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">wl_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434esp_vfs_fat_spiflash_unmount_rw_wlPKc11wl_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unmount FAT filesystem and release resources acquired using esp_vfs_fat_spiflash_mount_rw_wl. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where partition should be registered (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>wl_handle</strong> -- wear levelling driver handle returned by esp_vfs_fat_spiflash_mount_rw_wl</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount_rw_wl hasn't been called </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv437esp_vfs_fat_spiflash_format_cfg_rw_wlPKcPKcP26esp_vfs_fat_mount_config_t">
+<span id="_CPPv337esp_vfs_fat_spiflash_format_cfg_rw_wlPKcPKcP26esp_vfs_fat_mount_config_t"></span><span id="_CPPv237esp_vfs_fat_spiflash_format_cfg_rw_wlPKcPKcP26esp_vfs_fat_mount_config_t"></span><span id="esp_vfs_fat_spiflash_format_cfg_rw_wl__cCP.cCP.esp_vfs_fat_mount_config_tP"></span><span class="target" id="esp__vfs__fat_8h_1aa9993bdaafe2777f2e6f3c814154e7c7"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_spiflash_format_cfg_rw_wl</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">partition_label</span></span>, <a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">cfg</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv437esp_vfs_fat_spiflash_format_cfg_rw_wlPKcPKcP26esp_vfs_fat_mount_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format FAT filesystem with given configuration. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API can be called when the FAT is mounted / not mounted. If this API is called when the FAT isn't mounted (by calling esp_vfs_fat_spiflash_mount_rw_wl), this API will first mount the FAT then format it, then restore back to the original state.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Path where partition should be registered (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>partition_label</strong> -- Label of the partition which should be used </p></li>
+<li><p><strong>cfg</strong> -- Pointer to structure with extra parameters for formatting FATFS (only relevant fields are used). If NULL and mounted the previous configuration will be used. If NULL and unmounted the default configuration will be used.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK</p></li>
+<li><p>ESP_ERR_NO_MEM: if memory can not be allocated</p></li>
+<li><p>Other errors from esp_vfs_fat_spiflash_mount_rw_wl </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv433esp_vfs_fat_spiflash_format_rw_wlPKcPKc">
+<span id="_CPPv333esp_vfs_fat_spiflash_format_rw_wlPKcPKc"></span><span id="_CPPv233esp_vfs_fat_spiflash_format_rw_wlPKcPKc"></span><span id="esp_vfs_fat_spiflash_format_rw_wl__cCP.cCP"></span><span class="target" id="esp__vfs__fat_8h_1a08f2185608116f09f28b8e6717795d99"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_spiflash_format_rw_wl</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">partition_label</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433esp_vfs_fat_spiflash_format_rw_wlPKcPKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Format FAT filesystem. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API can be called when the FAT is mounted / not mounted. If this API is called when the FAT isn't mounted (by calling esp_vfs_fat_spiflash_mount_rw_wl), this API will first mount the FAT then format it, then restore back to the original state.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Path where partition should be registered (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>partition_label</strong> -- Label of the partition which should be used</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK</p></li>
+<li><p>ESP_ERR_NO_MEM: if memory can not be allocated</p></li>
+<li><p>Other errors from esp_vfs_fat_spiflash_mount_rw_wl </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv429esp_vfs_fat_spiflash_mount_roPKcPKcPK26esp_vfs_fat_mount_config_t">
+<span id="_CPPv329esp_vfs_fat_spiflash_mount_roPKcPKcPK26esp_vfs_fat_mount_config_t"></span><span id="_CPPv229esp_vfs_fat_spiflash_mount_roPKcPKcPK26esp_vfs_fat_mount_config_t"></span><span id="esp_vfs_fat_spiflash_mount_ro__cCP.cCP.esp_vfs_fat_mount_config_tCP"></span><span class="target" id="esp__vfs__fat_8h_1ae9ce1c38136365400ca31f2ec22ef770"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_spiflash_mount_ro</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">partition_label</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mount_config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv429esp_vfs_fat_spiflash_mount_roPKcPKcPK26esp_vfs_fat_mount_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenience function to initialize read-only FAT filesystem and register it in VFS. </p>
+<p>This is an all-in-one function which does the following:</p>
+<p><ul class="simple">
+<li><p>finds the partition with defined partition_label. Partition label should be configured in the partition table.</p></li>
+<li><p>mounts FAT partition using FATFS library</p></li>
+<li><p>registers FATFS library with VFS, with prefix given by base_prefix variable</p></li>
+</ul>
+</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Wear levelling is not used when FAT is mounted in read-only mode using this function.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where FATFS partition should be mounted (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>partition_label</strong> -- label of the partition which should be used </p></li>
+<li><p><strong>mount_config</strong> -- pointer to structure with extra parameters for mounting FATFS </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_NOT_FOUND if the partition table does not contain FATFS partition with given label</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount_ro was already called for the same partition</p></li>
+<li><p>ESP_ERR_NO_MEM if memory can not be allocated</p></li>
+<li><p>ESP_FAIL if partition can not be mounted</p></li>
+<li><p>other error codes from SPI flash driver, or FATFS drivers </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431esp_vfs_fat_spiflash_unmount_roPKcPKc">
+<span id="_CPPv331esp_vfs_fat_spiflash_unmount_roPKcPKc"></span><span id="_CPPv231esp_vfs_fat_spiflash_unmount_roPKcPKc"></span><span id="esp_vfs_fat_spiflash_unmount_ro__cCP.cCP"></span><span class="target" id="esp__vfs__fat_8h_1a791e6f830d5944ac7201e452c74ec99b"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_spiflash_unmount_ro</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">partition_label</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431esp_vfs_fat_spiflash_unmount_roPKcPKc" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unmount FAT filesystem and release resources acquired using esp_vfs_fat_spiflash_mount_ro. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where partition should be registered (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>partition_label</strong> -- label of partition to be unmounted</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_spiflash_mount_ro hasn't been called </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv421esp_vfs_fat_bdl_mountPKc21esp_blockdev_handle_tPK26esp_vfs_fat_mount_config_t">
+<span id="_CPPv321esp_vfs_fat_bdl_mountPKc21esp_blockdev_handle_tPK26esp_vfs_fat_mount_config_t"></span><span id="_CPPv221esp_vfs_fat_bdl_mountPKc21esp_blockdev_handle_tPK26esp_vfs_fat_mount_config_t"></span><span id="esp_vfs_fat_bdl_mount__cCP.esp_blockdev_handle_t.esp_vfs_fat_mount_config_tCP"></span><span class="target" id="esp__vfs__fat_8h_1a6be2935a4bbbe187b88f4f7c55051237"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_bdl_mount</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <a class="reference internal" href="blockdev.html#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bdl_handle</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">mount_config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv421esp_vfs_fat_bdl_mountPKc21esp_blockdev_handle_tPK26esp_vfs_fat_mount_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Convenience function to mount a FatFS volume on a BDL (Block Device Layer) device. </p>
+<p>The FatFS logical sector size is derived from BDL geometry as LCM(FF_MIN_SS, read_size, write_size [, erase_size]). erase_size is included when it fits within FF_MAX_SS, making the sector erase-aligned for NOR-style devices and page-aligned for NAND-style devices (where the FTL/WL layer handles erase internally).</p>
+<p>The caller is responsible for constructing the BDL stack (e.g. partition BDL -&gt; WL BDL) before calling this function. Read-only devices are detected automatically.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where FATFS partition should be mounted (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>bdl_handle</strong> -- BDL device handle providing the storage </p></li>
+<li><p><strong>mount_config</strong> -- pointer to structure with extra parameters for mounting FATFS</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG if any of the arguments is invalid</p></li>
+<li><p>ESP_ERR_NO_MEM if memory can not be allocated or no free drives</p></li>
+<li><p>ESP_FAIL if partition can not be mounted </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_vfs_fat_bdl_unmountPKc21esp_blockdev_handle_t">
+<span id="_CPPv323esp_vfs_fat_bdl_unmountPKc21esp_blockdev_handle_t"></span><span id="_CPPv223esp_vfs_fat_bdl_unmountPKc21esp_blockdev_handle_t"></span><span id="esp_vfs_fat_bdl_unmount__cCP.esp_blockdev_handle_t"></span><span class="target" id="esp__vfs__fat_8h_1a1f3cf996ae23a728e2f42e40b35b38bb"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_bdl_unmount</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <a class="reference internal" href="blockdev.html#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">bdl_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_vfs_fat_bdl_unmountPKc21esp_blockdev_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Unmount FAT filesystem and release resources acquired using esp_vfs_fat_bdl_mount. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function does NOT release the BDL device handle — the caller owns the BDL stack lifecycle.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- path where partition was registered (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>bdl_handle</strong> -- BDL device handle used during mount</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if esp_vfs_fat_bdl_mount hasn't been called </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv416esp_vfs_fat_infoPKcP8uint64_tP8uint64_t">
+<span id="_CPPv316esp_vfs_fat_infoPKcP8uint64_tP8uint64_t"></span><span id="_CPPv216esp_vfs_fat_infoPKcP8uint64_tP8uint64_t"></span><span id="esp_vfs_fat_info__cCP.uint64_tP.uint64_tP"></span><span class="target" id="esp__vfs__fat_8h_1a66b9d51721f53fbada8bfef01e9efc59"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_info</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_total_bytes</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_free_bytes</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv416esp_vfs_fat_infoPKcP8uint64_tP8uint64_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get information for FATFS partition. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Base path of the partition examined (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>out_total_bytes</strong> -- <strong>[out]</strong> Size of the file system </p></li>
+<li><p><strong>out_free_bytes</strong> -- <strong>[out]</strong> Free bytes available in the file system </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_STATE if partition not found</p></li>
+<li><p>ESP_FAIL if another FRESULT error (saved in errno) </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv434esp_vfs_fat_create_contiguous_filePKcPKc8uint64_tb">
+<span id="_CPPv334esp_vfs_fat_create_contiguous_filePKcPKc8uint64_tb"></span><span id="_CPPv234esp_vfs_fat_create_contiguous_filePKcPKc8uint64_tb"></span><span id="esp_vfs_fat_create_contiguous_file__cCP.cCP.uint64_t.b"></span><span class="target" id="esp__vfs__fat_8h_1a49e7750029b53c306c96db4be84482fe"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_create_contiguous_file</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">full_path</span></span>, <span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">size</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">alloc_now</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv434esp_vfs_fat_create_contiguous_filePKcPKc8uint64_tb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Create a file with contiguous space at given path. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The file cannot exist before calling this function (or the file size has to be 0) For more information see documentation for <code class="docutils literal notranslate"><span class="pre">f_expand</span></code> from FATFS library</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Base path of the partition examined (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>full_path</strong> -- Full path of the file (e.g. &quot;/spiflash/ABC.TXT&quot;) </p></li>
+<li><p><strong>size</strong> -- File size expanded to, number of bytes in size to prepare or allocate for the file </p></li>
+<li><p><strong>alloc_now</strong> -- True == allocate space now, false == prepare to allocate – see <code class="docutils literal notranslate"><span class="pre">f_expand</span></code> from FATFS </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG if invalid arguments (e.g. any of arguments are NULL or size lower or equal to 0)</p></li>
+<li><p>ESP_ERR_INVALID_STATE if partition not found</p></li>
+<li><p>ESP_FAIL if another FRESULT error (saved in errno) </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432esp_vfs_fat_test_contiguous_filePKcPKcPb">
+<span id="_CPPv332esp_vfs_fat_test_contiguous_filePKcPKcPb"></span><span id="_CPPv232esp_vfs_fat_test_contiguous_filePKcPKcPb"></span><span id="esp_vfs_fat_test_contiguous_file__cCP.cCP.bP"></span><span class="target" id="esp__vfs__fat_8h_1a95b5f2c6a9fa841ce03f4581d3e90919"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_test_contiguous_file</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">base_path</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">full_path</span></span>, <span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">is_contiguous</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432esp_vfs_fat_test_contiguous_filePKcPKcPb" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Test if a file is contiguous in the FAT filesystem. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>base_path</strong> -- Base path of the partition examined (e.g. &quot;/spiflash&quot;) </p></li>
+<li><p><strong>full_path</strong> -- Full path of the file (e.g. &quot;/spiflash/ABC.TXT&quot;) </p></li>
+<li><p><strong>is_contiguous</strong> -- <strong>[out]</strong> True == allocate space now, false == prepare to allocate – see <code class="docutils literal notranslate"><span class="pre">f_expand</span></code> from FATFS </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG if invalid arguments (e.g. any of arguments are NULL)</p></li>
+<li><p>ESP_ERR_INVALID_STATE if partition not found</p></li>
+<li><p>ESP_FAIL if another FRESULT error (saved in errno) </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv418esp_vfs_fat_conf_t">
+<span id="_CPPv318esp_vfs_fat_conf_t"></span><span id="_CPPv218esp_vfs_fat_conf_t"></span><span id="esp_vfs_fat_conf_t"></span><span class="target" id="structesp__vfs__fat__conf__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_conf_t</span></span></span><a class="headerlink" href="#_CPPv418esp_vfs_fat_conf_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration structure for esp_vfs_fat_register. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_vfs_fat_conf_t9base_pathE">
+<span id="_CPPv3N18esp_vfs_fat_conf_t9base_pathE"></span><span id="_CPPv2N18esp_vfs_fat_conf_t9base_pathE"></span><span id="esp_vfs_fat_conf_t::base_path__cCP"></span><span class="target" id="structesp__vfs__fat__conf__t_1a3e51b0e00a6f5fdd7e0d10c63ba444e1"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">base_path</span></span></span><a class="headerlink" href="#_CPPv4N18esp_vfs_fat_conf_t9base_pathE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Path prefix where FATFS should be registered, </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_vfs_fat_conf_t9fat_driveE">
+<span id="_CPPv3N18esp_vfs_fat_conf_t9fat_driveE"></span><span id="_CPPv2N18esp_vfs_fat_conf_t9fat_driveE"></span><span id="esp_vfs_fat_conf_t::fat_drive__cCP"></span><span class="target" id="structesp__vfs__fat__conf__t_1ae007db8771ca2edf58042efa64a5f318"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">fat_drive</span></span></span><a class="headerlink" href="#_CPPv4N18esp_vfs_fat_conf_t9fat_driveE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>FATFS drive specification; if only one drive is used, can be an empty string. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_vfs_fat_conf_t9max_filesE">
+<span id="_CPPv3N18esp_vfs_fat_conf_t9max_filesE"></span><span id="_CPPv2N18esp_vfs_fat_conf_t9max_filesE"></span><span id="esp_vfs_fat_conf_t::max_files__s"></span><span class="target" id="structesp__vfs__fat__conf__t_1a46661852e076e944c192a565d6432c07"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_files</span></span></span><a class="headerlink" href="#_CPPv4N18esp_vfs_fat_conf_t9max_filesE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Maximum number of files which can be open at the same time. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426esp_vfs_fat_mount_config_t">
+<span id="_CPPv326esp_vfs_fat_mount_config_t"></span><span id="_CPPv226esp_vfs_fat_mount_config_t"></span><span id="esp_vfs_fat_mount_config_t"></span><span class="target" id="structesp__vfs__fat__mount__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></span><a class="headerlink" href="#_CPPv426esp_vfs_fat_mount_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration arguments for esp_vfs_fat_sdmmc_mount and esp_vfs_fat_spiflash_mount_rw_wl functions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_vfs_fat_mount_config_t22format_if_mount_failedE">
+<span id="_CPPv3N26esp_vfs_fat_mount_config_t22format_if_mount_failedE"></span><span id="_CPPv2N26esp_vfs_fat_mount_config_t22format_if_mount_failedE"></span><span id="esp_vfs_fat_mount_config_t::format_if_mount_failed__b"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a00a3a5b150759860512e9d44c89232ac"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">format_if_mount_failed</span></span></span><a class="headerlink" href="#_CPPv4N26esp_vfs_fat_mount_config_t22format_if_mount_failedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If FAT partition can not be mounted, and this parameter is true, create partition table and format the filesystem. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_vfs_fat_mount_config_t9max_filesE">
+<span id="_CPPv3N26esp_vfs_fat_mount_config_t9max_filesE"></span><span id="_CPPv2N26esp_vfs_fat_mount_config_t9max_filesE"></span><span id="esp_vfs_fat_mount_config_t::max_files__i"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a2eec236e215f9fc7cd94fb340e32f301"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_files</span></span></span><a class="headerlink" href="#_CPPv4N26esp_vfs_fat_mount_config_t9max_filesE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Max number of open files. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_vfs_fat_mount_config_t20allocation_unit_sizeE">
+<span id="_CPPv3N26esp_vfs_fat_mount_config_t20allocation_unit_sizeE"></span><span id="_CPPv2N26esp_vfs_fat_mount_config_t20allocation_unit_sizeE"></span><span id="esp_vfs_fat_mount_config_t::allocation_unit_size__s"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a015e459eb420efc8318e8de5bc15bae8"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">allocation_unit_size</span></span></span><a class="headerlink" href="#_CPPv4N26esp_vfs_fat_mount_config_t20allocation_unit_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If format_if_mount_failed is set, and mount fails, format the card with given allocation unit size. Must be a power of 2, between sector size and 128 * sector size. For SD cards, sector size is always 512 bytes. For wear_levelling, sector size is determined by CONFIG_WL_SECTOR_SIZE option.</p>
+<p>Using larger allocation unit size will result in higher read/write performance and higher overhead when storing small files.</p>
+<p>Setting this field to 0 will result in allocation unit set to the sector size. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_vfs_fat_mount_config_t24disk_status_check_enableE">
+<span id="_CPPv3N26esp_vfs_fat_mount_config_t24disk_status_check_enableE"></span><span id="_CPPv2N26esp_vfs_fat_mount_config_t24disk_status_check_enableE"></span><span id="esp_vfs_fat_mount_config_t::disk_status_check_enable__b"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1aa7783e6ece609d3f7ad9219896721c94"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disk_status_check_enable</span></span></span><a class="headerlink" href="#_CPPv4N26esp_vfs_fat_mount_config_t24disk_status_check_enableE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enables real ff_disk_status function implementation for SD cards (ff_sdmmc_status). Possibly slows down IO performance.</p>
+<p>Try to enable if you need to handle situations when SD cards are not unmounted properly before physical removal or you are experiencing issues with SD cards.</p>
+<p>Doesn't do anything for other memory storage media. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26esp_vfs_fat_mount_config_t11use_one_fatE">
+<span id="_CPPv3N26esp_vfs_fat_mount_config_t11use_one_fatE"></span><span id="_CPPv2N26esp_vfs_fat_mount_config_t11use_one_fatE"></span><span id="esp_vfs_fat_mount_config_t::use_one_fat__b"></span><span class="target" id="structesp__vfs__fat__mount__config__t_1a15d0e528bbb2e939f85afc0d88171ed3"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">use_one_fat</span></span></span><a class="headerlink" href="#_CPPv4N26esp_vfs_fat_mount_config_t11use_one_fatE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use 1 FAT (File Allocation Tables) instead of 2. This decreases reliability, but makes more space available (usually only one sector). Note that this option has effect only when the filesystem is formatted. When mounting an already-formatted partition, the actual number of FATs may be different. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.VFS_FAT_MOUNT_DEFAULT_CONFIG">
+<span class="target" id="esp__vfs__fat_8h_1a69688b9ae3e49b845678f7b7278a40e8"></span><span class="sig-name descname"><span class="n"><span class="pre">VFS_FAT_MOUNT_DEFAULT_CONFIG</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.VFS_FAT_MOUNT_DEFAULT_CONFIG" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv423esp_vfs_fat_pdrv_part_t">
+<span id="_CPPv323esp_vfs_fat_pdrv_part_t"></span><span id="_CPPv223esp_vfs_fat_pdrv_part_t"></span><span id="esp_vfs_fat_pdrv_part_t"></span><span class="target" id="esp__vfs__fat_8h_1a522b40c33467da80cefb53ecb17aa9ef"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">PARTITION</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_pdrv_part_t</span></span></span><a class="headerlink" href="#_CPPv423esp_vfs_fat_pdrv_part_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv430esp_vfs_fat_drive_divide_arr_t">
+<span id="_CPPv330esp_vfs_fat_drive_divide_arr_t"></span><span id="_CPPv230esp_vfs_fat_drive_divide_arr_t"></span><span id="esp_vfs_fat_drive_divide_arr_t"></span><span class="target" id="esp__vfs__fat_8h_1a087d5d2f1109b06eccd42db9adbbd4a8"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">LBA_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_drive_divide_arr_t</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">4</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv430esp_vfs_fat_drive_divide_arr_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>
+For example:</p>
+<p><code class="docutils literal notranslate"><span class="pre">{100,</span> <span class="pre">0,</span> <span class="pre">0,</span> <span class="pre">0}</span></code> will create a single partition with 100% of the drive space. <code class="docutils literal notranslate"><span class="pre">{50,</span> <span class="pre">50,</span> <span class="pre">0,</span> <span class="pre">0}</span></code> will create two partitions, first with 50% of the drive space and second with the remaining 50%. <code class="docutils literal notranslate"><span class="pre">{0x10000000,</span> <span class="pre">0x10000000,</span> <span class="pre">0x10000000,</span> <span class="pre">0}</span></code> will create three partitions, each with a size of 256 MiB, leaving remaining space non-allocated. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>When the value of item is less than or equal to 100, it specifies the partition size in percentage of the entire drive space. When it is larger than 100, it specifies number of sectors. The partition map table is terminated by a zero, 4th partition in MBR format or no remaining space for next allocation. If the specified size is larger than remaining space on the drive, the partition is truncated at end of the drive.</p>
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv432esp_vfs_fat_sdmmc_mount_config_t">
+<span id="_CPPv332esp_vfs_fat_sdmmc_mount_config_t"></span><span id="_CPPv232esp_vfs_fat_sdmmc_mount_config_t"></span><span id="esp_vfs_fat_sdmmc_mount_config_t"></span><span class="target" id="esp__vfs__fat_8h_1a0b281b926a3a56fa5367778cab8ecb2a"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426esp_vfs_fat_mount_config_t" title="esp_vfs_fat_mount_config_t"><span class="n"><span class="pre">esp_vfs_fat_mount_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_vfs_fat_sdmmc_mount_config_t</span></span></span><a class="headerlink" href="#_CPPv432esp_vfs_fat_sdmmc_mount_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv421vfs_fat_x_ctx_flags_t">
+<span id="_CPPv321vfs_fat_x_ctx_flags_t"></span><span id="_CPPv221vfs_fat_x_ctx_flags_t"></span><span class="target" id="esp__vfs__fat_8h_1a793d6806fe981840f99251deed93129c"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">vfs_fat_x_ctx_flags_t</span></span></span><a class="headerlink" href="#_CPPv421vfs_fat_x_ctx_flags_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21vfs_fat_x_ctx_flags_t27FORMATTED_DURING_LAST_MOUNTE">
+<span id="_CPPv3N21vfs_fat_x_ctx_flags_t27FORMATTED_DURING_LAST_MOUNTE"></span><span id="_CPPv2N21vfs_fat_x_ctx_flags_t27FORMATTED_DURING_LAST_MOUNTE"></span><span class="target" id="esp__vfs__fat_8h_1a793d6806fe981840f99251deed93129cad4e54e8d324cba29bc10696fff50bf7a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">FORMATTED_DURING_LAST_MOUNT</span></span></span><a class="headerlink" href="#_CPPv4N21vfs_fat_x_ctx_flags_t27FORMATTED_DURING_LAST_MOUNTE" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="disk-i-o-api-reference">
+<span id="fatfs-diskio-api-reference"></span><h3>Disk I/O API Reference<a class="headerlink" href="#disk-i-o-api-reference" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv418ff_diskio_register4BYTEPK16ff_diskio_impl_t">
+<span id="_CPPv318ff_diskio_register4BYTEPK16ff_diskio_impl_t"></span><span id="_CPPv218ff_diskio_register4BYTEPK16ff_diskio_impl_t"></span><span id="ff_diskio_register__BYTE.ff_diskio_impl_tCP"></span><span class="target" id="diskio__impl_8h_1aede394e2f813eefc9492432b93b66101"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ff_diskio_register</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">BYTE</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdrv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv416ff_diskio_impl_t" title="ff_diskio_impl_t"><span class="n"><span class="pre">ff_diskio_impl_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">discio_impl</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv418ff_diskio_register4BYTEPK16ff_diskio_impl_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register or unregister diskio driver for given drive number.</p>
+<p>When FATFS library calls one of disk_xxx functions for driver number pdrv, corresponding function in discio_impl for given pdrv will be called.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdrv</strong> -- drive number </p></li>
+<li><p><strong>discio_impl</strong> -- pointer to <a class="reference internal" href="#structff__diskio__impl__t"><span class="std std-ref">ff_diskio_impl_t</span></a> structure with diskio functions or NULL to unregister and free previously registered drive </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv416ff_diskio_impl_t">
+<span id="_CPPv316ff_diskio_impl_t"></span><span id="_CPPv216ff_diskio_impl_t"></span><span id="ff_diskio_impl_t"></span><span class="target" id="structff__diskio__impl__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ff_diskio_impl_t</span></span></span><a class="headerlink" href="#_CPPv416ff_diskio_impl_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Structure of pointers to disk IO driver functions.</p>
+<p>See FatFs documentation for details about these functions </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16ff_diskio_impl_t4initE">
+<span id="_CPPv3N16ff_diskio_impl_t4initE"></span><span id="_CPPv2N16ff_diskio_impl_t4initE"></span><span class="target" id="structff__diskio__impl__t_1a1df50cb1a2e6cac7e9f1d68ec2cd7548"></span><span class="n"><span class="pre">DSTATUS</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">init</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">pdrv</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N16ff_diskio_impl_t4initE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>disk initialization function </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16ff_diskio_impl_t6statusE">
+<span id="_CPPv3N16ff_diskio_impl_t6statusE"></span><span id="_CPPv2N16ff_diskio_impl_t6statusE"></span><span class="target" id="structff__diskio__impl__t_1af444e959dd792c09eba53a02423d373a"></span><span class="n"><span class="pre">DSTATUS</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">status</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">pdrv</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N16ff_diskio_impl_t6statusE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>disk status check function </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16ff_diskio_impl_t4readE">
+<span id="_CPPv3N16ff_diskio_impl_t4readE"></span><span id="_CPPv2N16ff_diskio_impl_t4readE"></span><span class="target" id="structff__diskio__impl__t_1a0934accd72d57706af9ea795a2375bcb"></span><span class="n"><span class="pre">DRESULT</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">read</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">pdrv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buff</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">sector</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">UINT</span></span><span class="w"> </span><span class="n"><span class="pre">count</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N16ff_diskio_impl_t4readE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sector read function </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16ff_diskio_impl_t5writeE">
+<span id="_CPPv3N16ff_diskio_impl_t5writeE"></span><span id="_CPPv2N16ff_diskio_impl_t5writeE"></span><span class="target" id="structff__diskio__impl__t_1a1c5f6f739c5a6a866c9a923df9312241"></span><span class="n"><span class="pre">DRESULT</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">pdrv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buff</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n"><span class="pre">sector</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">UINT</span></span><span class="w"> </span><span class="n"><span class="pre">count</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N16ff_diskio_impl_t5writeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>sector write function </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N16ff_diskio_impl_t5ioctlE">
+<span id="_CPPv3N16ff_diskio_impl_t5ioctlE"></span><span id="_CPPv2N16ff_diskio_impl_t5ioctlE"></span><span class="target" id="structff__diskio__impl__t_1a6a6fba1f8fccdd56238804fb2c0ebf17"></span><span class="n"><span class="pre">DRESULT</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ioctl</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">pdrv</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">buff</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N16ff_diskio_impl_t5ioctlE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>function to get info about disk and do some misc operations </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424ff_diskio_register_sdmmchP12sdmmc_card_t">
+<span id="_CPPv324ff_diskio_register_sdmmchP12sdmmc_card_t"></span><span id="_CPPv224ff_diskio_register_sdmmchP12sdmmc_card_t"></span><span id="ff_diskio_register_sdmmc__unsigned-c.sdmmc_card_tP"></span><span class="target" id="diskio__sdmmc_8h_1a2a5a7ea95bc6352e83f0dbcdfc4f8df0"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ff_diskio_register_sdmmc</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdrv</span></span>, <a class="reference internal" href="sdmmc.html#_CPPv412sdmmc_card_t" title="sdmmc_card_t"><span class="n"><span class="pre">sdmmc_card_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">card</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424ff_diskio_register_sdmmchP12sdmmc_card_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register SD/MMC diskio driver</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdrv</strong> -- drive number </p></li>
+<li><p><strong>card</strong> -- pointer to <a class="reference internal" href="sdmmc.html#structsdmmc__card__t"><span class="std std-ref">sdmmc_card_t</span></a> structure describing a card; card should be initialized before calling f_mount. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv431ff_diskio_register_wl_partitionh11wl_handle_t">
+<span id="_CPPv331ff_diskio_register_wl_partitionh11wl_handle_t"></span><span id="_CPPv231ff_diskio_register_wl_partitionh11wl_handle_t"></span><span id="ff_diskio_register_wl_partition__unsigned-c.wl_handle_t"></span><span class="target" id="diskio__wl_8h_1adff902b08561e963b7cadf1187839bb3"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ff_diskio_register_wl_partition</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdrv</span></span>, <a class="reference internal" href="wear-levelling.html#_CPPv411wl_handle_t" title="wl_handle_t"><span class="n"><span class="pre">wl_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">flash_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv431ff_diskio_register_wl_partitionh11wl_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register spi flash partition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdrv</strong> -- drive number </p></li>
+<li><p><strong>flash_handle</strong> -- handle of the wear levelling partition. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv432ff_diskio_register_raw_partitionhPK15esp_partition_t">
+<span id="_CPPv332ff_diskio_register_raw_partitionhPK15esp_partition_t"></span><span id="_CPPv232ff_diskio_register_raw_partitionhPK15esp_partition_t"></span><span id="ff_diskio_register_raw_partition__unsigned-c.esp_partition_tCP"></span><span class="target" id="diskio__rawflash_8h_1afbc35702232a97adabab60b1425ea7c9"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ff_diskio_register_raw_partition</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">unsigned</span></span><span class="w"> </span><span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">pdrv</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="partition.html#_CPPv415esp_partition_t" title="esp_partition_t"><span class="n"><span class="pre">esp_partition_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">part_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv432ff_diskio_register_raw_partitionhPK15esp_partition_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Register spi flash partition</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>pdrv</strong> -- drive number </p></li>
+<li><p><strong>part_handle</strong> -- pointer to raw flash partition. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=FAT Filesystem Support (api-reference/storage/fatfs)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=FAT Filesystem Support (api-reference/storage/fatfs)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Storage API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="fatfsgen.html" class="btn btn-neutral float-right" title="Generating and Parsing FATFS on Host" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

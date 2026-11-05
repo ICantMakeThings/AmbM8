@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Analog to Digital Converter (ADC) - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/adc/index.html" />
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+        <script async="async" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="../../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/adc/index';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../../about.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="Analog to Digital Converter (ADC) Oneshot Mode Driver" href="adc_oneshot.html" />
+    <link rel="prev" title="Peripherals API" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../bluetooth/index.html">Bluetooth<sup>®</sup> API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Analog to Digital Converter (ADC)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adc-conversion">ADC Conversion</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adc-attenuation">ADC Attenuation</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#driver-usage">Driver Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#adc-calibration">ADC Calibration</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="../async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="../uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Analog to Digital Converter (ADC)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/adc/index.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="analog-to-digital-converter-adc">
+<h1>Analog to Digital Converter (ADC)<a class="headerlink" href="#analog-to-digital-converter-adc" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../../zh_CN/v6.1/esp32c3/api-reference/peripherals/adc/index.html">[中文]</a></p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>This guide provides a comprehensive overview of the ADC (Analog to Digital Converter) controller on ESP32-C3. It begins by introducing core ADC concepts such as conversion principles, raw data resolution, reference voltage, and attenuation. Then it walks through the two supported ADC driver modes — oneshot mode and continuous mode — along with ADC calibration, which helps improve accuracy.</p>
+<p>ESP32-C3 integrates 2 ADC(s) for measuring analog signals from multiple input channels. For details about the number of measurement channels (analog-enabled pins), voltage ranges, and other ADC characteristics, please refer to the <a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf">datasheet</a>.</p>
+</section>
+<section id="adc-conversion">
+<h2>ADC Conversion<a class="headerlink" href="#adc-conversion" title="Permalink to this heading"></a></h2>
+<p>ADC conversion is the process of converting an input analog voltage to a digital value. The results provided by the ADC driver APIs are raw data values that represent the analog input in digital form.</p>
+<p>By default, the bit width of these raw ADC results is 12 bits. This means the input voltage range is divided into 4096 (2<sup>12</sup>) discrete levels, which defines the minimum detectable change in input signal.</p>
+<p>The voltage <code class="docutils literal notranslate"><span class="pre">Vdata</span></code> corresponding to a raw ADC result <code class="docutils literal notranslate"><span class="pre">data</span></code> is calculated as:</p>
+<div class="math notranslate nohighlight">
+\[V_{data} = \frac{data}{2^{bitwidth} - 1} \times V_{ref}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> is the raw ADC result.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">bitwidth</span></code> is the resolution of the ADC result (e.g., 12 bits).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Vref</span></code> is the ADC’s reference voltage.</p></li>
+</ul>
+<p>By design, <code class="docutils literal notranslate"><span class="pre">Vref</span></code> is set to 1100 mV. However, due to manufacturing variations, the actual value may range between 1000 mV and 1200 mV depending on the chip.</p>
+<p>To obtain calibrated and accurate voltage values, refer to the section <a class="reference internal" href="adc_calibration.html"><span class="doc">Analog to Digital Converter (ADC) Calibration Driver</span></a>, which explains how to use the ADC calibration driver to adjust the raw results based on the actual <code class="docutils literal notranslate"><span class="pre">Vref</span></code> value.</p>
+</section>
+<section id="adc-attenuation">
+<h2>ADC Attenuation<a class="headerlink" href="#adc-attenuation" title="Permalink to this heading"></a></h2>
+<p>The ADC can measure analog voltages from 0 V to <code class="docutils literal notranslate"><span class="pre">Vref</span></code>. To measure higher voltages, input signals can be attenuated before being passed to the ADC.</p>
+<p>The supported attenuation levels are:</p>
+<ul class="simple">
+<li><p>0 dB (k≈100%)</p></li>
+<li><p>2.5 dB (k≈75%)</p></li>
+<li><p>6 dB (k≈50%)</p></li>
+<li><p>12 dB (k≈25%)</p></li>
+</ul>
+<p>Higher attenuation levels allow the ADC to measure higher input voltages. The voltage <code class="docutils literal notranslate"><span class="pre">Vdata</span></code> after applying attenuation can be calculated using:</p>
+<div class="math notranslate nohighlight">
+\[V_{data} = \frac{V_{ref}}{k}\times{\frac{data}{2^{bitwidth} - 1}}\]</div>
+<p>Where:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">k</span></code> is the ratio value corresponding to the attenuation level.</p></li>
+<li><p>Other variables are as defined above.</p></li>
+</ul>
+<p>For detailed input voltage ranges associated with each attenuation setting, refer to the <a class="reference external" href="https://www.espressif.com/sites/default/files/documentation/esp32-c3_datasheet_en.pdf">datasheet</a> &gt; Electrical Characteristics &gt; ADC Characteristics.</p>
+</section>
+<section id="driver-usage">
+<h2>Driver Usage<a class="headerlink" href="#driver-usage" title="Permalink to this heading"></a></h2>
+<p><ul class="simple">
+<li><p>ADC unit supports <strong>oneshot mode</strong>. Oneshot mode is suitable for oneshot sampling: ADC samples one channel at a time.</p></li>
+<li><p>Each ADC unit supports <strong>continuous mode</strong>. Continuous mode is designed for continuous sampling: ADC sequentially samples a group of channels or continuously samples a single channel.</p></li>
+</ul>
+</p>
+<p>See the guide below for implementation details:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adc_oneshot.html">Analog to Digital Converter (ADC) Oneshot Mode Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adc_oneshot.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_oneshot.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_oneshot.html#application-examples">Application Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_oneshot.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="adc_continuous.html">Analog to Digital Converter (ADC) Continuous Mode Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adc_continuous.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_continuous.html#driver-concepts">Driver Concepts</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_continuous.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_continuous.html#application-examples">Application Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_continuous.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="adc-calibration">
+<h2>ADC Calibration<a class="headerlink" href="#adc-calibration" title="Permalink to this heading"></a></h2>
+<p>The ADC calibration driver corrects deviations through software to obtain more accurate output results.</p>
+<p>For more information, refer to the following guide:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="adc_calibration.html">Analog to Digital Converter (ADC) Calibration Driver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="adc_calibration.html#introduction">Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_calibration.html#functional-overview">Functional Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="adc_calibration.html#api-reference">API Reference</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/soc/esp32c3/include/soc/adc_channel.h">components/soc/esp32c3/include/soc/adc_channel.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"soc/adc_channel.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_GPIO0_CHANNEL">
+<span class="target" id="adc__channel_8h_1a946c4b65d8ada4ba21746a1f6b5eaea2"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_GPIO0_CHANNEL</span></span></span><a class="headerlink" href="#c.ADC1_GPIO0_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_CHANNEL_0_GPIO_NUM">
+<span class="target" id="adc__channel_8h_1a9734ca1c41537f06c28b9106a35f4a11"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_CHANNEL_0_GPIO_NUM</span></span></span><a class="headerlink" href="#c.ADC1_CHANNEL_0_GPIO_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_GPIO1_CHANNEL">
+<span class="target" id="adc__channel_8h_1adaa8280f02abf99bf0de6e29acb380f4"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_GPIO1_CHANNEL</span></span></span><a class="headerlink" href="#c.ADC1_GPIO1_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_CHANNEL_1_GPIO_NUM">
+<span class="target" id="adc__channel_8h_1aea2af61d638ac552b6de284af606fd6d"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_CHANNEL_1_GPIO_NUM</span></span></span><a class="headerlink" href="#c.ADC1_CHANNEL_1_GPIO_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_GPIO2_CHANNEL">
+<span class="target" id="adc__channel_8h_1a66991d28606a37db5a89b374a4027c7f"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_GPIO2_CHANNEL</span></span></span><a class="headerlink" href="#c.ADC1_GPIO2_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_CHANNEL_2_GPIO_NUM">
+<span class="target" id="adc__channel_8h_1a6f9983f0c45d3e74b345038688a34ff8"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_CHANNEL_2_GPIO_NUM</span></span></span><a class="headerlink" href="#c.ADC1_CHANNEL_2_GPIO_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_GPIO3_CHANNEL">
+<span class="target" id="adc__channel_8h_1a4b96d6cf5b8b3bcf2d4010b4760b226a"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_GPIO3_CHANNEL</span></span></span><a class="headerlink" href="#c.ADC1_GPIO3_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_CHANNEL_3_GPIO_NUM">
+<span class="target" id="adc__channel_8h_1a79f5800e14b6c1dbc175488008ff4783"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_CHANNEL_3_GPIO_NUM</span></span></span><a class="headerlink" href="#c.ADC1_CHANNEL_3_GPIO_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_GPIO4_CHANNEL">
+<span class="target" id="adc__channel_8h_1a95920a9fd4cacc995b820207e6fa3f1c"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_GPIO4_CHANNEL</span></span></span><a class="headerlink" href="#c.ADC1_GPIO4_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC1_CHANNEL_4_GPIO_NUM">
+<span class="target" id="adc__channel_8h_1ab2330713b7f369b0489df708e7cc2e8a"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC1_CHANNEL_4_GPIO_NUM</span></span></span><a class="headerlink" href="#c.ADC1_CHANNEL_4_GPIO_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC2_GPIO5_CHANNEL">
+<span class="target" id="adc__channel_8h_1aa70b6cd0219e6554e0f9b3f94ed788c8"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC2_GPIO5_CHANNEL</span></span></span><a class="headerlink" href="#c.ADC2_GPIO5_CHANNEL" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ADC2_CHANNEL_0_GPIO_NUM">
+<span class="target" id="adc__channel_8h_1a6cb55443db2901cc91b1dd7592a8e4d6"></span><span class="sig-name descname"><span class="n"><span class="pre">ADC2_CHANNEL_0_GPIO_NUM</span></span></span><a class="headerlink" href="#c.ADC2_CHANNEL_0_GPIO_NUM" title="Permalink to this definition"></a><br /></dt>
+<dd></dd></dl>
+
+</section>
+<section id="id1">
+<h3>Header File<a class="headerlink" href="#id1" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hal_ana_conv/include/hal/adc_types.h">components/esp_hal_ana_conv/include/hal/adc_types.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"hal/adc_types.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_hal_ana_conv</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_hal_ana_conv</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_hal_ana_conv
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_hal_ana_conv
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv425adc_digi_pattern_config_t">
+<span id="_CPPv325adc_digi_pattern_config_t"></span><span id="_CPPv225adc_digi_pattern_config_t"></span><span id="adc_digi_pattern_config_t"></span><span class="target" id="structadc__digi__pattern__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_digi_pattern_config_t</span></span></span><a class="headerlink" href="#_CPPv425adc_digi_pattern_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC digital controller pattern configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25adc_digi_pattern_config_t5attenE">
+<span id="_CPPv3N25adc_digi_pattern_config_t5attenE"></span><span id="_CPPv2N25adc_digi_pattern_config_t5attenE"></span><span id="adc_digi_pattern_config_t::atten__uint8_t"></span><span class="target" id="structadc__digi__pattern__config__t_1ab8dd799225a4acf48886b880a5266257"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">atten</span></span></span><a class="headerlink" href="#_CPPv4N25adc_digi_pattern_config_t5attenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Attenuation of this ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25adc_digi_pattern_config_t7channelE">
+<span id="_CPPv3N25adc_digi_pattern_config_t7channelE"></span><span id="_CPPv2N25adc_digi_pattern_config_t7channelE"></span><span id="adc_digi_pattern_config_t::channel__uint8_t"></span><span class="target" id="structadc__digi__pattern__config__t_1af19be10b129fd95b4b85f0c79333c282"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">channel</span></span></span><a class="headerlink" href="#_CPPv4N25adc_digi_pattern_config_t7channelE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25adc_digi_pattern_config_t4unitE">
+<span id="_CPPv3N25adc_digi_pattern_config_t4unitE"></span><span id="_CPPv2N25adc_digi_pattern_config_t4unitE"></span><span id="adc_digi_pattern_config_t::unit__uint8_t"></span><span class="target" id="structadc__digi__pattern__config__t_1a2855e8bf4196a10651542cf97226e881"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">unit</span></span></span><a class="headerlink" href="#_CPPv4N25adc_digi_pattern_config_t4unitE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC unit. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N25adc_digi_pattern_config_t9bit_widthE">
+<span id="_CPPv3N25adc_digi_pattern_config_t9bit_widthE"></span><span id="_CPPv2N25adc_digi_pattern_config_t9bit_widthE"></span><span id="adc_digi_pattern_config_t::bit_width__uint8_t"></span><span class="target" id="structadc__digi__pattern__config__t_1a381a4e48a439566e4e22c08c59f7851d"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bit_width</span></span></span><a class="headerlink" href="#_CPPv4N25adc_digi_pattern_config_t9bit_widthE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC output bit width. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421adc_oneshot_clk_src_t">
+<span id="_CPPv321adc_oneshot_clk_src_t"></span><span id="_CPPv221adc_oneshot_clk_src_t"></span><span id="adc_oneshot_clk_src_t"></span><span class="target" id="adc__types_8h_1ad98be3c37cc2ee4069645305ac835e53"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="../clk_tree.html#_CPPv429soc_periph_adc_digi_clk_src_t" title="soc_periph_adc_digi_clk_src_t"><span class="n"><span class="pre">soc_periph_adc_digi_clk_src_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_oneshot_clk_src_t</span></span></span><a class="headerlink" href="#_CPPv421adc_oneshot_clk_src_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clock source type of oneshot mode which uses digital controller. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv424adc_continuous_clk_src_t">
+<span id="_CPPv324adc_continuous_clk_src_t"></span><span id="_CPPv224adc_continuous_clk_src_t"></span><span id="adc_continuous_clk_src_t"></span><span class="target" id="adc__types_8h_1aed9433f825936f3aa91b43ac45d0cc25"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="../clk_tree.html#_CPPv429soc_periph_adc_digi_clk_src_t" title="soc_periph_adc_digi_clk_src_t"><span class="n"><span class="pre">soc_periph_adc_digi_clk_src_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_continuous_clk_src_t</span></span></span><a class="headerlink" href="#_CPPv424adc_continuous_clk_src_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Clock source type of continuous mode which uses digital controller. </p>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv410adc_unit_t">
+<span id="_CPPv310adc_unit_t"></span><span id="_CPPv210adc_unit_t"></span><span class="target" id="adc__types_8h_1ad8b7b5a18bfe497e5313ac9a47b297e2"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_unit_t</span></span></span><a class="headerlink" href="#_CPPv410adc_unit_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC unit. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N10adc_unit_t10ADC_UNIT_1E">
+<span id="_CPPv3N10adc_unit_t10ADC_UNIT_1E"></span><span id="_CPPv2N10adc_unit_t10ADC_UNIT_1E"></span><span class="target" id="adc__types_8h_1ad8b7b5a18bfe497e5313ac9a47b297e2a104d8d36c8b116f544b799df3e6ec673"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_UNIT_1</span></span></span><a class="headerlink" href="#_CPPv4N10adc_unit_t10ADC_UNIT_1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SAR ADC 1. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N10adc_unit_t10ADC_UNIT_2E">
+<span id="_CPPv3N10adc_unit_t10ADC_UNIT_2E"></span><span id="_CPPv2N10adc_unit_t10ADC_UNIT_2E"></span><span class="target" id="adc__types_8h_1ad8b7b5a18bfe497e5313ac9a47b297e2ab23f1637a412e6f1047d63389e49464e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_UNIT_2</span></span></span><a class="headerlink" href="#_CPPv4N10adc_unit_t10ADC_UNIT_2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SAR ADC 2. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv413adc_channel_t">
+<span id="_CPPv313adc_channel_t"></span><span id="_CPPv213adc_channel_t"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_channel_t</span></span></span><a class="headerlink" href="#_CPPv413adc_channel_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channels. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_0E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_0E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_0E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a69dddf5b6edfe54ac25b653d8f62d104"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_0</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_0E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_1E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_1E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_1E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a203b48944d019f4fda969a6fc2a9e492"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_1</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_2E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_2E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_2E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814ab5ff3c915ec02ae6ac3980a1312a4815"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_2</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_3E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_3E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_3E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a6ca054f67bee5197eec92a0379cffb6e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_3</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_3E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_4E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_4E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_4E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a358c6f5e7243a7ed09640253d83d2131"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_4</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_4E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_5E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_5E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_5E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814add27743e52a0719102130818d31d545a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_5</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_5E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_6E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_6E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_6E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814acf3be71bfeb9d342e6d845db91782b79"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_6</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_6E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_7E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_7E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_7E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814ad6ef86ca1b448f220905d771f258586a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_7</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_7E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_8E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_8E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_8E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a2875a590dc7e8502581ff68a075ce019"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_8</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t13ADC_CHANNEL_9E">
+<span id="_CPPv3N13adc_channel_t13ADC_CHANNEL_9E"></span><span id="_CPPv2N13adc_channel_t13ADC_CHANNEL_9E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a0e198353a76bf512e4dcc8224710d6b0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_9</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t13ADC_CHANNEL_9E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N13adc_channel_t14ADC_CHANNEL_10E">
+<span id="_CPPv3N13adc_channel_t14ADC_CHANNEL_10E"></span><span id="_CPPv2N13adc_channel_t14ADC_CHANNEL_10E"></span><span class="target" id="adc__types_8h_1aafc4060027875f8fe46242b0656d7814a9db3195dade30ed8b254187c22616898"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CHANNEL_10</span></span></span><a class="headerlink" href="#_CPPv4N13adc_channel_t14ADC_CHANNEL_10E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC channel. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv411adc_atten_t">
+<span id="_CPPv311adc_atten_t"></span><span id="_CPPv211adc_atten_t"></span><span class="target" id="adc__types_8h_1a73f655480e1d86d998aba0b37fa5afb7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_atten_t</span></span></span><a class="headerlink" href="#_CPPv411adc_atten_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC attenuation parameter. Different parameters determine the range of the ADC. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N11adc_atten_t14ADC_ATTEN_DB_0E">
+<span id="_CPPv3N11adc_atten_t14ADC_ATTEN_DB_0E"></span><span id="_CPPv2N11adc_atten_t14ADC_ATTEN_DB_0E"></span><span class="target" id="adc__types_8h_1a73f655480e1d86d998aba0b37fa5afb7a42f843e9bf134093a4f069b4d3c608a7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ATTEN_DB_0</span></span></span><a class="headerlink" href="#_CPPv4N11adc_atten_t14ADC_ATTEN_DB_0E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>No input attenuation, ADC can measure up to approx. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N11adc_atten_t16ADC_ATTEN_DB_2_5E">
+<span id="_CPPv3N11adc_atten_t16ADC_ATTEN_DB_2_5E"></span><span id="_CPPv2N11adc_atten_t16ADC_ATTEN_DB_2_5E"></span><span class="target" id="adc__types_8h_1a73f655480e1d86d998aba0b37fa5afb7ab8f47783e60f4db39de4de81578fa1ab"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ATTEN_DB_2_5</span></span></span><a class="headerlink" href="#_CPPv4N11adc_atten_t16ADC_ATTEN_DB_2_5E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The input voltage of ADC will be attenuated extending the range of measurement by about 2.5 dB. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N11adc_atten_t14ADC_ATTEN_DB_6E">
+<span id="_CPPv3N11adc_atten_t14ADC_ATTEN_DB_6E"></span><span id="_CPPv2N11adc_atten_t14ADC_ATTEN_DB_6E"></span><span class="target" id="adc__types_8h_1a73f655480e1d86d998aba0b37fa5afb7aac19d80231434ec071ccecd5e03d4820"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ATTEN_DB_6</span></span></span><a class="headerlink" href="#_CPPv4N11adc_atten_t14ADC_ATTEN_DB_6E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The input voltage of ADC will be attenuated extending the range of measurement by about 6 dB. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N11adc_atten_t15ADC_ATTEN_DB_12E">
+<span id="_CPPv3N11adc_atten_t15ADC_ATTEN_DB_12E"></span><span id="_CPPv2N11adc_atten_t15ADC_ATTEN_DB_12E"></span><span class="target" id="adc__types_8h_1a73f655480e1d86d998aba0b37fa5afb7aee7a0d09a1a08c0f9b8766b731a9e107"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ATTEN_DB_12</span></span></span><a class="headerlink" href="#_CPPv4N11adc_atten_t15ADC_ATTEN_DB_12E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The input voltage of ADC will be attenuated extending the range of measurement by about 12 dB. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv414adc_bitwidth_t">
+<span id="_CPPv314adc_bitwidth_t"></span><span id="_CPPv214adc_bitwidth_t"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_bitwidth_t</span></span></span><a class="headerlink" href="#_CPPv414adc_bitwidth_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC bitwidth. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_bitwidth_t20ADC_BITWIDTH_DEFAULTE">
+<span id="_CPPv3N14adc_bitwidth_t20ADC_BITWIDTH_DEFAULTE"></span><span id="_CPPv2N14adc_bitwidth_t20ADC_BITWIDTH_DEFAULTE"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387af4d1d2b392f1dc1bf9b5740c4ef431b6"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_BITWIDTH_DEFAULT</span></span></span><a class="headerlink" href="#_CPPv4N14adc_bitwidth_t20ADC_BITWIDTH_DEFAULTE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Default ADC output bits, max supported width will be selected. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_bitwidth_t14ADC_BITWIDTH_9E">
+<span id="_CPPv3N14adc_bitwidth_t14ADC_BITWIDTH_9E"></span><span id="_CPPv2N14adc_bitwidth_t14ADC_BITWIDTH_9E"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387a8d9694ac4743ebaf83372021c3204a5c"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_BITWIDTH_9</span></span></span><a class="headerlink" href="#_CPPv4N14adc_bitwidth_t14ADC_BITWIDTH_9E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC output width is 9Bit. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_10E">
+<span id="_CPPv3N14adc_bitwidth_t15ADC_BITWIDTH_10E"></span><span id="_CPPv2N14adc_bitwidth_t15ADC_BITWIDTH_10E"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387af46776eebfef50f800ff4af4e0e9bad7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_BITWIDTH_10</span></span></span><a class="headerlink" href="#_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_10E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC output width is 10Bit. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_11E">
+<span id="_CPPv3N14adc_bitwidth_t15ADC_BITWIDTH_11E"></span><span id="_CPPv2N14adc_bitwidth_t15ADC_BITWIDTH_11E"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387ac7281efa79f76664ef4580e6d2156257"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_BITWIDTH_11</span></span></span><a class="headerlink" href="#_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_11E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC output width is 11Bit. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_12E">
+<span id="_CPPv3N14adc_bitwidth_t15ADC_BITWIDTH_12E"></span><span id="_CPPv2N14adc_bitwidth_t15ADC_BITWIDTH_12E"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387aa0a249c79385f8ebc66ae74300ddbf7d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_BITWIDTH_12</span></span></span><a class="headerlink" href="#_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_12E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC output width is 12Bit. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_13E">
+<span id="_CPPv3N14adc_bitwidth_t15ADC_BITWIDTH_13E"></span><span id="_CPPv2N14adc_bitwidth_t15ADC_BITWIDTH_13E"></span><span class="target" id="adc__types_8h_1aec5666997cbd7257e838bea409056387ab36d653a7879a349985bbad24461a165"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_BITWIDTH_13</span></span></span><a class="headerlink" href="#_CPPv4N14adc_bitwidth_t15ADC_BITWIDTH_13E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC output width is 13Bit. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv414adc_ulp_mode_t">
+<span id="_CPPv314adc_ulp_mode_t"></span><span id="_CPPv214adc_ulp_mode_t"></span><span class="target" id="adc__types_8h_1ad50e9a6ef4aa8d4e63003ad1783f4dba"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_ulp_mode_t</span></span></span><a class="headerlink" href="#_CPPv414adc_ulp_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC ULP working mode. </p>
+<p>This decides the controller that controls ADC when in low power mode. Set <code class="docutils literal notranslate"><span class="pre">ADC_ULP_MODE_DISABLE</span></code> for normal mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_ulp_mode_t20ADC_ULP_MODE_DISABLEE">
+<span id="_CPPv3N14adc_ulp_mode_t20ADC_ULP_MODE_DISABLEE"></span><span id="_CPPv2N14adc_ulp_mode_t20ADC_ULP_MODE_DISABLEE"></span><span class="target" id="adc__types_8h_1ad50e9a6ef4aa8d4e63003ad1783f4dbaac9067875256efd741a786d5dbf5d9282"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ULP_MODE_DISABLE</span></span></span><a class="headerlink" href="#_CPPv4N14adc_ulp_mode_t20ADC_ULP_MODE_DISABLEE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC ULP mode is disabled. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_ulp_mode_t16ADC_ULP_MODE_FSME">
+<span id="_CPPv3N14adc_ulp_mode_t16ADC_ULP_MODE_FSME"></span><span id="_CPPv2N14adc_ulp_mode_t16ADC_ULP_MODE_FSME"></span><span class="target" id="adc__types_8h_1ad50e9a6ef4aa8d4e63003ad1783f4dbaa75c44419319f4216a14eec1d9995b509"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ULP_MODE_FSM</span></span></span><a class="headerlink" href="#_CPPv4N14adc_ulp_mode_t16ADC_ULP_MODE_FSME" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC is controlled by ULP FSM. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N14adc_ulp_mode_t18ADC_ULP_MODE_RISCVE">
+<span id="_CPPv3N14adc_ulp_mode_t18ADC_ULP_MODE_RISCVE"></span><span id="_CPPv2N14adc_ulp_mode_t18ADC_ULP_MODE_RISCVE"></span><span class="target" id="adc__types_8h_1ad50e9a6ef4aa8d4e63003ad1783f4dbaa6c155b4b445a65e18913210f1e176ca3"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_ULP_MODE_RISCV</span></span></span><a class="headerlink" href="#_CPPv4N14adc_ulp_mode_t18ADC_ULP_MODE_RISCVE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC is controlled by ULP RISCV. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv423adc_digi_convert_mode_t">
+<span id="_CPPv323adc_digi_convert_mode_t"></span><span id="_CPPv223adc_digi_convert_mode_t"></span><span class="target" id="adc__types_8h_1a40a64a749a2a7886f6068cc3b645dc8e"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_digi_convert_mode_t</span></span></span><a class="headerlink" href="#_CPPv423adc_digi_convert_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC digital controller (DMA mode) work mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_1E">
+<span id="_CPPv3N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_1E"></span><span id="_CPPv2N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_1E"></span><span class="target" id="adc__types_8h_1a40a64a749a2a7886f6068cc3b645dc8ea38ffd4d5dd91a039eadf56cfbbe38075"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CONV_SINGLE_UNIT_1</span></span></span><a class="headerlink" href="#_CPPv4N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Only use ADC1 for conversion. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_2E">
+<span id="_CPPv3N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_2E"></span><span id="_CPPv2N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_2E"></span><span class="target" id="adc__types_8h_1a40a64a749a2a7886f6068cc3b645dc8eaba9133db3c27db09b39c8ef6d3bfe07a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CONV_SINGLE_UNIT_2</span></span></span><a class="headerlink" href="#_CPPv4N23adc_digi_convert_mode_t22ADC_CONV_SINGLE_UNIT_2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Only use ADC2 for conversion. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23adc_digi_convert_mode_t18ADC_CONV_BOTH_UNITE">
+<span id="_CPPv3N23adc_digi_convert_mode_t18ADC_CONV_BOTH_UNITE"></span><span id="_CPPv2N23adc_digi_convert_mode_t18ADC_CONV_BOTH_UNITE"></span><span class="target" id="adc__types_8h_1a40a64a749a2a7886f6068cc3b645dc8ea935a871d21aae13b41114de9ab6dcd99"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CONV_BOTH_UNIT</span></span></span><a class="headerlink" href="#_CPPv4N23adc_digi_convert_mode_t18ADC_CONV_BOTH_UNITE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use Both ADC1 and ADC2 for conversion simultaneously. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N23adc_digi_convert_mode_t19ADC_CONV_ALTER_UNITE">
+<span id="_CPPv3N23adc_digi_convert_mode_t19ADC_CONV_ALTER_UNITE"></span><span id="_CPPv2N23adc_digi_convert_mode_t19ADC_CONV_ALTER_UNITE"></span><span class="target" id="adc__types_8h_1a40a64a749a2a7886f6068cc3b645dc8eafa56e73ce40ae00f2e391044d3c29c6b"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_CONV_ALTER_UNIT</span></span></span><a class="headerlink" href="#_CPPv4N23adc_digi_convert_mode_t19ADC_CONV_ALTER_UNITE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use both ADC1 and ADC2 for conversion by turn. e.g. ADC1 -&gt; ADC2 -&gt; ADC1 -&gt; ADC2 ..... </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv424adc_digi_output_format_t">
+<span id="_CPPv324adc_digi_output_format_t"></span><span id="_CPPv224adc_digi_output_format_t"></span><span class="target" id="adc__types_8h_1a8c64ec1bf088bcdff68a8dc4c3b5b4e7"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_digi_output_format_t</span></span></span><a class="headerlink" href="#_CPPv424adc_digi_output_format_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC digital controller (DMA mode) output data format option. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE1E">
+<span id="_CPPv3N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE1E"></span><span id="_CPPv2N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE1E"></span><span class="target" id="adc__types_8h_1a8c64ec1bf088bcdff68a8dc4c3b5b4e7a24b64bb61301a9d85e603474f3281db0"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_OUTPUT_FORMAT_TYPE1</span></span></span><a class="headerlink" href="#_CPPv4N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>See <code class="docutils literal notranslate"><span class="pre">adc_digi_output_data_t.type1</span></code></p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE2E">
+<span id="_CPPv3N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE2E"></span><span id="_CPPv2N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE2E"></span><span class="target" id="adc__types_8h_1a8c64ec1bf088bcdff68a8dc4c3b5b4e7a4ef70033a4485408d8742d709a190fd4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_OUTPUT_FORMAT_TYPE2</span></span></span><a class="headerlink" href="#_CPPv4N24adc_digi_output_format_t28ADC_DIGI_OUTPUT_FORMAT_TYPE2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>See <code class="docutils literal notranslate"><span class="pre">adc_digi_output_data_t.type2</span></code></p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv421adc_digi_iir_filter_t">
+<span id="_CPPv321adc_digi_iir_filter_t"></span><span id="_CPPv221adc_digi_iir_filter_t"></span><span class="target" id="adc__types_8h_1a0d4f5a999f54b3f655172d0fbdfe7265"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_digi_iir_filter_t</span></span></span><a class="headerlink" href="#_CPPv421adc_digi_iir_filter_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC IIR Filter ID. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_0E">
+<span id="_CPPv3N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_0E"></span><span id="_CPPv2N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_0E"></span><span class="target" id="adc__types_8h_1a0d4f5a999f54b3f655172d0fbdfe7265a1d217535421bcc35ef0aec6c00cb804a"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_0</span></span></span><a class="headerlink" href="#_CPPv4N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_0E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter 0. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_1E">
+<span id="_CPPv3N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_1E"></span><span id="_CPPv2N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_1E"></span><span class="target" id="adc__types_8h_1a0d4f5a999f54b3f655172d0fbdfe7265a1fbf0db8770ba2824eff20f780f587c9"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_1</span></span></span><a class="headerlink" href="#_CPPv4N21adc_digi_iir_filter_t21ADC_DIGI_IIR_FILTER_1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Filter 1. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv427adc_digi_iir_filter_coeff_t">
+<span id="_CPPv327adc_digi_iir_filter_coeff_t"></span><span id="_CPPv227adc_digi_iir_filter_coeff_t"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77a"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_digi_iir_filter_coeff_t</span></span></span><a class="headerlink" href="#_CPPv427adc_digi_iir_filter_coeff_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>IIR Filter Coefficient. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_2E">
+<span id="_CPPv3N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_2E"></span><span id="_CPPv2N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_2E"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77aa15268aef88c609fc37491f989cba86a7"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_COEFF_2</span></span></span><a class="headerlink" href="#_CPPv4N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_2E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The filter coefficient is 2. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_4E">
+<span id="_CPPv3N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_4E"></span><span id="_CPPv2N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_4E"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77aa2e38eb016b732219ba8663efa9661e0d"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_COEFF_4</span></span></span><a class="headerlink" href="#_CPPv4N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_4E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The filter coefficient is 4. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_8E">
+<span id="_CPPv3N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_8E"></span><span id="_CPPv2N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_8E"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77aae77c76a31aed097f2acf62b0efd9dec2"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_COEFF_8</span></span></span><a class="headerlink" href="#_CPPv4N27adc_digi_iir_filter_coeff_t27ADC_DIGI_IIR_FILTER_COEFF_8E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The filter coefficient is 8. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_16E">
+<span id="_CPPv3N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_16E"></span><span id="_CPPv2N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_16E"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77aa8ec3fdeccabe2fbcba3c7039adf6505e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_COEFF_16</span></span></span><a class="headerlink" href="#_CPPv4N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_16E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The filter coefficient is 16. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_32E">
+<span id="_CPPv3N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_32E"></span><span id="_CPPv2N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_32E"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77aa63eeeaafbfb9e073b36c8f2f19376558"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_COEFF_32</span></span></span><a class="headerlink" href="#_CPPv4N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_32E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The filter coefficient is 32. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_64E">
+<span id="_CPPv3N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_64E"></span><span id="_CPPv2N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_64E"></span><span class="target" id="adc__types_8h_1a903a8f46c5e2f2ad573fdfb81c42e77aade77610b17e00be3b69db480724719bc"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_DIGI_IIR_FILTER_COEFF_64</span></span></span><a class="headerlink" href="#_CPPv4N27adc_digi_iir_filter_coeff_t28ADC_DIGI_IIR_FILTER_COEFF_64E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The filter coefficient is 64. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv416adc_monitor_id_t">
+<span id="_CPPv316adc_monitor_id_t"></span><span id="_CPPv216adc_monitor_id_t"></span><span class="target" id="adc__types_8h_1a4856a883243d2753fc37599679ea6c9d"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_monitor_id_t</span></span></span><a class="headerlink" href="#_CPPv416adc_monitor_id_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC monitor (continuous mode) ID. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N16adc_monitor_id_t13ADC_MONITOR_0E">
+<span id="_CPPv3N16adc_monitor_id_t13ADC_MONITOR_0E"></span><span id="_CPPv2N16adc_monitor_id_t13ADC_MONITOR_0E"></span><span class="target" id="adc__types_8h_1a4856a883243d2753fc37599679ea6c9da389eda916f74ee2f13b9474ba1d98ccb"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_MONITOR_0</span></span></span><a class="headerlink" href="#_CPPv4N16adc_monitor_id_t13ADC_MONITOR_0E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The monitor index 0. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N16adc_monitor_id_t13ADC_MONITOR_1E">
+<span id="_CPPv3N16adc_monitor_id_t13ADC_MONITOR_1E"></span><span id="_CPPv2N16adc_monitor_id_t13ADC_MONITOR_1E"></span><span class="target" id="adc__types_8h_1a4856a883243d2753fc37599679ea6c9dac87f36f5c6eb22bd575430f2802858af"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_MONITOR_1</span></span></span><a class="headerlink" href="#_CPPv4N16adc_monitor_id_t13ADC_MONITOR_1E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The monitor index 1. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv418adc_monitor_mode_t">
+<span id="_CPPv318adc_monitor_mode_t"></span><span id="_CPPv218adc_monitor_mode_t"></span><span class="target" id="adc__types_8h_1a232cfa21664565501aecf141ab9be11c"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adc_monitor_mode_t</span></span></span><a class="headerlink" href="#_CPPv418adc_monitor_mode_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Monitor config/event mode type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N18adc_monitor_mode_t21ADC_MONITOR_MODE_HIGHE">
+<span id="_CPPv3N18adc_monitor_mode_t21ADC_MONITOR_MODE_HIGHE"></span><span id="_CPPv2N18adc_monitor_mode_t21ADC_MONITOR_MODE_HIGHE"></span><span class="target" id="adc__types_8h_1a232cfa21664565501aecf141ab9be11ca191d91c6bfa7ef2e1ac333ad69abb15e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_MONITOR_MODE_HIGH</span></span></span><a class="headerlink" href="#_CPPv4N18adc_monitor_mode_t21ADC_MONITOR_MODE_HIGHE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC raw_result &gt; threshold value, monitor interrupt will be generated. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N18adc_monitor_mode_t20ADC_MONITOR_MODE_LOWE">
+<span id="_CPPv3N18adc_monitor_mode_t20ADC_MONITOR_MODE_LOWE"></span><span id="_CPPv2N18adc_monitor_mode_t20ADC_MONITOR_MODE_LOWE"></span><span class="target" id="adc__types_8h_1a232cfa21664565501aecf141ab9be11cafdb6806a6e023c071c0d24e4ed7b1ff4"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ADC_MONITOR_MODE_LOW</span></span></span><a class="headerlink" href="#_CPPv4N18adc_monitor_mode_t20ADC_MONITOR_MODE_LOWE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>ADC raw_result &lt; threshold value, monitor interrupt will be generated. </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Analog to Digital Converter (ADC) (api-reference/peripherals/adc/index)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Analog to Digital Converter (ADC) (api-reference/peripherals/adc/index)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="Peripherals API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="adc_oneshot.html" class="btn btn-neutral float-right" title="Analog to Digital Converter (ADC) Oneshot Mode Driver" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

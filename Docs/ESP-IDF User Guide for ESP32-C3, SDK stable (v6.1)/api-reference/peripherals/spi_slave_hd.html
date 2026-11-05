@@ -1,0 +1,957 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SPI Slave Half Duplex - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/peripherals/spi_slave_hd.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/spi_slave_hd';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Temperature Sensor" href="temp_sensor.html" />
+    <link rel="prev" title="SPI Slave Driver" href="spi_slave.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth<sup>®</sup> API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">SPI Slave Half Duplex</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#terminology">Terminology</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#driver-feature">Driver Feature</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#driver-usage">Driver Usage</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">SPI Slave Half Duplex</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/spi_slave_hd.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="spi-slave-half-duplex">
+<h1>SPI Slave Half Duplex<a class="headerlink" href="#spi-slave-half-duplex" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32c3/api-reference/peripherals/spi_slave_hd.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The Half Duplex (HD) Mode is a special mode provided by ESP SPI Slave peripheral. Under this mode, the hardware provides more services than the Full Duplex (FD) Mode (the mode for general-purpose SPI transactions, see <a class="reference internal" href="spi_slave.html"><span class="doc">SPI Slave Driver</span></a>). These services reduce the CPU load and the response time of SPI Slave. However, it is important to note that the communication format is determined by the hardware and is always in a half-duplex configuration, allowing only one-way data transfer at any given time. Hence, the mode is named Half Duplex Mode due to this characteristic.</p>
+<p>When conducting an SPI transaction, transactions can be classified into several types based on the <strong>command</strong> phase of the transaction. Each transaction may consist of the following phases: command, address, dummy, and data. The command phase is mandatory, while the other phases may be determined by the command field. During the command, address, and dummy phases, the bus is always controlled by the master (usually the host), while the direction of the data phase depends on the command. The data phase can be either an input phase, where the master writes data to the slave (e.g., the host sends data to the slave), or an output phase, where the master reads data from the slave (e.g., the host receives data from the slave).</p>
+<section id="protocol">
+<h3>Protocol<a class="headerlink" href="#protocol" title="Permalink to this heading"></a></h3>
+<p>About the details of how master should communicate with the SPI Slave, see <a class="reference external" href="https://espressif.github.io/idf-extra-components/latest/esp_serial_slave_link/spi_slave_hd_protocol.html#spi-slave-hd-half-duplex-protocol">ESP SPI Slave HD Protocol</a>.</p>
+<p>Through these different transactions, the slave provides these services to the master:</p>
+<ul class="simple">
+<li><p>A DMA channel for the master to write a great amount of data to the slave.</p></li>
+<li><p>A DMA channel for the master to read a great amount of data from the slave.</p></li>
+<li><p>Several general purpose registers, shared between the master and the slave.</p></li>
+<li><p>Several general purpose interrupts, for the master to interrupt the SW of the slave.</p></li>
+</ul>
+</section>
+</section>
+<section id="terminology">
+<h2>Terminology<a class="headerlink" href="#terminology" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Transaction</p></li>
+<li><p>Channel</p></li>
+<li><p>Sending</p></li>
+<li><p>Receiving</p></li>
+<li><p>Data Descriptor</p></li>
+</ul>
+</section>
+<section id="driver-feature">
+<h2>Driver Feature<a class="headerlink" href="#driver-feature" title="Permalink to this heading"></a></h2>
+<ul class="simple">
+<li><p>Transaction read/write by master in segments</p></li>
+<li><p>Queues for data to send and received</p></li>
+</ul>
+</section>
+<section id="driver-usage">
+<h2>Driver Usage<a class="headerlink" href="#driver-usage" title="Permalink to this heading"></a></h2>
+<section id="slave-initialization">
+<h3>Slave Initialization<a class="headerlink" href="#slave-initialization" title="Permalink to this heading"></a></h3>
+<p>Call <a class="reference internal" href="#_CPPv417spi_slave_hd_init17spi_host_device_tPK16spi_bus_config_tPK26spi_slave_hd_slot_config_t" title="spi_slave_hd_init"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_init()</span></code></a> to initialize the SPI bus as well as the peripheral and the driver. The SPI Slave exclusively uses the SPI peripheral, pins of the bus before it is deinitialized, which means other devices are unable to use the above resources during initialization. Thus, to ensure SPI resources are correctly occupied and the connections work properly, most configurations of the slave should be done as soon as the slave is initialized.</p>
+<p>The <a class="reference internal" href="spi_master.html#_CPPv416spi_bus_config_t" title="spi_bus_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">spi_bus_config_t</span></code></a> specifies how the bus should be initialized, while <a class="reference internal" href="#_CPPv426spi_slave_hd_slot_config_t" title="spi_slave_hd_slot_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">spi_slave_hd_slot_config_t</span></code></a> specifies how the SPI Slave driver should work.</p>
+<p>To use 3-wire mode, also known as single I/O (SIO) mode, set <a class="reference internal" href="#c.SPI_SLAVE_HD_3WIRE_MODE" title="SPI_SLAVE_HD_3WIRE_MODE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">SPI_SLAVE_HD_3WIRE_MODE</span></code></a> in <a class="reference internal" href="#_CPPv4N26spi_slave_hd_slot_config_t5flagsE" title="spi_slave_hd_slot_config_t::flags"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">spi_slave_hd_slot_config_t::flags</span></code></a>. In this mode, MOSI is used for both input and output data, so <a class="reference internal" href="spi_master.html#_CPPv4N16spi_bus_config_t11mosi_io_numE" title="spi_bus_config_t::mosi_io_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">spi_bus_config_t::mosi_io_num</span></code></a> must be set to an output-capable GPIO. The MISO line is not used and <a class="reference internal" href="spi_master.html#_CPPv4N16spi_bus_config_t11miso_io_numE" title="spi_bus_config_t::miso_io_num"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">spi_bus_config_t::miso_io_num</span></code></a> can be set to <code class="docutils literal notranslate"><span class="pre">-1</span></code>. The master should use the 1-bit SPI Slave HD commands in this mode. Commands with DIO/QIO masks will select 2-line or 4-line data phases in hardware and are not compatible with 3-wire mode, resulting in data errors.</p>
+</section>
+<section id="enable-disable-driver-optional">
+<h3>Enable/Disable Driver (Optional)<a class="headerlink" href="#enable-disable-driver-optional" title="Permalink to this heading"></a></h3>
+<p>Slave driver supports disabling / enabling driver after it is initialized by calling to <a class="reference internal" href="#_CPPv420spi_slave_hd_disable17spi_host_device_t" title="spi_slave_hd_disable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_disable()</span></code></a> / <a class="reference internal" href="#_CPPv419spi_slave_hd_enable17spi_host_device_t" title="spi_slave_hd_enable"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_enable()</span></code></a>, to be able to change clock or power config or sleep to save power. By default, the driver state is <cite>enabled</cite> after initialized.</p>
+</section>
+<section id="deinitialization-optional">
+<h3>Deinitialization (Optional)<a class="headerlink" href="#deinitialization-optional" title="Permalink to this heading"></a></h3>
+<p>Call <a class="reference internal" href="#_CPPv419spi_slave_hd_deinit17spi_host_device_t" title="spi_slave_hd_deinit"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_deinit()</span></code></a> to uninstall the driver. The resources, including the pins, SPI peripheral, internal memory used by the driver, and interrupt sources, are released by the <code class="docutils literal notranslate"><span class="pre">deinit()</span></code> function.</p>
+</section>
+<section id="send-receive-data-by-dma-channels">
+<h3>Send/Receive Data by DMA Channels<a class="headerlink" href="#send-receive-data-by-dma-channels" title="Permalink to this heading"></a></h3>
+<p>To send data to the master through the sending DMA channel, the application should properly wrap the data in an <a class="reference internal" href="#_CPPv419spi_slave_hd_data_t" title="spi_slave_hd_data_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">spi_slave_hd_data_t</span></code></a> descriptor structure before calling <a class="reference internal" href="#_CPPv424spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_queue_trans"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_queue_trans()</span></code></a> with the data descriptor and the channel argument of <a class="reference internal" href="#_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_TXE" title="SPI_SLAVE_CHAN_TX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">SPI_SLAVE_CHAN_TX</span></code></a>. The pointers to descriptors are stored in the queue, and the data is sent to the master in the same order they are enqueued using <a class="reference internal" href="#_CPPv424spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_queue_trans"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_queue_trans()</span></code></a>, upon receiving the master's <code class="docutils literal notranslate"><span class="pre">Rd_DMA</span></code> command.</p>
+<p>The application should check the result of data sending by calling <a class="reference internal" href="#_CPPv426spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_get_trans_res"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_get_trans_res()</span></code></a> with the channel set as <a class="reference internal" href="#_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_TXE" title="SPI_SLAVE_CHAN_TX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">SPI_SLAVE_CHAN_TX</span></code></a>. This function blocks until the transaction with the command <code class="docutils literal notranslate"><span class="pre">Rd_DMA</span></code> from the master successfully completes (or timeout). The <code class="docutils literal notranslate"><span class="pre">out_trans</span></code> argument of the function outputs the pointer of the data descriptor which is just finished, providing information about the sending.</p>
+<p>Receiving data from the master through the receiving DMA channel is quite similar. The application calls <a class="reference internal" href="#_CPPv424spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_queue_trans"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_queue_trans()</span></code></a> with proper data descriptor and the channel argument of <a class="reference internal" href="#_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_RXE" title="SPI_SLAVE_CHAN_RX"><code class="xref cpp cpp-enumerator docutils literal notranslate"><span class="pre">SPI_SLAVE_CHAN_RX</span></code></a>. And the application calls the <a class="reference internal" href="#_CPPv426spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_get_trans_res"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_get_trans_res()</span></code></a> later to get the descriptor to the receiving buffer before it handles the data in the receiving buffer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This driver itself does not have an internal buffer for the data to send or just received. The application should provide data buffer for driver via data descriptors to send to the master, or to receive data from the master.</p>
+<p>The application has to properly keep the data descriptor as well as the buffer it points, after the descriptor is successfully sent into the driver internal queue by <a class="reference internal" href="#_CPPv424spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_queue_trans"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_queue_trans()</span></code></a>, and before returned by <a class="reference internal" href="#_CPPv426spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t" title="spi_slave_hd_get_trans_res"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_get_trans_res()</span></code></a>. During this period, the hardware as well as the driver may read or write to the buffer and the descriptor when required at any time.</p>
+</div>
+<p>Please note that, when using this driver for data transfer, the buffer does not have to be fully sent or filled before it is terminated. For example, in the segment transaction mode, the master has to send <code class="docutils literal notranslate"><span class="pre">CMD7</span></code> to terminate a <code class="docutils literal notranslate"><span class="pre">Wr_DMA</span></code> transaction or send <code class="docutils literal notranslate"><span class="pre">CMD8</span></code> to terminate an <code class="docutils literal notranslate"><span class="pre">Rd_DMA</span></code> transaction (in segments), no matter whether the send (receive) buffer is used up (full) or not.</p>
+</section>
+<section id="using-data-descriptor-with-customized-user-arguments">
+<span id="spi-slave-hd-data-arguments"></span><h3>Using Data Descriptor with Customized User Arguments<a class="headerlink" href="#using-data-descriptor-with-customized-user-arguments" title="Permalink to this heading"></a></h3>
+<p>Sometimes you may have initiator (sending data descriptor) and closure (handling returned descriptors) functions in different places. When you get the returned data descriptor in the closure, you may need some extra information when handling the finished data descriptor. For example, you may want to know which round it is for the returned descriptor when you send the same piece of data several times.</p>
+<p>Set the <code class="docutils literal notranslate"><span class="pre">arg</span></code> member in the data descriptor to a variable indicating the transaction by force casting, or point it to a structure that wraps all the information you may need when handling the sending/receiving data. Then you can get what you need in your closure.</p>
+</section>
+<section id="using-callbacks">
+<span id="spi-slave-hd-callbacks"></span><h3>Using Callbacks<a class="headerlink" href="#using-callbacks" title="Permalink to this heading"></a></h3>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These callbacks are called in the ISR, so the required operations need to be processed quickly and returned as soon as possible to ensure that the system is functioning properly. You may need to be very careful to write the code in the ISR.</p>
+<p>Since the interrupt handling is executed concurrently with the application, long delays or blocking may cause the system to respond slower or lead to unpredictable behavior. Therefore, when writing callback functions, avoid using operations that may cause delays or blocking, e.g., waiting, sleeping, resource locking, etc.</p>
+</div>
+<p>The <a class="reference internal" href="#_CPPv430spi_slave_hd_callback_config_t" title="spi_slave_hd_callback_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">spi_slave_hd_callback_config_t</span></code></a> member in the <a class="reference internal" href="#_CPPv426spi_slave_hd_slot_config_t" title="spi_slave_hd_slot_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">spi_slave_hd_slot_config_t</span></code></a> configuration structure passed when initializing the SPI Slave HD driver, allows you to have callbacks for each event you may concern.</p>
+<p>The corresponding interrupt for each callback that is not <strong>NULL</strong> is enabled, so that the callbacks can be called immediately when the events happen. You do not need to provide callbacks for the unconcerned events.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">arg</span></code> member in the configuration structure can help you pass some context to the callback or indicate the specific SPI Slave instance when using the same callbacks for multiple SPI Slave peripherals. You can set the arg member to a variable that indicates the SPI Slave instance by performing a forced type casting or point it to a context structure. All the callbacks are called with this <code class="docutils literal notranslate"><span class="pre">arg</span></code> argument you set when the callbacks are initialized.</p>
+<p>There are two other arguments: the <code class="docutils literal notranslate"><span class="pre">event</span></code> and the <code class="docutils literal notranslate"><span class="pre">awoken</span></code>.</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The <code class="docutils literal notranslate"><span class="pre">event</span></code> passes the information of the current event to the callback. The <a class="reference internal" href="#_CPPv420spi_slave_hd_event_t" title="spi_slave_hd_event_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">spi_slave_hd_event_t</span></code></a> type contains the information of the event, for example, event type, the data descriptor just finished (The <a class="reference internal" href="#spi-slave-hd-data-arguments"><span class="std std-ref">data argument</span></a> is very useful in this case!).</p></li>
+<li><p>The <code class="docutils literal notranslate"><span class="pre">awoken</span></code> argument serves as an output parameter. It informs the ISR that tasks have been awakened after the callback function, and the ISR should call <cite>portYIELD_FROM_ISR()</cite> to schedule these tasks. Simply pass the <code class="docutils literal notranslate"><span class="pre">awoken</span></code> argument to all FreeRTOS APIs that may unblock tasks, and the value of <code class="docutils literal notranslate"><span class="pre">awoken</span></code> will be returned to the ISR.</p></li>
+</ul>
+</div></blockquote>
+</section>
+<section id="writing-reading-shared-registers">
+<h3>Writing/Reading Shared Registers<a class="headerlink" href="#writing-reading-shared-registers" title="Permalink to this heading"></a></h3>
+<p>Call <a class="reference internal" href="#_CPPv425spi_slave_hd_write_buffer17spi_host_device_tiP7uint8_t6size_t" title="spi_slave_hd_write_buffer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_write_buffer()</span></code></a> to write the shared buffer, and <a class="reference internal" href="#_CPPv424spi_slave_hd_read_buffer17spi_host_device_tiP7uint8_t6size_t" title="spi_slave_hd_read_buffer"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">spi_slave_hd_read_buffer()</span></code></a> to read the shared buffer.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>On ESP32-C3, the shared registers are read/written in words by the application but read/written in bytes by the master. There is no guarantee four continuous bytes read from the master are from the same word written by the slave's application. It is also possible that if the slave reads a word while the master is writing bytes of the word, the slave may get one word with half of them just written by the master, and the other half has not been written into.</p>
+<p>The master can confirm that the word is not in transition by reading the word twice and comparing the values.</p>
+<p>For the slave, it is more difficult to ensure the word is not in transition because the process of master writing four bytes can be very long (32 SPI clocks). You can put some CRC in the last (largest address) byte of a word so that when the byte is written, the word is sure to be all written.</p>
+<p>Due to the conflicts that may be among read/write from SW (worse if there are multi-cores) and master, it is suggested that a word is only used in one direction (only written by the master or only written by the slave).</p>
+</div>
+</section>
+<section id="receiving-general-purpose-interrupts-from-the-master">
+<h3>Receiving General Purpose Interrupts from the Master<a class="headerlink" href="#receiving-general-purpose-interrupts-from-the-master" title="Permalink to this heading"></a></h3>
+<p>When the master sends <code class="docutils literal notranslate"><span class="pre">CMD8</span></code>, <code class="docutils literal notranslate"><span class="pre">CMD9</span></code> or <code class="docutils literal notranslate"><span class="pre">CMDA</span></code>, the slave corresponding is triggered. Currently the <code class="docutils literal notranslate"><span class="pre">CMD8</span></code> is permanently used to indicate the termination of <code class="docutils literal notranslate"><span class="pre">Rd_DMA</span></code> segments. To receive general-purpose interrupts, register callbacks for <code class="docutils literal notranslate"><span class="pre">CMD9</span></code> and <code class="docutils literal notranslate"><span class="pre">CMDA</span></code> when the slave is initialized, see <a class="reference internal" href="#spi-slave-hd-callbacks"><span class="std std-ref">Using Callbacks</span></a>.</p>
+</section>
+</section>
+<section id="application-examples">
+<h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<p>The code example for Device/Host communication can be found in the <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/spi_slave_hd">peripherals/spi_slave_hd</a> directory of ESP-IDF examples.</p>
+<ul class="simple">
+<li><dl class="field-list simple">
+<dt class="field-odd">example<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>peripherals/spi_slave_hd/append_mode</cite> demonstrates how to use the SPI Slave HD driver and ESSL driver to communicate (ESSL driver is an encapsulated layer based on SPI Master driver to communicate with halfduplex mode SPI Slave).</p>
+</dd>
+</dl>
+</li>
+<li><dl class="field-list simple">
+<dt class="field-odd">example<span class="colon">:</span></dt>
+<dd class="field-odd"><p><cite>peripherals/spi_slave_hd/segment_mode</cite> demonstrate two ways to use the SPI Slave Halfduplex Segment Mode: Using the SPI Slave Halfduplex driver with two tasks repeating transactions with the SPI Master, and using the ESP Serial Slave Link APIs for multiple exchanges with the slave.</p>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_driver_spi/include/driver/spi_slave_hd.h">components/esp_driver_spi/include/driver/spi_slave_hd.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"driver/spi_slave_hd.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_driver_spi</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_driver_spi</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_driver_spi
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_driver_spi
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv417spi_slave_hd_init17spi_host_device_tPK16spi_bus_config_tPK26spi_slave_hd_slot_config_t">
+<span id="_CPPv317spi_slave_hd_init17spi_host_device_tPK16spi_bus_config_tPK26spi_slave_hd_slot_config_t"></span><span id="_CPPv217spi_slave_hd_init17spi_host_device_tPK16spi_bus_config_tPK26spi_slave_hd_slot_config_t"></span><span id="spi_slave_hd_init__spi_host_device_t.spi_bus_config_tCP.spi_slave_hd_slot_config_tCP"></span><span class="target" id="spi__slave__hd_8h_1a2e6dbe08a6d920f065f18be8b50091dc"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_init</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="spi_master.html#_CPPv416spi_bus_config_t" title="spi_bus_config_t"><span class="n"><span class="pre">spi_bus_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">bus_config</span></span>, <span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv426spi_slave_hd_slot_config_t" title="spi_slave_hd_slot_config_t"><span class="n"><span class="pre">spi_slave_hd_slot_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv417spi_slave_hd_init17spi_host_device_tPK16spi_bus_config_tPK26spi_slave_hd_slot_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Initialize the SPI Slave HD driver and enable it by default. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- The host to use </p></li>
+<li><p><strong>bus_config</strong> -- Bus configuration for the bus used </p></li>
+<li><p><strong>config</strong> -- Configuration for the SPI Slave HD driver </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: invalid argument given</p></li>
+<li><p>ESP_ERR_INVALID_STATE: function called in invalid state, may be some resources are already in use</p></li>
+<li><p>ESP_ERR_NOT_FOUND if there is no available DMA channel</p></li>
+<li><p>ESP_ERR_NO_MEM: memory allocation failed</p></li>
+<li><p>or other return value from <code class="docutils literal notranslate"><span class="pre">esp_intr_alloc</span></code></p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419spi_slave_hd_deinit17spi_host_device_t">
+<span id="_CPPv319spi_slave_hd_deinit17spi_host_device_t"></span><span id="_CPPv219spi_slave_hd_deinit17spi_host_device_t"></span><span id="spi_slave_hd_deinit__spi_host_device_t"></span><span class="target" id="spi__slave__hd_8h_1a10da186fc0704aeb9c642ee2a7e4afcb"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_deinit</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419spi_slave_hd_deinit17spi_host_device_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Deinitialize the SPI Slave HD driver. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>host_id</strong> -- The host to deinitialize the driver </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: if the host_id is not correct </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv419spi_slave_hd_enable17spi_host_device_t">
+<span id="_CPPv319spi_slave_hd_enable17spi_host_device_t"></span><span id="_CPPv219spi_slave_hd_enable17spi_host_device_t"></span><span id="spi_slave_hd_enable__spi_host_device_t"></span><span class="target" id="spi__slave__hd_8h_1aafd2d9d415103303070fe368379049e9"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_enable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv419spi_slave_hd_enable17spi_host_device_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Enable the spi slave HD function for an initialized spi host. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>No need to call this function additionally after <code class="docutils literal notranslate"><span class="pre">spi_slave_hd_init</span></code>, because it has been enabled already during the initialization.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>host_id</strong> -- SPI peripheral to be enabled </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG Unsupported host_id</p></li>
+<li><p>ESP_ERR_INVALID_STATE Peripheral already enabled </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv420spi_slave_hd_disable17spi_host_device_t">
+<span id="_CPPv320spi_slave_hd_disable17spi_host_device_t"></span><span id="_CPPv220spi_slave_hd_disable17spi_host_device_t"></span><span id="spi_slave_hd_disable__spi_host_device_t"></span><span class="target" id="spi__slave__hd_8h_1a5cb151c86a995db2b4f23fdbd31959fe"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_disable</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv420spi_slave_hd_disable17spi_host_device_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Disable the spi slave HD function for an initialized spi host. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>host_id</strong> -- SPI peripheral to be disabled </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK On success</p></li>
+<li><p>ESP_ERR_INVALID_ARG Unsupported host_id</p></li>
+<li><p>ESP_ERR_INVALID_STATE Peripheral already disabled </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t">
+<span id="_CPPv324spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t"></span><span id="_CPPv224spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t"></span><span id="spi_slave_hd_queue_trans__spi_host_device_t.spi_slave_chan_t.spi_slave_hd_data_tP.uint32_t"></span><span class="target" id="spi__slave__hd_8h_1ab3211f8a8367537f9a376ef1d3102443"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_queue_trans</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <a class="reference internal" href="#_CPPv416spi_slave_chan_t" title="spi_slave_chan_t"><span class="n"><span class="pre">spi_slave_chan_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span>, <a class="reference internal" href="#_CPPv419spi_slave_hd_data_t" title="spi_slave_hd_data_t"><span class="n"><span class="pre">spi_slave_hd_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">trans</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424spi_slave_hd_queue_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Queue transactions (segment mode) </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- Host to queue the transaction </p></li>
+<li><p><strong>chan</strong> -- SPI_SLAVE_CHAN_TX or SPI_SLAVE_CHAN_RX </p></li>
+<li><p><strong>trans</strong> -- Transaction descriptors </p></li>
+<li><p><strong>timeout</strong> -- Timeout before the data is queued </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: The input argument is invalid. Can be the following reason:<ul>
+<li><p>The buffer given is not DMA capable</p></li>
+<li><p>The length of data is invalid (not larger than 0, or exceed the max transfer length)</p></li>
+<li><p>The transaction direction is invalid</p></li>
+</ul>
+</p></li>
+<li><p>ESP_ERR_TIMEOUT: Cannot queue the data before timeout. Master is still processing previous transaction.</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Function called in invalid state. This API should be called under segment mode. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv426spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t">
+<span id="_CPPv326spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t"></span><span id="_CPPv226spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t"></span><span id="spi_slave_hd_get_trans_res__spi_host_device_t.spi_slave_chan_t.spi_slave_hd_data_tPP.uint32_t"></span><span class="target" id="spi__slave__hd_8h_1a6981583213e7e6b1f8291a96cd646591"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_get_trans_res</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <a class="reference internal" href="#_CPPv416spi_slave_chan_t" title="spi_slave_chan_t"><span class="n"><span class="pre">spi_slave_chan_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span>, <a class="reference internal" href="#_CPPv419spi_slave_hd_data_t" title="spi_slave_hd_data_t"><span class="n"><span class="pre">spi_slave_hd_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_trans</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv426spi_slave_hd_get_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the result of a data transaction (segment mode) </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API should be called successfully the same times as the <code class="docutils literal notranslate"><span class="pre">spi_slave_hd_queue_trans</span></code>.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- Host to queue the transaction </p></li>
+<li><p><strong>chan</strong> -- Channel to get the result, SPI_SLAVE_CHAN_TX or SPI_SLAVE_CHAN_RX </p></li>
+<li><p><strong>out_trans</strong> -- <strong>[out]</strong> Pointer to the transaction descriptor (<code class="docutils literal notranslate"><a class="reference internal" href="#structspi__slave__hd__data__t"><span class="std std-ref"><span class="pre">spi_slave_hd_data_t</span></span></a></code>) passed to the driver before. Hardware has finished this transaction. Member <code class="docutils literal notranslate"><span class="pre">trans_len</span></code> indicates the actual number of bytes of received data, it's meaningless for TX. </p></li>
+<li><p><strong>timeout</strong> -- Timeout before the result is got </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Function is not valid</p></li>
+<li><p>ESP_ERR_TIMEOUT: There's no transaction done before timeout</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Function called in invalid state. This API should be called under segment mode. Or DMA hardware over/underflow occurred. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv424spi_slave_hd_read_buffer17spi_host_device_tiP7uint8_t6size_t">
+<span id="_CPPv324spi_slave_hd_read_buffer17spi_host_device_tiP7uint8_t6size_t"></span><span id="_CPPv224spi_slave_hd_read_buffer17spi_host_device_tiP7uint8_t6size_t"></span><span id="spi_slave_hd_read_buffer__spi_host_device_t.i.uint8_tP.s"></span><span class="target" id="spi__slave__hd_8h_1ace2b08fdb1f72a4b3de88b8ab8dd560d"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_read_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv424spi_slave_hd_read_buffer17spi_host_device_tiP7uint8_t6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read the shared registers. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- Host to read the shared registers </p></li>
+<li><p><strong>addr</strong> -- Address of register to read, 0 to <code class="docutils literal notranslate"><span class="pre">SOC_SPI_MAXIMUM_BUFFER_SIZE-1</span></code></p></li>
+<li><p><strong>out_data</strong> -- <strong>[out]</strong> Output buffer to store the read data </p></li>
+<li><p><strong>len</strong> -- Length to read, not larger than <code class="docutils literal notranslate"><span class="pre">SOC_SPI_MAXIMUM_BUFFER_SIZE-addr</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425spi_slave_hd_write_buffer17spi_host_device_tiP7uint8_t6size_t">
+<span id="_CPPv325spi_slave_hd_write_buffer17spi_host_device_tiP7uint8_t6size_t"></span><span id="_CPPv225spi_slave_hd_write_buffer17spi_host_device_tiP7uint8_t6size_t"></span><span id="spi_slave_hd_write_buffer__spi_host_device_t.i.uint8_tP.s"></span><span class="target" id="spi__slave__hd_8h_1a012ad1627a3077c8819166e42b1ca9c2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_write_buffer</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">addr</span></span>, <span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">data</span></span>, <span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">len</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425spi_slave_hd_write_buffer17spi_host_device_tiP7uint8_t6size_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Write the shared registers. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- Host to write the shared registers </p></li>
+<li><p><strong>addr</strong> -- Address of register to write, 0 to <code class="docutils literal notranslate"><span class="pre">SOC_SPI_MAXIMUM_BUFFER_SIZE-1</span></code></p></li>
+<li><p><strong>data</strong> -- Buffer holding the data to write </p></li>
+<li><p><strong>len</strong> -- Length to write, <code class="docutils literal notranslate"><span class="pre">SOC_SPI_MAXIMUM_BUFFER_SIZE-addr</span></code></p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv425spi_slave_hd_append_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t">
+<span id="_CPPv325spi_slave_hd_append_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t"></span><span id="_CPPv225spi_slave_hd_append_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t"></span><span id="spi_slave_hd_append_trans__spi_host_device_t.spi_slave_chan_t.spi_slave_hd_data_tP.uint32_t"></span><span class="target" id="spi__slave__hd_8h_1ad3be8754819310e3f2edf36e6644870c"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_append_trans</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <a class="reference internal" href="#_CPPv416spi_slave_chan_t" title="spi_slave_chan_t"><span class="n"><span class="pre">spi_slave_chan_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span>, <a class="reference internal" href="#_CPPv419spi_slave_hd_data_t" title="spi_slave_hd_data_t"><span class="n"><span class="pre">spi_slave_hd_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">trans</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv425spi_slave_hd_append_trans17spi_host_device_t16spi_slave_chan_tP19spi_slave_hd_data_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Load transactions (append mode) </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In this mode, user transaction descriptors will be appended to the DMA and the DMA will keep processing the data without stopping</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- Host to load transactions </p></li>
+<li><p><strong>chan</strong> -- SPI_SLAVE_CHAN_TX or SPI_SLAVE_CHAN_RX </p></li>
+<li><p><strong>trans</strong> -- Transaction descriptor </p></li>
+<li><p><strong>timeout</strong> -- Timeout before the transaction is loaded </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: The input argument is invalid. Can be the following reason:<ul>
+<li><p>The buffer given is not DMA capable</p></li>
+<li><p>The length of data is invalid (not larger than 0, or exceed the max transfer length)</p></li>
+<li><p>The transaction direction is invalid</p></li>
+</ul>
+</p></li>
+<li><p>ESP_ERR_TIMEOUT: Master is still processing previous transaction. There is no available transaction for slave to load</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Function called in invalid state. This API should be called under append mode. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv433spi_slave_hd_get_append_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t">
+<span id="_CPPv333spi_slave_hd_get_append_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t"></span><span id="_CPPv233spi_slave_hd_get_append_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t"></span><span id="spi_slave_hd_get_append_trans_res__spi_host_device_t.spi_slave_chan_t.spi_slave_hd_data_tPP.uint32_t"></span><span class="target" id="spi__slave__hd_8h_1a0c7398d761631b4806d7a7f511f5b8a2"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_get_append_trans_res</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="spi_master.html#_CPPv417spi_host_device_t" title="spi_host_device_t"><span class="n"><span class="pre">spi_host_device_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">host_id</span></span>, <a class="reference internal" href="#_CPPv416spi_slave_chan_t" title="spi_slave_chan_t"><span class="n"><span class="pre">spi_slave_chan_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span>, <a class="reference internal" href="#_CPPv419spi_slave_hd_data_t" title="spi_slave_hd_data_t"><span class="n"><span class="pre">spi_slave_hd_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_trans</span></span>, <span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">timeout</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv433spi_slave_hd_get_append_trans_res17spi_host_device_t16spi_slave_chan_tPP19spi_slave_hd_data_t8uint32_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Get the result of a data transaction (append mode) </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This API should be called the same times as the <code class="docutils literal notranslate"><span class="pre">spi_slave_hd_append_trans</span></code></p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>host_id</strong> -- Host to load the transaction </p></li>
+<li><p><strong>chan</strong> -- SPI_SLAVE_CHAN_TX or SPI_SLAVE_CHAN_RX </p></li>
+<li><p><strong>out_trans</strong> -- <strong>[out]</strong> Pointer to the transaction descriptor (<code class="docutils literal notranslate"><a class="reference internal" href="#structspi__slave__hd__data__t"><span class="std std-ref"><span class="pre">spi_slave_hd_data_t</span></span></a></code>) passed to the driver before. Hardware has finished this transaction. Member <code class="docutils literal notranslate"><span class="pre">trans_len</span></code> indicates the actual number of bytes of received data, it's meaningless for TX. </p></li>
+<li><p><strong>timeout</strong> -- Timeout before the result is got </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: on success</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Function is not valid</p></li>
+<li><p>ESP_ERR_TIMEOUT: There's no transaction done before timeout</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Function called in invalid state. This API should be called under append mode. Or DMA hardware over/underflow occurred. </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv419spi_slave_hd_data_t">
+<span id="_CPPv319spi_slave_hd_data_t"></span><span id="_CPPv219spi_slave_hd_data_t"></span><span id="spi_slave_hd_data_t"></span><span class="target" id="structspi__slave__hd__data__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_data_t</span></span></span><a class="headerlink" href="#_CPPv419spi_slave_hd_data_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Descriptor of data to send/receive. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19spi_slave_hd_data_t4dataE">
+<span id="_CPPv3N19spi_slave_hd_data_t4dataE"></span><span id="_CPPv2N19spi_slave_hd_data_t4dataE"></span><span id="spi_slave_hd_data_t::data__uint8_tP"></span><span class="target" id="structspi__slave__hd__data__t_1aa944cfc790aff41625558d90bf45451b"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><a class="headerlink" href="#_CPPv4N19spi_slave_hd_data_t4dataE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Buffer to send, must be DMA capable. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19spi_slave_hd_data_t3lenE">
+<span id="_CPPv3N19spi_slave_hd_data_t3lenE"></span><span id="_CPPv2N19spi_slave_hd_data_t3lenE"></span><span id="spi_slave_hd_data_t::len__s"></span><span class="target" id="structspi__slave__hd__data__t_1a09c15946a1c55f1f17558f9142999c5c"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">len</span></span></span><a class="headerlink" href="#_CPPv4N19spi_slave_hd_data_t3lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Len of data to send/receive. For receiving the buffer length should be multiples of 4 bytes, otherwise the extra part will be truncated. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19spi_slave_hd_data_t9trans_lenE">
+<span id="_CPPv3N19spi_slave_hd_data_t9trans_lenE"></span><span id="_CPPv2N19spi_slave_hd_data_t9trans_lenE"></span><span id="spi_slave_hd_data_t::trans_len__s"></span><span class="target" id="structspi__slave__hd__data__t_1af100d945144b4597e9168ba324d22f6d"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">trans_len</span></span></span><a class="headerlink" href="#_CPPv4N19spi_slave_hd_data_t9trans_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>For RX direction, it indicates the data actually received. For TX direction, it is meaningless. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19spi_slave_hd_data_t5flagsE">
+<span id="_CPPv3N19spi_slave_hd_data_t5flagsE"></span><span id="_CPPv2N19spi_slave_hd_data_t5flagsE"></span><span id="spi_slave_hd_data_t::flags__uint32_t"></span><span class="target" id="structspi__slave__hd__data__t_1ad83949ef9bcc71c9170dc8d4a17b09b5"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N19spi_slave_hd_data_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bitwise OR of SPI_SLAVE_HD_TRANS_* flags. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N19spi_slave_hd_data_t3argE">
+<span id="_CPPv3N19spi_slave_hd_data_t3argE"></span><span id="_CPPv2N19spi_slave_hd_data_t3argE"></span><span id="spi_slave_hd_data_t::arg__voidP"></span><span class="target" id="structspi__slave__hd__data__t_1afcb6bed4fe6eb305bf01a52b10255adb"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">arg</span></span></span><a class="headerlink" href="#_CPPv4N19spi_slave_hd_data_t3argE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra argument indicating this data. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420spi_slave_hd_event_t">
+<span id="_CPPv320spi_slave_hd_event_t"></span><span id="_CPPv220spi_slave_hd_event_t"></span><span id="spi_slave_hd_event_t"></span><span class="target" id="structspi__slave__hd__event__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_event_t</span></span></span><a class="headerlink" href="#_CPPv420spi_slave_hd_event_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Information of SPI Slave HD event. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20spi_slave_hd_event_t5eventE">
+<span id="_CPPv3N20spi_slave_hd_event_t5eventE"></span><span id="_CPPv2N20spi_slave_hd_event_t5eventE"></span><span id="spi_slave_hd_event_t::event__spi_event_t"></span><span class="target" id="structspi__slave__hd__event__t_1a809d4b213f27e31de2d060402eaa78bf"></span><a class="reference internal" href="spi_master.html#_CPPv411spi_event_t" title="spi_event_t"><span class="n"><span class="pre">spi_event_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">event</span></span></span><a class="headerlink" href="#_CPPv4N20spi_slave_hd_event_t5eventE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Event type. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20spi_slave_hd_event_t5transE">
+<span id="_CPPv3N20spi_slave_hd_event_t5transE"></span><span id="_CPPv2N20spi_slave_hd_event_t5transE"></span><span id="spi_slave_hd_event_t::trans__spi_slave_hd_data_tP"></span><span class="target" id="structspi__slave__hd__event__t_1a43f18999476ac15b9b55f3c08df0c463"></span><a class="reference internal" href="#_CPPv419spi_slave_hd_data_t" title="spi_slave_hd_data_t"><span class="n"><span class="pre">spi_slave_hd_data_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">trans</span></span></span><a class="headerlink" href="#_CPPv4N20spi_slave_hd_event_t5transE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Corresponding transaction for SPI_EV_SEND and SPI_EV_RECV events. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv430spi_slave_hd_callback_config_t">
+<span id="_CPPv330spi_slave_hd_callback_config_t"></span><span id="_CPPv230spi_slave_hd_callback_config_t"></span><span id="spi_slave_hd_callback_config_t"></span><span class="target" id="structspi__slave__hd__callback__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_callback_config_t</span></span></span><a class="headerlink" href="#_CPPv430spi_slave_hd_callback_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback configuration structure for SPI Slave HD. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t12cb_buffer_txE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t12cb_buffer_txE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t12cb_buffer_txE"></span><span id="spi_slave_hd_callback_config_t::cb_buffer_tx__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1afeffca5151f9ded9c14110019ec9126d"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_buffer_tx</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t12cb_buffer_txE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when master reads from shared buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t12cb_buffer_rxE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t12cb_buffer_rxE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t12cb_buffer_rxE"></span><span id="spi_slave_hd_callback_config_t::cb_buffer_rx__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1a9cf4b8d7252439f2418ff8a8d5704ee1"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_buffer_rx</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t12cb_buffer_rxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when master writes to shared buffer. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t17cb_send_dma_readyE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t17cb_send_dma_readyE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t17cb_send_dma_readyE"></span><span id="spi_slave_hd_callback_config_t::cb_send_dma_ready__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1a51263f69a8015a73a6e57a38d214f901"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_send_dma_ready</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t17cb_send_dma_readyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when TX data buffer is loaded to the hardware (DMA) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t7cb_sentE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t7cb_sentE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t7cb_sentE"></span><span id="spi_slave_hd_callback_config_t::cb_sent__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1ade17463e5e2776c21ccb417ba7593e0a"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_sent</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t7cb_sentE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when data are sent. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t17cb_recv_dma_readyE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t17cb_recv_dma_readyE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t17cb_recv_dma_readyE"></span><span id="spi_slave_hd_callback_config_t::cb_recv_dma_ready__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1a8b65010b3ba43214fcc9e2e7f6c66107"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_recv_dma_ready</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t17cb_recv_dma_readyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when RX data buffer is loaded to the hardware (DMA) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t7cb_recvE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t7cb_recvE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t7cb_recvE"></span><span id="spi_slave_hd_callback_config_t::cb_recv__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1afb6dbf4b988854a474442e43fda02fd0"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_recv</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t7cb_recvE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when data are received. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t7cb_cmd9E">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t7cb_cmd9E"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t7cb_cmd9E"></span><span id="spi_slave_hd_callback_config_t::cb_cmd9__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1a278dff6b25dc37445bc805330008663d"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_cmd9</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t7cb_cmd9E" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when CMD9 received. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t7cb_cmdAE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t7cb_cmdAE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t7cb_cmdAE"></span><span id="spi_slave_hd_callback_config_t::cb_cmdA__slave_cb_t"></span><span class="target" id="structspi__slave__hd__callback__config__t_1a38fd4f443eb83dbc9c979e8896552ee4"></span><a class="reference internal" href="#_CPPv410slave_cb_t" title="slave_cb_t"><span class="n"><span class="pre">slave_cb_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_cmdA</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t7cb_cmdAE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback when CMDA received. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N30spi_slave_hd_callback_config_t3argE">
+<span id="_CPPv3N30spi_slave_hd_callback_config_t3argE"></span><span id="_CPPv2N30spi_slave_hd_callback_config_t3argE"></span><span id="spi_slave_hd_callback_config_t::arg__voidP"></span><span class="target" id="structspi__slave__hd__callback__config__t_1ae7b5ff913eebf195692a895f22fab23b"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">arg</span></span></span><a class="headerlink" href="#_CPPv4N30spi_slave_hd_callback_config_t3argE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Argument indicating this SPI Slave HD peripheral instance. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv426spi_slave_hd_slot_config_t">
+<span id="_CPPv326spi_slave_hd_slot_config_t"></span><span id="_CPPv226spi_slave_hd_slot_config_t"></span><span id="spi_slave_hd_slot_config_t"></span><span class="target" id="structspi__slave__hd__slot__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_hd_slot_config_t</span></span></span><a class="headerlink" href="#_CPPv426spi_slave_hd_slot_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Configuration structure for the SPI Slave HD driver. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t4modeE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t4modeE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t4modeE"></span><span id="spi_slave_hd_slot_config_t::mode__uint8_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1ad6a7bd8c2afe79b46a5b7382c7549088"></span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">mode</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t4modeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>SPI mode, representing a pair of (CPOL, CPHA) configuration:<ul class="simple">
+<li><p>0: (0, 0)</p></li>
+<li><p>1: (0, 1)</p></li>
+<li><p>2: (1, 0)</p></li>
+<li><p>3: (1, 1) </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t12spics_io_numE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t12spics_io_numE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t12spics_io_numE"></span><span id="spi_slave_hd_slot_config_t::spics_io_num__uint32_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a72b7d4fb45a52194022e8ccfa3cac9aa"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spics_io_num</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t12spics_io_numE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>CS GPIO pin for this device. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t5flagsE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t5flagsE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t5flagsE"></span><span id="spi_slave_hd_slot_config_t::flags__uint32_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1aff21a599f363fed4e0ea50e69d12e5da"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Bitwise OR of SPI_SLAVE_HD_* flags. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t12command_bitsE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t12command_bitsE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t12command_bitsE"></span><span id="spi_slave_hd_slot_config_t::command_bits__uint32_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a2e44b1976ea647dbaa99a4e9884d70ae"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">command_bits</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t12command_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>command field bits, multiples of 8 and at least 8. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t12address_bitsE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t12address_bitsE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t12address_bitsE"></span><span id="spi_slave_hd_slot_config_t::address_bits__uint32_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a920ed831d2abf4e28baa43267ddb7c33"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">address_bits</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t12address_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>address field bits, multiples of 8 and at least 8. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t10dummy_bitsE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t10dummy_bitsE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t10dummy_bitsE"></span><span id="spi_slave_hd_slot_config_t::dummy_bits__uint32_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a70a76cf4771f98d6b297ebe4dd21c83e"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dummy_bits</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t10dummy_bitsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>dummy field bits, multiples of 8 and at least 8. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t10queue_sizeE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t10queue_sizeE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t10queue_sizeE"></span><span id="spi_slave_hd_slot_config_t::queue_size__uint32_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a3045faebd19892d8bd6cd3f96c0914ce"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">queue_size</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t10queue_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transaction queue size. This sets how many transactions can be 'in the air' (queued using spi_slave_hd_queue_trans but not yet finished using spi_slave_hd_get_trans_result) at the same time. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t8dma_chanE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t8dma_chanE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t8dma_chanE"></span><span id="spi_slave_hd_slot_config_t::dma_chan__spi_dma_chan_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a3e658e774446712c39f81265e3b90ad4"></span><a class="reference internal" href="spi_master.html#_CPPv414spi_dma_chan_t" title="spi_dma_chan_t"><span class="n"><span class="pre">spi_dma_chan_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">dma_chan</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t8dma_chanE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>DMA channel to used. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N26spi_slave_hd_slot_config_t9cb_configE">
+<span id="_CPPv3N26spi_slave_hd_slot_config_t9cb_configE"></span><span id="_CPPv2N26spi_slave_hd_slot_config_t9cb_configE"></span><span id="spi_slave_hd_slot_config_t::cb_config__spi_slave_hd_callback_config_t"></span><span class="target" id="structspi__slave__hd__slot__config__t_1a9b87da1265619abfeea07b654184ba55"></span><a class="reference internal" href="#_CPPv430spi_slave_hd_callback_config_t" title="spi_slave_hd_callback_config_t"><span class="n"><span class="pre">spi_slave_hd_callback_config_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cb_config</span></span></span><a class="headerlink" href="#_CPPv4N26spi_slave_hd_slot_config_t9cb_configE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback configuration. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SPI_SLAVE_HD_TRANS_DMA_BUFFER_ALIGN_AUTO">
+<span class="target" id="spi__slave__hd_8h_1af36ea2bb79a6bda5b388a7f16b617634"></span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_HD_TRANS_DMA_BUFFER_ALIGN_AUTO</span></span></span><a class="headerlink" href="#c.SPI_SLAVE_HD_TRANS_DMA_BUFFER_ALIGN_AUTO" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Automatically re-malloc dma buffer if user buffer doesn't meet hardware alignment or dma_capable, this process may lose some memory and performance. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SPI_SLAVE_HD_TXBIT_LSBFIRST">
+<span class="target" id="spi__slave__hd_8h_1a08a44912aa1f78186d6d9ca9ec6649b8"></span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_HD_TXBIT_LSBFIRST</span></span></span><a class="headerlink" href="#c.SPI_SLAVE_HD_TXBIT_LSBFIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transmit command/address/data LSB first instead of the default MSB first. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SPI_SLAVE_HD_RXBIT_LSBFIRST">
+<span class="target" id="spi__slave__hd_8h_1a3afa427a9d2598cba01f06262f389d6b"></span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_HD_RXBIT_LSBFIRST</span></span></span><a class="headerlink" href="#c.SPI_SLAVE_HD_RXBIT_LSBFIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Receive data LSB first instead of the default MSB first. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SPI_SLAVE_HD_BIT_LSBFIRST">
+<span class="target" id="spi__slave__hd_8h_1a00cca9f2d348a6f7d8033f2dfe9000f8"></span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_HD_BIT_LSBFIRST</span></span></span><a class="headerlink" href="#c.SPI_SLAVE_HD_BIT_LSBFIRST" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Transmit and receive LSB first. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SPI_SLAVE_HD_APPEND_MODE">
+<span class="target" id="spi__slave__hd_8h_1a08774a8509606969937395624feae29e"></span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_HD_APPEND_MODE</span></span></span><a class="headerlink" href="#c.SPI_SLAVE_HD_APPEND_MODE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adopt DMA append mode for transactions. In this mode, users can load(append) DMA descriptors without stopping the DMA. </p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.SPI_SLAVE_HD_3WIRE_MODE">
+<span class="target" id="spi__slave__hd_8h_1a28b240682224c1e4501c13991908f7ab"></span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_HD_3WIRE_MODE</span></span></span><a class="headerlink" href="#c.SPI_SLAVE_HD_3WIRE_MODE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Use MOSI (=spid) for both sending and receiving data, and the master should only use the 1-bit mask for SPI Slave HD commands. </p>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv410slave_cb_t">
+<span id="_CPPv310slave_cb_t"></span><span id="_CPPv210slave_cb_t"></span><span id="slave_cb_t"></span><span class="target" id="spi__slave__hd_8h_1af71f767ad7a44dd240a751d4f4584863"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">slave_cb_t</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">arg</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv420spi_slave_hd_event_t" title="spi_slave_hd_event_t"><span class="n"><span class="pre">spi_slave_hd_event_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">event</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">awoken</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv410slave_cb_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Callback for SPI Slave HD. </p>
+</dd></dl>
+
+</section>
+<section id="enumerations">
+<h3>Enumerations<a class="headerlink" href="#enumerations" title="Permalink to this heading"></a></h3>
+<dl class="cpp enum">
+<dt class="sig sig-object cpp" id="_CPPv416spi_slave_chan_t">
+<span id="_CPPv316spi_slave_chan_t"></span><span id="_CPPv216spi_slave_chan_t"></span><span class="target" id="spi__slave__hd_8h_1a5f6e65aee15776e62a672236799b28a9"></span><span class="k"><span class="pre">enum</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">spi_slave_chan_t</span></span></span><a class="headerlink" href="#_CPPv416spi_slave_chan_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Channel of SPI Slave HD to do data transaction. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_TXE">
+<span id="_CPPv3N16spi_slave_chan_t17SPI_SLAVE_CHAN_TXE"></span><span id="_CPPv2N16spi_slave_chan_t17SPI_SLAVE_CHAN_TXE"></span><span class="target" id="spi__slave__hd_8h_1a5f6e65aee15776e62a672236799b28a9ab6c10a5dbfd5df51472ea6e36d9c227e"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_CHAN_TX</span></span></span><a class="headerlink" href="#_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_TXE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The output channel (RDDMA) </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt class="sig sig-object cpp" id="_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_RXE">
+<span id="_CPPv3N16spi_slave_chan_t17SPI_SLAVE_CHAN_RXE"></span><span id="_CPPv2N16spi_slave_chan_t17SPI_SLAVE_CHAN_RXE"></span><span class="target" id="spi__slave__hd_8h_1a5f6e65aee15776e62a672236799b28a9ab540b3870fe628e4f45a0323e005a075"></span><span class="k"><span class="pre">enumerator</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">SPI_SLAVE_CHAN_RX</span></span></span><a class="headerlink" href="#_CPPv4N16spi_slave_chan_t17SPI_SLAVE_CHAN_RXE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The input channel (WRDMA) </p>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=SPI Slave Half Duplex (api-reference/peripherals/spi_slave_hd)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=SPI Slave Half Duplex (api-reference/peripherals/spi_slave_hd)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="spi_slave.html" class="btn btn-neutral float-left" title="SPI Slave Driver" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="temp_sensor.html" class="btn btn-neutral float-right" title="Temperature Sensor" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

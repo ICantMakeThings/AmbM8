@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Low Dropout Voltage Regulator (LDO) - ESP32-P4 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32p4/api-reference/peripherals/ldo_regulator.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/peripherals/ldo_regulator';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32p4';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="LED Control (LEDC)" href="ledc.html" />
+    <link rel="prev" title="Parallel IO simulation of SPI or I80 Interfaced LCD" href="lcd/parl_lcd.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Peripherals API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="adc/index.html">Analog to Digital Converter (ADC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ana_cmpr.html">Analog Comparator</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_crc.html">Asynchronous CRC Calculation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_color_convert.html">Asynchronous Color Conversion</a></li>
+<li class="toctree-l3"><a class="reference internal" href="async_memcpy.html">Asynchronous Memory Copy</a></li>
+<li class="toctree-l3"><a class="reference internal" href="bitscrambler.html">BitScrambler Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="camera_driver.html">Camera Controller Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="clk_tree.html">Clock Tree</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ecdsa.html">ECDSA Digital Signature Peripheral (ECDSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="etm.html">Event Task Matrix (ETM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gpio.html">GPIO &amp; RTC GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="gptimer.html">General Purpose Timer (GPTimer)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="dedic_gpio.html">Dedicated GPIO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="hmac.html">Hash-Based Message Authentication Code (HMAC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ds.html">RSA Digital Signature Peripheral (RSA_DS)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2c.html">Inter-Integrated Circuit (I2C)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i2s.html">Inter-IC Sound (I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="i3c_master.html">I3C master interface</a></li>
+<li class="toctree-l3"><a class="reference internal" href="isp.html">Image Signal Processor (ISP)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="jpeg.html">JPEG Encoder and Decoder</a></li>
+<li class="toctree-l3"><a class="reference internal" href="key_manager.html">Key Manager</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lcd/index.html">LCD</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Low Dropout Voltage Regulator (LDO)</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#introduction">Introduction</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#functional-overview">Functional Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#application-examples">Application Examples</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="ledc.html">LED Control (LEDC)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mcpwm.html">Motor Control Pulse Width Modulator (MCPWM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="parlio/index.html">Parallel IO</a></li>
+<li class="toctree-l3"><a class="reference internal" href="pcnt.html">Pulse Counter (PCNT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="ppa.html">Pixel-Processing Accelerator (PPA)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="rmt.html">Remote Control Transceiver (RMT)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sd_pullup_requirements.html">SD Pull-up Requirements</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc_host.html">SDMMC Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdspi_host.html">SD SPI Host Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdm.html">Sigma-Delta Modulation (SDM)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_flash/index.html">SPI Flash API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_master.html">SPI Master Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave.html">SPI Slave Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="spi_slave_hd.html">SPI Slave Half Duplex</a></li>
+<li class="toctree-l3"><a class="reference internal" href="lp_i2s.html">Low Power Inter-IC Sound (LP I2S)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vad.html">Voice Activity Detection (VAD)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="temp_sensor.html">Temperature Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="cap_touch_sens.html">Capacitive Touch Sensor</a></li>
+<li class="toctree-l3"><a class="reference internal" href="twai.html">Two-Wire Automotive Interface (TWAI)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="uart.html">Universal Asynchronous Receiver/Transmitter (UART)</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_device.html">USB Device Stack</a></li>
+<li class="toctree-l3"><a class="reference external" href="https://docs.espressif.com/projects/esp-usb/en/latest/esp32p4/usb_host.html">USB Host</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../storage/index.html">Storage API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Peripherals API</a></li>
+      <li class="breadcrumb-item active">Low Dropout Voltage Regulator (LDO)</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/peripherals/ldo_regulator.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="low-dropout-voltage-regulator-ldo">
+<h1>Low Dropout Voltage Regulator (LDO)<a class="headerlink" href="#low-dropout-voltage-regulator-ldo" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32p4/api-reference/peripherals/ldo_regulator.html">[中文]</a></p>
+<section id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this heading"></a></h2>
+<p>The ESP32-P4 chip internally integrates 4 channels of low-dropout voltage regulators (LDOs). Each channel's voltage is programmable. In our hardware reference designs, some of these LDO outputs are typically used to power the internal Flash and PSRAM, while the remaining LDOs can be used to supply external devices.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>It's essential to read the manual first and ensure that the required current does not exceed the chip's specifications.</p>
+</div>
+</section>
+<section id="functional-overview">
+<h2>Functional Overview<a class="headerlink" href="#functional-overview" title="Permalink to this heading"></a></h2>
+<p>The description of the LDO driver is divided into the following sections:</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#ldo-channel-acquisition"><span class="std std-ref">LDO Channel Acquisition</span></a> - Introduces the types of LDO channels and how to apply for LDO channel resources.</p></li>
+<li><p><a class="reference internal" href="#ldo-adjust-voltage"><span class="std std-ref">LDO Voltage Adjustment</span></a> - Describes how to adjust the voltage of the LDO channel.</p></li>
+</ul>
+<section id="ldo-channel-acquisition">
+<span id="id1"></span><h3>LDO Channel Acquisition<a class="headerlink" href="#ldo-channel-acquisition" title="Permalink to this heading"></a></h3>
+<p>LDO channels can be classified into two types: fixed voltage and adjustable voltage. For a fixed voltage channel, it allows multiple users to simultaneously use it (in software, we allow a variable to have multiple immutable references ). However, for an adjustable voltage channel, only one user is allowed to use it at a time (in software, we don't allow a variable to have multiple mutable references or coexistence of mutable and immutable references).</p>
+<p>In the driver, the LDO channel is represented by the <a class="reference internal" href="#_CPPv424esp_ldo_channel_handle_t" title="esp_ldo_channel_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_ldo_channel_handle_t</span></code></a>. You can use the <a class="reference internal" href="#_CPPv423esp_ldo_acquire_channelPK24esp_ldo_channel_config_tP24esp_ldo_channel_handle_t" title="esp_ldo_acquire_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_ldo_acquire_channel()</span></code></a> function to request LDO channel resources. Upon successful acquisition, a handle for the LDO channel will be returned, which can be used for subsequent voltage adjustment operations. When applying for a channel, the <a class="reference internal" href="#_CPPv424esp_ldo_channel_config_t" title="esp_ldo_channel_config_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_ldo_channel_config_t</span></code></a> structure is used to specify the basic information of the LDO channel, including the channel ID, the desired output voltage, and whether the voltage can be dynamically adjusted.</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#_CPPv4N24esp_ldo_channel_config_t7chan_idE" title="esp_ldo_channel_config_t::chan_id"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_ldo_channel_config_t::chan_id</span></code></a> - LDO channels are uniquely identified by a label, which is used to distinguish different LDO channels. Please note that this information needs to be determined based on the circuit schematic and chip datasheet. For example, an LDO channel labeled as <code class="docutils literal notranslate"><span class="pre">LDO_VO3</span></code> corresponds to an ID of <code class="docutils literal notranslate"><span class="pre">3</span></code>.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N24esp_ldo_channel_config_t10voltage_mvE" title="esp_ldo_channel_config_t::voltage_mv"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_ldo_channel_config_t::voltage_mv</span></code></a> - The desired output voltage of the LDO channel, in millivolts.</p></li>
+<li><p><a class="reference internal" href="#_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags10adjustableE" title="esp_ldo_channel_config_t::ldo_extra_flags::adjustable"><code class="xref cpp cpp-member docutils literal notranslate"><span class="pre">esp_ldo_channel_config_t::ldo_extra_flags::adjustable</span></code></a> - Whether the LDO channel's output voltage can be dynamically adjusted. Only when it is set to <cite>true</cite>, can the <a class="reference internal" href="#_CPPv430esp_ldo_channel_adjust_voltage24esp_ldo_channel_handle_ti" title="esp_ldo_channel_adjust_voltage"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_ldo_channel_adjust_voltage()</span></code></a> function be used to dynamically adjust the output voltage.</p></li>
+</ul>
+<p>Since multiple users are allowed to use a fixed voltage LDO channel simultaneously, the driver internally maintains a reference counter. The LDO channel will be automatically closed when the last user releases the LDO channel resources. The function to release LDO channel resources is <a class="reference internal" href="#_CPPv423esp_ldo_release_channel24esp_ldo_channel_handle_t" title="esp_ldo_release_channel"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_ldo_release_channel()</span></code></a>. Additionally, it is important to note that the acquisition and release of LDO channels should appear in pairs during usage.</p>
+</section>
+<section id="ldo-voltage-adjustment">
+<span id="ldo-adjust-voltage"></span><h3>LDO Voltage Adjustment<a class="headerlink" href="#ldo-voltage-adjustment" title="Permalink to this heading"></a></h3>
+<p><a class="reference internal" href="#_CPPv430esp_ldo_channel_adjust_voltage24esp_ldo_channel_handle_ti" title="esp_ldo_channel_adjust_voltage"><code class="xref cpp cpp-func docutils literal notranslate"><span class="pre">esp_ldo_channel_adjust_voltage()</span></code></a> function is used to adjust the output voltage of an LDO channel at runtime. However, please note that this function can only be used for LDO channels with adjustable voltage. Attempting to use this function on a fixed voltage LDO channel will result in an error.</p>
+<p>Also, it is important to keep in mind that due to hardware limitations, the LDO channel voltage may have a deviation of approximately 50-100mV. Therefore, it is not advisable to rely on the LDO channel's output voltage for precise analog control.</p>
+</section>
+</section>
+<section id="application-examples">
+<h2>Application Examples<a class="headerlink" href="#application-examples" title="Permalink to this heading"></a></h2>
+<p><ul class="simple">
+<li><p>Use the internal LDO channel to power up the MIPI DPHY: <a class="reference external" href="https://github.com/espressif/esp-idf/tree/v6.1/examples/peripherals/lcd/mipi_dsi">peripherals/lcd/mipi_dsi</a></p></li>
+</ul>
+</p>
+</section>
+<section id="api-reference">
+<h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_hw_support/ldo/include/esp_ldo_regulator.h">components/esp_hw_support/ldo/include/esp_ldo_regulator.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_ldo_regulator.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading"></a></h3>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_ldo_acquire_channelPK24esp_ldo_channel_config_tP24esp_ldo_channel_handle_t">
+<span id="_CPPv323esp_ldo_acquire_channelPK24esp_ldo_channel_config_tP24esp_ldo_channel_handle_t"></span><span id="_CPPv223esp_ldo_acquire_channelPK24esp_ldo_channel_config_tP24esp_ldo_channel_handle_t"></span><span id="esp_ldo_acquire_channel__esp_ldo_channel_config_tCP.esp_ldo_channel_handle_tP"></span><span class="target" id="esp__ldo__regulator_8h_1ac637c13c0c964bc5fcd63057074c0ade"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_ldo_acquire_channel</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424esp_ldo_channel_config_t" title="esp_ldo_channel_config_t"><span class="n"><span class="pre">esp_ldo_channel_config_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">config</span></span>, <a class="reference internal" href="#_CPPv424esp_ldo_channel_handle_t" title="esp_ldo_channel_handle_t"><span class="n"><span class="pre">esp_ldo_channel_handle_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">out_handle</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_ldo_acquire_channelPK24esp_ldo_channel_config_tP24esp_ldo_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Acquire an LDO channel with the specified configuration. </p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This function can't automatically search a LDO channel for you, you must specify a LDO channel ID manually, based on your schematic. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The same channel can be acquired multiple times in different places of the application code, however, if the LDO channel is adjustable, you can't acquire it multiple times, in case user A changes the voltage and breaks the voltage setting of user B. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>You should release the channel by <code class="docutils literal notranslate"><span class="pre">esp_ldo_release_channel</span></code> when it's no longer needed.</p>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>config</strong> -- <strong>[in]</strong> The configuration of the LDO channel </p></li>
+<li><p><strong>out_handle</strong> -- <strong>[out]</strong> The returned LDO channel handle </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Acquire the LDO channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Acquire the LDO channel failed due to invalid arguments</p></li>
+<li><p>ESP_FAIL: Acquire the LDO channel failed due to other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv423esp_ldo_release_channel24esp_ldo_channel_handle_t">
+<span id="_CPPv323esp_ldo_release_channel24esp_ldo_channel_handle_t"></span><span id="_CPPv223esp_ldo_release_channel24esp_ldo_channel_handle_t"></span><span id="esp_ldo_release_channel__esp_ldo_channel_handle_t"></span><span class="target" id="esp__ldo__regulator_8h_1a66a2460626ab735ab3783bb9bea04a86"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_ldo_release_channel</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_ldo_channel_handle_t" title="esp_ldo_channel_handle_t"><span class="n"><span class="pre">esp_ldo_channel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv423esp_ldo_release_channel24esp_ldo_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release the LDO channel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>chan</strong> -- <strong>[in]</strong> The LDO channel handle returned from <code class="docutils literal notranslate"><span class="pre">esp_ldo_acquire_channel</span></code></p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Release the LDO channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Release the LDO channel failed due to invalid arguments</p></li>
+<li><p>ESP_ERR_INVALID_STATE: Release the LDO channel failed due to invalid state, e.g., the channel handle is double released</p></li>
+<li><p>ESP_FAIL: Release the LDO channel failed due to other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv430esp_ldo_channel_adjust_voltage24esp_ldo_channel_handle_ti">
+<span id="_CPPv330esp_ldo_channel_adjust_voltage24esp_ldo_channel_handle_ti"></span><span id="_CPPv230esp_ldo_channel_adjust_voltage24esp_ldo_channel_handle_ti"></span><span id="esp_ldo_channel_adjust_voltage__esp_ldo_channel_handle_t.i"></span><span class="target" id="esp__ldo__regulator_8h_1a098db97ec9226c0c529aaaada358dd57"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_ldo_channel_adjust_voltage</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv424esp_ldo_channel_handle_t" title="esp_ldo_channel_handle_t"><span class="n"><span class="pre">esp_ldo_channel_handle_t</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">chan</span></span>, <span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">voltage_mv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv430esp_ldo_channel_adjust_voltage24esp_ldo_channel_handle_ti" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Adjust the voltage of the LDO channel. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>chan</strong> -- <strong>[in]</strong> The LDO channel handle returned from <code class="docutils literal notranslate"><span class="pre">esp_ldo_acquire_channel</span></code></p></li>
+<li><p><strong>voltage_mv</strong> -- <strong>[in]</strong> The voltage value to be set to the LDO channel, in millivolts </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Adjust the voltage of the LDO channel successfully</p></li>
+<li><p>ESP_ERR_INVALID_ARG: Adjust the voltage of the LDO channel failed due to invalid arguments</p></li>
+<li><p>ESP_ERR_NOT_SUPPORTED: Adjust the voltage of the LDO channel failed due to the channel is not adjustable</p></li>
+<li><p>ESP_FAIL: Adjust the voltage of the LDO channel failed due to other reasons </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv412esp_ldo_dumpP4FILE">
+<span id="_CPPv312esp_ldo_dumpP4FILE"></span><span id="_CPPv212esp_ldo_dumpP4FILE"></span><span id="esp_ldo_dump__FILEP"></span><span class="target" id="esp__ldo__regulator_8h_1a2415e11c3e2252f9abc21bad50e9e82e"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_ldo_dump</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">FILE</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">stream</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv412esp_ldo_dumpP4FILE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Dump LDO channel status to the specified stream. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>stream</strong> -- <strong>[in]</strong> IO stream. Can be stdout, stderr, or a file/string stream. </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p>ESP_OK: Dump the LDO channel status successfully</p></li>
+<li><p>ESP_FAIL: Dump the LDO channel status failed </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv424esp_ldo_channel_config_t">
+<span id="_CPPv324esp_ldo_channel_config_t"></span><span id="_CPPv224esp_ldo_channel_config_t"></span><span id="esp_ldo_channel_config_t"></span><span class="target" id="structesp__ldo__channel__config__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_ldo_channel_config_t</span></span></span><a class="headerlink" href="#_CPPv424esp_ldo_channel_config_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>LDO channel configurations. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t7chan_idE">
+<span id="_CPPv3N24esp_ldo_channel_config_t7chan_idE"></span><span id="_CPPv2N24esp_ldo_channel_config_t7chan_idE"></span><span id="esp_ldo_channel_config_t::chan_id__i"></span><span class="target" id="structesp__ldo__channel__config__t_1af44e02a2a964007b198bd76c9ab599f7"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">chan_id</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t7chan_idE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>You must set the LDO channel ID according to the datasheet, e.g., set it to 1 for LDO_VO1 </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t10voltage_mvE">
+<span id="_CPPv3N24esp_ldo_channel_config_t10voltage_mvE"></span><span id="_CPPv2N24esp_ldo_channel_config_t10voltage_mvE"></span><span id="esp_ldo_channel_config_t::voltage_mv__i"></span><span class="target" id="structesp__ldo__channel__config__t_1a63618c81a035dd2875cc176dfd91b896"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">voltage_mv</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t10voltage_mvE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>The voltage value to be set to the LDO channel </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t23voltage_stable_delay_usE">
+<span id="_CPPv3N24esp_ldo_channel_config_t23voltage_stable_delay_usE"></span><span id="_CPPv2N24esp_ldo_channel_config_t23voltage_stable_delay_usE"></span><span id="esp_ldo_channel_config_t::voltage_stable_delay_us__uint32_t"></span><span class="target" id="structesp__ldo__channel__config__t_1a9ac97ee97ca550dddb45d56867ca7243"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">voltage_stable_delay_us</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t23voltage_stable_delay_usE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Delay in microseconds after LDO enable, wait for output voltage to stabilize. Set to 0 to skip </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t5flagsE">
+<span id="_CPPv3N24esp_ldo_channel_config_t5flagsE"></span><span id="_CPPv2N24esp_ldo_channel_config_t5flagsE"></span><span id="esp_ldo_channel_config_t::flags__esp_ldo_channel_config_t::ldo_extra_flags"></span><span class="target" id="structesp__ldo__channel__config__t_1acbdc1cc318e3c2af6e9ecaf3447636a6"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv424esp_ldo_channel_config_t" title="esp_ldo_channel_config_t"><span class="n"><span class="pre">esp_ldo_channel_config_t</span></span></a><span class="p"><span class="pre">::</span></span><a class="reference internal" href="#_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flagsE" title="esp_ldo_channel_config_t::ldo_extra_flags"><span class="n"><span class="pre">ldo_extra_flags</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">flags</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t5flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Flags for the LDO channel </p>
+</dd></dl>
+
+</div>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flagsE">
+<span id="_CPPv3N24esp_ldo_channel_config_t15ldo_extra_flagsE"></span><span id="_CPPv2N24esp_ldo_channel_config_t15ldo_extra_flagsE"></span><span id="esp_ldo_channel_config_t::ldo_extra_flags"></span><span class="target" id="structesp__ldo__channel__config__t_1_1ldo__extra__flags"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">ldo_extra_flags</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Extra flags of a LDO channel. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags10adjustableE">
+<span id="_CPPv3N24esp_ldo_channel_config_t15ldo_extra_flags10adjustableE"></span><span id="_CPPv2N24esp_ldo_channel_config_t15ldo_extra_flags10adjustableE"></span><span id="esp_ldo_channel_config_t::ldo_extra_flags::adjustable__uint32_t"></span><span class="target" id="structesp__ldo__channel__config__t_1_1ldo__extra__flags_1a636baeb7a15ec09052b5ee91ac1be4a7"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">adjustable</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags10adjustableE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether the LDO channel is adjustable, and the voltage can be updated by <code class="docutils literal notranslate"><span class="pre">esp_ldo_channel_adjust_voltage</span></code></p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags11owned_by_hwE">
+<span id="_CPPv3N24esp_ldo_channel_config_t15ldo_extra_flags11owned_by_hwE"></span><span id="_CPPv2N24esp_ldo_channel_config_t15ldo_extra_flags11owned_by_hwE"></span><span id="esp_ldo_channel_config_t::ldo_extra_flags::owned_by_hw__uint32_t"></span><span class="target" id="structesp__ldo__channel__config__t_1_1ldo__extra__flags_1a68d6233e5b6598c6fb5ee66adc13a802"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">owned_by_hw</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags11owned_by_hwE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>If the LDO channel is owned by hardware, then software configurations can be overridden by hardware (e.g. eFuse) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags6bypassE">
+<span id="_CPPv3N24esp_ldo_channel_config_t15ldo_extra_flags6bypassE"></span><span id="_CPPv2N24esp_ldo_channel_config_t15ldo_extra_flags6bypassE"></span><span id="esp_ldo_channel_config_t::ldo_extra_flags::bypass__uint32_t"></span><span class="target" id="structesp__ldo__channel__config__t_1_1ldo__extra__flags_1a1ee712212562b7b1501cc7b5dce07551"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">bypass</span></span></span><a class="headerlink" href="#_CPPv4N24esp_ldo_channel_config_t15ldo_extra_flags6bypassE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Whether to bypass the regulator, i.e., the input voltage is sourced directly to the output </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv424esp_ldo_channel_handle_t">
+<span id="_CPPv324esp_ldo_channel_handle_t"></span><span id="_CPPv224esp_ldo_channel_handle_t"></span><span id="esp_ldo_channel_handle_t"></span><span class="target" id="esp__ldo__regulator_8h_1a3b073c12b3abd6455fc6ccb107c668d0"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="n"><span class="pre">ldo_regulator_channel_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_ldo_channel_handle_t</span></span></span><a class="headerlink" href="#_CPPv424esp_ldo_channel_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Type of LDO regulator channel handle. </p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Low Dropout Voltage Regulator (LDO) (api-reference/peripherals/ldo_regulator)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Low Dropout Voltage Regulator (LDO) (api-reference/peripherals/ldo_regulator)&version=esp32p4 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="lcd/parl_lcd.html" class="btn btn-neutral float-left" title="Parallel IO simulation of SPI or I80 Interfaced LCD" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="ledc.html" class="btn btn-neutral float-right" title="LED Control (LEDC)" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

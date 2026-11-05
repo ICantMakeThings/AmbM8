@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en">
+<head>
+  <meta charset="utf-8" />
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-73KGWFC8DM"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-73KGWFC8DM');
+        </script><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Block Device Layer - ESP32-C3 -  &mdash; ESP-IDF Programming Guide v6.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=a60756f2" />
+      <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css?v=949a1ff5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/theme_overrides.css?v=851bd809" />
+      <link rel="stylesheet" type="text/css" href="../../_static/hover_api.css?v=b5535953" />
+      <link rel="stylesheet" type="text/css" href="../../_static/js/chatbot_widget.css?v=3106ea3a" />
+
+  
+    <link rel="canonical" href="https://docs.espressif.com/projects/esp-idf/en/stable/esp32c3/api-reference/storage/blockdev.html" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script data-url_root="../../" id="documentation_options" src="../../_static/documentation_options.js?v=b3833d5f"></script>
+        <script src="../../_static/doctools.js?v=888ff710"></script>
+        <script src="../../_static/sphinx_highlight.js?v=4825356b"></script>
+        <script src="../../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../../_static/copybutton.js?v=ff8fa330"></script>
+        <script src="../../_static/hover_api.js?v=3332994e"></script>
+        <script src="https://wavedrom.com/skins/default.js"></script>
+        <script src="https://wavedrom.com/wavedrom.min.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+
+    
+        
+
+    <script type="text/javascript">
+        DOCUMENTATION_OPTIONS.PAGENAME = 'api-reference/storage/blockdev';
+        DOCUMENTATION_OPTIONS.PROJECT_SLUG = 'esp-idf';
+        DOCUMENTATION_OPTIONS.LATEST_BRANCH_NAME = 'master';
+        DOCUMENTATION_OPTIONS.VERSIONS_URL = 'https://dl.espressif.com/dl/esp-idf/idf_versions.js';
+        DOCUMENTATION_OPTIONS.LANGUAGES = ["en", "zh_CN"];
+        DOCUMENTATION_OPTIONS.IDF_TARGET = 'esp32c3';
+        DOCUMENTATION_OPTIONS.HAS_IDF_TARGETS = ["esp32", "esp32s2", "esp32s3", "esp32s31", "esp32c3", "esp32c2", "esp32c5", "esp32c6", "esp32p4"]
+        DOCUMENTATION_OPTIONS.RELEASE = 'v6.1';
+        DOCUMENTATION_OPTIONS.LANGUAGE_URL = 'en';
+
+    </script>
+
+    <script type="text/javascript" src="https://dl.espressif.com/dl/esp-idf/idf_versions.js"></script>
+    <link rel="author" title="About these documents" href="../../about.html" />
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="SPIFFS Filesystem" href="spiffs.html" />
+    <link rel="prev" title="Partitions API" href="partition.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            ESP-IDF Programming Guide
+              <img src="../../_static/espressif-logo.svg" class="logo" alt="Logo"/>
+          </a>
+
+          
+            <div class="selectors">
+              <select id="target-select" style="width: 150px;" hidden>
+                <option value="" disabled selected>Choose target...</option>
+              </select>
+            </div>
+          
+
+          <div class="selectors">
+            <select id="version-select" style="width: 150px;" hidden>
+              <option value="" disabled selected>Choose version...</option>
+            </select>
+          </div>
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../get-started/index.html">Get Started</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../api-conventions.html">API Conventions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../protocols/index.html">Application Protocols</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../bluetooth/index.html">Bluetooth<sup>®</sup> API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../error-codes.html">Error Codes Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../network/index.html">Networking APIs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../peripherals/index.html">Peripherals API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../provisioning/index.html">Provisioning API</a></li>
+<li class="toctree-l2 current"><a class="reference internal" href="index.html">Storage API</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="fatfs.html">FAT Filesystem Support</a></li>
+<li class="toctree-l3"><a class="reference internal" href="fatfsgen.html">Generating and Parsing FATFS on Host</a></li>
+<li class="toctree-l3"><a class="reference internal" href="mass_mfg.html">Manufacturing Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_flash.html">Non-Volatile Storage Library</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_bootloader.html">NVS Bootloader</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_encryption.html">NVS Encryption</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_partition_gen.html">NVS Partition Generator Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="nvs_partition_parse.html">NVS Partition Parser Utility</a></li>
+<li class="toctree-l3"><a class="reference internal" href="sdmmc.html">SD/SDIO/MMC Driver</a></li>
+<li class="toctree-l3"><a class="reference internal" href="partition.html">Partitions API</a></li>
+<li class="toctree-l3 current"><a class="current reference internal" href="#">Block Device Layer</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#overview">Overview</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#using-block-devices">Using Block Devices</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#contracts">Contracts</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#api-reference">API Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="spiffs.html">SPIFFS Filesystem</a></li>
+<li class="toctree-l3"><a class="reference internal" href="vfs.html">Virtual Filesystem Component</a></li>
+<li class="toctree-l3"><a class="reference internal" href="wear-levelling.html">Wear Levelling API</a></li>
+<li class="toctree-l3"><a class="reference internal" href="storage-security.html">Storage Security</a></li>
+<li class="toctree-l3"><a class="reference internal" href="index.html#examples">Examples</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../system/index.html">System API</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../kconfig-reference.html">Configuration Options Reference</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../../hw-reference/index.html">Hardware Reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../api-guides/index.html">API Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../security/index.html">Security Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../migration-guides/index.html">Migration Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../libraries-and-frameworks/index.html">Libraries and Frameworks</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../contribute/index.html">Contributions Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../versions.html">ESP-IDF Versions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../resources.html">Resources</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../COPYRIGHT.html">Copyrights and Licenses</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../about.html">About</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../languages.html">Switch Between Languages</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">ESP-IDF Programming Guide</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="index.html">Storage API</a></li>
+      <li class="breadcrumb-item active">Block Device Layer</li>
+      <li class="wy-breadcrumbs-aside">
+              <a href="https://github.com/espressif/esp-idf/blob/v6.1/docs/en/api-reference/storage/blockdev.rst" class="fa fa-github"> Edit on GitHub</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="block-device-layer">
+<h1>Block Device Layer<a class="headerlink" href="#block-device-layer" title="Permalink to this heading"></a></h1>
+<p><a class="reference external" href="../../../../../zh_CN/v6.1/esp32c3/api-reference/storage/blockdev.html">[中文]</a></p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading"></a></h2>
+<p>The Block Device Layer (BDL) defines a C interface that lets storage-oriented components exchange data without custom-made adapters. Each block device exposes this interface in the form of an <a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_handle_t</span></code></a> handle giving access to device flags, geometry information, and a set of supported operations as defined in <code class="docutils literal notranslate"><span class="pre">components/esp_blockdev/include/esp_blockdev.h</span></code>. Higher-level code inspects that metadata and may invoke the available callbacks to perform I/O operations.</p>
+<p>The unified interface makes it possible to compose BDL stacks supporting storage use-cases by chaining multiple universal components. A driver provides a handle representing access to the physical device; a middleware component consumes this handle, augments behaviour (for example splits the space on the device or adds wear levelling capability), and exposes a new handle to the next layer. The topmost components of the chain like file-systems are pure device consumers. This model allows filesystems, middleware, and physical drivers to be mixed and matched as long as every layer honours the interface contracts described below.</p>
+<figure class="align-center" id="id1">
+<div class="align-default"><img height="440" src="../../_images/blockdiag-88909ce033ff7377c96aa58400dfd96dc3591747.png" width="962" /></div>
+<figcaption>
+<p><span class="caption-text">Example Block Device Layer Stack</span><a class="headerlink" href="#id1" title="Permalink to this image"></a></p>
+</figcaption>
+</figure>
+</section>
+<section id="using-block-devices">
+<h2>Using Block Devices<a class="headerlink" href="#using-block-devices" title="Permalink to this heading"></a></h2>
+<section id="handles">
+<h3>Handles<a class="headerlink" href="#handles" title="Permalink to this heading"></a></h3>
+<p>Block devices are accessed through <a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_handle_t</span></code></a>. Handles are obtained from the owning component via the <code class="docutils literal notranslate"><span class="pre">&lt;component&gt;_get_blockdev()</span></code> convention and must be released with the matching <code class="docutils literal notranslate"><span class="pre">&lt;component&gt;_release_blockdev()</span></code> helper once the device is no longer needed. Treat handles as opaque: only use the public API in <code class="docutils literal notranslate"><span class="pre">components/esp_blockdev/include/esp_blockdev.h</span></code>, and do not move or modify the memory they reference.</p>
+</section>
+<section id="geometry-and-flags">
+<h3>Geometry and Flags<a class="headerlink" href="#geometry-and-flags" title="Permalink to this heading"></a></h3>
+<p>Each device publishes an <a class="reference internal" href="#_CPPv423esp_blockdev_geometry_t" title="esp_blockdev_geometry_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_geometry_t</span></code></a> structure that reports capacity together with minimum read, write, and erase granularities. Optional recommended sizes act as performance hints but must not replace alignment checks against the mandatory values. The accompanying <a class="reference internal" href="#_CPPv420esp_blockdev_flags_t" title="esp_blockdev_flags_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_flags_t</span></code></a> structure advertises properties such as read-only media, encryption, or erase-before-write requirements. Middleware can change apparent geometry size, but must verify upon creation that the underlying layer fits its requirements, and ensure that the underlying device will only be accessed correctly.</p>
+</section>
+<section id="operations">
+<h3>Operations<a class="headerlink" href="#operations" title="Permalink to this heading"></a></h3>
+<p>The <a class="reference internal" href="#_CPPv418esp_blockdev_ops_t" title="esp_blockdev_ops_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_ops_t</span></code></a> structure defines callbacks for read, write, erase, sync, ioctl, and release. Before invoking a callback, callers must ensure that the given pointer is not <code class="docutils literal notranslate"><span class="pre">NULL</span></code>; a <code class="docutils literal notranslate"><span class="pre">NULL</span></code> pointer indicates that the operation is not supported. Callers are responsible for validating alignment and bounds using the geometry data and for respecting flag-driven requirements such as issuing an erase before writing to NAND-like media.</p>
+</section>
+<section id="typical-flow">
+<h3>Typical Flow<a class="headerlink" href="#typical-flow" title="Permalink to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Acquire a handle from a driver or middleware provider.</p></li>
+<li><p>Inspect geometry and flags to determine required alignment, available capacity, and special handling.</p></li>
+<li><p>Issue read, write, erase, and sync requests through the operation table that the provider exposes.</p></li>
+<li><p>Forward the handle to higher components or release it once all operations complete.</p></li>
+</ol>
+</section>
+<section id="example">
+<h3>Example<a class="headerlink" href="#example" title="Permalink to this heading"></a></h3>
+<div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="n">esp_blockdev_handle_t</span><span class="w"> </span><span class="n">dev</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_component_get_blockdev</span><span class="p">();</span>
+<span class="k">const</span><span class="w"> </span><span class="n">esp_blockdev_geometry_t</span><span class="w"> </span><span class="o">*</span><span class="n">geometry</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">geometry</span><span class="p">;</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">ops</span><span class="o">-&gt;</span><span class="n">read</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)</span><span class="w"> </span><span class="o">%</span><span class="w"> </span><span class="n">geometry</span><span class="o">-&gt;</span><span class="n">read_size</span><span class="p">)</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">ops</span><span class="o">-&gt;</span><span class="n">read</span><span class="p">(</span><span class="n">dev</span><span class="p">,</span><span class="w"> </span><span class="n">buffer</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">),</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="k">sizeof</span><span class="p">(</span><span class="n">buffer</span><span class="p">)));</span>
+<span class="p">}</span>
+<span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">ops</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="n">ESP_ERROR_CHECK</span><span class="p">(</span><span class="n">dev</span><span class="o">-&gt;</span><span class="n">ops</span><span class="o">-&gt;</span><span class="n">release</span><span class="p">(</span><span class="n">dev</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="contracts">
+<h2>Contracts<a class="headerlink" href="#contracts" title="Permalink to this heading"></a></h2>
+<section id="flags-esp-blockdev-flags-t">
+<h3>Flags (<a class="reference internal" href="#_CPPv420esp_blockdev_flags_t" title="esp_blockdev_flags_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_flags_t</span></code></a>)<a class="headerlink" href="#flags-esp-blockdev-flags-t" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p>Flags are initialised once during device creation and must remain immutable for the lifetime of the handle.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_only</span></code> requires write, erase, and mutating ioctl commands to fail with an error such as <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_STATE" title="ESP_ERR_INVALID_STATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code></a>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">encrypted</span></code> signals that on-media data is encrypted; higher layers must not assume plaintext visibility or transparent mapping.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">erase_before_write</span></code> tells callers that a successful write requires an erase of the target range beforehand. If multiple write operations are issued to the same range without an erase operation in-between, the behavior is undefined, but will likely result in data corruption.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">and_type_write</span></code> signals NAND/NOR-style behavior: programming only clears bits (1→0) and effectively stores <code class="docutils literal notranslate"><span class="pre">existing_bits</span> <span class="pre">&amp;</span> <span class="pre">new_bits</span></code>. Bits that are already zero remain zero even if the write request supplies ones; erasing first is the only way to restore them.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">default_val_after_erase</span></code> identifies whether erased regions read as <code class="docutils literal notranslate"><span class="pre">0x00</span></code> or <code class="docutils literal notranslate"><span class="pre">0xFF</span></code> so middleware can keep sentinel values consistent.</p></li>
+</ul>
+</section>
+<section id="geometry-esp-blockdev-geometry-t">
+<h3>Geometry (<a class="reference internal" href="#_CPPv423esp_blockdev_geometry_t" title="esp_blockdev_geometry_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_geometry_t</span></code></a>)<a class="headerlink" href="#geometry-esp-blockdev-geometry-t" title="Permalink to this heading"></a></h3>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">disk_size</span></code> is the total accessible capacity in bytes; operations must reject any request whose end offset exceeds this value.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">read_size</span></code>, <code class="docutils literal notranslate"><span class="pre">write_size</span></code>, and <code class="docutils literal notranslate"><span class="pre">erase_size</span></code> are mandatory alignment units, in bytes; both offsets and lengths must align to the corresponding size before the operation runs.</p></li>
+<li><p>Recommended sizes improve throughput when callers honour them but cannot replace the minimum alignment checks; implementations must accept any request that respects the required granularity.</p></li>
+<li><p>When a user sees read-write and read-only variants of the same underlying device, the geometry must be identical aside from the <code class="docutils literal notranslate"><span class="pre">read_only</span></code> flag. In particular, <code class="docutils literal notranslate"><span class="pre">read_size</span></code>, <code class="docutils literal notranslate"><span class="pre">write_size</span></code>, and <code class="docutils literal notranslate"><span class="pre">erase_size</span></code> should match between the two variants; <code class="docutils literal notranslate"><span class="pre">recommended_*</span></code> values are expected to match and should differ only when there is a clear benefit to doing so (and should be documented in such cases).</p></li>
+</ul>
+</section>
+<section id="operations-esp-blockdev-ops-t">
+<h3>Operations (<a class="reference internal" href="#_CPPv418esp_blockdev_ops_t" title="esp_blockdev_ops_t"><code class="xref cpp cpp-type docutils literal notranslate"><span class="pre">esp_blockdev_ops_t</span></code></a>)<a class="headerlink" href="#operations-esp-blockdev-ops-t" title="Permalink to this heading"></a></h3>
+<dl class="simple">
+<dt><code class="docutils literal notranslate"><span class="pre">read(dev_handle,</span> <span class="pre">dst_buf,</span> <span class="pre">dst_buf_size,</span> <span class="pre">src_addr,</span> <span class="pre">data_read_len)</span></code></dt><dd><ul class="simple">
+<li><p>Behaviour: Upon success copies exactly <code class="docutils literal notranslate"><span class="pre">data_read_len</span></code> bytes into <code class="docutils literal notranslate"><span class="pre">dst_buf</span></code>.</p></li>
+<li><p>Preconditions: <code class="docutils literal notranslate"><span class="pre">dst_buf</span></code> is valid, <code class="docutils literal notranslate"><span class="pre">src_addr</span></code> and <code class="docutils literal notranslate"><span class="pre">data_read_len</span></code> are aligned to <code class="docutils literal notranslate"><span class="pre">read_size</span></code>, <code class="docutils literal notranslate"><span class="pre">src_addr</span> <span class="pre">+</span> <span class="pre">data_read_len</span> <span class="pre">&lt;=</span> <span class="pre">disk_size</span></code>, and <code class="docutils literal notranslate"><span class="pre">data_read_len</span> <span class="pre">&lt;=</span> <span class="pre">dst_buf_size</span></code>.</p></li>
+<li><p>Postcondition: Returns <a class="reference internal" href="../system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> when the copy succeeds or propagates a relevant <code class="docutils literal notranslate"><span class="pre">ESP_ERR_*</span></code> code on failure.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">write(dev_handle,</span> <span class="pre">src_buf,</span> <span class="pre">dst_addr,</span> <span class="pre">data_write_len)</span></code></dt><dd><ul class="simple">
+<li><p>Preconditions: Device is not <code class="docutils literal notranslate"><span class="pre">read_only</span></code>; <code class="docutils literal notranslate"><span class="pre">src_buf</span></code> spans at least <code class="docutils literal notranslate"><span class="pre">data_write_len</span></code> bytes; offset and length align to <code class="docutils literal notranslate"><span class="pre">write_size</span></code> and stay within <code class="docutils literal notranslate"><span class="pre">disk_size</span></code>.</p></li>
+<li><p>Behaviour: When <code class="docutils literal notranslate"><span class="pre">erase_before_write</span></code> is set, callers must issue an <code class="docutils literal notranslate"><span class="pre">erase</span></code> beforehand. When <code class="docutils literal notranslate"><span class="pre">and_type_write</span></code> is set, the hardware applies a bitwise AND with the existing contents, so the stored result becomes <code class="docutils literal notranslate"><span class="pre">old_value</span> <span class="pre">&amp;</span> <span class="pre">new_value</span></code>; bits cleared by earlier writes stay cleared unless the range is erased first.</p></li>
+<li><p>Postcondition: Returns <a class="reference internal" href="../system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> once the requested range has been accepted by the device (data may still reside in intermediate buffers until <code class="docutils literal notranslate"><span class="pre">sync</span></code> runs). Misaligned, out-of-range, or read-only attempts should surface <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_ARG" title="ESP_ERR_INVALID_ARG"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code></a> or <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_STATE" title="ESP_ERR_INVALID_STATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code></a>, and implementations must avoid leaving the range partially updated.</p></li>
+<li><p>Note: On devices with <code class="docutils literal notranslate"><span class="pre">and_type_write</span></code> writes depend on the existing contents, so reading the same (or overlapping) range immediately after a write may require a preceding <code class="docutils literal notranslate"><span class="pre">sync</span></code> to ensure that cached data reflects the fully merged value.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">erase(dev_handle,</span> <span class="pre">start_addr,</span> <span class="pre">erase_len)</span></code></dt><dd><ul class="simple">
+<li><p>Preconditions: Device permits erases; <code class="docutils literal notranslate"><span class="pre">start_addr</span></code> and <code class="docutils literal notranslate"><span class="pre">erase_len</span></code> align to <code class="docutils literal notranslate"><span class="pre">erase_size</span></code>; the range remains inside <code class="docutils literal notranslate"><span class="pre">disk_size</span></code>.</p></li>
+<li><p>Postcondition: The range reads back as <code class="docutils literal notranslate"><span class="pre">default_val_after_erase</span></code> on success. Misaligned or out-of-range requests should return <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_ARG" title="ESP_ERR_INVALID_ARG"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_ARG</span></code></a>; hardware failures are expected to bubble up using driver-specific <code class="docutils literal notranslate"><span class="pre">ESP_ERR_*</span></code> codes.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">sync(dev_handle)</span></code></dt><dd><ul class="simple">
+<li><p>Flushes pending writes. Devices that omit this callback operate with write-through semantics.</p></li>
+<li><p>Postcondition: All previously reported writes reach stable storage before <a class="reference internal" href="../system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> is returned (this includes all underlying devices). Timeouts or transport issues should surface as <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_TIMEOUT" title="ESP_ERR_TIMEOUT"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_TIMEOUT</span></code></a> or another relevant <code class="docutils literal notranslate"><span class="pre">ESP_ERR_*</span></code>.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">ioctl(dev_handle,</span> <span class="pre">cmd,</span> <span class="pre">args)</span></code></dt><dd><ul class="simple">
+<li><p>Command identifiers <cite>0x00–0x7F</cite> are reserved for ESP-IDF system use; <cite>0x80–0xFF</cite> are available for user-defined extensions.</p></li>
+<li><p>Each command defines its own payload layout; because <code class="docutils literal notranslate"><span class="pre">args</span></code> is a <code class="docutils literal notranslate"><span class="pre">void</span> <span class="pre">*</span></code>, wrappers can only validate or reinterpret the buffer for commands they understand, and must otherwise treat the payload as opaque.</p></li>
+<li><p>Wrappers that cannot service a command should forward it unchanged to the next device in the stack when available; only the bottom device is expected to return <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_NOT_SUPPORTED" title="ESP_ERR_NOT_SUPPORTED"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_NOT_SUPPORTED</span></code></a> for unrecognised commands.</p></li>
+<li><p>When the stack contains non-transparent address mapping, forwarding commands that embed raw addresses is inherently unsafe: intermediate layers cannot translate opaque payloads, so behaviour is undefined and will typically fail. Such commands should either be blocked explicitly or documented as unsupported in stacked configurations.</p></li>
+</ul>
+</dd>
+<dt><code class="docutils literal notranslate"><span class="pre">release(dev_handle)</span></code></dt><dd><ul class="simple">
+<li><p>Optional destructor that frees device resources. The function must be idempotent so that repeated calls either succeed or return a benign error like <a class="reference internal" href="../system/esp_err.html#c.ESP_ERR_INVALID_STATE" title="ESP_ERR_INVALID_STATE"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_ERR_INVALID_STATE</span></code></a>.</p></li>
+</ul>
+</dd>
+</dl>
+</section>
+<section id="error-handling">
+<h3>Error Handling<a class="headerlink" href="#error-handling" title="Permalink to this heading"></a></h3>
+<p>Callbacks return <a class="reference internal" href="../system/esp_err.html#c.ESP_OK" title="ESP_OK"><code class="xref c c-macro docutils literal notranslate"><span class="pre">ESP_OK</span></code></a> on success and should propagate <code class="docutils literal notranslate"><span class="pre">ESP_ERR_*</span></code> codes unchanged to help callers diagnose failures. Middleware and applications are expected to propagate errors from underlying devices rather than masking them inside the stack. NULL function pointers should be treated as &quot;operation not supported&quot;.</p>
+</section>
+<section id="validation">
+<h3>Validation<a class="headerlink" href="#validation" title="Permalink to this heading"></a></h3>
+<p>Implementations should include tests that cover alignment checks, flag-driven behaviour (read-only, erase-before-write, NAND-style writes), and correct propagation of errors through stacked devices. Middleware that wraps lower handles must also verify that handle lifetime management remains consistent across the stack.</p>
+</section>
+</section>
+<section id="api-reference">
+<span id="blockdev-apis"></span><h2>API Reference<a class="headerlink" href="#api-reference" title="Permalink to this heading"></a></h2>
+<section id="header-file">
+<h3>Header File<a class="headerlink" href="#header-file" title="Permalink to this heading"></a></h3>
+<ul>
+<li><p><a class="reference external" href="https://github.com/espressif/esp-idf/blob/v6.1/components/esp_blockdev/include/esp_blockdev.h">components/esp_blockdev/include/esp_blockdev.h</a></p></li>
+<li><p>This header file can be included with:</p>
+<blockquote>
+<div><div class="highlight-c notranslate"><div class="highlight"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">"esp_blockdev.h"</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+<li><p>This header file is a part of the API provided by the <code class="docutils literal notranslate"><span class="pre">esp_blockdev</span></code> component. To declare that your component depends on <code class="docutils literal notranslate"><span class="pre">esp_blockdev</span></code>, add the following to your CMakeLists.txt:</p>
+<blockquote>
+<div><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>REQUIRES esp_blockdev
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>PRIV_REQUIRES esp_blockdev
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+</section>
+<section id="structures">
+<h3>Structures<a class="headerlink" href="#structures" title="Permalink to this heading"></a></h3>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv428esp_blockdev_cmd_arg_erase_t">
+<span id="_CPPv328esp_blockdev_cmd_arg_erase_t"></span><span id="_CPPv228esp_blockdev_cmd_arg_erase_t"></span><span id="esp_blockdev_cmd_arg_erase_t"></span><span class="target" id="structesp__blockdev__cmd__arg__erase__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev_cmd_arg_erase_t</span></span></span><a class="headerlink" href="#_CPPv428esp_blockdev_cmd_arg_erase_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Input arguments for erase-related block-device ioctl commands. </p>
+<p>Pass a pointer to this structure as the <code class="docutils literal notranslate"><span class="pre">args</span></code> argument to <a class="reference internal" href="#structesp__blockdev__ops__t_1a3541be7471bd2670adb76b59a4f20925"><span class="std std-ref">esp_blockdev_ops_t::ioctl</span></a> when using ESP_BLOCKDEV_CMD_MARK_DELETED or ESP_BLOCKDEV_CMD_ERASE_CONTENTS. Both <code class="docutils literal notranslate"><span class="pre">start_addr</span></code> and <code class="docutils literal notranslate"><span class="pre">erase_len</span></code> must be aligned to <a class="reference internal" href="#structesp__blockdev__geometry__t_1a4afaf1189618ac10cb0a9a60d8bef0a7"><span class="std std-ref">esp_blockdev_geometry_t::erase_size</span></a> for the target device. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_blockdev_cmd_arg_erase_t10start_addrE">
+<span id="_CPPv3N28esp_blockdev_cmd_arg_erase_t10start_addrE"></span><span id="_CPPv2N28esp_blockdev_cmd_arg_erase_t10start_addrE"></span><span id="esp_blockdev_cmd_arg_erase_t::start_addr__uint64_t"></span><span class="target" id="structesp__blockdev__cmd__arg__erase__t_1aba5c3f5612cc6c08a297688a62fd7d2f"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start_addr</span></span></span><a class="headerlink" href="#_CPPv4N28esp_blockdev_cmd_arg_erase_t10start_addrE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Byte offset of the range from the start of the device. </p>
+<p>Must be a multiple of <a class="reference internal" href="#structesp__blockdev__geometry__t_1a4afaf1189618ac10cb0a9a60d8bef0a7"><span class="std std-ref">esp_blockdev_geometry_t::erase_size</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N28esp_blockdev_cmd_arg_erase_t9erase_lenE">
+<span id="_CPPv3N28esp_blockdev_cmd_arg_erase_t9erase_lenE"></span><span id="_CPPv2N28esp_blockdev_cmd_arg_erase_t9erase_lenE"></span><span id="esp_blockdev_cmd_arg_erase_t::erase_len__s"></span><span class="target" id="structesp__blockdev__cmd__arg__erase__t_1aa6253512ccd9f7ef2636b2e7e252ff09"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">erase_len</span></span></span><a class="headerlink" href="#_CPPv4N28esp_blockdev_cmd_arg_erase_t9erase_lenE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Length of the range in bytes. </p>
+<p>Must be a multiple of <a class="reference internal" href="#structesp__blockdev__geometry__t_1a4afaf1189618ac10cb0a9a60d8bef0a7"><span class="std std-ref">esp_blockdev_geometry_t::erase_size</span></a>. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv420esp_blockdev_flags_t">
+<span id="_CPPv320esp_blockdev_flags_t"></span><span id="_CPPv220esp_blockdev_flags_t"></span><span id="esp_blockdev_flags_t"></span><span class="target" id="structesp__blockdev__flags__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev_flags_t</span></span></span><a class="headerlink" href="#_CPPv420esp_blockdev_flags_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Block device property flags (<code class="docutils literal notranslate"><a class="reference internal" href="#structesp__blockdev__flags__t"><span class="std std-ref"><span class="pre">esp_blockdev_flags_t</span></span></a></code>) </p>
+<p>Various properties and characteristics of a BDL device. Represented as a <code class="docutils literal notranslate"><span class="pre">struct</span></code> when <code class="docutils literal notranslate"><span class="pre">__DOXYGEN__</span></code> is defined (for documentation only) and as a <code class="docutils literal notranslate"><span class="pre">union</span></code> in normal builds.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The macros <code class="docutils literal notranslate"><span class="pre">ESP_BLOCKDEV_FLAGS_CONFIG_DEFAULT</span></code> and <code class="docutils literal notranslate"><span class="pre">ESP_BLOCKDEV_FLAGS_INST_CONFIG_DEFAULT</span></code> provide a typical configuration for ESP-IDF components that expose a BDL interface. Use them as a starting point for custom initializers. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t9read_onlyE">
+<span id="_CPPv3N20esp_blockdev_flags_t9read_onlyE"></span><span id="_CPPv2N20esp_blockdev_flags_t9read_onlyE"></span><span id="esp_blockdev_flags_t::read_only__b"></span><span class="target" id="structesp__blockdev__flags__t_1a370236d3249255e2a85c8e4d76687a09"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_only</span></span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t9read_onlyE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>no erase/write operations allowed </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t9encryptedE">
+<span id="_CPPv3N20esp_blockdev_flags_t9encryptedE"></span><span id="_CPPv2N20esp_blockdev_flags_t9encryptedE"></span><span id="esp_blockdev_flags_t::encrypted__b"></span><span class="target" id="structesp__blockdev__flags__t_1a9c80016206a9992b573186a43baecaef"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">encrypted</span></span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t9encryptedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>the device data is encrypted </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t18erase_before_writeE">
+<span id="_CPPv3N20esp_blockdev_flags_t18erase_before_writeE"></span><span id="_CPPv2N20esp_blockdev_flags_t18erase_before_writeE"></span><span id="esp_blockdev_flags_t::erase_before_write__b"></span><span class="target" id="structesp__blockdev__flags__t_1a63029828b288ba29373d6ef0f0afb78b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">erase_before_write</span></span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t18erase_before_writeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>erasing required before any write operation </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t14and_type_writeE">
+<span id="_CPPv3N20esp_blockdev_flags_t14and_type_writeE"></span><span id="_CPPv2N20esp_blockdev_flags_t14and_type_writeE"></span><span id="esp_blockdev_flags_t::and_type_write__b"></span><span class="target" id="structesp__blockdev__flags__t_1a8d48c109c4b59e3d85691a32ebe8dcf9"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">and_type_write</span></span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t14and_type_writeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>0-bits cannot be changed to 1-bits (NAND/NOR flash behavior) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t23default_val_after_eraseE">
+<span id="_CPPv3N20esp_blockdev_flags_t23default_val_after_eraseE"></span><span id="_CPPv2N20esp_blockdev_flags_t23default_val_after_eraseE"></span><span id="esp_blockdev_flags_t::default_val_after_erase__b"></span><span class="target" id="structesp__blockdev__flags__t_1acdd376623d10e0d4803d7f43d2c23e37"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">default_val_after_erase</span></span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t23default_val_after_eraseE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>default bit value after erasing (0 or 1) </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t8reservedE">
+<span id="_CPPv3N20esp_blockdev_flags_t8reservedE"></span><span id="_CPPv2N20esp_blockdev_flags_t8reservedE"></span><span id="esp_blockdev_flags_t::reserved__bA"></span><span class="target" id="structesp__blockdev__flags__t_1a1e2b7859e7b6180c1e5a2a58a3b3d537"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reserved</span></span></span><span class="p"><span class="pre">[</span></span><span class="m"><span class="pre">27</span></span><span class="p"><span class="pre">]</span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t8reservedE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Reserved for future blockdev flags </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N20esp_blockdev_flags_t3valE">
+<span id="_CPPv3N20esp_blockdev_flags_t3valE"></span><span id="_CPPv2N20esp_blockdev_flags_t3valE"></span><span id="esp_blockdev_flags_t::val__uint32_t"></span><span class="target" id="structesp__blockdev__flags__t_1a0c3c333a290462f9543e530d09682d25"></span><span class="n"><span class="pre">uint32_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">val</span></span></span><a class="headerlink" href="#_CPPv4N20esp_blockdev_flags_t3valE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Raw bitfield view for bulk initialization </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv423esp_blockdev_geometry_t">
+<span id="_CPPv323esp_blockdev_geometry_t"></span><span id="_CPPv223esp_blockdev_geometry_t"></span><span id="esp_blockdev_geometry_t"></span><span class="target" id="structesp__blockdev__geometry__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev_geometry_t</span></span></span><a class="headerlink" href="#_CPPv423esp_blockdev_geometry_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Block device geometry. </p>
+<p>Granularity and capacity parameters for read, write, and erase operations on the device. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t9disk_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t9disk_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t9disk_sizeE"></span><span id="esp_blockdev_geometry_t::disk_size__uint64_t"></span><span class="target" id="structesp__blockdev__geometry__t_1a1ff78982257d0f3f5187fe45b497c3cb"></span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">disk_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t9disk_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Total addressable size of the device in bytes. </p>
+<p>Mandatory for every block device. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t9read_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t9read_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t9read_sizeE"></span><span id="esp_blockdev_geometry_t::read_size__s"></span><span class="target" id="structesp__blockdev__geometry__t_1aa6e54eb2bc736e092dacd8c97ff668c4"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">read_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t9read_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum read transaction size in bytes. </p>
+<p>Mandatory. All read lengths and offsets must respect this granularity where required by the driver. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t10write_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t10write_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t10write_sizeE"></span><span id="esp_blockdev_geometry_t::write_size__s"></span><span class="target" id="structesp__blockdev__geometry__t_1a9f0b536b6e7ad4ee1d568b47f5873891"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">write_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t10write_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum write transaction size in bytes. </p>
+<p>Mandatory for read/write devices; set to <code class="docutils literal notranslate"><span class="pre">0</span></code> for read-only devices. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t10erase_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t10erase_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t10erase_sizeE"></span><span id="esp_blockdev_geometry_t::erase_size__s"></span><span class="target" id="structesp__blockdev__geometry__t_1a4afaf1189618ac10cb0a9a60d8bef0a7"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">erase_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t10erase_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Minimum erase granularity in bytes. </p>
+<p>Mandatory for read/write devices; set to <code class="docutils literal notranslate"><span class="pre">0</span></code> for read-only devices.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Often corresponds to the logical sector size used by file systems. </p>
+</div>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t22recommended_write_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t22recommended_write_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t22recommended_write_sizeE"></span><span id="esp_blockdev_geometry_t::recommended_write_size__s"></span><span class="target" id="structesp__blockdev__geometry__t_1afd875413ed3c6ec48836067dca9af310"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recommended_write_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t22recommended_write_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Suggested write chunk size in bytes for best performance. </p>
+<p>Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not used. Optional hint for upper layers. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t21recommended_read_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t21recommended_read_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t21recommended_read_sizeE"></span><span id="esp_blockdev_geometry_t::recommended_read_size__s"></span><span class="target" id="structesp__blockdev__geometry__t_1ac4c9161d3aa68eef00dbbc9b5245ab90"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recommended_read_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t21recommended_read_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Suggested read chunk size in bytes for best performance. </p>
+<p>Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not used. Optional hint for upper layers. </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N23esp_blockdev_geometry_t22recommended_erase_sizeE">
+<span id="_CPPv3N23esp_blockdev_geometry_t22recommended_erase_sizeE"></span><span id="_CPPv2N23esp_blockdev_geometry_t22recommended_erase_sizeE"></span><span id="esp_blockdev_geometry_t::recommended_erase_size__s"></span><span class="target" id="structesp__blockdev__geometry__t_1a4bfa0106832bc7a13cb5462ae6ef3dbf"></span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">recommended_erase_size</span></span></span><a class="headerlink" href="#_CPPv4N23esp_blockdev_geometry_t22recommended_erase_sizeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Suggested erase chunk size in bytes for best performance. </p>
+<p>Set to <code class="docutils literal notranslate"><span class="pre">0</span></code> if not used. Optional hint for upper layers.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Often matches the physical erase block of the underlying flash or similar media. </p>
+</div>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv418esp_blockdev_ops_t">
+<span id="_CPPv318esp_blockdev_ops_t"></span><span id="_CPPv218esp_blockdev_ops_t"></span><span id="esp_blockdev_ops_t"></span><span class="target" id="structesp__blockdev__ops__t"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev_ops_t</span></span></span><a class="headerlink" href="#_CPPv418esp_blockdev_ops_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Block device operations. </p>
+<p>Function table for read, write, erase, sync, ioctl, and release on a block device instance. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_blockdev_ops_t4readE">
+<span id="_CPPv3N18esp_blockdev_ops_t4readE"></span><span id="_CPPv2N18esp_blockdev_ops_t4readE"></span><span class="target" id="structesp__blockdev__ops__t_1aab5361cdd4d81c05f462b1c5c108d74f"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">read</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">dev_handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">dst_buf</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">dst_buf_size</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">src_addr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_read_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N18esp_blockdev_ops_t4readE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Read data from the device. </p>
+<p>Reads the requested number of bytes from the device at the given offset into the output buffer.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><em>dev_handle</em> Target device handle</p></li>
+<li><p><em>dst_buf</em> Output buffer to receive the data read</p></li>
+<li><p><em>dst_buf_size</em> Size of the destination buffer (in bytes)</p></li>
+<li><p><em>src_addr</em> Source address for the read (offset in the device's address space)</p></li>
+<li><p><em>data_read_len</em> Data read length (in bytes)</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Return value</strong></dt><dd><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Another <code class="docutils literal notranslate"><span class="pre">esp_err_t</span></code> error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_blockdev_ops_t5writeE">
+<span id="_CPPv3N18esp_blockdev_ops_t5writeE"></span><span id="_CPPv2N18esp_blockdev_ops_t5writeE"></span><span class="target" id="structesp__blockdev__ops__t_1a802b17c04f40abe55caad7315a5d3952"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">write</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">dev_handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">src_buf</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">dst_addr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">data_write_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N18esp_blockdev_ops_t5writeE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Write data to the device. </p>
+<p>Writes the requested number of bytes from the input buffer to the device at the given offset.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><em>dev_handle</em> Target device handle</p></li>
+<li><p><em>src_buf</em> Input buffer providing the data to write</p></li>
+<li><p><em>dst_addr</em> Destination address for the write (offset in the device's address space)</p></li>
+<li><p><em>data_write_len</em> Length of the data to be written (in bytes)</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Return value</strong></dt><dd><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Another <code class="docutils literal notranslate"><span class="pre">esp_err_t</span></code> error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_blockdev_ops_t5eraseE">
+<span id="_CPPv3N18esp_blockdev_ops_t5eraseE"></span><span id="_CPPv2N18esp_blockdev_ops_t5eraseE"></span><span class="target" id="structesp__blockdev__ops__t_1a5cbed1ec3cfe18fbaf3f4dabd355ec8a"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">erase</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">dev_handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">uint64_t</span></span><span class="w"> </span><span class="n"><span class="pre">start_addr</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="n"><span class="pre">erase_len</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N18esp_blockdev_ops_t5eraseE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Erase an address range on the device. </p>
+<p>Erases the address range <code class="docutils literal notranslate"></code>[start_addr, start_addr + erase_len). Both <code class="docutils literal notranslate"><span class="pre">erase_len</span></code> and <code class="docutils literal notranslate"><span class="pre">start_addr</span></code> must be aligned to multiples of the erase block size in bytes (<code class="docutils literal notranslate"><span class="pre">erase_size</span></code> in <a class="reference internal" href="#structesp__blockdev__geometry__t"><span class="std std-ref">esp_blockdev_geometry_t</span></a>). The implementation may use one or more internal operations, depending on the device. The result must be that data in the range is no longer readable as previously written content.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><em>dev_handle</em> Target device handle</p></li>
+<li><p><em>start_addr</em> Start address for the erase operation</p></li>
+<li><p><em>erase_len</em> Length of the address range to erase (in bytes)</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Return value</strong></dt><dd><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Another <code class="docutils literal notranslate"><span class="pre">esp_err_t</span></code> error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_blockdev_ops_t4syncE">
+<span id="_CPPv3N18esp_blockdev_ops_t4syncE"></span><span id="_CPPv2N18esp_blockdev_ops_t4syncE"></span><span class="target" id="structesp__blockdev__ops__t_1aea44b65f8508f528543aac24565a9694"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">sync</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">dev_handle</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N18esp_blockdev_ops_t4syncE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Commit pending writes to the device. </p>
+<p>Commits all pending writes and blocks until they complete. Does nothing if the device does not cache writes.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><em>dev_handle</em> Target device handle</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Return value</strong></dt><dd><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Another <code class="docutils literal notranslate"><span class="pre">esp_err_t</span></code> error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_blockdev_ops_t5ioctlE">
+<span id="_CPPv3N18esp_blockdev_ops_t5ioctlE"></span><span id="_CPPv2N18esp_blockdev_ops_t5ioctlE"></span><span class="target" id="structesp__blockdev__ops__t_1a3541be7471bd2670adb76b59a4f20925"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ioctl</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">dev_handle</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><span class="n"><span class="pre">uint8_t</span></span><span class="w"> </span><span class="n"><span class="pre">cmd</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="n"><span class="pre">args</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N18esp_blockdev_ops_t5ioctlE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Device-specific I/O control. </p>
+<p>Each command has parameters that the handler must validate. Implementations may extend commands within these ranges:<ul class="simple">
+<li><p>0x00-0x7F: IDF device commands (system)</p></li>
+<li><p>0x80-0xFF: user-defined commands</p></li>
+</ul>
+</p>
+<p>Refer to the <code class="docutils literal notranslate"><span class="pre">ESP_BLOCKDEV_CMD_</span></code> macros in this header.</p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><em>dev_handle</em> Target device handle</p></li>
+<li><p><em>cmd</em> Command ID</p></li>
+<li><p><em>args</em> Command-specific arguments</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Return value</strong></dt><dd><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Another <code class="docutils literal notranslate"><span class="pre">esp_err_t</span></code> error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N18esp_blockdev_ops_t7releaseE">
+<span id="_CPPv3N18esp_blockdev_ops_t7releaseE"></span><span id="_CPPv2N18esp_blockdev_ops_t7releaseE"></span><span class="target" id="structesp__blockdev__ops__t_1a9a2d9323f9a8dde6b7a948cde820fa47"></span><a class="reference internal" href="../system/esp_err.html#_CPPv49esp_err_t" title="esp_err_t"><span class="n"><span class="pre">esp_err_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">(</span></span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">release</span></span></span><span class="p"><span class="pre">)</span></span><span class="p"><span class="pre">(</span></span><a class="reference internal" href="#_CPPv421esp_blockdev_handle_t" title="esp_blockdev_handle_t"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></a><span class="w"> </span><span class="n"><span class="pre">dev_handle</span></span><span class="p"><span class="pre">)</span></span><a class="headerlink" href="#_CPPv4N18esp_blockdev_ops_t7releaseE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Release resources for this device handle. </p>
+<p><dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><p><ul class="simple">
+<li><p><em>dev_handle</em> Target device handle</p></li>
+</ul>
+</p>
+</dd>
+<dt><strong>Return value</strong></dt><dd><p><ul class="simple">
+<li><p>ESP_OK on success</p></li>
+<li><p>Another <code class="docutils literal notranslate"><span class="pre">esp_err_t</span></code> error code on failure </p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv412esp_blockdev">
+<span id="_CPPv312esp_blockdev"></span><span id="_CPPv212esp_blockdev"></span><span id="esp_blockdev"></span><span class="target" id="structesp__blockdev"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev</span></span></span><a class="headerlink" href="#_CPPv412esp_blockdev" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Generic IDF block device interface. </p>
+<p>Describes a block device that supports common disk operations and exposes parameters needed to integrate it into a component stack.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The context pointer <code class="docutils literal notranslate"><span class="pre">ctx</span></code> holds driver-private data; the BDL layer does not interpret it. </p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ops</span></code> table may be shared by multiple instances of the same driver type. </p>
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12esp_blockdev3ctxE">
+<span id="_CPPv3N12esp_blockdev3ctxE"></span><span id="_CPPv2N12esp_blockdev3ctxE"></span><span id="esp_blockdev::ctx__voidP"></span><span class="target" id="structesp__blockdev_1aef4cac1d0b1b78c12c0528ea8a378b85"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ctx</span></span></span><a class="headerlink" href="#_CPPv4N12esp_blockdev3ctxE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Owner-provided context; not interpreted by the BDL layer </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12esp_blockdev12device_flagsE">
+<span id="_CPPv3N12esp_blockdev12device_flagsE"></span><span id="_CPPv2N12esp_blockdev12device_flagsE"></span><span id="esp_blockdev::device_flags__esp_blockdev_flags_t"></span><span class="target" id="structesp__blockdev_1a003690ee56d082167c1ae02d5cc11a13"></span><a class="reference internal" href="#_CPPv420esp_blockdev_flags_t" title="esp_blockdev_flags_t"><span class="n"><span class="pre">esp_blockdev_flags_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">device_flags</span></span></span><a class="headerlink" href="#_CPPv4N12esp_blockdev12device_flagsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Capabilities and requirements </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12esp_blockdev8geometryE">
+<span id="_CPPv3N12esp_blockdev8geometryE"></span><span id="_CPPv2N12esp_blockdev8geometryE"></span><span id="esp_blockdev::geometry__esp_blockdev_geometry_t"></span><span class="target" id="structesp__blockdev_1aca2180e915e5f44ac37e3226d0a2ab31"></span><a class="reference internal" href="#_CPPv423esp_blockdev_geometry_t" title="esp_blockdev_geometry_t"><span class="n"><span class="pre">esp_blockdev_geometry_t</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">geometry</span></span></span><a class="headerlink" href="#_CPPv4N12esp_blockdev8geometryE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Operation granularity and capacity </p>
+</dd></dl>
+
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv4N12esp_blockdev3opsE">
+<span id="_CPPv3N12esp_blockdev3opsE"></span><span id="_CPPv2N12esp_blockdev3opsE"></span><span id="esp_blockdev::ops__esp_blockdev_ops_tCP"></span><span class="target" id="structesp__blockdev_1a9bd85ce77d96890e78586026bf591077"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv418esp_blockdev_ops_t" title="esp_blockdev_ops_t"><span class="n"><span class="pre">esp_blockdev_ops_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">ops</span></span></span><a class="headerlink" href="#_CPPv4N12esp_blockdev3opsE" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Function table implementing the device </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+<section id="macros">
+<h3>Macros<a class="headerlink" href="#macros" title="Permalink to this heading"></a></h3>
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_BLOCKDEV_FLAGS_CONFIG_DEFAULT">
+<span class="target" id="esp__blockdev_8h_1a6b9107b8ab6d9b2d4202f137f742330f"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_BLOCKDEV_FLAGS_CONFIG_DEFAULT</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#c.ESP_BLOCKDEV_FLAGS_CONFIG_DEFAULT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Brace-enclosed initializer for <code class="docutils literal notranslate"><a class="reference internal" href="#structesp__blockdev__flags__t"><span class="std std-ref"><span class="pre">esp_blockdev_flags_t</span></span></a></code> with typical ESP-IDF defaults. </p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#esp__blockdev_8h_1a1e2776b0e85c960c16fd685be0804f3b"><span class="std std-ref">ESP_BLOCKDEV_FLAGS_INST_CONFIG_DEFAULT</span></a></p>
+</div>
+</p>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_BLOCKDEV_FLAGS_INST_CONFIG_DEFAULT">
+<span class="target" id="esp__blockdev_8h_1a1e2776b0e85c960c16fd685be0804f3b"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_BLOCKDEV_FLAGS_INST_CONFIG_DEFAULT</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">flags</span></span><span class="sig-paren">)</span><a class="headerlink" href="#c.ESP_BLOCKDEV_FLAGS_INST_CONFIG_DEFAULT" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Assign typical ESP-IDF default values to an existing <code class="docutils literal notranslate"><a class="reference internal" href="#structesp__blockdev__flags__t"><span class="std std-ref"><span class="pre">esp_blockdev_flags_t</span></span></a></code>. </p>
+<p><div class="admonition seealso">
+<p class="admonition-title">See also</p>
+<p><a class="reference internal" href="#esp__blockdev_8h_1a6b9107b8ab6d9b2d4202f137f742330f"><span class="std std-ref">ESP_BLOCKDEV_FLAGS_CONFIG_DEFAULT</span></a></p>
+</div>
+</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>flags</strong> -- Flags instance to initialize (statement form, not an expression)</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp macro">
+<dt class="sig sig-object cpp" id="c.ESP_BLOCKDEV_HANDLE_INVALID">
+<span class="target" id="esp__blockdev_8h_1a7275f3160aaf9442f33e6130ca70bfc1"></span><span class="sig-name descname"><span class="n"><span class="pre">ESP_BLOCKDEV_HANDLE_INVALID</span></span></span><a class="headerlink" href="#c.ESP_BLOCKDEV_HANDLE_INVALID" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Sentinel for an invalid block device handle. </p>
+<p>Compare handles to <code class="docutils literal notranslate"><span class="pre">NULL</span></code>; this macro expands to <code class="docutils literal notranslate"><span class="pre">NULL</span></code> for readability. </p>
+</dd></dl>
+
+</section>
+<section id="type-definitions">
+<h3>Type Definitions<a class="headerlink" href="#type-definitions" title="Permalink to this heading"></a></h3>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv414esp_blockdev_t">
+<span id="_CPPv314esp_blockdev_t"></span><span id="_CPPv214esp_blockdev_t"></span><span id="esp_blockdev_t"></span><span class="target" id="esp__blockdev_8h_1ae5f1aa9dda13a08777f3c9a6f11f2779"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv412esp_blockdev" title="esp_blockdev"><span class="n"><span class="pre">esp_blockdev</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev_t</span></span></span><a class="headerlink" href="#_CPPv414esp_blockdev_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Forward declaration; see <a class="reference internal" href="#structesp__blockdev"><span class="std std-ref">esp_blockdev</span></a></p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv421esp_blockdev_handle_t">
+<span id="_CPPv321esp_blockdev_handle_t"></span><span id="_CPPv221esp_blockdev_handle_t"></span><span id="esp_blockdev_handle_t"></span><span class="target" id="esp__blockdev_8h_1af9fde020d1791b7fa02554022b4ce129"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv414esp_blockdev_t" title="esp_blockdev_t"><span class="n"><span class="pre">esp_blockdev_t</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">esp_blockdev_handle_t</span></span></span><a class="headerlink" href="#_CPPv421esp_blockdev_handle_t" title="Permalink to this definition"></a><br /></dt>
+<dd><p>Opaque handle to a block device instance. </p>
+<p>Pointer to <a class="reference internal" href="#structesp__blockdev"><span class="std std-ref">esp_blockdev</span></a>. This is the only public identifier for a BDL instance: it is returned from the device factory and must be released through <a class="reference internal" href="#structesp__blockdev__ops__t_1a9a2d9323f9a8dde6b7a948cde820fa47"><span class="std std-ref">esp_blockdev_ops_t::release</span></a> when no longer needed. </p>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+    <script type="text/javascript">
+        function init() {
+            WaveDrom.ProcessAll();
+        }
+        window.onload = init;
+    </script>
+
+           </div>
+             <div class="articleComments">
+
+<style>
+    .expand-feedback-content {
+        display: none;
+    }
+    .click-like-or-dislike {
+        background-color: #d3d3d3;
+        pointer-events: none;
+    }
+</style>
+
+<script>
+    function submitFeedbackForm(user_likes_document) {
+        // Send to GA4 the user reaction
+        gtag('event', 'user_reaction', {
+            'user_likes_document': user_likes_document
+        });
+
+        if (user_likes_document === 1) {
+            document.querySelector('.like-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContentLike").style.display = 'block';
+        } else {
+            document.querySelector('.dislike-btn').classList.add('click-like-or-dislike');
+            document.getElementById("expandContent").style.display = 'block';
+        }
+
+        document.querySelector('.like-btn').style.pointerEvents = 'none';
+        document.querySelector('.dislike-btn').style.pointerEvents = 'none';
+    }
+</script>
+
+<hr>
+
+<p style="text-align:center"><strong>Was this page helpful?</strong></p>
+<p style="text-align:center">
+    <button class="like-btn" onclick="submitFeedbackForm(1)">
+        <svg aria-hidden="true" focusable="false" class="color-fg-muted" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M8.834.066c.763.087 1.5.295 2.01.884.505.581.656 1.378.656 2.3 0 .467-.087 1.119-.157 1.637L11.328 5h1.422c.603 0 1.174.085 1.668.333.508.254.911.679 1.137 1.2.453.998.438 2.447.188 4.316l-.04.306c-.105.79-.195 1.473-.313 2.033-.131.63-.315 1.209-.668 1.672C13.97 15.847 12.706 16 11 16c-1.848 0-3.234-.333-4.388-.653-.165-.045-.323-.09-.475-.133-.658-.186-1.2-.34-1.725-.415A1.75 1.75 0 0 1 2.75 16h-1A1.75 1.75 0 0 1 0 14.25v-7.5C0 5.784.784 5 1.75 5h1a1.75 1.75 0 0 1 1.514.872c.258-.105.59-.268.918-.508C5.853 4.874 6.5 4.079 6.5 2.75v-.5c0-1.202.994-2.337 2.334-2.184ZM4.5 13.3c.705.088 1.39.284 2.072.478l.441.125c1.096.305 2.334.598 3.987.598 1.794 0 2.28-.223 2.528-.549.147-.193.276-.505.394-1.07.105-.502.188-1.124.295-1.93l.04-.3c.25-1.882.189-2.933-.068-3.497a.921.921 0 0 0-.442-.48c-.208-.104-.52-.174-.997-.174H11c-.686 0-1.295-.577-1.206-1.336.023-.192.05-.39.076-.586.065-.488.13-.97.13-1.328 0-.809-.144-1.15-.288-1.316-.137-.158-.402-.304-1.048-.378C8.357 1.521 8 1.793 8 2.25v.5c0 1.922-.978 3.128-1.933 3.825a5.831 5.831 0 0 1-1.567.81ZM2.75 6.5h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z"></path>
+        </svg>
+    </button>
+    <button class="dislike-btn" onclick="submitFeedbackForm(0)">
+        <svg aria-hidden="true" focusable="false" class="" viewBox="0 0 16 16" width="16" height="16" fill="currentColor" style="display:inline-block;user-select:none;vertical-align:text-bottom;overflow:visible">
+            <path d="M7.083 15.986c-.763-.087-1.499-.295-2.011-.884-.504-.581-.655-1.378-.655-2.299 0-.468.087-1.12.157-1.638l.015-.112H3.167c-.603 0-1.174-.086-1.669-.334a2.415 2.415 0 0 1-1.136-1.2c-.454-.998-.438-2.447-.188-4.316l.04-.306C.32 4.108.41 3.424.526 2.864c.132-.63.316-1.209.669-1.672C1.947.205 3.211.053 4.917.053c1.848 0 3.234.332 4.388.652l.474.133c.658.187 1.201.341 1.726.415a1.75 1.75 0 0 1 1.662-1.2h1c.966 0 1.75.784 1.75 1.75v7.5a1.75 1.75 0 0 1-1.75 1.75h-1a1.75 1.75 0 0 1-1.514-.872c-.259.105-.59.268-.919.508-.671.491-1.317 1.285-1.317 2.614v.5c0 1.201-.994 2.336-2.334 2.183Zm4.334-13.232c-.706-.089-1.39-.284-2.072-.479l-.441-.125c-1.096-.304-2.335-.597-3.987-.597-1.794 0-2.28.222-2.529.548-.147.193-.275.505-.393 1.07-.105.502-.188 1.124-.295 1.93l-.04.3c-.25 1.882-.19 2.933.067 3.497a.923.923 0 0 0 .443.48c.208.104.52.175.997.175h1.75c.685 0 1.295.577 1.205 1.335-.022.192-.049.39-.075.586-.066.488-.13.97-.13 1.329 0 .808.144 1.15.288 1.316.137.157.401.303 1.048.377.307.035.664-.237.664-.693v-.5c0-1.922.978-3.127 1.932-3.825a5.878 5.878 0 0 1 1.568-.809Zm1.75 6.798h1a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25h-1a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25Z"></path>
+        </svg>
+    </button>
+</p>
+
+<div class="expand-feedback-content" id="expandContentLike">
+    <ul style="text-align:center">
+        <li>Thank you! We received your feedback.</li>
+        <li>If you have any comments, fill in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Block Device Layer (api-reference/storage/blockdev)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<div class="expand-feedback-content" id="expandContent">
+    <ul style="text-align:center">
+        <li>We value your feedback.</li>
+        <li>Let us know how we can improve this page by filling in <a href='https://www.espressif.com/en/company/documents/documentation_feedback?docId=4287&sections=Block Device Layer (api-reference/storage/blockdev)&version=esp32c3 v6.1 (v6.1)'>Espressif Documentation Feedback Form</a>.</li>
+    </ul>
+</div>
+
+<br>
+
+
+             </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="partition.html" class="btn btn-neutral float-left" title="Partitions API" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="spiffs.html" class="btn btn-neutral float-right" title="SPIFFS Filesystem" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2016 - 2026, Espressif Systems (Shanghai) Co., Ltd.</p>
+  </div>
+
+  <ul class="footer">
+        <li>
+	    
+            
+            Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/espressif/sphinx_idf_theme">theme</a>  based on <a href="https://github.com/readthedocs/sphinx_rtd_theme">Read the Docs Sphinx Theme</a>.
+         </li>
+    <li class="footer-aside">
+        <a href="../../esp-idf-en-v6.1.zip"> Download HTML</a>
+    </li>
+
+  </ul> 
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
