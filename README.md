@@ -5,6 +5,7 @@
 
 **AmbM8** (short for *Ambisonic Mate*) is a budget-ish (about £40 in parts) 4-in / 2-out audio interface built around the ESP32-P4 and the PCM1865. It works as a proper USB interface with a computer, as a mass-storage card reader, and entirely standalone as a recorder / player with its intuitive(ish) E-Paper UI.
 
+[YouTube Video](https://www.youtube.com/watch?v=Uah8clTc53E)
 ---
 
 ## Overview
